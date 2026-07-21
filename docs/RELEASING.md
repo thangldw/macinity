@@ -30,6 +30,8 @@ git push origin diskora-v1.0.0
 
 Workflow `Release Diskora` xác minh tag trùng với `Info.plist`, chạy test, build và đính kèm ZIP cùng checksum vào GitHub Release.
 
+Workflow không chạy cho commit hoặc push thông thường. Chỉ tạo tag khi thực sự muốn phát hành; dùng `workflow_dispatch` cho lần kiểm tra thủ công có chủ đích.
+
 ## Giới hạn của release miễn phí
 
 Artifact được ad-hoc signed với Hardened Runtime nhưng không có Developer ID và không được Apple notarize. GitHub Actions có full Xcode nên tạo bản universal; máy chỉ có Command Line Tools sẽ tạo bản native và ghi kiến trúc trong tên file. Người dùng tải binary phải xác minh SHA-256 và dùng **Privacy & Security → Open Anyway**, hoặc tự build từ source.

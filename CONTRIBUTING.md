@@ -17,3 +17,10 @@ swift build
 ```
 
 Pull request liên quan đến xóa dữ liệu phải có test cho giới hạn đường dẫn và trường hợp lỗi quyền truy cập.
+
+## Sử dụng GitHub Actions tiết kiệm
+
+- CI không tự chạy khi push trực tiếp vào `main`.
+- CI chỉ chạy cho Pull Request có thay đổi Diskora, hoặc khi được kích hoạt thủ công.
+- Commit mới trong cùng Pull Request sẽ hủy lượt CI cũ đang chạy.
+- Hãy chạy smoke test và `swift build` local trước khi mở Pull Request.
