@@ -1,4 +1,4 @@
-# Thang Toolbox
+# Toolbox
 
 [Tiếng Việt](#vi) · [English](#en) · [日本語](#ja)
 
