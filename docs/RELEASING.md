@@ -35,3 +35,25 @@ Workflow không chạy cho commit hoặc push thông thường. Chỉ tạo tag 
 ## Giới hạn của release miễn phí
 
 Artifact được ad-hoc signed với Hardened Runtime nhưng không có Developer ID và không được Apple notarize. GitHub Actions có full Xcode nên tạo bản universal; máy chỉ có Command Line Tools sẽ tạo bản native và ghi kiến trúc trong tên file. Người dùng tải binary phải xác minh SHA-256 và dùng **Privacy & Security → Open Anyway**, hoặc tự build từ source.
+
+## Changeora
+
+### Kiểm tra và build local
+
+```bash
+cd apps/changeora
+swift format lint --recursive --parallel Sources Tests Package.swift
+./scripts/test_core.sh
+swift build
+./scripts/build_release.sh
+(cd release && shasum -a 256 -c Changeora-1.0.0-macos-*-unsigned.zip.sha256)
+```
+
+### Phát hành
+
+```bash
+git tag changeora-v1.0.0
+git push origin changeora-v1.0.0
+```
+
+Workflow Changeora chỉ chạy khi tạo tag `changeora-v*` hoặc được kích hoạt thủ công. Push thông thường vào `main` không sử dụng runner macOS.

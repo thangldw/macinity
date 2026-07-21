@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc">
+  <title id="title">Changeora snapshot and diff flow</title>
+  <desc id="desc">Luồng chụp snapshot trước, cài đặt ứng dụng, chụp snapshot sau, tạo diff, phân loại rủi ro và lưu báo cáo local.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity=".14"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#60646f"/></marker>
+    <style>.canvas{fill:#fbfaf7}.title{font:700 34px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}.subtitle{font:500 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#676b75}.node-title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}.node-body{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#4f535d}.note{font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#5e4b16}.connector{fill:none;stroke:#60646f;stroke-width:3;stroke-linecap:round;marker-end:url(#arrow)}.card{stroke:#202124;stroke-width:2;rx:18;filter:url(#shadow)}</style>
+  </defs>
+  <rect class="canvas" width="1440" height="820"/>
+  <path d="M80 86C230 30 390 43 526 72" fill="none" stroke="#d8b4fe" stroke-width="14" stroke-linecap="round" opacity=".85"/>
+  <text class="title" x="80" y="92">Changeora — Snapshot &amp; diff</text>
+  <text class="subtitle" x="80" y="124">See what changed on your Mac. • read-only • local-first • evidence, not verdicts</text>
+
+  <path class="connector" d="M252 290C292 290 303 290 344 290"/><path class="connector" d="M534 290C574 290 585 290 626 290"/><path class="connector" d="M816 290C856 290 867 290 908 290"/><path class="connector" d="M1098 290C1138 290 1149 290 1190 290"/>
+  <path class="connector" d="M1285 356C1285 420 1120 430 1120 492"/><path class="connector" d="M1285 356C1285 420 1320 430 1320 492"/>
+
+  <g transform="rotate(-1 157 290)"><rect class="card" x="62" y="224" width="190" height="132" fill="#fff3a6"/><text class="node-title" x="86" y="264">Snapshot trước</text><text class="node-body" x="86" y="296"><tspan x="86">Apps + services</tspan><tspan x="86" dy="22">Library metadata</tspan><tspan x="86" dy="22">Bundle + signature</tspan></text></g>
+  <g transform="rotate(1 439 290)"><rect class="card" x="344" y="224" width="190" height="132" fill="#ffd6e8"/><text class="node-title" x="368" y="264">Người dùng cài app</text><text class="node-body" x="368" y="296"><tspan x="368">Installer / drag app</tspan><tspan x="368" dy="22">Update bình thường</tspan><tspan x="368" dy="22">Changeora chờ</tspan></text></g>
+  <g transform="rotate(-1 721 290)"><rect class="card" x="626" y="224" width="190" height="132" fill="#dfd3ff"/><text class="node-title" x="650" y="264">Snapshot sau</text><text class="node-body" x="650" y="296"><tspan x="650">Cùng phạm vi</tspan><tspan x="650" dy="22">Cùng định danh</tspan><tspan x="650" dy="22">Không đọc nội dung</tspan></text></g>
+  <g transform="rotate(1 1003 290)"><rect class="card" x="908" y="224" width="190" height="132" fill="#cfe8ff"/><text class="node-title" x="932" y="264">Diff engine</text><text class="node-body" x="932" y="296"><tspan x="932">Added / removed</tspan><tspan x="932" dy="22">Modified metadata</tspan><tspan x="932" dy="22">Owner attribution</tspan></text></g>
+  <g transform="rotate(-1 1285 290)"><rect class="card" x="1190" y="224" width="190" height="132" fill="#c9f3dc"/><text class="node-title" x="1214" y="264">Risk classifier</text><text class="node-body" x="1214" y="296"><tspan x="1214">Thông tin</tspan><tspan x="1214" dy="22">Nên xem</tspan><tspan x="1214" dy="22">Quan trọng</tspan></text></g>
+
+  <g><rect class="card" x="1019" y="492" width="202" height="118" fill="#ffdfb4"/><text class="node-title" x="1043" y="532">Báo cáo</text><text class="node-body" x="1043" y="564"><tspan x="1043">Search + Finder</tspan><tspan x="1043" dy="22">Export Markdown</tspan></text></g>
+  <g><rect class="card" x="1237" y="492" width="166" height="118" fill="#e5f5c7"/><text class="node-title" x="1261" y="532">Local history</text><text class="node-body" x="1261" y="564"><tspan x="1261">Tối đa 100 phiên</tspan><tspan x="1261" dy="22">No telemetry</tspan></text></g>
+
+  <g transform="rotate(-2 430 655)"><rect x="230" y="610" width="400" height="96" rx="4" fill="#fff3a6" filter="url(#shadow)"/><text class="note" x="254" y="648"><tspan x="254">Safety boundary</tspan><tspan x="254" dy="25">Không xóa • không disable • không kết luận malware</tspan></text></g>
+  <path d="M250 744c175 48 365 44 520-8" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round"/><text class="note" x="300" y="786">Evidence first → user reviews → explicit next action</text>
+</svg>

@@ -16,6 +16,14 @@ cd apps/diskora
 swift build
 ```
 
+Với Changeora:
+
+```bash
+cd apps/changeora
+./scripts/test_core.sh
+swift build
+```
+
 Pull request liên quan đến xóa dữ liệu phải có test cho giới hạn đường dẫn và trường hợp lỗi quyền truy cập.
 
 ## Sử dụng GitHub Actions tiết kiệm

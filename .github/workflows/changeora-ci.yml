@@ -1,0 +1,32 @@
+name: CI Changeora
+
+on:
+  pull_request:
+    paths:
+      - "apps/changeora/**"
+      - ".github/workflows/changeora-ci.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: changeora-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changeora:
+    name: Changeora
+    runs-on: macos-15
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: apps/changeora
+    steps:
+      - uses: actions/checkout@v6
+      - name: Lint
+        run: swift format lint --recursive --parallel Sources Tests Package.swift
+      - name: Test core services
+        run: ./scripts/test_core.sh
+      - name: Build debug app
+        run: swift build

@@ -7,8 +7,12 @@ Một monorepo dành cho những ứng dụng và tiện ích nhỏ, tập trung
 | App | Mô tả | Phiên bản | Nền tảng |
 | --- | --- | --- | --- |
 | [Diskora](apps/diskora) | Phân tích và quản lý dung lượng — *See where your space goes.* | 1.0.0 | macOS 13+ |
+| [Changeora](apps/changeora) | Theo dõi thay đổi sau khi cài app — *See what changed on your Mac.* | 1.0.0 | macOS 13+ |
 
-![Diskora icon](apps/diskora/Resources/AppIcon-1024.png)
+<p>
+  <img src="apps/diskora/Resources/AppIcon-1024.png" alt="Diskora icon" width="180">
+  <img src="apps/changeora/Resources/AppIcon-1024.png" alt="Changeora icon" width="180">
+</p>
 
 ## Cài đặt
 
@@ -32,7 +36,7 @@ Mã nguồn được phát hành theo [MIT License](LICENSE), trừ khi một th
 
 ## Tài liệu
 
-- [Kiến trúc monorepo và Diskora](docs/ARCHITECTURE.md)
+- [Kiến trúc monorepo, Diskora và Changeora](docs/ARCHITECTURE.md)
 - [Quy trình phát hành](docs/RELEASING.md)
 - [Đóng góp](CONTRIBUTING.md)
 - [Bảo mật](SECURITY.md)
