@@ -1,0 +1,22 @@
+name: Feature request
+description: Đề xuất một cải tiến cho toolbox.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: app
+    attributes:
+      label: Phạm vi
+      options: [Diskora, Toolbox chung, Tool mới]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề cần giải quyết
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Giải pháp đề xuất

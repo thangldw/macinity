@@ -1,0 +1,32 @@
+name: Bug report
+description: Báo lỗi có thể tái hiện trong một ứng dụng.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: dropdown
+    id: app
+    attributes:
+      label: Application
+      options: [Diskora]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version và macOS
+      placeholder: "Diskora 1.0.0, macOS 15.5"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Các bước tái hiện
+      description: Không dán đường dẫn cá nhân hoặc nội dung file riêng tư.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Kết quả mong đợi và thực tế
+    validations:
+      required: true

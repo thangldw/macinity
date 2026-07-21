@@ -1,0 +1,49 @@
+name: Release Diskora
+
+on:
+  push:
+    tags:
+      - "diskora-v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: apps/diskora
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate tag and app version
+        if: github.ref_type == 'tag'
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#diskora-v}"
+          APP_VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' Resources/Info.plist)"
+          test "$TAG_VERSION" = "$APP_VERSION"
+      - name: Test
+        run: ./scripts/test_core.sh
+      - name: Build unsigned release
+        env:
+          DISKORA_UNIVERSAL: "1"
+        run: ./scripts/build_release.sh
+      - name: Publish GitHub Release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            release/Diskora-*-unsigned.zip \
+            release/Diskora-*-unsigned.zip.sha256 \
+            --title "Diskora ${GITHUB_REF_NAME#diskora-v}" \
+            --generate-notes \
+            --verify-tag
+      - name: Upload manual-build artifacts
+        if: github.ref_type != 'tag'
+        uses: actions/upload-artifact@v4
+        with:
+          name: diskora-unsigned
+          path: apps/diskora/release/*
+          if-no-files-found: error

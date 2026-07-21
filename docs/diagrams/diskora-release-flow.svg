@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc">
+  <title id="title">Diskora free release flow</title>
+  <desc id="desc">Từ commit đến CI, tag, build, checksum, GitHub Release và hai cách cài đặt miễn phí.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-opacity=".14"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#60646f"/></marker>
+    <style>.canvas{fill:#fbfaf7}.title{font:700 34px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}.subtitle{font:500 17px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#676b75}.node-title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}.node-body{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#4f535d}.note{font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#5e4b16}.connector{fill:none;stroke:#60646f;stroke-width:3;stroke-linecap:round;marker-end:url(#arrow)}.card{stroke:#202124;stroke-width:2;rx:18;filter:url(#shadow)}</style>
+  </defs>
+  <rect class="canvas" width="1440" height="820"/>
+  <path d="M77 86C229 31 376 43 510 70" fill="none" stroke="#6ee7b7" stroke-width="14" stroke-linecap="round" opacity=".75"/>
+  <text class="title" x="80" y="92">Diskora — Free release flow</text>
+  <text class="subtitle" x="80" y="124">Public source • MIT • unsigned binary • SHA-256 • no Apple membership required</text>
+
+  <path class="connector" d="M248 283C288 283 301 283 340 283"/><path class="connector" d="M526 283C566 283 579 283 618 283"/><path class="connector" d="M804 283C844 283 857 283 896 283"/><path class="connector" d="M1082 283C1122 283 1135 283 1174 283"/>
+  <path class="connector" d="M1267 348C1267 412 1124 415 1124 486"/><path class="connector" d="M1267 348C1267 412 1330 420 1330 486"/>
+  <path class="connector" d="M1124 598C1124 650 980 660 920 697"/><path class="connector" d="M1330 598C1330 650 1210 660 1150 697"/>
+
+  <g transform="rotate(-1 155 283)"><rect class="card" x="62" y="220" width="186" height="126" fill="#fff3a6"/><text class="node-title" x="86" y="260">Commit / PR</text><text class="node-body" x="86" y="291"><tspan x="86">Refactor + docs</tspan><tspan x="86" dy="22">Review safety</tspan></text></g>
+  <g transform="rotate(1 433 283)"><rect class="card" x="340" y="220" width="186" height="126" fill="#cfe8ff"/><text class="node-title" x="364" y="260">GitHub CI</text><text class="node-body" x="364" y="291"><tspan x="364">Swift format</tspan><tspan x="364" dy="22">Smoke tests + build</tspan></text></g>
+  <g transform="rotate(-1 711 283)"><rect class="card" x="618" y="220" width="186" height="126" fill="#dfd3ff"/><text class="node-title" x="642" y="260">Version tag</text><text class="node-body" x="642" y="291"><tspan x="642">diskora-vX.Y.Z</tspan><tspan x="642" dy="22">Match Info.plist</tspan></text></g>
+  <g transform="rotate(1 989 283)"><rect class="card" x="896" y="220" width="186" height="126" fill="#c9f3dc"/><text class="node-title" x="920" y="260">Build</text><text class="node-body" x="920" y="291"><tspan x="920">Universal on CI</tspan><tspan x="920" dy="22">Native on local CLT</tspan></text></g>
+  <g transform="rotate(-1 1267 283)"><rect class="card" x="1174" y="220" width="186" height="126" fill="#ffdfb4"/><text class="node-title" x="1198" y="260">Package</text><text class="node-body" x="1198" y="291"><tspan x="1198">Hardened ad-hoc</tspan><tspan x="1198" dy="22">ZIP + SHA-256</tspan></text></g>
+
+  <g><rect class="card" x="1031" y="486" width="186" height="112" fill="#d8f0ff"/><text class="node-title" x="1055" y="526">GitHub Release</text><text class="node-body" x="1055" y="556"><tspan x="1055">Binary + checksum</tspan><tspan x="1055" dy="21">Generated notes</tspan></text></g>
+  <g><rect class="card" x="1237" y="486" width="186" height="112" fill="#e5f5c7"/><text class="node-title" x="1261" y="526">Source code</text><text class="node-body" x="1261" y="556"><tspan x="1261">MIT repository</tspan><tspan x="1261" dy="21">Reproducible build</tspan></text></g>
+  <g transform="rotate(-2 920 718)"><rect x="806" y="674" width="228" height="92" rx="4" fill="#ffd6d2" filter="url(#shadow)"/><text class="note" x="830" y="710"><tspan x="830">Download binary</tspan><tspan x="830" dy="24">Verify hash → Open Anyway</tspan></text></g>
+  <g transform="rotate(1 1150 718)"><rect x="1046" y="674" width="244" height="92" rx="4" fill="#fff3a6" filter="url(#shadow)"/><text class="note" x="1070" y="710"><tspan x="1070">Safest free path</tspan><tspan x="1070" dy="24">Clone → test → build locally</tspan></text></g>
+  <path d="M136 602c162 70 356 73 506 9" fill="none" stroke="#8b5cf6" stroke-width="6" stroke-linecap="round"/><text class="note" x="180" y="660">No payment → no Developer ID / notarization → be explicit with users</text>
+</svg>
