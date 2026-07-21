@@ -26,7 +26,7 @@ toolbox/
 │       ├── Resources/
 │       └── scripts/
 ├── docs/
-├── .github/workflows/
+├── .github/workflows/{ci.yml,release.yml}
 └── LICENSE
 ```
 
@@ -89,7 +89,7 @@ toolbox/
 │       ├── Resources/
 │       └── scripts/
 ├── docs/
-├── .github/workflows/
+├── .github/workflows/{ci.yml,release.yml}
 └── LICENSE
 ```
 
@@ -152,7 +152,7 @@ toolbox/
 │       ├── Resources/
 │       └── scripts/
 ├── docs/
-├── .github/workflows/
+├── .github/workflows/{ci.yml,release.yml}
 └── LICENSE
 ```
 

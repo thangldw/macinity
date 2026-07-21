@@ -1,50 +1,107 @@
-name: Release Diskora
+name: Release
 
 on:
   push:
     tags:
       - "diskora-v*"
+      - "changeora-v*"
   workflow_dispatch:
+    inputs:
+      app:
+        description: Application to build
+        required: true
+        type: choice
+        options:
+          - diskora
+          - changeora
+
+concurrency:
+  group: toolbox-release-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   release:
+    name: Build release
     runs-on: macos-15
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: apps/diskora
     steps:
       - uses: actions/checkout@v6
+      - name: Select application
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          SELECTED_APP: ${{ inputs.app }}
+        run: |
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            APP_SLUG="$SELECTED_APP"
+          elif [[ "$REF_NAME" == diskora-v* ]]; then
+            APP_SLUG=diskora
+          elif [[ "$REF_NAME" == changeora-v* ]]; then
+            APP_SLUG=changeora
+          else
+            echo "Unsupported release ref: $REF_NAME" >&2
+            exit 1
+          fi
+
+          case "$APP_SLUG" in
+            diskora)
+              APP_NAME=Diskora
+              ;;
+            changeora)
+              APP_NAME=Changeora
+              ;;
+            *)
+              echo "Unsupported application: $APP_SLUG" >&2
+              exit 1
+              ;;
+          esac
+
+          {
+            echo "APP_SLUG=$APP_SLUG"
+            echo "APP_NAME=$APP_NAME"
+            echo "APP_DIR=apps/$APP_SLUG"
+          } >> "$GITHUB_ENV"
+
       - name: Validate tag and app version
         if: github.ref_type == 'tag'
         run: |
-          TAG_VERSION="${GITHUB_REF_NAME#diskora-v}"
-          APP_VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' Resources/Info.plist)"
+          TAG_PREFIX="${APP_SLUG}-v"
+          TAG_VERSION="${GITHUB_REF_NAME#"$TAG_PREFIX"}"
+          APP_VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP_DIR/Resources/Info.plist")"
           test "$TAG_VERSION" = "$APP_VERSION"
+
       - name: Test
-        run: ./scripts/test_core.sh
+        run: cd "$APP_DIR" && ./scripts/test_core.sh
+
       - name: Build unsigned release
-        env:
-          DISKORA_UNIVERSAL: "1"
-        run: ./scripts/build_release.sh
+        run: |
+          cd "$APP_DIR"
+          if [[ "$APP_SLUG" == "diskora" ]]; then
+            DISKORA_UNIVERSAL=1 ./scripts/build_release.sh
+          else
+            CHANGEORA_UNIVERSAL=1 ./scripts/build_release.sh
+          fi
+
       - name: Publish GitHub Release
         if: github.ref_type == 'tag'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          TAG_PREFIX="${APP_SLUG}-v"
           gh release create "$GITHUB_REF_NAME" \
-            release/Diskora-*-unsigned.zip \
-            release/Diskora-*-unsigned.zip.sha256 \
-            --title "Diskora ${GITHUB_REF_NAME#diskora-v}" \
+            "$APP_DIR/release/$APP_NAME-"*-unsigned.zip \
+            "$APP_DIR/release/$APP_NAME-"*-unsigned.zip.sha256 \
+            --title "$APP_NAME ${GITHUB_REF_NAME#"$TAG_PREFIX"}" \
             --generate-notes \
             --verify-tag
+
       - name: Upload manual-build artifacts
         if: github.ref_type != 'tag'
         uses: actions/upload-artifact@v7
         with:
-          name: diskora-unsigned
-          path: apps/diskora/release/*
+          name: ${{ env.APP_SLUG }}-unsigned
+          path: ${{ env.APP_DIR }}/release/*
           if-no-files-found: error

@@ -4,19 +4,67 @@ on:
   pull_request:
     paths:
       - "apps/diskora/**"
+      - "apps/changeora/**"
       - ".github/workflows/ci.yml"
   workflow_dispatch:
+    inputs:
+      app:
+        description: Application to validate
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - diskora
+          - changeora
 
 concurrency:
-  group: diskora-ci-${{ github.event.pull_request.number || github.ref }}
+  group: toolbox-ci-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
+  changes:
+    name: Select applications
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      diskora: ${{ steps.scope.outputs.diskora }}
+      changeora: ${{ steps.scope.outputs.changeora }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - id: scope
+        name: Detect affected applications
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          EVENT_NAME: ${{ github.event_name }}
+          SELECTED_APP: ${{ inputs.app }}
+        run: |
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            [[ "$SELECTED_APP" == "both" || "$SELECTED_APP" == "diskora" ]] && DISKORA=true || DISKORA=false
+            [[ "$SELECTED_APP" == "both" || "$SELECTED_APP" == "changeora" ]] && CHANGEORA=true || CHANGEORA=false
+          else
+            git fetch origin "$BASE_REF" --depth=1
+            BASE="origin/$BASE_REF"
+            if git diff --quiet "$BASE"...HEAD -- .github/workflows/ci.yml; then
+              git diff --quiet "$BASE"...HEAD -- apps/diskora && DISKORA=false || DISKORA=true
+              git diff --quiet "$BASE"...HEAD -- apps/changeora && CHANGEORA=false || CHANGEORA=true
+            else
+              DISKORA=true
+              CHANGEORA=true
+            fi
+          fi
+          echo "diskora=$DISKORA" >> "$GITHUB_OUTPUT"
+          echo "changeora=$CHANGEORA" >> "$GITHUB_OUTPUT"
+
   diskora:
     name: Diskora
+    needs: changes
+    if: needs.changes.outputs.diskora == 'true'
     runs-on: macos-15
     timeout-minutes: 15
     defaults:
@@ -26,6 +74,24 @@ jobs:
       - uses: actions/checkout@v6
       - name: Show Swift version
         run: swift --version
+      - name: Lint
+        run: swift format lint --recursive --parallel Sources Tests Package.swift
+      - name: Test core services
+        run: ./scripts/test_core.sh
+      - name: Build debug app
+        run: swift build
+
+  changeora:
+    name: Changeora
+    needs: changes
+    if: needs.changes.outputs.changeora == 'true'
+    runs-on: macos-15
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: apps/changeora
+    steps:
+      - uses: actions/checkout@v6
       - name: Lint
         run: swift format lint --recursive --parallel Sources Tests Package.swift
       - name: Test core services
