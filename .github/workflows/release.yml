@@ -16,7 +16,7 @@ jobs:
       run:
         working-directory: apps/diskora
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Validate tag and app version
         if: github.ref_type == 'tag'
         run: |
@@ -42,7 +42,7 @@ jobs:
             --verify-tag
       - name: Upload manual-build artifacts
         if: github.ref_type != 'tag'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: diskora-unsigned
           path: apps/diskora/release/*
