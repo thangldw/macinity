@@ -66,7 +66,7 @@ struct ApplicationScanner: Sendable {
       "Library/Application Support", "Library/Caches", "Library/Preferences", "Library/Logs",
       "Library/Saved Application State", "Library/Containers",
     ].map { home.appendingPathComponent($0) }
-    let normalizedName = name.lowercased().replacingOccurrences(of: " ", with: "")
+    let normalizedName = Self.canonicalName(name)
     guard normalizedName.count >= 4 else { return [] }
     var output: [StorageEntry] = []
     for root in roots {
@@ -75,17 +75,34 @@ struct ApplicationScanner: Sendable {
           at: root, includingPropertiesForKeys: [.contentModificationDateKey])
       else { continue }
       for url in contents {
-        let candidate = url.lastPathComponent.lowercased().replacingOccurrences(of: " ", with: "")
+        let candidate = url.lastPathComponent.lowercased()
         let bundleMatch =
           bundleID.map {
             candidate == $0.lowercased() || candidate.hasPrefix($0.lowercased() + ".")
           } ?? false
-        guard bundleMatch || candidate.contains(normalizedName) else { continue }
+        guard bundleMatch || Self.matchesLeftoverName(candidate, applicationName: name) else {
+          continue
+        }
         output.append(
           StorageEntry(url: url, bytes: (try? service.size(of: url)) ?? 0, modifiedAt: nil))
       }
     }
     return output.sorted { $0.bytes > $1.bytes }
+  }
+
+  static func matchesLeftoverName(_ candidate: String, applicationName: String) -> Bool {
+    let application = canonicalName(applicationName)
+    guard application.count >= 4 else { return false }
+    let components = candidate.lowercased().split { !$0.isLetter && !$0.isNumber }.map(String.init)
+    guard !components.isEmpty else { return false }
+    if canonicalName(candidate) == application || components.contains(application) { return true }
+    return components.indices.contains { index in
+      canonicalName(components[index...].joined()) == application
+    }
+  }
+
+  private static func canonicalName<S: StringProtocol>(_ value: S) -> String {
+    value.lowercased().filter { $0.isLetter || $0.isNumber }
   }
 }
 
@@ -119,7 +136,8 @@ final class ApplicationViewModel: ObservableObject {
       }.value
       history.record(
         action: "Gỡ ứng dụng: \(app.name)",
-        paths: [app.url.path] + app.leftovers.map { $0.url.path }, bytes: result.movedBytes,
+        paths: [app.url.path] + (includeLeftovers ? app.leftovers.map { $0.url.path } : []),
+        bytes: result.movedBytes,
         recoverable: true, note: "Đã chuyển vào Trash")
       errorMessage = result.errors.isEmpty ? nil : result.errors.joined(separator: "\n")
       isWorking = false

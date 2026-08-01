@@ -11,6 +11,11 @@ let package = Package(
     .executableTarget(
       name: "Diskora",
       path: "Sources/Diskora"
-    )
+    ),
+    .testTarget(
+      name: "DiskoraTests",
+      dependencies: ["Diskora"],
+      path: "Tests/Unit"
+    ),
   ]
 )

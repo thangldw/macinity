@@ -25,14 +25,14 @@ Current applications:
 - **Diskora** — analyzes macOS storage and provides reviewed, recoverable cleanup.
 - **Changeora** — records filesystem changes associated with application installation.
 
-Both applications require macOS 13+ and can be built from their directories:
+Both applications require macOS 13+ and can be tested and built from their directories:
 
 ```bash
 cd apps/diskora && swift test && swift build
 cd apps/changeora && swift test && swift build
 ```
 
-No telemetry or outbound transfer occurs without clear consent. Destructive actions require a preview and confirmation, and recoverable Trash operations are preferred.
+No telemetry or outbound transfer occurs without clear consent. Cleanup actions require a preview and confirmation. Diskora moves cleaned items to Trash, except when explicitly emptying Trash itself.
 
 ## Tiếng Việt
 
@@ -41,7 +41,7 @@ No telemetry or outbound transfer occurs without clear consent. Destructive acti
 - **Diskora** — phân tích dung lượng macOS và chỉ dọn dẹp sau khi người dùng xem trước.
 - **Changeora** — ghi nhận thay đổi filesystem liên quan tới quá trình cài ứng dụng.
 
-Cả hai yêu cầu macOS 13+. Dùng các lệnh ở phần English để test và build. Không có telemetry hoặc truyền dữ liệu ra ngoài nếu chưa có sự đồng ý rõ ràng; thao tác phá hủy phải được xem trước và xác nhận.
+Cả hai yêu cầu macOS 13+. Dùng các lệnh ở phần English để test và build. Không có telemetry hoặc truyền dữ liệu ra ngoài nếu chưa có sự đồng ý rõ ràng. Diskora chuyển nội dung đã dọn vào Trash; chỉ thao tác dọn chính Trash mới xóa vĩnh viễn.
 
 ## 日本語
 
@@ -50,6 +50,6 @@ Cả hai yêu cầu macOS 13+. Dùng các lệnh ở phần English để test v
 - **Diskora** — macOS のストレージを分析し、確認後に復元可能なクリーンアップを行います。
 - **Changeora** — アプリのインストールに関連するファイルシステム変更を記録します。
 
-いずれも macOS 13 以上が必要です。テストとビルドには English セクションのコマンドを使用してください。明確な同意なしにテレメトリや外部送信を行わず、破壊的操作にはプレビューと確認を必須とします。
+いずれも macOS 13 以上が必要です。テストとビルドには English セクションのコマンドを使用してください。明確な同意なしにテレメトリや外部送信を行いません。Diskora はクリーンアップ対象を Trash に移動し、Trash 自体を空にする場合のみ完全に削除します。
 
 Released under the [MIT License](LICENSE).

@@ -37,21 +37,21 @@ struct SnapshotConfiguration: Sendable {
           maximumDepth: 3),
         ScanLocation(
           category: .applicationSupport,
-          url: userLibrary.appendingPathComponent("Application Support"), maximumDepth: 1),
+          url: userLibrary.appendingPathComponent("Application Support"), maximumDepth: 2),
         ScanLocation(
           category: .applicationSupport, url: URL(fileURLWithPath: "/Library/Application Support"),
-          maximumDepth: 1),
+          maximumDepth: 2),
         ScanLocation(
-          category: .cache, url: userLibrary.appendingPathComponent("Caches"), maximumDepth: 1),
+          category: .cache, url: userLibrary.appendingPathComponent("Caches"), maximumDepth: 2),
         ScanLocation(
           category: .preference, url: userLibrary.appendingPathComponent("Preferences"),
           maximumDepth: 1),
         ScanLocation(
           category: .container, url: userLibrary.appendingPathComponent("Containers"),
-          maximumDepth: 1),
+          maximumDepth: 2),
         ScanLocation(
           category: .container, url: userLibrary.appendingPathComponent("Group Containers"),
-          maximumDepth: 1),
+          maximumDepth: 2),
       ],
       maximumItems: 50_000
     )
@@ -103,19 +103,22 @@ struct SystemSnapshotScanner: Sendable {
       .isDirectoryKey, .isRegularFileKey, .isSymbolicLinkKey, .contentModificationDateKey,
       .fileSizeKey, .totalFileAllocatedSizeKey,
     ]
+    var inaccessible: [String] = []
     guard
       let enumerator = manager.enumerator(
         at: location.url,
         includingPropertiesForKeys: keys,
         options: [.skipsHiddenFiles, .skipsPackageDescendants],
-        errorHandler: { _, _ in true })
+        errorHandler: { url, _ in
+          inaccessible.append(url.path)
+          return true
+        })
     else {
       return ScanOutcome(inaccessiblePaths: [location.url.path])
     }
 
     let rootDepth = location.url.standardizedFileURL.pathComponents.count
     var result: [SnapshotItem] = []
-    var inaccessible: [String] = []
     var truncated = false
 
     for case let url as URL in enumerator {

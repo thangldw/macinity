@@ -44,7 +44,7 @@ struct DeepCleanView: View {
       Button("Dọn dẹp", role: .destructive) { model.cleanSelected() }
     } message: {
       Text(
-        "Mục 'Cần xem lại' có thể phải tải hoặc tạo lại. Các mục nguy hiểm không bao giờ được xóa tự động."
+        "Nội dung sẽ được chuyển vào Trash. Mục 'Cần xem lại' có thể phải tải hoặc tạo lại; các mục nguy hiểm không bao giờ được dọn tự động."
       )
     }
   }

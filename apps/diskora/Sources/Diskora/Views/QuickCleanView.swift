@@ -61,7 +61,7 @@ struct QuickCleanView: View {
       Button("Dọn dẹp", role: .destructive) { model.cleanSelected() }
     } message: {
       Text(
-        "Xóa nội dung của \(model.selectedCount) hạng mục và giải phóng khoảng \(ByteCount.string(model.selectedBytes)). Thao tác này không thể hoàn tác."
+        "Chuyển khoảng \(ByteCount.string(model.selectedBytes)) từ \(model.selectedCount) hạng mục vào Trash. Dọn chính Trash sẽ xóa vĩnh viễn nội dung và thực sự giải phóng dung lượng."
       )
     }
     .alert("Một số mục không thể xóa", isPresented: $showsErrors) {

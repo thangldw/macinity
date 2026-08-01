@@ -106,6 +106,23 @@ do {
   try store.clearActiveSnapshot()
   try expect(store.loadActiveSnapshot() == nil, "active snapshot cleanup failed")
 
+  let nestedRoot = root.appendingPathComponent("Nested Support")
+  let nestedVendor = nestedRoot.appendingPathComponent("Vendor")
+  try manager.createDirectory(at: nestedVendor, withIntermediateDirectories: true)
+  let nestedScanner = SystemSnapshotScanner(
+    configuration: SnapshotConfiguration(
+      locations: [
+        ScanLocation(category: .applicationSupport, url: nestedRoot, maximumDepth: 2)
+      ], maximumItems: 100))
+  let nestedBefore = nestedScanner.capture(name: "nested-before")
+  let nestedFile = nestedVendor.appendingPathComponent("installed.db")
+  try Data("installed".utf8).write(to: nestedFile)
+  let nestedAfter = nestedScanner.capture(name: "nested-after")
+  let nestedComparison = SnapshotDiffEngine().compare(before: nestedBefore, after: nestedAfter)
+  try expect(
+    nestedComparison.changes.contains { $0.after?.path == nestedFile.path },
+    "nested application support change missing")
+
   print("PASS: snapshot scan, diff, risk classification and persistence")
 } catch {
   fputs("FAIL: \(error)\n", stderr)

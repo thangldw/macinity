@@ -108,24 +108,26 @@ final class DeepCleanViewModel: ObservableObject {
     let service = self.service
     let history = self.history
     Task {
-      var reclaimed: Int64 = 0
+      var affected: Int64 = 0
       var errors: [String] = []
       var paths: [String] = []
+      var recoverable = true
       for row in selected {
         let target = CleaningTarget(
           id: row.id, name: row.definition.name, detail: row.definition.detail,
           relativePath: row.definition.relativePath, symbol: "folder", isSelectedByDefault: false)
         let result = await Task.detached { service.clean(target: target) }.value
-        reclaimed += result.reclaimedBytes
+        affected += result.affectedBytes
         errors += result.errors
         paths.append(row.definition.relativePath)
+        recoverable = recoverable && result.recoverable
       }
       history.record(
-        action: "Dọn chuyên sâu", paths: paths, bytes: reclaimed, recoverable: false,
-        note: "Đã xóa nội dung cache/thư mục đã xác nhận")
+        action: "Dọn chuyên sâu", paths: paths, bytes: affected, recoverable: recoverable,
+        note: "Đã chuyển nội dung cache/thư mục đã xác nhận vào Trash")
       errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
       isWorking = false
-      status = "Đã giải phóng \(ByteCount.string(reclaimed))"
+      status = "Đã chuyển \(ByteCount.string(affected)) vào Trash"
       scan()
     }
   }

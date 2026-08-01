@@ -51,9 +51,10 @@ struct ScanResult: Identifiable, Sendable {
 
 struct CleanupResult: Sendable {
   let target: CleaningTarget
-  let reclaimedBytes: Int64
+  let affectedBytes: Int64
   let removedItems: Int
   let errors: [String]
+  let recoverable: Bool
 }
 
 enum ByteCount {

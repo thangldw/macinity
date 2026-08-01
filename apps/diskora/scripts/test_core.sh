@@ -8,6 +8,8 @@ swiftc \
     "$PROJECT_DIR/Sources/Diskora/Core/Models.swift" \
     "$PROJECT_DIR/Sources/Diskora/App/AppMetadata.swift" \
     "$PROJECT_DIR/Sources/Diskora/Features/Cleaning/CleanerService.swift" \
+    "$PROJECT_DIR/Sources/Diskora/Features/Applications/ApplicationManager.swift" \
+    "$PROJECT_DIR/Sources/Diskora/Features/History/HistoryStore.swift" \
     "$PROJECT_DIR/Sources/Diskora/Features/Storage/StorageModels.swift" \
     "$PROJECT_DIR/Sources/Diskora/Features/Storage/StorageAnalyzer.swift" \
     "$PROJECT_DIR/Sources/Diskora/Features/Duplicates/DuplicateScanner.swift" \

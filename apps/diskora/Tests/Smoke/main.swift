@@ -25,13 +25,14 @@ do {
     symbol: "folder",
     isSelectedByDefault: true
   )
-  let service = CleanerService(homeURL: temporary)
+  let service = CleanerService(homeURL: temporary, removalMethod: .permanentForTesting)
   let sampleSize = try service.size(of: service.url(for: target))
   require(sampleSize > 0, "Không tính được dung lượng tệp mẫu")
 
   let result = service.clean(target: target)
   require(result.removedItems == 1, "Không xóa đúng số lượng mục")
   require(result.errors.isEmpty, "Quá trình dọn dẹp trả về lỗi")
+  require(!result.recoverable, "Chế độ test không được đánh dấu có thể khôi phục")
   require(manager.fileExists(atPath: cache.path), "Đã xóa nhầm thư mục gốc")
   let remainingItems = try manager.contentsOfDirectory(atPath: cache.path)
   require(remainingItems.isEmpty, "Thư mục chưa được dọn sạch")
@@ -50,6 +51,13 @@ do {
   } catch is CleanerError {
     // Expected.
   }
+
+  require(
+    ApplicationScanner.matchesLeftoverName("com.example.note", applicationName: "Note"),
+    "Không nhận diện được leftover theo thành phần tên")
+  require(
+    !ApplicationScanner.matchesLeftoverName("com.example.noteworthy", applicationName: "Note"),
+    "Nhận nhầm leftover chỉ vì tên chứa chuỗi con")
 
   let documents = temporary.appendingPathComponent("Documents", isDirectory: true)
   try manager.createDirectory(at: documents, withIntermediateDirectories: true)

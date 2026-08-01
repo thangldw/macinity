@@ -11,6 +11,11 @@ let package = Package(
     .executableTarget(
       name: "Changeora",
       path: "Sources/Changeora"
-    )
+    ),
+    .testTarget(
+      name: "ChangeoraTests",
+      dependencies: ["Changeora"],
+      path: "Tests/Unit"
+    ),
   ]
 )

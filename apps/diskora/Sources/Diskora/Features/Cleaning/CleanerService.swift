@@ -11,11 +11,21 @@ enum CleanerError: LocalizedError {
   }
 }
 
+enum CleanupRemovalMethod: Equatable, Sendable {
+  case trash
+  case permanentForTesting
+}
+
 struct CleanerService: Sendable {
   let homeURL: URL
+  let removalMethod: CleanupRemovalMethod
 
-  init(homeURL: URL = FileManager.default.homeDirectoryForCurrentUser) {
+  init(
+    homeURL: URL = FileManager.default.homeDirectoryForCurrentUser,
+    removalMethod: CleanupRemovalMethod = .trash
+  ) {
     self.homeURL = homeURL.standardizedFileURL
+    self.removalMethod = removalMethod
   }
 
   func url(for target: CleaningTarget) throws -> URL {
@@ -91,8 +101,13 @@ struct CleanerService: Sendable {
       let root = try url(for: target)
       let before = (try? size(of: root)) ?? 0
       let manager = FileManager()
+      let effectiveRemovalMethod: CleanupRemovalMethod =
+        target.relativePath == ".Trash" ? .permanentForTesting : removalMethod
+      let recoverable = effectiveRemovalMethod == .trash
       guard manager.fileExists(atPath: root.path) else {
-        return CleanupResult(target: target, reclaimedBytes: 0, removedItems: 0, errors: [])
+        return CleanupResult(
+          target: target, affectedBytes: 0, removedItems: 0, errors: [],
+          recoverable: recoverable)
       }
 
       let children = try manager.contentsOfDirectory(
@@ -104,7 +119,12 @@ struct CleanerService: Sendable {
       var errors: [String] = []
       for child in children {
         do {
-          try manager.removeItem(at: child)
+          switch effectiveRemovalMethod {
+          case .trash:
+            try manager.trashItem(at: child, resultingItemURL: nil)
+          case .permanentForTesting:
+            try manager.removeItem(at: child)
+          }
           removed += 1
         } catch {
           errors.append("\(child.lastPathComponent): \(error.localizedDescription)")
@@ -113,13 +133,15 @@ struct CleanerService: Sendable {
       let after = (try? size(of: root)) ?? 0
       return CleanupResult(
         target: target,
-        reclaimedBytes: max(0, before - after),
+        affectedBytes: max(0, before - after),
         removedItems: removed,
-        errors: errors
+        errors: errors,
+        recoverable: recoverable
       )
     } catch {
       return CleanupResult(
-        target: target, reclaimedBytes: 0, removedItems: 0, errors: [error.localizedDescription])
+        target: target, affectedBytes: 0, removedItems: 0, errors: [error.localizedDescription],
+        recoverable: removalMethod == .trash && target.relativePath != ".Trash")
     }
   }
 }

@@ -54,6 +54,9 @@ struct CoverageView: View {
         "Chỉ đọc metadata như đường dẫn, thời gian, kích thước, Bundle ID và chữ ký.",
         systemImage: "doc.text.magnifyingglass")
       Label(
+        "Application Support, Cache và Container được quan sát sâu hai cấp để nhận diện thay đổi bên trong thư mục ứng dụng.",
+        systemImage: "folder.badge.questionmark")
+      Label(
         "Không đọc nội dung tài liệu cá nhân và không gửi dữ liệu ra mạng.",
         systemImage: "network.slash")
       Label("Không tự xóa, tắt service hoặc sửa System Settings.", systemImage: "hand.raised.slash")
