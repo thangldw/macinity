@@ -2,13 +2,13 @@ import SwiftUI
 
 struct WatchInstallationView: View {
   @ObservedObject var model: ChangeoraViewModel
-  @State private var sessionTitle = "Cài đặt / cập nhật ứng dụng"
+  @State private var sessionTitle = "Cài đặt / cập nhật / gỡ ứng dụng"
 
   var body: some View {
     VStack(spacing: 0) {
       PageHeader(
-        title: "Theo dõi cài đặt",
-        subtitle: "Chụp trạng thái trước và sau để biết ứng dụng đã thay đổi những gì.",
+        title: "Theo dõi thay đổi",
+        subtitle: "FSEvents và snapshot ghi nhận quá trình cài đặt, cập nhật hoặc uninstall.",
         symbol: "scope",
         value: "\(model.sessions.count)",
         valueLabel: "phiên đã lưu"
@@ -50,7 +50,7 @@ struct WatchInstallationView: View {
       Label("Bắt đầu một phiên thay đổi", systemImage: "camera.metering.matrix")
         .font(.title2).fontWeight(.semibold)
       Text(
-        "Changeora sẽ lưu snapshot ban đầu. Sau đó bạn cài hoặc cập nhật ứng dụng như bình thường và quay lại để so sánh."
+        "Changeora sẽ lưu snapshot và bật FSEvents. Sau đó bạn cài, cập nhật hoặc gỡ ứng dụng như bình thường rồi quay lại để so sánh."
       )
       .foregroundStyle(.secondary)
       TextField("Tên phiên", text: $sessionTitle)
@@ -79,7 +79,7 @@ struct WatchInstallationView: View {
           .font(.system(.body, design: .monospaced)).foregroundStyle(.secondary)
       }
       Text(
-        "Snapshot ban đầu có \(snapshot.items.count) mục. Hãy hoàn tất cài đặt hoặc cập nhật trước khi tạo snapshot thứ hai."
+        "Snapshot ban đầu có \(snapshot.items.count) mục. FSEvents đang ghi thay đổi sâu; hãy hoàn tất thao tác trước khi tạo snapshot thứ hai."
       )
       .foregroundStyle(.secondary)
       TextField("Tên phiên", text: $sessionTitle)

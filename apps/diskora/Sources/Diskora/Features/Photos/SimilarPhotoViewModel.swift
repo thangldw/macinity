@@ -81,26 +81,36 @@ final class SimilarPhotoViewModel: ObservableObject {
     let history = self.history
     isWorking = true
     Task {
-      let errors = await Task.detached {
+      let outcome = await Task.detached {
         var errors: [String] = []
+        var moves: [TrashMoveRecord] = []
         for photo in photos {
           let url = photo.url.resolvingSymlinksInPath()
           guard url.path.hasPrefix(root) else {
             errors.append("Đường dẫn không an toàn: \(url.path)")
             continue
           }
-          do { try FileManager.default.trashItem(at: url, resultingItemURL: nil) } catch {
+          do {
+            var trashedURL: NSURL?
+            try FileManager.default.trashItem(at: url, resultingItemURL: &trashedURL)
+            if let trashedURL {
+              moves.append(
+                TrashMoveRecord(
+                  originalPath: url.path, trashPath: (trashedURL as URL).path,
+                  bytes: photo.bytes))
+            }
+          } catch {
             errors.append("\(url.lastPathComponent): \(error.localizedDescription)")
           }
         }
-        return errors
+        return (errors, moves)
       }.value
-      errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
+      errorMessage = outcome.0.isEmpty ? nil : outcome.0.joined(separator: "\n")
       let moved = photos.filter { photo in !FileManager.default.fileExists(atPath: photo.url.path) }
       history.record(
         action: "Loại ảnh tương tự", paths: moved.map { $0.url.path },
         bytes: moved.reduce(0) { $0 + $1.bytes }, recoverable: true,
-        note: "Ảnh đã chuyển vào Trash sau khi người dùng duyệt")
+        note: "Ảnh đã chuyển vào Trash sau khi người dùng duyệt", moves: outcome.1)
       isWorking = false
       scan()
     }

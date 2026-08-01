@@ -107,7 +107,7 @@ struct CleanerService: Sendable {
       guard manager.fileExists(atPath: root.path) else {
         return CleanupResult(
           target: target, affectedBytes: 0, removedItems: 0, errors: [],
-          recoverable: recoverable)
+          recoverable: recoverable, moves: [])
       }
 
       let children = try manager.contentsOfDirectory(
@@ -117,11 +117,20 @@ struct CleanerService: Sendable {
       )
       var removed = 0
       var errors: [String] = []
+      var moves: [TrashMoveRecord] = []
       for child in children {
         do {
+          let childBytes = (try? size(of: child)) ?? 0
           switch effectiveRemovalMethod {
           case .trash:
-            try manager.trashItem(at: child, resultingItemURL: nil)
+            var trashedURL: NSURL?
+            try manager.trashItem(at: child, resultingItemURL: &trashedURL)
+            if let trashedURL {
+              moves.append(
+                TrashMoveRecord(
+                  originalPath: child.path, trashPath: (trashedURL as URL).path,
+                  bytes: childBytes))
+            }
           case .permanentForTesting:
             try manager.removeItem(at: child)
           }
@@ -136,12 +145,13 @@ struct CleanerService: Sendable {
         affectedBytes: max(0, before - after),
         removedItems: removed,
         errors: errors,
-        recoverable: recoverable
+        recoverable: recoverable,
+        moves: moves
       )
     } catch {
       return CleanupResult(
         target: target, affectedBytes: 0, removedItems: 0, errors: [error.localizedDescription],
-        recoverable: removalMethod == .trash && target.relativePath != ".Trash")
+        recoverable: removalMethod == .trash && target.relativePath != ".Trash", moves: [])
     }
   }
 }

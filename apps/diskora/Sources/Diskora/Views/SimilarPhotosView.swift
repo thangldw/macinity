@@ -32,6 +32,10 @@ struct SimilarPhotosView: View {
                       ).frame(width: 150, alignment: .leading).disabled(
                         photo.id == group.recommendedID)
                       Text(ByteCount.string(photo.bytes)).font(.caption).foregroundStyle(.secondary)
+                      Text(
+                        "\(photo.pixelWidth)×\(photo.pixelHeight) • nét \(photo.sharpnessScore.formatted(.number.precision(.fractionLength(1))))"
+                      )
+                      .font(.caption2).foregroundStyle(.secondary)
                     }.onTapGesture { model.reveal(photo.url) }
                   }
                 }

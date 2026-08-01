@@ -2,11 +2,13 @@ import SwiftUI
 
 struct HistoryView: View {
   @ObservedObject var model: HistoryViewModel
+  @State private var entryToRestore: CleanupHistoryEntry?
+  @State private var showsError = false
   var body: some View {
     VStack(spacing: 0) {
       PageHeader(
-        title: "Lịch sử", subtitle: "Nhật ký dọn dẹp và khả năng khôi phục",
-        symbol: "clock.arrow.circlepath", value: model.entries.count.formatted(),
+        title: "Undo Center", subtitle: "Lịch sử, vị trí Trash và khôi phục có kiểm tra xung đột",
+        symbol: "arrow.uturn.backward.circle", value: model.entries.count.formatted(),
         valueLabel: "thao tác")
       Divider()
       if model.entries.isEmpty {
@@ -18,6 +20,15 @@ struct HistoryView: View {
           DisclosureGroup {
             ForEach(entry.paths, id: \.self) { Text($0).font(.caption).textSelection(.enabled) }
             Text(entry.note).font(.caption).foregroundStyle(.secondary)
+            if entry.pendingRestoreCount > 0 {
+              Button("Khôi phục \(entry.pendingRestoreCount) mục…") {
+                entryToRestore = entry
+              }
+              .disabled(model.isRestoring)
+            } else if entry.recoverable, entry.moves != nil {
+              Label("Đã khôi phục hoặc không còn mục trong Trash", systemImage: "checkmark.circle")
+                .font(.caption).foregroundStyle(.secondary)
+            }
           } label: {
             HStack {
               Image(systemName: entry.recoverable ? "trash" : "eraser").foregroundStyle(
@@ -34,8 +45,13 @@ struct HistoryView: View {
       }
       Divider()
       HStack {
-        Text("Mục có biểu tượng Trash có thể được khôi phục thủ công từ Trash.").font(.caption)
-          .foregroundStyle(.secondary)
+        VStack(alignment: .leading, spacing: 2) {
+          Text("Undo Center không ghi đè dữ liệu đang tồn tại ở vị trí gốc.").font(.caption)
+          if let statusMessage = model.statusMessage {
+            Text(statusMessage).font(.caption).foregroundStyle(.green)
+          }
+        }
+        .foregroundStyle(.secondary)
         Spacer()
         Button("Mở Trash") {
           NSWorkspace.shared.open(
@@ -43,6 +59,25 @@ struct HistoryView: View {
         }
         Button("Làm mới") { model.refresh() }
       }.padding(18)
-    }.onAppear { model.refresh() }
+    }
+    .onAppear { model.refresh() }
+    .onChange(of: model.errorMessage) { showsError = $0 != nil }
+    .alert(
+      "Khôi phục từ Trash?",
+      isPresented: Binding(get: { entryToRestore != nil }, set: { if !$0 { entryToRestore = nil } })
+    ) {
+      Button("Hủy", role: .cancel) { entryToRestore = nil }
+      Button("Khôi phục") {
+        if let entryToRestore { model.restore(entryToRestore) }
+        entryToRestore = nil
+      }
+    } message: {
+      Text("Mục chỉ được khôi phục khi vị trí gốc chưa có dữ liệu mới.")
+    }
+    .alert("Một số mục không thể khôi phục", isPresented: $showsError) {
+      Button("Đóng", role: .cancel) {}
+    } message: {
+      Text(model.errorMessage ?? "")
+    }
   }
 }

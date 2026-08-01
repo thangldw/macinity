@@ -15,6 +15,7 @@ struct ChangesView: View {
         || change.item.name.localizedCaseInsensitiveContains(query)
         || change.item.path.localizedCaseInsensitiveContains(query)
         || (change.item.ownerHint?.localizedCaseInsensitiveContains(query) ?? false)
+        || (change.attributedApplication?.localizedCaseInsensitiveContains(query) ?? false)
       return matchesRisk && matchesSearch
     }
   }
@@ -97,8 +98,15 @@ private struct ChangeRow: View {
           if let signature = change.item.signatureStatus {
             Label(signature, systemImage: "checkmark.seal")
           }
+          if let attribution = change.attributedApplication {
+            Label(attribution, systemImage: "app.badge.checkmark")
+          }
         }
         .font(.caption).foregroundStyle(.secondary)
+        if let reason = change.riskReason {
+          Label(reason, systemImage: "lightbulb")
+            .font(.caption).foregroundStyle(change.risk == .important ? .red : .secondary)
+        }
       }
       Spacer()
       Button("Finder", action: reveal).buttonStyle(.borderless)

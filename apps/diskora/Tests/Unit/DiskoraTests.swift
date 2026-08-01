@@ -43,4 +43,29 @@ final class DiskoraTests: XCTestCase {
     XCTAssertFalse(
       ApplicationScanner.matchesLeftoverName("com.example.noteworthy", applicationName: "Note"))
   }
+
+  func testUndoCenterRestoresRecordedTrashMoveWithoutOverwrite() throws {
+    let manager = FileManager.default
+    let root = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? manager.removeItem(at: root) }
+    let original = root.appendingPathComponent("Original/sample.txt")
+    let trashed = root.appendingPathComponent("Trash/sample.txt")
+    try manager.createDirectory(
+      at: trashed.deletingLastPathComponent(), withIntermediateDirectories: true)
+    try Data("recoverable".utf8).write(to: trashed)
+
+    let store = HistoryStore(directory: root.appendingPathComponent("Store"))
+    store.record(
+      action: "Test", paths: [original.path], bytes: 11, recoverable: true,
+      note: "Undo test",
+      moves: [TrashMoveRecord(originalPath: original.path, trashPath: trashed.path, bytes: 11)])
+    let entry = try XCTUnwrap(store.load().first)
+    let result = store.restore(entryID: entry.id)
+
+    XCTAssertEqual(result.restoredCount, 1)
+    XCTAssertTrue(result.errors.isEmpty)
+    XCTAssertTrue(manager.fileExists(atPath: original.path))
+    XCTAssertFalse(manager.fileExists(atPath: trashed.path))
+    XCTAssertEqual(store.load().first?.pendingRestoreCount, 0)
+  }
 }

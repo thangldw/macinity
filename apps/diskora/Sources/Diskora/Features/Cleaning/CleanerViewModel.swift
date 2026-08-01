@@ -75,6 +75,7 @@ final class CleanerViewModel: ObservableObject {
       let errors = results.flatMap { result in
         result.errors.map { "\(result.target.name): \($0)" }
       }
+      let moves = results.flatMap(\.moves)
       let fullyRecoverable = results.allSatisfy(\.recoverable)
       cleanupSummary =
         fullyRecoverable
@@ -88,7 +89,8 @@ final class CleanerViewModel: ObservableObject {
         recoverable: fullyRecoverable,
         note: fullyRecoverable
           ? "Đã chuyển nội dung đã xác nhận vào Trash"
-          : "Đã xóa nội dung đã xác nhận; mục trong Trash không thể khôi phục")
+          : "Đã xóa nội dung đã xác nhận; mục trong Trash không thể khôi phục",
+        moves: moves)
       isWorking = false
       scan(resetSummary: false)
     }

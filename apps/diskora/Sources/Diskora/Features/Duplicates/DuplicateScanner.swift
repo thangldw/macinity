@@ -32,6 +32,7 @@ struct DuplicateSnapshot: Sendable {
   let rootURL: URL
   let groups: [DuplicateGroup]
   let candidateCount: Int
+  let partialHashedCount: Int
   let hashedCount: Int
   let inaccessibleCount: Int
   let nameWarnings: [NameSimilarityWarning]
@@ -39,11 +40,30 @@ struct DuplicateSnapshot: Sendable {
   var reclaimableBytes: Int64 { groups.reduce(0) { $0 + $1.reclaimableBytes } }
 }
 
+enum DuplicateScanPhase: String, Sendable {
+  case indexing = "Đang lập chỉ mục"
+  case partialHash = "Đang lọc bằng partial hash"
+  case fullHash = "Đang xác minh SHA-256"
+  case finished = "Hoàn tất"
+}
+
+struct DuplicateScanProgress: Sendable {
+  let phase: DuplicateScanPhase
+  let completed: Int
+  let total: Int
+
+  var fraction: Double {
+    guard total > 0 else { return 0 }
+    return min(1, Double(completed) / Double(total))
+  }
+}
+
 struct TrashResult: Sendable {
   let movedCount: Int
   let movedBytes: Int64
   let errors: [String]
   let reportURL: URL?
+  let moves: [TrashMoveRecord]
 }
 
 struct DuplicateScanner: Sendable {
@@ -53,7 +73,10 @@ struct DuplicateScanner: Sendable {
     let modifiedAt: Date?
   }
 
-  func scan(rootURL: URL, minimumBytes: Int64 = 1_024 * 1_024) throws -> DuplicateSnapshot {
+  func scan(
+    rootURL: URL, minimumBytes: Int64 = 1_024 * 1_024,
+    progress: @Sendable (DuplicateScanProgress) -> Void = { _ in }
+  ) throws -> DuplicateSnapshot {
     let manager = FileManager()
     let root = rootURL.resolvingSymlinksInPath().standardizedFileURL
     let keys: Set<URLResourceKey> = [
@@ -75,6 +98,7 @@ struct DuplicateScanner: Sendable {
 
     var bySize: [Int64: [Candidate]] = [:]
     var candidateCount = 0
+    progress(DuplicateScanProgress(phase: .indexing, completed: 0, total: 0))
     for case let fileURL as URL in enumerator {
       if Task.isCancelled { throw CancellationError() }
       guard let values = try? fileURL.resourceValues(forKeys: keys) else { continue }
@@ -89,6 +113,10 @@ struct DuplicateScanner: Sendable {
       let bytes = Int64(values.fileSize ?? 0)
       guard bytes >= minimumBytes else { continue }
       candidateCount += 1
+      if candidateCount.isMultiple(of: 250) {
+        progress(
+          DuplicateScanProgress(phase: .indexing, completed: candidateCount, total: candidateCount))
+      }
       bySize[bytes, default: []].append(
         Candidate(
           url: fileURL.standardizedFileURL, bytes: bytes, modifiedAt: values.contentModificationDate
@@ -96,18 +124,39 @@ struct DuplicateScanner: Sendable {
       )
     }
 
+    let sizeCandidates = bySize.values.filter { $0.count > 1 }.flatMap { $0 }
+    var byPartialDigest: [String: [Candidate]] = [:]
+    var partialDigestByPath: [String: String] = [:]
+    var partialHashedCount = 0
+    for candidate in sizeCandidates {
+      if Task.isCancelled { throw CancellationError() }
+      guard let digest = try? partialSHA256(of: candidate.url, bytes: candidate.bytes) else {
+        inaccessible += 1
+        continue
+      }
+      partialHashedCount += 1
+      let key = "\(candidate.bytes):\(digest)"
+      partialDigestByPath[candidate.url.path] = key
+      byPartialDigest[key, default: []].append(candidate)
+      progress(
+        DuplicateScanProgress(
+          phase: .partialHash, completed: partialHashedCount, total: sizeCandidates.count))
+    }
+
+    let fullCandidates = byPartialDigest.values.filter { $0.count > 1 }.flatMap { $0 }
     var byDigest: [String: [Candidate]] = [:]
     var hashedCount = 0
-    for candidates in bySize.values where candidates.count > 1 {
-      for candidate in candidates {
-        if Task.isCancelled { throw CancellationError() }
-        guard let digest = try? sha256(of: candidate.url) else {
-          inaccessible += 1
-          continue
-        }
-        hashedCount += 1
-        byDigest["\(candidate.bytes):\(digest)", default: []].append(candidate)
+    for candidate in fullCandidates {
+      if Task.isCancelled { throw CancellationError() }
+      guard let digest = try? sha256(of: candidate.url) else {
+        inaccessible += 1
+        continue
       }
+      hashedCount += 1
+      byDigest["\(candidate.bytes):\(digest)", default: []].append(candidate)
+      progress(
+        DuplicateScanProgress(
+          phase: .fullHash, completed: hashedCount, total: fullCandidates.count))
     }
 
     let groups = byDigest.compactMap { digest, candidates -> DuplicateGroup? in
@@ -124,15 +173,19 @@ struct DuplicateScanner: Sendable {
       uniqueKeysWithValues: byDigest.flatMap { digest, candidates in
         candidates.map { ($0.url.path, digest) }
       })
+    let comparisonDigestByPath = partialDigestByPath.merging(digestByPath) { _, full in full }
     let nameWarnings = findNameWarnings(
       candidates: bySize.values.flatMap { $0 },
-      digestByPath: digestByPath
+      digestByPath: comparisonDigestByPath
     )
+
+    progress(DuplicateScanProgress(phase: .finished, completed: 1, total: 1))
 
     return DuplicateSnapshot(
       rootURL: root,
       groups: groups,
       candidateCount: candidateCount,
+      partialHashedCount: partialHashedCount,
       hashedCount: hashedCount,
       inaccessibleCount: inaccessible,
       nameWarnings: nameWarnings
@@ -151,6 +204,7 @@ struct DuplicateScanner: Sendable {
     var bytes: Int64 = 0
     var errors: [String] = []
     var movedRecords: [(original: String, duplicate: String)] = []
+    var moves: [TrashMoveRecord] = []
 
     for file in files {
       let candidate = file.url.resolvingSymlinksInPath().standardizedFileURL
@@ -174,10 +228,17 @@ struct DuplicateScanner: Sendable {
         continue
       }
       do {
-        try manager.trashItem(at: candidate, resultingItemURL: nil)
+        var trashedURL: NSURL?
+        try manager.trashItem(at: candidate, resultingItemURL: &trashedURL)
         count += 1
         bytes += file.bytes
         movedRecords.append((original.path, file.url.path))
+        if let trashedURL {
+          moves.append(
+            TrashMoveRecord(
+              originalPath: candidate.path, trashPath: (trashedURL as URL).path,
+              bytes: file.bytes))
+        }
       } catch {
         errors.append("\(file.url.lastPathComponent): \(error.localizedDescription)")
       }
@@ -189,7 +250,8 @@ struct DuplicateScanner: Sendable {
       errors.append("Không thể ghi báo cáo: \(error.localizedDescription)")
       reportURL = nil
     }
-    return TrashResult(movedCount: count, movedBytes: bytes, errors: errors, reportURL: reportURL)
+    return TrashResult(
+      movedCount: count, movedBytes: bytes, errors: errors, reportURL: reportURL, moves: moves)
   }
 
   private func sha256(of url: URL) throws -> String {
@@ -201,6 +263,20 @@ struct DuplicateScanner: Sendable {
       if data.isEmpty { break }
       hasher.update(data: data)
       if Task.isCancelled { throw CancellationError() }
+    }
+    return hasher.finalize().map { String(format: "%02x", $0) }.joined()
+  }
+
+  private func partialSHA256(of url: URL, bytes: Int64) throws -> String {
+    let handle = try FileHandle(forReadingFrom: url)
+    defer { try? handle.close() }
+    let sampleSize = 64 * 1_024
+    var hasher = SHA256()
+    hasher.update(data: Data(String(bytes).utf8))
+    hasher.update(data: try handle.read(upToCount: sampleSize) ?? Data())
+    if bytes > Int64(sampleSize) {
+      try handle.seek(toOffset: UInt64(max(0, bytes - Int64(sampleSize))))
+      hasher.update(data: try handle.read(upToCount: sampleSize) ?? Data())
     }
     return hasher.finalize().map { String(format: "%02x", $0) }.joined()
   }

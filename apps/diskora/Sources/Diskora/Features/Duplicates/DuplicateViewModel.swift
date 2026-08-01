@@ -12,6 +12,7 @@ final class DuplicateViewModel: ObservableObject {
   @Published var summary: String?
   @Published var errorMessage: String?
   @Published var lastReportURL: URL?
+  @Published var progress: DuplicateScanProgress?
 
   private let scanner = DuplicateScanner()
   private let history = HistoryStore()
@@ -59,12 +60,21 @@ final class DuplicateViewModel: ObservableObject {
     if !preserveSummary { summary = nil }
     selectedPaths = []
     status = "Đang nhóm theo kích thước và kiểm tra nội dung…"
+    progress = DuplicateScanProgress(phase: .indexing, completed: 0, total: 0)
     let scanner = self.scanner
     let root = rootURL
     task = Task {
       do {
         let result = try await Task.detached(priority: .userInitiated) {
-          try scanner.scan(rootURL: root)
+          try scanner.scan(rootURL: root) { update in
+            Task { @MainActor in
+              self.progress = update
+              self.status =
+                update.total > 0
+                ? "\(update.phase.rawValue) • \(update.completed)/\(update.total)"
+                : update.phase.rawValue
+            }
+          }
         }.value
         snapshot = result
         status =
@@ -76,6 +86,7 @@ final class DuplicateViewModel: ObservableObject {
         status = "Không thể hoàn tất quá trình quét"
       }
       isWorking = false
+      progress = nil
     }
   }
 
@@ -109,7 +120,8 @@ final class DuplicateViewModel: ObservableObject {
       history.record(
         action: "Loại tệp trùng lặp", paths: files.map { $0.url.path }, bytes: result.movedBytes,
         recoverable: true,
-        note: "Bản sao đã chuyển vào Trash; báo cáo: \(result.reportURL?.path ?? "không có")")
+        note: "Bản sao đã chuyển vào Trash; báo cáo: \(result.reportURL?.path ?? "không có")",
+        moves: result.moves)
       lastReportURL = result.reportURL
       if !result.errors.isEmpty { errorMessage = result.errors.joined(separator: "\n") }
       isWorking = false

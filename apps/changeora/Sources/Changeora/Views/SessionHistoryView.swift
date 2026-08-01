@@ -3,6 +3,8 @@ import SwiftUI
 
 struct SessionHistoryView: View {
   @ObservedObject var model: ChangeoraViewModel
+  @State private var olderID: UUID?
+  @State private var newerID: UUID?
 
   var body: some View {
     VStack(spacing: 0) {
@@ -14,7 +16,30 @@ struct SessionHistoryView: View {
         valueLabel: "phiên"
       )
       Divider()
-      if model.sessions.isEmpty {
+      HStack(spacing: 10) {
+        Button("Tạo baseline hiện tại") { model.createBaseline() }.disabled(model.isScanning)
+        Button("So sánh với baseline") { model.compareWithBaseline() }
+          .disabled(model.baselineSnapshot == nil || model.isScanning)
+        if model.sessions.count > 1 {
+          Divider().frame(height: 20)
+          Picker("Phiên trước", selection: $olderID) {
+            Text("Chọn phiên").tag(UUID?.none)
+            ForEach(model.sessions) { Text($0.title).tag(Optional($0.id)) }
+          }.frame(maxWidth: 190)
+          Picker("Phiên sau", selection: $newerID) {
+            Text("Chọn phiên").tag(UUID?.none)
+            ForEach(model.sessions) { Text($0.title).tag(Optional($0.id)) }
+          }.frame(maxWidth: 190)
+          Button("So sánh hai phiên") {
+            if let olderID, let newerID {
+              model.compareSessions(olderID: olderID, newerID: newerID)
+            }
+          }.disabled(olderID == nil || newerID == nil || olderID == newerID)
+        }
+        Spacer()
+      }.padding(12)
+      Divider()
+      if model.sessions.isEmpty && model.adHocSession == nil {
         EmptyStateView(
           title: "Chưa có lịch sử",
           symbol: "clock",
@@ -59,9 +84,14 @@ private struct SessionDetailView: View {
           }
           Spacer()
           Button {
-            exportReport()
+            exportReport(format: "md")
           } label: {
             Label("Export Markdown", systemImage: "square.and.arrow.up")
+          }
+          Button {
+            exportReport(format: "json")
+          } label: {
+            Label("Export JSON", systemImage: "curlybraces")
           }
         }
         HStack(spacing: 12) {
@@ -98,14 +128,17 @@ private struct SessionDetailView: View {
     }
   }
 
-  private func exportReport() {
+  private func exportReport(format: String) {
     let panel = NSSavePanel()
-    panel.allowedContentTypes = [.plainText]
+    panel.allowedContentTypes = format == "json" ? [.json] : [.plainText]
     panel.nameFieldStringValue =
-      "Changeora-\(session.finishedAt.formatted(.iso8601.year().month().day())).md"
+      "Changeora-\(session.finishedAt.formatted(.iso8601.year().month().day())).\(format)"
     guard panel.runModal() == .OK, let url = panel.url else { return }
     do {
-      try model.markdownReport(for: session).write(to: url, atomically: true, encoding: .utf8)
+      let report =
+        try format == "json"
+        ? model.jsonReport(for: session) : model.markdownReport(for: session)
+      try report.write(to: url, atomically: true, encoding: .utf8)
     } catch {
       model.errorMessage = "Không thể export báo cáo: \(error.localizedDescription)"
     }

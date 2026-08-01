@@ -1,7 +1,7 @@
 import SwiftUI
 
 private enum AppSection: String, CaseIterable, Identifiable {
-  case overview = "Theo dõi cài đặt"
+  case overview = "Theo dõi thay đổi"
   case changes = "Thay đổi"
   case history = "Lịch sử"
   case coverage = "Phạm vi & quyền riêng tư"

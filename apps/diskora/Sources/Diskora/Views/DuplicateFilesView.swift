@@ -34,7 +34,9 @@ struct DuplicateFilesView: View {
                   title: "Có thể giải phóng", value: ByteCount.string(snapshot.reclaimableBytes),
                   symbol: "externaldrive.badge.minus")
                 MetricCard(
-                  title: "Tệp đã hash", value: snapshot.hashedCount.formatted(), symbol: "number")
+                  title: "Partial / Full hash",
+                  value: "\(snapshot.partialHashedCount) / \(snapshot.hashedCount)",
+                  symbol: "number")
               }
               .listRowInsets(EdgeInsets()).padding(.vertical, 8)
             }
@@ -140,6 +142,9 @@ struct DuplicateFilesView: View {
         }
         HStack(spacing: 10) {
           if model.isWorking { ProgressView().controlSize(.small) }
+          if let progress = model.progress, progress.total > 0 {
+            ProgressView(value: progress.fraction).frame(width: 110)
+          }
           Text(model.status).font(.callout).lineLimit(1)
           Spacer()
           Button("Chọn vị trí…") { model.chooseRoot() }.disabled(model.isWorking)

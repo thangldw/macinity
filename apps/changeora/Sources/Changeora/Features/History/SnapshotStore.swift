@@ -4,6 +4,7 @@ struct SnapshotStore: Sendable {
   private let directory: URL
   private let sessionsURL: URL
   private let activeURL: URL
+  private let baselineURL: URL
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
 
@@ -11,6 +12,7 @@ struct SnapshotStore: Sendable {
     self.directory = directory
     sessionsURL = directory.appendingPathComponent("sessions.json")
     activeURL = directory.appendingPathComponent("active-snapshot.json")
+    baselineURL = directory.appendingPathComponent("trusted-baseline.json")
     encoder = JSONEncoder()
     encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
     decoder = JSONDecoder()
@@ -39,5 +41,20 @@ struct SnapshotStore: Sendable {
   func clearActiveSnapshot() throws {
     guard FileManager.default.fileExists(atPath: activeURL.path) else { return }
     try FileManager.default.removeItem(at: activeURL)
+  }
+
+  func loadBaseline() -> SystemSnapshot? {
+    guard let data = try? Data(contentsOf: baselineURL) else { return nil }
+    return try? decoder.decode(SystemSnapshot.self, from: data)
+  }
+
+  func saveBaseline(_ snapshot: SystemSnapshot) throws {
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    try encoder.encode(snapshot).write(to: baselineURL, options: .atomic)
+  }
+
+  func clearBaseline() throws {
+    guard FileManager.default.fileExists(atPath: baselineURL.path) else { return }
+    try FileManager.default.removeItem(at: baselineURL)
   }
 }

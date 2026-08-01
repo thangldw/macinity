@@ -4,8 +4,12 @@ enum AppMetadata {
   static let name = "Diskora"
   static let tagline = "See where your space goes."
   static let author = "Thang"
-  static let version = "1.0.0"
-  static let build = "1"
+  static var version: String {
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.2.0"
+  }
+  static var build: String {
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "3"
+  }
   static let copyright = "Copyright © 2026 Thang. MIT License."
   static let summary = "Công cụ phân tích và quản lý dung lượng dành cho macOS."
 

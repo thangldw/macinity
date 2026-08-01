@@ -37,5 +37,22 @@ final class ChangeoraTests: XCTestCase {
     let comparison = SnapshotDiffEngine().compare(before: before, after: after)
 
     XCTAssertEqual(comparison.changes.first?.risk, .important)
+    XCTAssertNotNil(comparison.changes.first?.riskReason)
+  }
+
+  func testFSEventAddsDeepChangeMissingFromSnapshot() throws {
+    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? FileManager.default.removeItem(at: root) }
+    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+    let path = root.appendingPathComponent("Vendor/deep/item.db").path
+    let before = SystemSnapshot(name: "before", items: [])
+    let after = SystemSnapshot(name: "after", items: [])
+    let comparison = SnapshotDiffEngine().compare(
+      before: before, after: after,
+      events: [FileSystemEvent(path: path, flags: 0)],
+      categoryForPath: { _ in .applicationSupport })
+
+    XCTAssertEqual(comparison.changes.count, 1)
+    XCTAssertTrue(comparison.changes[0].riskReason?.contains("FSEvents") == true)
   }
 }

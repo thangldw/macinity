@@ -52,6 +52,44 @@ struct SnapshotConfiguration: Sendable {
         ScanLocation(
           category: .container, url: userLibrary.appendingPathComponent("Group Containers"),
           maximumDepth: 2),
+        ScanLocation(
+          category: .loginItem,
+          url: userLibrary.appendingPathComponent("Application Support/com.apple.sharedfilelist"),
+          maximumDepth: 3),
+        ScanLocation(
+          category: .backgroundTask,
+          url: userLibrary.appendingPathComponent(
+            "Application Support/com.apple.backgroundtaskmanagementagent"),
+          maximumDepth: 2),
+        ScanLocation(
+          category: .packageReceipt, url: URL(fileURLWithPath: "/var/db/receipts"),
+          maximumDepth: 1),
+        ScanLocation(
+          category: .kernelExtension, url: URL(fileURLWithPath: "/Library/Extensions"),
+          maximumDepth: 2),
+        ScanLocation(
+          category: .configurationProfile,
+          url: URL(fileURLWithPath: "/var/db/ConfigurationProfiles"), maximumDepth: 3),
+        ScanLocation(
+          category: .browserExtension,
+          url: userLibrary.appendingPathComponent(
+            "Application Support/Google/Chrome/Default/Extensions"),
+          maximumDepth: 3),
+        ScanLocation(
+          category: .browserExtension, url: userLibrary.appendingPathComponent("Safari/Extensions"),
+          maximumDepth: 2),
+        ScanLocation(
+          category: .shellConfiguration, url: home.appendingPathComponent(".zshrc"), maximumDepth: 0
+        ),
+        ScanLocation(
+          category: .shellConfiguration, url: home.appendingPathComponent(".zprofile"),
+          maximumDepth: 0),
+        ScanLocation(
+          category: .shellConfiguration, url: home.appendingPathComponent(".bash_profile"),
+          maximumDepth: 0),
+        ScanLocation(
+          category: .shellConfiguration, url: home.appendingPathComponent(".bashrc"),
+          maximumDepth: 0),
       ],
       maximumItems: 50_000
     )
@@ -63,6 +101,36 @@ struct SystemSnapshotScanner: Sendable {
 
   init(configuration: SnapshotConfiguration = .standard()) {
     self.configuration = configuration
+  }
+
+  var monitoredRoots: [URL] {
+    let roots = configuration.locations.map { location in
+      var candidate = location.url.standardizedFileURL
+      var isDirectory: ObjCBool = false
+      if FileManager.default.fileExists(atPath: candidate.path, isDirectory: &isDirectory),
+        !isDirectory.boolValue
+      {
+        candidate.deleteLastPathComponent()
+      }
+      while !FileManager.default.fileExists(atPath: candidate.path, isDirectory: &isDirectory),
+        candidate.path != "/"
+      {
+        candidate.deleteLastPathComponent()
+      }
+      return candidate
+    }
+    return Array(Set(roots)).sorted { $0.path < $1.path }
+  }
+
+  func category(for path: String) -> SnapshotCategory? {
+    let standardized = URL(fileURLWithPath: path).standardizedFileURL.path
+    return configuration.locations
+      .filter { location in
+        let root = location.url.standardizedFileURL.path
+        return standardized == root || standardized.hasPrefix(root + "/")
+      }
+      .max { $0.url.path.count < $1.url.path.count }?
+      .category
   }
 
   func capture(name: String) -> SystemSnapshot {
@@ -93,9 +161,7 @@ struct SystemSnapshotScanner: Sendable {
   private func scan(location: ScanLocation, remainingLimit: Int) -> ScanOutcome {
     let manager = FileManager.default
     var isDirectory: ObjCBool = false
-    guard manager.fileExists(atPath: location.url.path, isDirectory: &isDirectory),
-      isDirectory.boolValue
-    else {
+    guard manager.fileExists(atPath: location.url.path, isDirectory: &isDirectory) else {
       return ScanOutcome()
     }
 
@@ -103,6 +169,15 @@ struct SystemSnapshotScanner: Sendable {
       .isDirectoryKey, .isRegularFileKey, .isSymbolicLinkKey, .contentModificationDateKey,
       .fileSizeKey, .totalFileAllocatedSizeKey,
     ]
+    if !isDirectory.boolValue {
+      do {
+        let values = try location.url.resourceValues(forKeys: Set(keys))
+        let item = makeItem(url: location.url, category: location.category, values: values)
+        return ScanOutcome(items: item.map { [$0] } ?? [])
+      } catch {
+        return ScanOutcome(inaccessiblePaths: [location.url.path])
+      }
+    }
     var inaccessible: [String] = []
     guard
       let enumerator = manager.enumerator(
@@ -176,7 +251,7 @@ struct SystemSnapshotScanner: Sendable {
       let metadata = propertyListMetadata(at: url)
       name = metadata.label ?? url.deletingPathExtension().lastPathComponent
       ownerHint = metadata.label ?? metadata.program
-    } else if [.privilegedHelper, .systemExtension].contains(category) {
+    } else if [.privilegedHelper, .systemExtension, .kernelExtension].contains(category) {
       let signature = signatureDetails(for: url)
       teamIdentifier = signature.teamIdentifier
       signatureStatus = signature.status

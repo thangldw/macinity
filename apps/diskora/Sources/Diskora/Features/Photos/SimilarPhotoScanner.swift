@@ -6,7 +6,11 @@ struct SimilarPhoto: Identifiable, Sendable {
   let url: URL
   let bytes: Int64
   let capturedAt: Date
+  let pixelWidth: Int
+  let pixelHeight: Int
+  let sharpnessScore: Double
   var id: String { url.path }
+  var pixelCount: Int { pixelWidth * pixelHeight }
 }
 
 struct SimilarPhotoGroup: Identifiable, Sendable {
@@ -54,12 +58,16 @@ struct SimilarPhotoScanner: Sendable {
         let values = try? url.resourceValues(forKeys: keys),
         values.isRegularFile == true, values.isSymbolicLink != true
       else { continue }
+      let metadata = imageMetadata(
+        url: url, fallback: values.contentModificationDate ?? .distantPast)
       photos.append(
         SimilarPhoto(
           url: url.standardizedFileURL,
           bytes: Int64(values.fileSize ?? 0),
-          capturedAt: captureDate(
-            url: url, fallback: values.contentModificationDate ?? .distantPast)
+          capturedAt: metadata.date,
+          pixelWidth: metadata.width,
+          pixelHeight: metadata.height,
+          sharpnessScore: 0
         ))
     }
 
@@ -91,31 +99,63 @@ struct SimilarPhotoScanner: Sendable {
               skipped += 1
               continue
             }
-            candidates.append(Candidate(photo: photo, observation: observation))
+            let measuredPhoto = SimilarPhoto(
+              url: photo.url, bytes: photo.bytes, capturedAt: photo.capturedAt,
+              pixelWidth: photo.pixelWidth, pixelHeight: photo.pixelHeight,
+              sharpnessScore: sharpnessScore(at: photo.url))
+            candidates.append(Candidate(photo: measuredPhoto, observation: observation))
             analyzed += 1
           } catch { skipped += 1 }
         }
-        guard let first = candidates.first else { continue }
-        var similar = [first]
-        var maxDistance: Float = 0
-        for candidate in candidates.dropFirst() {
-          var distance: Float = 0
-          try first.observation.computeDistance(&distance, to: candidate.observation)
-          if distance <= distanceLimit {
-            similar.append(candidate)
-            maxDistance = max(maxDistance, distance)
+        guard candidates.count > 1 else { continue }
+        var parent = Array(candidates.indices)
+        func root(of index: Int) -> Int {
+          var current = index
+          while parent[current] != current { current = parent[current] }
+          return current
+        }
+        func unite(_ first: Int, _ second: Int) {
+          let firstRoot = root(of: first)
+          let secondRoot = root(of: second)
+          if firstRoot != secondRoot { parent[secondRoot] = firstRoot }
+        }
+        for firstIndex in candidates.indices {
+          for secondIndex in candidates.indices where secondIndex > firstIndex {
+            var distance: Float = 0
+            try candidates[firstIndex].observation.computeDistance(
+              &distance, to: candidates[secondIndex].observation)
+            if distance <= distanceLimit { unite(firstIndex, secondIndex) }
           }
         }
-        guard similar.count > 1 else { continue }
-        let groupPhotos = similar.map(\.photo)
-        let recommended = groupPhotos.max { $0.bytes < $1.bytes } ?? groupPhotos[0]
-        output.append(
-          SimilarPhotoGroup(
-            id: similar.map { $0.photo.id }.sorted().joined(separator: "|"),
-            photos: groupPhotos,
-            recommendedID: recommended.id,
-            maximumDistance: maxDistance
-          ))
+        let components = Dictionary(grouping: candidates.indices) { root(of: $0) }
+        for indices in components.values where indices.count > 1 {
+          let groupCandidates = indices.map { candidates[$0] }
+          let groupPhotos = groupCandidates.map(\.photo)
+          let recommended =
+            groupPhotos.max {
+              ($0.pixelCount, $0.sharpnessScore, $0.bytes)
+                < ($1.pixelCount, $1.sharpnessScore, $1.bytes)
+            } ?? groupPhotos[0]
+          var maximumDistance: Float = 0
+          for firstIndex in groupCandidates.indices {
+            for secondIndex in groupCandidates.indices where secondIndex > firstIndex {
+              var distance: Float = 0
+              try groupCandidates[firstIndex].observation.computeDistance(
+                &distance, to: groupCandidates[secondIndex].observation)
+              maximumDistance = max(maximumDistance, distance)
+            }
+          }
+          output.append(
+            SimilarPhotoGroup(
+              id: groupPhotos.map(\.id).sorted().joined(separator: "|"),
+              photos: groupPhotos.sorted {
+                ($0.pixelCount, $0.sharpnessScore, $0.bytes)
+                  > ($1.pixelCount, $1.sharpnessScore, $1.bytes)
+              },
+              recommendedID: recommended.id,
+              maximumDistance: maximumDistance
+            ))
+        }
       }
     }
     return SimilarPhotoSnapshot(
@@ -123,15 +163,60 @@ struct SimilarPhotoScanner: Sendable {
       skippedCount: skipped)
   }
 
-  private func captureDate(url: URL, fallback: Date) -> Date {
+  private func imageMetadata(url: URL, fallback: Date) -> (date: Date, width: Int, height: Int) {
     guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-      let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any],
-      let exif = properties[kCGImagePropertyExifDictionary] as? [CFString: Any],
+      let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any]
+    else { return (fallback, 0, 0) }
+    let width = properties[kCGImagePropertyPixelWidth] as? Int ?? 0
+    let height = properties[kCGImagePropertyPixelHeight] as? Int ?? 0
+    guard let exif = properties[kCGImagePropertyExifDictionary] as? [CFString: Any],
       let value = exif[kCGImagePropertyExifDateTimeOriginal] as? String
-    else { return fallback }
+    else { return (fallback, width, height) }
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.dateFormat = "yyyy:MM:dd HH:mm:ss"
-    return formatter.date(from: value) ?? fallback
+    return (formatter.date(from: value) ?? fallback, width, height)
+  }
+
+  private func sharpnessScore(at url: URL) -> Double {
+    guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
+      let image = CGImageSourceCreateThumbnailAtIndex(
+        source, 0,
+        [
+          kCGImageSourceCreateThumbnailFromImageAlways: true,
+          kCGImageSourceThumbnailMaxPixelSize: 96,
+        ] as CFDictionary)
+    else { return 0 }
+    let width = image.width
+    let height = image.height
+    guard width > 1, height > 1 else { return 0 }
+    var pixels = [UInt8](repeating: 0, count: width * height)
+    let rendered = pixels.withUnsafeMutableBytes { buffer -> Bool in
+      guard
+        let context = CGContext(
+          data: buffer.baseAddress, width: width, height: height, bitsPerComponent: 8,
+          bytesPerRow: width, space: CGColorSpaceCreateDeviceGray(),
+          bitmapInfo: CGImageAlphaInfo.none.rawValue)
+      else { return false }
+      context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+      return true
+    }
+    guard rendered else { return 0 }
+    var difference = 0.0
+    var comparisons = 0
+    for y in 0..<height {
+      for x in 0..<width {
+        let value = Int(pixels[y * width + x])
+        if x + 1 < width {
+          difference += Double(abs(value - Int(pixels[y * width + x + 1])))
+          comparisons += 1
+        }
+        if y + 1 < height {
+          difference += Double(abs(value - Int(pixels[(y + 1) * width + x])))
+          comparisons += 1
+        }
+      }
+    }
+    return comparisons > 0 ? difference / Double(comparisons) : 0
   }
 }

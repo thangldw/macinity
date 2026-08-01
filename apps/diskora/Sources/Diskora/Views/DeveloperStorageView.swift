@@ -3,7 +3,10 @@ import SwiftUI
 struct DeveloperStorageView: View {
   @ObservedObject var model: AnalyzerViewModel
   @StateObject private var runtimes = DeveloperRuntimeViewModel()
+  @StateObject private var cleanup = DeveloperCleanupViewModel()
   @State private var runtimeToTrash: RuntimeVersion?
+  @State private var actionToRun: DeveloperCleanupAction?
+  @State private var showsCleanupError = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -16,7 +19,7 @@ struct DeveloperStorageView: View {
       )
       Divider()
       if let snapshot = model.snapshot,
-        !snapshot.developerData.isEmpty || !runtimes.versions.isEmpty
+        !snapshot.developerData.isEmpty || !runtimes.versions.isEmpty || !cleanup.actions.isEmpty
       {
         List {
           Section("Tổng quan") {
@@ -63,6 +66,25 @@ struct DeveloperStorageView: View {
               }
             }
           }
+          if !cleanup.actions.isEmpty {
+            Section("Dọn bằng công cụ chính thức") {
+              ForEach(cleanup.actions) { action in
+                HStack {
+                  Image(systemName: action.confidence.symbol).foregroundStyle(
+                    action.confidence == .safe
+                      ? .green : action.confidence == .review ? .orange : .red)
+                  VStack(alignment: .leading, spacing: 3) {
+                    Text(action.tool.rawValue).fontWeight(.medium)
+                    Text(action.detail).font(.caption).foregroundStyle(.secondary)
+                    Text(action.commandPreview).font(.caption2).monospaced().textSelection(.enabled)
+                  }
+                  Spacer()
+                  Text(ByteCount.string(action.estimatedBytes)).foregroundStyle(.secondary)
+                  Button("Chạy…") { actionToRun = action }.disabled(cleanup.isWorking)
+                }
+              }
+            }
+          }
         }
         .listStyle(.inset)
       } else {
@@ -74,13 +96,14 @@ struct DeveloperStorageView: View {
       }
       Divider()
       HStack {
-        Text("App chỉ thống kê ở màn hình này; chưa tự động xóa runtime hoặc môi trường dev.")
+        Text("Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.")
           .font(.callout).foregroundStyle(.secondary)
         Spacer()
         Button("Quét thư mục người dùng") {
           model.rootURL = FileManager.default.homeDirectoryForCurrentUser
           model.scan()
           runtimes.scan()
+          cleanup.refresh()
         }
         .disabled(model.isScanning || runtimes.isScanning)
       }
@@ -100,6 +123,27 @@ struct DeveloperStorageView: View {
         "App chưa tìm thấy file cấu hình dự án tham chiếu phiên bản này. Việc quét không thể đảm bảo bao phủ mọi dự án, hãy kiểm tra trước khi tiếp tục."
       )
     }
+    .alert(
+      "Chạy công cụ dọn dẹp?",
+      isPresented: Binding(get: { actionToRun != nil }, set: { if !$0 { actionToRun = nil } })
+    ) {
+      Button("Hủy", role: .cancel) { actionToRun = nil }
+      Button("Chạy", role: .destructive) {
+        if let actionToRun { cleanup.run(actionToRun) }
+        actionToRun = nil
+      }
+    } message: {
+      Text(
+        "Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo."
+      )
+    }
+    .alert("Developer Cleanup thất bại", isPresented: $showsCleanupError) {
+      Button("Đóng", role: .cancel) {}
+    } message: {
+      Text(cleanup.errorMessage ?? "")
+    }
+    .onAppear { cleanup.refresh() }
+    .onChange(of: cleanup.errorMessage) { showsCleanupError = $0 != nil }
   }
 
   private var developerTotal: String {

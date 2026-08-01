@@ -87,6 +87,9 @@ do {
   require(duplicateSnapshot.groups.count == 1, "Không nhóm đúng tệp trùng lặp")
   require(duplicateSnapshot.groups[0].files.count == 2, "Không xác nhận đủ bản sao bằng SHA-256")
   require(
+    duplicateSnapshot.partialHashedCount >= duplicateSnapshot.hashedCount,
+    "Partial-hash pipeline không lọc trước full SHA-256")
+  require(
     duplicateSnapshot.groups[0].hasDifferentNames,
     "Không cảnh báo nội dung giống hệt nhưng tên khác")
   require(duplicateSnapshot.reclaimableBytes > 0, "Không tính được dung lượng có thể giải phóng")
@@ -120,7 +123,26 @@ do {
     require(
       photos.groups.count == 1 && photos.groups[0].photos.count == 2,
       "Không nhóm được chuỗi ảnh tương tự bằng Vision")
+    require(
+      photos.groups[0].photos.allSatisfy { $0.pixelWidth > 0 && $0.pixelHeight > 0 },
+      "Không đọc được độ phân giải ảnh")
   }
+
+  let undoOriginal = temporary.appendingPathComponent("Restored/sample.txt")
+  let undoTrash = temporary.appendingPathComponent("FakeTrash/sample.txt")
+  try manager.createDirectory(
+    at: undoTrash.deletingLastPathComponent(), withIntermediateDirectories: true)
+  try Data("undo".utf8).write(to: undoTrash)
+  let history = HistoryStore(directory: temporary.appendingPathComponent("History"))
+  history.record(
+    action: "Undo smoke", paths: [undoOriginal.path], bytes: 4, recoverable: true, note: "test",
+    moves: [
+      TrashMoveRecord(originalPath: undoOriginal.path, trashPath: undoTrash.path, bytes: 4)
+    ])
+  let undoEntry = history.load().first!
+  let restored = history.restore(entryID: undoEntry.id)
+  require(restored.restoredCount == 1, "Undo Center không khôi phục đúng mục")
+  require(manager.fileExists(atPath: undoOriginal.path), "Undo Center không trả mục về vị trí gốc")
 
   print("PASS: cleaner, storage analyzer, duplicate and similar-photo smoke tests")
 } catch {

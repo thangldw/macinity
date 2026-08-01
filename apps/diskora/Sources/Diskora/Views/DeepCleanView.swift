@@ -11,14 +11,16 @@ struct DeepCleanView: View {
         valueLabel: "đã chọn")
       Divider()
       List {
-        ForEach(CleanupRisk.allCases, id: \.rawValue) { risk in
-          Section(risk.rawValue) {
-            ForEach($model.rows.filter { $0.wrappedValue.definition.risk == risk }) { $row in
+        ForEach(CleanupConfidence.allCases, id: \.rawValue) { confidence in
+          Section(confidence.title) {
+            ForEach(
+              $model.rows.filter { $0.wrappedValue.definition.confidence == confidence }
+            ) { $row in
               HStack {
                 Toggle("", isOn: $row.selected).toggleStyle(.checkbox).labelsHidden().disabled(
-                  risk == .dangerous || model.isWorking)
-                Image(systemName: risk.symbol).foregroundStyle(
-                  risk == .safe ? .green : risk == .review ? .orange : .red)
+                  confidence == .dangerous || model.isWorking)
+                Image(systemName: confidence.symbol).foregroundStyle(
+                  confidence == .safe ? .green : confidence == .review ? .orange : .red)
                 VStack(alignment: .leading) {
                   Text(row.definition.name).fontWeight(.medium)
                   Text(row.definition.detail).font(.caption).foregroundStyle(.secondary)

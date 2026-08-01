@@ -21,10 +21,15 @@ struct ApplicationsView: View {
           DisclosureGroup {
             ForEach(app.leftovers) { item in
               HStack {
-                Image(systemName: "doc.badge.gearshape")
-                Text(item.url.path).lineLimit(1)
+                Image(systemName: item.confidence.symbol).foregroundStyle(
+                  item.confidence == .safe ? .green : item.confidence == .review ? .orange : .red)
+                VStack(alignment: .leading, spacing: 2) {
+                  Text(item.entry.url.path).lineLimit(1)
+                  Text("\(item.kind.rawValue) • \(item.evidence)")
+                    .font(.caption).foregroundStyle(.secondary)
+                }
                 Spacer()
-                Text(ByteCount.string(item.bytes))
+                Text(ByteCount.string(item.entry.bytes))
               }
             }
           } label: {

@@ -10,6 +10,13 @@ enum SnapshotCategory: String, Codable, CaseIterable, Identifiable, Sendable {
   case cache = "Cache"
   case preference = "Preference"
   case container = "Container"
+  case loginItem = "Login Item"
+  case backgroundTask = "Background Task"
+  case packageReceipt = "Package Receipt"
+  case kernelExtension = "Kernel Extension"
+  case configurationProfile = "Configuration Profile"
+  case browserExtension = "Browser Extension"
+  case shellConfiguration = "Shell / PATH"
 
   var id: String { rawValue }
 
@@ -24,6 +31,13 @@ enum SnapshotCategory: String, Codable, CaseIterable, Identifiable, Sendable {
     case .cache: "shippingbox"
     case .preference: "slider.horizontal.3"
     case .container: "square.stack.3d.up"
+    case .loginItem: "person.crop.circle.badge.clock"
+    case .backgroundTask: "clock.badge"
+    case .packageReceipt: "shippingbox"
+    case .kernelExtension: "cpu"
+    case .configurationProfile: "checkmark.shield"
+    case .browserExtension: "safari"
+    case .shellConfiguration: "terminal"
     }
   }
 }
@@ -123,8 +137,24 @@ struct ChangeRecord: Identifiable, Codable, Hashable, Sendable {
   let risk: ChangeRisk
   let before: SnapshotItem?
   let after: SnapshotItem?
+  let riskReason: String?
+  let attributedApplication: String?
 
   var item: SnapshotItem { after ?? before! }
+}
+
+struct FileSystemEvent: Identifiable, Codable, Hashable, Sendable {
+  let id: UUID
+  let path: String
+  let occurredAt: Date
+  let flags: UInt32
+
+  init(id: UUID = UUID(), path: String, occurredAt: Date = Date(), flags: UInt32) {
+    self.id = id
+    self.path = path
+    self.occurredAt = occurredAt
+    self.flags = flags
+  }
 }
 
 struct SnapshotComparison: Identifiable, Codable, Hashable, Sendable {
@@ -156,15 +186,17 @@ struct WatchSession: Identifiable, Codable, Hashable, Sendable {
   let startedAt: Date
   let finishedAt: Date
   let comparison: SnapshotComparison
+  let events: [FileSystemEvent]?
 
   init(
     id: UUID = UUID(), title: String, startedAt: Date, finishedAt: Date,
-    comparison: SnapshotComparison
+    comparison: SnapshotComparison, events: [FileSystemEvent]? = nil
   ) {
     self.id = id
     self.title = title
     self.startedAt = startedAt
     self.finishedAt = finishedAt
     self.comparison = comparison
+    self.events = events
   }
 }

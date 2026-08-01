@@ -8,6 +8,7 @@ private enum AppSection: String, CaseIterable, Identifiable {
   case deepClean = "Dọn chuyên sâu"
   case applications = "Gỡ ứng dụng"
   case developer = "Developer"
+  case schedule = "Lịch quét"
   case history = "Lịch sử"
 
   var id: String { rawValue }
@@ -20,6 +21,7 @@ private enum AppSection: String, CaseIterable, Identifiable {
     case .deepClean: return "sparkles.rectangle.stack"
     case .applications: return "app.badge"
     case .developer: return "hammer"
+    case .schedule: return "calendar.badge.clock"
     case .history: return "clock.arrow.circlepath"
     }
   }
@@ -59,6 +61,8 @@ struct ContentView: View {
         ApplicationsView(model: applications)
       case .developer:
         DeveloperStorageView(model: analyzer)
+      case .schedule:
+        ScheduledScanView()
       case .history:
         HistoryView(model: history)
       }

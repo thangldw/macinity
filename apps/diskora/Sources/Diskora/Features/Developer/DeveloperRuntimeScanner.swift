@@ -102,11 +102,19 @@ final class DeveloperRuntimeViewModel: ObservableObject {
       return
     }
     do {
-      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+      var trashedURL: NSURL?
+      try FileManager.default.trashItem(at: url, resultingItemURL: &trashedURL)
+      let moves =
+        trashedURL.map {
+          [
+            TrashMoveRecord(
+              originalPath: url.path, trashPath: ($0 as URL).path, bytes: runtime.bytes)
+          ]
+        } ?? []
       history.record(
         action: "Gỡ runtime \(runtime.tool) \(runtime.version)", paths: [url.path],
         bytes: runtime.bytes, recoverable: true,
-        note: "Không tìm thấy file cấu hình dự án tham chiếu; đã chuyển vào Trash")
+        note: "Không tìm thấy file cấu hình dự án tham chiếu; đã chuyển vào Trash", moves: moves)
       status = "Đã chuyển \(runtime.version) vào Trash"
       scan()
     } catch { errorMessage = error.localizedDescription }

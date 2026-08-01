@@ -1,22 +1,11 @@
 import Foundation
 
-enum CleanupRisk: String, CaseIterable, Sendable {
-  case safe = "An toàn"
-  case review = "Cần xem lại"
-  case dangerous = "Không xóa tự động"
-
-  var symbol: String {
-    self == .safe
-      ? "checkmark.shield" : self == .review ? "exclamationmark.triangle" : "hand.raised"
-  }
-}
-
 struct DeepCleanDefinition: Identifiable, Sendable {
   let id: String
   let name: String
   let detail: String
   let relativePath: String
-  let risk: CleanupRisk
+  let confidence: CleanupConfidence
 }
 
 struct DeepCleanRow: Identifiable {
@@ -39,45 +28,45 @@ final class DeepCleanViewModel: ObservableObject {
     let definitions: [DeepCleanDefinition] = [
       .init(
         id: "gradle", name: "Gradle Cache", detail: "Dependency và distribution có thể tải lại",
-        relativePath: ".gradle/caches", risk: .safe),
+        relativePath: ".gradle/caches", confidence: .safe),
       .init(
         id: "swiftpm", name: "SwiftPM Cache", detail: "Cache Swift Package Manager",
-        relativePath: "Library/Caches/org.swift.swiftpm", risk: .safe),
+        relativePath: "Library/Caches/org.swift.swiftpm", confidence: .safe),
       .init(
         id: "cocoapods", name: "CocoaPods Cache", detail: "Pods có thể tải lại",
-        relativePath: "Library/Caches/CocoaPods", risk: .safe),
+        relativePath: "Library/Caches/CocoaPods", confidence: .safe),
       .init(
         id: "homebrew", name: "Homebrew Cache", detail: "Các gói đã tải về",
-        relativePath: "Library/Caches/Homebrew", risk: .safe),
+        relativePath: "Library/Caches/Homebrew", confidence: .safe),
       .init(
         id: "sim-cache", name: "Simulator Cache", detail: "Cache của Xcode Simulator",
-        relativePath: "Library/Developer/CoreSimulator/Caches", risk: .safe),
+        relativePath: "Library/Developer/CoreSimulator/Caches", confidence: .safe),
       .init(
         id: "device-support", name: "iOS Device Support",
         detail: "Có thể cần tải lại khi debug thiết bị cũ",
-        relativePath: "Library/Developer/Xcode/iOS DeviceSupport", risk: .review),
+        relativePath: "Library/Developer/Xcode/iOS DeviceSupport", confidence: .review),
       .init(
         id: "sim-devices", name: "Simulator Devices",
         detail: "Có thể chứa dữ liệu ứng dụng thử nghiệm",
-        relativePath: "Library/Developer/CoreSimulator/Devices", risk: .review),
+        relativePath: "Library/Developer/CoreSimulator/Devices", confidence: .review),
       .init(
         id: "ios-backups", name: "iPhone/iPad Backups",
         detail: "Có thể là bản sao dữ liệu duy nhất",
-        relativePath: "Library/Application Support/MobileSync/Backup", risk: .review),
+        relativePath: "Library/Application Support/MobileSync/Backup", confidence: .review),
       .init(
         id: "docker", name: "Docker Data", detail: "Volume có thể chứa database quan trọng",
-        relativePath: "Library/Containers/com.docker.docker/Data", risk: .dangerous),
+        relativePath: "Library/Containers/com.docker.docker/Data", confidence: .dangerous),
       .init(
         id: "nvm", name: "nvm Versions", detail: "Kiểm tra .nvmrc của dự án",
-        relativePath: ".nvm/versions", risk: .dangerous),
+        relativePath: ".nvm/versions", confidence: .dangerous),
       .init(
         id: "pyenv", name: "pyenv Versions", detail: "Kiểm tra .python-version của dự án",
-        relativePath: ".pyenv/versions", risk: .dangerous),
+        relativePath: ".pyenv/versions", confidence: .dangerous),
       .init(
         id: "conda", name: "Conda Environments", detail: "Môi trường có thể chứa package riêng",
-        relativePath: ".conda/envs", risk: .dangerous),
+        relativePath: ".conda/envs", confidence: .dangerous),
     ]
-    rows = definitions.map { DeepCleanRow(definition: $0, selected: $0.risk == .safe) }
+    rows = definitions.map { DeepCleanRow(definition: $0, selected: $0.confidence == .safe) }
   }
 
   var selectedBytes: Int64 { rows.filter(\.selected).reduce(0) { $0 + $1.bytes } }
@@ -102,7 +91,7 @@ final class DeepCleanViewModel: ObservableObject {
   }
 
   func cleanSelected() {
-    let selected = rows.filter { $0.selected && $0.definition.risk != .dangerous }
+    let selected = rows.filter { $0.selected && $0.definition.confidence != .dangerous }
     guard !selected.isEmpty else { return }
     isWorking = true
     let service = self.service
@@ -112,6 +101,7 @@ final class DeepCleanViewModel: ObservableObject {
       var errors: [String] = []
       var paths: [String] = []
       var recoverable = true
+      var moves: [TrashMoveRecord] = []
       for row in selected {
         let target = CleaningTarget(
           id: row.id, name: row.definition.name, detail: row.definition.detail,
@@ -121,10 +111,11 @@ final class DeepCleanViewModel: ObservableObject {
         errors += result.errors
         paths.append(row.definition.relativePath)
         recoverable = recoverable && result.recoverable
+        moves += result.moves
       }
       history.record(
         action: "Dọn chuyên sâu", paths: paths, bytes: affected, recoverable: recoverable,
-        note: "Đã chuyển nội dung cache/thư mục đã xác nhận vào Trash")
+        note: "Đã chuyển nội dung cache/thư mục đã xác nhận vào Trash", moves: moves)
       errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
       isWorking = false
       status = "Đã chuyển \(ByteCount.string(affected)) vào Trash"

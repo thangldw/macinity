@@ -23,10 +23,20 @@ struct QuickCleanView: View {
                 model.isWorking)
               Image(systemName: row.target.symbol).frame(width: 24).foregroundStyle(.blue)
               VStack(alignment: .leading, spacing: 3) {
-                Text(row.target.name).fontWeight(.medium)
+                HStack(spacing: 7) {
+                  Text(row.target.name).fontWeight(.medium)
+                  Label(row.target.confidence.title, systemImage: row.target.confidence.symbol)
+                    .font(.caption2)
+                    .foregroundStyle(
+                      row.target.confidence == .safe
+                        ? .green : row.target.confidence == .review ? .orange : .red)
+                }
                 Text(row.issue ?? row.target.detail)
                   .font(.caption)
                   .foregroundStyle(row.issue == nil ? Color.secondary : Color.red)
+                Text(row.target.confidenceReason)
+                  .font(.caption2)
+                  .foregroundStyle(.secondary)
               }
               Spacer()
               Text(model.hasScanned ? ByteCount.string(row.bytes) : "—").foregroundStyle(.secondary)

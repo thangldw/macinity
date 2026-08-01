@@ -85,6 +85,9 @@ do {
   try expect(comparison.modifiedCount == 1, "expected modified preference")
   try expect(comparison.importantCount == 1, "launch daemon addition must be important")
   try expect(
+    comparison.changes.first(where: { $0.item.category == .launchDaemon })?.riskReason != nil,
+    "important change must explain its risk")
+  try expect(
     comparison.changes.contains { $0.item.category == .application && $0.kind == .added },
     "application addition missing")
   try expect(
@@ -101,8 +104,10 @@ do {
     comparison: compacted)
   try store.saveSessions([session])
   try store.saveActiveSnapshot(before)
+  try store.saveBaseline(before)
   try expect(store.loadSessions() == [session], "session persistence failed")
   try expect(store.loadActiveSnapshot() == before, "active snapshot persistence failed")
+  try expect(store.loadBaseline() == before, "baseline persistence failed")
   try store.clearActiveSnapshot()
   try expect(store.loadActiveSnapshot() == nil, "active snapshot cleanup failed")
 
@@ -122,6 +127,17 @@ do {
   try expect(
     nestedComparison.changes.contains { $0.after?.path == nestedFile.path },
     "nested application support change missing")
+
+  let eventOnlyPath = nestedVendor.appendingPathComponent("deeper/event-only.db").path
+  let eventComparison = SnapshotDiffEngine().compare(
+    before: SystemSnapshot(name: "event-before", items: []),
+    after: SystemSnapshot(name: "event-after", items: []),
+    events: [FileSystemEvent(path: eventOnlyPath, flags: 0)],
+    categoryForPath: { _ in .applicationSupport })
+  try expect(
+    eventComparison.changes.count == 1
+      && eventComparison.changes[0].riskReason?.contains("FSEvents") == true,
+    "FSEvents did not preserve deep change evidence")
 
   print("PASS: snapshot scan, diff, risk classification and persistence")
 } catch {

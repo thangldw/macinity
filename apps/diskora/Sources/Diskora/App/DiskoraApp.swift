@@ -3,9 +3,15 @@ import SwiftUI
 
 @main
 struct DiskoraApp: App {
+  private let isScheduledScan = ProcessInfo.processInfo.arguments.contains("--scheduled-scan")
+
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      if isScheduledScan {
+        ScheduledScanRunnerView()
+      } else {
+        ContentView()
+      }
     }
     .windowStyle(.titleBar)
     .commands {
@@ -37,5 +43,15 @@ struct DiskoraApp: App {
       .credits: credits,
     ])
     NSApp.activate(ignoringOtherApps: true)
+  }
+}
+
+private struct ScheduledScanRunnerView: View {
+  var body: some View {
+    ProgressView().frame(width: 1, height: 1)
+      .task {
+        await ScheduledScanService().runNow()
+        NSApp.terminate(nil)
+      }
   }
 }
