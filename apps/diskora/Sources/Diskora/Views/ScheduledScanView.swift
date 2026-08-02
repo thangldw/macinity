@@ -27,7 +27,7 @@ struct ScheduledScanView: View {
           }
           .pickerStyle(.segmented)
           HStack {
-            Button(model.isEnabled ? "Cập nhật lịch" : "Bật lịch quét") {
+            Button(L10n.text(model.isEnabled ? "Cập nhật lịch" : "Bật lịch quét")) {
               model.enable(hours: selectedHours)
             }
             .buttonStyle(.borderedProminent).disabled(model.isWorking)
@@ -47,7 +47,7 @@ struct ScheduledScanView: View {
       Divider()
       HStack {
         if model.isWorking { ProgressView().controlSize(.small) }
-        Text(model.status).font(.callout).foregroundStyle(.secondary)
+        Text(L10n.text(model.status)).font(.callout).foregroundStyle(.secondary)
         Spacer()
       }.padding(18)
     }
@@ -56,7 +56,7 @@ struct ScheduledScanView: View {
     .alert("Không thể cập nhật lịch quét", isPresented: $showsError) {
       Button("Đóng", role: .cancel) {}
     } message: {
-      Text(model.errorMessage ?? "")
+      Text(L10n.text(model.errorMessage ?? ""))
     }
   }
 }

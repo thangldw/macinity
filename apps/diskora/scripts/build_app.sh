@@ -18,6 +18,9 @@ mkdir -p "$APP_DIR/Contents/MacOS" "$APP_DIR/Contents/Resources"
 cp "$BIN_DIR/Diskora" "$APP_DIR/Contents/MacOS/Diskora"
 cp "$PROJECT_DIR/Resources/Info.plist" "$APP_DIR/Contents/Info.plist"
 cp "$PROJECT_DIR/Resources/AppIcon.icns" "$APP_DIR/Contents/Resources/AppIcon.icns"
+for localization in "$PROJECT_DIR"/Resources/*.lproj; do
+    [[ -d "$localization" ]] && cp -R "$localization" "$APP_DIR/Contents/Resources/"
+done
 chmod +x "$APP_DIR/Contents/MacOS/Diskora"
 
 codesign --force --deep --options runtime --timestamp=none --sign - "$APP_DIR"

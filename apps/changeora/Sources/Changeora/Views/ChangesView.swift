@@ -62,7 +62,7 @@ struct ChangesView: View {
       Picker("Mức", selection: $riskFilter) {
         Text("Tất cả mức").tag(ChangeRisk?.none)
         ForEach(ChangeRisk.allCases, id: \.rawValue) { risk in
-          Text(risk.title).tag(Optional(risk))
+          Text(L10n.text(risk.title)).tag(Optional(risk))
         }
       }
       .frame(width: 150)
@@ -83,12 +83,12 @@ private struct ChangeRow: View {
       VStack(alignment: .leading, spacing: 5) {
         HStack(spacing: 8) {
           Text(change.item.name).fontWeight(.semibold)
-          Text(change.kind.rawValue).font(.caption).foregroundStyle(.secondary)
+          Text(L10n.text(change.kind.rawValue)).font(.caption).foregroundStyle(.secondary)
           RiskBadge(risk: change.risk)
         }
         Text(change.item.path).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
         HStack(spacing: 12) {
-          Label(change.item.category.rawValue, systemImage: "tag")
+          Label(L10n.text(change.item.category.rawValue), systemImage: "tag")
           if let owner = change.item.ownerHint {
             Label(owner, systemImage: "building.2")
           }
@@ -104,7 +104,7 @@ private struct ChangeRow: View {
         }
         .font(.caption).foregroundStyle(.secondary)
         if let reason = change.riskReason {
-          Label(reason, systemImage: "lightbulb")
+          Label(L10n.text(reason), systemImage: "lightbulb")
             .font(.caption).foregroundStyle(change.risk == .important ? .red : .secondary)
         }
       }

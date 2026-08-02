@@ -22,8 +22,8 @@ struct DeepCleanView: View {
                 Image(systemName: confidence.symbol).foregroundStyle(
                   confidence == .safe ? .green : confidence == .review ? .orange : .red)
                 VStack(alignment: .leading) {
-                  Text(row.definition.name).fontWeight(.medium)
-                  Text(row.definition.detail).font(.caption).foregroundStyle(.secondary)
+                  Text(L10n.text(row.definition.name)).fontWeight(.medium)
+                  Text(L10n.text(row.definition.detail)).font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()
                 Text(ByteCount.string(row.bytes)).monospacedDigit()
@@ -35,7 +35,7 @@ struct DeepCleanView: View {
       Divider()
       HStack {
         if model.isWorking { ProgressView().controlSize(.small) }
-        Text(model.status)
+        Text(L10n.text(model.status))
         Spacer()
         Button("Quét chuyên sâu") { model.scan() }.disabled(model.isWorking)
         Button("Dọn mục đã chọn…") { confirms = true }.buttonStyle(.borderedProminent).disabled(

@@ -16,7 +16,7 @@ struct DiskoraApp: App {
     .windowStyle(.titleBar)
     .commands {
       CommandGroup(replacing: .appInfo) {
-        Button("Giới thiệu Diskora") {
+        Button(L10n.text("Giới thiệu Diskora")) {
           showAboutPanel()
         }
       }
@@ -29,7 +29,7 @@ struct DiskoraApp: App {
     paragraph.alignment = .center
     let credits = NSAttributedString(
       string:
-        "\(AppMetadata.tagline)\n\n\(AppMetadata.summary)\n\nTác giả: \(AppMetadata.author)\n\nPhân tích dung lượng • Tệp trùng lặp • Dọn dẹp Developer",
+        "\(L10n.text(AppMetadata.tagline))\n\n\(L10n.text(AppMetadata.summary))\n\n\(L10n.text("Tác giả")): \(AppMetadata.author)\n\n\(L10n.text("Phân tích dung lượng • Tệp trùng lặp • Dọn dẹp Developer"))",
       attributes: [
         .font: NSFont.systemFont(ofSize: 11),
         .foregroundColor: NSColor.secondaryLabelColor,

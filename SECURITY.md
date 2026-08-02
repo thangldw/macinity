@@ -4,7 +4,7 @@
 
 ### Supported versions
 
-Security fixes target the latest public versions: Diskora 1.2.x and Changeora 1.3.x. Older releases may not receive patches.
+Security fixes target the latest public versions: Diskora 1.3.x and Changeora 1.4.x. Older releases may not receive patches.
 
 ### Reporting a vulnerability
 
@@ -35,15 +35,15 @@ These controls reduce risk but do not replace backups. Keep a current backup bef
 The repository has no runtime package dependencies outside Apple's SDKs. Release archives are generated from a tagged commit and accompanied by SHA-256 checksum files. Verify a download before opening an unsigned build:
 
 ```bash
-shasum -a 256 -c Diskora-1.2.0-macos-arm64-unsigned.zip.sha256
-shasum -a 256 -c Changeora-1.3.0-macos-arm64-unsigned.zip.sha256
+shasum -a 256 -c Diskora-1.3.0-macos-arm64-unsigned.zip.sha256
+shasum -a 256 -c Changeora-1.4.0-macos-arm64-unsigned.zip.sha256
 ```
 
 ## Tiếng Việt
 
 ### Phiên bản được hỗ trợ
 
-Bản vá bảo mật tập trung vào phiên bản public mới nhất: Diskora 1.2.x và Changeora 1.3.x. Phiên bản cũ có thể không được vá.
+Bản vá bảo mật tập trung vào phiên bản public mới nhất: Diskora 1.3.x và Changeora 1.4.x. Phiên bản cũ có thể không được vá.
 
 ### Báo cáo lỗ hổng
 
@@ -77,7 +77,7 @@ Repository không có runtime package dependency ngoài SDK của Apple. Archive
 
 ### Supported version
 
-Security fix は最新 public version の Diskora 1.2.x と Changeora 1.3.x を対象にします。古い release は patch 対象外になる場合があります。
+Security fix は最新 public version の Diskora 1.3.x と Changeora 1.4.x を対象にします。古い release は patch 対象外になる場合があります。
 
 ### 脆弱性の報告
 

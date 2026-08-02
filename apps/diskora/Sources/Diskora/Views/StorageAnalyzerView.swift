@@ -40,7 +40,7 @@ struct StorageAnalyzerView: View {
       Divider()
       HStack {
         if model.isScanning { ProgressView().controlSize(.small) }
-        Text(model.status).font(.callout).lineLimit(1)
+        Text(L10n.text(model.status)).font(.callout).lineLimit(1)
         Spacer()
         Button("Chọn vị trí…") { model.chooseRoot() }.disabled(model.isScanning)
         if model.isScanning {
@@ -54,7 +54,7 @@ struct StorageAnalyzerView: View {
     .alert("Không thể phân tích", isPresented: $showsError) {
       Button("Đóng", role: .cancel) {}
     } message: {
-      Text(model.errorMessage ?? "")
+      Text(L10n.text(model.errorMessage ?? ""))
     }
     .onChange(of: model.errorMessage) { showsError = $0 != nil }
   }
@@ -91,7 +91,7 @@ struct StorageAnalyzerView: View {
       ForEach(snapshot.categories) { usage in
         HStack(spacing: 10) {
           Image(systemName: usage.category.symbol).frame(width: 22).foregroundStyle(.blue)
-          Text(usage.category.rawValue).frame(width: 100, alignment: .leading)
+          Text(L10n.text(usage.category.rawValue)).frame(width: 100, alignment: .leading)
           ProgressView(value: Double(usage.bytes), total: Double(max(snapshot.scannedBytes, 1)))
           Text(ByteCount.string(usage.bytes)).frame(width: 90, alignment: .trailing)
             .foregroundStyle(.secondary)
@@ -102,7 +102,7 @@ struct StorageAnalyzerView: View {
 
   private func entrySection(_ title: String, entries: [StorageEntry]) -> some View {
     VStack(alignment: .leading, spacing: 10) {
-      Text(title).font(.title2).fontWeight(.semibold)
+      Text(L10n.text(title)).font(.title2).fontWeight(.semibold)
       if entries.isEmpty {
         Text("Không tìm thấy mục phù hợp.").foregroundStyle(.secondary)
       } else {

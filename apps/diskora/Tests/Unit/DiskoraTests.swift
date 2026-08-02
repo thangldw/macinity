@@ -4,6 +4,24 @@ import XCTest
 @testable import Diskora
 
 final class DiskoraTests: XCTestCase {
+  func testEnglishLocalizationResourceCoversCoreInterface() throws {
+    let resource = URL(fileURLWithPath: #filePath)
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .appendingPathComponent("Resources/en.lproj/Localizable.strings")
+    let data = try Data(contentsOf: resource)
+    let strings = try XCTUnwrap(
+      PropertyListSerialization.propertyList(from: data, format: nil) as? [String: String])
+
+    XCTAssertGreaterThan(strings.count, 150)
+    XCTAssertEqual(strings["Dọn nhanh"], "Quick Clean")
+    XCTAssertEqual(strings["Cần xem lại"], "Review")
+    XCTAssertEqual(strings["Khôi phục"], "Restore")
+    XCTAssertEqual(AppLanguage.english.rawValue, "en")
+    XCTAssertEqual(AppLanguage.vietnamese.rawValue, "vi")
+  }
+
   func testCleanerBlocksPathsOutsideHome() throws {
     let home = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     let service = CleanerService(homeURL: home, removalMethod: .permanentForTesting)

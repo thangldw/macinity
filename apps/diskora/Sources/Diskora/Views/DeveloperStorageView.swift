@@ -29,13 +29,13 @@ struct DeveloperStorageView: View {
                   Image(systemName: "terminal").foregroundStyle(.purple).frame(width: 24)
                   VStack(alignment: .leading, spacing: 2) {
                     Text(item.name).fontWeight(.semibold)
-                    Text(item.detail).font(.caption).foregroundStyle(.secondary)
+                    Text(L10n.text(item.detail)).font(.caption).foregroundStyle(.secondary)
                   }
                   Spacer()
                   Text(ByteCount.string(item.bytes)).monospacedDigit()
                   Button("Finder") { model.reveal(item.url) }
                 }
-                Label(item.safetyNote, systemImage: "exclamationmark.shield")
+                Label(L10n.text(item.safetyNote), systemImage: "exclamationmark.shield")
                   .font(.caption).foregroundStyle(.orange)
               }
               .padding(.vertical, 8)
@@ -53,9 +53,11 @@ struct DeveloperStorageView: View {
                   VStack(alignment: .leading) {
                     Text("\(runtime.tool) \(runtime.version)").fontWeight(.medium)
                     Text(
-                      runtime.isReferenced
-                        ? "Được tham chiếu bởi \(runtime.referencedBy.count) dự án"
-                        : "Chưa tìm thấy file cấu hình sử dụng"
+                      L10n.text(
+                        runtime.isReferenced
+                          ? "Được tham chiếu bởi \(runtime.referencedBy.count) dự án"
+                          : "Chưa tìm thấy file cấu hình sử dụng"
+                      )
                     )
                     .font(.caption).foregroundStyle(.secondary)
                   }
@@ -75,7 +77,7 @@ struct DeveloperStorageView: View {
                       ? .green : action.confidence == .review ? .orange : .red)
                   VStack(alignment: .leading, spacing: 3) {
                     Text(action.tool.rawValue).fontWeight(.medium)
-                    Text(action.detail).font(.caption).foregroundStyle(.secondary)
+                    Text(L10n.text(action.detail)).font(.caption).foregroundStyle(.secondary)
                     Text(action.commandPreview).font(.caption2).monospaced().textSelection(.enabled)
                   }
                   Spacer()
@@ -140,7 +142,7 @@ struct DeveloperStorageView: View {
     .alert("Developer Cleanup thất bại", isPresented: $showsCleanupError) {
       Button("Đóng", role: .cancel) {}
     } message: {
-      Text(cleanup.errorMessage ?? "")
+      Text(L10n.text(cleanup.errorMessage ?? ""))
     }
     .onAppear { cleanup.refresh() }
     .onChange(of: cleanup.errorMessage) { showsCleanupError = $0 != nil }

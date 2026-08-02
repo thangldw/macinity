@@ -26,12 +26,14 @@ flowchart LR
 
 | Application | Version | Purpose | Safety boundary |
 | --- | --- | --- | --- |
-| **Diskora** | 1.2.0 | Analyze storage, review cleanup candidates, find duplicates and similar photos, manage developer data, and inspect application artifacts | Every mutation requires confirmation; recoverable operations go to Trash and are recorded by Undo Center |
-| **Changeora** | 1.3.0 | Record installation, update, and uninstall activity using snapshots plus FSEvents | Read-only: it never deletes, disables, or modifies observed system components |
+| **Diskora** | 1.3.0 | Analyze storage, review cleanup candidates, find duplicates and similar photos, manage developer data, and inspect application artifacts | Every mutation requires confirmation; recoverable operations go to Trash and are recorded by Undo Center |
+| **Changeora** | 1.4.0 | Record installation, update, and uninstall activity using snapshots plus FSEvents | Read-only: it never deletes, disables, or modifies observed system components |
 
 Diskora 1.2 adds Undo Center, cleanup-confidence explanations, a partial-hash duplicate pipeline, pairwise photo clustering, evidence-based application artifacts, allowlisted developer cleanup commands, and scheduled scan-only notifications.
 
 Changeora 1.3 adds real-time FSEvents journaling, broader persistence and configuration coverage, explainable risk scoring, application attribution, trusted baselines, arbitrary session comparison, and redacted Markdown/JSON exports.
+
+Both applications now provide an in-app English/Vietnamese language selector. English is the default, the selection is persisted locally, and changing it refreshes the interface without reinstalling or changing the macOS system language.
 
 ### Requirements
 
@@ -95,12 +97,14 @@ Released under the [MIT License](LICENSE).
 
 | Ứng dụng | Phiên bản | Mục đích | Ranh giới an toàn |
 | --- | --- | --- | --- |
-| **Diskora** | 1.2.0 | Phân tích dung lượng, duyệt mục dọn dẹp, tìm file trùng/ảnh tương tự, quản lý dữ liệu developer và kiểm tra artifact ứng dụng | Mọi thay đổi đều cần xác nhận; thao tác có thể phục hồi đi qua Trash và được Undo Center ghi nhận |
-| **Changeora** | 1.3.0 | Ghi nhận cài đặt, cập nhật và uninstall bằng snapshot kết hợp FSEvents | Chỉ đọc: không xóa, vô hiệu hóa hoặc sửa thành phần hệ thống |
+| **Diskora** | 1.3.0 | Phân tích dung lượng, duyệt mục dọn dẹp, tìm file trùng/ảnh tương tự, quản lý dữ liệu developer và kiểm tra artifact ứng dụng | Mọi thay đổi đều cần xác nhận; thao tác có thể phục hồi đi qua Trash và được Undo Center ghi nhận |
+| **Changeora** | 1.4.0 | Ghi nhận cài đặt, cập nhật và uninstall bằng snapshot kết hợp FSEvents | Chỉ đọc: không xóa, vô hiệu hóa hoặc sửa thành phần hệ thống |
 
 Diskora 1.2 bổ sung Undo Center, giải thích mức độ tin cậy, pipeline partial hash, clustering ảnh pairwise, artifact ứng dụng dựa trên bằng chứng, developer cleanup bằng command allowlist và lịch chỉ quét/thông báo.
 
 Changeora 1.3 bổ sung FSEvents thời gian thực, phạm vi persistence/configuration rộng hơn, risk score có giải thích, attribution theo ứng dụng, baseline tin cậy, so sánh phiên tùy ý và export Markdown/JSON đã ẩn thông tin cá nhân.
+
+Cả hai ứng dụng hiện có bộ chọn English/Tiếng Việt ngay trong app. English là mặc định, lựa chọn được lưu cục bộ và giao diện cập nhật mà không cần cài lại hoặc đổi ngôn ngữ hệ thống macOS.
 
 ### Yêu cầu
 
@@ -159,12 +163,14 @@ Phát hành theo [MIT License](LICENSE).
 
 | アプリ | バージョン | 目的 | 安全境界 |
 | --- | --- | --- | --- |
-| **Diskora** | 1.2.0 | ストレージ分析、クリーンアップ候補の確認、重複ファイル・類似写真、開発データ、アプリ関連 artifact の管理 | 変更には必ず確認が必要。復元可能な操作は Trash を使用し、Undo Center に記録 |
-| **Changeora** | 1.3.0 | snapshot と FSEvents でインストール、更新、アンインストールを記録 | 読み取り専用。監視対象を削除・無効化・変更しない |
+| **Diskora** | 1.3.0 | ストレージ分析、クリーンアップ候補の確認、重複ファイル・類似写真、開発データ、アプリ関連 artifact の管理 | 変更には必ず確認が必要。復元可能な操作は Trash を使用し、Undo Center に記録 |
+| **Changeora** | 1.4.0 | snapshot と FSEvents でインストール、更新、アンインストールを記録 | 読み取り専用。監視対象を削除・無効化・変更しない |
 
 Diskora 1.2 は Undo Center、信頼度の説明、partial hash、pairwise 写真 clustering、証拠ベースのアプリ artifact、allowlist 済み開発者 cleanup command、通知専用の定期 scan を追加します。
 
 Changeora 1.3 はリアルタイム FSEvents、監視範囲の拡張、説明可能な risk score、アプリ attribution、信頼済み baseline、任意 session 比較、redact 済み Markdown/JSON export を追加します。
+
+両アプリに English / Tiếng Việt の言語 selector を追加しました。既定は English で、選択はローカルに保存され、再インストールや macOS のシステム言語変更なしで UI に反映されます。
 
 ### 必要環境
 

@@ -53,7 +53,7 @@ struct SimilarPhotosView: View {
       Divider()
       HStack {
         if model.isWorking { ProgressView().controlSize(.small) }
-        Text(model.status)
+        Text(L10n.text(model.status))
         Spacer()
         Button("Chọn thư mục…") { model.chooseRoot() }.disabled(model.isWorking)
         Button("Chọn ảnh đề xuất loại") { model.selectSuggestions() }.disabled(

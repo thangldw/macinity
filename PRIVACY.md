@@ -30,6 +30,8 @@ Official developer-cleanup commands can invoke locally installed third-party too
 
 History is retained locally until the user removes it or deletes the application's support directory. Items moved to Trash follow macOS Trash retention and user actions. Removing an application's support directory removes its saved history or baseline but cannot restore files already deleted from Trash.
 
+The selected interface language is stored locally in the application's `UserDefaults` domain. It is not telemetry and is never transmitted.
+
 ### Permissions
 
 macOS may request notification, filesystem, or Full Disk Access permissions depending on the selected scope. Denying permission limits coverage; Toolbox does not bypass system protections.
@@ -64,6 +66,8 @@ Lệnh developer cleanup chính thức có thể gọi công cụ bên thứ ba 
 
 Lịch sử được giữ local cho đến khi người dùng xóa hoặc xóa thư mục support của ứng dụng. File chuyển vào Trash tuân theo cơ chế Trash của macOS. Xóa thư mục support sẽ xóa lịch sử hoặc baseline nhưng không thể khôi phục file đã bị xóa khỏi Trash.
 
+Ngôn ngữ giao diện đã chọn được lưu cục bộ trong `UserDefaults` của ứng dụng. Đây không phải telemetry và không được truyền ra ngoài.
+
 ### Quyền truy cập
 
 macOS có thể yêu cầu quyền notification, filesystem hoặc Full Disk Access tùy phạm vi quét. Từ chối quyền sẽ làm giảm độ bao phủ; Toolbox không vượt qua cơ chế bảo vệ hệ thống.
@@ -97,6 +101,8 @@ Changeora は install、update、uninstall 前後を比較するため、filesys
 ### 保持と削除
 
 History は user が削除するか application support directory を削除するまで local に残ります。Trash に移動した item は macOS Trash の保持と user 操作に従います。Support directory を削除すると history/baseline は消えますが、Trash から削除済みの file は復元できません。
+
+選択した UI 言語はアプリの `UserDefaults` domain にローカル保存されます。Telemetry ではなく、外部へ送信されません。
 
 ### 権限
 

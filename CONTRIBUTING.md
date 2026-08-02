@@ -61,6 +61,7 @@ Release-affecting changes must also pass `swift build -c release` and each app's
 - Errors are actionable and do not expose unrelated personal paths.
 - Accessibility labels and keyboard behavior remain usable.
 - Documentation and changelog entries are complete in all three languages.
+- New user-facing copy is added to the English localization resource and verified in both in-app languages; do not hard-code English-only UI.
 
 ### Commit guidance
 
@@ -97,6 +98,7 @@ Dùng đúng các lệnh trong phần English. Thay đổi ảnh hưởng releas
 - Lỗi có hướng xử lý và không lộ đường dẫn cá nhân không liên quan.
 - Accessibility label và điều khiển bàn phím vẫn hoạt động.
 - Tài liệu và changelog đầy đủ ở cả ba ngôn ngữ.
+- Nội dung mới trên giao diện phải có trong tài nguyên localization tiếng Anh và được kiểm tra ở cả hai ngôn ngữ trong app; không hard-code UI chỉ có English.
 
 ### Commit
 
@@ -133,6 +135,7 @@ English セクションのコマンドをそのまま実行してください。
 - Error は対処可能で、無関係な個人 path を公開しません。
 - Accessibility label と keyboard 操作を維持しています。
 - Documentation と changelog が 3 言語で完成しています。
+- 新しい user-facing copy を English localization resource に追加し、アプリ内の両言語で確認します。English-only UI を hard-code しません。
 
 ### Commit
 

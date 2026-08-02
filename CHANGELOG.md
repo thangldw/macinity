@@ -4,6 +4,16 @@ All notable changes to Toolbox are documented here. Releases follow [Semantic Ve
 
 ## English
 
+### Toolbox 1.4.0 — 2026-08-02
+
+This release contains Diskora 1.3.0 and Changeora 1.4.0.
+
+- Added an in-app English/Vietnamese language selector to both applications.
+- Made English the default while preserving Vietnamese as a first-class interface language.
+- Persisted language preferences locally and refreshed the full interface when changed.
+- Localized navigation, actions, safety explanations, scan states, errors, and About panels.
+- Added packaged macOS localization resources and release checks for both languages.
+
 ### Toolbox 1.3.0 — 2026-08-02
 
 This release contains Diskora 1.2.0 and Changeora 1.3.0.
@@ -48,6 +58,16 @@ This release contains Diskora 1.2.0 and Changeora 1.3.0.
 
 ## Tiếng Việt
 
+### Toolbox 1.4.0 — 2026-08-02
+
+Bản phát hành này gồm Diskora 1.3.0 và Changeora 1.4.0.
+
+- Thêm bộ chọn English/Tiếng Việt ngay trong cả hai ứng dụng.
+- Dùng English làm mặc định và giữ Tiếng Việt là ngôn ngữ giao diện đầy đủ.
+- Lưu lựa chọn ngôn ngữ cục bộ và cập nhật toàn bộ giao diện khi thay đổi.
+- Bản địa hóa navigation, thao tác, giải thích an toàn, trạng thái quét, lỗi và About panel.
+- Đóng gói tài nguyên localization macOS và bổ sung kiểm tra release cho cả hai ngôn ngữ.
+
 ### Toolbox 1.3.0 — 2026-08-02
 
 Bản phát hành này gồm Diskora 1.2.0 và Changeora 1.3.0.
@@ -91,6 +111,16 @@ Bản phát hành này gồm Diskora 1.2.0 và Changeora 1.3.0.
 - Thiết lập nguyên tắc local-first, xem trước rõ ràng và ưu tiên thao tác có thể phục hồi.
 
 ## 日本語
+
+### Toolbox 1.4.0 — 2026-08-02
+
+このリリースには Diskora 1.3.0 と Changeora 1.4.0 が含まれます。
+
+- 両アプリに English / Tiếng Việt のアプリ内言語 selector を追加しました。
+- English を既定にし、ベトナム語も完全な UI 言語として維持します。
+- 言語設定をローカル保存し、変更時に UI 全体を更新します。
+- Navigation、操作、安全性の説明、scan status、error、About panel を localization 対象にしました。
+- macOS localization resource を app bundle に含め、両言語の release check を追加しました。
 
 ### Toolbox 1.3.0 — 2026-08-02
 

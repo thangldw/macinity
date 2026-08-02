@@ -18,13 +18,13 @@ struct PageHeader: View {
       }
       .frame(width: 60, height: 60)
       VStack(alignment: .leading, spacing: 4) {
-        Text(title).font(.system(size: 27, weight: .bold))
-        Text(subtitle).foregroundStyle(.secondary).lineLimit(2)
+        Text(L10n.text(title)).font(.system(size: 27, weight: .bold))
+        Text(L10n.text(subtitle)).foregroundStyle(.secondary).lineLimit(2)
       }
       Spacer()
       VStack(alignment: .trailing, spacing: 3) {
         Text(value).font(.system(size: 24, weight: .semibold, design: .rounded))
-        Text(valueLabel).font(.caption).foregroundStyle(.secondary)
+        Text(L10n.text(valueLabel)).font(.caption).foregroundStyle(.secondary)
       }
     }
     .padding(24)
@@ -42,7 +42,7 @@ struct MetricCard: View {
       Image(systemName: symbol).font(.title2).foregroundStyle(color)
       VStack(alignment: .leading, spacing: 2) {
         Text(value).font(.title3).fontWeight(.semibold)
-        Text(title).font(.caption).foregroundStyle(.secondary)
+        Text(L10n.text(title)).font(.caption).foregroundStyle(.secondary)
       }
       Spacer()
     }
@@ -64,7 +64,7 @@ struct RiskBadge: View {
   }
 
   var body: some View {
-    Label(risk.title, systemImage: risk.symbol)
+    Label(L10n.text(risk.title), systemImage: risk.symbol)
       .font(.caption)
       .foregroundStyle(color)
       .padding(.horizontal, 8)
@@ -82,8 +82,9 @@ struct EmptyStateView: View {
     VStack(spacing: 12) {
       Spacer()
       Image(systemName: symbol).font(.system(size: 42)).foregroundStyle(.secondary)
-      Text(title).font(.title2).fontWeight(.semibold)
-      Text(detail).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(maxWidth: 460)
+      Text(L10n.text(title)).font(.title2).fontWeight(.semibold)
+      Text(L10n.text(detail)).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(
+        maxWidth: 460)
       Spacer()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

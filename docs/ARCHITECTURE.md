@@ -2,16 +2,18 @@
 
 Toolbox is a monorepo for two independent, local-first macOS applications. Diskora changes files only after review; Changeora observes system changes and produces evidence.
 
+Both presentation layers use the same localization pattern: an `AppLanguage` preference stored in `UserDefaults`, an environment locale that refreshes SwiftUI views, and packaged `en.lproj` resources. Vietnamese source copy is the development fallback. English is selected on first launch, and switching languages never changes scan data, history, or safety decisions.
+
 ```mermaid
 %%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":35,"rankSpacing":50},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
 flowchart LR
     M["macOS<br/>filesystem + system metadata"]:::yellow
-    subgraph D["Diskora 1.2"]
+    subgraph D["Diskora 1.3"]
         DS["Scanners"]:::blue --> DC["Confidence + preview"]:::pink
         DC --> DA["Trash or allowlisted command"]:::purple
         DA --> DU["History + Undo Center"]:::green
     end
-    subgraph C["Changeora 1.3"]
+    subgraph C["Changeora 1.4"]
         CS["Snapshots + FSEvents"]:::blue --> CA["Attribution + explainable risk"]:::pink
         CA --> CB["Sessions + clean baseline"]:::purple
         CB --> CE["Redacted reports"]:::green
@@ -50,7 +52,7 @@ toolbox/
 
 SwiftUI views own presentation and user intent. Feature view models coordinate asynchronous work. Services perform scanning, comparison, persistence, or narrowly scoped mutations. Core models are Codable and UI-independent where practical.
 
-### Diskora 1.2
+### Diskora 1.3
 
 Diskora follows a review-before-action pipeline:
 
@@ -66,7 +68,7 @@ Similar Photos generates local Vision feature prints, compares candidate pairs, 
 
 Application cleanup uses Bundle ID and typed evidence. Package receipts and background-item databases are evidence, not ordinary deletion targets. Developer Cleanup runs only fixed executable paths and allowlisted arguments. Scheduled Scan launches the app in scan-only mode, posts a local notification, and never calls a cleaner.
 
-### Changeora 1.3
+### Changeora 1.4
 
 Changeora takes a recursive metadata snapshot before an installation, update, or uninstall. An FSEvents journal then captures paths changed during the observation window. Finishing a session takes another snapshot and combines:
 
@@ -97,13 +99,15 @@ Unit tests cover deterministic models, diffing, persistence, and restore behavio
 
 ## Tiếng Việt
 
+Hai presentation layer dùng cùng mô hình localization: lựa chọn `AppLanguage` lưu trong `UserDefaults`, environment locale làm mới SwiftUI view và tài nguyên `en.lproj` được đóng gói trong app. Nội dung nguồn tiếng Việt là development fallback. English được chọn ở lần chạy đầu; đổi ngôn ngữ không tác động dữ liệu quét, lịch sử hoặc quyết định an toàn.
+
 ### Ranh giới repository
 
 Mỗi thư mục trong `apps/` là một Swift package độc lập, có executable, resource, test, script, version và archive release riêng. Chính sách dùng chung nằm ở root; hai ứng dụng không import lẫn nhau.
 
 SwiftUI view quản lý phần trình bày và ý định người dùng. Feature view model điều phối công việc bất đồng bộ. Service thực hiện scan, so sánh, persistence hoặc mutation có phạm vi hẹp. Core model dùng Codable và tách khỏi UI khi phù hợp.
 
-### Diskora 1.2
+### Diskora 1.3
 
 Diskora dùng quy trình xem trước trước khi hành động:
 
@@ -119,7 +123,7 @@ Similar Photos tạo Vision feature print local, so sánh từng cặp và dùng
 
 Application Cleanup dùng Bundle ID và evidence có type. Package receipt và database background item chỉ là evidence, không phải target xóa thông thường. Developer Cleanup chỉ chạy executable path cố định với argument trong allowlist. Scheduled Scan khởi động app ở chế độ chỉ quét, gửi notification local và không gọi cleaner.
 
-### Changeora 1.3
+### Changeora 1.4
 
 Changeora tạo snapshot metadata đệ quy trước khi cài đặt, cập nhật hoặc gỡ ứng dụng. FSEvents journal ghi path thay đổi trong thời gian quan sát. Khi kết thúc, snapshot thứ hai được kết hợp với:
 
@@ -150,13 +154,15 @@ Unit test bao phủ model xác định, diff, persistence và restore. Smoke tes
 
 ## 日本語
 
+両 presentation layer は同じ localization 構成を使います。`AppLanguage` を `UserDefaults` に保存し、environment locale で SwiftUI view を更新し、`en.lproj` resource を app に同梱します。ベトナム語 source copy が development fallback です。初回起動時は English で、言語変更は scan data、history、安全判定に影響しません。
+
 ### Repository boundary
 
 `apps/` 配下の各 directory は独立した Swift package で、個別の executable、resource、test、script、version、release archive を持ちます。共通 policy は root に置き、アプリ同士は import しません。
 
 SwiftUI view は表示と user intent、feature view model は非同期処理の調整、service は scan、compare、persistence、限定的 mutation を担当します。Core model は可能な限り Codable かつ UI 非依存です。
 
-### Diskora 1.2
+### Diskora 1.3
 
 Diskora は action 前 review の pipeline を使います。
 
@@ -172,7 +178,7 @@ Similar Photos は local Vision feature print、pairwise comparison、connected-
 
 Application Cleanup は Bundle ID と typed evidence を使います。Package receipt と background-item database は evidence であり通常の削除対象ではありません。Developer Cleanup は固定 executable path と allowlist argument だけを実行します。Scheduled Scan は scan-only mode と local notification だけを使い cleaner を呼びません。
 
-### Changeora 1.3
+### Changeora 1.4
 
 Changeora は install、update、uninstall 前に再帰的 metadata snapshot を取得し、観測中は FSEvents journal で変更 path を記録します。終了時の snapshot と次を統合します。
 

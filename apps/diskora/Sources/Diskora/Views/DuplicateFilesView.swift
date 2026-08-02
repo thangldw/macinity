@@ -133,7 +133,7 @@ struct DuplicateFilesView: View {
       VStack(spacing: 8) {
         if let summary = model.summary {
           HStack {
-            Text(summary).font(.caption).foregroundStyle(.green)
+            Text(L10n.text(summary)).font(.caption).foregroundStyle(.green)
             if let report = model.lastReportURL {
               Button("Mở báo cáo") { model.reveal(report) }.buttonStyle(.link)
             }
@@ -145,7 +145,7 @@ struct DuplicateFilesView: View {
           if let progress = model.progress, progress.total > 0 {
             ProgressView(value: progress.fraction).frame(width: 110)
           }
-          Text(model.status).font(.callout).lineLimit(1)
+          Text(L10n.text(model.status)).font(.callout).lineLimit(1)
           Spacer()
           Button("Chọn vị trí…") { model.chooseRoot() }.disabled(model.isWorking)
           if model.snapshot != nil {
@@ -176,7 +176,7 @@ struct DuplicateFilesView: View {
     .alert("Một số thao tác không thành công", isPresented: $showsError) {
       Button("Đóng", role: .cancel) {}
     } message: {
-      Text(model.errorMessage ?? "")
+      Text(L10n.text(model.errorMessage ?? ""))
     }
     .onChange(of: model.errorMessage) { showsError = $0 != nil }
   }

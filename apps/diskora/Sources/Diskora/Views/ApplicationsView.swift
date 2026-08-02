@@ -25,7 +25,7 @@ struct ApplicationsView: View {
                   item.confidence == .safe ? .green : item.confidence == .review ? .orange : .red)
                 VStack(alignment: .leading, spacing: 2) {
                   Text(item.entry.url.path).lineLimit(1)
-                  Text("\(item.kind.rawValue) • \(item.evidence)")
+                  Text("\(L10n.text(item.kind.rawValue)) • \(L10n.text(item.evidence))")
                     .font(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -38,8 +38,9 @@ struct ApplicationsView: View {
                 width: 34, height: 34)
               VStack(alignment: .leading) {
                 Text(app.name).fontWeight(.medium)
-                Text(app.bundleIdentifier ?? "Không có Bundle ID").font(.caption).foregroundStyle(
-                  .secondary)
+                Text(app.bundleIdentifier ?? L10n.text("Không có Bundle ID")).font(.caption)
+                  .foregroundStyle(
+                    .secondary)
               }
               Spacer()
               Text(ByteCount.string(app.totalBytes))
@@ -51,7 +52,7 @@ struct ApplicationsView: View {
       Divider()
       HStack {
         if model.isWorking { ProgressView().controlSize(.small) }
-        Text(model.status)
+        Text(L10n.text(model.status))
         Spacer()
         Button("Quét ứng dụng") { model.scan() }.disabled(model.isWorking)
       }.padding(18)

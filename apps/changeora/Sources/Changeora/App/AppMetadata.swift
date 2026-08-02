@@ -5,10 +5,10 @@ enum AppMetadata {
   static let tagline = "See what changed on your Mac."
   static let author = "Thang"
   static var version: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.3.0"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.4.0"
   }
   static var build: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "3"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "4"
   }
   static let copyright = "Copyright © 2026 Thang. MIT License."
   static let summary =

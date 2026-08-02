@@ -25,11 +25,11 @@ struct WatchInstallationView: View {
           if model.isScanning {
             HStack(spacing: 10) {
               ProgressView().controlSize(.small)
-              Text(model.statusMessage ?? "Đang quét…").foregroundStyle(.secondary)
+              Text(L10n.text(model.statusMessage ?? "Đang quét…")).foregroundStyle(.secondary)
             }
             .padding(.horizontal, 4)
           } else if let message = model.statusMessage {
-            Label(message, systemImage: "checkmark.circle")
+            Label(L10n.text(message), systemImage: "checkmark.circle")
               .foregroundStyle(.secondary)
               .padding(.horizontal, 4)
           }

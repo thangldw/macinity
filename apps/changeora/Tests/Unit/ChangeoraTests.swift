@@ -4,6 +4,24 @@ import XCTest
 @testable import Changeora
 
 final class ChangeoraTests: XCTestCase {
+  func testEnglishLocalizationResourceCoversCoreInterface() throws {
+    let resource = URL(fileURLWithPath: #filePath)
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .deletingLastPathComponent()
+      .appendingPathComponent("Resources/en.lproj/Localizable.strings")
+    let data = try Data(contentsOf: resource)
+    let strings = try XCTUnwrap(
+      PropertyListSerialization.propertyList(from: data, format: nil) as? [String: String])
+
+    XCTAssertGreaterThan(strings.count, 65)
+    XCTAssertEqual(strings["Theo dõi thay đổi"], "Watch Changes")
+    XCTAssertEqual(strings["Quan trọng"], "Important")
+    XCTAssertEqual(strings["Phạm vi & quyền riêng tư"], "Coverage & Privacy")
+    XCTAssertEqual(AppLanguage.english.rawValue, "en")
+    XCTAssertEqual(AppLanguage.vietnamese.rawValue, "vi")
+  }
+
   func testSnapshotDetectsNestedApplicationSupportChanges() throws {
     let manager = FileManager.default
     let root = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)

@@ -19,7 +19,7 @@ flowchart LR
 
 ### Release model
 
-Diskora and Changeora version independently. A Toolbox release tag represents the repository delivery and states both included product versions. For example, Toolbox `v1.3.0` contains Diskora `1.2.0` and Changeora `1.3.0`.
+Diskora and Changeora version independently. A Toolbox release tag represents the repository delivery and states both included product versions. For example, Toolbox `v1.4.0` contains Diskora `1.3.0` and Changeora `1.4.0`.
 
 Release assets contain application archives and matching SHA-256 files only. Do not upload a separate source ZIP or TAR archive. GitHub automatically adds “Source code” links to tag-based releases; those platform-managed links cannot be removed.
 
@@ -54,6 +54,15 @@ Review version metadata:
 
 Confirm the changelog, README, privacy policy, security policy, architecture, and this runbook reflect the shipped behavior in English, Vietnamese, and Japanese.
 
+For each packaged app, verify localization resources and both UI modes:
+
+```bash
+test -f dist/Diskora.app/Contents/Resources/en.lproj/Localizable.strings
+plutil -lint Resources/en.lproj/Localizable.strings
+```
+
+Launch with a clean preference domain, confirm English is the default, switch to Tiếng Việt, relaunch, and confirm the selection persists. Exercise at least one empty state, progress state, confirmation dialog, and error presentation in each language.
+
 ### Packaging
 
 ```bash
@@ -69,11 +78,11 @@ Inspect each archive before publishing:
 ```bash
 file apps/diskora/dist/Diskora.app/Contents/MacOS/Diskora
 codesign -dv --verbose=4 apps/diskora/dist/Diskora.app
-(cd apps/diskora/release && shasum -a 256 -c Diskora-1.2.0-macos-arm64-unsigned.zip.sha256)
+(cd apps/diskora/release && shasum -a 256 -c Diskora-1.3.0-macos-arm64-unsigned.zip.sha256)
 
 file apps/changeora/dist/Changeora.app/Contents/MacOS/Changeora
 codesign -dv --verbose=4 apps/changeora/dist/Changeora.app
-(cd apps/changeora/release && shasum -a 256 -c Changeora-1.3.0-macos-arm64-unsigned.zip.sha256)
+(cd apps/changeora/release && shasum -a 256 -c Changeora-1.4.0-macos-arm64-unsigned.zip.sha256)
 ```
 
 The builds are unsigned unless an explicit signing and notarization process is introduced. Label them accurately; never imply notarization.
@@ -102,7 +111,7 @@ Diskora creates `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.plist` 
 
 ### Mô hình release
 
-Diskora và Changeora có version độc lập. Tag Toolbox đại diện cho lần giao repository và ghi rõ version của hai sản phẩm. Ví dụ Toolbox `v1.3.0` gồm Diskora `1.2.0` và Changeora `1.3.0`.
+Diskora và Changeora có version độc lập. Tag Toolbox đại diện cho lần giao repository và ghi rõ version của hai sản phẩm. Ví dụ Toolbox `v1.4.0` gồm Diskora `1.3.0` và Changeora `1.4.0`.
 
 Asset release chỉ gồm archive ứng dụng và file SHA-256 tương ứng. Không upload ZIP/TAR mã nguồn riêng. GitHub tự thêm liên kết “Source code” vào release có tag và không thể xóa các liên kết do nền tảng quản lý này.
 
@@ -119,6 +128,8 @@ Asset release chỉ gồm archive ứng dụng và file SHA-256 tương ứng. K
 Chạy toàn bộ command trong mục Validation tiếng Anh cho từng ứng dụng. Nếu command-line toolchain không chạy được XCTest, ghi rõ giới hạn và bắt buộc unit-test job của GitHub Actions đạt trước khi release. Smoke test và release build vẫn phải đạt local.
 
 Kiểm tra version trong Info.plist, sau đó xác nhận changelog, README, privacy, security, architecture và runbook phản ánh đúng sản phẩm ở cả ba ngôn ngữ.
+
+Với mỗi app đã đóng gói, kiểm tra `en.lproj/Localizable.strings` tồn tại và hợp lệ bằng command trong phần English. Chạy với preference domain sạch, xác nhận English là mặc định, chuyển sang Tiếng Việt, mở lại app và xác nhận lựa chọn được giữ. Kiểm tra ít nhất một empty state, progress state, confirmation dialog và error presentation ở mỗi ngôn ngữ.
 
 ### Đóng gói
 
@@ -148,7 +159,7 @@ Diskora chỉ tạo `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.pli
 
 ### Release model
 
-Diskora と Changeora は独立して versioning します。Toolbox tag は repository delivery を表し、含まれる両 product version を明記します。例として Toolbox `v1.3.0` は Diskora `1.2.0` と Changeora `1.3.0` を含みます。
+Diskora と Changeora は独立して versioning します。Toolbox tag は repository delivery を表し、含まれる両 product version を明記します。例として Toolbox `v1.4.0` は Diskora `1.3.0` と Changeora `1.4.0` を含みます。
 
 Release asset は application archive と対応する SHA-256 file だけです。別の source ZIP/TAR は upload しません。GitHub は tag-based release に “Source code” link を自動追加し、platform 管理のため削除できません。
 
@@ -165,6 +176,8 @@ Release asset は application archive と対応する SHA-256 file だけです�
 各アプリで English の Validation command をすべて実行します。Command-line toolchain で XCTest を実行できない場合は制約を記録し、release 前に GitHub Actions unit-test job の成功を必須にします。Local smoke test と release build は必ず成功させます。
 
 Info.plist の version を確認し、changelog、README、privacy、security、architecture、runbook が 3 言語で出荷動作と一致することを確認します。
+
+各 app bundle に有効な `en.lproj/Localizable.strings` があることを English セクションの command で確認します。Preference domain を初期化して English が既定であること、Tiếng Việt へ切り替えて再起動後も保持されることを確認します。各言語で empty state、progress state、confirmation dialog、error presentation を最低 1 件ずつテストします。
 
 ### Packaging
 

@@ -12,6 +12,7 @@ private enum AppSection: String, CaseIterable, Identifiable {
   case history = "Lịch sử"
 
   var id: String { rawValue }
+  var title: String { L10n.text(rawValue) }
   var symbol: String {
     switch self {
     case .cleanup: return "sparkles"
@@ -28,6 +29,7 @@ private enum AppSection: String, CaseIterable, Identifiable {
 }
 
 struct ContentView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.english.rawValue
   @State private var selection: AppSection? = .cleanup
   @StateObject private var cleaner = CleanerViewModel()
   @StateObject private var analyzer = AnalyzerViewModel()
@@ -40,11 +42,14 @@ struct ContentView: View {
   var body: some View {
     NavigationSplitView {
       List(AppSection.allCases, selection: $selection) { section in
-        Label(section.rawValue, systemImage: section.symbol)
+        Label(section.title, systemImage: section.symbol)
           .tag(section)
       }
       .navigationTitle("Diskora")
       .navigationSplitViewColumnWidth(min: 190, ideal: 220)
+      .safeAreaInset(edge: .bottom) {
+        LanguagePicker().padding(.horizontal, 12).padding(.vertical, 8)
+      }
     } detail: {
       switch selection ?? .cleanup {
       case .cleanup:
@@ -67,6 +72,8 @@ struct ContentView: View {
         HistoryView(model: history)
       }
     }
+    .environment(\.locale, AppLanguage(rawValue: languageCode)?.locale ?? .init(identifier: "en"))
+    .id(languageCode)
     .frame(minWidth: 940, minHeight: 650)
   }
 }

@@ -19,7 +19,7 @@ struct HistoryView: View {
         List(model.entries) { entry in
           DisclosureGroup {
             ForEach(entry.paths, id: \.self) { Text($0).font(.caption).textSelection(.enabled) }
-            Text(entry.note).font(.caption).foregroundStyle(.secondary)
+            Text(L10n.text(entry.note)).font(.caption).foregroundStyle(.secondary)
             if entry.pendingRestoreCount > 0 {
               Button("Khôi phục \(entry.pendingRestoreCount) mục…") {
                 entryToRestore = entry
@@ -34,7 +34,7 @@ struct HistoryView: View {
               Image(systemName: entry.recoverable ? "trash" : "eraser").foregroundStyle(
                 entry.recoverable ? .blue : .orange)
               VStack(alignment: .leading) {
-                Text(entry.action).fontWeight(.medium)
+                Text(L10n.text(entry.action)).fontWeight(.medium)
                 Text(entry.date.formatted()).font(.caption).foregroundStyle(.secondary)
               }
               Spacer()
@@ -48,7 +48,7 @@ struct HistoryView: View {
         VStack(alignment: .leading, spacing: 2) {
           Text("Undo Center không ghi đè dữ liệu đang tồn tại ở vị trí gốc.").font(.caption)
           if let statusMessage = model.statusMessage {
-            Text(statusMessage).font(.caption).foregroundStyle(.green)
+            Text(L10n.text(statusMessage)).font(.caption).foregroundStyle(.green)
           }
         }
         .foregroundStyle(.secondary)
@@ -77,7 +77,7 @@ struct HistoryView: View {
     .alert("Một số mục không thể khôi phục", isPresented: $showsError) {
       Button("Đóng", role: .cancel) {}
     } message: {
-      Text(model.errorMessage ?? "")
+      Text(L10n.text(model.errorMessage ?? ""))
     }
   }
 }

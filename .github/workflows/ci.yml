@@ -37,3 +37,10 @@ jobs:
         run: ./scripts/test_core.sh
       - name: Release build
         run: swift build -c release
+      - name: Packaged localization
+        run: |
+          ./scripts/build_app.sh
+          if [[ "${{ matrix.app }}" == "diskora" ]]; then APP_NAME="Diskora"; else APP_NAME="Changeora"; fi
+          test -f "dist/$APP_NAME.app/Contents/Resources/en.lproj/Localizable.strings"
+          plutil -lint "Resources/en.lproj/Localizable.strings"
+          codesign --verify --deep --strict "dist/$APP_NAME.app"

@@ -7,6 +7,7 @@ private enum AppSection: String, CaseIterable, Identifiable {
   case coverage = "Phạm vi & quyền riêng tư"
 
   var id: String { rawValue }
+  var title: String { L10n.text(rawValue) }
 
   var symbol: String {
     switch self {
@@ -19,16 +20,20 @@ private enum AppSection: String, CaseIterable, Identifiable {
 }
 
 struct ContentView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.english.rawValue
   @State private var selection: AppSection? = .overview
   @StateObject private var model = ChangeoraViewModel()
 
   var body: some View {
     NavigationSplitView {
       List(AppSection.allCases, selection: $selection) { section in
-        Label(section.rawValue, systemImage: section.symbol).tag(section)
+        Label(section.title, systemImage: section.symbol).tag(section)
       }
       .navigationTitle("Changeora")
       .navigationSplitViewColumnWidth(min: 210, ideal: 235)
+      .safeAreaInset(edge: .bottom) {
+        LanguagePicker().padding(.horizontal, 12).padding(.vertical, 8)
+      }
     } detail: {
       switch selection ?? .overview {
       case .overview:
@@ -41,6 +46,8 @@ struct ContentView: View {
         CoverageView(model: model)
       }
     }
+    .environment(\.locale, AppLanguage(rawValue: languageCode)?.locale ?? .init(identifier: "en"))
+    .id(languageCode)
     .frame(minWidth: 980, minHeight: 680)
     .alert(
       "Changeora",
@@ -51,7 +58,7 @@ struct ContentView: View {
     ) {
       Button("Đóng", role: .cancel) { model.errorMessage = nil }
     } message: {
-      Text(model.errorMessage ?? "")
+      Text(L10n.text(model.errorMessage ?? ""))
     }
   }
 }

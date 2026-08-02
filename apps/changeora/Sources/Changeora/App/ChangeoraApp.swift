@@ -10,7 +10,7 @@ struct ChangeoraApp: App {
     .windowStyle(.titleBar)
     .commands {
       CommandGroup(replacing: .appInfo) {
-        Button("Giới thiệu Changeora") { showAboutPanel() }
+        Button(L10n.text("Giới thiệu Changeora")) { showAboutPanel() }
       }
       CommandGroup(replacing: .newItem) {}
     }
@@ -21,7 +21,7 @@ struct ChangeoraApp: App {
     paragraph.alignment = .center
     let credits = NSAttributedString(
       string:
-        "\(AppMetadata.tagline)\n\n\(AppMetadata.summary)\n\nTác giả: \(AppMetadata.author)\n\nSnapshot • System diff • Local only",
+        "\(L10n.text(AppMetadata.tagline))\n\n\(L10n.text(AppMetadata.summary))\n\n\(L10n.text("Tác giả")): \(AppMetadata.author)\n\nSnapshot • System diff • Local only",
       attributes: [
         .font: NSFont.systemFont(ofSize: 11),
         .foregroundColor: NSColor.secondaryLabelColor,

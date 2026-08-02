@@ -52,7 +52,7 @@ struct SessionHistoryView: View {
               Text(session.title).fontWeight(.semibold)
               Text(session.finishedAt.formatted(date: .abbreviated, time: .shortened))
                 .font(.caption).foregroundStyle(.secondary)
-              Text("\(session.comparison.changes.count) thay đổi")
+              Text(L10n.text("\(session.comparison.changes.count) thay đổi"))
                 .font(.caption).foregroundStyle(.secondary)
             }
             .tag(session.id)
@@ -114,8 +114,10 @@ private struct SessionDetailView: View {
               Image(systemName: change.item.category.symbol).foregroundStyle(.purple)
               VStack(alignment: .leading) {
                 Text(change.item.name).fontWeight(.medium)
-                Text("\(change.kind.rawValue) • \(change.item.category.rawValue)")
-                  .font(.caption).foregroundStyle(.secondary)
+                Text(
+                  "\(L10n.text(change.kind.rawValue)) • \(L10n.text(change.item.category.rawValue))"
+                )
+                .font(.caption).foregroundStyle(.secondary)
               }
               Spacer()
               RiskBadge(risk: change.risk)
