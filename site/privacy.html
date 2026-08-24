@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090a0a">
+    <meta name="description" content="Toolbox privacy boundaries for the macOS app and website.">
+    <title>Privacy — Toolbox</title>
+    <link rel="icon" href="assets/app-icon.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Toolbox home"><img src="assets/app-icon.png" alt="" width="34" height="34"><span>Toolbox</span></a>
+      <nav aria-label="Primary navigation"><a href="index.html#product">Product</a><a href="privacy.html" aria-current="page">Privacy</a><a href="https://github.com/thangldw/toolbox">GitHub</a></nav>
+      <a class="button button-small button-outline" href="index.html">Back to product</a>
+    </header>
+    <main id="main" class="privacy-main">
+      <h1>Privacy</h1>
+      <p class="lede">Toolbox is designed to explain local changes without turning your Mac into a data source.</p>
+
+      <h2>The macOS app</h2>
+      <p>Toolbox has no account system, telemetry SDK, analytics event stream, advertising identifier, remote content upload, or privileged helper. Scans, file paths, snapshots, change evidence, cleanup history, and recovery records stay on your Mac.</p>
+      <p>Toolbox reads filesystem metadata for folders and installers you explicitly select. It does not read document contents for Install Trace. Cleanup is never automatic: targets are reviewed, revalidated, and moved to Trash only after confirmation.</p>
+
+      <h2>Network access</h2>
+      <p>The app makes no automatic update request. When you press Check for Updates, Toolbox sends a GET request only to <code>api.github.com/repos/thangldw/toolbox/releases/latest</code>. It sends no paths, evidence, scan results, or device fields.</p>
+      <p>Opening an installer, source link, or support link hands the URL to macOS. The destination service then applies its own privacy terms.</p>
+
+      <h2>This website</h2>
+      <p>This static site currently uses no cookies, tracking pixels, analytics, forms, or third-party JavaScript. GitHub Pages and GitHub download infrastructure may retain standard service logs under GitHub’s policies.</p>
+      <p>If cookieless aggregate analytics are added later, this page will name the provider, fields, retention, and opt-out before collection begins. In-app telemetry will remain absent unless the product and this notice are explicitly changed.</p>
+
+      <h2>Questions</h2>
+      <p>Review the public <a class="text-link" href="https://github.com/thangldw/toolbox/blob/main/PRIVACY.md">app privacy policy</a> or open a <a class="text-link" href="https://github.com/thangldw/toolbox/issues">GitHub issue</a>.</p>
+    </main>
+    <footer><a class="brand" href="index.html"><img src="assets/app-icon.png" alt="" width="28" height="28"><span>Toolbox</span></a><div><a href="privacy.html">Privacy</a><a href="https://github.com/thangldw/toolbox">GitHub</a><a href="https://github.com/thangldw/toolbox/blob/main/LICENSE">MIT License</a></div></footer>
+  </body>
+</html>

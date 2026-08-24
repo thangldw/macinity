@@ -253,7 +253,7 @@ Expected: FAIL.
 
 - [ ] **Step 3: Implement the responsive static landing page**
 
-The first viewport contains the promise, one sentence of differentiation, direct Download and Homebrew actions, macOS requirement, and a real product screenshot. Follow with a three-step Trace → Review → Recover story, four product screenshots, local-first/safety proof, installation instructions, and source/security/support links. No framework or runtime dependency is required.
+The first viewport contains the promise, one sentence of differentiation, direct Download and Homebrew actions, macOS requirement, and a product preview. Follow with a three-step Trace → Review → Recover story, four product previews, local-first/safety proof, installation instructions, and source/security/support links. No framework or runtime dependency is required. Representative generated previews are allowed during source preparation only when marked as fixture data; replace them with exact release-candidate captures before public launch.
 
 - [ ] **Step 4: Add privacy copy and Pages deployment**
 
