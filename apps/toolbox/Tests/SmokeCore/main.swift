@@ -42,4 +42,36 @@ require(
   "support data should use the Toolbox directory")
 require(AppLanguage.defaultLanguage == .english, "English should be the default language")
 
+let evidenceDirectory = fixtureRoot.appendingPathComponent("evidence-store")
+let evidenceStore = EvidenceStore(directory: evidenceDirectory)
+try evidenceStore.upsert(record)
+try evidenceStore.upsert(
+  EvidenceRecord(
+    path: record.path, kind: record.kind, safety: .review, reasons: ["new"],
+    observedAt: Date(timeIntervalSince1970: 2)))
+let storedEvidence = try evidenceStore.load()
+require(storedEvidence.count == 1, "evidence upsert should replace the same path-kind")
+require(storedEvidence[0].safety == .review, "latest evidence should win")
+
+let ledger = ActivityLedger(directory: fixtureRoot.appendingPathComponent("activity-ledger"))
+let activity = ActivityEntry(
+  kind: .cleanup, status: .succeeded, paths: [record.path], affectedBytes: 10,
+  recoverable: true, errors: [])
+try ledger.append(activity)
+let storedActivity = try ledger.load()
+require(storedActivity == [activity], "activity ledger should persist entries")
+
+let corruptDirectory = fixtureRoot.appendingPathComponent("corrupt-store")
+try manager.createDirectory(at: corruptDirectory, withIntermediateDirectories: true)
+try Data("{".utf8).write(to: corruptDirectory.appendingPathComponent("evidence-v1.json"))
+do {
+  _ = try EvidenceStore(directory: corruptDirectory).load()
+  require(false, "corrupt evidence should throw")
+} catch {
+  let names = try manager.contentsOfDirectory(atPath: corruptDirectory.path)
+  require(
+    names.count { $0.hasPrefix("evidence-v1.corrupt-") } == 1,
+    "corrupt evidence should be quarantined")
+}
+
 print("PASS: ToolboxCore path safety and evidence contracts")

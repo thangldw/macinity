@@ -50,6 +50,48 @@ final class ToolboxCoreTests: XCTestCase {
     XCTAssertEqual(try JSONDecoder().decode(EvidenceRecord.self, from: data), record)
   }
 
+  func testEvidenceUpsertIsStableByCanonicalPathAndKind() throws {
+    let directory = try temporaryDirectory()
+    let store = EvidenceStore(directory: directory)
+    try store.upsert(
+      EvidenceRecord(
+        path: "/tmp/a", kind: .projectArtifact, safety: .safe,
+        reasons: ["first"], observedAt: Date(timeIntervalSince1970: 1)))
+    try store.upsert(
+      EvidenceRecord(
+        path: "/tmp/a", kind: .projectArtifact, safety: .review,
+        reasons: ["new"], observedAt: Date(timeIntervalSince1970: 2)))
+
+    XCTAssertEqual(try store.load().count, 1)
+    XCTAssertEqual(try store.load().first?.safety, .review)
+  }
+
+  func testCorruptStoreIsQuarantinedInsteadOfOverwritten() throws {
+    let directory = try temporaryDirectory()
+    try Data("{".utf8).write(to: directory.appendingPathComponent("evidence-v1.json"))
+
+    XCTAssertThrowsError(try EvidenceStore(directory: directory).load())
+    XCTAssertEqual(
+      try FileManager.default.contentsOfDirectory(atPath: directory.path)
+        .filter { $0.hasPrefix("evidence-v1.corrupt-") }.count,
+      1)
+    XCTAssertFalse(
+      FileManager.default.fileExists(
+        atPath: directory.appendingPathComponent("evidence-v1.json").path))
+  }
+
+  func testActivityLedgerPersistsStatusAndExactTargets() throws {
+    let directory = try temporaryDirectory()
+    let ledger = ActivityLedger(directory: directory)
+    let entry = ActivityEntry(
+      kind: .cleanup, status: .succeeded, occurredAt: Date(timeIntervalSince1970: 3),
+      paths: ["/tmp/cache"], affectedBytes: 42, recoverable: true, errors: [])
+
+    try ledger.append(entry)
+
+    XCTAssertEqual(try ledger.load(), [entry])
+  }
+
   func testProductMetadataUsesUnifiedSupportDirectory() {
     let base = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     XCTAssertEqual(AppMetadata.name, "Toolbox")
