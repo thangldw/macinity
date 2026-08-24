@@ -57,6 +57,7 @@ final class ProjectViewModel: ObservableObject {
     errorMessage = nil
     selectedIDs.removeAll()
     status = "Đang tìm artifact có thể tạo lại…"
+    ScanActivityRegistry.shared.begin()
     let roots = roots
     let scanner = scanner
     let evidenceStore = evidenceStore
@@ -64,6 +65,7 @@ final class ProjectViewModel: ObservableObject {
     scanTask = Task {
       let result = await scanner.scan(roots: roots)
       guard !Task.isCancelled else {
+        ScanActivityRegistry.shared.end()
         isWorking = false
         status = "Đã hủy quét."
         return
@@ -80,6 +82,7 @@ final class ProjectViewModel: ObservableObject {
           errorMessage = "Không thể lưu evidence: \(error.localizedDescription)"
         }
       }
+      ScanActivityRegistry.shared.end()
       isWorking = false
       status =
         result.cancelled

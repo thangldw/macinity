@@ -1,4 +1,5 @@
 import Foundation
+import ToolboxCore
 
 struct RuntimeVersion: Identifiable, Sendable {
   let tool: String
@@ -76,12 +77,15 @@ final class DeveloperRuntimeViewModel: ObservableObject {
   @Published var status = ""
   @Published var errorMessage: String?
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
   func scan() {
     isScanning = true
+    ScanActivityRegistry.shared.begin()
     status = "Đang đối chiếu file cấu hình dự án…"
     let scanner = DeveloperRuntimeScanner()
     Task {
       versions = await Task.detached { scanner.scan() }.value
+      ScanActivityRegistry.shared.end()
       isScanning = false
       status = "Đã kiểm tra \(versions.count) phiên bản"
     }
@@ -92,12 +96,16 @@ final class DeveloperRuntimeViewModel: ObservableObject {
       errorMessage = "Phiên bản này đang được file cấu hình dự án tham chiếu."
       return
     }
-    let home = FileManager.default.homeDirectoryForCurrentUser.resolvingSymlinksInPath().path + "/"
-    let url = runtime.url.resolvingSymlinksInPath()
-    let allowed = [
-      "/.nvm/versions/node/", "/.pyenv/versions/", "/.asdf/installs/", "/.conda/envs/",
+    let home = FileManager.default.homeDirectoryForCurrentUser
+    let allowedRoots = [
+      home.appendingPathComponent(".nvm/versions/node"),
+      home.appendingPathComponent(".pyenv/versions"),
+      home.appendingPathComponent(".asdf/installs"),
+      home.appendingPathComponent(".conda/envs"),
     ]
-    guard url.path.hasPrefix(home), allowed.contains(where: { url.path.contains($0) }) else {
+    guard
+      let url = try? PathSafetyPolicy.validate(candidate: runtime.url, allowedRoots: allowedRoots)
+    else {
       errorMessage = "Đường dẫn runtime không an toàn."
       return
     }
@@ -115,6 +123,10 @@ final class DeveloperRuntimeViewModel: ObservableObject {
         action: "Gỡ runtime \(runtime.tool) \(runtime.version)", paths: [url.path],
         bytes: runtime.bytes, recoverable: true,
         note: "Không tìm thấy file cấu hình dự án tham chiếu; đã chuyển vào Trash", moves: moves)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, paths: [url.path], affectedBytes: runtime.bytes,
+          recoverable: !moves.isEmpty, errors: []))
       status = "Đã chuyển \(runtime.version) vào Trash"
       scan()
     } catch { errorMessage = error.localizedDescription }

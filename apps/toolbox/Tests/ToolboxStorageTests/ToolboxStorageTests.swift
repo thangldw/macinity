@@ -41,7 +41,11 @@ final class ToolboxStorageTests: XCTestCase {
       at: trashed.deletingLastPathComponent(), withIntermediateDirectories: true)
     try Data("recoverable".utf8).write(to: trashed)
 
-    let store = HistoryStore(directory: root.appendingPathComponent("Store"))
+    let store = HistoryStore(
+      directory: root.appendingPathComponent("Store"),
+      recoveryAdapter: UnifiedRecoveryAdapter(
+        allowedTrashRoots: [trashed.deletingLastPathComponent()],
+        allowedDestinationRoots: [original.deletingLastPathComponent()]))
     store.record(
       action: "Test", paths: [original.path], bytes: 11, recoverable: true,
       note: "Undo test",

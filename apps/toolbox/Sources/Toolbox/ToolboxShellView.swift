@@ -40,14 +40,13 @@ struct ToolboxShellView: View {
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
   @AppStorage("toolbox.onboarding.completed.v2") private var onboardingCompleted = false
-  @SceneStorage("toolbox.selectedSection") private var selectedSectionRaw =
-    ToolboxSection.home.rawValue
+  @StateObject private var coordinator = ToolboxCoordinator()
   @State private var showsOnboarding = false
 
   private var selection: Binding<ToolboxSection?> {
     Binding(
-      get: { ToolboxSection(rawValue: selectedSectionRaw) ?? .home },
-      set: { selectedSectionRaw = ($0 ?? .home).rawValue }
+      get: { coordinator.selectedSection },
+      set: { coordinator.open(.section($0 ?? .home)) }
     )
   }
 
@@ -67,7 +66,7 @@ struct ToolboxShellView: View {
       }
     } detail: {
       detailView
-        .navigationTitle((ToolboxSection(rawValue: selectedSectionRaw) ?? .home).title)
+        .navigationTitle(coordinator.selectedSection.title)
     }
     .environment(
       \.locale,
@@ -76,6 +75,7 @@ struct ToolboxShellView: View {
     .frame(minWidth: 960, minHeight: 640)
     .task {
       if !onboardingCompleted { showsOnboarding = true }
+      coordinator.refreshSummaries()
     }
     .sheet(isPresented: $showsOnboarding) {
       OnboardingView {
@@ -88,17 +88,19 @@ struct ToolboxShellView: View {
 
   @ViewBuilder
   private var detailView: some View {
-    switch ToolboxSection(rawValue: selectedSectionRaw) ?? .home {
+    switch coordinator.selectedSection {
     case .home:
-      HomeView(selection: selection)
+      HomeView(coordinator: coordinator)
     case .storage:
-      StorageModuleView(destination: .storage)
+      StorageModuleView(destination: .storage, focusPath: coordinator.storageFocusPath)
     case .projects:
       StorageModuleView(destination: .projects)
     case .applications:
       StorageModuleView(destination: .applications)
     case .changes:
-      ChangeTimelineModuleView()
+      ChangeTimelineModuleView { path in
+        coordinator.open(.reviewStorage(path: path))
+      }
     case .recovery:
       StorageModuleView(destination: .recovery)
     }

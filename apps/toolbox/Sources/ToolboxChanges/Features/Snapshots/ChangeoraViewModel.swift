@@ -227,6 +227,7 @@ final class ChangeoraViewModel: ObservableObject {
     completion: @escaping @MainActor (SystemSnapshot) -> Void
   ) {
     isScanning = true
+    ScanActivityRegistry.shared.begin()
     statusMessage = "Đang chụp trạng thái hệ thống…"
     errorMessage = nil
     let scanner = scanner
@@ -234,6 +235,7 @@ final class ChangeoraViewModel: ObservableObject {
       let snapshot = await Task.detached(priority: .userInitiated) {
         scanner.capture(name: name)
       }.value
+      ScanActivityRegistry.shared.end()
       isScanning = false
       completion(snapshot)
     }

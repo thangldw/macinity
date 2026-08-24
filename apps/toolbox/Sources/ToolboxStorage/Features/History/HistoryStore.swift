@@ -16,17 +16,16 @@ struct CleanupHistoryEntry: Codable, Identifiable, Sendable {
   }
 }
 
-struct RestoreResult: Sendable {
-  let restoredCount: Int
-  let restoredBytes: Int64
-  let errors: [String]
-}
-
 struct HistoryStore: Sendable {
   private let directory: URL
+  private let recoveryAdapter: UnifiedRecoveryAdapter
 
-  init(directory: URL = AppMetadata.applicationSupportDirectory()) {
+  init(
+    directory: URL = AppMetadata.applicationSupportDirectory(),
+    recoveryAdapter: UnifiedRecoveryAdapter = UnifiedRecoveryAdapter()
+  ) {
     self.directory = directory
+    self.recoveryAdapter = recoveryAdapter
   }
 
   private var fileURL: URL {
@@ -61,32 +60,21 @@ struct HistoryStore: Sendable {
         errors: ["Lịch sử này không có thông tin vị trí trong Trash."])
     }
 
-    let manager = FileManager()
     var restoredCount = 0
     var restoredBytes: Int64 = 0
     var errors: [String] = []
     for index in moves.indices where moves[index].restoredAt == nil {
       let move = moves[index]
-      let source = URL(fileURLWithPath: move.trashPath).standardizedFileURL
-      let destination = URL(fileURLWithPath: move.originalPath).standardizedFileURL
-      guard manager.fileExists(atPath: source.path) else {
-        errors.append("\(source.lastPathComponent): không còn trong Trash")
-        continue
-      }
-      guard !manager.fileExists(atPath: destination.path) else {
-        errors.append("\(destination.lastPathComponent): vị trí gốc đã có dữ liệu")
-        continue
-      }
-      do {
-        try manager.createDirectory(
-          at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try manager.moveItem(at: source, to: destination)
+      let result = recoveryAdapter.restore(
+        RecoveryItem(
+          id: move.id, originalPath: move.originalPath, trashPath: move.trashPath,
+          bytes: move.bytes))
+      if result.restoredCount == 1 {
         moves[index].restoredAt = Date()
-        restoredCount += 1
-        restoredBytes += move.bytes
-      } catch {
-        errors.append("\(destination.lastPathComponent): \(error.localizedDescription)")
+        restoredCount += result.restoredCount
+        restoredBytes += result.restoredBytes
       }
+      errors += result.errors
     }
     entries[entryIndex].moves = moves
     save(entries)
@@ -109,22 +97,47 @@ struct HistoryStore: Sendable {
 @MainActor
 final class HistoryViewModel: ObservableObject {
   @Published var entries: [CleanupHistoryEntry] = []
+  @Published var activityEntries: [ActivityEntry] = []
   @Published var statusMessage: String?
   @Published var errorMessage: String?
   @Published var isRestoring = false
-  private let store = HistoryStore()
-  func refresh() { entries = store.load() }
+  private let store: HistoryStore
+  private let activityLedger: ActivityLedger
+
+  init(
+    store: HistoryStore = HistoryStore(), activityLedger: ActivityLedger = ActivityLedger()
+  ) {
+    self.store = store
+    self.activityLedger = activityLedger
+  }
+
+  func refresh() {
+    entries = store.load()
+    do {
+      activityEntries = try activityLedger.load()
+    } catch {
+      activityEntries = []
+      errorMessage = error.localizedDescription
+    }
+  }
 
   func restore(_ entry: CleanupHistoryEntry) {
     guard !isRestoring, entry.pendingRestoreCount > 0 else { return }
     isRestoring = true
     let store = store
+    let activityLedger = activityLedger
     Task {
       let result = await Task.detached { store.restore(entryID: entry.id) }.value
       statusMessage =
         "Đã khôi phục \(result.restoredCount) mục (\(ByteCount.string(result.restoredBytes)))."
       errorMessage = result.errors.isEmpty ? nil : result.errors.joined(separator: "\n")
-      entries = store.load()
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .restore, status: result.errors.isEmpty ? .succeeded : .failed,
+          paths: entry.moves?.map(\.originalPath) ?? entry.paths,
+          affectedBytes: result.restoredBytes, recoverable: false,
+          errors: result.errors))
+      refresh()
       isRestoring = false
     }
   }

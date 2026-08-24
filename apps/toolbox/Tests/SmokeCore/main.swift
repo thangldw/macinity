@@ -41,6 +41,10 @@ require(
   AppMetadata.applicationSupportDirectory(base: fixtureRoot).lastPathComponent == "Toolbox",
   "support data should use the Toolbox directory")
 require(AppLanguage.defaultLanguage == .english, "English should be the default language")
+ScanActivityRegistry.shared.begin()
+require(ScanActivityRegistry.shared.isActive, "scan registry should report active work")
+ScanActivityRegistry.shared.end()
+require(!ScanActivityRegistry.shared.isActive, "scan registry should clear completed work")
 
 let evidenceDirectory = fixtureRoot.appendingPathComponent("evidence-store")
 let evidenceStore = EvidenceStore(directory: evidenceDirectory)

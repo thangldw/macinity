@@ -1,6 +1,7 @@
 import AppKit
 import SwiftUI
 import ToolboxCore
+import ToolboxStorage
 
 @main
 struct ToolboxApp: App {
@@ -18,6 +19,10 @@ struct ToolboxApp: App {
       }
       CommandGroup(replacing: .newItem) {}
     }
+
+    Settings {
+      SettingsView()
+    }
   }
 
   private func showAboutPanel() {
@@ -34,14 +39,25 @@ struct ToolboxApp: App {
 @MainActor
 final class ToolboxAppDelegate: NSObject, NSApplicationDelegate {
   private var fallbackWindowController: NSWindowController?
+  private let isScheduledScan = ProcessInfo.processInfo.arguments.contains("--scheduled-scan")
 
   func applicationDidFinishLaunching(_ notification: Notification) {
+    if isScheduledScan {
+      NSApp.setActivationPolicy(.accessory)
+      for window in NSApp.windows { window.orderOut(nil) }
+      Task {
+        await ScheduledScanService().runNow()
+        NSApp.terminate(nil)
+      }
+      return
+    }
     NSApp.setActivationPolicy(.regular)
     ensureMainWindow()
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool
   {
+    guard !isScheduledScan else { return false }
     ensureMainWindow()
     return true
   }

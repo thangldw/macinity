@@ -50,6 +50,7 @@
 "Hạng mục" = "Categories";
 "Nguyên tắc" = "Principles";
 "Tần suất" = "Frequency";
+"Công cụ lưu trữ" = "Storage tools";
 
 /* Quick Clean */
 "Cache, log và dữ liệu build có thể tạo lại" = "Regenerable caches, logs, and build data";
@@ -203,6 +204,11 @@
 "Lần chạy gần nhất" = "Last Run";
 "Không thể cập nhật lịch quét" = "Unable to Update Schedule";
 "Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Scheduled scans only notify; Diskora never deletes data automatically.";
+"Lịch quét chỉ thông báo; Toolbox không tự xóa dữ liệu." = "Scheduled scans only notify; Toolbox never deletes data automatically.";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Toolbox không tự xóa" = "The system receipt is evidence only; Toolbox never deletes it automatically";
+"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Toolbox không xóa database hệ thống" = "sfltool detected a login/background item; evidence is shown without deleting system databases";
+"Toolbox chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Toolbox cleans only after confirmation and prefers each tool's official command.";
+"Toolbox sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Toolbox will run exactly the displayed allowlisted command. It does not use Trash and cannot be undone.";
 "Lịch sử, vị trí Trash và khôi phục có kiểm tra xung đột" = "History, Trash locations, and conflict-safe restoration";
 "thao tác" = "operations";
 "Chưa có lịch sử" = "No History Yet";

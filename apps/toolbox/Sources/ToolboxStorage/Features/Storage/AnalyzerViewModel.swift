@@ -34,6 +34,7 @@ final class AnalyzerViewModel: ObservableObject {
     isScanning = true
     errorMessage = nil
     status = "Đang phân tích \(rootURL.path)…"
+    ScanActivityRegistry.shared.begin()
     let analyzer = self.analyzer
     let root = rootURL
     scanTask = Task {
@@ -51,6 +52,7 @@ final class AnalyzerViewModel: ObservableObject {
         errorMessage = error.localizedDescription
         status = "Không thể hoàn tất quá trình quét"
       }
+      ScanActivityRegistry.shared.end()
       isScanning = false
     }
   }

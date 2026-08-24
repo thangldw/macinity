@@ -1,6 +1,7 @@
 import AppKit
 import Foundation
 import SwiftUI
+import ToolboxCore
 
 @MainActor
 final class SimilarPhotoViewModel: ObservableObject {
@@ -13,6 +14,7 @@ final class SimilarPhotoViewModel: ObservableObject {
   @Published var errorMessage: String?
   private let scanner = SimilarPhotoScanner()
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
   private var task: Task<Void, Never>?
 
   var selectedBytes: Int64 {
@@ -39,6 +41,7 @@ final class SimilarPhotoViewModel: ObservableObject {
     errorMessage = nil
     selectedPaths = []
     status = "Đang phân tích đặc trưng hình ảnh bằng Vision…"
+    ScanActivityRegistry.shared.begin()
     let scanner = self.scanner
     let root = rootURL
     task = Task {
@@ -51,6 +54,7 @@ final class SimilarPhotoViewModel: ObservableObject {
         errorMessage = error.localizedDescription
         status = "Không thể quét ảnh"
       }
+      ScanActivityRegistry.shared.end()
       isWorking = false
     }
   }
@@ -76,18 +80,21 @@ final class SimilarPhotoViewModel: ObservableObject {
   func reveal(_ url: URL) { NSWorkspace.shared.activateFileViewerSelecting([url]) }
 
   func trashSelected() {
-    let root = rootURL.resolvingSymlinksInPath().path + "/"
+    let root = rootURL.resolvingSymlinksInPath().standardizedFileURL
     let photos = snapshot?.groups.flatMap(\.photos).filter { selectedPaths.contains($0.id) } ?? []
     let history = self.history
+    let activityLedger = self.activityLedger
     isWorking = true
     Task {
       let outcome = await Task.detached {
         var errors: [String] = []
         var moves: [TrashMoveRecord] = []
         for photo in photos {
-          let url = photo.url.resolvingSymlinksInPath()
-          guard url.path.hasPrefix(root) else {
-            errors.append("Đường dẫn không an toàn: \(url.path)")
+          let url: URL
+          do {
+            url = try PathSafetyPolicy.validate(candidate: photo.url, allowedRoots: [root])
+          } catch {
+            errors.append("Đường dẫn không an toàn: \(photo.url.path)")
             continue
           }
           do {
@@ -111,6 +118,11 @@ final class SimilarPhotoViewModel: ObservableObject {
         action: "Loại ảnh tương tự", paths: moved.map { $0.url.path },
         bytes: moved.reduce(0) { $0 + $1.bytes }, recoverable: true,
         note: "Ảnh đã chuyển vào Trash sau khi người dùng duyệt", moves: outcome.1)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, status: outcome.0.isEmpty ? .succeeded : .failed,
+          paths: photos.map { $0.url.path }, affectedBytes: moved.reduce(0) { $0 + $1.bytes },
+          recoverable: !outcome.1.isEmpty, errors: outcome.0))
       isWorking = false
       scan()
     }

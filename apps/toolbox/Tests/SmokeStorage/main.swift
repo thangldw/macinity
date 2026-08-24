@@ -23,6 +23,16 @@ func require(_ condition: @autoclosure () -> Bool, _ message: String) {
   }
 }
 
+struct SmokeFailingLaunchctl: LaunchctlRunning {
+  func run(_ arguments: [String]) throws {
+    if arguments.first == "bootstrap" { throw CocoaError(.executableNotLoadable) }
+  }
+}
+
+struct SmokeGrantedNotifications: NotificationAuthorizing {
+  func requestAuthorization() async throws -> Bool { true }
+}
+
 let manager = FileManager.default
 let temporary = manager.temporaryDirectory.appendingPathComponent(
   UUID().uuidString, isDirectory: true)
@@ -68,12 +78,46 @@ do {
     // Expected.
   }
 
+  let outsideForSymlink = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+  defer { try? manager.removeItem(at: outsideForSymlink) }
+  try manager.createDirectory(at: outsideForSymlink, withIntermediateDirectories: true)
+  try manager.createSymbolicLink(
+    at: temporary.appendingPathComponent("escape"), withDestinationURL: outsideForSymlink)
+  let symlinkTarget = CleaningTarget(
+    id: "symlink", name: "Symlink", detail: "", relativePath: "escape/item",
+    symbol: "folder", isSelectedByDefault: false)
+  do {
+    _ = try service.validatedURL(for: symlinkTarget)
+    require(false, "Cleaner phải chặn symlink thoát khỏi home")
+  } catch {
+    // Expected.
+  }
+
   require(
     ApplicationScanner.matchesLeftoverName("com.example.note", applicationName: "Note"),
     "Không nhận diện được leftover theo thành phần tên")
   require(
     !ApplicationScanner.matchesLeftoverName("com.example.noteworthy", applicationName: "Note"),
     "Nhận nhầm leftover chỉ vì tên chứa chuỗi con")
+
+  let appHome = temporary.appendingPathComponent("AppHome")
+  let appDirectory = appHome.appendingPathComponent("Applications")
+  let outsideApp = manager.temporaryDirectory.appendingPathComponent(
+    "Outside-\(UUID().uuidString).app")
+  defer { try? manager.removeItem(at: outsideApp) }
+  try manager.createDirectory(at: appDirectory, withIntermediateDirectories: true)
+  try manager.createDirectory(at: outsideApp, withIntermediateDirectories: true)
+  let escapedApp = appDirectory.appendingPathComponent("Escape.app")
+  try manager.createSymbolicLink(at: escapedApp, withDestinationURL: outsideApp)
+  let rejectedApp = ApplicationScanner(homeURL: appHome).uninstall(
+    InstalledApplication(
+      url: escapedApp, name: "Escape", bundleIdentifier: nil, bytes: 0, leftovers: []),
+    includeLeftovers: false)
+  require(
+    rejectedApp.movedCount == 0 && !rejectedApp.errors.isEmpty,
+    "Application uninstall phải chặn app symlink ra ngoài Applications")
+  require(
+    manager.fileExists(atPath: outsideApp.path), "Application uninstall đã di chuyển nhầm app")
 
   let documents = temporary.appendingPathComponent("Documents", isDirectory: true)
   try manager.createDirectory(at: documents, withIntermediateDirectories: true)
@@ -149,7 +193,11 @@ do {
   try manager.createDirectory(
     at: undoTrash.deletingLastPathComponent(), withIntermediateDirectories: true)
   try Data("undo".utf8).write(to: undoTrash)
-  let history = HistoryStore(directory: temporary.appendingPathComponent("History"))
+  let history = HistoryStore(
+    directory: temporary.appendingPathComponent("History"),
+    recoveryAdapter: UnifiedRecoveryAdapter(
+      allowedTrashRoots: [undoTrash.deletingLastPathComponent()],
+      allowedDestinationRoots: [undoOriginal.deletingLastPathComponent()]))
   history.record(
     action: "Undo smoke", paths: [undoOriginal.path], bytes: 4, recoverable: true, note: "test",
     moves: [
@@ -159,6 +207,27 @@ do {
   let restored = history.restore(entryID: undoEntry.id)
   require(restored.restoredCount == 1, "Undo Center không khôi phục đúng mục")
   require(manager.fileExists(atPath: undoOriginal.path), "Undo Center không trả mục về vị trí gốc")
+
+  let conflictSource = temporary.appendingPathComponent("ConflictTrash/item")
+  let conflictDestination = temporary.appendingPathComponent("ConflictOriginal/item")
+  try manager.createDirectory(
+    at: conflictSource.deletingLastPathComponent(), withIntermediateDirectories: true)
+  try manager.createDirectory(
+    at: conflictDestination.deletingLastPathComponent(), withIntermediateDirectories: true)
+  try Data("trashed".utf8).write(to: conflictSource)
+  try Data("existing".utf8).write(to: conflictDestination)
+  let conflictResult = UnifiedRecoveryAdapter(
+    allowedTrashRoots: [conflictSource.deletingLastPathComponent()],
+    allowedDestinationRoots: [conflictDestination.deletingLastPathComponent()]
+  ).restore(
+    RecoveryItem(
+      id: UUID(), originalPath: conflictDestination.path, trashPath: conflictSource.path,
+      bytes: 7))
+  require(conflictResult.restoredCount == 0, "Recovery không được ghi đè destination")
+  let conflictDestinationData = try Data(contentsOf: conflictDestination)
+  require(
+    conflictDestinationData == Data("existing".utf8),
+    "Recovery đã thay đổi destination xung đột")
 
   let migrationRoot = temporary.appendingPathComponent("LegacyMigration")
   let legacyDiskora = migrationRoot.appendingPathComponent("Diskora")
@@ -178,6 +247,32 @@ do {
   require(
     migratedHistory.first?.action == "Legacy cleanup",
     "Diskora history không đọc được sau migration")
+
+  let scheduledHome = temporary.appendingPathComponent("ScheduledHome")
+  let scheduledAgents = scheduledHome.appendingPathComponent("Library/LaunchAgents")
+  let scheduledApp = scheduledHome.appendingPathComponent("Toolbox.app")
+  try manager.createDirectory(at: scheduledAgents, withIntermediateDirectories: true)
+  try manager.createDirectory(at: scheduledApp, withIntermediateDirectories: true)
+  let legacyAgent = scheduledAgents.appendingPathComponent(
+    "com.thang.diskora.scheduled-scan.plist")
+  try Data("legacy".utf8).write(to: legacyAgent)
+  let scheduledService = ScheduledScanService(
+    homeURL: scheduledHome, bundleURL: scheduledApp, launchctl: SmokeFailingLaunchctl(),
+    notifications: SmokeGrantedNotifications())
+  do {
+    try await scheduledService.replaceLegacyLaunchAgent(intervalHours: 24)
+    require(false, "Bootstrap lịch Toolbox phải báo lỗi")
+  } catch {
+    require(
+      manager.fileExists(atPath: legacyAgent.path),
+      "Không được gỡ lịch Diskora khi bootstrap Toolbox thất bại")
+    require(
+      !manager.fileExists(
+        atPath: scheduledAgents.appendingPathComponent(
+          "com.thang.toolbox.scheduled-scan.plist"
+        ).path),
+      "Phải dọn plist Toolbox chưa bootstrap được")
+  }
 
   let project = try makeProjectFixture(
     files: ["package.json", "package-lock.json", "node_modules/pkg/index.js"],

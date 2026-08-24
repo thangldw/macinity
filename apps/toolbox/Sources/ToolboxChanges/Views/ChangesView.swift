@@ -3,6 +3,7 @@ import ToolboxCore
 
 struct ChangesView: View {
   @ObservedObject var model: ChangeoraViewModel
+  let onReviewStorage: ((String) -> Void)?
   @State private var searchText = ""
   @State private var riskFilter: ChangeRisk?
 
@@ -48,7 +49,11 @@ struct ChangesView: View {
           )
         } else {
           List(changes) { change in
-            ChangeRow(change: change) { model.reveal(change.item) }
+            ChangeRow(
+              change: change, reveal: { model.reveal(change.item) },
+              reviewStorage: onReviewStorage.map { callback in
+                { callback(change.item.path) }
+              })
           }
           .listStyle(.inset)
         }
@@ -75,6 +80,7 @@ struct ChangesView: View {
 private struct ChangeRow: View {
   let change: ChangeRecord
   let reveal: () -> Void
+  let reviewStorage: (() -> Void)?
 
   var body: some View {
     HStack(alignment: .top, spacing: 12) {
@@ -110,7 +116,13 @@ private struct ChangeRow: View {
         }
       }
       Spacer()
-      Button("Finder", action: reveal).buttonStyle(.borderless)
+      VStack(alignment: .trailing, spacing: 6) {
+        if let reviewStorage {
+          Button("Review in Storage", action: reviewStorage)
+            .buttonStyle(.borderless)
+        }
+        Button("Finder", action: reveal).buttonStyle(.borderless)
+      }
     }
     .padding(.vertical, 6)
   }

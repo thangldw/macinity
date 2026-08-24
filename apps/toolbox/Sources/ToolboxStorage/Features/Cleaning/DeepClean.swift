@@ -24,6 +24,7 @@ final class DeepCleanViewModel: ObservableObject {
   @Published var errorMessage: String?
   private let service = CleanerService()
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
 
   init() {
     let definitions: [DeepCleanDefinition] = [
@@ -76,6 +77,7 @@ final class DeepCleanViewModel: ObservableObject {
     isWorking = true
     status = "Đang quét dữ liệu chuyên sâu…"
     errorMessage = nil
+    ScanActivityRegistry.shared.begin()
     let targets = rows.map {
       CleaningTarget(
         id: $0.id, name: $0.definition.name, detail: $0.definition.detail,
@@ -86,6 +88,7 @@ final class DeepCleanViewModel: ObservableObject {
       for result in results {
         if let i = rows.firstIndex(where: { $0.id == result.id }) { rows[i].bytes = result.bytes }
       }
+      ScanActivityRegistry.shared.end()
       isWorking = false
       status = "Có thể xem xét \(ByteCount.string(rows.reduce(0) { $0 + $1.bytes }))"
     }
@@ -97,6 +100,7 @@ final class DeepCleanViewModel: ObservableObject {
     isWorking = true
     let service = self.service
     let history = self.history
+    let activityLedger = self.activityLedger
     Task {
       var affected: Int64 = 0
       var errors: [String] = []
@@ -114,9 +118,21 @@ final class DeepCleanViewModel: ObservableObject {
         recoverable = recoverable && result.recoverable
         moves += result.moves
       }
+      let canonicalPaths = paths.compactMap {
+        try? service.validatedURL(
+          for: CleaningTarget(
+            id: $0, name: $0, detail: "", relativePath: $0, symbol: "folder",
+            isSelectedByDefault: false)
+        ).path
+      }
       history.record(
-        action: "Dọn chuyên sâu", paths: paths, bytes: affected, recoverable: recoverable,
+        action: "Dọn chuyên sâu", paths: canonicalPaths, bytes: affected, recoverable: recoverable,
         note: "Đã chuyển nội dung cache/thư mục đã xác nhận vào Trash", moves: moves)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, status: errors.isEmpty ? .succeeded : .failed,
+          paths: canonicalPaths, affectedBytes: affected, recoverable: recoverable,
+          errors: errors))
       errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
       isWorking = false
       status = "Đã chuyển \(ByteCount.string(affected)) vào Trash"

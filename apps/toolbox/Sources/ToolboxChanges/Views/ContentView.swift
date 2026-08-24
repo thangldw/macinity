@@ -24,8 +24,11 @@ public struct ChangeModuleSummary: Sendable, Equatable {
 public struct ChangeTimelineModuleView: View {
   @State private var selection = ChangeTimelineSection.overview
   @StateObject private var model = ChangeoraViewModel()
+  private let onReviewStorage: ((String) -> Void)?
 
-  public init() {}
+  public init(onReviewStorage: ((String) -> Void)? = nil) {
+    self.onReviewStorage = onReviewStorage
+  }
 
   public var body: some View {
     VStack(spacing: 0) {
@@ -46,7 +49,7 @@ public struct ChangeTimelineModuleView: View {
         case .overview:
           InstallTraceDropView(model: model)
         case .changes:
-          ChangesView(model: model)
+          ChangesView(model: model, onReviewStorage: onReviewStorage)
         case .history:
           SessionHistoryView(model: model)
         case .coverage:

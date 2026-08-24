@@ -68,9 +68,11 @@ final class InstallTraceCoordinator: ObservableObject {
     defer { isWorking = false }
 
     let scanner = scanner
+    ScanActivityRegistry.shared.begin()
     let before = await Task.detached(priority: .userInitiated) {
       scanner.capture(name: "Trước Install Trace")
     }.value
+    ScanActivityRegistry.shared.end()
     try store.saveActiveSnapshot(before)
     do {
       try store.saveActiveTraceMetadata(metadata)
@@ -104,9 +106,11 @@ final class InstallTraceCoordinator: ObservableObject {
     defer { isWorking = false }
 
     let scanner = scanner
+    ScanActivityRegistry.shared.begin()
     let after = await Task.detached(priority: .userInitiated) {
       scanner.capture(name: "Sau Install Trace")
     }.value
+    ScanActivityRegistry.shared.end()
     let comparison = diffEngine.compare(
       before: before, after: after, events: events,
       categoryForPath: { scanner.category(for: $0) }

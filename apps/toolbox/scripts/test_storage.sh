@@ -19,8 +19,10 @@ swiftc \
   -lToolboxCore \
   "$PROJECT_DIR/Sources/ToolboxStorage/Core/Models.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Cleaning/CleanerService.swift" \
+  "$PROJECT_DIR/Sources/ToolboxStorage/Features/Cleaning/ScheduledScan.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Applications/ApplicationManager.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/History/HistoryStore.swift" \
+  "$PROJECT_DIR/Sources/ToolboxStorage/Features/History/UnifiedRecoveryAdapter.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Storage/StorageModels.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Storage/StorageAnalyzer.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Duplicates/DuplicateScanner.swift" \

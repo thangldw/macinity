@@ -200,7 +200,6 @@ struct DuplicateScanner: Sendable {
   ) -> TrashResult {
     let manager = FileManager()
     let root = rootURL.resolvingSymlinksInPath().standardizedFileURL
-    let rootPath = root.path.hasSuffix("/") ? root.path : root.path + "/"
     var count = 0
     var bytes: Int64 = 0
     var errors: [String] = []
@@ -208,8 +207,10 @@ struct DuplicateScanner: Sendable {
     var moves: [TrashMoveRecord] = []
 
     for file in files {
-      let candidate = file.url.resolvingSymlinksInPath().standardizedFileURL
-      guard candidate.path.hasPrefix(rootPath), candidate.path != root.path else {
+      let candidate: URL
+      do {
+        candidate = try PathSafetyPolicy.validate(candidate: file.url, allowedRoots: [root])
+      } catch {
         errors.append("\(file.url.lastPathComponent): đường dẫn không an toàn")
         continue
       }
@@ -217,9 +218,9 @@ struct DuplicateScanner: Sendable {
         errors.append("\(file.url.lastPathComponent): không xác định được bản giữ lại")
         continue
       }
-      let original = URL(fileURLWithPath: originalPath).resolvingSymlinksInPath()
-        .standardizedFileURL
-      guard original.path.hasPrefix(rootPath),
+      guard
+        let original = try? PathSafetyPolicy.validate(
+          candidate: URL(fileURLWithPath: originalPath), allowedRoots: [root]),
         manager.fileExists(atPath: original.path),
         let originalHash = try? sha256(of: original),
         let candidateHash = try? sha256(of: candidate),

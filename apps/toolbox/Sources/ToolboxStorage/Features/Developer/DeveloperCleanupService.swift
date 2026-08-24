@@ -1,4 +1,5 @@
 import Foundation
+import ToolboxCore
 
 enum DeveloperCleanupTool: String, CaseIterable, Sendable {
   case simulator = "Xcode Simulator"
@@ -79,7 +80,7 @@ struct DeveloperCleanupService: Sendable {
 
   func run(_ action: DeveloperCleanupAction, timeout: TimeInterval = 120) -> DeveloperCommandResult
   {
-    guard Self.allowedExecutableNames.contains(action.executable.lastPathComponent),
+    guard Self.allowedExecutablePaths[action.tool]?.contains(action.executable.path) == true,
       Self.allowedArguments[action.tool] == action.arguments
     else {
       return DeveloperCommandResult(
@@ -122,7 +123,13 @@ struct DeveloperCleanupService: Sendable {
     }
   }
 
-  private static let allowedExecutableNames = Set(["xcrun", "docker", "brew", "npm", "python3"])
+  private static let allowedExecutablePaths: [DeveloperCleanupTool: Set<String>] = [
+    .simulator: ["/usr/bin/xcrun"],
+    .docker: ["/usr/local/bin/docker", "/opt/homebrew/bin/docker"],
+    .homebrew: ["/usr/local/bin/brew", "/opt/homebrew/bin/brew"],
+    .npm: ["/usr/local/bin/npm", "/opt/homebrew/bin/npm"],
+    .pip: ["/usr/bin/python3", "/usr/local/bin/python3", "/opt/homebrew/bin/python3"],
+  ]
   private static let allowedArguments: [DeveloperCleanupTool: [String]] = [
     .simulator: ["simctl", "delete", "unavailable"],
     .docker: ["system", "prune", "--force"],
@@ -140,6 +147,7 @@ final class DeveloperCleanupViewModel: ObservableObject {
   @Published var errorMessage: String?
   private let service = DeveloperCleanupService()
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
 
   func refresh() {
     actions = service.availableActions()
@@ -151,6 +159,7 @@ final class DeveloperCleanupViewModel: ObservableObject {
     status = "Đang chạy \(action.tool.rawValue)…"
     let service = service
     let history = history
+    let activityLedger = activityLedger
     Task {
       let result = await Task.detached { service.run(action) }.value
       if result.succeeded {
@@ -163,6 +172,12 @@ final class DeveloperCleanupViewModel: ObservableObject {
         errorMessage = result.message
         status = "\(action.tool.rawValue): thất bại"
       }
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .command, status: result.succeeded ? .succeeded : .failed,
+          paths: [action.commandPreview],
+          affectedBytes: result.succeeded ? action.estimatedBytes : Int64(0),
+          recoverable: false, errors: result.succeeded ? [] : [result.message]))
       actions = service.availableActions()
       isWorking = false
     }

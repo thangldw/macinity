@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import ToolboxCore
 
 enum ApplicationArtifactKind: String, Sendable {
   case support = "Application Support"
@@ -32,9 +33,15 @@ struct InstalledApplication: Identifiable, Sendable {
 }
 
 struct ApplicationScanner: Sendable {
+  private let homeURL: URL
+
+  init(homeURL: URL = FileManager.default.homeDirectoryForCurrentUser) {
+    self.homeURL = homeURL.standardizedFileURL
+  }
+
   func scan() -> [InstalledApplication] {
     let manager = FileManager()
-    let home = manager.homeDirectoryForCurrentUser
+    let home = homeURL
     let roots = [
       URL(fileURLWithPath: "/Applications"), home.appendingPathComponent("Applications"),
     ]
@@ -70,26 +77,59 @@ struct ApplicationScanner: Sendable {
     var bytes: Int64 = 0
     var errors: [String] = []
     var moves: [TrashMoveRecord] = []
-    let targets =
-      [StorageEntry(url: app.url, bytes: app.bytes, modifiedAt: nil)]
-      + (includeLeftovers
-        ? app.leftovers.filter { $0.confidence != .dangerous }.map(\.entry) : [])
-    for target in targets {
+    let appTarget = StorageEntry(url: app.url, bytes: app.bytes, modifiedAt: nil)
+    let leftovers = includeLeftovers ? app.leftovers.filter { $0.confidence != .dangerous } : []
+    let targets: [(StorageEntry, [URL])] =
+      [(appTarget, applicationRoots())]
+      + leftovers.map { ($0.entry, roots(for: $0.kind)) }
+    for (target, allowedRoots) in targets {
       do {
+        let validated = try PathSafetyPolicy.validate(
+          candidate: target.url, allowedRoots: allowedRoots)
         var trashedURL: NSURL?
-        try manager.trashItem(at: target.url, resultingItemURL: &trashedURL)
+        try manager.trashItem(at: validated, resultingItemURL: &trashedURL)
         moved += 1
         bytes += target.bytes
         if let trashedURL {
           moves.append(
             TrashMoveRecord(
-              originalPath: target.url.path, trashPath: (trashedURL as URL).path,
+              originalPath: validated.path, trashPath: (trashedURL as URL).path,
               bytes: target.bytes))
         }
       } catch { errors.append("\(target.url.lastPathComponent): \(error.localizedDescription)") }
     }
     return TrashResult(
       movedCount: moved, movedBytes: bytes, errors: errors, reportURL: nil, moves: moves)
+  }
+
+  private func applicationRoots() -> [URL] {
+    [URL(fileURLWithPath: "/Applications"), homeURL.appendingPathComponent("Applications")]
+  }
+
+  private func roots(for kind: ApplicationArtifactKind) -> [URL] {
+    switch kind {
+    case .support:
+      [
+        homeURL.appendingPathComponent("Library/Application Support"),
+        homeURL.appendingPathComponent("Library/Saved Application State"),
+      ]
+    case .cache:
+      [homeURL.appendingPathComponent("Library/Caches")]
+    case .preference:
+      [homeURL.appendingPathComponent("Library/Preferences")]
+    case .log:
+      [homeURL.appendingPathComponent("Library/Logs")]
+    case .container:
+      [homeURL.appendingPathComponent("Library/Containers")]
+    case .launchAgent:
+      [
+        homeURL.appendingPathComponent("Library/LaunchAgents"),
+        URL(fileURLWithPath: "/Library/LaunchAgents"),
+        URL(fileURLWithPath: "/Library/LaunchDaemons"),
+      ]
+    case .loginItem, .packageReceipt:
+      []
+    }
   }
 
   private func findLeftovers(
@@ -190,7 +230,7 @@ struct ApplicationScanner: Sendable {
       return ApplicationArtifact(
         entry: StorageEntry(url: url, bytes: size, modifiedAt: nil),
         kind: .packageReceipt, confidence: .dangerous,
-        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa")
+        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Toolbox không tự xóa")
     }
   }
 
@@ -227,7 +267,7 @@ struct ApplicationScanner: Sendable {
           url: database, bytes: (try? service.size(of: database)) ?? 0, modifiedAt: nil),
         kind: .loginItem, confidence: .dangerous,
         evidence:
-          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Diskora không xóa database hệ thống"
+          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Toolbox không xóa database hệ thống"
       )
     ]
   }
@@ -256,13 +296,16 @@ final class ApplicationViewModel: ObservableObject {
   @Published var errorMessage: String?
   private let scanner = ApplicationScanner()
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
 
   func scan() {
     isWorking = true
+    ScanActivityRegistry.shared.begin()
     status = "Đang phân tích ứng dụng và dữ liệu liên quan…"
     let scanner = self.scanner
     Task {
       applications = await Task.detached { scanner.scan() }.value
+      ScanActivityRegistry.shared.end()
       isWorking = false
       status = "Tìm thấy \(applications.count) ứng dụng"
     }
@@ -270,19 +313,27 @@ final class ApplicationViewModel: ObservableObject {
 
   func uninstall(_ app: InstalledApplication, includeLeftovers: Bool) {
     isWorking = true
+    let attemptedPaths =
+      [app.url.path]
+      + (includeLeftovers
+        ? app.leftovers.filter { $0.confidence != .dangerous }.map { $0.entry.url.path } : [])
     let scanner = self.scanner
     let history = self.history
+    let activityLedger = self.activityLedger
     Task {
       let result = await Task.detached {
         scanner.uninstall(app, includeLeftovers: includeLeftovers)
       }.value
       history.record(
         action: "Gỡ ứng dụng: \(app.name)",
-        paths: [app.url.path]
-          + (includeLeftovers
-            ? app.leftovers.filter { $0.confidence != .dangerous }.map { $0.entry.url.path } : []),
+        paths: attemptedPaths,
         bytes: result.movedBytes,
         recoverable: true, note: "Đã chuyển vào Trash", moves: result.moves)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, status: result.errors.isEmpty ? .succeeded : .failed,
+          paths: attemptedPaths, affectedBytes: result.movedBytes,
+          recoverable: !result.moves.isEmpty, errors: result.errors))
       errorMessage = result.errors.isEmpty ? nil : result.errors.joined(separator: "\n")
       isWorking = false
       scan()

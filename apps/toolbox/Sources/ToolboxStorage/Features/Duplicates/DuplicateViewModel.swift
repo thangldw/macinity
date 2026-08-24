@@ -17,6 +17,7 @@ final class DuplicateViewModel: ObservableObject {
 
   private let scanner = DuplicateScanner()
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
   private var task: Task<Void, Never>?
 
   var selectedFiles: [DuplicateFile] {
@@ -62,6 +63,7 @@ final class DuplicateViewModel: ObservableObject {
     selectedPaths = []
     status = "Đang nhóm theo kích thước và kiểm tra nội dung…"
     progress = DuplicateScanProgress(phase: .indexing, completed: 0, total: 0)
+    ScanActivityRegistry.shared.begin()
     let scanner = self.scanner
     let root = rootURL
     task = Task {
@@ -86,6 +88,7 @@ final class DuplicateViewModel: ObservableObject {
         errorMessage = error.localizedDescription
         status = "Không thể hoàn tất quá trình quét"
       }
+      ScanActivityRegistry.shared.end()
       isWorking = false
       progress = nil
     }
@@ -112,6 +115,7 @@ final class DuplicateViewModel: ObservableObject {
     }
     let originals = Dictionary(uniqueKeysWithValues: originalPairs)
     let history = self.history
+    let activityLedger = self.activityLedger
     Task {
       let result = await Task.detached {
         scanner.moveToTrash(files: files, retainedOriginalByPath: originals, within: root)
@@ -123,6 +127,11 @@ final class DuplicateViewModel: ObservableObject {
         recoverable: true,
         note: "Bản sao đã chuyển vào Trash; báo cáo: \(result.reportURL?.path ?? "không có")",
         moves: result.moves)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, status: result.errors.isEmpty ? .succeeded : .failed,
+          paths: files.map { $0.url.path }, affectedBytes: result.movedBytes,
+          recoverable: !result.moves.isEmpty, errors: result.errors))
       lastReportURL = result.reportURL
       if !result.errors.isEmpty { errorMessage = result.errors.joined(separator: "\n") }
       isWorking = false

@@ -1,4 +1,5 @@
 import Foundation
+import ToolboxCore
 
 enum CleanerError: LocalizedError {
   case unsafePath(String)
@@ -29,18 +30,16 @@ struct CleanerService: Sendable {
   }
 
   func url(for target: CleaningTarget) throws -> URL {
-    let safeHome = homeURL.resolvingSymlinksInPath().standardizedFileURL
-    let candidate =
-      homeURL
-      .appendingPathComponent(target.relativePath, isDirectory: true)
-      .resolvingSymlinksInPath()
-      .standardizedFileURL
-    let homePath = safeHome.path.hasSuffix("/") ? safeHome.path : safeHome.path + "/"
+    try validatedURL(for: target)
+  }
 
-    guard candidate.path.hasPrefix(homePath), candidate.path != safeHome.path else {
-      throw CleanerError.unsafePath(candidate.path)
+  func validatedURL(for target: CleaningTarget) throws -> URL {
+    let candidate = homeURL.appendingPathComponent(target.relativePath, isDirectory: true)
+    do {
+      return try PathSafetyPolicy.validate(candidate: candidate, allowedRoots: [homeURL])
+    } catch {
+      throw CleanerError.unsafePath(candidate.standardizedFileURL.path)
     }
-    return candidate
   }
 
   func scan(targets: [CleaningTarget]) async -> [ScanResult] {
@@ -120,19 +119,21 @@ struct CleanerService: Sendable {
       var moves: [TrashMoveRecord] = []
       for child in children {
         do {
-          let childBytes = (try? size(of: child)) ?? 0
+          let validatedChild = try PathSafetyPolicy.validate(
+            candidate: child, allowedRoots: [root])
+          let childBytes = (try? size(of: validatedChild)) ?? 0
           switch effectiveRemovalMethod {
           case .trash:
             var trashedURL: NSURL?
-            try manager.trashItem(at: child, resultingItemURL: &trashedURL)
+            try manager.trashItem(at: validatedChild, resultingItemURL: &trashedURL)
             if let trashedURL {
               moves.append(
                 TrashMoveRecord(
-                  originalPath: child.path, trashPath: (trashedURL as URL).path,
+                  originalPath: validatedChild.path, trashPath: (trashedURL as URL).path,
                   bytes: childBytes))
             }
           case .permanentForTesting:
-            try manager.removeItem(at: child)
+            try manager.removeItem(at: validatedChild)
           }
           removed += 1
         } catch {

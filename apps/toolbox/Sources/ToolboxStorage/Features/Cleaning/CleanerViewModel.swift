@@ -24,6 +24,7 @@ final class CleanerViewModel: ObservableObject {
 
   private let service: CleanerService
   private let history = HistoryStore()
+  private let activityLedger = ActivityLedger()
 
   init(service: CleanerService = CleanerService()) {
     self.service = service
@@ -41,6 +42,7 @@ final class CleanerViewModel: ObservableObject {
     if resetSummary { cleanupSummary = nil }
     errorDetails = nil
     status = "Đang quét…"
+    ScanActivityRegistry.shared.begin()
     let targets = rows.map(\.target)
 
     Task {
@@ -51,6 +53,7 @@ final class CleanerViewModel: ObservableObject {
         rows[index].issue = result.issue
       }
       hasScanned = true
+      ScanActivityRegistry.shared.end()
       isWorking = false
       status = "Đã quét xong • Đã chọn \(ByteCount.string(selectedBytes))"
     }
@@ -65,6 +68,7 @@ final class CleanerViewModel: ObservableObject {
     status = "Đang dọn dẹp…"
     let service = self.service
     let history = self.history
+    let activityLedger = self.activityLedger
 
     Task {
       var results: [CleanupResult] = []
@@ -78,6 +82,7 @@ final class CleanerViewModel: ObservableObject {
       }
       let moves = results.flatMap(\.moves)
       let fullyRecoverable = results.allSatisfy(\.recoverable)
+      let canonicalPaths = selected.compactMap { try? service.validatedURL(for: $0).path }
       cleanupSummary =
         fullyRecoverable
         ? "Đã chuyển \(ByteCount.string(affected)) từ \(removed) mục vào Trash."
@@ -86,12 +91,17 @@ final class CleanerViewModel: ObservableObject {
         errorDetails = errors.joined(separator: "\n")
       }
       history.record(
-        action: "Dọn nhanh", paths: selected.map(\.relativePath), bytes: affected,
+        action: "Dọn nhanh", paths: canonicalPaths, bytes: affected,
         recoverable: fullyRecoverable,
         note: fullyRecoverable
           ? "Đã chuyển nội dung đã xác nhận vào Trash"
           : "Đã xóa nội dung đã xác nhận; mục trong Trash không thể khôi phục",
         moves: moves)
+      try? activityLedger.append(
+        ActivityEntry(
+          kind: .cleanup, status: errors.isEmpty ? .succeeded : .failed,
+          paths: canonicalPaths, affectedBytes: affected, recoverable: fullyRecoverable,
+          errors: errors))
       isWorking = false
       scan(resetSummary: false)
     }

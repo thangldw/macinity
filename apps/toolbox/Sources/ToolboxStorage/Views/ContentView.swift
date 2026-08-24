@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 import ToolboxCore
 
@@ -32,6 +33,7 @@ public struct StorageModuleSummary: Sendable, Equatable {
 
 public struct StorageModuleView: View {
   private let destination: StorageDestination
+  private let focusPath: String?
   @State private var workspaceSection: StorageWorkspaceSection = .cleanup
   @StateObject private var cleaner = CleanerViewModel()
   @StateObject private var analyzer = AnalyzerViewModel()
@@ -41,8 +43,9 @@ public struct StorageModuleView: View {
   @StateObject private var applications = ApplicationViewModel()
   @StateObject private var history = HistoryViewModel()
 
-  public init(destination: StorageDestination) {
+  public init(destination: StorageDestination, focusPath: String? = nil) {
     self.destination = destination
+    self.focusPath = focusPath
   }
 
   public var body: some View {
@@ -54,6 +57,27 @@ public struct StorageModuleView: View {
     switch destination {
     case .storage:
       VStack(spacing: 0) {
+        if let focusPath {
+          HStack(spacing: 10) {
+            Label(L10n.text("Evidence path"), systemImage: "scope")
+              .fontWeight(.semibold)
+            Text(focusPath)
+              .font(.caption.monospaced())
+              .lineLimit(1)
+              .truncationMode(.middle)
+              .textSelection(.enabled)
+            Spacer()
+            Text(L10n.text("Not selected or cleaned automatically."))
+              .font(.caption)
+              .foregroundStyle(.secondary)
+            Button(L10n.text("Show in Finder")) {
+              NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: focusPath)])
+            }
+          }
+          .padding(.horizontal, 18)
+          .padding(.vertical, 10)
+          .background(Color.orange.opacity(0.08))
+        }
         Picker(L10n.text("Công cụ lưu trữ"), selection: $workspaceSection) {
           ForEach(StorageWorkspaceSection.allCases) { section in
             Text(section.title).tag(section)
@@ -64,6 +88,9 @@ public struct StorageModuleView: View {
 
         Divider()
         storageWorkspace
+      }
+      .onAppear {
+        if focusPath != nil { workspaceSection = .analyzer }
       }
     case .projects:
       ProjectsView()
