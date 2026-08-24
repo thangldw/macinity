@@ -229,6 +229,32 @@ do {
     conflictDestinationData == Data("existing".utf8),
     "Recovery đã thay đổi destination xung đột")
 
+  for drill in 1...5 {
+    let drillSource = temporary.appendingPathComponent("RestoreDrills/Trash/item-\(drill).txt")
+    let drillDestination = temporary.appendingPathComponent(
+      "RestoreDrills/Original/item-\(drill).txt")
+    try manager.createDirectory(
+      at: drillSource.deletingLastPathComponent(), withIntermediateDirectories: true)
+    let drillData = Data("restore-drill-\(drill)".utf8)
+    try drillData.write(to: drillSource)
+
+    let drillResult = UnifiedRecoveryAdapter(
+      allowedTrashRoots: [drillSource.deletingLastPathComponent()],
+      allowedDestinationRoots: [drillDestination.deletingLastPathComponent()]
+    ).restore(
+      RecoveryItem(
+        id: UUID(), originalPath: drillDestination.path, trashPath: drillSource.path,
+        bytes: Int64(drillData.count)))
+    require(drillResult.restoredCount == 1, "Restore drill \(drill) không khôi phục đúng")
+    let restoredDrillData = try Data(contentsOf: drillDestination)
+    require(
+      restoredDrillData == drillData,
+      "Restore drill \(drill) không giữ nguyên dữ liệu")
+    require(
+      !manager.fileExists(atPath: drillSource.path),
+      "Restore drill \(drill) còn bản sao trong Trash fixture")
+  }
+
   let migrationRoot = temporary.appendingPathComponent("LegacyMigration")
   let legacyDiskora = migrationRoot.appendingPathComponent("Diskora")
   let migratedToolbox = migrationRoot.appendingPathComponent("Toolbox")
@@ -313,7 +339,8 @@ do {
     symlinkReport.artifacts.first?.safety == .protected,
     "Project scan phải chặn symlink artifact vượt khỏi root")
 
-  print("PASS: cleaner, storage analyzer, project, duplicate and similar-photo smoke tests")
+  print(
+    "PASS: cleaner, storage analyzer, project, duplicate, similar-photo and 5 restore drills")
 } catch {
   FileHandle.standardError.write(Data("FAIL: \(error.localizedDescription)\n".utf8))
   exit(1)
