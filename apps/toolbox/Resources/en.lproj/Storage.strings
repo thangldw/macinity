@@ -227,6 +227,35 @@
 "Được tham chiếu bởi %lld dự án" = "Referenced by %lld projects";
 "Ảnh tương tự không phải bản sao tuyệt đối. Hãy kiểm tra kỹ trước khi chuyển %lld ảnh vào Trash." = "Similar photos are not exact duplicates. Review carefully before moving %lld photos to Trash.";
 
+/* Projects */
+"Dự án" = "Projects";
+"Artifact có thể tạo lại, chỉ trong project root bạn chọn" = "Regenerable artifacts, only inside project roots you select";
+"có thể xem xét" = "reviewable";
+"Tất cả" = "All";
+"An toàn" = "Safe";
+"Cần xem lại" = "Review";
+"Được bảo vệ" = "Protected";
+"Chưa chọn project root" = "No Project Root Selected";
+"Toolbox chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Toolbox scans only folders you select and offers artifacts only when ecosystem markers are present.";
+"Chọn project…" = "Choose Projects…";
+"Tất cả hệ sinh thái" = "All Ecosystems";
+"Hệ sinh thái" = "Ecosystem";
+"Mức an toàn" = "Safety";
+"Tìm đường dẫn" = "Search Paths";
+"Sẵn sàng quét" = "Ready to Scan";
+"Không có artifact phù hợp" = "No Matching Artifacts";
+"Toolbox sẽ nhận diện output có thể tạo lại từ marker dự án." = "Toolbox identifies regenerable output from project markers.";
+"Không có source, manifest, lockfile hoặc thư mục chưa biết nào được đề xuất." = "No source, manifest, lockfile, or unknown folder is offered.";
+"Thêm project…" = "Add Projects…";
+"Chuyển vào Trash…" = "Move to Trash…";
+"Chuyển artifact đã chọn vào Trash?" = "Move Selected Artifacts to Trash?";
+"Project source, manifest, lockfile và .git không được chọn." = "Project source, manifests, lockfiles, and .git are never selected.";
+"Chọn project root" = "Choose Project Roots";
+"Chọn project root để bắt đầu." = "Choose project roots to begin.";
+"Đang tìm artifact có thể tạo lại…" = "Finding regenerable artifacts…";
+"Đang chuyển artifact đã xác nhận vào Trash…" = "Moving confirmed artifacts to Trash…";
+"Artifact vượt khỏi project root đã chọn nên bị chặn." = "The artifact escapes the selected project root and was blocked.";
+
 /* Dynamic-message fragments; longest matches are applied first. */
 "Không thể" = "Unable to";
 "Đã chuyển" = "Moved";

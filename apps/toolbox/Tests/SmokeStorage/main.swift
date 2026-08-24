@@ -4,6 +4,17 @@ import Foundation
   import ToolboxStorage
 #endif
 
+func makeProjectFixture(files: [String], under root: URL) throws -> URL {
+  let project = root.appendingPathComponent("project")
+  for relativePath in files {
+    let file = project.appendingPathComponent(relativePath)
+    try FileManager.default.createDirectory(
+      at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
+    try Data(relativePath.utf8).write(to: file)
+  }
+  return project
+}
+
 func require(_ condition: @autoclosure () -> Bool, _ message: String) {
   guard condition() else {
     FileHandle.standardError.write(Data("FAIL: \(message)\n".utf8))
@@ -148,7 +159,46 @@ do {
   require(restored.restoredCount == 1, "Undo Center không khôi phục đúng mục")
   require(manager.fileExists(atPath: undoOriginal.path), "Undo Center không trả mục về vị trí gốc")
 
-  print("PASS: cleaner, storage analyzer, duplicate and similar-photo smoke tests")
+  let project = try makeProjectFixture(
+    files: ["package.json", "package-lock.json", "node_modules/pkg/index.js"],
+    under: temporary.appendingPathComponent("Projects"))
+  let projectReport = await ProjectScanner().scan(roots: [project])
+  require(projectReport.artifacts.count == 1, "Project scan phải chỉ nhận diện artifact đã biết")
+  require(
+    projectReport.artifacts[0].artifactURL.lastPathComponent == "node_modules",
+    "Project scan không nhận diện node_modules")
+  require(
+    !projectReport.artifacts.contains { $0.artifactURL.lastPathComponent == "package-lock.json" },
+    "Project scan không được đề xuất lockfile")
+  let projectCleanup = ProjectCleanupService(removalMethod: .permanentForTesting)
+    .moveToTrash(projectReport.artifacts[0], allowedRoots: [project])
+  require(projectCleanup.error == nil, "Project cleanup không xử lý artifact đã xác nhận")
+  require(
+    !manager.fileExists(atPath: project.appendingPathComponent("node_modules").path),
+    "Project cleanup chưa xóa artifact trong chế độ test")
+  require(
+    manager.fileExists(atPath: project.appendingPathComponent("package-lock.json").path),
+    "Project cleanup đã xóa nhầm lockfile")
+
+  let unknownProject = try makeProjectFixture(
+    files: ["src/main.swift", "mystery-cache/blob"],
+    under: temporary.appendingPathComponent("UnknownProjects"))
+  let unknownReport = await ProjectScanner().scan(roots: [unknownProject])
+  require(unknownReport.artifacts.isEmpty, "Project scan không được suy đoán artifact chưa biết")
+
+  let symlinkProject = try makeProjectFixture(
+    files: ["package.json"], under: temporary.appendingPathComponent("SymlinkProjects"))
+  let outsideArtifact = temporary.appendingPathComponent("OutsideArtifact")
+  try manager.createDirectory(at: outsideArtifact, withIntermediateDirectories: true)
+  try manager.createSymbolicLink(
+    at: symlinkProject.appendingPathComponent("node_modules"),
+    withDestinationURL: outsideArtifact)
+  let symlinkReport = await ProjectScanner().scan(roots: [symlinkProject])
+  require(
+    symlinkReport.artifacts.first?.safety == .protected,
+    "Project scan phải chặn symlink artifact vượt khỏi root")
+
+  print("PASS: cleaner, storage analyzer, project, duplicate and similar-photo smoke tests")
 } catch {
   FileHandle.standardError.write(Data("FAIL: \(error.localizedDescription)\n".utf8))
   exit(1)

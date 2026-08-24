@@ -25,9 +25,12 @@ swiftc \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Storage/StorageAnalyzer.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Duplicates/DuplicateScanner.swift" \
   "$PROJECT_DIR/Sources/ToolboxStorage/Features/Photos/SimilarPhotoScanner.swift" \
+  "$PROJECT_DIR/Sources/ToolboxStorage/Features/Projects/ProjectModels.swift" \
+  "$PROJECT_DIR/Sources/ToolboxStorage/Features/Projects/ProjectScanner.swift" \
+  "$PROJECT_DIR/Sources/ToolboxStorage/Features/Projects/ProjectCleanupService.swift" \
   "$PROJECT_DIR/Tests/SmokeStorage/main.swift" \
   -o "$BUILD_DIR/toolbox-storage-smoke"
 
 DYLD_LIBRARY_PATH="$BUILD_DIR" \
-  MAC_CLEANER_TEST_IMAGE="$PROJECT_DIR/../diskora/Resources/AppIcon-1024.png" \
+  MAC_CLEANER_TEST_IMAGE="$PROJECT_DIR/Resources/AppIcon-1024.png" \
   "$BUILD_DIR/toolbox-storage-smoke"

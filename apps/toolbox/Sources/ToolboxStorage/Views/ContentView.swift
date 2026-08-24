@@ -66,7 +66,7 @@ public struct StorageModuleView: View {
         storageWorkspace
       }
     case .projects:
-      DeveloperStorageView(model: analyzer)
+      ProjectsView()
     case .applications:
       ApplicationsView(model: applications)
     case .recovery:

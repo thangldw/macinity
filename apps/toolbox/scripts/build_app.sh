@@ -21,6 +21,9 @@ cp "$PROJECT_DIR/Resources/AppIcon.icns" "$APP_DIR/Contents/Resources/AppIcon.ic
 for localization in "$PROJECT_DIR"/Resources/*.lproj; do
   [[ -d "$localization" ]] && cp -R "$localization" "$APP_DIR/Contents/Resources/"
 done
+"$PROJECT_DIR/scripts/merge_localizations.swift" \
+  "$PROJECT_DIR/Resources/en.lproj" \
+  "$APP_DIR/Contents/Resources/en.lproj/Localizable.strings"
 chmod +x "$APP_DIR/Contents/MacOS/Toolbox"
 
 codesign --force --deep --options runtime --timestamp=none --sign - "$APP_DIR"
