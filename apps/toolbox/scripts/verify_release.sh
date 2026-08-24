@@ -20,6 +20,25 @@ if [[ -f "$dmg" || -f "$checksum" ]]; then
   test -f "$dmg"
   test -f "$checksum"
   (cd "$(dirname "$dmg")" && shasum -a 256 -c "$(basename "$checksum")")
+
+  mount_dir="$(mktemp -d -t toolbox-verify-dmg)"
+  mounted=0
+  cleanup_mount() {
+    if [[ "$mounted" -eq 1 ]]; then
+      hdiutil detach "$mount_dir" -quiet || true
+    fi
+    rm -rf "$mount_dir"
+  }
+  trap cleanup_mount EXIT
+  hdiutil attach "$dmg" -nobrowse -readonly -mountpoint "$mount_dir" -quiet
+  mounted=1
+  "$project_dir/Tests/Distribution/release_contract.sh" "$mount_dir/Toolbox.app"
+  test -L "$mount_dir/Applications"
+  test "$(readlink "$mount_dir/Applications")" = "/Applications"
+  hdiutil detach "$mount_dir" -quiet
+  mounted=0
+  rm -rf "$mount_dir"
+  trap - EXIT
 fi
 
 if [[ "$allow_adhoc" -eq 1 ]]; then
