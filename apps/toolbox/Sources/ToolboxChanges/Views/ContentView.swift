@@ -44,7 +44,7 @@ public struct ChangeTimelineModuleView: View {
       Group {
         switch selection {
         case .overview:
-          WatchInstallationView(model: model)
+          InstallTraceDropView(model: model)
         case .changes:
           ChangesView(model: model)
         case .history:

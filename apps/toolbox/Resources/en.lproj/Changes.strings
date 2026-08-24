@@ -93,6 +93,33 @@
 "Snapshot ban đầu có %lld mục. FSEvents đang ghi thay đổi sâu; hãy hoàn tất thao tác trước khi tạo snapshot thứ hai." = "The initial snapshot contains %lld items. FSEvents is recording deep changes; finish the operation before taking the second snapshot.";
 "…và %lld đường dẫn khác" = "…and %lld other paths";
 
+/* Install Trace */
+"Thả installer, chụp trước/sau và xem bằng chứng thay đổi" = "Drop an installer, capture before and after, and review change evidence";
+"Thả .dmg, .pkg hoặc .app vào đây" = "Drop a .dmg, .pkg, or .app here";
+"Toolbox chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Toolbox reads only the file type and path; the installer opens only after the baseline is saved.";
+"Chọn installer…" = "Choose Installer…";
+"Bỏ chọn" = "Clear";
+"Lưu baseline và mở installer" = "Save Baseline and Open Installer";
+"Đang theo dõi installer" = "Watching Installer";
+"Coverage giảm vì Toolbox không chạy trong một phần của phiên." = "Coverage is reduced because Toolbox was not running for part of the session.";
+"Install Trace bị gián đoạn" = "Install Trace Was Interrupted";
+"Baseline vẫn còn nguyên. Có thể tiếp tục với coverage giảm hoặc bỏ phiên này." = "The baseline is intact. Continue with reduced coverage or discard this trace.";
+"Tiếp tục với coverage giảm" = "Continue with Reduced Coverage";
+"Bỏ phiên" = "Discard Trace";
+"Snapshot và FSEvents chỉ lưu metadata cục bộ. Toolbox không mount, execute hoặc bypass Gatekeeper." = "Snapshots and FSEvents store local metadata only. Toolbox does not mount, execute, or bypass Gatekeeper.";
+"Chọn DMG, PKG hoặc ứng dụng" = "Choose a DMG, PKG, or Application";
+"Toolbox chỉ nhận .dmg, .pkg hoặc .app" = "Toolbox accepts only .dmg, .pkg, or .app";
+"Install Trace đã lưu" = "Install Trace saved";
+"Một Install Trace đang hoạt động." = "An Install Trace is already active.";
+"Không có Install Trace đang hoạt động." = "No Install Trace is active.";
+"Đang chụp trạng thái trước khi mở installer…" = "Capturing the state before opening the installer…";
+"Baseline đã lưu. macOS có thể mở installer an toàn." = "The baseline is saved. macOS can now open the installer.";
+"Đã tiếp tục theo dõi; thời gian app không chạy có coverage giảm." = "Tracing resumed; coverage is reduced while the app was not running.";
+"Đang chụp trạng thái sau thay đổi…" = "Capturing the state after changes…";
+"Đã hủy Install Trace." = "Install Trace cancelled.";
+"Minh bạch về dữ liệu Toolbox đọc, lưu và không thể quan sát." = "A transparent view of what Toolbox reads, stores, and cannot observe.";
+"Toolbox đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Toolbox presents technical evidence; it does not declare an application malicious.";
+
 /* Dynamic-message fragments; longest matches are applied first. */
 "Không thể" = "Unable to";
 "Đã phát hiện" = "Detected";

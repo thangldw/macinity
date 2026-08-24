@@ -24,6 +24,7 @@ public enum L10n {
     "LaunchDaemon mới có thể chạy nền với quyền hệ thống/root.",
     "Thành phần persistence có thể tự chạy khi đăng nhập hoặc trong nền.",
     "Thành phần đặc quyền hoặc system extension có thể chạy ngoài tiến trình ứng dụng.",
+    "Toolbox chỉ nhận .dmg, .pkg hoặc .app", "Install Trace đã lưu",
     "Không thể", "Đã phát hiện", "Đã chuyển", "Đã khôi phục", "Đã quét xong", "Đã quét",
     "Đã xử lý", "Đã bật", "Đã tắt", "Đã chọn", "Đã lưu", "Đã hủy", "Đang chụp",
     "Đang phân tích", "Đang chạy", "Không phát hiện", "Tìm thấy", "Có thể giải phóng",

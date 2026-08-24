@@ -5,6 +5,7 @@ struct SnapshotStore: Sendable {
   private let directory: URL
   private let sessionsURL: URL
   private let activeURL: URL
+  private let activeTraceMetadataURL: URL
   private let baselineURL: URL
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
@@ -13,11 +14,14 @@ struct SnapshotStore: Sendable {
     self.directory = directory
     sessionsURL = directory.appendingPathComponent("sessions.json")
     activeURL = directory.appendingPathComponent("active-snapshot.json")
+    activeTraceMetadataURL = directory.appendingPathComponent("active-trace-metadata.json")
     baselineURL = directory.appendingPathComponent("trusted-baseline.json")
     encoder = JSONEncoder()
     encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
     decoder = JSONDecoder()
   }
+
+  var directoryURL: URL { directory }
 
   func loadSessions() -> [WatchSession] {
     guard let data = try? Data(contentsOf: sessionsURL) else { return [] }
@@ -42,6 +46,21 @@ struct SnapshotStore: Sendable {
   func clearActiveSnapshot() throws {
     guard FileManager.default.fileExists(atPath: activeURL.path) else { return }
     try FileManager.default.removeItem(at: activeURL)
+  }
+
+  func loadActiveTraceMetadata() -> InstallerMetadata? {
+    guard let data = try? Data(contentsOf: activeTraceMetadataURL) else { return nil }
+    return try? decoder.decode(InstallerMetadata.self, from: data)
+  }
+
+  func saveActiveTraceMetadata(_ metadata: InstallerMetadata) throws {
+    try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+    try encoder.encode(metadata).write(to: activeTraceMetadataURL, options: .atomic)
+  }
+
+  func clearActiveTraceMetadata() throws {
+    guard FileManager.default.fileExists(atPath: activeTraceMetadataURL.path) else { return }
+    try FileManager.default.removeItem(at: activeTraceMetadataURL)
   }
 
   func loadBaseline() -> SystemSnapshot? {

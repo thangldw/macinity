@@ -33,7 +33,13 @@ final class ChangeoraViewModel: ObservableObject {
     activeSnapshot = store.loadActiveSnapshot()
     baselineSnapshot = store.loadBaseline()
     selectedSessionID = sessions.first?.id
-    if activeSnapshot != nil { eventJournal.start(paths: scanner.monitoredRoots) }
+  }
+
+  func reloadFromStore() {
+    sessions = store.loadSessions().sorted { $0.finishedAt > $1.finishedAt }
+    activeSnapshot = store.loadActiveSnapshot()
+    baselineSnapshot = store.loadBaseline()
+    selectedSessionID = sessions.first?.id
   }
 
   var selectedSession: WatchSession? {

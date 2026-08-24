@@ -143,7 +143,50 @@ do {
       && eventComparison.changes[0].riskReason?.contains("FSEvents") == true,
     "FSEvents did not preserve deep change evidence")
 
-  print("PASS: snapshot scan, diff, risk classification and persistence")
+  let tracePreview = await MainActor.run { InstallTraceCoordinator.previewOnly() }
+  let acceptedInstaller = try await MainActor.run {
+    try tracePreview.accept(url: URL(fileURLWithPath: "/tmp/Demo.DMG"))
+  }
+  try expect(
+    acceptedInstaller.kind == .diskImage,
+    "Install Trace did not accept a DMG")
+  do {
+    _ = try await MainActor.run {
+      try tracePreview.accept(url: URL(fileURLWithPath: "/tmp/Demo.zip"))
+    }
+    try expect(false, "Install Trace accepted an unsupported archive")
+  } catch InstallTraceError.unsupportedType {
+    // Expected.
+  }
+
+  let interruptedDirectory = root.appendingPathComponent("InterruptedTrace")
+  let interruptedStore = SnapshotStore(directory: interruptedDirectory)
+  try interruptedStore.saveActiveSnapshot(SystemSnapshot(name: "before", items: []))
+  let interruptedState = await MainActor.run {
+    InstallTraceCoordinator(store: interruptedStore).recoveryState
+  }
+  try expect(
+    interruptedState == .interrupted(reducedCoverage: true),
+    "interrupted trace must report reduced coverage")
+
+  let lifecycleDirectory = root.appendingPathComponent("TraceLifecycle")
+  let lifecycleStore = SnapshotStore(directory: lifecycleDirectory)
+  let lifecycleScanner = SystemSnapshotScanner(
+    configuration: SnapshotConfiguration(locations: [], maximumItems: 10))
+  let lifecycleCoordinator = await MainActor.run {
+    InstallTraceCoordinator(scanner: lifecycleScanner, store: lifecycleStore)
+  }
+  let lifecycleMetadata = try await MainActor.run {
+    try lifecycleCoordinator.accept(url: URL(fileURLWithPath: "/tmp/Lifecycle.pkg"))
+  }
+  try await lifecycleCoordinator.start(metadata: lifecycleMetadata)
+  try expect(lifecycleStore.loadActiveSnapshot() != nil, "trace baseline was not persisted")
+  let lifecycleSession = try await lifecycleCoordinator.finish(title: "Lifecycle")
+  try expect(lifecycleSession.title == "Lifecycle", "trace session title was not preserved")
+  try expect(lifecycleStore.loadActiveSnapshot() == nil, "finished trace kept active baseline")
+  try expect(lifecycleStore.loadSessions().count == 1, "finished trace was not persisted")
+
+  print("PASS: snapshot scan, diff, install trace, risk classification and persistence")
 } catch {
   fputs("FAIL: \(error)\n", stderr)
   exit(1)
