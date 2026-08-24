@@ -1,0 +1,21 @@
+[
+  {
+    "action": "Dọn cache",
+    "bytes": 42,
+    "date": 0,
+    "id": "11111111-1111-1111-1111-111111111111",
+    "moves": [
+      {
+        "bytes": 42,
+        "id": "11111111-1111-1111-1111-111111111112",
+        "originalPath": "/tmp/cache",
+        "trashPath": "/tmp/.Trash/cache"
+      }
+    ],
+    "note": "Legacy cleanup",
+    "paths": [
+      "/tmp/cache"
+    ],
+    "recoverable": true
+  }
+]

@@ -23,7 +23,8 @@ let package = Package(
     .executableTarget(
       name: "SmokeCore", dependencies: ["ToolboxCore"], path: "Tests/SmokeCore"),
     .testTarget(
-      name: "ToolboxCoreTests", dependencies: ["ToolboxCore"], path: "Tests/ToolboxCoreTests"),
+      name: "ToolboxCoreTests", dependencies: ["ToolboxCore"], path: "Tests/ToolboxCoreTests",
+      resources: [.copy("Fixtures")]),
     .testTarget(
       name: "ToolboxStorageTests", dependencies: ["ToolboxStorage"],
       path: "Tests/ToolboxStorageTests"),

@@ -74,4 +74,63 @@ do {
     "corrupt evidence should be quarantined")
 }
 
-print("PASS: ToolboxCore path safety and evidence contracts")
+let migrationRoot = fixtureRoot.appendingPathComponent("migration")
+let legacyDiskora = migrationRoot.appendingPathComponent("Diskora")
+let legacyChangeora = migrationRoot.appendingPathComponent("Changeora")
+let migratedToolbox = migrationRoot.appendingPathComponent("Toolbox")
+try manager.createDirectory(at: legacyDiskora, withIntermediateDirectories: true)
+try manager.createDirectory(at: legacyChangeora, withIntermediateDirectories: true)
+let legacyHistory = legacyDiskora.appendingPathComponent("history.json")
+let legacySessions = legacyChangeora.appendingPathComponent("sessions.json")
+try Data(
+  #"[{"action":"Cleanup","bytes":42,"date":0,"id":"11111111-1111-1111-1111-111111111111","note":"legacy","paths":["/tmp/cache"],"recoverable":true}]"#
+    .utf8
+).write(to: legacyHistory)
+try Data(
+  #"[{"comparison":{"after":{"createdAt":60,"id":"22222222-2222-2222-2222-222222222224","inaccessiblePaths":[],"items":[],"name":"after","truncated":false},"before":{"createdAt":0,"id":"22222222-2222-2222-2222-222222222223","inaccessiblePaths":[],"items":[],"name":"before","truncated":false},"changes":[],"id":"22222222-2222-2222-2222-222222222222"},"events":[],"finishedAt":60,"id":"22222222-2222-2222-2222-222222222221","startedAt":0,"title":"Legacy trace"}]"#
+    .utf8
+).write(to: legacySessions)
+let historyBeforeMigration = try Data(contentsOf: legacyHistory)
+let sessionsBeforeMigration = try Data(contentsOf: legacySessions)
+let migration = MigrationService(legacyRoot: migrationRoot, toolboxDirectory: migratedToolbox)
+let migrationAssessment = migration.inspect()
+require(migrationAssessment.cleanupEntriesAvailable == 1, "migration should inspect cleanup data")
+require(migrationAssessment.traceSessionsAvailable == 1, "migration should inspect trace data")
+let firstMigration = try migration.migrate()
+let secondMigration = try migration.migrate()
+require(firstMigration == secondMigration, "migration should be idempotent")
+let historyAfterMigration = try Data(contentsOf: legacyHistory)
+let sessionsAfterMigration = try Data(contentsOf: legacySessions)
+let migrationActivities = try ActivityLedger(directory: migratedToolbox).load()
+require(
+  historyAfterMigration == historyBeforeMigration,
+  "migration should preserve Diskora data")
+require(
+  sessionsAfterMigration == sessionsBeforeMigration,
+  "migration should preserve Changeora data")
+require(
+  migrationActivities.filter { $0.kind == .migration }.count == 1,
+  "migration should record one activity")
+
+let corruptMigrationRoot = fixtureRoot.appendingPathComponent("corrupt-migration")
+let corruptDiskora = corruptMigrationRoot.appendingPathComponent("Diskora")
+let corruptToolbox = corruptMigrationRoot.appendingPathComponent("Toolbox")
+try manager.createDirectory(at: corruptDiskora, withIntermediateDirectories: true)
+let corruptHistory = corruptDiskora.appendingPathComponent("history.json")
+let corruptSource = Data("{".utf8)
+try corruptSource.write(to: corruptHistory)
+do {
+  _ = try MigrationService(
+    legacyRoot: corruptMigrationRoot, toolboxDirectory: corruptToolbox
+  ).migrate()
+  require(false, "corrupt migration source should fail")
+} catch {
+  require(
+    !manager.fileExists(
+      atPath: corruptToolbox.appendingPathComponent("migration-v1.json").path),
+    "failed migration should not write a completion marker")
+  let preservedCorruptSource = try Data(contentsOf: corruptHistory)
+  require(preservedCorruptSource == corruptSource, "failed migration should preserve its source")
+}
+
+print("PASS: ToolboxCore path safety, evidence and migration contracts")

@@ -39,8 +39,10 @@ enum ToolboxSection: String, CaseIterable, Identifiable {
 struct ToolboxShellView: View {
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
+  @AppStorage("toolbox.onboarding.completed.v2") private var onboardingCompleted = false
   @SceneStorage("toolbox.selectedSection") private var selectedSectionRaw =
     ToolboxSection.home.rawValue
+  @State private var showsOnboarding = false
 
   private var selection: Binding<ToolboxSection?> {
     Binding(
@@ -72,6 +74,16 @@ struct ToolboxShellView: View {
       AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale
     )
     .frame(minWidth: 960, minHeight: 640)
+    .task {
+      if !onboardingCompleted { showsOnboarding = true }
+    }
+    .sheet(isPresented: $showsOnboarding) {
+      OnboardingView {
+        onboardingCompleted = true
+        showsOnboarding = false
+      }
+      .interactiveDismissDisabled()
+    }
   }
 
   @ViewBuilder

@@ -1,4 +1,5 @@
 import Foundation
+import ToolboxCore
 
 #if canImport(ToolboxStorage)
   import ToolboxStorage
@@ -158,6 +159,25 @@ do {
   let restored = history.restore(entryID: undoEntry.id)
   require(restored.restoredCount == 1, "Undo Center không khôi phục đúng mục")
   require(manager.fileExists(atPath: undoOriginal.path), "Undo Center không trả mục về vị trí gốc")
+
+  let migrationRoot = temporary.appendingPathComponent("LegacyMigration")
+  let legacyDiskora = migrationRoot.appendingPathComponent("Diskora")
+  let migratedToolbox = migrationRoot.appendingPathComponent("Toolbox")
+  try manager.createDirectory(at: legacyDiskora, withIntermediateDirectories: true)
+  let legacyEntry = CleanupHistoryEntry(
+    id: UUID(), date: Date(timeIntervalSince1970: 1), action: "Legacy cleanup",
+    paths: ["/tmp/legacy-cache"], bytes: 128, recoverable: false, note: "legacy",
+    moves: nil)
+  try JSONEncoder().encode([legacyEntry]).write(
+    to: legacyDiskora.appendingPathComponent("history.json"))
+  let migrationReport = try MigrationService(
+    legacyRoot: migrationRoot, toolboxDirectory: migratedToolbox
+  ).migrate()
+  let migratedHistory = HistoryStore(directory: migratedToolbox).load()
+  require(migrationReport.cleanupEntriesImported == 1, "Sai số bản ghi Diskora đã migrate")
+  require(
+    migratedHistory.first?.action == "Legacy cleanup",
+    "Diskora history không đọc được sau migration")
 
   let project = try makeProjectFixture(
     files: ["package.json", "package-lock.json", "node_modules/pkg/index.js"],

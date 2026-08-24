@@ -1,0 +1,29 @@
+[
+  {
+    "comparison": {
+      "after": {
+        "createdAt": 60,
+        "id": "22222222-2222-2222-2222-222222222224",
+        "inaccessiblePaths": [],
+        "items": [],
+        "name": "after",
+        "truncated": false
+      },
+      "before": {
+        "createdAt": 0,
+        "id": "22222222-2222-2222-2222-222222222223",
+        "inaccessiblePaths": [],
+        "items": [],
+        "name": "before",
+        "truncated": false
+      },
+      "changes": [],
+      "id": "22222222-2222-2222-2222-222222222222"
+    },
+    "events": [],
+    "finishedAt": 60,
+    "id": "22222222-2222-2222-2222-222222222221",
+    "startedAt": 0,
+    "title": "Legacy trace"
+  }
+]

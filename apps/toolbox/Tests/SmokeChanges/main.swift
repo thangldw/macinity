@@ -1,4 +1,5 @@
 import Foundation
+import ToolboxCore
 
 #if canImport(ToolboxChanges)
   import ToolboxChanges
@@ -185,6 +186,35 @@ do {
   try expect(lifecycleSession.title == "Lifecycle", "trace session title was not preserved")
   try expect(lifecycleStore.loadActiveSnapshot() == nil, "finished trace kept active baseline")
   try expect(lifecycleStore.loadSessions().count == 1, "finished trace was not persisted")
+
+  let migrationRoot = root.appendingPathComponent("LegacyMigration")
+  let legacyChangeora = migrationRoot.appendingPathComponent("Changeora")
+  let migratedToolbox = migrationRoot.appendingPathComponent("Toolbox")
+  try manager.createDirectory(at: legacyChangeora, withIntermediateDirectories: true)
+  let legacySession = WatchSession(
+    title: "Legacy trace", startedAt: before.createdAt, finishedAt: after.createdAt,
+    comparison: compacted)
+  let encoder = JSONEncoder()
+  try encoder.encode([legacySession]).write(
+    to: legacyChangeora.appendingPathComponent("sessions.json"))
+  try encoder.encode(before).write(
+    to: legacyChangeora.appendingPathComponent("active-snapshot.json"))
+  try encoder.encode(before).write(
+    to: legacyChangeora.appendingPathComponent("trusted-baseline.json"))
+  let migrationReport = try MigrationService(
+    legacyRoot: migrationRoot, toolboxDirectory: migratedToolbox
+  ).migrate()
+  let migratedStore = SnapshotStore(directory: migratedToolbox)
+  try expect(migrationReport.traceSessionsImported == 1, "trace migration count was wrong")
+  try expect(
+    migratedStore.loadSessions().first?.title == "Legacy trace",
+    "Changeora session was not readable after migration")
+  try expect(
+    migratedStore.loadActiveSnapshot()?.name == before.name,
+    "active Changeora snapshot was not readable after migration")
+  try expect(
+    migratedStore.loadBaseline()?.name == before.name,
+    "trusted Changeora baseline was not readable after migration")
 
   print("PASS: snapshot scan, diff, install trace, risk classification and persistence")
 } catch {
