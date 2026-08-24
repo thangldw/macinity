@@ -51,7 +51,7 @@ docs/launch/product-hunt.md
 - Create: `apps/toolbox/scripts/build_universal.sh`
 - Create: `apps/toolbox/scripts/verify_release.sh`
 - Modify: `apps/toolbox/scripts/build_app.sh`
-- Create: `apps/toolbox/Tests/Release/release_contract.sh`
+- Create: `apps/toolbox/Tests/Distribution/release_contract.sh`
 
 **Interfaces:**
 - Produces: `apps/toolbox/dist/Toolbox.app`
@@ -73,7 +73,7 @@ codesign --verify --deep --strict "$app"
 
 - [ ] **Step 2: Run the contract against the current single-architecture build**
 
-Run: `cd apps/toolbox && ./scripts/build_app.sh && bash Tests/Release/release_contract.sh dist/Toolbox.app`
+Run: `cd apps/toolbox && ./scripts/build_app.sh && bash Tests/Distribution/release_contract.sh dist/Toolbox.app`
 
 Expected: FAIL on the missing architecture.
 
@@ -83,14 +83,14 @@ Expected: FAIL on the missing architecture.
 
 - [ ] **Step 4: Verify the local ad-hoc universal build**
 
-Run: `cd apps/toolbox && ./scripts/build_universal.sh && bash Tests/Release/release_contract.sh dist/Toolbox.app`
+Run: `cd apps/toolbox && ./scripts/build_universal.sh && bash Tests/Distribution/release_contract.sh dist/Toolbox.app`
 
 Expected: PASS.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add apps/toolbox/scripts apps/toolbox/Tests/Release
+git add apps/toolbox/scripts apps/toolbox/Tests/Distribution
 git commit -m "build: produce universal Toolbox application"
 ```
 

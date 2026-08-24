@@ -4,13 +4,12 @@ set -euo pipefail
 PROJECT_DIR="${0:A:h:h}"
 cd "$PROJECT_DIR"
 
-BUILD_ARGS=(-c release)
 if [[ "${TOOLBOX_UNIVERSAL:-0}" == "1" ]]; then
-  BUILD_ARGS+=(--arch arm64 --arch x86_64)
+  exec "$PROJECT_DIR/scripts/build_universal.sh"
 fi
 
-swift build "${BUILD_ARGS[@]}"
-BIN_DIR="$(swift build "${BUILD_ARGS[@]}" --show-bin-path)"
+swift build -c release
+BIN_DIR="$(swift build -c release --show-bin-path)"
 APP_DIR="$PROJECT_DIR/dist/Toolbox.app"
 
 rm -rf "$APP_DIR"
