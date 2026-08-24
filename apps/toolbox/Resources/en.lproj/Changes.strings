@@ -1,0 +1,111 @@
+/* Navigation and common */
+"Theo dõi thay đổi" = "Watch Changes";
+"Thay đổi" = "Changes";
+"Lịch sử" = "History";
+"Phạm vi & quyền riêng tư" = "Coverage & Privacy";
+"Giới thiệu Changeora" = "About Changeora";
+"Tác giả" = "Author";
+"Theo dõi và giải thích thay đổi hệ thống sau khi cài hoặc cập nhật ứng dụng." = "Track and explain system changes after installing or updating applications.";
+"Đóng" = "Close";
+"Hủy" = "Cancel";
+"Làm mới" = "Refresh";
+"Hoàn tất" = "Complete";
+"Chọn phiên" = "Select Session";
+"Phiên trước" = "Earlier Session";
+"Phiên sau" = "Later Session";
+"Mức" = "Risk";
+"Tất cả mức" = "All Risks";
+"Thông tin" = "Informational";
+"Nên xem" = "Review";
+"Quan trọng" = "Important";
+"Đã thêm" = "Added";
+"Đã gỡ" = "Removed";
+"Đã thay đổi" = "Modified";
+"Đã đổi" = "Modified";
+"Ứng dụng" = "Application";
+"Không thể đọc" = "Unreadable";
+"không telemetry" = "no telemetry";
+"phiên" = "sessions";
+"phiên đã lưu" = "saved sessions";
+"kết quả đang hiển thị" = "results shown";
+
+/* Watch */
+"FSEvents và snapshot ghi nhận quá trình cài đặt, cập nhật hoặc uninstall." = "FSEvents and snapshots record installation, update, and uninstall activity.";
+"Cài đặt / cập nhật / gỡ ứng dụng" = "Install / update / uninstall application";
+"Đang quét…" = "Scanning…";
+"Bắt đầu một phiên thay đổi" = "Start a Change Session";
+"Changeora sẽ lưu snapshot và bật FSEvents. Sau đó bạn cài, cập nhật hoặc gỡ ứng dụng như bình thường rồi quay lại để so sánh." = "Changeora saves a snapshot and starts FSEvents. Install, update, or remove an application, then return to compare.";
+"Tên phiên" = "Session Name";
+"Chụp trạng thái ban đầu" = "Capture Initial State";
+"Đang theo dõi" = "Watching";
+"Hoàn tất và so sánh" = "Finish and Compare";
+"Hủy phiên" = "Cancel Session";
+"Kết quả gần nhất" = "Latest Result";
+"Tổng thay đổi" = "Total Changes";
+"Changeora chỉ đọc metadata cục bộ, không đọc nội dung tài liệu, không telemetry và không tự động xóa hoặc hoàn tác thay đổi." = "Changeora reads local metadata only. It does not read document contents, use telemetry, delete data, or revert changes automatically.";
+
+/* Changes */
+"Chưa có phiên so sánh." = "No comparison session selected.";
+"Chưa có thay đổi" = "No Changes Yet";
+"Hãy hoàn thành một phiên theo dõi cài đặt để xem kết quả trước và sau." = "Complete an installation watch session to compare before and after states.";
+"Không có kết quả phù hợp" = "No Matching Results";
+"Thử bỏ bộ lọc hoặc thay đổi từ khóa tìm kiếm." = "Clear filters or change the search query.";
+"Tìm tên, đường dẫn hoặc chủ sở hữu" = "Search names, paths, or owners";
+"Hiển thị trong Finder" = "Show in Finder";
+
+/* History and comparison */
+"Chưa có lịch sử" = "No History Yet";
+"Các phiên so sánh hoàn tất sẽ xuất hiện tại đây." = "Completed comparison sessions will appear here.";
+"So sánh hai phiên" = "Compare Two Sessions";
+"Tạo baseline hiện tại" = "Create Current Baseline";
+"So sánh với baseline" = "Compare with Baseline";
+"Baseline tin cậy" = "Trusted Baseline";
+"Trạng thái hiện tại" = "Current State";
+"Mọi báo cáo được lưu cục bộ trên máy Mac này." = "All reports are stored locally on this Mac.";
+"Mở báo cáo" = "Open Report";
+
+/* Coverage */
+"Minh bạch về dữ liệu Changeora đọc, lưu và không thể quan sát." = "A transparent view of what Changeora reads, stores, and cannot observe.";
+"Mục thay đổi trong phiên gần nhất" = "Changes in the Latest Session";
+"Snapshot đang theo dõi" = "Active Snapshot";
+"Nguyên tắc an toàn" = "Safety Principles";
+"Chỉ đọc metadata như đường dẫn, thời gian, kích thước, Bundle ID và chữ ký." = "Reads metadata such as paths, timestamps, sizes, Bundle IDs, and signatures.";
+"Application Support, Cache và Container được quan sát sâu hai cấp để nhận diện thay đổi bên trong thư mục ứng dụng." = "Application Support, Cache, and Container directories are observed two levels deep to detect internal changes.";
+"Không đọc nội dung tài liệu cá nhân và không gửi dữ liệu ra mạng." = "Never reads personal document contents or sends data over the network.";
+"Không tự xóa, tắt service hoặc sửa System Settings." = "Never deletes data, disables services, or changes System Settings.";
+"Một số vùng được macOS bảo vệ có thể cần Full Disk Access để quan sát đầy đủ." = "Some macOS-protected locations may require Full Disk Access for complete observation.";
+"Changeora đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Changeora presents technical evidence; it does not declare an application malicious.";
+
+/* Evidence and risk */
+"Application bundle thay đổi; kiểm tra version, Team ID và chữ ký." = "The application bundle changed; review its version, Team ID, and signature.";
+"Browser extension có thể đọc hoặc thay đổi dữ liệu trong trình duyệt." = "A browser extension may read or modify browser data.";
+"Configuration profile có thể thay đổi policy và thiết lập quản trị của macOS." = "A configuration profile may change macOS policy and management settings.";
+"Kernel extension tác động ở mức hệ thống và cần được xem xét cẩn thận." = "A kernel extension operates at system level and requires careful review.";
+"LaunchDaemon mới có thể chạy nền với quyền hệ thống/root." = "A new LaunchDaemon may run in the background with system/root privileges.";
+"Package receipt là bằng chứng cài đặt do Installer ghi lại." = "A package receipt is installation evidence recorded by Installer.";
+"Shell/PATH thay đổi có thể tác động mọi terminal session và command được thực thi." = "Shell/PATH changes may affect every terminal session and executed command.";
+"Thành phần persistence có thể tự chạy khi đăng nhập hoặc trong nền." = "A persistence component may launch at login or in the background.";
+"Thành phần đặc quyền hoặc system extension có thể chạy ngoài tiến trình ứng dụng." = "A privileged component or system extension may run outside the application process.";
+"Dữ liệu người dùng hoặc metadata ứng dụng thay đổi trong Library." = "User data or application metadata changed in Library.";
+"%lld thay đổi" = "%lld changes";
+"Không phát hiện thay đổi trong phạm vi theo dõi." = "No changes were detected within the monitored scope.";
+"Language / Ngôn ngữ" = "Language / Ngôn ngữ";
+"Snapshot ban đầu có %lld mục. FSEvents đang ghi thay đổi sâu; hãy hoàn tất thao tác trước khi tạo snapshot thứ hai." = "The initial snapshot contains %lld items. FSEvents is recording deep changes; finish the operation before taking the second snapshot.";
+"…và %lld đường dẫn khác" = "…and %lld other paths";
+
+/* Dynamic-message fragments; longest matches are applied first. */
+"Không thể" = "Unable to";
+"Đã phát hiện" = "Detected";
+"Đã lưu" = "Saved";
+"Đã hủy" = "Cancelled";
+"Đang chụp" = "Capturing";
+"Không phát hiện" = "No";
+"thay đổi" = "changes";
+"phiên" = "session";
+"mục" = "items";
+"đường dẫn" = "paths";
+"trong phạm vi theo dõi" = "within the monitored scope";
+"từ snapshot và" = "from the snapshot and";
+"FSEvent" = "FSEvents";
+"Baseline có" = "Baseline has";
+"So sánh hai phiên có" = "Session comparison has";
