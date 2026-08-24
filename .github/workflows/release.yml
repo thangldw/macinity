@@ -1,0 +1,123 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v2.0.0"
+  workflow_dispatch:
+
+concurrency:
+  group: toolbox-release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate exact source
+    runs-on: macos-15
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: apps/toolbox
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+      - name: Require the supported release tag
+        run: test "$GITHUB_REF" = "refs/tags/v2.0.0"
+      - name: Format
+        run: swift format lint --recursive --parallel Sources Tests Package.swift
+      - name: XCTest
+        run: swift test
+      - name: Smoke contracts
+        run: |
+          ./scripts/test_core.sh
+          ./scripts/test_storage.sh
+          ./scripts/test_changes.sh
+          ./scripts/test_app.sh
+          ./scripts/lint_localizations.swift
+      - name: Universal release contract
+        run: |
+          ./scripts/build_universal.sh
+          ./Tests/Distribution/release_contract.sh dist/Toolbox.app
+
+  release:
+    name: Sign, notarize, and publish
+    needs: validate
+    runs-on: macos-15
+    timeout-minutes: 45
+    environment: release
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: apps/toolbox
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Build universal app
+        run: ./scripts/build_universal.sh
+
+      - name: Configure temporary signing keychain
+        env:
+          DEVELOPER_ID_P12_BASE64: ${{ secrets.TOOLBOX_DEVELOPER_ID_P12_BASE64 }}
+          DEVELOPER_ID_P12_PASSWORD: ${{ secrets.TOOLBOX_DEVELOPER_ID_P12_PASSWORD }}
+          NOTARY_PRIVATE_KEY_BASE64: ${{ secrets.TOOLBOX_NOTARY_PRIVATE_KEY_BASE64 }}
+          NOTARY_KEY_ID: ${{ secrets.TOOLBOX_NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.TOOLBOX_NOTARY_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          KEYCHAIN_PATH="$RUNNER_TEMP/toolbox-release.keychain-db"
+          KEYCHAIN_PASSWORD="$(uuidgen)"
+          CERTIFICATE_PATH="$RUNNER_TEMP/toolbox-developer-id.p12"
+          NOTARY_KEY_PATH="$RUNNER_TEMP/toolbox-notary.p8"
+          echo "::add-mask::$KEYCHAIN_PASSWORD"
+          printf '%s' "$DEVELOPER_ID_P12_BASE64" | base64 --decode > "$CERTIFICATE_PATH"
+          printf '%s' "$NOTARY_PRIVATE_KEY_BASE64" | base64 --decode > "$NOTARY_KEY_PATH"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$CERTIFICATE_PATH" -k "$KEYCHAIN_PATH" -P "$DEVELOPER_ID_P12_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychains -d user -s "$KEYCHAIN_PATH"
+          xcrun notarytool store-credentials toolbox-release \
+            --key "$NOTARY_KEY_PATH" \
+            --key-id "$NOTARY_KEY_ID" \
+            --issuer "$NOTARY_ISSUER_ID" \
+            --keychain "$KEYCHAIN_PATH"
+          rm -f "$CERTIFICATE_PATH" "$NOTARY_KEY_PATH"
+          {
+            echo "TOOLBOX_RELEASE_KEYCHAIN=$KEYCHAIN_PATH"
+            echo "TOOLBOX_NOTARY_PROFILE=toolbox-release"
+          } >> "$GITHUB_ENV"
+
+      - name: Sign and notarize exact artifacts
+        env:
+          TOOLBOX_CODESIGN_IDENTITY: ${{ secrets.TOOLBOX_CODESIGN_IDENTITY }}
+        run: ./scripts/notarize.sh
+
+      - name: Publish immutable release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/Toolbox-2.0.0.dmg \
+            dist/Toolbox-2.0.0.dmg.sha256 \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --generate-notes \
+            --title "Toolbox 2.0.0"
+
+      - name: Remove temporary release credentials
+        if: always()
+        working-directory: ${{ runner.temp }}
+        run: |
+          rm -f "$RUNNER_TEMP/toolbox-developer-id.p12" "$RUNNER_TEMP/toolbox-notary.p8"
+          RELEASE_KEYCHAIN="$RUNNER_TEMP/toolbox-release.keychain-db"
+          if [[ -f "$RELEASE_KEYCHAIN" ]]; then
+            security delete-keychain "$RELEASE_KEYCHAIN"
+          fi

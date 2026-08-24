@@ -23,6 +23,16 @@ Toolbox 2.0 replaces the standalone Diskora and Changeora packages. Releases thr
 - Full Xcode for XCTest, universal archives, Developer ID signing, and notarization
 - Optional Full Disk Access for broader protected-folder coverage
 
+### Install
+
+After the signed 2.0.0 release is published:
+
+```bash
+brew install --cask thangldw/toolbox/toolbox
+```
+
+Or download `Toolbox-2.0.0.dmg` and its SHA-256 file from [GitHub Releases](https://github.com/thangldw/toolbox/releases). The release gate requires the Homebrew cask and direct download to resolve to the same notarized DMG.
+
 ### Build and verify
 
 ```bash
@@ -82,6 +92,8 @@ Dùng các lệnh trong phần English để chạy format, XCTest, bốn smoke 
 
 Xem [Kiến trúc](docs/ARCHITECTURE.md), [Vận hành](docs/OPERATIONS.md), [Quyền riêng tư](PRIVACY.md), [Bảo mật](SECURITY.md) và [Đóng góp](CONTRIBUTING.md).
 
+Sau khi bản 2.0.0 đã được ký và publish, cài bằng `brew install --cask thangldw/toolbox/toolbox` hoặc tải DMG và SHA-256 từ GitHub Releases. Hai cách phải trỏ đến đúng cùng một DMG đã notarize.
+
 ## 日本語
 
 Toolbox は、変更内容を説明し、自動削除せずにストレージを安全に整理するローカル優先の macOS GUI です。
@@ -99,6 +111,8 @@ Toolbox 2.0 は standalone Diskora / Changeora package を置き換えます。`
 macOS 13 以降と Swift 6.0 以降が必要です。XCTest、universal archive、Developer ID signing、notarization には full Xcode を使用してください。検証 command は English セクションを参照してください。
 
 [Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Privacy](PRIVACY.md)、[Security](SECURITY.md)、[Contributing](CONTRIBUTING.md) を参照してください。
+
+署名済み 2.0.0 の公開後は `brew install --cask thangldw/toolbox/toolbox`、または GitHub Releases の DMG と SHA-256 を使用します。両方は同じ notarized DMG を参照します。
 
 ## License
 

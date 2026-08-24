@@ -53,6 +53,8 @@ spctl --assess --type execute --verbose=4 dist/Toolbox.app
 shasum -a 256 Toolbox-2.0.0.dmg
 ```
 
+The complete protected-keychain, notarization, local DMG, and post-publication procedure is in [OPERATIONS-RELEASE.md](OPERATIONS-RELEASE.md).
+
 Do not publish or replace an asset until the exact artifact has passed CI, checksum verification after re-download, DMG mount/launch smoke, and notarization/stapling. Credentials and Developer ID material remain protected release secrets.
 
 Never replace a published binary silently. Mark a bad release unavailable, explain the impact, and publish a patch version. Use [SECURITY.md](../SECURITY.md) for vulnerabilities. Historical Diskora/Changeora source and assets remain in tags through `v1.4.0`; Toolbox 2.0 does not rebuild or mutate them.
