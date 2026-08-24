@@ -2,7 +2,7 @@
 
 [English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
-Toolbox is a local-first macOS monorepo containing two independent utilities: Diskora for evidence-based storage management and Changeora for read-only system-change observation.
+Toolbox is a local-first macOS utility for understanding changes and reclaiming space safely. Toolbox 2.0 is currently pre-release; the stable Diskora and Changeora apps remain available while their proven workflows move into one GUI.
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#64748B","primaryTextColor":"#172B4D"},"flowchart":{"curve":"basis","nodeSpacing":42,"rankSpacing":55}}}%%
@@ -26,8 +26,11 @@ flowchart LR
 
 | Application | Version | Purpose | Safety boundary |
 | --- | --- | --- | --- |
+| **Toolbox** | 2.0.0 pre-release | One GUI for Storage, Projects, Applications, Change Timeline, and Recovery | Local-only; no automatic deletion; every mutation remains reviewable and recoverable where macOS permits |
 | **Diskora** | 1.3.0 | Analyze storage, review cleanup candidates, find duplicates and similar photos, manage developer data, and inspect application artifacts | Every mutation requires confirmation; recoverable operations go to Trash and are recorded by Undo Center |
 | **Changeora** | 1.4.0 | Record installation, update, and uninstall activity using snapshots plus FSEvents | Read-only: it never deletes, disables, or modifies observed system components |
+
+Toolbox 2.0 currently provides the unified six-destination shell and ports the stable Diskora and Changeora engines without changing their safety boundaries. Shared evidence, migration, and signed distribution remain pre-release work.
 
 Diskora 1.2 adds Undo Center, cleanup-confidence explanations, a partial-hash duplicate pipeline, pairwise photo clustering, evidence-based application artifacts, allowlisted developer cleanup commands, and scheduled scan-only notifications.
 
@@ -44,7 +47,20 @@ Both applications now provide an in-app English/Vietnamese language selector. En
 
 ### Build and verify
 
-Run the following in each application directory:
+Run the unified pre-release gate:
+
+```bash
+cd apps/toolbox
+swift format lint --recursive --parallel Sources Tests Package.swift
+swift test
+./scripts/test_core.sh
+./scripts/test_storage.sh
+./scripts/test_changes.sh
+swift build -c release
+./scripts/build_app.sh
+```
+
+The legacy packages retain their independent validation:
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
@@ -54,7 +70,13 @@ swift build
 swift build -c release
 ```
 
-Build local application bundles:
+Build the local Toolbox bundle:
+
+```bash
+cd apps/toolbox && ./scripts/build_app.sh
+```
+
+Build legacy application bundles:
 
 ```bash
 cd apps/diskora && ./scripts/build_release.sh
@@ -67,7 +89,8 @@ cd apps/changeora && ./scripts/build_release.sh
 toolbox/
 ├── apps/
 │   ├── diskora/       # Independent Swift package and macOS app
-│   └── changeora/     # Independent Swift package and macOS app
+│   ├── changeora/     # Independent Swift package and macOS app
+│   └── toolbox/       # Unified Toolbox 2.0 pre-release package
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   └── OPERATIONS.md
@@ -97,8 +120,11 @@ Released under the [MIT License](LICENSE).
 
 | Ứng dụng | Phiên bản | Mục đích | Ranh giới an toàn |
 | --- | --- | --- | --- |
+| **Toolbox** | 2.0.0 pre-release | Một GUI cho Dung lượng, Dự án, Ứng dụng, Dòng thời gian thay đổi và Khôi phục | Chạy local; không tự động xóa; mọi thay đổi đều cần duyệt và được thiết kế để có thể khôi phục khi macOS cho phép |
 | **Diskora** | 1.3.0 | Phân tích dung lượng, duyệt mục dọn dẹp, tìm file trùng/ảnh tương tự, quản lý dữ liệu developer và kiểm tra artifact ứng dụng | Mọi thay đổi đều cần xác nhận; thao tác có thể phục hồi đi qua Trash và được Undo Center ghi nhận |
 | **Changeora** | 1.4.0 | Ghi nhận cài đặt, cập nhật và uninstall bằng snapshot kết hợp FSEvents | Chỉ đọc: không xóa, vô hiệu hóa hoặc sửa thành phần hệ thống |
+
+Toolbox 2.0 hiện đã có shell sáu đích và đã port engine ổn định của Diskora/Changeora mà không thay đổi ranh giới an toàn. Shared evidence, migration và bản phân phối đã ký vẫn đang ở trạng thái pre-release.
 
 Diskora 1.2 bổ sung Undo Center, giải thích mức độ tin cậy, pipeline partial hash, clustering ảnh pairwise, artifact ứng dụng dựa trên bằng chứng, developer cleanup bằng command allowlist và lịch chỉ quét/thông báo.
 
@@ -115,7 +141,20 @@ Cả hai ứng dụng hiện có bộ chọn English/Tiếng Việt ngay trong a
 
 ### Build và kiểm tra
 
-Chạy trong từng thư mục ứng dụng:
+Chạy gate của Toolbox pre-release:
+
+```bash
+cd apps/toolbox
+swift format lint --recursive --parallel Sources Tests Package.swift
+swift test
+./scripts/test_core.sh
+./scripts/test_storage.sh
+./scripts/test_changes.sh
+swift build -c release
+./scripts/build_app.sh
+```
+
+Hai package legacy vẫn giữ gate độc lập:
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
@@ -125,7 +164,13 @@ swift build
 swift build -c release
 ```
 
-Tạo app bundle local:
+Tạo app bundle Toolbox local:
+
+```bash
+cd apps/toolbox && ./scripts/build_app.sh
+```
+
+Tạo app bundle legacy:
 
 ```bash
 cd apps/diskora && ./scripts/build_release.sh
@@ -138,6 +183,7 @@ cd apps/changeora && ./scripts/build_release.sh
 toolbox/
 ├── apps/diskora/      # Swift package và macOS app độc lập
 ├── apps/changeora/    # Swift package và macOS app độc lập
+├── apps/toolbox/      # Toolbox 2.0 pre-release hợp nhất
 ├── docs/              # Kiến trúc và runbook
 ├── .github/workflows/ # CI
 └── tài liệu quản trị dự án
@@ -163,8 +209,11 @@ Phát hành theo [MIT License](LICENSE).
 
 | アプリ | バージョン | 目的 | 安全境界 |
 | --- | --- | --- | --- |
+| **Toolbox** | 2.0.0 pre-release | Storage、Projects、Applications、Change Timeline、Recovery を一つの GUI に統合 | ローカル処理、自動削除なし。変更は確認可能で、macOS が許す範囲で復元可能 |
 | **Diskora** | 1.3.0 | ストレージ分析、クリーンアップ候補の確認、重複ファイル・類似写真、開発データ、アプリ関連 artifact の管理 | 変更には必ず確認が必要。復元可能な操作は Trash を使用し、Undo Center に記録 |
 | **Changeora** | 1.4.0 | snapshot と FSEvents でインストール、更新、アンインストールを記録 | 読み取り専用。監視対象を削除・無効化・変更しない |
+
+Toolbox 2.0 は現在、6 destination の shell と Diskora / Changeora の安定 engine を統合済みです。Shared evidence、migration、署名済み配布は pre-release 作業中です。
 
 Diskora 1.2 は Undo Center、信頼度の説明、partial hash、pairwise 写真 clustering、証拠ベースのアプリ artifact、allowlist 済み開発者 cleanup command、通知専用の定期 scan を追加します。
 
@@ -181,7 +230,20 @@ Changeora 1.3 はリアルタイム FSEvents、監視範囲の拡張、説明可
 
 ### Build と検証
 
-各アプリのディレクトリで実行します。
+Toolbox pre-release gate を実行します。
+
+```bash
+cd apps/toolbox
+swift format lint --recursive --parallel Sources Tests Package.swift
+swift test
+./scripts/test_core.sh
+./scripts/test_storage.sh
+./scripts/test_changes.sh
+swift build -c release
+./scripts/build_app.sh
+```
+
+Legacy package は個別 gate を維持します。
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
@@ -191,7 +253,13 @@ swift build
 swift build -c release
 ```
 
-ローカル app bundle を作成します。
+Toolbox のローカル app bundle を作成します。
+
+```bash
+cd apps/toolbox && ./scripts/build_app.sh
+```
+
+Legacy app bundle を作成します。
 
 ```bash
 cd apps/diskora && ./scripts/build_release.sh
@@ -204,6 +272,7 @@ cd apps/changeora && ./scripts/build_release.sh
 toolbox/
 ├── apps/diskora/      # 独立 Swift package / macOS app
 ├── apps/changeora/    # 独立 Swift package / macOS app
+├── apps/toolbox/      # 統合 Toolbox 2.0 pre-release
 ├── docs/              # アーキテクチャと runbook
 ├── .github/workflows/ # CI
 └── プロジェクト管理文書

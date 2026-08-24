@@ -14,6 +14,37 @@ permissions:
   contents: read
 
 jobs:
+  toolbox:
+    name: Toolbox 2.0 pre-release
+    runs-on: macos-15
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: apps/toolbox
+    steps:
+      - uses: actions/checkout@v6
+      - name: Show Swift version
+        run: swift --version
+      - name: Lint
+        run: swift format lint --recursive --parallel Sources Tests Package.swift
+      - name: Unit tests
+        run: swift test
+      - name: Smoke tests
+        run: |
+          ./scripts/test_core.sh
+          ./scripts/test_storage.sh
+          ./scripts/test_changes.sh
+      - name: Release build
+        run: swift build -c release
+      - name: Assemble app bundle
+        run: |
+          ./scripts/build_app.sh
+          test -x dist/Toolbox.app/Contents/MacOS/Toolbox
+          test -f dist/Toolbox.app/Contents/Resources/en.lproj/Localizable.strings
+          test -f dist/Toolbox.app/Contents/Resources/vi.lproj/Localizable.strings
+          plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings
+          codesign --verify --deep --strict dist/Toolbox.app
+
   validate:
     name: ${{ matrix.app }}
     runs-on: macos-15

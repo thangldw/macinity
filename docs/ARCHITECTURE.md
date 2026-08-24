@@ -1,8 +1,8 @@
 # Toolbox architecture
 
-Toolbox is a monorepo for two independent, local-first macOS applications. Diskora changes files only after review; Changeora observes system changes and produces evidence.
+Toolbox is a monorepo for a unified local-first macOS utility and its two stable legacy applications. Toolbox 2.0 is pre-release: it combines Diskora's review-first storage workflows with Changeora's read-only system evidence in one six-destination GUI. The legacy apps remain independently buildable during migration.
 
-Both presentation layers use the same localization pattern: an `AppLanguage` preference stored in `UserDefaults`, an environment locale that refreshes SwiftUI views, and packaged `en.lproj` resources. Vietnamese source copy is the development fallback. English is selected on first launch, and switching languages never changes scan data, history, or safety decisions.
+The unified presentation layer owns one `AppLanguage` preference stored in `UserDefaults`, one stable navigation selection per window, and packaged English/Vietnamese resources. Switching languages never changes scan data, history, or safety decisions.
 
 ```mermaid
 %%{init: {"theme":"base","flowchart":{"curve":"basis","nodeSpacing":35,"rankSpacing":50},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
@@ -31,7 +31,7 @@ flowchart LR
 
 ### Repository boundaries
 
-Each directory under `apps/` is an independent Swift package with its own executable, resources, tests, scripts, version, and release archive. Shared repository policy lives at the root; the applications do not import one another.
+Each directory under `apps/` is an independent Swift package. `apps/toolbox` contains `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, and the `Toolbox` executable; it does not import either legacy package. Diskora and Changeora remain intact until migration and release gates are complete.
 
 ```text
 toolbox/
@@ -41,10 +41,15 @@ toolbox/
 │   │   ├── Resources
 │   │   ├── Tests/{Unit,Smoke}
 │   │   └── scripts
-│   └── changeora/
-│       ├── Sources/Changeora/{App,Core,Features,Views}
+│   ├── changeora/
+│   │   ├── Sources/Changeora/{App,Core,Features,Views}
+│   │   ├── Resources
+│   │   ├── Tests/{Unit,Smoke}
+│   │   └── scripts
+│   └── toolbox/
+│       ├── Sources/{Toolbox,ToolboxCore,ToolboxStorage,ToolboxChanges}
 │       ├── Resources
-│       ├── Tests/{Unit,Smoke}
+│       ├── Tests
 │       └── scripts
 ├── docs/
 └── .github/workflows/
@@ -81,7 +86,7 @@ Session history is append-only application data. A user may designate a trusted 
 
 ### Persistence and concurrency
 
-Both applications use Codable files under their own `~/Library/Application Support/<App>` directory. Stores write atomically. Long-running scanners use Swift concurrency and publish UI state on the main actor. FSEvents owns a dedicated dispatch queue and synchronizes its bounded event buffer.
+Toolbox modules use Codable files under `~/Library/Application Support/Toolbox`; legacy applications keep their original directories. Stores write atomically. Long-running scanners use Swift concurrency and publish UI state on the main actor. FSEvents owns a dedicated dispatch queue and synchronizes its bounded event buffer.
 
 ### Safety invariants
 
@@ -95,15 +100,15 @@ Both applications use Codable files under their own `~/Library/Application Suppo
 
 ### Verification strategy
 
-Unit tests cover deterministic models, diffing, persistence, and restore behavior. Standalone smoke tests exercise core behavior in temporary directories without requiring the Swift testing runtime. CI runs formatting, unit tests, smoke tests, and release builds for both packages.
+Unit tests cover deterministic models, navigation contracts, diffing, persistence, and restore behavior. Standalone smoke tests exercise Core, Storage, and Changes in temporary directories. CI runs a dedicated Toolbox format/test/smoke/release/bundle lane and preserves both legacy lanes.
 
 ## Tiếng Việt
 
-Hai presentation layer dùng cùng mô hình localization: lựa chọn `AppLanguage` lưu trong `UserDefaults`, environment locale làm mới SwiftUI view và tài nguyên `en.lproj` được đóng gói trong app. Nội dung nguồn tiếng Việt là development fallback. English được chọn ở lần chạy đầu; đổi ngôn ngữ không tác động dữ liệu quét, lịch sử hoặc quyết định an toàn.
+Presentation layer hợp nhất quản lý một lựa chọn `AppLanguage` trong `UserDefaults`, một navigation selection ổn định cho từng cửa sổ và tài nguyên English/Tiếng Việt đóng gói trong app. Đổi ngôn ngữ không tác động dữ liệu quét, lịch sử hoặc quyết định an toàn.
 
 ### Ranh giới repository
 
-Mỗi thư mục trong `apps/` là một Swift package độc lập, có executable, resource, test, script, version và archive release riêng. Chính sách dùng chung nằm ở root; hai ứng dụng không import lẫn nhau.
+Mỗi thư mục trong `apps/` là một Swift package độc lập. `apps/toolbox` chứa `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges` và executable `Toolbox`, không import hai package legacy. Diskora và Changeora được giữ nguyên cho tới khi migration và release gate hoàn tất.
 
 SwiftUI view quản lý phần trình bày và ý định người dùng. Feature view model điều phối công việc bất đồng bộ. Service thực hiện scan, so sánh, persistence hoặc mutation có phạm vi hẹp. Core model dùng Codable và tách khỏi UI khi phù hợp.
 
@@ -136,7 +141,7 @@ Session history là dữ liệu application append-only. Người dùng có th�
 
 ### Persistence và concurrency
 
-Hai ứng dụng lưu file Codable trong `~/Library/Application Support/<App>` riêng và ghi atomic. Scanner dài dùng Swift concurrency, cập nhật UI trên main actor. FSEvents dùng dispatch queue riêng và đồng bộ event buffer có giới hạn.
+Các module hợp nhất lưu file Codable trong `~/Library/Application Support/Toolbox`; hai app legacy giữ thư mục cũ. Store ghi atomic. Scanner dài dùng Swift concurrency, cập nhật UI trên main actor. FSEvents dùng dispatch queue riêng và đồng bộ event buffer có giới hạn.
 
 ### Bất biến an toàn
 
@@ -150,15 +155,15 @@ Hai ứng dụng lưu file Codable trong `~/Library/Application Support/<App>` r
 
 ### Chiến lược kiểm thử
 
-Unit test bao phủ model xác định, diff, persistence và restore. Smoke test độc lập chạy core behavior trong thư mục tạm mà không cần Swift testing runtime. CI chạy format, unit test, smoke test và release build cho cả hai package.
+Unit test bao phủ model xác định, contract navigation, diff, persistence và restore. Smoke test độc lập chạy Core, Storage và Changes trong thư mục tạm. CI có lane riêng cho Toolbox và vẫn giữ hai lane legacy.
 
 ## 日本語
 
-両 presentation layer は同じ localization 構成を使います。`AppLanguage` を `UserDefaults` に保存し、environment locale で SwiftUI view を更新し、`en.lproj` resource を app に同梱します。ベトナム語 source copy が development fallback です。初回起動時は English で、言語変更は scan data、history、安全判定に影響しません。
+統合 presentation layer は `UserDefaults` の `AppLanguage`、window ごとの安定 navigation selection、同梱された English / Vietnamese resource を一元管理します。言語変更は scan data、history、安全判定に影響しません。
 
 ### Repository boundary
 
-`apps/` 配下の各 directory は独立した Swift package で、個別の executable、resource、test、script、version、release archive を持ちます。共通 policy は root に置き、アプリ同士は import しません。
+`apps/` 配下の各 directory は独立した Swift package です。`apps/toolbox` は `ToolboxCore`、`ToolboxStorage`、`ToolboxChanges`、`Toolbox` executable を持ち、legacy package を import しません。Migration と release gate が完了するまで Diskora と Changeora は維持されます。
 
 SwiftUI view は表示と user intent、feature view model は非同期処理の調整、service は scan、compare、persistence、限定的 mutation を担当します。Core model は可能な限り Codable かつ UI 非依存です。
 
@@ -191,7 +196,7 @@ Session history は append-only application data です。Trusted clean baseline
 
 ### Persistence と concurrency
 
-両アプリは Codable file を個別の `~/Library/Application Support/<App>` に atomic write します。長時間 scanner は Swift concurrency を使い main actor で UI state を更新します。FSEvents は専用 dispatch queue と同期済み bounded event buffer を持ちます。
+統合 module は Codable file を `~/Library/Application Support/Toolbox` に保存し、legacy app は従来の directory を維持します。Store は atomic write を行い、長時間 scanner は Swift concurrency と main actor を使います。FSEvents は専用 dispatch queue と同期済み bounded event buffer を持ちます。
 
 ### Safety invariant
 
@@ -205,4 +210,4 @@ Session history は append-only application data です。Trusted clean baseline
 
 ### Verification strategy
 
-Unit test は deterministic model、diff、persistence、restore を対象にします。Standalone smoke test は Swift testing runtime なしで temporary directory 上の core behavior を検証します。CI は両 package の format、unit、smoke、release build を実行します。
+Unit test は deterministic model、navigation contract、diff、persistence、restore を対象にします。Standalone smoke test は Core、Storage、Changes を temporary directory で検証します。CI は Toolbox 専用 lane と二つの legacy lane を実行します。
