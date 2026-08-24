@@ -1,7 +1,7 @@
 # Toolbox 2.0 Super-App Design
 
 Date: 2026-08-24
-Status: Design approved in chat; written spec awaiting review
+Status: Approved on 2026-08-25
 Owner: thangldw
 
 ## Summary
