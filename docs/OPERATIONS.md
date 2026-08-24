@@ -1,204 +1,80 @@
-# Operations and release runbook
+# Toolbox Operations
 
-```mermaid
-%%{init: {"theme":"base","flowchart":{"curve":"basis"},"themeVariables":{"background":"#F7F7F5","fontFamily":"Inter, Arial, sans-serif","lineColor":"#667085","primaryTextColor":"#172B4D"}}}%%
-flowchart LR
-    C["Choose product versions"]:::yellow --> V["Format + test + build"]:::blue
-    V --> A["Create app archives"]:::pink
-    A --> T["Commit + tag + CI"]:::purple
-    T --> G["GitHub release + checksums"]:::green
-    G --> Q["Download verification"]:::yellow
-    classDef yellow fill:#FFF4A3,stroke:#C9A227,stroke-width:2px,color:#172B4D
-    classDef blue fill:#D9EAFD,stroke:#4C78A8,stroke-width:2px,color:#172B4D
-    classDef pink fill:#FFE1E6,stroke:#C96A7B,stroke-width:2px,color:#172B4D
-    classDef purple fill:#E9DDF7,stroke:#8064A2,stroke-width:2px,color:#172B4D
-    classDef green fill:#DDF5E3,stroke:#4F9D69,stroke-width:2px,color:#172B4D
-```
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
 ## English
 
-### Release model
-
-Diskora and Changeora version independently. A Toolbox release tag represents the repository delivery and states both included product versions. For example, Toolbox `v1.4.0` contains Diskora `1.3.0` and Changeora `1.4.0`.
-
-Release assets contain application archives and matching SHA-256 files only. Do not upload a separate source ZIP or TAR archive. GitHub automatically adds “Source code” links to tag-based releases; those platform-managed links cannot be removed.
-
-### Prerequisites
-
-- macOS 13 or newer for supported runtime behavior
-- Apple Silicon for the current unsigned `arm64` archives
-- Swift 6.2 toolchain
-- GitHub CLI authenticated with permission to push and manage releases
-- A clean understanding of any pre-existing working-tree changes
-
 ### Validation
 
-Run in each application:
+From `apps/toolbox`:
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
 swift test
 ./scripts/test_core.sh
-swift build
+./scripts/test_storage.sh
+./scripts/test_changes.sh
+./scripts/test_app.sh
+./scripts/lint_localizations.swift
 swift build -c release
+./scripts/build_app.sh
+plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings
+codesign --verify --deep --strict dist/Toolbox.app
 ```
 
-If the active command-line toolchain cannot run XCTest, document the limitation and require the GitHub Actions unit-test job to pass before release. Smoke tests and release builds must still pass locally.
+If `xcode-select -p` points to Command Line Tools and `swift test` reports `no such module XCTest`, the smoke/release gates remain valid local evidence, but merge/release still requires the full GitHub Actions XCTest job.
 
-Review version metadata:
+### Scheduled scan
+
+Toolbox creates `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist` only after explicit GUI confirmation and notification authorization. It opens Toolbox with the internal `--scheduled-scan` argument, scans safe targets, posts a local notification, and exits without mutation.
+
+Settings detects `com.thang.diskora.scheduled-scan.plist`. Replacement order is: write Toolbox plist → bootstrap Toolbox label → boot out legacy label → remove legacy plist. A Toolbox bootstrap failure removes the new plist, retains the legacy plist, and reports the launchctl error.
+
+### Update checks
+
+Settings performs no automatic update request. The button sends a GET request only to:
+
+```text
+https://api.github.com/repos/thangldw/toolbox/releases/latest
+```
+
+It sends no paths, evidence, scan results, or device fields and refuses to start while a scanner is registered active.
+
+### Release artifact
+
+The public artifact is `Toolbox-2.0.0.dmg` plus `Toolbox-2.0.0.dmg.sha256`. Release builds must be universal (`arm64` + `x86_64`), Developer ID signed, notarized, stapled, and verified with Gatekeeper before publication. Local `build_app.sh` creates an ad-hoc signed development bundle and is not notarization evidence.
+
+Required release checks:
 
 ```bash
-/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' Resources/Info.plist
-/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' Resources/Info.plist
+lipo -info dist/Toolbox.app/Contents/MacOS/Toolbox
+codesign --verify --deep --strict --verbose=2 dist/Toolbox.app
+spctl --assess --type execute --verbose=4 dist/Toolbox.app
+shasum -a 256 Toolbox-2.0.0.dmg
 ```
 
-Confirm the changelog, README, privacy policy, security policy, architecture, and this runbook reflect the shipped behavior in English, Vietnamese, and Japanese.
+Do not publish or replace an asset until the exact artifact has passed CI, checksum verification after re-download, DMG mount/launch smoke, and notarization/stapling. Credentials and Developer ID material remain protected release secrets.
 
-For each packaged app, verify localization resources and both UI modes:
-
-```bash
-test -f dist/Diskora.app/Contents/Resources/en.lproj/Localizable.strings
-plutil -lint Resources/en.lproj/Localizable.strings
-```
-
-Launch with a clean preference domain, confirm English is the default, switch to Tiếng Việt, relaunch, and confirm the selection persists. Exercise at least one empty state, progress state, confirmation dialog, and error presentation in each language.
-
-### Packaging
-
-```bash
-cd apps/diskora
-./scripts/build_release.sh
-
-cd ../changeora
-./scripts/build_release.sh
-```
-
-Inspect each archive before publishing:
-
-```bash
-file apps/diskora/dist/Diskora.app/Contents/MacOS/Diskora
-codesign -dv --verbose=4 apps/diskora/dist/Diskora.app
-(cd apps/diskora/release && shasum -a 256 -c Diskora-1.3.0-macos-arm64-unsigned.zip.sha256)
-
-file apps/changeora/dist/Changeora.app/Contents/MacOS/Changeora
-codesign -dv --verbose=4 apps/changeora/dist/Changeora.app
-(cd apps/changeora/release && shasum -a 256 -c Changeora-1.4.0-macos-arm64-unsigned.zip.sha256)
-```
-
-The builds are unsigned unless an explicit signing and notarization process is introduced. Label them accurately; never imply notarization.
-
-### Publish sequence
-
-1. Inspect `git diff` and confirm only intended source, test, metadata, and documentation changes.
-2. Commit and push the default branch.
-3. Wait for all GitHub Actions checks on the exact commit.
-4. Create an annotated tag and GitHub release with the Toolbox version.
-5. Upload the two application archives and their two checksum files.
-6. Download every asset from GitHub and verify its checksum.
-7. Confirm the release title, product versions, installation notes, unsigned status, and changelog link.
-
-A release is complete only after remote assets have been downloaded and verified.
-
-### Rollback and incident handling
-
-Do not replace an asset silently. If an artifact is wrong but the tag is correct, mark the release unavailable, describe the problem, and publish a new patch release. If a vulnerability is involved, use the private process in [SECURITY.md](../SECURITY.md). Preserve logs and checksums while removing personal paths and credentials.
-
-### Scheduled Scan operations
-
-Diskora creates `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.plist` only after user action. The job opens Diskora with `--scheduled-scan`, scans safe targets, posts a local notification, and exits. It does not delete. Disable the schedule through Diskora; if diagnosing manually, inspect the plist and `launchctl print gui/$(id -u)/com.thang.diskora.scheduled-scan`.
+Never replace a published binary silently. Mark a bad release unavailable, explain the impact, and publish a patch version. Use [SECURITY.md](../SECURITY.md) for vulnerabilities. Historical Diskora/Changeora source and assets remain in tags through `v1.4.0`; Toolbox 2.0 does not rebuild or mutate them.
 
 ## Tiếng Việt
 
-### Mô hình release
+Chạy toàn bộ command phần English trong `apps/toolbox`. Nếu Command Line Tools thiếu XCTest, smoke/release build là evidence local nhưng merge/release vẫn phải chờ job XCTest trên GitHub Actions.
 
-Diskora và Changeora có version độc lập. Tag Toolbox đại diện cho lần giao repository và ghi rõ version của hai sản phẩm. Ví dụ Toolbox `v1.4.0` gồm Diskora `1.3.0` và Changeora `1.4.0`.
+Lịch quét chỉ được tạo sau xác nhận GUI và cấp Notification. Label mới là `com.thang.toolbox.scheduled-scan`; job chỉ scan, gửi notification và thoát. Khi thay lịch Diskora, Toolbox bootstrap label mới trước rồi mới bootout/xóa plist cũ. Bootstrap thất bại phải giữ nguyên plist cũ và hiển thị lỗi thật.
 
-Asset release chỉ gồm archive ứng dụng và file SHA-256 tương ứng. Không upload ZIP/TAR mã nguồn riêng. GitHub tự thêm liên kết “Source code” vào release có tag và không thể xóa các liên kết do nền tảng quản lý này.
+Update check không tự chạy, chỉ GET endpoint GitHub công khai ghi ở phần English, không gửi path/evidence/kết quả scan/thông tin thiết bị và bị chặn khi có scanner active.
 
-### Điều kiện
+Artifact public là `Toolbox-2.0.0.dmg` và checksum SHA-256. Chỉ publish sau universal build, Developer ID signing, notarization, stapling, Gatekeeper, CI, re-download checksum và DMG launch smoke. `build_app.sh` local chỉ tạo bundle ad-hoc, không phải bằng chứng notarization.
 
-- macOS 14 trở lên cho hành vi runtime được hỗ trợ
-- Apple Silicon cho archive unsigned `arm64` hiện tại
-- Swift 6.2
-- GitHub CLI đã đăng nhập, có quyền push và quản lý release
-- Hiểu rõ mọi thay đổi có sẵn trong working tree
-
-### Xác minh
-
-Chạy toàn bộ command trong mục Validation tiếng Anh cho từng ứng dụng. Nếu command-line toolchain không chạy được XCTest, ghi rõ giới hạn và bắt buộc unit-test job của GitHub Actions đạt trước khi release. Smoke test và release build vẫn phải đạt local.
-
-Kiểm tra version trong Info.plist, sau đó xác nhận changelog, README, privacy, security, architecture và runbook phản ánh đúng sản phẩm ở cả ba ngôn ngữ.
-
-Với mỗi app đã đóng gói, kiểm tra `en.lproj/Localizable.strings` tồn tại và hợp lệ bằng command trong phần English. Chạy với preference domain sạch, xác nhận English là mặc định, chuyển sang Tiếng Việt, mở lại app và xác nhận lựa chọn được giữ. Kiểm tra ít nhất một empty state, progress state, confirmation dialog và error presentation ở mỗi ngôn ngữ.
-
-### Đóng gói
-
-Chạy `scripts/build_release.sh` của từng app. Kiểm tra architecture, trạng thái ký, nội dung archive và SHA-256 bằng các command trong phần English. Build hiện là unsigned nếu chưa có quy trình ký/notarize rõ ràng; phải ghi nhãn chính xác.
-
-### Trình tự publish
-
-1. Kiểm tra `git diff`, chỉ giữ source, test, metadata và tài liệu dự kiến.
-2. Commit và push default branch.
-3. Chờ toàn bộ GitHub Actions trên đúng commit.
-4. Tạo annotated tag và GitHub release theo version Toolbox.
-5. Upload hai archive ứng dụng và hai file checksum.
-6. Tải lại mọi asset từ GitHub và xác minh checksum.
-7. Kiểm tra title, product version, hướng dẫn cài, trạng thái unsigned và link changelog.
-
-Release chỉ hoàn tất sau khi asset remote đã được tải về và xác minh.
-
-### Rollback và incident
-
-Không âm thầm thay asset. Nếu artifact sai nhưng tag đúng, đánh dấu release không dùng được, mô tả vấn đề và tạo patch release mới. Nếu liên quan lỗ hổng, dùng quy trình riêng tư trong [SECURITY.md](../SECURITY.md). Giữ log/checksum nhưng xóa đường dẫn cá nhân và credential.
-
-### Vận hành Scheduled Scan
-
-Diskora chỉ tạo `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.plist` sau thao tác người dùng. Job mở Diskora với `--scheduled-scan`, quét target an toàn, gửi notification local rồi thoát; không xóa. Tắt lịch trong Diskora. Khi chẩn đoán thủ công, kiểm tra plist và lệnh `launchctl print` trong phần English.
+Không thay binary đã publish một cách im lặng. Gỡ khả dụng bản lỗi, mô tả ảnh hưởng và phát hành patch. Source/asset Diskora và Changeora lịch sử vẫn ở tag đến `v1.4.0`.
 
 ## 日本語
 
-### Release model
+`apps/toolbox` で English セクションの全 validation command を実行します。Command Line Tools に XCTest がない場合、local smoke/release build は有効ですが、merge/release には GitHub Actions の XCTest 成功が必要です。
 
-Diskora と Changeora は独立して versioning します。Toolbox tag は repository delivery を表し、含まれる両 product version を明記します。例として Toolbox `v1.4.0` は Diskora `1.3.0` と Changeora `1.4.0` を含みます。
+Scheduled scan は GUI confirmation と notification authorization 後だけ作成され、`com.thang.toolbox.scheduled-scan` で scan・通知のみを実行します。Legacy replacement は新 label の bootstrap 成功後に旧 label/plist を削除します。失敗時は旧 plist を保持して exact error を表示します。
 
-Release asset は application archive と対応する SHA-256 file だけです。別の source ZIP/TAR は upload しません。GitHub は tag-based release に “Source code” link を自動追加し、platform 管理のため削除できません。
+Update check は自動実行せず、English セクションの public GitHub endpoint だけを GET します。Path、evidence、scan result、device field は送信せず、scan 中は開始しません。
 
-### 前提条件
-
-- Supported runtime behavior 用の macOS 14 以降
-- 現在の unsigned `arm64` archive 用の Apple Silicon
-- Swift 6.2 toolchain
-- Push と release 管理権限で認証済みの GitHub CLI
-- 既存 working-tree change の把握
-
-### Validation
-
-各アプリで English の Validation command をすべて実行します。Command-line toolchain で XCTest を実行できない場合は制約を記録し、release 前に GitHub Actions unit-test job の成功を必須にします。Local smoke test と release build は必ず成功させます。
-
-Info.plist の version を確認し、changelog、README、privacy、security、architecture、runbook が 3 言語で出荷動作と一致することを確認します。
-
-各 app bundle に有効な `en.lproj/Localizable.strings` があることを English セクションの command で確認します。Preference domain を初期化して English が既定であること、Tiếng Việt へ切り替えて再起動後も保持されることを確認します。各言語で empty state、progress state、confirmation dialog、error presentation を最低 1 件ずつテストします。
-
-### Packaging
-
-各アプリの `scripts/build_release.sh` を実行します。English セクションの command で architecture、signing state、archive 内容、SHA-256 を確認します。明示的 signing/notarization process がない限り build は unsigned です。正確に表示し、notarized と誤認させないでください。
-
-### Publish sequence
-
-1. `git diff` を確認し、意図した source、test、metadata、documentation だけにします。
-2. Default branch を commit/push します。
-3. 同じ commit の GitHub Actions がすべて成功するまで待ちます。
-4. Toolbox version の annotated tag と GitHub release を作ります。
-5. 2 つの application archive と 2 つの checksum file を upload します。
-6. GitHub から全 asset を download して checksum を検証します。
-7. Release title、product version、installation note、unsigned 表示、changelog link を確認します。
-
-Remote asset の再 download と検証が終わるまで release は完了ではありません。
-
-### Rollback と incident
-
-Asset を黙って置き換えません。Artifact が誤っていて tag が正しい場合は release を利用不可として問題を説明し、新しい patch release を公開します。Vulnerability の場合は [SECURITY.md](../SECURITY.md) の private process を使います。個人 path と credential を除き、log と checksum を保存します。
-
-### Scheduled Scan operation
-
-Diskora は user 操作後にだけ `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.plist` を作成します。Job は `--scheduled-scan` で Diskora を開き、安全 target を scan して local notification 後に終了し、削除しません。Diskora から schedule を無効化できます。手動調査では plist と English セクションの `launchctl print` を確認します。
+Public artifact は universal、Developer ID signed、notarized、stapled、Gatekeeper verified の `Toolbox-2.0.0.dmg` と SHA-256 です。公開後の binary を黙って差し替えず、問題時は patch release を作成します。過去の Diskora / Changeora は `v1.4.0` までの tag に保存されています。

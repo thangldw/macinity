@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   toolbox:
-    name: Toolbox 2.0 pre-release
+    name: Toolbox 2.0
     runs-on: macos-15
     timeout-minutes: 25
     defaults:
@@ -34,6 +34,8 @@ jobs:
           ./scripts/test_core.sh
           ./scripts/test_storage.sh
           ./scripts/test_changes.sh
+          ./scripts/test_app.sh
+          ./scripts/lint_localizations.swift
       - name: Release build
         run: swift build -c release
       - name: Assemble app bundle
@@ -44,34 +46,3 @@ jobs:
           test -f dist/Toolbox.app/Contents/Resources/vi.lproj/Localizable.strings
           plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings
           codesign --verify --deep --strict dist/Toolbox.app
-
-  validate:
-    name: ${{ matrix.app }}
-    runs-on: macos-15
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        app: [diskora, changeora]
-    defaults:
-      run:
-        working-directory: apps/${{ matrix.app }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Show Swift version
-        run: swift --version
-      - name: Lint
-        run: swift format lint --recursive --parallel Sources Tests Package.swift
-      - name: Unit tests
-        run: swift test
-      - name: Smoke tests
-        run: ./scripts/test_core.sh
-      - name: Release build
-        run: swift build -c release
-      - name: Packaged localization
-        run: |
-          ./scripts/build_app.sh
-          if [[ "${{ matrix.app }}" == "diskora" ]]; then APP_NAME="Diskora"; else APP_NAME="Changeora"; fi
-          test -f "dist/$APP_NAME.app/Contents/Resources/en.lproj/Localizable.strings"
-          plutil -lint "Resources/en.lproj/Localizable.strings"
-          codesign --verify --deep --strict "dist/$APP_NAME.app"

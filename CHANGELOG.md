@@ -1,8 +1,18 @@
 # Changelog
 
-All notable changes to Toolbox are documented here. Releases follow [Semantic Versioning](https://semver.org/), while Diskora and Changeora keep independent product versions.
+All notable changes to Toolbox are documented here. Releases follow [Semantic Versioning](https://semver.org/). Historical tags through `v1.4.0` contain the standalone Diskora and Changeora applications; 2.0 and later ship one Toolbox application.
 
 ## English
+
+### Toolbox 2.0.0 — Unreleased
+
+- Replaced the standalone applications with one six-destination Toolbox GUI.
+- Added user-selected project artifact cleanup for seven developer ecosystems.
+- Added drag-and-drop Install Trace with persisted before/after evidence and interrupted-session recovery.
+- Added versioned evidence/activity stores, conflict-safe Recovery, and copy-then-verify legacy migration.
+- Revalidated every mutation against canonical roots and exact allowlisted developer commands.
+- Added onboarding, Settings, scan-only schedule migration, isolated update checks, and English/Vietnamese parity gates.
+- Consolidated CI, packaging, documentation, and release ownership under `apps/toolbox`.
 
 ### Toolbox 1.4.0 — 2026-08-02
 
@@ -58,6 +68,16 @@ This release contains Diskora 1.2.0 and Changeora 1.3.0.
 
 ## Tiếng Việt
 
+### Toolbox 2.0.0 — Chưa phát hành
+
+- Thay hai ứng dụng độc lập bằng một GUI Toolbox với sáu destination.
+- Thêm dọn artifact project theo root người dùng chọn cho bảy hệ sinh thái developer.
+- Thêm Install Trace kéo-thả với bằng chứng trước/sau và khôi phục phiên bị gián đoạn.
+- Thêm evidence/activity store có version, Recovery không ghi đè và migration copy-then-verify.
+- Revalidate mọi mutation theo canonical root và developer command allowlist chính xác.
+- Thêm onboarding, Settings, migrate lịch chỉ-quét, update check tách biệt và gate English/Tiếng Việt.
+- Hợp nhất CI, packaging, tài liệu và release vào `apps/toolbox`.
+
 ### Toolbox 1.4.0 — 2026-08-02
 
 Bản phát hành này gồm Diskora 1.3.0 và Changeora 1.4.0.
@@ -111,6 +131,16 @@ Bản phát hành này gồm Diskora 1.2.0 và Changeora 1.3.0.
 - Thiết lập nguyên tắc local-first, xem trước rõ ràng và ưu tiên thao tác có thể phục hồi.
 
 ## 日本語
+
+### Toolbox 2.0.0 — 未リリース
+
+- Standalone app を一つの 6 destination Toolbox GUI に統合しました。
+- User 選択 root 内で 7 ecosystem の project artifact cleanup を追加しました。
+- Drag-and-drop Install Trace、前後 evidence、interrupted session recovery を追加しました。
+- Versioned evidence/activity store、上書きしない Recovery、copy-then-verify migration を追加しました。
+- 全 mutation に canonical root validation と exact command allowlist を適用しました。
+- Onboarding、Settings、scan-only schedule migration、isolated update check、英語/ベトナム語 gate を追加しました。
+- CI、packaging、documentation、release を `apps/toolbox` に統合しました。
 
 ### Toolbox 1.4.0 — 2026-08-02
 

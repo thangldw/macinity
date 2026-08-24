@@ -1,111 +1,33 @@
-# Privacy
+# Toolbox Privacy
 
-Toolbox is designed for local inspection and local control. This policy describes the repository's current behavior; it is not a promise about third-party tools that users choose to run.
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
 ## English
 
-### Data processing
+Toolbox has no account, telemetry, advertising SDK, analytics endpoint, or built-in cloud synchronization. Scans, snapshots, file hashes, photo features, evidence, activity, and recovery manifests are processed on the Mac and stored under `~/Library/Application Support/Toolbox`.
 
-Toolbox has no telemetry, advertising SDK, user account, analytics endpoint, or built-in cloud synchronization. Diskora and Changeora process data on the Mac where they run.
+Depending on the workflow and granted permissions, Toolbox may read filesystem metadata, allocated sizes, image features/metadata, project markers, application bundle metadata, code-signing identifiers, package receipts, system registration data, and FSEvents. It does not upload file contents or declare software malicious. Full Disk Access is optional; inaccessible paths are shown as reduced coverage.
 
-Diskora may read:
+Mutations occur only after foreground review. Recoverable file operations use Trash and record original/Trash paths. Project roots and export destinations are user-selected. Redacted exports replace the current home prefix with `~`; review reports before sharing.
 
-- filesystem paths, sizes, dates, file type, and other metadata needed for cleanup previews;
-- partial or complete file content while calculating local SHA-256 hashes;
-- local image features and metadata used to group similar photos;
-- application identifiers, receipts, launch items, background-item evidence, and containers;
-- output from explicitly selected, allowlisted local maintenance commands.
+First launch may inspect legacy `Diskora`, `MacCleaner`, and `Changeora` Application Support JSON. Import is opt-in, copy-then-verify, and does not modify or delete legacy files. Settings may replace a legacy scheduled-scan plist only after confirmation and successful Toolbox bootstrap.
 
-Diskora stores cleanup history and restore locations under `~/Library/Application Support/Diskora`. Scheduled scanning stores user preferences and a LaunchAgent configuration. It scans and notifies only; it does not delete automatically.
-
-Changeora may read filesystem metadata, property-list metadata, code-signing identifiers, package receipts, system registration data, and FSEvents needed to compare a Mac before and after an install, update, or uninstall. It stores sessions and an optional trusted baseline under `~/Library/Application Support/Changeora`.
-
-### Data sharing
-
-The applications do not send scanned paths, hashes, photos, reports, or usage data to the developer or another service. Export occurs only when the user chooses a destination. Changeora support exports replace the current home-directory prefix with `~`; users should still review a report before sharing it.
-
-Official developer-cleanup commands can invoke locally installed third-party tools. Those tools remain governed by their own configuration and privacy behavior.
-
-### Retention and deletion
-
-History is retained locally until the user removes it or deletes the application's support directory. Items moved to Trash follow macOS Trash retention and user actions. Removing an application's support directory removes its saved history or baseline but cannot restore files already deleted from Trash.
-
-The selected interface language is stored locally in the application's `UserDefaults` domain. It is not telemetry and is never transmitted.
-
-### Permissions
-
-macOS may request notification, filesystem, or Full Disk Access permissions depending on the selected scope. Denying permission limits coverage; Toolbox does not bypass system protections.
-
-Privacy questions may be opened as a GitHub discussion or issue. Security-sensitive reports should follow [SECURITY.md](SECURITY.md).
+The app makes no automatic update request. When the user clicks **Check for Updates**, Toolbox sends a GET request to `https://api.github.com/repos/thangldw/toolbox/releases/latest` with standard HTTP headers. It sends no paths, scan results, evidence, file metadata, or device fields, and the action is blocked during a scan.
 
 ## Tiếng Việt
 
-### Xử lý dữ liệu
+Toolbox không có tài khoản, telemetry, SDK quảng cáo, analytics endpoint hoặc cloud sync tích hợp. Scan, snapshot, hash, đặc trưng ảnh, evidence, activity và recovery manifest được xử lý trên máy Mac và lưu tại `~/Library/Application Support/Toolbox`.
 
-Toolbox không có telemetry, SDK quảng cáo, tài khoản người dùng, endpoint analytics hoặc đồng bộ cloud tích hợp. Diskora và Changeora xử lý dữ liệu ngay trên máy Mac đang chạy.
+Tùy workflow/quyền, Toolbox có thể đọc metadata filesystem, dung lượng, đặc trưng/metadata ảnh, project marker, bundle/signing metadata, package receipt, system registration và FSEvents. App không upload nội dung file hoặc kết luận malware. Full Disk Access là tùy chọn; path không đọc được hiển thị là coverage giảm.
 
-Diskora có thể đọc:
+Mutation chỉ xảy ra sau review foreground. Thao tác có thể khôi phục dùng Trash. Migration dữ liệu Diskora/MacCleaner/Changeora là opt-in, copy-then-verify và không sửa/xóa file cũ. Thay lịch quét cũ cần xác nhận và chỉ gỡ plist cũ sau khi Toolbox bootstrap thành công.
 
-- đường dẫn, kích thước, ngày, loại file và metadata cần cho màn hình xem trước;
-- một phần hoặc toàn bộ nội dung file khi tính SHA-256 cục bộ;
-- đặc trưng và metadata ảnh cục bộ để gom nhóm ảnh tương tự;
-- định danh ứng dụng, receipt, launch item, bằng chứng background item và container;
-- output của lệnh bảo trì local nằm trong allowlist và do người dùng chọn rõ ràng.
-
-Diskora lưu lịch sử cleanup và vị trí khôi phục tại `~/Library/Application Support/Diskora`. Quét theo lịch lưu tùy chọn người dùng và cấu hình LaunchAgent. Tính năng này chỉ quét và thông báo, không tự xóa.
-
-Changeora có thể đọc metadata filesystem, property list, định danh chữ ký, package receipt, dữ liệu đăng ký hệ thống và FSEvents để so sánh máy Mac trước/sau cài đặt, cập nhật hoặc gỡ ứng dụng. Phiên theo dõi và baseline tùy chọn được lưu tại `~/Library/Application Support/Changeora`.
-
-### Chia sẻ dữ liệu
-
-Ứng dụng không gửi đường dẫn, hash, ảnh, báo cáo hoặc dữ liệu sử dụng cho nhà phát triển hay dịch vụ khác. Chỉ export khi người dùng chọn đích lưu. Báo cáo hỗ trợ của Changeora thay prefix thư mục home hiện tại bằng `~`; người dùng vẫn cần xem lại trước khi chia sẻ.
-
-Lệnh developer cleanup chính thức có thể gọi công cụ bên thứ ba đã cài local. Các công cụ đó tuân theo cấu hình và chính sách riêng của chúng.
-
-### Lưu trữ và xóa
-
-Lịch sử được giữ local cho đến khi người dùng xóa hoặc xóa thư mục support của ứng dụng. File chuyển vào Trash tuân theo cơ chế Trash của macOS. Xóa thư mục support sẽ xóa lịch sử hoặc baseline nhưng không thể khôi phục file đã bị xóa khỏi Trash.
-
-Ngôn ngữ giao diện đã chọn được lưu cục bộ trong `UserDefaults` của ứng dụng. Đây không phải telemetry và không được truyền ra ngoài.
-
-### Quyền truy cập
-
-macOS có thể yêu cầu quyền notification, filesystem hoặc Full Disk Access tùy phạm vi quét. Từ chối quyền sẽ làm giảm độ bao phủ; Toolbox không vượt qua cơ chế bảo vệ hệ thống.
-
-Câu hỏi quyền riêng tư có thể gửi qua GitHub discussion hoặc issue. Báo cáo nhạy cảm về bảo mật cần theo [SECURITY.md](SECURITY.md).
+App không tự check update. Khi người dùng bấm nút, Toolbox chỉ GET endpoint GitHub công khai nêu ở phần English, không gửi path, kết quả scan, evidence, metadata file hoặc field thiết bị, và bị chặn trong lúc scan.
 
 ## 日本語
 
-### データ処理
+Toolbox には account、telemetry、広告 SDK、analytics endpoint、内蔵 cloud sync がありません。Scan、snapshot、hash、photo feature、evidence、activity、recovery manifest は Mac 上で処理され、`~/Library/Application Support/Toolbox` に保存されます。
 
-Toolbox には telemetry、広告 SDK、user account、analytics endpoint、内蔵 cloud sync がありません。Diskora と Changeora は実行中の Mac 上でデータを処理します。
+Workflow と permission に応じて filesystem metadata、size、image metadata/feature、project marker、bundle/signing metadata、package receipt、system registration、FSEvents を読み取ります。File content を upload せず、malware 判定を行いません。Full Disk Access は任意で、読めない path は reduced coverage として表示します。
 
-Diskora は次のデータを読み取る場合があります。
-
-- Cleanup preview に必要な path、size、date、file type などの metadata
-- Local SHA-256 計算中の file 内容の一部または全部
-- 類似写真 grouping に使う local image feature と metadata
-- Application identifier、receipt、launch item、background-item evidence、container
-- User が明示的に選んだ allowlist 内の local maintenance command 出力
-
-Diskora は cleanup history と restore location を `~/Library/Application Support/Diskora` に保存します。定期 scan は user preference と LaunchAgent 設定を保存しますが、scan と通知だけを行い自動削除しません。
-
-Changeora は install、update、uninstall 前後を比較するため、filesystem metadata、property-list metadata、code-signing identifier、package receipt、system registration data、FSEvents を読み取る場合があります。Session と任意の trusted baseline は `~/Library/Application Support/Changeora` に保存します。
-
-### データ共有
-
-アプリは scan した path、hash、photo、report、usage data を developer や外部 service に送信しません。Export は user が保存先を選んだ場合だけ行います。Changeora support export は現在の home-directory prefix を `~` に置換しますが、共有前に内容を確認してください。
-
-公式 developer-cleanup command は local に導入された third-party tool を呼び出す場合があります。それらの tool には独自の設定と privacy behavior が適用されます。
-
-### 保持と削除
-
-History は user が削除するか application support directory を削除するまで local に残ります。Trash に移動した item は macOS Trash の保持と user 操作に従います。Support directory を削除すると history/baseline は消えますが、Trash から削除済みの file は復元できません。
-
-選択した UI 言語はアプリの `UserDefaults` domain にローカル保存されます。Telemetry ではなく、外部へ送信されません。
-
-### 権限
-
-選択範囲に応じて macOS が notification、filesystem、Full Disk Access を要求する場合があります。拒否すると監視範囲が制限されます。Toolbox は system protection を迂回しません。
-
-Privacy に関する質問は GitHub discussion または issue を利用できます。Security-sensitive な報告は [SECURITY.md](SECURITY.md) に従ってください。
+Mutation は foreground review 後だけです。Legacy migration は opt-in の copy-then-verify で旧 file を変更・削除しません。Update request は自動実行せず、user が button を押した場合だけ English セクションの public GitHub endpoint に GET し、scan/path/evidence/device data を送りません。
