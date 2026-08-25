@@ -17,7 +17,7 @@
       --rule-solid: #d9d5cb;
       --accent: #a83a00;
       --accent-tint: #fff2e8;
-      --info-link: #236aa8;
+      --link: #a83a00;
       --sans: Inter, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
       --mono: ui-monospace, "SFMono-Regular", "Noto Sans Mono CJK JP", Menlo, monospace;
     }
@@ -65,11 +65,11 @@
     <div class="diagram">
       <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="toolbox-architecture-title toolbox-architecture-desc">
         <title id="toolbox-architecture-title">Toolbox architecture and safety boundaries</title>
-        <desc id="toolbox-architecture-desc">Architecture showing the user-initiated GUI route through Toolbox modules to local stores and macOS services, the manual GitHub Releases check, two blocked paths, and the review and revalidation gate.</desc>
+        <desc id="toolbox-architecture-desc">Architecture showing the app shell coordinating ToolboxCore, ToolboxStorage, and ToolboxChanges, the feature modules depending on Core, local audit and macOS service paths, the manual GitHub Releases check, two blocked paths, and the review and revalidation gate.</desc>
         <defs>
           <marker id="toolbox-architecture-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#505750"/></marker>
           <marker id="toolbox-architecture-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a83a00"/></marker>
-          <marker id="toolbox-architecture-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#236aa8"/></marker>
+          <marker id="toolbox-architecture-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a83a00"/></marker>
         </defs>
 
         <rect width="100%" height="100%" fill="#fbfcfe"/>
@@ -88,37 +88,37 @@
         <text x="1180" y="96" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.14em">EXTERNAL NETWORK</text>
 
         <!-- Paths: draw before components -->
-        <path d="M 200 312 H 224 Q 240 312 240 296 V 192 Q 240 176 256 176 H 280" fill="none" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
-        <rect x="248" y="236" width="104" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="300" y="248" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">PERMITTED INGRESS</text>
+        <path d="M 200 312 H 232 Q 240 312 240 304 V 184 Q 240 176 248 176 H 280" fill="none" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
+        <rect x="248" y="236" width="80" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="288" y="248" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">GUI INGRESS</text>
 
         <line x1="440" y1="176" x2="520" y2="176" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
-        <rect x="456" y="148" width="48" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="480" y="160" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">ROUTE</text>
+        <rect x="448" y="148" width="64" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="480" y="160" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COORD CORE</text>
 
-        <path d="M 568 208 V 272 Q 568 280 560 280 H 368 Q 360 280 360 288 V 360" fill="none" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
-        <rect x="432" y="252" width="64" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="464" y="264" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COORDINATE</text>
+        <line x1="336" y1="208" x2="336" y2="360" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
+        <rect x="348" y="268" width="80" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="388" y="280" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COORD STORAGE</text>
 
-        <line x1="632" y1="208" x2="632" y2="360" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
-        <rect x="644" y="268" width="64" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="676" y="280" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COORDINATE</text>
+        <path d="M 400 208 V 280 Q 400 288 408 288 H 592 Q 600 288 600 296 V 360" fill="none" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
+        <rect x="504" y="260" width="80" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="544" y="272" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COORD CHANGES</text>
 
         <line x1="680" y1="176" x2="844" y2="176" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
         <rect x="724" y="148" width="112" height="16" rx="4" fill="#fbfcfe"/>
         <text x="780" y="160" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">AUDIT RECORDS</text>
 
-        <path d="M 344 424 V 464 Q 344 480 360 480 H 908 Q 924 480 924 464 V 424" fill="none" stroke="#a83a00" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow-accent)"/>
-        <rect x="532" y="452" width="136" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="600" y="464" fill="#a83a00" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">REVIEWED MUTATION</text>
+        <path d="M 344 424 V 472 Q 344 480 352 480 H 916 Q 924 480 924 472 V 424" fill="none" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
+        <rect x="548" y="452" width="104" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="600" y="464" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">REVIEWED MOVE</text>
 
         <line x1="680" y1="392" x2="844" y2="392" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
-        <rect x="712" y="364" width="120" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="772" y="376" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">USER-ACTION OPEN</text>
+        <rect x="736" y="364" width="72" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="772" y="376" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">USER OPEN</text>
 
-        <path d="M 360 144 V 128 Q 360 116 372 116 H 1168 Q 1180 116 1180 128 V 144" fill="none" stroke="#236aa8" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow-link)"/>
-        <rect x="708" y="88" width="144" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="780" y="100" fill="#236aa8" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">USER-INITIATED GET</text>
+        <path d="M 360 144 V 124 Q 360 116 368 116 H 1172 Q 1180 116 1180 124 V 144" fill="none" stroke="#a83a00" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow-link)"/>
+        <rect x="748" y="88" width="64" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="780" y="100" fill="#a83a00" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">USER GET</text>
 
         <line x1="1004" y1="192" x2="1108" y2="192" stroke="#697169" stroke-width="1" stroke-dasharray="4,3"/>
         <rect x="1012" y="164" width="88" height="16" rx="4" fill="#fbfcfe"/>
@@ -126,16 +126,17 @@
         <circle cx="1108" cy="192" r="8" fill="#fbfcfe" stroke="#697169" stroke-width="1.2"/>
         <path d="M 1104 188 L 1112 196 M 1112 188 L 1104 196" fill="none" stroke="#697169" stroke-width="1.2"/>
 
-        <path d="M 400 424 V 520 Q 400 536 416 536 H 812" fill="none" stroke="#697169" stroke-width="1" stroke-dasharray="4,3"/>
-        <rect x="548" y="508" width="152" height="16" rx="4" fill="#fbfcfe"/>
-        <text x="624" y="520" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">UNREVIEWED BLOCKED</text>
+        <path d="M 400 424 V 528 Q 400 536 408 536 H 812" fill="none" stroke="#697169" stroke-width="1" stroke-dasharray="4,3"/>
+        <rect x="580" y="508" width="88" height="16" rx="4" fill="#fbfcfe"/>
+        <text x="624" y="520" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">UNREVIEWED</text>
         <circle cx="812" cy="536" r="8" fill="#fbfcfe" stroke="#697169" stroke-width="1.2"/>
         <path d="M 808 532 L 816 540 M 816 532 L 808 540" fill="none" stroke="#697169" stroke-width="1.2"/>
 
         <!-- Privileged gate at the local trust boundary -->
-        <polygon points="804,468 816,480 804,492 792,480" fill="#fff2e8" stroke="#a83a00" stroke-width="1.2"/>
-        <rect x="704" y="436" width="200" height="16" rx="4" fill="#fbfcfe" stroke="rgba(168,58,0,0.28)" stroke-width="0.8"/>
-        <text x="804" y="448" fill="#a83a00" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">PRIVILEGED GATE · REVIEW + REVALIDATE</text>
+        <polygon points="804,468 816,480 804,492 792,480" fill="#fbfaf6" stroke="#505750" stroke-width="1.2"/>
+        <rect x="744" y="428" width="120" height="32" rx="4" fill="#fbfcfe" stroke="rgba(29,33,30,0.20)" stroke-width="0.8"/>
+        <text x="804" y="440" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">PRIVILEGE GATE</text>
+        <text x="804" y="456" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">REVALIDATE</text>
 
         <!-- Components -->
         <rect x="40" y="280" width="160" height="64" rx="6" fill="rgba(80,87,80,0.10)" stroke="#697169" stroke-width="1"/>
@@ -144,7 +145,7 @@
 
         <rect x="280" y="144" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
         <text x="360" y="172" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">App shell</text>
-        <text x="360" y="192" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SwiftUI · AppKit</text>
+        <text x="360" y="192" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">coordinates 3 modules</text>
 
         <rect x="520" y="144" width="160" height="64" rx="6" fill="#fff2e8" stroke="#a83a00" stroke-width="1.2"/>
         <text x="600" y="172" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">ToolboxCore</text>
@@ -152,11 +153,13 @@
 
         <rect x="280" y="360" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
         <text x="360" y="388" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">ToolboxStorage</text>
-        <text x="360" y="408" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">reviewed cleanup · recovery</text>
+        <text x="360" y="404" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">depends on ToolboxCore</text>
+        <text x="360" y="416" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">cleanup · recovery</text>
 
         <rect x="520" y="360" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
         <text x="600" y="388" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">ToolboxChanges</text>
-        <text x="600" y="408" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">snapshots · bounded FSEvents</text>
+        <text x="600" y="404" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">depends on ToolboxCore</text>
+        <text x="600" y="416" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">snapshots · FSEvents</text>
 
         <rect x="844" y="144" width="160" height="64" rx="6" fill="rgba(29,33,30,0.05)" stroke="#505750" stroke-width="1"/>
         <text x="924" y="172" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">Local stores</text>
@@ -175,12 +178,12 @@
         <text x="40" y="688" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="0.14em">LEGEND</text>
         <line x1="144" y1="684" x2="192" y2="684" stroke="#505750" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
         <text x="204" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">PERMITTED LOCAL PATH</text>
-        <line x1="404" y1="684" x2="452" y2="684" stroke="#236aa8" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow-link)"/>
+        <line x1="404" y1="684" x2="452" y2="684" stroke="#a83a00" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow-link)"/>
         <text x="464" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">USER-INITIATED NETWORK</text>
         <line x1="696" y1="684" x2="744" y2="684" stroke="#697169" stroke-width="1" stroke-dasharray="4,3"/>
         <circle cx="752" cy="684" r="8" fill="#fbfcfe" stroke="#697169" stroke-width="1"/>
         <text x="772" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">BLOCKED BEFORE BOUNDARY</text>
-        <polygon points="1060,672 1072,684 1060,696 1048,684" fill="#fff2e8" stroke="#a83a00" stroke-width="1"/>
+        <polygon points="1060,672 1072,684 1060,696 1048,684" fill="#fbfaf6" stroke="#505750" stroke-width="1"/>
         <text x="1084" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">PRIVILEGED GATE</text>
       </svg>
     </div>
@@ -190,7 +193,7 @@
         <h2>English</h2>
         <dl>
           <dt>Content</dt>
-          <dd>The supported route starts with foreground GUI input, crosses the Toolbox process boundary, coordinates Core, Storage, and Changes, writes local audit records, and calls macOS services. GitHub Releases is contacted only by the explicit update check.</dd>
+          <dd>The supported route starts with foreground GUI input. The app shell coordinates ToolboxCore, ToolboxStorage, and ToolboxChanges; Storage and Changes depend on Core. Core writes local audit records, and the feature modules call macOS services. GitHub Releases is contacted only by the explicit update check.</dd>
           <dt>Exclusions</dt>
           <dd>The figure does not imply a privileged helper, automatic upload, automatic update installation, cloud storage, or a complete historical audit from FSEvents.</dd>
           <dt>Safety boundary</dt>
@@ -201,7 +204,7 @@
         <h2>Tiếng Việt</h2>
         <dl>
           <dt>Nội dung</dt>
-          <dd>Luồng được hỗ trợ bắt đầu từ input GUI ở foreground, đi qua ranh giới process Toolbox, điều phối Core, Storage và Changes, ghi audit record local rồi gọi service của macOS. GitHub Releases chỉ được truy cập khi người dùng chủ động kiểm tra update.</dd>
+          <dd>Luồng được hỗ trợ bắt đầu từ input GUI ở foreground. App shell điều phối ToolboxCore, ToolboxStorage và ToolboxChanges; Storage cùng Changes phụ thuộc Core. Core ghi audit record local, còn các feature module gọi service của macOS. GitHub Releases chỉ được truy cập khi người dùng chủ động kiểm tra update.</dd>
           <dt>Không bao gồm</dt>
           <dd>Sơ đồ không ngụ ý privileged helper, upload tự động, tự cài update, cloud storage hoặc historical audit đầy đủ từ FSEvents.</dd>
           <dt>Ranh giới an toàn</dt>
@@ -212,7 +215,7 @@
         <h2>日本語</h2>
         <dl>
           <dt>内容</dt>
-          <dd>サポート対象の経路は foreground GUI input から始まり、Toolbox process boundary を越えて Core、Storage、Changes を調整し、local audit record を保存して macOS service を呼び出します。GitHub Releases への接続は user が明示的に update check を行った場合だけです。</dd>
+          <dd>サポート対象の経路は foreground GUI input から始まります。App shell が ToolboxCore、ToolboxStorage、ToolboxChanges を調整し、Storage と Changes は Core に依存します。Core は local audit record を保存し、feature module は macOS service を呼び出します。GitHub Releases への接続は user が明示的に update check を行った場合だけです。</dd>
           <dt>対象外</dt>
           <dd>この図は privileged helper、自動 upload、自動 update install、cloud storage、または FSEvents による完全な historical audit を示しません。</dd>
           <dt>Safety boundary</dt>
