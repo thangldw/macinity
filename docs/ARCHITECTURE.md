@@ -15,6 +15,8 @@ Toolbox 2.0 is a SwiftPM package under `apps/toolbox`, targets macOS 13 or later
 
 Dependency direction is `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, and `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`. Storage and Changes do not import one another. This keeps shared evidence and safety contracts below both feature modules and leaves cross-module coordination in the executable.
 
+See the [architecture and safety-boundary diagram](../docs/diagrams/toolbox-architecture.html) for the static component and trust-path view.
+
 ### Application coordination
 
 The shell exposes Home, Storage, Projects, Applications, Change Timeline, and Recovery. `ToolboxCoordinator` persists the selected section and derives Home summaries from the Core ledgers. A Change Timeline action can route a standardized evidence path to Storage; the receiving view displays the path and opens Finder only on request. Routing does not select or mutate the item.
@@ -74,6 +76,8 @@ Toolbox 2.0 là SwiftPM package trong `apps/toolbox`, target macOS 13 trở lên
 
 Hướng dependency là `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore` và `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`. Storage và Changes không import nhau. Cấu trúc này đặt shared evidence/safety contract bên dưới cả hai feature module và giữ điều phối cross-module trong executable.
 
+Xem [sơ đồ architecture và safety boundary](../docs/diagrams/toolbox-architecture.html) để có component/trust-path view dạng static.
+
 ### Điều phối ứng dụng
 
 Shell cung cấp Home, Storage, Projects, Applications, Change Timeline và Recovery. `ToolboxCoordinator` lưu section đang chọn và tạo summary ở Home từ các Core ledger. Một action trong Change Timeline có thể route standardized evidence path sang Storage; view nhận chỉ hiển thị path và mở Finder khi người dùng yêu cầu. Routing không chọn hoặc mutate item.
@@ -132,6 +136,8 @@ Toolbox 2.0 は `apps/toolbox` の SwiftPM package で、macOS 13 以降を targ
 - `Toolbox` は application lifecycle、one-window shell、onboarding、Settings、update check、summary、feature module 間 routing を所有します。
 
 Dependency direction は `ToolboxStorage -> ToolboxCore`、`ToolboxChanges -> ToolboxCore`、`Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges` です。Storage と Changes は相互に import しません。Shared evidence/safety contract を両 feature module の下に置き、cross-module coordination を executable に保持します。
+
+Static な component/trust-path view は [architecture と safety-boundary diagram](../docs/diagrams/toolbox-architecture.html) を参照してください。
 
 ### Application coordination
 

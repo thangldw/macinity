@@ -71,7 +71,7 @@ toolbox/
 └── CONTRIBUTING.md
 ```
 
-Start with [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), and [Release operations](docs/OPERATIONS-RELEASE.md). Historical release details are in [Changelog](CHANGELOG.md) and the [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md). Engineering changes follow [Contributing](CONTRIBUTING.md).
+Start with [Architecture](docs/ARCHITECTURE.md), the [architecture diagram](docs/diagrams/toolbox-architecture.html), [Operations](docs/OPERATIONS.md), and [Release operations](docs/OPERATIONS-RELEASE.md). Historical release details are in [Changelog](CHANGELOG.md) and the [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md). Engineering changes follow [Contributing](CONTRIBUTING.md).
 
 ### Version 1 history
 
@@ -150,7 +150,7 @@ toolbox/
 └── CONTRIBUTING.md
 ```
 
-Bắt đầu với [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md) và [Release operations](docs/OPERATIONS-RELEASE.md). Chi tiết release lịch sử nằm trong [Changelog](CHANGELOG.md) và [release note `v2.0.0`](docs/launch/toolbox-2.0.0.md). Thay đổi kỹ thuật tuân theo [Contributing](CONTRIBUTING.md).
+Bắt đầu với [Architecture](docs/ARCHITECTURE.md), [sơ đồ architecture](docs/diagrams/toolbox-architecture.html), [Operations](docs/OPERATIONS.md) và [Release operations](docs/OPERATIONS-RELEASE.md). Chi tiết release lịch sử nằm trong [Changelog](CHANGELOG.md) và [release note `v2.0.0`](docs/launch/toolbox-2.0.0.md). Thay đổi kỹ thuật tuân theo [Contributing](CONTRIBUTING.md).
 
 ### Lịch sử Version 1
 
@@ -229,7 +229,7 @@ toolbox/
 └── CONTRIBUTING.md
 ```
 
-[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md) から参照してください。Historical release detail は [Changelog](CHANGELOG.md) と [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md) にあります。Engineering change は [Contributing](CONTRIBUTING.md) に従います。
+[Architecture](docs/ARCHITECTURE.md)、[architecture diagram](docs/diagrams/toolbox-architecture.html)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md) から参照してください。Historical release detail は [Changelog](CHANGELOG.md) と [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md) にあります。Engineering change は [Contributing](CONTRIBUTING.md) に従います。
 
 ### Version 1 の履歴
 

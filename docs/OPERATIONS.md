@@ -4,6 +4,8 @@
 
 ## English
 
+Visual references: [Install Trace sequence](diagrams/install-trace-sequence.html) and [review/recovery state machine](diagrams/review-recovery-state.html).
+
 ### Workstation and toolchain
 
 Toolbox is a dependency-free SwiftPM package with `swift-tools-version: 6.0` and a macOS 13 deployment target. Development, application bundling, FSEvents, LaunchAgent, signing, DMG, and Gatekeeper checks require macOS. GitHub CI uses `macos-15` and prints the selected Swift version; the repository does not promise a specific local Xcode build beyond what the manifest and tests prove.
@@ -106,6 +108,8 @@ Review the generated file before sharing it. Move it only through a user-chosen 
 
 ## Tiếng Việt
 
+Tham chiếu trực quan: [sequence Install Trace](diagrams/install-trace-sequence.html) và [state machine review/recovery](diagrams/review-recovery-state.html).
+
 ### Workstation và toolchain
 
 Toolbox là SwiftPM package không có dependency ngoài, dùng `swift-tools-version: 6.0` và deployment target macOS 13. Development, application bundling, FSEvents, LaunchAgent, signing, DMG và Gatekeeper check cần macOS. GitHub CI dùng `macos-15` và in Swift version đã chọn; repository không hứa một local Xcode build cụ thể ngoài những gì manifest và test chứng minh.
@@ -207,6 +211,8 @@ Review file đã tạo trước khi share. Chỉ move file qua channel do ngư�
 - Với suspected vulnerability hoặc unsafe path acceptance, dừng workflow bị ảnh hưởng và theo `SECURITY.md`. Với artifact, signing, notarization, checksum hoặc published-release issue, theo `docs/OPERATIONS-RELEASE.md`.
 
 ## 日本語
+
+Visual reference: [Install Trace sequence](diagrams/install-trace-sequence.html) と [review/recovery state machine](diagrams/review-recovery-state.html)。
 
 ### Workstation と toolchain
 

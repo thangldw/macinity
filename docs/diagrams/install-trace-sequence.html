@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Trace sequence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --paper: #fbfcfe;
+      --paper-2: #fbfaf6;
+      --ink: #1d211e;
+      --muted: #505750;
+      --soft: #697169;
+      --rule: rgba(29, 33, 30, 0.12);
+      --accent: #a83a00;
+      --sans: Inter, "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+      --mono: ui-monospace, "SFMono-Regular", "Noto Sans Mono CJK JP", Menlo, monospace;
+    }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+    main { width: 100%; max-width: 1360px; min-width: 0; margin: 0 auto; padding: 40px; }
+    .eyebrow { margin: 0 0 8px; color: var(--soft); font: 600 8px/1.4 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; }
+    h1 { margin: 0 0 24px; font-size: 28px; font-weight: 400; line-height: 1.2; }
+    .diagram { width: 100%; max-width: 100%; min-width: 0; overflow-x: auto; border-bottom: 1px solid var(--rule); }
+    svg { display: block; width: 100%; min-width: 960px; height: auto; }
+    .interpretation { display: grid; grid-template-columns: 1.08fr 1fr 1fr; gap: 24px; padding: 32px 0 8px; }
+    article { min-width: 0; padding-top: 16px; border-top: 1px solid var(--rule); overflow-wrap: anywhere; }
+    h2 { margin: 0 0 12px; font-size: 16px; font-weight: 600; }
+    dl, dd { margin: 0; }
+    dt { margin-top: 12px; color: var(--soft); font: 600 8px/1.4 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
+    dd { margin-top: 4px; font-size: 14px; }
+    footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--soft); font: 400 12px/1.5 var(--mono); }
+    @media (max-width: 760px) { main { padding: 24px 16px; } .interpretation { grid-template-columns: 1fr; } }
+    @media print { main { width: 100%; padding: 0; } .diagram { overflow: visible; } svg { min-width: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Sequence · Install Trace · Engineer</p>
+    <h1>Install Trace sequence</h1>
+    <div class="diagram">
+      <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="install-trace-sequence-title install-trace-sequence-desc">
+        <title id="install-trace-sequence-title">Install Trace sequence</title>
+        <desc id="install-trace-sequence-desc">Sequence showing a user starting and finishing Install Trace through the GUI and coordinator, bounded snapshot and FSEvents capture, normal macOS installer opening, resumable interruption metadata, and local session persistence.</desc>
+        <defs>
+          <marker id="install-trace-sequence-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#505750"/></marker>
+          <marker id="install-trace-sequence-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a83a00"/></marker>
+          <marker id="install-trace-sequence-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#236aa8"/></marker>
+          <marker id="install-trace-sequence-arrow-open" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polyline points="0 0, 8 3, 0 6" fill="none" stroke="#505750" stroke-width="1.2"/></marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#fbfcfe"/>
+
+        <!-- Lifelines -->
+        <line x1="200" y1="104" x2="200" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="440" y1="104" x2="440" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="680" y1="104" x2="680" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="920" y1="104" x2="920" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="1160" y1="104" x2="1160" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
+
+        <!-- Optional cancel/interruption fragment -->
+        <rect x="412" y="316" width="296" height="72" rx="4" fill="rgba(29,33,30,0.02)" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
+        <rect x="412" y="316" width="40" height="16" rx="4" fill="#fbfcfe" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
+        <text x="432" y="328" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.12em">OPT</text>
+        <text x="464" y="344" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">[cancel / interruption]</text>
+
+        <!-- Activation bars -->
+        <rect x="436" y="152" width="8" height="436" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
+        <rect x="676" y="188" width="8" height="364" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
+        <rect x="916" y="224" width="8" height="36" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
+        <rect x="916" y="480" width="8" height="36" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
+        <rect x="1156" y="296" width="8" height="28" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
+
+        <!-- Messages -->
+        <line x1="200" y1="152" x2="432" y2="152" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="284" y="128" width="72" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="320" y="136" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SELECT INPUT</text>
+
+        <line x1="444" y1="188" x2="672" y2="188" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="520" y="164" width="76" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="558" y="172" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">START TRACE</text>
+
+        <line x1="684" y1="224" x2="912" y2="224" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="752" y="200" width="92" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="798" y="208" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">BEFORE + WATCH</text>
+
+        <line x1="916" y1="260" x2="688" y2="260" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="756" y="236" width="92" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="802" y="244" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SNAPSHOT READY</text>
+
+        <line x1="684" y1="296" x2="1152" y2="296" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="872" y="272" width="96" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="920" y="280" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">OPEN INSTALLER</text>
+
+        <line x1="444" y1="368" x2="672" y2="368" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="512" y="344" width="92" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="558" y="352" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">RETAIN RESUME</text>
+
+        <line x1="200" y1="408" x2="432" y2="408" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="292" y="384" width="56" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="320" y="392" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">FINISH</text>
+
+        <line x1="444" y1="444" x2="672" y2="444" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="512" y="420" width="92" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="558" y="428" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COMPLETE TRACE</text>
+
+        <line x1="684" y1="480" x2="912" y2="480" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="756" y="456" width="84" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="798" y="464" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">AFTER + STOP</text>
+
+        <line x1="916" y1="516" x2="688" y2="516" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="764" y="492" width="76" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="802" y="500" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">DIFF READY</text>
+
+        <line x1="676" y1="552" x2="448" y2="552" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="520" y="528" width="84" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="562" y="536" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAVE + AUDIT</text>
+
+        <line x1="436" y1="588" x2="208" y2="588" stroke="#a83a00" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow-accent)"/>
+        <rect x="280" y="564" width="80" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="320" y="572" fill="#a83a00" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">TRACE SAVED</text>
+
+        <!-- Actors paint over lifelines -->
+        <rect x="120" y="40" width="160" height="64" rx="6" fill="rgba(80,87,80,0.10)" stroke="#697169" stroke-width="1"/>
+        <text x="200" y="80" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">User</text>
+
+        <rect x="360" y="40" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
+        <text x="440" y="80" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">GUI</text>
+
+        <rect x="600" y="40" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
+        <text x="680" y="80" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">Coordinator</text>
+
+        <rect x="840" y="40" width="160" height="64" rx="6" fill="rgba(29,33,30,0.05)" stroke="#505750" stroke-width="1"/>
+        <text x="920" y="68" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle"><tspan x="920" dy="0">Snapshot /</tspan><tspan x="920" dy="16">FSEvents</tspan></text>
+
+        <rect x="1080" y="40" width="160" height="64" rx="6" fill="rgba(29,33,30,0.03)" stroke="rgba(29,33,30,0.30)" stroke-width="1"/>
+        <text x="1160" y="80" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">Installer</text>
+
+        <!-- Legend -->
+        <line x1="40" y1="660" x2="1240" y2="660" stroke="rgba(29,33,30,0.12)" stroke-width="0.8"/>
+        <text x="40" y="688" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" letter-spacing="0.14em">LEGEND</text>
+        <line x1="144" y1="684" x2="192" y2="684" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <text x="204" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">CALL</text>
+        <line x1="320" y1="684" x2="368" y2="684" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
+        <text x="380" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">FILLED RETURN</text>
+        <rect x="568" y="672" width="40" height="24" rx="4" fill="rgba(29,33,30,0.02)" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
+        <text x="620" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">OPTIONAL INTERRUPTION</text>
+        <line x1="864" y1="684" x2="912" y2="684" stroke="#a83a00" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow-accent)"/>
+        <text x="924" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">SUCCESS RESPONSE</text>
+      </svg>
+    </div>
+
+    <section class="interpretation" aria-label="Trilingual interpretation">
+      <article lang="en">
+        <h2>English</h2>
+        <dl>
+          <dt>Content</dt>
+          <dd>The user selects a supported installer, the coordinator captures a before snapshot and starts bounded FSEvents, then opens the item through normal macOS handling. Finishing captures after evidence, compares it, and persists the session and audit records. Cancellation or interruption retains resumable metadata.</dd>
+          <dt>Exclusions</dt>
+          <dd>Toolbox does not mount, execute, install, uninstall, or bypass Gatekeeper for the selected item. The sequence does not claim that FSEvents is a complete historical audit.</dd>
+          <dt>Safety boundary</dt>
+          <dd>The user starts and finishes the trace in the foreground. Installer execution remains in the normal macOS flow; persisted evidence stays local, and an interruption interval is reported as reduced coverage when resumed.</dd>
+        </dl>
+      </article>
+      <article lang="vi">
+        <h2>Tiếng Việt</h2>
+        <dl>
+          <dt>Nội dung</dt>
+          <dd>Người dùng chọn installer được hỗ trợ; coordinator chụp before snapshot, bắt đầu FSEvents có giới hạn rồi mở item bằng luồng macOS bình thường. Khi finish, hệ thống chụp after evidence, so sánh và lưu session cùng audit record. Cancel hoặc interruption giữ metadata để resume.</dd>
+          <dt>Không bao gồm</dt>
+          <dd>Toolbox không mount, execute, install, uninstall hoặc bypass Gatekeeper cho item đã chọn. Sequence không claim FSEvents là historical audit đầy đủ.</dd>
+          <dt>Ranh giới an toàn</dt>
+          <dd>Người dùng bắt đầu và kết thúc trace trong foreground. Việc chạy installer vẫn thuộc luồng macOS bình thường; evidence đã lưu ở local, và khoảng interruption được báo reduced coverage khi resume.</dd>
+        </dl>
+      </article>
+      <article lang="ja">
+        <h2>日本語</h2>
+        <dl>
+          <dt>内容</dt>
+          <dd>User が対象 installer を選択すると、coordinator は before snapshot を取得して bounded FSEvents を開始し、通常の macOS 処理で item を開きます。Finish 時に after evidence を取得・比較し、session と audit record を保存します。Cancel または interruption では resume 用 metadata を保持します。</dd>
+          <dt>対象外</dt>
+          <dd>Toolbox は選択 item を mount、execute、install、uninstall せず、Gatekeeper を bypass しません。この sequence は FSEvents を完全な historical audit として扱いません。</dd>
+          <dt>Safety boundary</dt>
+          <dd>Trace の開始と終了は user の foreground action です。Installer 実行は通常の macOS flow に残り、保存 evidence は local に留まります。Resume 時は interruption 区間を reduced coverage として報告します。</dd>
+        </dl>
+      </article>
+    </section>
+    <footer>Static HTML · 1280 × 720 SVG · five lifelines · twelve messages · no animation · profile: thangldw</footer>
+  </main>
+</body>
+</html>
