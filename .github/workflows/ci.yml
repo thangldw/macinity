@@ -14,6 +14,18 @@ permissions:
   contents: read
 
 jobs:
+  documentation:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Show Python version
+        run: python3 --version
+      - name: Validate documentation
+        run: bash tests/documentation_contract.sh
+      - name: Validate diagrams
+        run: python3 tests/check_diagrams.py docs/diagrams/*.html
+
   toolbox:
     name: Toolbox 2.0
     runs-on: macos-15
