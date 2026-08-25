@@ -264,8 +264,12 @@ def repository_hygiene_cases() -> list[bool]:
     return [
         repository_hygiene_case("internal-plan", "docs/superpowers/plan.md"),
         repository_hygiene_case("design-draft", "docs/design-concepts/draft.png"),
+        repository_hygiene_case("design-evidence", "docs/design-evidence/audit.png"),
         repository_hygiene_case("beta-record", "docs/launch/toolbox-beta.md"),
         repository_hygiene_case("release-archive", "dist/Toolbox.zip"),
+        repository_hygiene_case("root-ds-store", ".DS_Store"),
+        repository_hygiene_case("root-swift-build", ".build/workspace-state.json"),
+        repository_hygiene_case("root-derived-data", "DerivedData/cache.db"),
     ]
 
 

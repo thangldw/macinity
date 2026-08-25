@@ -16,8 +16,11 @@ while IFS= read -r tracked_file; do
       *.zip | \
       *.tmp | \
       *.bak | \
+      .DS_Store | \
       */.DS_Store | \
+      .build/* | \
       */.build/* | \
+      DerivedData/* | \
       */DerivedData/*)
       printf '%s\n' "obsolete tracked artifact: $tracked_file" >&2
       failures=$((failures + 1))
