@@ -170,3 +170,6 @@ analysis/outputs/
 analysis/*-artifact.json
 analysis/*.html
 NamiQuant-Claude-Design.html
+
+# Local isolated worktrees
+/.worktrees/
