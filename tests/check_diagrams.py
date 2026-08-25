@@ -4,6 +4,7 @@
 import argparse
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import sys
 
 
@@ -25,6 +26,8 @@ class DiagramParser(HTMLParser):
         attributes = {name: value or "" for name, value in attrs}
         if tag == "script":
             self.errors.append("script elements are not allowed")
+        if tag.startswith("animate") or tag == "set":
+            self.errors.append(f"animation element is not allowed: {tag}")
         if tag in {"img", "image"}:
             for attribute in ("src", "href", "xlink:href"):
                 source = attributes.get(attribute, "")
@@ -36,6 +39,9 @@ class DiagramParser(HTMLParser):
             self.svg_depth += 1
             if self.svg_depth == 1:
                 self.svg_attributes = attributes
+                identifier = attributes.get("id")
+                if identifier:
+                    self.ids.append(identifier)
             return
 
         if self.svg_depth:
@@ -79,6 +85,8 @@ def check_file(path: Path) -> int:
         errors.append("writing-mode is not allowed")
     if "jetbrains mono" in source.lower():
         errors.append("JetBrains Mono is not allowed")
+    if re.search(r"@(?:-[\w]+-)?keyframes\b|\banimation(?:-[\w-]+)?\s*:", source, re.IGNORECASE):
+        errors.append("CSS animation is not allowed")
     if parser.svg_count != 1:
         errors.append("document must contain exactly one SVG")
     if parser.svg_attributes.get("role") != "img":

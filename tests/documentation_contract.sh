@@ -39,7 +39,7 @@ historical_records=(
 )
 for record in "${historical_records[@]}"; do
   require_text "$record" 'Status: completed'
-  if grep -nE '^[[:space:]]*[-*][[:space:]]+\[ \]' "$record"; then
+  if grep -nE '^[[:space:]]*(?:[-*+]|[0-9]+[.)])[[:space:]]+\[ \]' "$record"; then
     echo "$record: unchecked checklist item" >&2
     exit 1
   fi
