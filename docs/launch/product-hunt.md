@@ -1,10 +1,14 @@
-# Toolbox Product Hunt Launch Draft
+# Toolbox Product Hunt Launch Record
+
+Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT.
+
+Launch URL: https://www.producthunt.com/products/toolbox-14?launch=toolbox-14
 
 Name: Toolbox
 
-Tagline: See what changed. Reclaim developer storage safely.
+Tagline: Understand Mac changes before you clean them up
 
-Description: A local-first macOS utility that traces installer changes, explains developer storage, and moves reviewed cleanup targets to Trash with recovery evidence.
+Description: Toolbox is a free, open-source macOS app I built after getting tired of cleanup tools that show large folders without explaining what created them or whether removal is reversible. It traces installer changes, finds rebuildable project output only inside folders you choose, and records Trash-backed cleanup actions so you can recover them. Everything runs locally. No account, telemetry, privileged helper, or automatic deletion. Not Apple-notarized; first launch requires Open Anyway.
 
 Topics: Developer Tools, Mac, Open Source
 
@@ -14,9 +18,9 @@ Website: https://thangldw.github.io/toolbox/
 
 GitHub: https://github.com/thangldw/toolbox
 
-First comment: I built Toolbox after repeatedly finding gigabytes of project output and app leftovers without a trustworthy answer to two questions: what created this path, and can I undo the cleanup? Toolbox puts change evidence and storage review in one local-first macOS GUI. Install Trace records metadata before and after a normal macOS installer flow; Projects recognizes rebuildable output only inside folders you choose; reviewed cleanup moves to Trash and keeps recovery paths. There is no account, telemetry, privileged helper, automatic deletion, or malware verdict. Toolbox 2.0 combines and migrates the useful history from my earlier Diskora and Changeora apps. I would value concrete feedback on the workflow: which evidence is missing, and which confirmation or recovery step still feels unclear?
+First comment: Hi Product Hunt, I built Toolbox because I kept running into the same problem on my Mac: I could see that a folder was large, but I couldn't tell what created it, whether it was safe to remove, or how I would undo the cleanup if I got it wrong. So I made the tool I wanted to use myself. Toolbox has three main workflows: Install Trace compares filesystem metadata before and after a normal installer; Projects finds known rebuildable output only inside project folders you choose; Recovery keeps evidence for Trash-backed cleanup actions and checks paths before restoring. It runs locally and doesn't require an account. There is no telemetry, privileged helper, automatic deletion, or malware verdict. One honest limitation: Toolbox 2.0 is ad-hoc signed and not notarized by Apple, so macOS requires the Open Anyway step in Privacy & Security. I included a SHA-256 checksum, and the source is public. Please don't disable Gatekeeper or remove quarantine attributes. I'm looking for practical feedback from Mac developers: what evidence would you need before cleaning a path, which confirmation or recovery step feels unclear, and which project artifact should Toolbox recognize next? Reproducible issues can be reported at https://github.com/thangldw/toolbox/issues without private paths or files. Thanks for trying it.
 
-## Gallery order and captions
+## Gallery order
 
 1. `product-hunt-home.png` — One place to understand storage, change evidence, and recovery.
 2. `product-hunt-trace.png` — Compare before/after metadata and review each affected path.
@@ -25,26 +29,18 @@ First comment: I built Toolbox after repeatedly finding gigabytes of project out
 
 Thumbnail: `product-hunt-thumbnail.png`.
 
-## Maker checklist
+## Maker and support
 
 - Maker: Thang (`thangldw`)
 - Product status: free, open source, macOS 13+
 - Primary action: Download for macOS
 - Secondary action: View source
-- Support destination: GitHub Issues
-- Privacy destination: `https://thangldw.github.io/toolbox/privacy.html`
-- Launch-day response focus: reproduce workflow friction, collect macOS/hardware context, link evidence or an issue, avoid defensive replies
+- Support: https://github.com/thangldw/toolbox/issues
+- Privacy: https://thangldw.github.io/toolbox/privacy.html
 
-## Publication gate
+## Evidence limits accepted for this launch
 
-Status: BLOCKED — source package ready, public launch not authorized by evidence yet.
-
-Before uploading these fields to Product Hunt:
-
-- Replace all four representative fixture previews with exact signed release-candidate captures at the same dimensions.
-- Verify the public DMG, checksum, Pages link, Homebrew install, notarization staple, Gatekeeper assessment, Apple Silicon launch, and Intel launch.
-- Record 20 completed signed-beta users and close every severity-1/2 defect.
-- Rehearse and record the 30–60 second demo from `site/assets/demo-script.md` using the exact public build.
-- Confirm Product Hunt maker profile, launch date, website, topics, pricing, thumbnail, gallery, demo, and first comment in one final review.
-
-Do not create the public post or upload the representative previews before this gate passes.
+- The release is stable at the product-channel level but remains ad-hoc signed and not Apple-notarized.
+- Gatekeeper rejection is expected; users receive `Open Anyway` guidance on the website, in the DMG, and in onboarding.
+- Homebrew remains unavailable.
+- Gallery images use representative local fixture data and do not claim production-user evidence.

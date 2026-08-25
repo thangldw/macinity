@@ -1,6 +1,6 @@
 # Toolbox 45-second Demo Script
 
-Use the exact signed and notarized public release candidate with a disposable, harmless installer fixture and disposable developer-project fixtures. Keep all personal paths out of frame.
+Use the exact ad-hoc-signed, unnotarized `v2.0.0` public release with a disposable, harmless installer fixture and disposable developer-project fixtures. Keep all personal paths out of frame, and do not present the build as Apple-notarized or Gatekeeper-approved.
 
 | Time | Screen action | Voiceover |
 | --- | --- | --- |

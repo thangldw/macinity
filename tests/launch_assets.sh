@@ -14,9 +14,9 @@ for image in home projects trace recovery; do
 done
 
 rg -q '^Name: Toolbox$' "$copy"
-rg -q '^Tagline: See what changed\. Reclaim developer storage safely\.$' "$copy"
-rg -q '^Description:' "$copy"
-rg -q '^First comment:' "$copy"
+rg -q '^Tagline: Understand Mac changes before you clean them up$' "$copy"
+rg -q '^Description: .*Not Apple-notarized; first launch requires Open Anyway\.$' "$copy"
+rg -q '^First comment: .*Toolbox 2\.0 is ad-hoc signed and not notarized by Apple' "$copy"
 rg -q '^Topics: Developer Tools, Mac, Open Source$' "$copy"
 rg -q '^Pricing: Free$' "$copy"
 if rg -qi 'upvote|vote for' "$copy"; then
@@ -24,5 +24,7 @@ if rg -qi 'upvote|vote for' "$copy"; then
   exit 1
 fi
 test -f "$assets/demo-script.md"
+rg -q '^Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT\.$' "$copy"
+rg -q '^Launch URL: https://www\.producthunt\.com/products/toolbox-14\?launch=toolbox-14$' "$copy"
 
 echo "PASS: Product Hunt copy and asset contracts"

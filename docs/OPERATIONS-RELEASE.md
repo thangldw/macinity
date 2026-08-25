@@ -2,7 +2,7 @@
 
 ## Release boundary
 
-Only the protected GitHub release job may publish stable Toolbox releases. Local builds are ad-hoc signed and are useful for structural and DMG tests, but are not notarization evidence. The narrowly scoped public-beta exception is documented below.
+Toolbox `v2.0.0` uses the narrowly scoped unsigned-stable policy below. Local and release-job builds are ad-hoc signed and are useful for structural and DMG tests, but are not notarization evidence. Future notarized releases use the protected signing path.
 
 Required protected values:
 
@@ -23,11 +23,11 @@ From `apps/toolbox`:
 
 This verifies the bundle identifier, version, `arm64` and `x86_64` slices, English and Vietnamese resources, structural code signature, DMG checksum, and expected file layout. The explicit flag skips stapler and Gatekeeper acceptance.
 
-## Temporary unnotarized beta exception
+## Unsigned stable v2.0.0 policy
 
-Tag `v2.0.0-beta.1` may be published manually only as a GitHub pre-release after exact-head CI and Pages succeed. Its DMG must pass the local structural release check above, remain labeled ad-hoc signed and unnotarized on the release page, README, and product site, and include the manual **Open Anyway** instructions. Do not publish it through Homebrew, mark it latest/stable, disable Gatekeeper, remove quarantine attributes, or reuse its assets for stable `v2.0.0`.
+Tag `v2.0.0` may be published as the latest GitHub release after exact-head CI and Pages succeed. Stable describes the product release channel, not Apple trust approval. Its DMG must pass the structural release check above, remain labeled ad-hoc signed and unnotarized on the release page, README, product site, and Product Hunt, and include `Open Toolbox - First Launch.html` with the manual **Open Anyway** instructions.
 
-Publish only the immutable DMG and SHA-256 file from the tagged commit. The stable `v2.0.0` release remains blocked until Developer ID signing, notarization, stapling, Gatekeeper acceptance, and the protected release job pass.
+Publish only the immutable DMG and SHA-256 file from the tagged commit. Do not publish through Homebrew, disable Gatekeeper, remove quarantine attributes, or claim Developer ID signing, notarization, stapling, or Gatekeeper acceptance. `spctl` rejection is expected and must be recorded for this release.
 
 ## Protected signing and notarization
 
@@ -51,8 +51,8 @@ Re-download both assets after publication, verify the checksum, mount the DMG, d
 
 ## Tiếng Việt
 
-Chỉ job release được bảo vệ mới được publish stable release. Riêng `v2.0.0-beta.1` được phép publish thủ công dưới dạng GitHub pre-release chưa notarize, phải ghi rõ giới hạn và hướng dẫn **Open Anyway**, không đưa lên Homebrew hoặc gắn latest/stable. Build local chỉ có chữ ký ad-hoc, dùng để kiểm tra cấu trúc/DMG chứ không phải bằng chứng notarization. Stable `v2.0.0` vẫn phải dừng nếu thiếu identity hoặc notary profile.
+`v2.0.0` là stable theo kênh sản phẩm nhưng vẫn ký ad-hoc và chưa notarize. Release phải ghi rõ giới hạn, chứa `Open Toolbox - First Launch.html`, hướng dẫn **Open Anyway**, không đưa lên Homebrew và không tuyên bố Gatekeeper pass. Build chỉ là bằng chứng cấu trúc/DMG, không phải bằng chứng notarization.
 
 ## 日本語
 
-Stable release の公開は protected release job のみです。`v2.0.0-beta.1` だけは未 notarize の GitHub pre-release として手動公開でき、制限と **Open Anyway** 手順を明記し、Homebrew や latest/stable にはしません。Local build は ad-hoc 署名で notarization evidence ではありません。Stable `v2.0.0` は identity または notary profile がない場合、公開しません。
+`v2.0.0` は product channel 上の stable release ですが、ad-hoc 署名で未 notarize です。Release は制限、`Open Toolbox - First Launch.html`、**Open Anyway** 手順を明記し、Homebrew を提供せず Gatekeeper pass を主張しません。Build は構造/DMG evidence であり notarization evidence ではありません。

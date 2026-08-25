@@ -128,12 +128,26 @@ struct OnboardingView: View {
 
   private var privacyStep: some View {
     onboardingCard(symbol: "lock.shield", title: "Private by default") {
-      Text(
-        L10n.text(
-          "Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically."
+      VStack(alignment: .leading, spacing: 8) {
+        Text(
+          L10n.text(
+            "Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically."
+          )
         )
-      )
-      .foregroundStyle(.secondary)
+        .foregroundStyle(.secondary)
+        Divider()
+        Label(L10n.text("First-launch approval"), systemImage: "checkmark.shield")
+          .font(.subheadline.weight(.semibold))
+        Text(
+          L10n.text(
+            "If macOS blocks Toolbox, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper."
+          )
+        )
+        .foregroundStyle(.secondary)
+        Link(
+          L10n.text("Open installation guide"),
+          destination: URL(string: "https://thangldw.github.io/toolbox/#install")!)
+      }
     }
   }
 

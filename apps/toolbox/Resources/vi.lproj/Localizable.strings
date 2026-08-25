@@ -22,6 +22,9 @@
 "Local evidence for safer cleanup and app changes." = "Bằng chứng cục bộ để dọn dẹp và theo dõi thay đổi an toàn hơn.";
 "Private by default" = "Riêng tư ngay từ đầu";
 "Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically." = "Kết quả quét, snapshot và hoạt động chỉ lưu trên máy Mac này. Toolbox không telemetry và không tự động dọn dẹp.";
+"First-launch approval" = "Phê duyệt lần mở đầu";
+"If macOS blocks Toolbox, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "Nếu macOS chặn Toolbox, hãy thử mở ứng dụng một lần, sau đó vào System Settings → Privacy & Security → Open Anyway. Không bao giờ tắt Gatekeeper.";
+"Open installation guide" = "Mở hướng dẫn cài đặt";
 "Scan coverage" = "Phạm vi quét";
 "Sentinel folders are readable." = "Các thư mục kiểm tra có thể đọc được.";
 "Coverage is reduced until protected folders are readable." = "Phạm vi quét bị giảm cho đến khi đọc được các thư mục được bảo vệ.";

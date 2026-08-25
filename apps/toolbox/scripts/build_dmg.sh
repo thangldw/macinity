@@ -13,6 +13,7 @@ staging_dir="$(mktemp -d -t toolbox-dmg)"
 trap 'rm -rf "$staging_dir"' EXIT
 
 ditto "$app" "$staging_dir/Toolbox.app"
+cp "$project_dir/Resources/Open Toolbox - First Launch.html" "$staging_dir/"
 ln -s /Applications "$staging_dir/Applications"
 rm -f "$dmg" "$checksum"
 hdiutil create \

@@ -20,6 +20,7 @@ if [[ -f "$dmg" || -f "$checksum" ]]; then
   test -f "$dmg"
   test -f "$checksum"
   (cd "$(dirname "$dmg")" && shasum -a 256 -c "$(basename "$checksum")")
+  bash "$project_dir/Tests/Distribution/dmg_first_launch_contract.sh" "$dmg"
 
   mount_dir="$(mktemp -d -t toolbox-verify-dmg)"
   mounted=0

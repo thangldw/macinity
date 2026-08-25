@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Toolbox — First Launch</title>
+    <style>
+      :root { color-scheme: light dark; font: 17px/1.55 -apple-system, BlinkMacSystemFont, sans-serif; }
+      body { max-width: 720px; margin: 48px auto; padding: 0 24px 56px; }
+      h1 { font-size: 32px; line-height: 1.2; }
+      h2 { margin-top: 36px; }
+      li { margin: 10px 0; }
+      .notice { padding: 16px 18px; border: 1px solid #d69e2e; border-radius: 12px; background: color-mix(in srgb, #d69e2e 12%, transparent); }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+      a { color: #2878d0; }
+    </style>
+  </head>
+  <body>
+    <h1>Open Toolbox for the first time</h1>
+    <p class="notice"><strong>Toolbox 2.0.0 is not Apple-notarized.</strong> macOS therefore requires one manual approval. Do not disable Gatekeeper or remove quarantine attributes.</p>
+    <ol>
+      <li>Drag <strong>Toolbox</strong> to the <strong>Applications</strong> shortcut in this window.</li>
+      <li>Open Toolbox from Applications once. macOS will block this first attempt.</li>
+      <li>Open <strong>System Settings → Privacy &amp; Security</strong>.</li>
+      <li>Find the Toolbox message, click <strong>Open Anyway</strong>, then authenticate.</li>
+      <li>Confirm <strong>Open</strong>. Later launches should open normally.</li>
+    </ol>
+    <p>Verify the downloaded DMG before installation:</p>
+    <pre><code>shasum -a 256 -c Toolbox-2.0.0.dmg.sha256</code></pre>
+    <p><a href="https://thangldw.github.io/toolbox/#install">Installation page</a> · <a href="https://github.com/thangldw/toolbox/issues">Support</a> · <a href="https://github.com/thangldw/toolbox">Source code</a></p>
+
+    <h2 lang="vi">Mở Toolbox lần đầu</h2>
+    <p lang="vi"><strong>Toolbox 2.0.0 chưa được Apple notarize.</strong> Kéo Toolbox vào Applications, thử mở một lần, sau đó vào <strong>System Settings → Privacy &amp; Security → Open Anyway</strong> và xác thực. Không tắt Gatekeeper hoặc xóa quarantine attribute.</p>
+  </body>
+</html>

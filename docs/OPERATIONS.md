@@ -42,7 +42,7 @@ It sends no paths, evidence, scan results, or device fields and refuses to start
 
 ### Release artifact
 
-The public artifact is `Toolbox-2.0.0.dmg` plus `Toolbox-2.0.0.dmg.sha256`. Release builds must be universal (`arm64` + `x86_64`), Developer ID signed, notarized, stapled, and verified with Gatekeeper before publication. Local `build_app.sh` creates an ad-hoc signed development bundle and is not notarization evidence.
+The public artifact is `Toolbox-2.0.0.dmg` plus `Toolbox-2.0.0.dmg.sha256`. The explicit exception for `v2.0.0` permits a universal (`arm64` + `x86_64`), ad-hoc-signed, unnotarized stable artifact with clear disclosure and safe **Open Anyway** guidance in the DMG, website, and onboarding. Gatekeeper rejection is expected and recorded for this version. Later public releases return to the default requirement: Developer ID signing, notarization, stapling, and Gatekeeper acceptance. Local `build_app.sh` is structural evidence only.
 
 Required release checks:
 
@@ -53,9 +53,9 @@ spctl --assess --type execute --verbose=4 dist/Toolbox.app
 shasum -a 256 Toolbox-2.0.0.dmg
 ```
 
-The complete protected-keychain, notarization, local DMG, and post-publication procedure is in [OPERATIONS-RELEASE.md](OPERATIONS-RELEASE.md).
+For `v2.0.0`, the `spctl` command above must reject the app; do not report that expected result as Gatekeeper acceptance. The complete exception, protected-keychain, notarization, local DMG, and post-publication procedures are in [OPERATIONS-RELEASE.md](OPERATIONS-RELEASE.md).
 
-Do not publish or replace an asset until the exact artifact has passed CI, checksum verification after re-download, DMG mount/launch smoke, and notarization/stapling. Credentials and Developer ID material remain protected release secrets.
+Do not publish or replace an asset until the exact artifact has passed CI, checksum verification after re-download, and DMG mount/launch smoke. The explicit `v2.0.0` exception additionally requires verification of its ad-hoc signature, universal slices, embedded first-launch guide, and expected Gatekeeper rejection. All later releases also require notarization/stapling. Credentials and Developer ID material remain protected release secrets.
 
 Never replace a published binary silently. Mark a bad release unavailable, explain the impact, and publish a patch version. Use [SECURITY.md](../SECURITY.md) for vulnerabilities. Historical Diskora/Changeora source and assets remain in tags through `v1.4.0`; Toolbox 2.0 does not rebuild or mutate them.
 
@@ -67,7 +67,7 @@ Lịch quét chỉ được tạo sau xác nhận GUI và cấp Notification. La
 
 Update check không tự chạy, chỉ GET endpoint GitHub công khai ghi ở phần English, không gửi path/evidence/kết quả scan/thông tin thiết bị và bị chặn khi có scanner active.
 
-Artifact public là `Toolbox-2.0.0.dmg` và checksum SHA-256. Chỉ publish sau universal build, Developer ID signing, notarization, stapling, Gatekeeper, CI, re-download checksum và DMG launch smoke. `build_app.sh` local chỉ tạo bundle ad-hoc, không phải bằng chứng notarization.
+Artifact public là `Toolbox-2.0.0.dmg` và checksum SHA-256. Ngoại lệ riêng cho `v2.0.0` cho phép bản stable universal ký ad-hoc, chưa notarize, có công bố rõ và hướng dẫn **Open Anyway** an toàn; Gatekeeper rejection là kết quả dự kiến phải ghi nhận. Release sau `v2.0.0` quay lại yêu cầu Developer ID signing, notarization, stapling và Gatekeeper acceptance. Mọi release vẫn phải qua CI, re-download checksum và DMG launch smoke.
 
 Không thay binary đã publish một cách im lặng. Gỡ khả dụng bản lỗi, mô tả ảnh hưởng và phát hành patch. Source/asset Diskora và Changeora lịch sử vẫn ở tag đến `v1.4.0`.
 
@@ -79,4 +79,4 @@ Scheduled scan は GUI confirmation と notification authorization 後だけ作�
 
 Update check は自動実行せず、English セクションの public GitHub endpoint だけを GET します。Path、evidence、scan result、device field は送信せず、scan 中は開始しません。
 
-Public artifact は universal、Developer ID signed、notarized、stapled、Gatekeeper verified の `Toolbox-2.0.0.dmg` と SHA-256 です。公開後の binary を黙って差し替えず、問題時は patch release を作成します。過去の Diskora / Changeora は `v1.4.0` までの tag に保存されています。
+Public artifact は `Toolbox-2.0.0.dmg` と SHA-256 です。`v2.0.0` だけは明示的な例外として universal、ad-hoc 署名、未 notarize の stable artifact を許可し、安全な **Open Anyway** 手順を同梱します。Gatekeeper rejection は記録すべき expected result です。以後の release は Developer ID signing、notarization、stapling、Gatekeeper acceptance を再び必須とします。公開後の binary を黙って差し替えず、問題時は patch release を作成します。

@@ -4,6 +4,12 @@ All notable changes to Toolbox are documented here. Releases follow [Semantic Ve
 
 ## English
 
+### Toolbox 2.0.0 — 2026-08-25
+
+- Promoted Toolbox 2.0.0 to the stable product channel while retaining explicit unnotarized-distribution disclosure.
+- Added a first-launch HTML guide inside the DMG and matching onboarding guidance for safe Gatekeeper approval.
+- Kept Homebrew unavailable and prohibited instructions that disable Gatekeeper or strip quarantine attributes.
+
 ### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
 - Published tag `v2.0.0-beta.1` as an explicitly unnotarized public beta with manual Gatekeeper approval instructions.
@@ -68,6 +74,12 @@ This release contains Diskora 1.2.0 and Changeora 1.3.0.
 - Established local-first processing, explicit previews, and recoverable operations.
 
 ## Tiếng Việt
+
+### Toolbox 2.0.0 — 2026-08-25
+
+- Đưa Toolbox 2.0.0 lên kênh stable của sản phẩm, đồng thời giữ công bố rõ bản phân phối chưa notarize.
+- Thêm hướng dẫn HTML ngay trong DMG và hướng dẫn onboarding tương ứng để phê duyệt qua Gatekeeper an toàn.
+- Tiếp tục không cung cấp Homebrew và không hướng dẫn tắt Gatekeeper hoặc xóa quarantine attribute.
 
 ### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
