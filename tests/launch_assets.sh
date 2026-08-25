@@ -16,7 +16,7 @@ done
 grep -Eq '^Name: Toolbox$' "$copy"
 grep -Eq '^Tagline: Understand Mac changes before you clean them up$' "$copy"
 grep -Eq '^Description: .*Not Apple-notarized; first launch requires Open Anyway\.$' "$copy"
-grep -Eq '^First comment: .*Toolbox 2\.0 is ad-hoc signed and not notarized by Apple' "$copy"
+grep -Eq '^First comment: .*Toolbox 2\.0 is a stable product release, but it is ad-hoc signed and not notarized by Apple' "$copy"
 grep -Eq '^Topics: Developer Tools, Mac, Open Source$' "$copy"
 grep -Eq '^Pricing: Free$' "$copy"
 if grep -Eqi 'upvote|vote for' "$copy"; then
