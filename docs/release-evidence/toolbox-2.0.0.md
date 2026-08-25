@@ -84,7 +84,7 @@ Migration smoke covered Diskora cleanup history, completed and interrupted Chang
 
 This evidence does not claim a performance comparison, a physical Intel launch, a clean-account production launch, Developer ID signing, notarization, stapling, Homebrew distribution, a beta cohort, defect counts, votes, followers, unique users, or downloads. Absence of those claims does not change the recorded fact that `v2.0.0` is already published as the stable product-channel release.
 
-See the [stable release record](../launch/toolbox-2.0.0.md), [historical beta record](../launch/toolbox-2.0.0-beta.1.md), and [Product Hunt observation](../launch/product-hunt.md). Fixture imagery is disclosed separately in the [site fidelity ledger](../design-evidence/toolbox-site-fidelity.md).
+See the [stable release record](../launch/toolbox-2.0.0.md) and [Product Hunt observation](../launch/product-hunt.md).
 
 ## Tiếng Việt
 
@@ -168,7 +168,7 @@ Migration smoke bao phủ Diskora cleanup history, Changeora session đã comple
 
 Evidence này không claim performance comparison, physical Intel launch, clean-account production launch, Developer ID signing, notarization, stapling, Homebrew distribution, beta cohort, defect count, vote, follower, unique user hay download. Việc không claim các mục đó không thay đổi fact đã ghi rằng `v2.0.0` đã publish trên stable product channel.
 
-Xem [stable release record](../launch/toolbox-2.0.0.md), [historical beta record](../launch/toolbox-2.0.0-beta.1.md), [Product Hunt observation](../launch/product-hunt.md) và [site fidelity ledger](../design-evidence/toolbox-site-fidelity.md).
+Xem [stable release record](../launch/toolbox-2.0.0.md) và [Product Hunt observation](../launch/product-hunt.md).
 
 ## 日本語
 
@@ -252,4 +252,4 @@ Migration smoke は Diskora cleanup history、completed/interrupted Changeora se
 
 この evidence は performance comparison、physical Intel launch、clean-account production launch、Developer ID signing、notarization、stapling、Homebrew distribution、beta cohort、defect count、vote、follower、unique user、download を claim しません。これらを claim しないことは、`v2.0.0` が stable product channel で既に publish 済みという fact を変えません。
 
-[Stable release record](../launch/toolbox-2.0.0.md)、[historical beta record](../launch/toolbox-2.0.0-beta.1.md)、[Product Hunt observation](../launch/product-hunt.md)、[site fidelity ledger](../design-evidence/toolbox-site-fidelity.md) を参照してください。
+[Stable release record](../launch/toolbox-2.0.0.md) と [Product Hunt observation](../launch/product-hunt.md) を参照してください。

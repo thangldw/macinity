@@ -13,6 +13,7 @@ FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures"
 CHECK_DOCS = REPO_ROOT / "tests" / "check_docs.py"
 CHECK_DIAGRAMS = REPO_ROOT / "tests" / "check_diagrams.py"
 DOCUMENTATION_CONTRACT = REPO_ROOT / "tests" / "documentation_contract.sh"
+REPOSITORY_HYGIENE = REPO_ROOT / "tests" / "repository_hygiene.sh"
 
 
 def run(command: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -193,20 +194,6 @@ def contract_case(
 def documentation_contract_cases() -> list[bool]:
     return [
         contract_case(name="valid-repository", accepted=True),
-        contract_case(name="allows-documented-plan-rename", accepted=True),
-        contract_case(
-            name="allows-explicitly-historical-launch-claim",
-            target="docs/launch/toolbox-2.0.0-beta.1.md",
-            fixture="stale-current-launch.fixture",
-            accepted=True,
-        ),
-        contract_case(
-            name="rejects-unchecked-ordered-item",
-            target="docs/superpowers/plans/2026-08-25-toolbox-foundation-plan.md",
-            fixture="unchecked-ordered.fixture",
-            accepted=False,
-            diagnostic="unchecked checklist item",
-        ),
         contract_case(
             name="rejects-stale-current-launch",
             target="README.md",
@@ -243,31 +230,52 @@ def documentation_contract_cases() -> list[bool]:
             diagnostic="stale authoritative current claim",
         ),
         contract_case(
-            name="rejects-stale-plan-prose",
-            target="docs/superpowers/plans/2026-08-26-toolbox-documentation-redesign-plan.md",
-            fixture="stale-current-launch.fixture",
-            accepted=False,
-            diagnostic="stale authoritative current claim",
-        ),
-        contract_case(
             name="rejects-removed-beta-evidence-path",
             target="README.md",
             fixture="removed-beta-path.fixture",
             accepted=False,
             diagnostic="removed beta evidence path",
         ),
-        contract_case(
-            name="rejects-plan-beta-path-outside-rename",
-            target="docs/superpowers/plans/2026-08-26-toolbox-documentation-redesign-plan.md",
-            fixture="removed-beta-path.fixture",
+    ]
+
+
+def repository_hygiene_case(name: str, tracked_path: str) -> bool:
+    with tempfile.TemporaryDirectory(prefix=f"toolbox-repository-hygiene-{name}-") as temporary:
+        root = Path(temporary)
+        target = root / tracked_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("obsolete test artifact\n", encoding="utf-8")
+        init = run(["git", "init", "-q"], root)
+        if init.returncode != 0:
+            raise RuntimeError(output_of(init))
+        add = run(["git", "add", tracked_path], root)
+        if add.returncode != 0:
+            raise RuntimeError(output_of(add))
+        result = run(["bash", str(REPOSITORY_HYGIENE), str(root)], REPO_ROOT)
+        return expect(
+            f"repository_hygiene/{name}",
+            result,
             accepted=False,
-            diagnostic="allowed only in the documented rename instruction",
-        ),
+            diagnostic=f"obsolete tracked artifact: {tracked_path}",
+        )
+
+
+def repository_hygiene_cases() -> list[bool]:
+    return [
+        repository_hygiene_case("internal-plan", "docs/superpowers/plan.md"),
+        repository_hygiene_case("design-draft", "docs/design-concepts/draft.png"),
+        repository_hygiene_case("beta-record", "docs/launch/toolbox-beta.md"),
+        repository_hygiene_case("release-archive", "dist/Toolbox.zip"),
     ]
 
 
 def main() -> int:
-    outcomes = check_docs_cases() + check_diagram_cases() + documentation_contract_cases()
+    outcomes = (
+        check_docs_cases()
+        + check_diagram_cases()
+        + documentation_contract_cases()
+        + repository_hygiene_cases()
+    )
     if all(outcomes):
         print("PASS: checker regression fixtures")
         return 0
