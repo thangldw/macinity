@@ -10,12 +10,13 @@ final class ReleaseUpdateCheckerTests: XCTestCase {
     let checker = ReleaseUpdateChecker(session: session)
 
     let version = try await checker.latestVersion()
+    let request = await session.request
 
     XCTAssertEqual(version, SemanticVersion(major: 2, minor: 1, patch: 3))
     XCTAssertEqual(
-      await session.request?.url?.absoluteString,
+      request?.url?.absoluteString,
       "https://api.github.com/repos/thangldw/toolbox/releases/latest")
-    XCTAssertNil(await session.request?.httpBody)
+    XCTAssertNil(request?.httpBody)
   }
 
   func testSemanticVersionRejectsInvalidComponents() {
