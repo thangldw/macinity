@@ -33,7 +33,7 @@ The 2.0 boundary excludes a CLI, privileged helper, Endpoint Security extension,
 
 New shared data lives under `~/Library/Application Support/Toolbox`. `ToolboxCore` owns schema-versioned `evidence-v1.json` and `activity-v1.json`, deterministic ordering, normalized paths, atomic per-file writes, corrupt-file quarantine, and explicit unsupported-schema errors. Atomic replacement is not a transaction across stores. Storage history, storage checkpoints, Change Timeline sessions, active trace state, and trusted baseline retain their feature-owned formats and fail-soft behavior; they do not inherit the Core quarantine guarantee.
 
-Evidence records describe the normalized path, kind, safety, observation time, and reasons. Activity entries record cleanup, approved command, restore, trace, migration, or export results. Change Timeline can route a path to Storage for review, but routing neither selects nor mutates it.
+Evidence records describe the normalized path, kind, safety, observation time, and reasons. Activity entries currently record cleanup, approved command, restore, trace, and migration results. `ActivityKind.export` is reserved and unwired in `v2.0.0`; current Change Timeline export writes the user-selected Markdown or JSON report without appending an activity entry. Change Timeline can route a path to Storage for review, but routing neither selects nor mutates it.
 
 ### Reclaim Space as built
 
@@ -95,7 +95,7 @@ Ranh giới 2.0 loại trừ CLI, privileged helper, Endpoint Security extension
 
 Shared data mới nằm dưới `~/Library/Application Support/Toolbox`. `ToolboxCore` sở hữu `evidence-v1.json`, `activity-v1.json`, ordering deterministic, normalized path, atomic write cho từng file, corrupt-file quarantine và unsupported-schema error explicit. Atomic replacement không phải transaction giữa nhiều store. Storage history/checkpoint, Change Timeline session, active trace và trusted baseline giữ format/fail-soft behavior riêng; không có Core quarantine guarantee.
 
-Evidence record lưu normalized path, kind, safety, observation time và reason. Activity entry lưu kết quả cleanup, approved command, restore, trace, migration hoặc export. Change Timeline có thể route path sang Storage để review nhưng không select hay mutate.
+Evidence record lưu normalized path, kind, safety, observation time và reason. Activity entry hiện ghi kết quả cleanup, approved command, restore, trace và migration. `ActivityKind.export` được reserve và chưa wire trong `v2.0.0`; Change Timeline export hiện tại ghi report Markdown hoặc JSON vào destination do user chọn mà không append activity entry. Change Timeline có thể route path sang Storage để review nhưng không select hay mutate.
 
 ### Reclaim Space as built
 
@@ -157,7 +157,7 @@ Target user は developer tool を導入し、複数 package manager/runtime を
 
 新しい shared data は `~/Library/Application Support/Toolbox` にあります。`ToolboxCore` は `evidence-v1.json`、`activity-v1.json`、deterministic ordering、normalized path、file ごとの atomic write、corrupt-file quarantine、明示的 unsupported-schema error を所有します。Atomic replacement は store 間 transaction ではありません。Storage history/checkpoint、Change Timeline session、active trace、trusted baseline は feature-owned format/fail-soft behavior のままで、Core quarantine guarantee はありません。
 
-Evidence record は normalized path、kind、safety、observation time、reason を保持します。Activity entry は cleanup、approved command、restore、trace、migration、export の result を保持します。Change Timeline は review のため Storage に path を route できますが、select/mutate はしません。
+Evidence record は normalized path、kind、safety、observation time、reason を保持します。Activity entry は現在、cleanup、approved command、restore、trace、migration の result を記録します。`ActivityKind.export` は `v2.0.0` で reserved/unwired です。Current Change Timeline export は user-selected destination に Markdown または JSON report を書きますが、activity entry を append しません。Change Timeline は review のため Storage に path を route できますが、select/mutate はしません。
 
 ### Reclaim Space as built
 

@@ -1,0 +1,36 @@
+# Valid checker fixture
+
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語) · [Same file](#scope) · [Repository target](target.md#target-heading) · [HTML target](target.html#target-panel) · [External](https://example.com/path#fragment) · [Mail](mailto:security@example.com)
+
+## English
+
+### Scope
+
+The fixture exercises valid local and external link forms.
+
+### Checks
+
+- Unicode anchors resolve.
+- Repository-relative targets resolve.
+
+## Tiếng Việt
+
+### Phạm vi
+
+Fixture kiểm tra các dạng link local và external hợp lệ.
+
+### Kiểm tra
+
+- Unicode anchor resolve.
+- Target relative trong repository resolve.
+
+## 日本語
+
+### Scope
+
+Fixture は有効な local link と external link を検査します。
+
+### Checks
+
+- Unicode anchor が解決します。
+- Repository-relative target が解決します。

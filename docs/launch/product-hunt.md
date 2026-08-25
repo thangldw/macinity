@@ -72,13 +72,29 @@ The gallery images are `1270×760`; `product-hunt-thumbnail.png` is `512×512`. 
 - Kết quả tại thời điểm quan sát: đã lên lịch, chưa launch.
 - Tagline hiển thị: `Understand Mac changes before you clean them up`.
 
+Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT.
+
+Launch URL: https://www.producthunt.com/products/toolbox-14?launch=toolbox-14
+
 ### Đối chiếu copy hiển thị với stable release
 
-Trang hiển thị Toolbox là phần mềm miễn phí, mã nguồn mở; trace thay đổi của installer; chỉ tìm known rebuildable output trong folder người dùng chọn; ghi nhận cleanup qua Trash; và chạy local không account, telemetry, privileged helper hay automatic deletion. Description vẫn gọi build hiện tại là public beta; maker comment vẫn gọi đây là first public beta.
+Name: Toolbox
 
-Hai cách gọi beta được giữ lại chỉ như stale copy đã quan sát. Chúng không xác định release channel hiện tại. GitHub record có authority cao hơn cho thấy `v2.0.0` được publish lúc `2026-08-25T12:33:04Z`, không phải draft hay prerelease, từ commit `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
+Tagline: Understand Mac changes before you clean them up
 
-Maker comment vẫn mô tả đúng ba workflow, giới hạn ad-hoc signed/chưa notarize, đường **Open Anyway** an toàn và checksum/source công khai. Comment hỏi developer cần evidence nào trước khi cleanup path, confirmation/recovery step nào chưa rõ và Toolbox nên nhận diện project artifact nào tiếp theo; không gửi private path hay file. Issue tái hiện được báo tại https://github.com/thangldw/toolbox/issues.
+Description: Description hiển thị nói Toolbox miễn phí và mã nguồn mở; trace thay đổi của installer; chỉ tìm known rebuildable output trong folder người dùng chọn; ghi nhận cleanup qua Trash; và chạy local không account, telemetry, privileged helper hoặc automatic deletion. Description vẫn gọi build hiện tại là public beta, mâu thuẫn với stable GitHub release identity ghi bên dưới. Chưa Apple-notarized; lần mở đầu yêu cầu Open Anyway.
+
+Topics: Developer Tools, Mac, Open Source
+
+Pricing: Free
+
+Website: https://thangldw.github.io/toolbox/
+
+GitHub: https://github.com/thangldw/toolbox
+
+First comment: Maker comment hiển thị vẫn gọi release là first public beta. Nội dung workflow và trust vẫn chính xác: Install Trace so sánh filesystem metadata quanh luồng installer bình thường; Projects chỉ tìm known rebuildable output trong selected root; Recovery giữ evidence cho cleanup qua Trash; xử lý ở local; build ký ad-hoc và chưa notarize; exception an toàn là Open Anyway; checksum và source có sẵn. Comment hỏi developer cần evidence nào trước khi clean một path, confirmation hoặc recovery step nào chưa rõ và Toolbox nên nhận diện project artifact nào tiếp theo; feedback phải bỏ private path và file. Stable-aligned repository copy là: Toolbox 2.0 is a stable product release, but it is ad-hoc signed and not notarized by Apple. Do not disable Gatekeeper or remove quarantine attributes. Report reproducible issues at https://github.com/thangldw/toolbox/issues without private paths or files.
+
+Các từ “public beta” và “first public beta” chỉ được giữ ở đây như stale Product Hunt copy đã quan sát. Chúng không định nghĩa current release channel. GitHub record có authority cao hơn cho thấy `v2.0.0`, publish lúc `2026-08-25T12:33:04Z`, non-draft, non-prerelease, từ `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
 
 ### Gallery và recording evidence
 
@@ -92,12 +108,12 @@ Gallery image có kích thước `1270×760`; `product-hunt-thumbnail.png` là `
 ### Ranh giới sản phẩm và evidence
 
 - Maker: Thang (`thangldw`).
-- Sản phẩm: miễn phí, mã nguồn mở, macOS 13+.
-- Website: https://thangldw.github.io/toolbox/
-- Source: https://github.com/thangldw/toolbox
+- Product status: miễn phí, mã nguồn mở, macOS 13+.
+- Primary action: Download for macOS.
+- Secondary action: View source.
 - Support: https://github.com/thangldw/toolbox/issues
 - Privacy: https://thangldw.github.io/toolbox/privacy.html
-- `v2.0.0` stable theo product channel nhưng ký ad-hoc và chưa được Apple notarize.
+- `v2.0.0` stable ở product-channel level, ký ad-hoc và chưa Apple-notarized.
 - Gatekeeper dự kiến từ chối lần mở trực tiếp đầu tiên. Chỉ dùng **System Settings → Privacy & Security → Open Anyway** cho build này.
 - Không tắt Gatekeeper hoặc xóa quarantine attribute.
 - Không ghi hoặc suy luận số lượt bình chọn, follower, user, download hay adoption.
@@ -114,13 +130,29 @@ Gallery image có kích thước `1270×760`; `product-hunt-thumbnail.png` là `
 - 観測時点の結果: scheduled であり、未 launch。
 - 表示 tagline: `Understand Mac changes before you clean them up`。
 
+Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT.
+
+Launch URL: https://www.producthunt.com/products/toolbox-14?launch=toolbox-14
+
 ### 表示 copy と stable release の照合
 
-表示 description は、Toolbox が free/open source であり、installer change を trace し、user-selected folder 内だけで known rebuildable output を検出し、Trash-backed cleanup を記録し、account、telemetry、privileged helper、automatic deletion なしで local 実行することを説明していました。一方、current build を public beta と呼び、maker comment も first public beta と呼んでいました。
+Name: Toolbox
 
-この二つの beta 表現は観測した stale copy としてのみ残します。Current release channel の定義ではありません。より高 authority の GitHub record では、`v2.0.0` は `2026-08-25T12:33:04Z` に publish され、draft でも prerelease でもなく、source commit は `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` です。
+Tagline: Understand Mac changes before you clean them up
 
-Maker comment の three workflow、ad-hoc signed/not notarized 制約、安全な **Open Anyway** path、checksum/source 公開は引き続き正確です。Cleanup 前に必要な evidence、分かりにくい confirmation/recovery step、次に認識すべき project artifact を質問し、private path/file を送らないよう求めています。再現可能な issue は https://github.com/thangldw/toolbox/issues に報告します。
+Description: 表示 description は、Toolbox が free/open source であり、installer change を trace し、user-selected folder 内だけで known rebuildable output を検出し、Trash-backed cleanup を記録し、account、telemetry、privileged helper、automatic deletion なしで local 実行することを説明していました。Current build を public beta と呼ぶ部分は、下記 stable GitHub release identity と矛盾します。Apple-notarized ではなく、first launch には Open Anyway が必要です。
+
+Topics: Developer Tools, Mac, Open Source
+
+Pricing: Free
+
+Website: https://thangldw.github.io/toolbox/
+
+GitHub: https://github.com/thangldw/toolbox
+
+First comment: 表示 maker comment は release を first public beta と呼んでいました。Workflow/trust content は正確なままです。Install Trace は通常 installer flow の前後で filesystem metadata を比較し、Projects は selected root 内の known rebuildable output だけを検出し、Recovery は Trash-backed cleanup の evidence を保持します。Processing は local で、build は ad-hoc signed/not notarized、安全な exception は Open Anyway、checksum/source は公開済みです。Cleanup 前に developer が必要とする evidence、不明瞭な confirmation/recovery step、次に認識すべき project artifact を質問し、feedback から private path/file を除くよう求めています。Stable-aligned repository copy は次です: Toolbox 2.0 is a stable product release, but it is ad-hoc signed and not notarized by Apple. Do not disable Gatekeeper or remove quarantine attributes. Report reproducible issues at https://github.com/thangldw/toolbox/issues without private paths or files.
+
+“public beta” と “first public beta” は、観測した stale Product Hunt copy としてのみ保持します。Current release channel を定義しません。より高 authority の GitHub record は、`v2.0.0` が `2026-08-25T12:33:04Z` に publish され、non-draft、non-prerelease、source は `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` であることを示します。
 
 ### Gallery と recording evidence
 
@@ -134,12 +166,12 @@ Gallery image は `1270×760`、`product-hunt-thumbnail.png` は `512×512` で�
 ### Product と evidence の境界
 
 - Maker: Thang (`thangldw`)。
-- Product: free、open source、macOS 13+。
-- Website: https://thangldw.github.io/toolbox/
-- Source: https://github.com/thangldw/toolbox
+- Product status: free、open source、macOS 13+。
+- Primary action: Download for macOS.
+- Secondary action: View source.
 - Support: https://github.com/thangldw/toolbox/issues
 - Privacy: https://thangldw.github.io/toolbox/privacy.html
-- `v2.0.0` は product-channel では stable ですが、ad-hoc signed で Apple-notarize されていません。
+- `v2.0.0` は product-channel level では stable ですが、ad-hoc signed で Apple-notarized ではありません。
 - Direct first launch は Gatekeeper に拒否される想定です。この build に限り **System Settings → Privacy & Security → Open Anyway** を使います。
 - Gatekeeper を無効化せず、quarantine attribute を削除しません。
 - Vote、follower、user、download、adoption count は記録も推測もしません。

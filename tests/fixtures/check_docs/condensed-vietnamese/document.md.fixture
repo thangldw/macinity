@@ -1,0 +1,33 @@
+# Condensed Vietnamese bypass
+
+## English
+
+### Scope
+
+- Preserve commands.
+- Preserve paths.
+- Preserve evidence.
+
+### Verification
+
+- Run the checker.
+- Run the contract.
+- Inspect the result.
+
+## Tiếng Việt
+
+Tóm tắt.
+
+## 日本語
+
+### Scope
+
+- Command を保持します。
+- Path を保持します。
+- Evidence を保持します。
+
+### Verification
+
+- Checker を実行します。
+- Contract を実行します。
+- Result を検査します。

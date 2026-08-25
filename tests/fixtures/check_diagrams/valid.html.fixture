@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Diagram fixture</title></head>
+<body>
+  <svg viewBox="0 0 1280 720" role="img" aria-labelledby="diagram-title diagram-desc">
+    <title id="diagram-title">Diagram fixture</title>
+    <desc id="diagram-desc">Accessible static diagram fixture.</desc>
+    <rect width="1280" height="720" fill="#fbfcfe"/>
+  </svg>
+  <section class="interpretation" aria-label="Trilingual interpretation">
+    <article lang="en">
+      <h2>English</h2>
+      <dl>
+        <dt>Content</dt><dd>English content meaning.</dd>
+        <dt>Exclusions</dt><dd>English exclusions meaning.</dd>
+        <dt>Safety boundary</dt><dd>English safety boundary meaning.</dd>
+      </dl>
+    </article>
+    <article lang="vi">
+      <h2>Tiếng Việt</h2>
+      <dl>
+        <dt>Nội dung</dt><dd>Nội dung của sơ đồ.</dd>
+        <dt>Không bao gồm</dt><dd>Nội dung loại trừ.</dd>
+        <dt>Ranh giới an toàn</dt><dd>Ý nghĩa ranh giới an toàn.</dd>
+      </dl>
+    </article>
+    <article lang="ja">
+      <h2>日本語</h2>
+      <dl>
+        <dt>内容</dt><dd>図の内容。</dd>
+        <dt>対象外</dt><dd>対象外の意味。</dd>
+        <dt>Safety boundary</dt><dd>安全境界の意味。</dd>
+      </dl>
+    </article>
+  </section>
+  <footer>Static HTML · profile: thangldw</footer>
+</body>
+</html>

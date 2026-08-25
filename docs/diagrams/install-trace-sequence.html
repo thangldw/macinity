@@ -43,7 +43,7 @@
     <div class="diagram">
       <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="install-trace-sequence-title install-trace-sequence-desc">
         <title id="install-trace-sequence-title">Install Trace sequence</title>
-        <desc id="install-trace-sequence-desc">Sequence showing a user starting and finishing Install Trace through the GUI and coordinator, bounded snapshot and FSEvents capture, normal macOS installer opening, resumable interruption metadata, and local session persistence.</desc>
+        <desc id="install-trace-sequence-desc">Sequence showing the GUI starting Install Trace through the coordinator, opening the selected installer through normal macOS handling, finishing bounded snapshot and FSEvents capture, clearing active state on cancellation, and retaining resumable metadata only after unexpected interruption.</desc>
         <defs>
           <marker id="install-trace-sequence-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#505750"/></marker>
           <marker id="install-trace-sequence-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a83a00"/></marker>
@@ -61,10 +61,12 @@
         <line x1="1160" y1="104" x2="1160" y2="628" stroke="rgba(29,33,30,0.20)" stroke-width="1" stroke-dasharray="4,4"/>
 
         <!-- Optional cancel/interruption fragment -->
-        <rect x="412" y="316" width="296" height="72" rx="4" fill="rgba(29,33,30,0.02)" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
+        <rect x="412" y="316" width="536" height="72" rx="4" fill="rgba(29,33,30,0.02)" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
         <rect x="412" y="316" width="40" height="16" rx="4" fill="#fbfcfe" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
         <text x="432" y="328" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.12em">OPT</text>
-        <text x="464" y="344" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">[cancel / interruption]</text>
+        <text x="464" y="344" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">[cancel / unexpected interruption]</text>
+        <text x="464" y="360" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">cancel → stop journal; clear snapshot + metadata; not resumable</text>
+        <text x="464" y="376" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">interruption → metadata may remain; resume reports reduced coverage</text>
 
         <!-- Activation bars -->
         <rect x="436" y="152" width="8" height="436" fill="rgba(29,33,30,0.06)" stroke="#505750" stroke-width="0.8"/>
@@ -79,44 +81,40 @@
         <text x="320" y="136" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SELECT INPUT</text>
 
         <line x1="444" y1="188" x2="672" y2="188" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="520" y="164" width="76" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="558" y="172" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">START TRACE</text>
+        <rect x="520" y="164" width="80" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="560" y="172" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">START TRACE</text>
 
         <line x1="684" y1="224" x2="912" y2="224" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="752" y="200" width="92" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="798" y="208" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">BEFORE + WATCH</text>
+        <rect x="752" y="200" width="96" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="800" y="208" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">BEFORE + WATCH</text>
 
         <line x1="916" y1="260" x2="688" y2="260" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="756" y="236" width="92" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="802" y="244" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SNAPSHOT READY</text>
+        <rect x="752" y="236" width="96" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="800" y="244" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SNAPSHOT READY</text>
 
-        <line x1="684" y1="296" x2="1152" y2="296" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="872" y="272" width="96" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="920" y="280" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">OPEN INSTALLER</text>
-
-        <line x1="444" y1="368" x2="672" y2="368" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="512" y="344" width="92" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="558" y="352" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">RETAIN RESUME</text>
+        <line x1="444" y1="296" x2="1152" y2="296" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
+        <rect x="752" y="272" width="96" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="800" y="280" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">OPEN INSTALLER</text>
 
         <line x1="200" y1="408" x2="432" y2="408" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
         <rect x="292" y="384" width="56" height="12" rx="4" fill="#fbfcfe"/>
         <text x="320" y="392" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">FINISH</text>
 
         <line x1="444" y1="444" x2="672" y2="444" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="512" y="420" width="92" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="558" y="428" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COMPLETE TRACE</text>
+        <rect x="512" y="420" width="96" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="560" y="428" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">COMPLETE TRACE</text>
 
         <line x1="684" y1="480" x2="912" y2="480" stroke="#505750" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="756" y="456" width="84" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="798" y="464" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">AFTER + STOP</text>
+        <rect x="756" y="456" width="88" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="800" y="464" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">AFTER + STOP</text>
 
         <line x1="916" y1="516" x2="688" y2="516" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="764" y="492" width="76" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="802" y="500" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">DIFF READY</text>
+        <rect x="760" y="492" width="80" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="800" y="500" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">DIFF READY</text>
 
         <line x1="676" y1="552" x2="448" y2="552" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
-        <rect x="520" y="528" width="84" height="12" rx="4" fill="#fbfcfe"/>
-        <text x="562" y="536" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAVE + AUDIT</text>
+        <rect x="520" y="528" width="80" height="12" rx="4" fill="#fbfcfe"/>
+        <text x="560" y="536" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">SAVE + AUDIT</text>
 
         <line x1="436" y1="588" x2="208" y2="588" stroke="#a83a00" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow-accent)"/>
         <rect x="280" y="564" width="80" height="12" rx="4" fill="#fbfcfe"/>
@@ -146,7 +144,7 @@
         <line x1="320" y1="684" x2="368" y2="684" stroke="#505750" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#install-trace-sequence-arrow)"/>
         <text x="380" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">FILLED RETURN</text>
         <rect x="568" y="672" width="40" height="24" rx="4" fill="rgba(29,33,30,0.02)" stroke="rgba(29,33,30,0.22)" stroke-width="1"/>
-        <text x="620" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">OPTIONAL INTERRUPTION</text>
+        <text x="620" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">CANCEL / INTERRUPTION</text>
         <line x1="864" y1="684" x2="912" y2="684" stroke="#a83a00" stroke-width="1.2" marker-end="url(#install-trace-sequence-arrow-accent)"/>
         <text x="924" y="688" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">SUCCESS RESPONSE</text>
       </svg>
@@ -157,37 +155,37 @@
         <h2>English</h2>
         <dl>
           <dt>Content</dt>
-          <dd>The user selects a supported installer, the coordinator captures a before snapshot and starts bounded FSEvents, then opens the item through normal macOS handling. Finishing captures after evidence, compares it, and persists the session and audit records. Cancellation or interruption retains resumable metadata.</dd>
+          <dd>The user selects a supported installer and the GUI calls coordinator.start. The coordinator captures a before snapshot and starts bounded FSEvents; after start returns, the GUI invokes NSWorkspace.shared.open(metadata.sourceURL) for normal macOS handling. Finishing captures after evidence, compares it, and persists the session and audit records.</dd>
           <dt>Exclusions</dt>
           <dd>Toolbox does not mount, execute, install, uninstall, or bypass Gatekeeper for the selected item. The sequence does not claim that FSEvents is a complete historical audit.</dd>
           <dt>Safety boundary</dt>
-          <dd>The user starts and finishes the trace in the foreground. Installer execution remains in the normal macOS flow; persisted evidence stays local, and an interruption interval is reported as reduced coverage when resumed.</dd>
+          <dd>The user starts and finishes the trace in the foreground. cancel() stops the journal and clears active-snapshot.json plus active-trace-metadata.json, so cancellation is not resumable. Only unexpected interruption may retain resumable metadata; resumed observation reports the interruption interval as reduced coverage.</dd>
         </dl>
       </article>
       <article lang="vi">
         <h2>Tiếng Việt</h2>
         <dl>
           <dt>Nội dung</dt>
-          <dd>Người dùng chọn installer được hỗ trợ; coordinator chụp before snapshot, bắt đầu FSEvents có giới hạn rồi mở item bằng luồng macOS bình thường. Khi finish, hệ thống chụp after evidence, so sánh và lưu session cùng audit record. Cancel hoặc interruption giữ metadata để resume.</dd>
+          <dd>Người dùng chọn installer được hỗ trợ và GUI gọi coordinator.start. Coordinator chụp before snapshot rồi bắt đầu FSEvents có giới hạn; sau khi start return, GUI gọi NSWorkspace.shared.open(metadata.sourceURL) để macOS xử lý bình thường. Khi finish, hệ thống chụp after evidence, so sánh và lưu session cùng audit record.</dd>
           <dt>Không bao gồm</dt>
           <dd>Toolbox không mount, execute, install, uninstall hoặc bypass Gatekeeper cho item đã chọn. Sequence không claim FSEvents là historical audit đầy đủ.</dd>
           <dt>Ranh giới an toàn</dt>
-          <dd>Người dùng bắt đầu và kết thúc trace trong foreground. Việc chạy installer vẫn thuộc luồng macOS bình thường; evidence đã lưu ở local, và khoảng interruption được báo reduced coverage khi resume.</dd>
+          <dd>Người dùng bắt đầu và kết thúc trace trong foreground. cancel() dừng journal và xóa active-snapshot.json cùng active-trace-metadata.json, nên cancellation không thể resume. Chỉ unexpected interruption mới có thể giữ metadata để resume; observation sau resume báo khoảng interruption là reduced coverage.</dd>
         </dl>
       </article>
       <article lang="ja">
         <h2>日本語</h2>
         <dl>
           <dt>内容</dt>
-          <dd>User が対象 installer を選択すると、coordinator は before snapshot を取得して bounded FSEvents を開始し、通常の macOS 処理で item を開きます。Finish 時に after evidence を取得・比較し、session と audit record を保存します。Cancel または interruption では resume 用 metadata を保持します。</dd>
+          <dd>User が supported installer を選択し、GUI が coordinator.start を呼びます。Coordinator は before snapshot を取得して bounded FSEvents を開始し、start が return した後、GUI が NSWorkspace.shared.open(metadata.sourceURL) を呼んで通常の macOS handling に渡します。Finish 時に after evidence を取得・比較し、session と audit record を保存します。</dd>
           <dt>対象外</dt>
           <dd>Toolbox は選択 item を mount、execute、install、uninstall せず、Gatekeeper を bypass しません。この sequence は FSEvents を完全な historical audit として扱いません。</dd>
           <dt>Safety boundary</dt>
-          <dd>Trace の開始と終了は user の foreground action です。Installer 実行は通常の macOS flow に残り、保存 evidence は local に留まります。Resume 時は interruption 区間を reduced coverage として報告します。</dd>
+          <dd>Trace の開始と終了は user の foreground action です。cancel() は journal を停止し active-snapshot.json と active-trace-metadata.json を消去するため、cancellation は resume できません。Unexpected interruption だけが resumable metadata を保持でき、resume 後の observation は interruption 区間を reduced coverage として報告します。</dd>
         </dl>
       </article>
     </section>
-    <footer>Static HTML · 1280 × 720 SVG · five lifelines · twelve messages · no animation · profile: thangldw</footer>
+    <footer>Static HTML · 1280 × 720 SVG · five lifelines · eleven messages · no animation · profile: thangldw</footer>
   </main>
 </body>
 </html>

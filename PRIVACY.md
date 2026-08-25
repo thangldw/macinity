@@ -16,7 +16,7 @@ Install Trace accepts `.dmg`, `.pkg`, and `.app` paths for identification and ev
 
 ### Data stored
 
-Local application state is stored under `~/Library/Application Support/Toolbox`. It can include cleanup and recovery history in `history.json`, Change Timeline sessions and snapshots in `sessions.json`, `active-snapshot.json`, and `trusted-baseline.json`, evidence in `evidence-v1.json`, activity in `activity-v1.json`, storage checkpoints, migration state in `migration-v1.json`, and locally generated reports. Recovery entries can contain original and Trash paths. Preferences such as language and scheduled-scan status use macOS preferences, and an enabled schedule creates `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
+Local application state is stored under `~/Library/Application Support/Toolbox`. It can include cleanup and recovery history in `history.json`, Change Timeline sessions and snapshots in `sessions.json`, `active-snapshot.json`, `active-trace-metadata.json`, and `trusted-baseline.json`, evidence in `evidence-v1.json`, activity in `activity-v1.json`, storage checkpoints, migration state in `migration-v1.json`, and locally generated reports. `active-trace-metadata.json` may contain the selected installer source URL/path, display name, installer kind, and observation timestamp until finish or cancel clears active state; only an unexpected interruption may retain it for reduced-coverage recovery. Recovery entries can contain original and Trash paths. Preferences such as language and scheduled-scan status use macOS preferences, and an enabled schedule creates `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
 
 ### Permissions and mutations
 
@@ -52,7 +52,7 @@ Install Trace nhận path `.dmg`, `.pkg`, `.app` để nhận diện và capture
 
 ### Dữ liệu được lưu
 
-Application state local được lưu dưới `~/Library/Application Support/Toolbox`. Dữ liệu có thể gồm cleanup/recovery history trong `history.json`; session/snapshot Change Timeline trong `sessions.json`, `active-snapshot.json`, `trusted-baseline.json`; evidence trong `evidence-v1.json`; activity trong `activity-v1.json`; storage checkpoint; migration state trong `migration-v1.json`; và report tạo local. Recovery entry có thể chứa vị trí gốc và Trash. Preference như language và scheduled-scan status dùng macOS preferences; khi bật lịch, app tạo `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
+Application state local được lưu dưới `~/Library/Application Support/Toolbox`. Dữ liệu có thể gồm cleanup/recovery history trong `history.json`; session/snapshot Change Timeline trong `sessions.json`, `active-snapshot.json`, `active-trace-metadata.json`, `trusted-baseline.json`; evidence trong `evidence-v1.json`; activity trong `activity-v1.json`; storage checkpoint; migration state trong `migration-v1.json`; và report tạo local. `active-trace-metadata.json` có thể chứa source URL/path của installer đã chọn, display name, installer kind và observation timestamp cho đến khi finish hoặc cancel xóa active state; chỉ unexpected interruption mới có thể giữ file này để recovery với reduced coverage. Recovery entry có thể chứa vị trí gốc và Trash. Preference như language và scheduled-scan status dùng macOS preferences; khi bật lịch, app tạo `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
 
 ### Permission và mutation
 
@@ -88,7 +88,7 @@ Install Trace は識別と evidence capture のため `.dmg`、`.pkg`、`.app` p
 
 ### 保存する data
 
-Local application state は `~/Library/Application Support/Toolbox` に保存されます。Cleanup/recovery history の `history.json`、Change Timeline session/snapshot の `sessions.json`、`active-snapshot.json`、`trusted-baseline.json`、evidence の `evidence-v1.json`、activity の `activity-v1.json`、storage checkpoint、migration state の `migration-v1.json`、local 生成 report を含む場合があります。Recovery entry は original/Trash path を含む場合があります。Language と scheduled-scan status などの preference は macOS preferences を使い、schedule を有効にすると `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist` を作成します。
+Local application state は `~/Library/Application Support/Toolbox` に保存されます。Cleanup/recovery history の `history.json`、Change Timeline session/snapshot の `sessions.json`、`active-snapshot.json`、`active-trace-metadata.json`、`trusted-baseline.json`、evidence の `evidence-v1.json`、activity の `activity-v1.json`、storage checkpoint、migration state の `migration-v1.json`、local 生成 report を含む場合があります。`active-trace-metadata.json` は、finish または cancel が active state を消去するまで、選択した installer の source URL/path、display name、installer kind、observation timestamp を含む場合があります。Reduced-coverage recovery のために保持されるのは unexpected interruption の場合だけです。Recovery entry は original/Trash path を含む場合があります。Language と scheduled-scan status などの preference は macOS preferences を使い、schedule を有効にすると `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist` を作成します。
 
 ### Permission と mutation
 
