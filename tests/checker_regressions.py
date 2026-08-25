@@ -215,6 +215,20 @@ def documentation_contract_cases() -> list[bool]:
             diagnostic="stale authoritative current claim",
         ),
         contract_case(
+            name="rejects-stale-current-launch-in-product-hunt-record",
+            target="docs/launch/product-hunt.md",
+            fixture="stale-product-hunt-launch.fixture",
+            accepted=False,
+            diagnostic="stale authoritative current claim",
+        ),
+        contract_case(
+            name="rejects-unscoped-product-hunt-beta-claim",
+            target="docs/launch/product-hunt.md",
+            fixture="unscoped-product-hunt-beta.fixture",
+            accepted=False,
+            diagnostic="outside observed-copy allowlist",
+        ),
+        contract_case(
             name="rejects-stale-current-release",
             target="README.md",
             fixture="stale-current-release.fixture",
