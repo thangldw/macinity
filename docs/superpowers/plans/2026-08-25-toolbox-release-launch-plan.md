@@ -32,23 +32,23 @@ Evidence remains separated by authority: source and executable tests establish b
 
 | Area | As-built files and responsibility |
 | --- | --- |
-| Universal app | `apps/toolbox/scripts/build_universal.sh`, `build_app.sh`, `verify_release.sh`, and `Tests/Distribution/release_contract.sh` build both slices, merge them, assemble the bundle, and verify structural contracts. |
-| DMG and future trust path | `build_dmg.sh`, `notarize.sh`, and `docs/OPERATIONS-RELEASE.md` create the DMG/checksum and retain credential-bound Developer ID/notarization tooling for a future policy-compliant release. |
-| Stable workflow | `.github/workflows/release.yml` validates the exact `v2.0.0` tag, runs format/XCTest/smoke/localization/universal/public contracts, builds with `verify_release.sh --allow-adhoc`, and publishes immutable DMG/checksum assets. |
+| Universal app | `apps/toolbox/scripts/build_universal.sh`, `apps/toolbox/scripts/build_app.sh`, `apps/toolbox/scripts/verify_release.sh`, and `apps/toolbox/Tests/Distribution/release_contract.sh` build both slices, merge them, assemble the bundle, and verify structural contracts. |
+| DMG and historical notarization tooling | `apps/toolbox/scripts/build_dmg.sh`, `apps/toolbox/scripts/notarize.sh`, and `docs/OPERATIONS-RELEASE.md` created the DMG/checksum path and credential-bound Developer ID/notarization tooling present in the `v2.0.0` source; the tagged stable release did not use the notarization path. |
+| Stable workflow | `.github/workflows/release.yml` validates the exact `v2.0.0` tag, runs format/XCTest/smoke/localization/universal/public contracts, builds with `apps/toolbox/scripts/verify_release.sh --allow-adhoc`, and publishes immutable DMG/checksum assets. |
 | Cask tooling | `scripts/render_cask.sh` and `tests/render_cask_test.sh` render an exact-version cask from a URL/checksum; no Homebrew cask was published for `v2.0.0`. |
-| Site | `site/index.html`, `site/styles.css`, `site/privacy.html`, product assets, `.github/workflows/pages.yml`, and `tests/site_contract.sh` implement and publish the static site. |
-| Evidence/adoption | `scripts/adoption_report.sh`, `tests/adoption_report_test.sh`, and the stable evidence ledger distinguish DMG download events from unique users; no adoption count is claimed here. |
+| Site | `site/index.html`, `site/styles.css`, `site/privacy.html`, `site/assets/app-icon.png`, `site/assets/product-home.png`, `site/assets/product-changes.png`, `site/assets/product-projects.png`, `site/assets/product-recovery.png`, `.github/workflows/pages.yml`, and `tests/site_contract.sh` implement and publish the static site. |
+| Evidence/adoption | `scripts/adoption_report.sh`, `tests/adoption_report_test.sh`, and `docs/release-evidence/toolbox-2.0.0.md` distinguish DMG download events from unique users; no adoption count is claimed here. |
 | Product Hunt | `docs/launch/product-hunt.md`, `site/assets/product-hunt-*.png`, `site/assets/demo-script.md`, and `tests/launch_assets.sh` contain the validated package and time-bounded scheduled-state record. |
 
 ### Release contracts and failure modes
 
-`build_universal.sh` produces a bundle with `arm64` and `x86_64` slices. Slice presence is packaging evidence, not physical-machine execution. `build_dmg.sh` creates a read-only compressed DMG containing `Toolbox.app`, `/Applications`, and `Open Toolbox - First Launch.html`, then writes the checksum. `verify_release.sh --allow-adhoc` verifies bundle identity/version/resources, structural signature, slices, checksum, mount layout, and the first-launch guide while explicitly not asserting stapling or Gatekeeper acceptance.
+`apps/toolbox/scripts/build_universal.sh` produces a bundle with `arm64` and `x86_64` slices. Slice presence is packaging evidence, not physical-machine execution. `apps/toolbox/scripts/build_dmg.sh` creates a read-only compressed DMG containing `Toolbox.app`, `/Applications`, and `Open Toolbox - First Launch.html`, then writes the checksum. `apps/toolbox/scripts/verify_release.sh --allow-adhoc` verifies bundle identity/version/resources, structural signature, slices, checksum, mount layout, and the first-launch guide while explicitly not asserting stapling or Gatekeeper acceptance.
 
-The retained `notarize.sh` requires `TOOLBOX_CODESIGN_IDENTITY` and `TOOLBOX_NOTARY_PROFILE`, signs with hardened runtime/timestamp, submits and staples app/DMG, regenerates the checksum, and calls strict verification. Missing credentials stop before signing/submission and secrets are not printed. That tooling was not used for `v2.0.0`; its existence is not evidence of Developer ID or notarization.
+The retained `apps/toolbox/scripts/notarize.sh` requires `TOOLBOX_CODESIGN_IDENTITY` and `TOOLBOX_NOTARY_PROFILE`, signs with hardened runtime/timestamp, submits and staples app/DMG, regenerates the checksum, and calls strict verification. Missing credentials stop before signing/submission and secrets are not printed. That tooling was not used for `v2.0.0`; its existence is not evidence of Developer ID or notarization.
 
 For the published stable exception, direct Gatekeeper rejection is expected. The safe user path is **System Settings → Privacy & Security → Open Anyway** for this build only. Disabling Gatekeeper or removing quarantine attributes is outside the contract. Homebrew is unavailable.
 
-The release workflow is deliberately fixed to tag/version `v2.0.0`. A later release must update the versioned contract and use the notarized path unless a separately reviewed exception changes policy. Published asset bytes are immutable; a mismatch requires a new patch release, not silent replacement under the tag.
+The historical release workflow was deliberately fixed to tag/version `v2.0.0`, and its tagged asset bytes are immutable; correcting a mismatch would have required a new patch release rather than silent replacement under the tag. Current release policy is maintained in [docs/OPERATIONS-RELEASE.md](../../OPERATIONS-RELEASE.md). This historical record does not prescribe later-release gates.
 
 ### Execution record
 
@@ -105,23 +105,23 @@ Evidence tách theo authority: source/executable test chứng minh behavior; wor
 
 | Area | File/responsibility as built |
 | --- | --- |
-| Universal app | `build_universal.sh`, `build_app.sh`, `verify_release.sh`, `release_contract.sh` build/merge hai slice, assemble bundle và verify structural contract. |
-| DMG/future trust | `build_dmg.sh`, `notarize.sh`, `docs/OPERATIONS-RELEASE.md` tạo DMG/checksum và giữ credential-bound Developer ID/notarization tooling cho future release. |
-| Stable workflow | `.github/workflows/release.yml` validate exact `v2.0.0`, chạy format/XCTest/smoke/localization/universal/public contract, build với `--allow-adhoc` và publish DMG/checksum immutable. |
+| Universal app | `apps/toolbox/scripts/build_universal.sh`, `apps/toolbox/scripts/build_app.sh`, `apps/toolbox/scripts/verify_release.sh`, `apps/toolbox/Tests/Distribution/release_contract.sh` build/merge hai slice, assemble bundle và verify structural contract. |
+| DMG và historical notarization tooling | `apps/toolbox/scripts/build_dmg.sh`, `apps/toolbox/scripts/notarize.sh`, `docs/OPERATIONS-RELEASE.md` đã tạo DMG/checksum path cùng credential-bound Developer ID/notarization tooling có trong source `v2.0.0`; tagged stable release không dùng notarization path. |
+| Stable workflow | `.github/workflows/release.yml` validate exact `v2.0.0`, chạy format/XCTest/smoke/localization/universal/public contract, build với `apps/toolbox/scripts/verify_release.sh --allow-adhoc` và publish DMG/checksum immutable. |
 | Cask tooling | `scripts/render_cask.sh`, `tests/render_cask_test.sh` render cask từ exact URL/checksum; `v2.0.0` không publish Homebrew cask. |
-| Site | `site/**`, `.github/workflows/pages.yml`, `tests/site_contract.sh` implement/publish static site. |
-| Evidence/adoption | `scripts/adoption_report.sh`, test và stable ledger phân biệt DMG download event với unique user; record không claim adoption count. |
-| Product Hunt | `docs/launch/product-hunt.md`, `site/assets/product-hunt-*.png`, demo script và launch test tạo validated package/observed scheduled-state record. |
+| Site | `site/index.html`, `site/styles.css`, `site/privacy.html`, `site/assets/app-icon.png`, `site/assets/product-home.png`, `site/assets/product-changes.png`, `site/assets/product-projects.png`, `site/assets/product-recovery.png`, `.github/workflows/pages.yml`, `tests/site_contract.sh` implement/publish static site. |
+| Evidence/adoption | `scripts/adoption_report.sh`, `tests/adoption_report_test.sh`, `docs/release-evidence/toolbox-2.0.0.md` phân biệt DMG download event với unique user; record không claim adoption count. |
+| Product Hunt | `docs/launch/product-hunt.md`, `site/assets/product-hunt-*.png`, `site/assets/demo-script.md`, `tests/launch_assets.sh` tạo validated package/observed scheduled-state record. |
 
 ### Release contract và failure mode
 
-`build_universal.sh` tạo bundle có slice `arm64`/`x86_64`; slice không phải proof chạy máy vật lý. `build_dmg.sh` tạo read-only compressed DMG chứa `Toolbox.app`, `/Applications`, `Open Toolbox - First Launch.html` và checksum. `verify_release.sh --allow-adhoc` verify identity/version/resource, structural signature, slice, checksum, mount layout, first-launch guide, đồng thời không assert stapling/Gatekeeper acceptance.
+`apps/toolbox/scripts/build_universal.sh` tạo bundle có slice `arm64`/`x86_64`; slice không phải proof chạy máy vật lý. `apps/toolbox/scripts/build_dmg.sh` tạo read-only compressed DMG chứa `Toolbox.app`, `/Applications`, `Open Toolbox - First Launch.html` và checksum. `apps/toolbox/scripts/verify_release.sh --allow-adhoc` verify identity/version/resource, structural signature, slice, checksum, mount layout, first-launch guide, đồng thời không assert stapling/Gatekeeper acceptance.
 
-`notarize.sh` giữ lại yêu cầu `TOOLBOX_CODESIGN_IDENTITY`, `TOOLBOX_NOTARY_PROFILE`, ký hardened runtime/timestamp, submit/staple app/DMG, tạo lại checksum và strict verify. Thiếu credential dừng trước signing/submission; secret không được print. Tooling đó không dùng cho `v2.0.0`, nên không là evidence Developer ID/notarization.
+`apps/toolbox/scripts/notarize.sh` giữ lại yêu cầu `TOOLBOX_CODESIGN_IDENTITY`, `TOOLBOX_NOTARY_PROFILE`, ký hardened runtime/timestamp, submit/staple app/DMG, tạo lại checksum và strict verify. Thiếu credential dừng trước signing/submission; secret không được print. Tooling đó không dùng cho `v2.0.0`, nên không là evidence Developer ID/notarization.
 
 Với stable exception đã publish, Gatekeeper direct rejection là expected. Safe path là **System Settings → Privacy & Security → Open Anyway** chỉ cho build này. Tắt Gatekeeper/xóa quarantine ngoài contract. Homebrew không available.
 
-Workflow cố định cho tag/version `v2.0.0`. Release sau phải update versioned contract và dùng notarized path trừ khi có exception review riêng. Published asset immutable; mismatch cần patch release mới, không silent replace.
+Historical release workflow được cố định có chủ đích cho tag/version `v2.0.0`, và tagged asset byte là immutable; sửa mismatch khi đó cần patch release mới thay vì silent replacement dưới cùng tag. Current release policy được duy trì trong [docs/OPERATIONS-RELEASE.md](../../OPERATIONS-RELEASE.md). Historical record này không quy định gate cho release sau.
 
 ### Execution record
 
@@ -178,23 +178,23 @@ Evidence authority を分離します。Source/executable test は behavior、wo
 
 | Area | As-built file/responsibility |
 | --- | --- |
-| Universal app | `build_universal.sh`、`build_app.sh`、`verify_release.sh`、`release_contract.sh` が両 slice の build/merge、bundle assembly、structural contract を実装します。 |
-| DMG/future trust | `build_dmg.sh`、`notarize.sh`、`docs/OPERATIONS-RELEASE.md` が DMG/checksum と future release 用 credential-bound Developer ID/notarization tooling を実装します。 |
-| Stable workflow | `.github/workflows/release.yml` は exact `v2.0.0` を validate し、format/XCTest/smoke/localization/universal/public contract、`--allow-adhoc` build、immutable DMG/checksum publish を行います。 |
+| Universal app | `apps/toolbox/scripts/build_universal.sh`、`apps/toolbox/scripts/build_app.sh`、`apps/toolbox/scripts/verify_release.sh`、`apps/toolbox/Tests/Distribution/release_contract.sh` が両 slice の build/merge、bundle assembly、structural contract を実装します。 |
+| DMG と historical notarization tooling | `apps/toolbox/scripts/build_dmg.sh`、`apps/toolbox/scripts/notarize.sh`、`docs/OPERATIONS-RELEASE.md` は `v2.0.0` source に存在した DMG/checksum path と credential-bound Developer ID/notarization tooling を作成しました。Tagged stable release は notarization path を使用していません。 |
+| Stable workflow | `.github/workflows/release.yml` は exact `v2.0.0` を validate し、format/XCTest/smoke/localization/universal/public contract、`apps/toolbox/scripts/verify_release.sh --allow-adhoc` build、immutable DMG/checksum publish を行います。 |
 | Cask tooling | `scripts/render_cask.sh`、`tests/render_cask_test.sh` は exact URL/checksum から cask を render しますが、`v2.0.0` Homebrew cask は未 publish です。 |
-| Site | `site/**`、`.github/workflows/pages.yml`、`tests/site_contract.sh` が static site を implement/publish します。 |
-| Evidence/adoption | `scripts/adoption_report.sh`、test、stable ledger が DMG download event と unique user を分離し、adoption count は claim しません。 |
-| Product Hunt | `docs/launch/product-hunt.md`、`site/assets/product-hunt-*.png`、demo script、launch test が validated package/observed scheduled-state record を構成します。 |
+| Site | `site/index.html`、`site/styles.css`、`site/privacy.html`、`site/assets/app-icon.png`、`site/assets/product-home.png`、`site/assets/product-changes.png`、`site/assets/product-projects.png`、`site/assets/product-recovery.png`、`.github/workflows/pages.yml`、`tests/site_contract.sh` が static site を implement/publish します。 |
+| Evidence/adoption | `scripts/adoption_report.sh`、`tests/adoption_report_test.sh`、`docs/release-evidence/toolbox-2.0.0.md` が DMG download event と unique user を分離し、adoption count は claim しません。 |
+| Product Hunt | `docs/launch/product-hunt.md`、`site/assets/product-hunt-*.png`、`site/assets/demo-script.md`、`tests/launch_assets.sh` が validated package/observed scheduled-state record を構成します。 |
 
 ### Release contract と failure mode
 
-`build_universal.sh` は `arm64`/`x86_64` slice の bundle を作ります。Slice は physical execution proof ではありません。`build_dmg.sh` は `Toolbox.app`、`/Applications`、`Open Toolbox - First Launch.html` を含む read-only compressed DMG/checksum を作ります。`verify_release.sh --allow-adhoc` は identity/version/resource、structural signature、slice、checksum、mount layout、first-launch guide を verify しますが stapling/Gatekeeper acceptance は assert しません。
+`apps/toolbox/scripts/build_universal.sh` は `arm64`/`x86_64` slice の bundle を作ります。Slice は physical execution proof ではありません。`apps/toolbox/scripts/build_dmg.sh` は `Toolbox.app`、`/Applications`、`Open Toolbox - First Launch.html` を含む read-only compressed DMG/checksum を作ります。`apps/toolbox/scripts/verify_release.sh --allow-adhoc` は identity/version/resource、structural signature、slice、checksum、mount layout、first-launch guide を verify しますが stapling/Gatekeeper acceptance は assert しません。
 
-`notarize.sh` は `TOOLBOX_CODESIGN_IDENTITY`、`TOOLBOX_NOTARY_PROFILE` を要求し、hardened runtime/timestamp signing、app/DMG submit/staple、checksum regeneration、strict verify を行います。Credential 不足は signing/submission 前に停止し secret は print しません。この tooling は `v2.0.0` で未使用であり Developer ID/notarization evidence ではありません。
+`apps/toolbox/scripts/notarize.sh` は `TOOLBOX_CODESIGN_IDENTITY`、`TOOLBOX_NOTARY_PROFILE` を要求し、hardened runtime/timestamp signing、app/DMG submit/staple、checksum regeneration、strict verify を行います。Credential 不足は signing/submission 前に停止し secret は print しません。この tooling は `v2.0.0` で未使用であり Developer ID/notarization evidence ではありません。
 
 Published stable exception では Gatekeeper direct rejection が expected です。この build の safe path は **System Settings → Privacy & Security → Open Anyway** です。Gatekeeper disable/quarantine removal は contract 外です。Homebrew は unavailable です。
 
-Workflow は tag/version `v2.0.0` 固定です。後続 release は versioned contract を更新し、別途 review 済み exception がなければ notarized path を使います。Published asset は immutable で、mismatch は同じ tag の silent replace ではなく新しい patch release が必要です。
+Historical release workflow は意図的に tag/version `v2.0.0` 固定で、tagged asset byte は immutable でした。Mismatch の修正には同じ tag の silent replacement ではなく新しい patch release が必要でした。Current release policy は [docs/OPERATIONS-RELEASE.md](../../OPERATIONS-RELEASE.md) で管理します。この historical record は後続 release gate を規定しません。
 
 ### Execution record
 

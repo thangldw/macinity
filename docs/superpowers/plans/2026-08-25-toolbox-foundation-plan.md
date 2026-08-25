@@ -17,10 +17,10 @@ This record replaces the executed foundation plan. The objective was to establis
 | Area | As-built files and responsibility |
 | --- | --- |
 | Package | `apps/toolbox/Package.swift` defines `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, `Toolbox`, `SmokeCore`, and four XCTest targets. |
-| Core | `Sources/ToolboxCore/AppMetadata.swift`, `Localization.swift`, `SafetyModels.swift`, and `EvidenceModels.swift` establish application support, language/formatting, normalized-path safety, and shared evidence types. |
-| Storage | `Sources/ToolboxStorage/**`, `Tests/ToolboxStorageTests/**`, `Tests/SmokeStorage/main.swift`, and `scripts/test_storage.sh` contain the ported storage, application, developer, cleanup, history, duplicate, photo, and storage-trend functionality. |
-| Changes | `Sources/ToolboxChanges/**`, `Tests/ToolboxChangesTests/**`, `Tests/SmokeChanges/main.swift`, and `scripts/test_changes.sh` contain the ported snapshot, FSEvents, diff, baseline, history, and Change Timeline functionality. |
-| App shell | `Sources/Toolbox/ToolboxApp.swift`, `ToolboxShellView.swift`, `HomeView.swift`, `Resources/**`, app tests, and `scripts/build_app.sh` produce one app and one window. |
+| Core | `apps/toolbox/Sources/ToolboxCore/AppMetadata.swift`, `apps/toolbox/Sources/ToolboxCore/Localization.swift`, `apps/toolbox/Sources/ToolboxCore/SafetyModels.swift`, and `apps/toolbox/Sources/ToolboxCore/EvidenceModels.swift` establish application support, language/formatting, normalized-path safety, and shared evidence types. |
+| Storage | `apps/toolbox/Sources/ToolboxStorage/**`, `apps/toolbox/Tests/ToolboxStorageTests/**`, `apps/toolbox/Tests/SmokeStorage/main.swift`, and `apps/toolbox/scripts/test_storage.sh` contain the ported storage, application, developer, cleanup, history, duplicate, photo, and storage-trend functionality. |
+| Changes | `apps/toolbox/Sources/ToolboxChanges/**`, `apps/toolbox/Tests/ToolboxChangesTests/**`, `apps/toolbox/Tests/SmokeChanges/main.swift`, and `apps/toolbox/scripts/test_changes.sh` contain the ported snapshot, FSEvents, diff, baseline, history, and Change Timeline functionality. |
+| App shell | `apps/toolbox/Sources/Toolbox/ToolboxApp.swift`, `apps/toolbox/Sources/Toolbox/ToolboxShellView.swift`, `apps/toolbox/Sources/Toolbox/HomeView.swift`, `apps/toolbox/Resources/**`, `apps/toolbox/Tests/ToolboxAppTests/**`, and `apps/toolbox/scripts/build_app.sh` produce one app with a main `WindowGroup` and a separate `Settings` scene. |
 | CI/docs | `.github/workflows/ci.yml`, `README.md`, and `docs/ARCHITECTURE.md` changed the supported build/test contract to Toolbox. |
 
 ### Contracts and failure modes
@@ -59,10 +59,10 @@ Record này thay plan foundation đã execute. Objective là tạo một SwiftPM
 | Area | File/responsibility as built |
 | --- | --- |
 | Package | `apps/toolbox/Package.swift` định nghĩa `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, `Toolbox`, `SmokeCore` và bốn XCTest target. |
-| Core | `Sources/ToolboxCore/AppMetadata.swift`, `Localization.swift`, `SafetyModels.swift`, `EvidenceModels.swift` tạo application support, language/formatting, normalized-path safety và shared evidence type. |
-| Storage | `Sources/ToolboxStorage/**`, `Tests/ToolboxStorageTests/**`, `Tests/SmokeStorage/main.swift`, `scripts/test_storage.sh` chứa storage/application/developer/cleanup/history/duplicate/photo/trend đã port. |
-| Changes | `Sources/ToolboxChanges/**`, `Tests/ToolboxChangesTests/**`, `Tests/SmokeChanges/main.swift`, `scripts/test_changes.sh` chứa snapshot, FSEvents, diff, baseline, history và Change Timeline đã port. |
-| App shell | `Sources/Toolbox/ToolboxApp.swift`, `ToolboxShellView.swift`, `HomeView.swift`, `Resources/**`, app test và `scripts/build_app.sh` tạo một app/một window. |
+| Core | `apps/toolbox/Sources/ToolboxCore/AppMetadata.swift`, `apps/toolbox/Sources/ToolboxCore/Localization.swift`, `apps/toolbox/Sources/ToolboxCore/SafetyModels.swift`, `apps/toolbox/Sources/ToolboxCore/EvidenceModels.swift` tạo application support, language/formatting, normalized-path safety và shared evidence type. |
+| Storage | `apps/toolbox/Sources/ToolboxStorage/**`, `apps/toolbox/Tests/ToolboxStorageTests/**`, `apps/toolbox/Tests/SmokeStorage/main.swift`, `apps/toolbox/scripts/test_storage.sh` chứa storage/application/developer/cleanup/history/duplicate/photo/trend đã port. |
+| Changes | `apps/toolbox/Sources/ToolboxChanges/**`, `apps/toolbox/Tests/ToolboxChangesTests/**`, `apps/toolbox/Tests/SmokeChanges/main.swift`, `apps/toolbox/scripts/test_changes.sh` chứa snapshot, FSEvents, diff, baseline, history và Change Timeline đã port. |
+| App shell | `apps/toolbox/Sources/Toolbox/ToolboxApp.swift`, `apps/toolbox/Sources/Toolbox/ToolboxShellView.swift`, `apps/toolbox/Sources/Toolbox/HomeView.swift`, `apps/toolbox/Resources/**`, `apps/toolbox/Tests/ToolboxAppTests/**` và `apps/toolbox/scripts/build_app.sh` tạo một app với main `WindowGroup` và scene `Settings` riêng. |
 | CI/docs | `.github/workflows/ci.yml`, `README.md`, `docs/ARCHITECTURE.md` chuyển supported build/test contract sang Toolbox. |
 
 ### Contract và failure mode
@@ -101,10 +101,10 @@ Record không prove physical Intel execution, performance parity với v1, clean
 | Area | As-built file/responsibility |
 | --- | --- |
 | Package | `apps/toolbox/Package.swift` は `ToolboxCore`、`ToolboxStorage`、`ToolboxChanges`、`Toolbox`、`SmokeCore`、4 XCTest target を定義します。 |
-| Core | `Sources/ToolboxCore/AppMetadata.swift`、`Localization.swift`、`SafetyModels.swift`、`EvidenceModels.swift` が application support、language/formatting、normalized-path safety、shared evidence type を実装します。 |
-| Storage | `Sources/ToolboxStorage/**`、`Tests/ToolboxStorageTests/**`、`Tests/SmokeStorage/main.swift`、`scripts/test_storage.sh` が port 済み storage/application/developer/cleanup/history/duplicate/photo/trend を実装します。 |
-| Changes | `Sources/ToolboxChanges/**`、`Tests/ToolboxChangesTests/**`、`Tests/SmokeChanges/main.swift`、`scripts/test_changes.sh` が port 済み snapshot、FSEvents、diff、baseline、history、Change Timeline を実装します。 |
-| App shell | `Sources/Toolbox/ToolboxApp.swift`、`ToolboxShellView.swift`、`HomeView.swift`、`Resources/**`、app test、`scripts/build_app.sh` が one app/one window を作ります。 |
+| Core | `apps/toolbox/Sources/ToolboxCore/AppMetadata.swift`、`apps/toolbox/Sources/ToolboxCore/Localization.swift`、`apps/toolbox/Sources/ToolboxCore/SafetyModels.swift`、`apps/toolbox/Sources/ToolboxCore/EvidenceModels.swift` が application support、language/formatting、normalized-path safety、shared evidence type を実装します。 |
+| Storage | `apps/toolbox/Sources/ToolboxStorage/**`、`apps/toolbox/Tests/ToolboxStorageTests/**`、`apps/toolbox/Tests/SmokeStorage/main.swift`、`apps/toolbox/scripts/test_storage.sh` が port 済み storage/application/developer/cleanup/history/duplicate/photo/trend を実装します。 |
+| Changes | `apps/toolbox/Sources/ToolboxChanges/**`、`apps/toolbox/Tests/ToolboxChangesTests/**`、`apps/toolbox/Tests/SmokeChanges/main.swift`、`apps/toolbox/scripts/test_changes.sh` が port 済み snapshot、FSEvents、diff、baseline、history、Change Timeline を実装します。 |
+| App shell | `apps/toolbox/Sources/Toolbox/ToolboxApp.swift`、`apps/toolbox/Sources/Toolbox/ToolboxShellView.swift`、`apps/toolbox/Sources/Toolbox/HomeView.swift`、`apps/toolbox/Resources/**`、`apps/toolbox/Tests/ToolboxAppTests/**`、`apps/toolbox/scripts/build_app.sh` が main `WindowGroup` と別の `Settings` scene を持つ一つの app を作ります。 |
 | CI/docs | `.github/workflows/ci.yml`、`README.md`、`docs/ARCHITECTURE.md` が supported build/test contract を Toolbox に変更しました。 |
 
 ### Contract と failure mode

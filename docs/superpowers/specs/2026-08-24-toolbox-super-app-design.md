@@ -25,7 +25,7 @@ The 2.0 boundary excludes a CLI, privileged helper, Endpoint Security extension,
 
 ### As-built product and code structure
 
-`Toolbox` uses bundle identifier `com.thang.toolbox`, targets macOS 13 or later, and ships as version `2.0.0`. The single window exposes Home, Storage, Projects, Applications, Change Timeline, and Recovery. Home summarizes recoverable bytes and important changes and offers Start Install Trace; Settings owns language, scheduled scans, migration controls, and the user-initiated update check.
+`Toolbox` uses bundle identifier `com.thang.toolbox`, targets macOS 13 or later, and ships as version `2.0.0`. The main `WindowGroup` exposes Home, Storage, Projects, Applications, Change Timeline, and Recovery; a separate `Settings` scene is also defined. Home summarizes recoverable bytes and important changes and offers Start Install Trace. The language picker is in the main sidebar, legacy-data migration appears only in onboarding, and regular schedule controls live in `ScheduledScanView`. Settings handles coverage checks, legacy-schedule replacement, and the user-initiated update check.
 
 `apps/toolbox/Package.swift` defines `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, the `Toolbox` executable, and the non-shipping `SmokeCore` executable. Dependencies are `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, and `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`. Storage and Changes do not import one another; cross-module routing stays in `ToolboxCoordinator`. The legacy `apps/diskora` and `apps/changeora` packages were removed after parity checks in `2c1eb1d`; their historical releases and user data were not deleted.
 
@@ -87,9 +87,9 @@ Ranh giới 2.0 loại trừ CLI, privileged helper, Endpoint Security extension
 
 ### Product và code structure as built
 
-`Toolbox` dùng bundle identifier `com.thang.toolbox`, target macOS 13+ và ship version `2.0.0`. Một window có Home, Storage, Projects, Applications, Change Timeline và Recovery. Home tóm tắt recoverable byte/important change và có Start Install Trace; Settings quản lý language, scheduled scan, migration control và update check do user khởi tạo.
+`Toolbox` dùng bundle identifier `com.thang.toolbox`, target macOS 13+ và ship version `2.0.0`. `WindowGroup` chính có Home, Storage, Projects, Applications, Change Timeline và Recovery; ứng dụng còn định nghĩa một scene `Settings` riêng. Home tóm tắt recoverable byte/important change và có Start Install Trace. Language picker nằm trong main sidebar, legacy-data migration chỉ xuất hiện ở onboarding, và regular schedule control nằm trong `ScheduledScanView`. Settings xử lý coverage check, legacy-schedule replacement và update check do user khởi tạo.
 
-`apps/toolbox/Package.swift` định nghĩa `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, executable `Toolbox` và executable không ship `SmokeCore`. Dependency là `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`. Storage/Changes không import nhau; `ToolboxCoordinator` giữ cross-module routing. Hai package legacy bị xóa khỏi source trong `2c1eb1d` sau parity check; release history và user data không bị xóa.
+`apps/toolbox/Package.swift` định nghĩa `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, executable `Toolbox` và executable không ship `SmokeCore`. Dependency là `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`. Storage/Changes không import nhau; `ToolboxCoordinator` giữ cross-module routing. Hai package legacy `apps/diskora` và `apps/changeora` bị xóa khỏi source trong `2c1eb1d` sau parity check; release history và user data không bị xóa.
 
 ### Evidence và durable data
 
@@ -149,9 +149,9 @@ Target user は developer tool を導入し、複数 package manager/runtime を
 
 ### As-built product と code structure
 
-`Toolbox` は bundle identifier `com.thang.toolbox`、macOS 13+、version `2.0.0` です。一つの window に Home、Storage、Projects、Applications、Change Timeline、Recovery があります。Home は recoverable byte/important change を要約して Start Install Trace を提供し、Settings は language、scheduled scan、migration control、user-initiated update check を所有します。
+`Toolbox` は bundle identifier `com.thang.toolbox`、macOS 13+、version `2.0.0` です。Main `WindowGroup` に Home、Storage、Projects、Applications、Change Timeline、Recovery があり、別の `Settings` scene も定義します。Home は recoverable byte/important change を要約して Start Install Trace を提供します。Language picker は main sidebar、legacy-data migration は onboarding のみ、regular schedule control は `ScheduledScanView` にあります。Settings は coverage check、legacy-schedule replacement、user-initiated update check を扱います。
 
-`apps/toolbox/Package.swift` は `ToolboxCore`、`ToolboxStorage`、`ToolboxChanges`、`Toolbox` executable、non-shipping `SmokeCore` executable を定義します。Dependency は `ToolboxStorage -> ToolboxCore`、`ToolboxChanges -> ToolboxCore`、`Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges` です。Storage/Changes は相互 import せず、`ToolboxCoordinator` が cross-module routing を行います。Legacy package は parity check 後の `2c1eb1d` で source から削除しましたが、release history/user data は削除していません。
+`apps/toolbox/Package.swift` は `ToolboxCore`、`ToolboxStorage`、`ToolboxChanges`、`Toolbox` executable、non-shipping `SmokeCore` executable を定義します。Dependency は `ToolboxStorage -> ToolboxCore`、`ToolboxChanges -> ToolboxCore`、`Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges` です。Storage/Changes は相互 import せず、`ToolboxCoordinator` が cross-module routing を行います。Legacy package `apps/diskora` と `apps/changeora` は parity check 後の `2c1eb1d` で source から削除しましたが、release history/user data は削除していません。
 
 ### Evidence と durable data
 
