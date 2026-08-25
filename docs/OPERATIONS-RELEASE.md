@@ -2,7 +2,7 @@
 
 ## Release boundary
 
-Only the protected GitHub release job may publish Toolbox. Local builds are ad-hoc signed and are useful for structural and DMG tests, but are not notarization evidence.
+Only the protected GitHub release job may publish stable Toolbox releases. Local builds are ad-hoc signed and are useful for structural and DMG tests, but are not notarization evidence. The narrowly scoped public-beta exception is documented below.
 
 Required protected values:
 
@@ -22,6 +22,12 @@ From `apps/toolbox`:
 ```
 
 This verifies the bundle identifier, version, `arm64` and `x86_64` slices, English and Vietnamese resources, structural code signature, DMG checksum, and expected file layout. The explicit flag skips stapler and Gatekeeper acceptance.
+
+## Temporary unnotarized beta exception
+
+Tag `v2.0.0-beta.1` may be published manually only as a GitHub pre-release after exact-head CI and Pages succeed. Its DMG must pass the local structural release check above, remain labeled ad-hoc signed and unnotarized on the release page, README, and product site, and include the manual **Open Anyway** instructions. Do not publish it through Homebrew, mark it latest/stable, disable Gatekeeper, remove quarantine attributes, or reuse its assets for stable `v2.0.0`.
+
+Publish only the immutable DMG and SHA-256 file from the tagged commit. The stable `v2.0.0` release remains blocked until Developer ID signing, notarization, stapling, Gatekeeper acceptance, and the protected release job pass.
 
 ## Protected signing and notarization
 
@@ -45,8 +51,8 @@ Re-download both assets after publication, verify the checksum, mount the DMG, d
 
 ## Tiếng Việt
 
-Chỉ job release được bảo vệ mới được publish. Build local chỉ có chữ ký ad-hoc, dùng để kiểm tra cấu trúc/DMG chứ không phải bằng chứng notarization. Thiếu identity hoặc notary profile phải dừng trước khi ký hay upload. Sau publish, tải lại đúng DMG và checksum, kiểm tra checksum, mount/copy/launch trên tài khoản macOS 13+ sạch rồi mới mở launch công khai.
+Chỉ job release được bảo vệ mới được publish stable release. Riêng `v2.0.0-beta.1` được phép publish thủ công dưới dạng GitHub pre-release chưa notarize, phải ghi rõ giới hạn và hướng dẫn **Open Anyway**, không đưa lên Homebrew hoặc gắn latest/stable. Build local chỉ có chữ ký ad-hoc, dùng để kiểm tra cấu trúc/DMG chứ không phải bằng chứng notarization. Stable `v2.0.0` vẫn phải dừng nếu thiếu identity hoặc notary profile.
 
 ## 日本語
 
-公開は protected release job のみです。Local build は ad-hoc 署名で、構造と DMG の検証用であり notarization evidence ではありません。Identity または notary profile がない場合は署名・upload 前に停止します。公開後は DMG と checksum を再取得し、clean macOS 13+ account で mount・copy・launch・Gatekeeper を確認します。
+Stable release の公開は protected release job のみです。`v2.0.0-beta.1` だけは未 notarize の GitHub pre-release として手動公開でき、制限と **Open Anyway** 手順を明記し、Homebrew や latest/stable にはしません。Local build は ad-hoc 署名で notarization evidence ではありません。Stable `v2.0.0` は identity または notary profile がない場合、公開しません。

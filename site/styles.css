@@ -71,6 +71,10 @@ nav { margin-left: auto; display: flex; gap: 32px; color: var(--muted); font-siz
 .trust li::before { content: "✓"; display: inline-grid; place-items: center; width: 30px; height: 30px; margin-right: 16px; color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; font-size: 15px; }
 .install { display: grid; grid-template-columns: 1fr 360px; align-items: center; gap: 100px; }
 .install p { color: var(--muted); }
+.beta-notice { max-width: 720px; margin: 28px 0; padding: 18px 20px; color: #dfe3dc; background: rgba(215, 255, 54, .06); border: 1px solid rgba(215, 255, 54, .35); border-radius: 9px; }
+.beta-notice strong { color: var(--accent); }
+.install-steps { max-width: 720px; margin: 28px 0; padding-left: 24px; color: #d8dcd6; }
+.install-steps li { margin: 9px 0; padding-left: 6px; }
 .text-link, .link-row a { color: var(--accent); font-weight: 650; }
 pre { max-width: 670px; margin: 28px 0; padding: 18px 20px; overflow: auto; color: #d8dcd6; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; font-size: 14px; }
 .link-row { display: flex; flex-wrap: wrap; gap: 30px; }

@@ -18,4 +18,6 @@ for page in "$site/index.html" "$site/privacy.html"; do
   grep -Eq '<title>' "$page"
 done
 
+bash "$repo_dir/tests/unsigned_beta_release_test.sh"
+
 echo "PASS: Toolbox site content and accessibility contract"

@@ -23,15 +23,15 @@ Toolbox 2.0 replaces the standalone Diskora and Changeora packages. Releases thr
 - Full Xcode for XCTest, universal archives, Developer ID signing, and notarization
 - Optional Full Disk Access for broader protected-folder coverage
 
-### Install
+### Install the public beta
 
-After the signed 2.0.0 release is published:
+[`v2.0.0-beta.1`](https://github.com/thangldw/toolbox/releases/tag/v2.0.0-beta.1) is ad-hoc signed and **not notarized** by Apple. Download the DMG and its SHA-256 file, then verify them in the same folder:
 
 ```bash
-brew install --cask thangldw/toolbox/toolbox
+shasum -a 256 -c Toolbox-2.0.0.dmg.sha256
 ```
 
-Or download `Toolbox-2.0.0.dmg` and its SHA-256 file from [GitHub Releases](https://github.com/thangldw/toolbox/releases). The release gate requires the Homebrew cask and direct download to resolve to the same notarized DMG.
+Open the DMG and drag Toolbox to Applications. On first launch, try to open Toolbox once, then go to **System Settings → Privacy & Security → Open Anyway** and authenticate. Do not disable Gatekeeper or strip quarantine attributes. Homebrew installation remains unavailable until a Developer ID-signed and notarized stable release exists.
 
 ### Build and verify
 
@@ -92,7 +92,7 @@ Dùng các lệnh trong phần English để chạy format, XCTest, bốn smoke 
 
 Xem [Kiến trúc](docs/ARCHITECTURE.md), [Vận hành](docs/OPERATIONS.md), [Quyền riêng tư](PRIVACY.md), [Bảo mật](SECURITY.md) và [Đóng góp](CONTRIBUTING.md).
 
-Sau khi bản 2.0.0 đã được ký và publish, cài bằng `brew install --cask thangldw/toolbox/toolbox` hoặc tải DMG và SHA-256 từ GitHub Releases. Hai cách phải trỏ đến đúng cùng một DMG đã notarize.
+[`v2.0.0-beta.1`](https://github.com/thangldw/toolbox/releases/tag/v2.0.0-beta.1) là beta ký ad-hoc và **chưa notarize** bởi Apple. Tải DMG cùng file SHA-256, chạy lệnh kiểm tra trong phần English, kéo Toolbox vào Applications rồi thử mở một lần. Sau đó vào **System Settings → Privacy & Security → Open Anyway** và xác thực. Không tắt Gatekeeper hoặc xóa quarantine attribute. Homebrew chỉ được mở sau khi có stable release ký Developer ID và notarize.
 
 ## 日本語
 
@@ -112,7 +112,7 @@ macOS 13 以降と Swift 6.0 以降が必要です。XCTest、universal archive�
 
 [Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Privacy](PRIVACY.md)、[Security](SECURITY.md)、[Contributing](CONTRIBUTING.md) を参照してください。
 
-署名済み 2.0.0 の公開後は `brew install --cask thangldw/toolbox/toolbox`、または GitHub Releases の DMG と SHA-256 を使用します。両方は同じ notarized DMG を参照します。
+[`v2.0.0-beta.1`](https://github.com/thangldw/toolbox/releases/tag/v2.0.0-beta.1) は ad-hoc 署名の beta で、Apple により **notarize されていません**。DMG と SHA-256 file を download し、English section の command で検証してから Applications に移動します。初回は一度起動を試し、**System Settings → Privacy & Security → Open Anyway** で許可してください。Gatekeeper の無効化や quarantine attribute の削除は行わないでください。Homebrew は Developer ID 署名・notarize 済み stable release まで提供しません。
 
 ## License
 

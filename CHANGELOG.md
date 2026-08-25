@@ -4,8 +4,9 @@ All notable changes to Toolbox are documented here. Releases follow [Semantic Ve
 
 ## English
 
-### Toolbox 2.0.0 — Unreleased
+### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
+- Published tag `v2.0.0-beta.1` as an explicitly unnotarized public beta with manual Gatekeeper approval instructions.
 - Replaced the standalone applications with one six-destination Toolbox GUI.
 - Added user-selected project artifact cleanup for seven developer ecosystems.
 - Added drag-and-drop Install Trace with persisted before/after evidence and interrupted-session recovery.
@@ -68,8 +69,9 @@ This release contains Diskora 1.2.0 and Changeora 1.3.0.
 
 ## Tiếng Việt
 
-### Toolbox 2.0.0 — Chưa phát hành
+### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
+- Publish tag `v2.0.0-beta.1` dưới dạng public beta chưa notarize, kèm hướng dẫn người dùng tự phê duyệt qua Gatekeeper.
 - Thay hai ứng dụng độc lập bằng một GUI Toolbox với sáu destination.
 - Thêm dọn artifact project theo root người dùng chọn cho bảy hệ sinh thái developer.
 - Thêm Install Trace kéo-thả với bằng chứng trước/sau và khôi phục phiên bị gián đoạn.
@@ -132,8 +134,9 @@ Bản phát hành này gồm Diskora 1.2.0 và Changeora 1.3.0.
 
 ## 日本語
 
-### Toolbox 2.0.0 — 未リリース
+### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
+- `v2.0.0-beta.1` を未 notarize の public beta として公開し、Gatekeeper の手動許可手順を追加しました。
 - Standalone app を一つの 6 destination Toolbox GUI に統合しました。
 - User 選択 root 内で 7 ecosystem の project artifact cleanup を追加しました。
 - Drag-and-drop Install Trace、前後 evidence、interrupted session recovery を追加しました。
