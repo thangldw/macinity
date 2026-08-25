@@ -13,18 +13,18 @@ for image in home projects trace recovery; do
   test "$(sips -g pixelHeight "$file" | awk '/pixelHeight/ {print $2}')" = "760"
 done
 
-rg -q '^Name: Toolbox$' "$copy"
-rg -q '^Tagline: Understand Mac changes before you clean them up$' "$copy"
-rg -q '^Description: .*Not Apple-notarized; first launch requires Open Anyway\.$' "$copy"
-rg -q '^First comment: .*Toolbox 2\.0 is ad-hoc signed and not notarized by Apple' "$copy"
-rg -q '^Topics: Developer Tools, Mac, Open Source$' "$copy"
-rg -q '^Pricing: Free$' "$copy"
-if rg -qi 'upvote|vote for' "$copy"; then
+grep -Eq '^Name: Toolbox$' "$copy"
+grep -Eq '^Tagline: Understand Mac changes before you clean them up$' "$copy"
+grep -Eq '^Description: .*Not Apple-notarized; first launch requires Open Anyway\.$' "$copy"
+grep -Eq '^First comment: .*Toolbox 2\.0 is ad-hoc signed and not notarized by Apple' "$copy"
+grep -Eq '^Topics: Developer Tools, Mac, Open Source$' "$copy"
+grep -Eq '^Pricing: Free$' "$copy"
+if grep -Eqi 'upvote|vote for' "$copy"; then
   echo "Launch copy must request workflow feedback, not votes" >&2
   exit 1
 fi
 test -f "$assets/demo-script.md"
-rg -q '^Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT\.$' "$copy"
-rg -q '^Launch URL: https://www\.producthunt\.com/products/toolbox-14\?launch=toolbox-14$' "$copy"
+grep -Eq '^Status: SCHEDULED — August 26, 2026 at 12:01 AM PDT\.$' "$copy"
+grep -Eq '^Launch URL: https://www\.producthunt\.com/products/toolbox-14\?launch=toolbox-14$' "$copy"
 
 echo "PASS: Product Hunt copy and asset contracts"
