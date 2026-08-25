@@ -1,8 +1,10 @@
 # Changelog
 
-All notable changes to Toolbox are documented here. Releases follow [Semantic Versioning](https://semver.org/). Historical tags through `v1.4.0` contain the standalone Diskora and Changeora applications; 2.0 and later ship one Toolbox application.
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
 ## English
+
+All notable changes to Toolbox are documented here. Releases follow [Semantic Versioning](https://semver.org/). Historical tags through `v1.4.0` contain the standalone Diskora and Changeora applications; 2.0 and later ship one Toolbox application.
 
 ### Toolbox 2.0.0 — 2026-08-25
 
@@ -75,6 +77,8 @@ This release contains Diskora 1.2.0 and Changeora 1.3.0.
 
 ## Tiếng Việt
 
+Mọi thay đổi đáng chú ý của Toolbox được ghi tại đây. Các release tuân theo [Semantic Versioning](https://semver.org/). Tag lịch sử đến `v1.4.0` chứa hai ứng dụng độc lập Diskora và Changeora; từ 2.0 trở đi chỉ ship một ứng dụng Toolbox.
+
 ### Toolbox 2.0.0 — 2026-08-25
 
 - Đưa Toolbox 2.0.0 lên kênh stable của sản phẩm, đồng thời giữ công bố rõ bản phân phối chưa notarize.
@@ -145,6 +149,14 @@ Bản phát hành này gồm Diskora 1.2.0 và Changeora 1.3.0.
 - Thiết lập nguyên tắc local-first, xem trước rõ ràng và ưu tiên thao tác có thể phục hồi.
 
 ## 日本語
+
+Toolbox の主な変更をこの file に記録します。Release は [Semantic Versioning](https://semver.org/) に従います。`v1.4.0` までの historical tag は standalone Diskora/Changeora application を含み、2.0 以降は一つの Toolbox application を ship します。
+
+### Toolbox 2.0.0 — 2026-08-25
+
+- Toolbox 2.0.0 を stable product channel に移し、未 notarize distribution の明示的 disclosure を維持しました。
+- DMG 内に first-launch HTML guide を追加し、安全な Gatekeeper approval のための同等の onboarding guidance を追加しました。
+- Homebrew を引き続き提供せず、Gatekeeper の無効化または quarantine attribute の削除を案内しない方針を維持しました。
 
 ### Toolbox 2.0.0 Beta 1 — 2026-08-25
 
