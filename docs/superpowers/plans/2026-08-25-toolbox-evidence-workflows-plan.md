@@ -1,604 +1,163 @@
-# Toolbox 2.0 Evidence Workflows Implementation Plan
-
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
-**Goal:** Turn the unified parity shell into the differentiated Toolbox 2.0 product with shared evidence, project-aware cleanup, Install Trace, verified legacy migration, and unified Recovery.
-
-**Architecture:** Keep feature modules independent and connect them through versioned `ToolboxCore` protocols and records. All persistence is atomic and local; all mutation is preflighted through the shared path-safety policy and recorded in a unified activity ledger.
-
-**Tech Stack:** Swift 6, SwiftUI, AppKit drag/drop, Foundation Codable stores, CoreServices/FSEvents, XCTest, temporary-directory integration fixtures.
-
-**Spec:** `docs/superpowers/specs/2026-08-24-toolbox-super-app-design.md`
-
-## Global Constraints
-
-- Complete the foundation plan first.
-- macOS 13 or later; Swift tools 6.0 or later.
-- No CLI, privileged helper, Endpoint Security extension, telemetry, or automatic mutation.
-- User-selected project roots only; do not execute project scripts or hooks.
-- Unknown folders, source, manifests, lockfiles, `.git`, secrets, VM disks, and Docker volumes never receive `safe` classification.
-- Legacy data is copy-then-verify; legacy directories are never modified or deleted.
-- Each task ends with focused verification and a small commit.
-
----
-
-## File map
-
-```text
-apps/toolbox/Sources/ToolboxCore/
-├── EvidenceStore.swift                    # Versioned atomic evidence persistence
-├── ActivityLedger.swift                   # Cleanup/restore/trace/migration/export events
-├── MigrationService.swift                 # Idempotent legacy import
-└── StoreRecovery.swift                    # Corrupt-file quarantine
-apps/toolbox/Sources/ToolboxStorage/
-├── Features/Projects/ProjectModels.swift
-├── Features/Projects/ProjectScanner.swift
-├── Features/Projects/ProjectViewModel.swift
-├── Views/ProjectsView.swift
-└── Features/History/UnifiedRecoveryAdapter.swift
-apps/toolbox/Sources/ToolboxChanges/
-├── Features/Trace/InstallTraceCoordinator.swift
-├── Features/Trace/InstallerMetadata.swift
-└── Views/InstallTraceDropView.swift
-apps/toolbox/Sources/Toolbox/
-├── ToolboxCoordinator.swift               # Shared stores and cross-module routing
-├── OnboardingView.swift                   # Permission and migration status
-└── SettingsView.swift                     # Scan roots, schedule, update policy
-```
-
-### Task 1: Add the versioned evidence store and activity ledger
-
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxCore/EvidenceStore.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/ActivityLedger.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/StoreRecovery.swift`
-- Modify: `apps/toolbox/Sources/ToolboxCore/EvidenceModels.swift`
-- Modify: `apps/toolbox/Tests/ToolboxCoreTests/ToolboxCoreTests.swift`
-
-**Interfaces:**
-- Produces: `EvidenceStore.load() throws -> [EvidenceRecord]`
-- Produces: `EvidenceStore.upsert(_:) throws`
-- Produces: `ActivityLedger.load() throws -> [ActivityEntry]`
-- Produces: `ActivityLedger.append(_:) throws`
-- Produces: `StoreRecovery.quarantine(_:) throws -> URL`
-
-- [ ] **Step 1: Write failing atomic-store and quarantine tests**
-
-```swift
-func testEvidenceUpsertIsStableByCanonicalPathAndKind() throws {
-  let directory = try temporaryDirectory()
-  let store = EvidenceStore(directory: directory)
-  try store.upsert(EvidenceRecord(path: "/tmp/a", kind: .projectArtifact, safety: .safe,
-    reasons: ["first"], observedAt: Date(timeIntervalSince1970: 1)))
-  try store.upsert(EvidenceRecord(path: "/tmp/a", kind: .projectArtifact, safety: .review,
-    reasons: ["new"], observedAt: Date(timeIntervalSince1970: 2)))
-  XCTAssertEqual(try store.load().count, 1)
-  XCTAssertEqual(try store.load().first?.safety, .review)
-}
-
-func testCorruptStoreIsQuarantinedInsteadOfOverwritten() throws {
-  let directory = try temporaryDirectory()
-  try Data("{".utf8).write(to: directory.appendingPathComponent("evidence-v1.json"))
-  XCTAssertThrowsError(try EvidenceStore(directory: directory).load())
-  XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: directory.path)
-    .filter { $0.hasPrefix("evidence-v1.corrupt-") }.count, 1)
-}
-```
-
-- [ ] **Step 2: Run focused tests and verify missing stores**
-
-Run: `cd apps/toolbox && swift test --filter ToolboxCoreTests`
-
-Expected: FAIL because the stores and `ActivityEntry` do not exist.
-
-- [ ] **Step 3: Implement version envelopes and atomic writes**
-
-```swift
-struct StoreEnvelope<Value: Codable>: Codable {
-  let schemaVersion: Int
-  var values: [Value]
-}
-
-public enum ActivityKind: String, Codable, Sendable {
-  case cleanup, command, restore, trace, migration, export
-}
-
-public struct ActivityEntry: Codable, Hashable, Sendable, Identifiable {
-  public let id: UUID
-  public let kind: ActivityKind
-  public let occurredAt: Date
-  public let paths: [String]
-  public let affectedBytes: Int64
-  public let recoverable: Bool
-  public let errors: [String]
-
-  public init(
-    id: UUID = UUID(), kind: ActivityKind, occurredAt: Date = Date(), paths: [String],
-    affectedBytes: Int64, recoverable: Bool, errors: [String]
-  ) {
-    self.id = id
-    self.kind = kind
-    self.occurredAt = occurredAt
-    self.paths = paths
-    self.affectedBytes = affectedBytes
-    self.recoverable = recoverable
-    self.errors = errors
-  }
-}
-```
-
-Every save encodes to data and uses `Data.write(options: .atomic)`. Decode failure renames the corrupt file with a timestamp suffix and throws a typed error; it never writes an empty replacement during that call.
-
-- [ ] **Step 4: Run tests and lint**
-
-Run: `cd apps/toolbox && swift test --filter ToolboxCoreTests && swift format lint --recursive --parallel Sources/ToolboxCore Tests/ToolboxCoreTests`
-
-Expected: PASS.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add apps/toolbox/Sources/ToolboxCore apps/toolbox/Tests/ToolboxCoreTests
-git commit -m "feat: add shared evidence and activity stores"
-```
-
-### Task 2: Add project-aware artifact scanning
-
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxStorage/Features/Projects/ProjectModels.swift`
-- Create: `apps/toolbox/Sources/ToolboxStorage/Features/Projects/ProjectScanner.swift`
-- Create: `apps/toolbox/Sources/ToolboxStorage/Features/Projects/ProjectViewModel.swift`
-- Create: `apps/toolbox/Sources/ToolboxStorage/Views/ProjectsView.swift`
-- Create: `apps/toolbox/Tests/ToolboxStorageTests/ProjectScannerTests.swift`
-
-**Interfaces:**
-- Produces: `ProjectScanner.scan(roots:) async -> ProjectScanReport`
-- Produces: `ProjectArtifact` with `projectRoot`, `artifactURL`, `ecosystem`, `bytes`, `modifiedAt`, `safety`, and `reasons`
-- Consumes: `EvidenceStore.upsert(_:)`, `PathSafetyPolicy.validate(candidate:allowedRoots:)`
-
-- [ ] **Step 1: Write failing marker and protection tests**
-
-```swift
-func testNodeProjectFindsNodeModulesButProtectsLockfile() async throws {
-  let root = try fixtureProject(files: ["package.json", "package-lock.json", "node_modules/pkg/a.js"])
-  let report = await ProjectScanner().scan(roots: [root])
-  XCTAssertEqual(report.artifacts.map { $0.artifactURL.lastPathComponent }, ["node_modules"])
-  XCTAssertFalse(report.artifacts.contains { $0.artifactURL.lastPathComponent == "package-lock.json" })
-}
-
-func testUnknownGeneratedLookingFolderIsNotOffered() async throws {
-  let root = try fixtureProject(files: ["src/main.swift", "mystery-cache/blob"])
-  let report = await ProjectScanner().scan(roots: [root])
-  XCTAssertTrue(report.artifacts.isEmpty)
-}
-
-private func fixtureProject(files: [String]) throws -> URL {
-  let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-  for relativePath in files {
-    let file = root.appendingPathComponent(relativePath)
-    try FileManager.default.createDirectory(
-      at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
-    try Data(relativePath.utf8).write(to: file)
-  }
-  return root
-}
-```
-
-- [ ] **Step 2: Run focused tests and verify failure**
-
-Run: `cd apps/toolbox && swift test --filter ProjectScannerTests`
-
-Expected: FAIL because project models/scanner do not exist.
-
-- [ ] **Step 3: Implement explicit ecosystem rules**
-
-```swift
-struct ProjectRule: Sendable {
-  let ecosystem: ProjectEcosystem
-  let anyMarkers: Set<String>
-  let artifactPaths: Set<String>
-}
-
-static let rules: [ProjectRule] = [
-  .init(ecosystem: .swift, anyMarkers: ["Package.swift"], artifactPaths: [".build"]),
-  .init(ecosystem: .node, anyMarkers: ["package.json"], artifactPaths: ["node_modules"]),
-  .init(ecosystem: .python, anyMarkers: ["pyproject.toml"], artifactPaths: [".venv", "venv"]),
-  .init(ecosystem: .rust, anyMarkers: ["Cargo.toml"], artifactPaths: ["target"]),
-  .init(ecosystem: .gradle, anyMarkers: ["settings.gradle", "settings.gradle.kts"], artifactPaths: [".gradle", "build"]),
-  .init(ecosystem: .flutter, anyMarkers: ["pubspec.yaml"], artifactPaths: [".dart_tool", "build"]),
-  .init(ecosystem: .cocoapods, anyMarkers: ["Podfile"], artifactPaths: ["Pods"]),
-]
-```
-
-Only direct or recognized module descendants are traversed; `.git`, package contents, hidden unknown directories, and managed personal libraries are pruned. Results stream through the view model and persist typed evidence after a scan completes.
-
-- [ ] **Step 4: Add the Projects UI and explicit cleanup review**
-
-The view supports user-selected roots through `NSOpenPanel`, scan/cancel, ecosystem and safety filters, path reveal, exact-byte totals, and selection. Cleanup delegates to the existing Trash service only after `PathSafetyPolicy` revalidation against the selected project roots.
-
-- [ ] **Step 5: Run unit, integration, and storage smoke tests**
-
-Run: `cd apps/toolbox && swift test --filter ProjectScannerTests && swift run SmokeStorage`
-
-Expected: PASS.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add apps/toolbox/Sources/ToolboxStorage apps/toolbox/Tests/ToolboxStorageTests
-git commit -m "feat: add project-aware cleanup"
-```
-
-### Task 3: Add GUI Install Trace and dropped-installer handling
-
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxChanges/Features/Trace/InstallerMetadata.swift`
-- Create: `apps/toolbox/Sources/ToolboxChanges/Features/Trace/InstallTraceCoordinator.swift`
-- Create: `apps/toolbox/Sources/ToolboxChanges/Views/InstallTraceDropView.swift`
-- Modify: `apps/toolbox/Sources/ToolboxChanges/Features/Snapshots/ChangeoraViewModel.swift`
-- Create: `apps/toolbox/Tests/ToolboxChangesTests/InstallTraceCoordinatorTests.swift`
-
-**Interfaces:**
-- Produces: `InstallTraceCoordinator.accept(url:) throws -> InstallerMetadata`
-- Produces: `InstallTraceCoordinator.start(metadata:) async throws`
-- Produces: `InstallTraceCoordinator.finish(title:) async throws -> WatchSession`
-- Produces: `InstallTraceCoordinator.previewOnly() -> InstallTraceCoordinator` for file-type validation without opening an installer
-- Produces: `InstallTraceCoordinator.init(store:)` for interrupted-session recovery tests
-- Consumes: existing snapshot scanner, FSEvent journal, diff engine, and snapshot store
-
-- [ ] **Step 1: Write failing file-type and interrupted-session tests**
-
-```swift
-func testAcceptsOnlySupportedInstallerTypes() throws {
-  let coordinator = InstallTraceCoordinator.previewOnly()
-  XCTAssertNoThrow(try coordinator.accept(url: URL(fileURLWithPath: "/tmp/App.dmg")))
-  XCTAssertNoThrow(try coordinator.accept(url: URL(fileURLWithPath: "/tmp/App.pkg")))
-  XCTAssertNoThrow(try coordinator.accept(url: URL(fileURLWithPath: "/tmp/App.app")))
-  XCTAssertThrowsError(try coordinator.accept(url: URL(fileURLWithPath: "/tmp/App.zip")))
-}
-
-func testInterruptedTraceLoadsAsReducedCoverage() throws {
-  let store = try traceFixtureWithActiveSnapshot()
-  let state = InstallTraceCoordinator(store: store).recoveryState
-  XCTAssertEqual(state, .interrupted(reducedCoverage: true))
-}
-
-private func traceFixtureWithActiveSnapshot() throws -> SnapshotStore {
-  let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-  let store = SnapshotStore(directory: directory)
-  try store.saveActiveSnapshot(SystemSnapshot(name: "before", items: []))
-  return store
-}
-```
-
-- [ ] **Step 2: Run focused tests and verify missing coordinator**
-
-Run: `cd apps/toolbox && swift test --filter InstallTraceCoordinatorTests`
-
-Expected: FAIL because trace coordinator and recovery state are undefined.
-
-- [ ] **Step 3: Implement metadata acceptance and explicit lifecycle**
-
-```swift
-public struct InstallerMetadata: Codable, Hashable, Sendable {
-  public let sourceURL: URL
-  public let displayName: String
-  public let kind: InstallerKind
-  public let observedAt: Date
-}
-
-public enum InterruptedTraceRecovery: Equatable {
-  case none
-  case interrupted(reducedCoverage: Bool)
-}
-```
-
-Starting persists the before snapshot before journaling. Dropped installers open only through `NSWorkspace.shared.open`; the coordinator never mounts, executes, authorizes, or bypasses Gatekeeper itself. Finishing persists the compacted comparison and evidence records.
-
-- [ ] **Step 4: Add the SwiftUI drop surface**
-
-Use `.dropDestination(for: URL.self)` and a standard Open panel fallback. The view shows accepted type, source path, active duration, coverage state, Finish, Cancel, and reduced-coverage recovery choices. Unsupported types remain read-only errors.
-
-- [ ] **Step 5: Run tests and changes smoke**
-
-Run: `cd apps/toolbox && swift test --filter InstallTraceCoordinatorTests && swift run SmokeChanges`
-
-Expected: PASS.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add apps/toolbox/Sources/ToolboxChanges apps/toolbox/Tests/ToolboxChangesTests
-git commit -m "feat: add GUI install trace workflow"
-```
-
-### Task 4: Implement idempotent legacy migration
-
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxCore/MigrationService.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/LegacyModels.swift`
-- Create: `apps/toolbox/Tests/ToolboxCoreTests/Fixtures/diskora-history.json`
-- Create: `apps/toolbox/Tests/ToolboxCoreTests/Fixtures/changeora-sessions.json`
-- Create: `apps/toolbox/Tests/ToolboxCoreTests/MigrationServiceTests.swift`
-- Create: `apps/toolbox/Sources/Toolbox/OnboardingView.swift`
-
-**Interfaces:**
-- Produces: `MigrationService.inspect() -> MigrationAssessment`
-- Produces: `MigrationService.migrate() throws -> MigrationReport`
-- Produces: stable legacy IDs derived from source domain plus original record UUID
-
-- [ ] **Step 1: Add failing copy-verify and idempotency tests**
-
-```swift
-func testMigrationCopiesAndPreservesLegacyFiles() throws {
-  let fixture = try LegacyMigrationFixture.make()
-  let report = try fixture.service.migrate()
-  XCTAssertEqual(report.cleanupEntriesImported, 1)
-  XCTAssertEqual(report.traceSessionsImported, 1)
-  XCTAssertTrue(FileManager.default.fileExists(atPath: fixture.legacyHistory.path))
-  XCTAssertTrue(FileManager.default.fileExists(atPath: fixture.legacySessions.path))
-}
-
-func testMigrationIsIdempotent() throws {
-  let fixture = try LegacyMigrationFixture.make()
-  _ = try fixture.service.migrate()
-  _ = try fixture.service.migrate()
-  XCTAssertEqual(try fixture.activityLedger.load().filter { $0.kind == .migration }.count, 1)
-}
-
-private struct LegacyMigrationFixture {
-  let service: MigrationService
-  let activityLedger: ActivityLedger
-  let legacyHistory: URL
-  let legacySessions: URL
-
-  static func make() throws -> LegacyMigrationFixture {
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    let diskora = root.appendingPathComponent("Diskora")
-    let changeora = root.appendingPathComponent("Changeora")
-    let toolbox = root.appendingPathComponent("Toolbox")
-    try FileManager.default.createDirectory(at: diskora, withIntermediateDirectories: true)
-    try FileManager.default.createDirectory(at: changeora, withIntermediateDirectories: true)
-    let history = diskora.appendingPathComponent("history.json")
-    let sessions = changeora.appendingPathComponent("sessions.json")
-    let fixtures = URL(fileURLWithPath: #filePath)
-      .deletingLastPathComponent().appendingPathComponent("Fixtures")
-    try FileManager.default.copyItem(
-      at: fixtures.appendingPathComponent("diskora-history.json"), to: history)
-    try FileManager.default.copyItem(
-      at: fixtures.appendingPathComponent("changeora-sessions.json"), to: sessions)
-    let ledger = ActivityLedger(directory: toolbox)
-    return LegacyMigrationFixture(
-      service: MigrationService(legacyRoot: root, toolboxDirectory: toolbox),
-      activityLedger: ledger, legacyHistory: history, legacySessions: sessions)
-  }
-}
-```
-
-- [ ] **Step 2: Run focused tests and verify migration types are missing**
-
-Run: `cd apps/toolbox && swift test --filter MigrationServiceTests`
-
-Expected: FAIL.
-
-- [ ] **Step 3: Implement copy-then-verify migration**
-
-Decode `Diskora/history.json`, `MacCleaner/history.json`, `Changeora/sessions.json`, `active-snapshot.json`, and `trusted-baseline.json` through exact legacy Codable shapes. Write Toolbox records atomically, decode them again, compare stable IDs/counts, then write `migration-v1.json` and one migration activity. A thrown decode or verification error writes no completion marker and remains retryable.
-
-- [ ] **Step 4: Add onboarding migration and permission states**
-
-Onboarding displays detected legacy sources, records imported, errors, retry, reduced Full Disk Access coverage, and the fact that originals remain untouched. It never claims permission is granted based only on a button click; it verifies readable sentinel roots.
-
-- [ ] **Step 5: Run migration tests twice and verify fixtures remain unchanged**
-
-Run: `cd apps/toolbox && swift test --filter MigrationServiceTests && git diff --exit-code -- apps/toolbox/Tests/ToolboxCoreTests/Fixtures`
-
-Expected: PASS.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add apps/toolbox/Sources/ToolboxCore apps/toolbox/Sources/Toolbox/OnboardingView.swift apps/toolbox/Tests/ToolboxCoreTests
-git commit -m "feat: migrate Diskora and Changeora data"
-```
-
-### Task 5: Harden mutations and unify Recovery, scheduling, update checks, and routing
-
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxStorage/Features/History/UnifiedRecoveryAdapter.swift`
-- Modify: `apps/toolbox/Sources/ToolboxStorage/Features/Cleaning/CleanerService.swift`
-- Modify: `apps/toolbox/Sources/ToolboxStorage/Features/Applications/ApplicationManager.swift`
-- Modify: `apps/toolbox/Sources/ToolboxStorage/Features/Developer/DeveloperCleanupService.swift`
-- Modify: `apps/toolbox/Sources/ToolboxStorage/Views/HistoryView.swift`
-- Create: `apps/toolbox/Sources/Toolbox/ToolboxCoordinator.swift`
-- Create: `apps/toolbox/Sources/Toolbox/ReleaseUpdateChecker.swift`
-- Create: `apps/toolbox/Sources/Toolbox/SettingsView.swift`
-- Modify: `apps/toolbox/Sources/Toolbox/ToolboxShellView.swift`
-- Modify: `apps/toolbox/Sources/Toolbox/HomeView.swift`
-- Create: `apps/toolbox/Tests/ToolboxCoreTests/CrossModuleContractTests.swift`
-- Create: `apps/toolbox/Tests/ToolboxStorageTests/MutationSafetyTests.swift`
-- Create: `apps/toolbox/Tests/ToolboxAppTests/ReleaseUpdateCheckerTests.swift`
-
-**Interfaces:**
-- Produces: `ToolboxRoute.reviewStorage(path:)`
-- Produces: `RecoveryItem.init(id:originalPath:trashPath:bytes:)`
-- Produces: unified `RecoveryItem` projection over legacy Trash moves and new activities
-- Produces: `ReleaseUpdateChecker.latestVersion() async throws -> SemanticVersion?`
-- Produces: `CleanerService.validatedURL(for:) throws -> URL`
-- Consumes: module summaries and evidence paths
-
-- [ ] **Step 1: Write failing route and restore-conflict tests**
-
-```swift
-func testReviewStorageRoutePreservesCanonicalPath() throws {
-  let route = ToolboxRoute.reviewStorage(path: "/tmp/project/.build")
-  XCTAssertEqual(route.storagePath, "/tmp/project/.build")
-}
-
-func testRecoveryNeverOverwritesExistingDestination() throws {
-  let fixture = try RecoveryFixture.destinationConflict()
-  let result = fixture.adapter.restore(fixture.item)
-  XCTAssertEqual(result.restoredCount, 0)
-  XCTAssertEqual(try Data(contentsOf: fixture.destination), Data("existing".utf8))
-}
-
-func testCleanerRejectsSymlinkEscapingApprovedRoot() throws {
-  let fixture = try MutationSafetyFixture.symlinkEscape()
-  XCTAssertThrowsError(try fixture.service.validatedURL(for: fixture.target))
-}
-
-private struct RecoveryFixture {
-  let adapter: UnifiedRecoveryAdapter
-  let item: RecoveryItem
-  let destination: URL
-
-  static func destinationConflict() throws -> RecoveryFixture {
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    let source = root.appendingPathComponent("Trash/item")
-    let destination = root.appendingPathComponent("Original/item")
-    try FileManager.default.createDirectory(
-      at: source.deletingLastPathComponent(), withIntermediateDirectories: true)
-    try FileManager.default.createDirectory(
-      at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
-    try Data("trashed".utf8).write(to: source)
-    try Data("existing".utf8).write(to: destination)
-    let item = RecoveryItem(
-      id: UUID(), originalPath: destination.path, trashPath: source.path, bytes: 7)
-    return RecoveryFixture(adapter: UnifiedRecoveryAdapter(), item: item, destination: destination)
-  }
-}
-
-private struct MutationSafetyFixture {
-  let service: CleanerService
-  let target: CleaningTarget
-
-  static func symlinkEscape() throws -> MutationSafetyFixture {
-    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-    let allowed = root.appendingPathComponent("home")
-    let outside = root.appendingPathComponent("outside")
-    try FileManager.default.createDirectory(at: allowed, withIntermediateDirectories: true)
-    try FileManager.default.createDirectory(at: outside, withIntermediateDirectories: true)
-    try Data("protected".utf8).write(to: outside.appendingPathComponent("item"))
-    try FileManager.default.createSymbolicLink(
-      at: allowed.appendingPathComponent("escape"), withDestinationURL: outside)
-    return MutationSafetyFixture(
-      service: CleanerService(homeURL: allowed, removalMethod: .permanentForTesting),
-      target: CleaningTarget(
-        id: "escape", name: "Escape", detail: "", relativePath: "escape/item",
-        symbol: "folder", isSelectedByDefault: false))
-  }
-}
-```
-
-- [ ] **Step 2: Run tests and verify unified types are missing**
-
-Run: `cd apps/toolbox && swift test --filter CrossModuleContractTests`
-
-Expected: FAIL.
-
-- [ ] **Step 3: Apply shared preflight validation to every mutation path**
-
-`CleanerService`, application uninstall, developer cleanup, and restore must canonicalize and revalidate each target immediately before action. The developer command service continues to allow only fixed executable URLs plus enumerated argument sets and records nonrecoverable commands distinctly. Add `MutationSafetyFixture` in `MutationSafetyTests.swift` to create an allowed root containing a symlink to a sibling directory and assert the resolved target is rejected.
-
-- [ ] **Step 4: Add coordinator routing and summary refresh**
-
-The app coordinator owns shared stores, selected section, optional storage focus path, migration state, and module summaries. `Review in Storage` changes section and focus path only; it never selects or cleans the target automatically.
-
-- [ ] **Step 5: Migrate scheduled scan only after explicit confirmation**
-
-Detect `~/Library/LaunchAgents/com.thang.diskora.scheduled-scan.plist`. The Settings screen offers replacement with `com.thang.toolbox.scheduled-scan`; confirmation bootstraps the new scan-only agent before removing the old label. On any bootstrap failure, retain the old file and report the exact error.
-
-- [ ] **Step 6: Add an isolated, user-initiated update check**
-
-`ReleaseUpdateChecker` requests only `https://api.github.com/repos/thangldw/toolbox/releases/latest`, decodes `tag_name`, and returns a semantic version. It receives an injected `URLSessionProtocol` in tests; the request contains no path, scan, evidence, or device fields. Settings labels the network action and never runs it during scanning.
-
-```swift
-struct SemanticVersion: Comparable, Equatable {
-  let major: Int
-  let minor: Int
-  let patch: Int
-
-  static func < (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
-    (lhs.major, lhs.minor, lhs.patch) < (rhs.major, rhs.minor, rhs.patch)
-  }
-}
-
-protocol URLSessionProtocol: Sendable {
-  func data(for request: URLRequest) async throws -> (Data, URLResponse)
-}
-```
-
-- [ ] **Step 7: Complete localization and accessibility parity**
-
-Add English and Vietnamese strings for all new navigation, project, trace, migration, permission, recovery, and update states. Unit tests parse the strings file and require every source-language key used by `L10n.text` to exist in English. Add VoiceOver labels to icon-only controls, keyboard shortcuts to scan/cancel/finish, selectable paths, and symbol-plus-text safety status.
-
-- [ ] **Step 8: Run full behavioral gate**
-
-Run: `cd apps/toolbox && swift test && swift run SmokeStorage && swift run SmokeChanges && ./scripts/build_app.sh`
-
-Expected: PASS.
-
-- [ ] **Step 9: Commit**
-
-```bash
-git add apps/toolbox
-git commit -m "feat: connect Toolbox evidence and recovery workflows"
-```
-
-### Task 6: Remove legacy shipping packages after parity
-
-**Files:**
-- Delete: `apps/diskora/**`
-- Delete: `apps/changeora/**`
-- Modify: `.github/workflows/ci.yml`
-- Modify: `README.md`
-- Modify: `CHANGELOG.md`
-- Modify: `docs/ARCHITECTURE.md`
-- Modify: `docs/OPERATIONS.md`
-
-**Interfaces:**
-- Consumes: all Toolbox tests, smoke checks, migration fixtures, and build scripts
-- Produces: one shipping app and one CI contract
-
-- [ ] **Step 1: Capture the final legacy parity gate before deletion**
-
-Run:
-
-```bash
-cd apps/diskora && ./scripts/test_core.sh && swift build -c release
-cd ../changeora && ./scripts/test_core.sh && swift build -c release
-cd ../toolbox && swift test && swift run SmokeStorage && swift run SmokeChanges && swift build -c release
-```
-
-Expected: all available checks PASS; full XCTest for legacy packages may require full Xcode but their smoke and release builds must pass.
-
-- [ ] **Step 2: Remove legacy package directories and matrix jobs**
-
-```bash
-git rm -r apps/diskora apps/changeora
-```
-
-Update CI to validate only `apps/toolbox`. Documentation must state that tags through `v1.4.0` retain the two historical binaries and that 2.0 migrates their Application Support data.
-
-- [ ] **Step 3: Verify no runtime or CI reference points to removed paths**
-
-Run: `rg -n 'apps/(diskora|changeora)|cd apps/diskora|cd apps/changeora' . --glob '!CHANGELOG.md' --glob '!docs/superpowers/**'`
-
-Expected: no stale operational reference.
-
-- [ ] **Step 4: Run the complete Toolbox gate after deletion**
-
-Run: `cd apps/toolbox && swift format lint --recursive --parallel Sources Tests Package.swift && swift test && swift run SmokeStorage && swift run SmokeChanges && swift build -c release && ./scripts/build_app.sh && codesign --verify --deep --strict dist/Toolbox.app`
-
-Expected: PASS.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add -A
-git commit -m "refactor: retire standalone Diskora and Changeora apps"
-```
-
-## Evidence-workflow completion gate
-
-Run the Task 6 full gate, then perform manual smoke checks for project-root selection, Install Trace start/finish/cancel, interrupted trace recovery, migration retry, cross-module Review in Storage, cleanup preview, Trash move, and conflict-safe restore. Record results in `docs/release-evidence/toolbox-2.0.0.md` during the release plan.
+# Toolbox 2.0 Evidence Workflows As-Built Record
+
+Date: 2026-08-25
+Status: completed
+Release: `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`
+
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
+
+## English
+
+### Objective and release identity
+
+This record replaces the executed evidence-workflow plan. The objective was to connect storage discovery, installer-change observation, mutation safety, migration, activity history, and recovery through shared local evidence without letting evidence itself authorize deletion. Implementation landed on `2026-08-25` in `58c9082`, `8e1acd2`, `f656198`, `74b2f90`, `12dbdd0`, and `2c1eb1d`. The resulting source shipped in stable `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
+
+### Implemented file map
+
+| Workflow | As-built files and contract |
+| --- | --- |
+| Shared stores | `ToolboxCore/EvidenceStore.swift`, `ActivityLedger.swift`, `StoreRecovery.swift`, and `EvidenceModels.swift` own versioned envelopes, normalized evidence paths, deterministic ordering, atomic per-file writes, append/upsert behavior, and corrupt Core-store quarantine. |
+| Projects | `ToolboxStorage/Features/Projects/**` and `ToolboxStorage/Views/ProjectsView.swift` scan explicit generated-artifact rules inside user-selected roots and hand reviewed candidates to the existing cleanup boundary. |
+| Install Trace | `ToolboxChanges/Features/Trace/InstallerMetadata.swift`, `InstallTraceCoordinator.swift`, `InstallTraceDropView.swift`, and related snapshot/store files accept `.dmg`, `.pkg`, and `.app`, persist before/active state, observe bounded FSEvents, and finish with snapshot/diff evidence. |
+| Migration | `ToolboxCore/LegacyModels.swift`, `MigrationService.swift`, fixtures/tests, and `Toolbox/OnboardingView.swift` implement opt-in Diskora, MacCleaner, and Changeora import. |
+| Safety/recovery/routing | `UnifiedRecoveryAdapter.swift`, mutation-safety tests, `ToolboxCoordinator.swift`, `ReleaseUpdateChecker.swift`, `SettingsView.swift`, and the module view models connect review routes, preflight validation, activity summaries, restore, scheduling, and update checks. |
+| Retirement | `2c1eb1d` removed `apps/diskora/**` and `apps/changeora/**` and updated CI and canonical docs after the Toolbox gates passed. |
+
+### Data and workflow contracts
+
+`EvidenceStore` and `ActivityLedger` persist `evidence-v1.json` and `activity-v1.json` under `~/Library/Application Support/Toolbox`. Each write is atomic; multiple store writes are not one transaction. Decode corruption moves a Core file to a sibling `*.corrupt-<UTC timestamp>-<UUID>.json` path and reports it. An unsupported Core schema is reported without quarantine. Feature-owned history/session/checkpoint stores retain their narrower fail-soft loaders and are not represented as having Core-style quarantine.
+
+Project scanning is opt-in by root. Rules recognize generated outputs for Swift/SwiftPM, Node.js, Python, Rust, Gradle/Android, Flutter, and CocoaPods. Unknown directories, source, manifests, lockfiles, `.git`, secrets, virtual-machine disks, Docker volumes, referenced runtimes, and paths outside the selected root do not become safe candidates.
+
+Install Trace saves a before snapshot before asking `NSWorkspace` to open the selected installer item. Toolbox does not install or bypass macOS controls. Finish combines after-snapshot and bounded FSEvents evidence. Restarted traces expose the interval without observation as reduced coverage. Change Timeline can send a normalized path to Storage for review, but the route does not select or mutate it.
+
+Migration decodes all present sources before destination writes, derives stable domain-scoped IDs, merges only missing records, verifies written destinations, records one migration activity, and writes `migration-v1.json` last. Repeat import is idempotent. Existing Toolbox data and every legacy file remain unchanged. A corrupt source or marker reports an error and does not produce a false completion marker.
+
+Mutation services re-resolve symlinks and validate the exact existing target immediately before action. Eligible paths move to Trash; allowed developer commands use fixed executables and enumerated arguments and are explicitly nonrecoverable. Restore accepts only allowed Trash roots and allowed destinations, requires the source to exist, and refuses destination overwrite. Scheduled scans are scan-and-notify only. The legacy scheduled LaunchAgent changes only after confirmation. The update checker is user initiated and refuses a request while `ScanActivityRegistry` reports an active scan.
+
+### Failure modes recorded as built
+
+Permission/read failures produce visible coverage deficits. Independent scans may continue when one root fails. Cancellation leaves already streamed read-only results marked incomplete. Interrupted Install Trace never claims complete coverage. A preflight failure removes or rejects that target without broadening the allowed root. Partial Trash moves remain individually recoverable; missing Trash sources, destination conflicts, and filesystem errors are reported without overwrite. Evidence classifications remain advisory and never bypass feature-specific checks or confirmation.
+
+### Execution record
+
+| Commit | Recorded outcome |
+| --- | --- |
+| `58c9082` | Added shared evidence/activity stores, version envelopes, atomic writes, recovery/quarantine handling, and Core tests/smoke. |
+| `8e1acd2` | Added project recognition, project scan reports, Projects UI, explicit cleanup review, tests, smoke fixtures, and localization resources. |
+| `f656198` | Added installer metadata validation, GUI drop surface, trace lifecycle, interrupted-session support, and Changes tests/smoke. |
+| `74b2f90` | Added legacy models, fixtures, opt-in onboarding migration, stable IDs, copy-verify behavior, idempotency tests, and completion reporting. |
+| `12dbdd0` | Applied shared mutation preflight, unified Recovery, cross-module review routing, Home summaries, scan coordination, scheduled-scan migration, update checks, localization, and behavioral tests. |
+| `2c1eb1d` | Removed the two legacy shipping packages and their CI matrix after the complete Toolbox gate. |
+
+### Verification evidence
+
+Repository-local results dated `2026-08-25` record PASS for Core, Storage/Recovery, Changes, and App/update smoke scripts plus localization lint. Migration smoke covered Diskora cleanup history, completed and interrupted Changeora sessions, an idempotent second run, and corrupt legacy input without partial markers or destructive writes. Recovery smoke completed five independent byte-for-byte restores and one no-overwrite conflict. The exact release workflow `32847772209` later ran XCTest and the same smoke/localization contracts at the tagged source commit and completed `success`.
+
+### Deferred and unproven boundaries
+
+The evidence does not establish performance comparisons, full coverage for every macOS path, a beta cohort, production-user behavior, unique users, downloads, defect counts, or physical Intel execution. It does not change the `v2.0.0` trust boundary: the published universal DMG is ad-hoc signed, not Apple-notarized or stapled, and requires the documented **Open Anyway** path after expected Gatekeeper rejection. See [stable release evidence](../../release-evidence/toolbox-2.0.0.md).
+
+## Tiếng Việt
+
+### Objective và release identity
+
+Record này thay evidence-workflow plan đã execute. Objective là nối storage discovery, installer-change observation, mutation safety, migration, activity history và recovery qua shared local evidence mà không để evidence tự authorize deletion. Implementation vào `2026-08-25` trong `58c9082`, `8e1acd2`, `f656198`, `74b2f90`, `12dbdd0`, `2c1eb1d`; source đó ship trong stable `v2.0.0` tại `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
+
+### Implemented file map
+
+| Workflow | File/contract as built |
+| --- | --- |
+| Shared store | `ToolboxCore/EvidenceStore.swift`, `ActivityLedger.swift`, `StoreRecovery.swift`, `EvidenceModels.swift` sở hữu versioned envelope, normalized path, deterministic ordering, atomic write, append/upsert và corrupt Core-store quarantine. |
+| Projects | `ToolboxStorage/Features/Projects/**` và `ProjectsView.swift` scan rule generated-artifact explicit trong user-selected root rồi đưa candidate đã review tới cleanup boundary. |
+| Install Trace | `ToolboxChanges/Features/Trace/InstallerMetadata.swift`, `InstallTraceCoordinator.swift`, `InstallTraceDropView.swift` và snapshot/store liên quan nhận `.dmg`, `.pkg`, `.app`, persist before/active state, quan sát bounded FSEvents và finish bằng snapshot/diff evidence. |
+| Migration | `ToolboxCore/LegacyModels.swift`, `MigrationService.swift`, fixture/test và `Toolbox/OnboardingView.swift` implement opt-in import Diskora, MacCleaner, Changeora. |
+| Safety/recovery/routing | `UnifiedRecoveryAdapter.swift`, mutation-safety test, `ToolboxCoordinator.swift`, `ReleaseUpdateChecker.swift`, `SettingsView.swift` và view model nối review route, preflight validation, summary, restore, scheduling, update check. |
+| Retirement | `2c1eb1d` xóa `apps/diskora/**`, `apps/changeora/**` và update CI/canonical docs sau khi Toolbox gate pass. |
+
+### Data/workflow contract
+
+`EvidenceStore` và `ActivityLedger` persist `evidence-v1.json`, `activity-v1.json` dưới `~/Library/Application Support/Toolbox`. Mỗi write atomic; nhiều store không tạo một transaction. Decode corruption đổi tên Core file thành sibling `*.corrupt-<UTC timestamp>-<UUID>.json` và report. Unsupported Core schema được report mà không quarantine. Feature-owned history/session/checkpoint store giữ fail-soft loader hẹp hơn, không có Core quarantine guarantee.
+
+Project scan là opt-in theo root, nhận generated output cho Swift/SwiftPM, Node.js, Python, Rust, Gradle/Android, Flutter, CocoaPods. Unknown directory, source, manifest, lockfile, `.git`, secret, virtual-machine disk, Docker volume, referenced runtime và path ngoài root không thành safe candidate.
+
+Install Trace lưu before snapshot trước khi nhờ `NSWorkspace` mở installer item. Toolbox không install hay bypass macOS control. Finish merge after-snapshot/bounded FSEvents evidence. Trace qua restart đánh dấu interval không quan sát là reduced coverage. Change Timeline có thể gửi normalized path sang Storage để review, nhưng không select/mutate.
+
+Migration decode mọi present source trước destination write, tạo stable domain-scoped ID, chỉ merge missing record, verify destination, ghi một migration activity và ghi `migration-v1.json` cuối. Repeat import idempotent. Existing Toolbox data và legacy file không đổi. Corrupt source/marker report error, không false completion marker.
+
+Mutation service re-resolve symlink và validate exact existing target ngay trước action. Eligible path đi Trash; allowed developer command dùng fixed executable/argument enum và được ghi nonrecoverable. Restore chỉ nhận allowed Trash root/destination, yêu cầu source tồn tại và không overwrite. Scheduled scan chỉ scan-and-notify. Legacy scheduled LaunchAgent chỉ đổi sau confirmation. Update checker do user khởi tạo và từ chối request khi `ScanActivityRegistry` báo active scan.
+
+### Failure mode as built
+
+Permission/read failure tạo coverage deficit visible. Scan độc lập có thể tiếp tục khi một root fail. Cancel giữ streamed read-only result và đánh dấu incomplete. Interrupted Install Trace không claim complete coverage. Preflight failure reject target mà không mở rộng allowed root. Partial Trash move vẫn recover riêng; missing Trash source, destination conflict và filesystem error được report, không overwrite. Evidence classification chỉ advisory, không bypass feature check/confirmation.
+
+### Execution record
+
+| Commit | Kết quả ghi nhận |
+| --- | --- |
+| `58c9082` | Thêm shared store, version envelope, atomic write, recovery/quarantine handling, Core test/smoke. |
+| `8e1acd2` | Thêm project recognition/report/UI, cleanup review, test/smoke fixture và localization. |
+| `f656198` | Thêm metadata validation, GUI drop, trace lifecycle, interrupted-session support và Changes test/smoke. |
+| `74b2f90` | Thêm legacy model/fixture, onboarding migration opt-in, stable ID, copy-verify, idempotency test và completion report. |
+| `12dbdd0` | Thêm shared mutation preflight, unified Recovery, review routing, Home summary, scan coordination, scheduled migration, update check, localization và behavioral test. |
+| `2c1eb1d` | Xóa hai legacy shipping package/CI matrix sau full Toolbox gate. |
+
+### Verification evidence
+
+Repository-local result ngày `2026-08-25` ghi PASS cho Core, Storage/Recovery, Changes, App/update smoke và localization lint. Migration smoke bao phủ Diskora cleanup history, Changeora session complete/interrupted, second run idempotent và corrupt input không partial marker/destructive write. Recovery smoke hoàn tất năm restore byte-for-byte và một no-overwrite conflict. Exact release workflow `32847772209` sau đó chạy XCTest cùng smoke/localization contract tại tagged source commit và completed `success`.
+
+### Boundary deferred/chưa prove
+
+Evidence không prove performance comparison, full coverage mọi macOS path, beta cohort, production-user behavior, unique user, download, defect count hay physical Intel execution. Nó không đổi trust boundary `v2.0.0`: published universal DMG ký ad-hoc, chưa Apple-notarize/staple và cần **Open Anyway** sau expected Gatekeeper rejection. Xem [stable release evidence](../../release-evidence/toolbox-2.0.0.md).
+
+## 日本語
+
+### Objective と release identity
+
+この record は実行済み evidence-workflow plan を置き換えます。Objective は storage discovery、installer-change observation、mutation safety、migration、activity history、recovery を shared local evidence で接続し、evidence 自体には deletion authorization を与えないことでした。`2026-08-25` に `58c9082`、`8e1acd2`、`f656198`、`74b2f90`、`12dbdd0`、`2c1eb1d` で実装し、`c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` の stable `v2.0.0` に含まれました。
+
+### Implemented file map
+
+| Workflow | As-built file/contract |
+| --- | --- |
+| Shared store | `ToolboxCore/EvidenceStore.swift`、`ActivityLedger.swift`、`StoreRecovery.swift`、`EvidenceModels.swift` が versioned envelope、normalized path、deterministic ordering、atomic write、append/upsert、corrupt Core-store quarantine を所有します。 |
+| Projects | `ToolboxStorage/Features/Projects/**` と `ProjectsView.swift` が user-selected root 内の明示 generated-artifact rule を scan し、review 済み candidate を cleanup boundary に渡します。 |
+| Install Trace | `ToolboxChanges/Features/Trace/InstallerMetadata.swift`、`InstallTraceCoordinator.swift`、`InstallTraceDropView.swift` と関連 snapshot/store が `.dmg`、`.pkg`、`.app`、before/active persistence、bounded FSEvents、snapshot/diff finish を実装します。 |
+| Migration | `ToolboxCore/LegacyModels.swift`、`MigrationService.swift`、fixture/test、`Toolbox/OnboardingView.swift` が Diskora、MacCleaner、Changeora の opt-in import を実装します。 |
+| Safety/recovery/routing | `UnifiedRecoveryAdapter.swift`、mutation-safety test、`ToolboxCoordinator.swift`、`ReleaseUpdateChecker.swift`、`SettingsView.swift`、view model が review route、preflight、summary、restore、scheduling、update check を接続します。 |
+| Retirement | `2c1eb1d` は Toolbox gate 後に `apps/diskora/**`、`apps/changeora/**` を削除し CI/canonical docs を更新しました。 |
+
+### Data/workflow contract
+
+`EvidenceStore` と `ActivityLedger` は `~/Library/Application Support/Toolbox` の `evidence-v1.json`、`activity-v1.json` を persist します。各 write は atomic ですが store 間 transaction ではありません。Decode corruption は Core file を sibling `*.corrupt-<UTC timestamp>-<UUID>.json` に移し report します。Unsupported Core schema は quarantine せず report します。Feature-owned history/session/checkpoint store は narrower fail-soft loader のままで Core quarantine guarantee はありません。
+
+Project scan は root 単位の opt-in で、Swift/SwiftPM、Node.js、Python、Rust、Gradle/Android、Flutter、CocoaPods の generated output を認識します。Unknown directory、source、manifest、lockfile、`.git`、secret、virtual-machine disk、Docker volume、referenced runtime、root 外 path は safe candidate になりません。
+
+Install Trace は `NSWorkspace` に installer item の open を依頼する前に before snapshot を保存します。Toolbox は install/macOS control bypass をしません。Finish は after-snapshot/bounded FSEvents evidence を merge します。Restart を跨いだ trace は未観測 interval を reduced coverage とします。Change Timeline は normalized path を Storage review に送れますが select/mutate はしません。
+
+Migration は destination write 前に全 present source を decode し、stable domain-scoped ID を生成し、missing record のみ merge し、destination を verify し、一件の migration activity 後に `migration-v1.json` を最後に書きます。Repeat は idempotent です。Existing Toolbox data/legacy file は変更しません。Corrupt source/marker は error を report し false completion marker を作りません。
+
+Mutation service は action 直前に symlink を再 resolve し exact existing target を validate します。Eligible path は Trash に移し、allowed developer command は fixed executable/列挙 argument を使って nonrecoverable と明示します。Restore は allowed Trash root/destination のみ、source existence 必須、overwrite 拒否です。Scheduled scan は scan-and-notify のみです。Legacy scheduled LaunchAgent は confirmation 後だけ変更します。Update checker は user initiated で、`ScanActivityRegistry` が active scan を示す間は request を拒否します。
+
+### As-built failure mode
+
+Permission/read failure は visible coverage deficit になります。一つの root が fail しても独立 scan は継続できます。Cancel は streamed read-only result を incomplete として保持します。Interrupted Install Trace は complete coverage を claim しません。Preflight failure は allowed root を拡張せず target を reject します。Partial Trash move は個別 recovery 可能で、missing source、destination conflict、filesystem error は overwrite せず report します。Evidence classification は advisory で feature check/confirmation を bypass しません。
+
+### Execution record
+
+| Commit | 記録結果 |
+| --- | --- |
+| `58c9082` | Shared store、version envelope、atomic write、recovery/quarantine handling、Core test/smoke を追加。 |
+| `8e1acd2` | Project recognition/report/UI、cleanup review、test/smoke fixture、localization を追加。 |
+| `f656198` | Metadata validation、GUI drop、trace lifecycle、interrupted-session support、Changes test/smoke を追加。 |
+| `74b2f90` | Legacy model/fixture、opt-in onboarding migration、stable ID、copy-verify、idempotency test、completion report を追加。 |
+| `12dbdd0` | Shared mutation preflight、unified Recovery、review routing、Home summary、scan coordination、scheduled migration、update check、localization、behavioral test を追加。 |
+| `2c1eb1d` | Full Toolbox gate 後に二つの legacy shipping package/CI matrix を削除。 |
+
+### Verification evidence
+
+`2026-08-25` repository-local result は Core、Storage/Recovery、Changes、App/update smoke、localization lint の PASS を記録します。Migration smoke は Diskora cleanup history、completed/interrupted Changeora session、idempotent second run、partial marker/destructive write を作らない corrupt input を cover しました。Recovery smoke は 5 件の byte-for-byte restore と 1 件の no-overwrite conflict を完了しました。Exact release workflow `32847772209` は後に tagged source commit で XCTest と同じ smoke/localization contract を実行し completed `success` でした。
+
+### Deferred/unproven boundary
+
+Performance comparison、全 macOS path の complete coverage、beta cohort、production-user behavior、unique user、download、defect count、physical Intel execution は prove していません。`v2.0.0` trust boundary は変わらず、published universal DMG は ad-hoc signed、Apple-notarize/staple なしで、expected Gatekeeper rejection 後に **Open Anyway** が必要です。[Stable release evidence](../../release-evidence/toolbox-2.0.0.md) を参照してください。

@@ -1,470 +1,133 @@
-# Toolbox 2.0 Foundation Implementation Plan
-
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
-**Goal:** Produce a buildable unified Toolbox Swift package that hosts the complete existing Diskora and Changeora behavior behind one native macOS shell while preserving the two legacy packages until migration parity is complete.
-
-**Architecture:** Add `apps/toolbox` with an executable app shell and three library targets: `ToolboxCore`, `ToolboxStorage`, and `ToolboxChanges`. Port behavior mechanically first, expose one public module view from each feature library, and keep cross-module contracts in `ToolboxCore`.
-
-**Tech Stack:** Swift 6, SwiftUI, AppKit, Foundation, CoreServices/FSEvents, Vision, CryptoKit, Swift Package Manager, XCTest, shell smoke tests.
-
-**Spec:** `docs/superpowers/specs/2026-08-24-toolbox-super-app-design.md`
-
-## Global Constraints
-
-- macOS 13 or later; Swift tools 6.0 or later.
-- One shipping product named `Toolbox` with bundle identifier `com.thang.toolbox` and version `2.0.0`.
-- English is default; Vietnamese remains first-class.
-- No CLI, privileged helper, Endpoint Security extension, telemetry, automatic deletion, or destination overwrite.
-- Unknown targets fail closed; mutations remain explicit and Trash-backed where possible.
-- Keep `apps/diskora` and `apps/changeora` unchanged until the migration plan proves parity.
-- Each task ends with focused verification and a small commit.
-
----
-
-## File map
-
-```text
-apps/toolbox/
-├── Package.swift                         # Four-target Swift package
-├── Resources/                            # App icon, Info.plist, en.lproj strings
-├── Sources/
-│   ├── ToolboxCore/
-│   │   ├── AppMetadata.swift             # Product constants and support directory
-│   │   ├── Localization.swift            # AppLanguage and L10n
-│   │   ├── SafetyModels.swift            # SafetyLevel and path validation contracts
-│   │   └── EvidenceModels.swift          # Shared identifiers and cross-module records
-│   ├── ToolboxStorage/                    # Ported Diskora models/features/views
-│   ├── ToolboxChanges/                    # Ported Changeora models/features/views
-│   └── Toolbox/
-│       ├── ToolboxApp.swift               # @main entry point
-│       ├── ToolboxShellView.swift         # Six-destination NavigationSplitView
-│       └── HomeView.swift                 # Initial unified home surface
-├── Tests/
-│   ├── ToolboxCoreTests/
-│   ├── ToolboxStorageTests/
-│   └── ToolboxChangesTests/
-└── scripts/
-    ├── build_app.sh                       # Local .app assembly
-    └── test_core.sh                       # Dependency-light smoke coverage
-```
-
-### Task 1: Create the unified package and shared core
-
-**Files:**
-- Create: `apps/toolbox/Package.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/AppMetadata.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/Localization.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/SafetyModels.swift`
-- Create: `apps/toolbox/Sources/ToolboxCore/EvidenceModels.swift`
-- Create: `apps/toolbox/Tests/ToolboxCoreTests/ToolboxCoreTests.swift`
-
-**Interfaces:**
-- Produces: `AppMetadata.applicationSupportDirectory() -> URL`
-- Produces: `AppLanguage`, `L10n.text(_:)`, `ByteCount.string(_:)`
-- Produces: `SafetyLevel`, `EvidenceKind`, `EvidenceRecord`
-- Produces: `PathSafetyPolicy.validate(candidate:allowedRoots:) throws -> URL`
-
-- [ ] **Step 1: Write failing core tests**
-
-```swift
-import Foundation
-import XCTest
-@testable import ToolboxCore
-
-final class ToolboxCoreTests: XCTestCase {
-  func testSafetyPolicyAcceptsDescendantAndRejectsRoot() throws {
-    let root = URL(fileURLWithPath: NSTemporaryDirectory()).standardizedFileURL
-    let accepted = try PathSafetyPolicy.validate(
-      candidate: root.appendingPathComponent("cache/item"), allowedRoots: [root])
-    XCTAssertEqual(accepted.path, root.appendingPathComponent("cache/item").path)
-    XCTAssertThrowsError(
-      try PathSafetyPolicy.validate(candidate: URL(fileURLWithPath: "/"), allowedRoots: [root]))
-  }
-
-  func testEvidenceRecordRoundTrips() throws {
-    let record = EvidenceRecord(
-      path: "/tmp/cache", kind: .projectArtifact, safety: .safe,
-      reasons: ["Generated artifact"], observedAt: Date(timeIntervalSince1970: 1))
-    let data = try JSONEncoder().encode(record)
-    XCTAssertEqual(try JSONDecoder().decode(EvidenceRecord.self, from: data), record)
-  }
-}
-
-private func temporaryDirectory() throws -> URL {
-  let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-  try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-  return url
-}
-```
-
-- [ ] **Step 2: Run the tests to verify the target is missing**
-
-Run: `cd apps/toolbox && swift test --filter ToolboxCoreTests`
-
-Expected: FAIL because `Package.swift` or `ToolboxCore` does not exist.
-
-- [ ] **Step 3: Add the package and minimal shared contracts**
-
-```swift
-public enum SafetyLevel: String, Codable, Sendable {
-  case safe, review, protected
-}
-
-public enum EvidenceKind: String, Codable, Sendable {
-  case applicationArtifact, projectArtifact, traceChange, cleanup, restore
-}
-
-public struct EvidenceRecord: Codable, Hashable, Sendable {
-  public let path: String
-  public let kind: EvidenceKind
-  public let safety: SafetyLevel
-  public let reasons: [String]
-  public let observedAt: Date
+# Toolbox 2.0 Foundation As-Built Record
 
-  public init(
-    path: String, kind: EvidenceKind, safety: SafetyLevel, reasons: [String],
-    observedAt: Date
-  ) {
-    self.path = path
-    self.kind = kind
-    self.safety = safety
-    self.reasons = reasons
-    self.observedAt = observedAt
-  }
-}
-```
+Date: 2026-08-25
+Status: completed
+Release: `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`
 
-`Package.swift` must declare libraries `ToolboxCore`, `ToolboxStorage`, and `ToolboxChanges`, executable `Toolbox`, and one test target per library. The executable depends on all three libraries; feature libraries depend only on `ToolboxCore`.
-
-- [ ] **Step 4: Implement fail-closed canonical path validation**
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
-```swift
-public enum PathSafetyError: Error, Equatable { case emptyRoots, broadTarget, outsideAllowedRoots }
+## English
 
-public enum PathSafetyPolicy {
-  public static func validate(candidate: URL, allowedRoots: [URL]) throws -> URL {
-    guard !allowedRoots.isEmpty else { throw PathSafetyError.emptyRoots }
-    let resolved = candidate.resolvingSymlinksInPath().standardizedFileURL
-    guard resolved.path != "/", resolved.path != FileManager.default.homeDirectoryForCurrentUser.path
-    else { throw PathSafetyError.broadTarget }
-    let inside = allowedRoots.map { $0.resolvingSymlinksInPath().standardizedFileURL.path }
-      .contains { resolved.path.hasPrefix($0 + "/") }
-    guard inside else { throw PathSafetyError.outsideAllowedRoots }
-    return resolved
-  }
-}
-```
+### Objective and release identity
 
-- [ ] **Step 5: Run focused tests and lint**
+This record replaces the executed foundation plan. The objective was to establish one SwiftPM package and one native Toolbox executable while preserving Diskora and Changeora behavior long enough to verify the port. The work was implemented on `2026-08-25` in commits `2160541`, `1d480a6`, `f3a5108`, `4b623b7`, and `e780df5`; later evidence/recovery work retired the legacy packages in `2c1eb1d`. The final stable tag is `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
 
-Run: `cd apps/toolbox && swift test --filter ToolboxCoreTests && swift format lint --recursive --parallel Sources/ToolboxCore Tests/ToolboxCoreTests Package.swift`
+### Implemented file map
 
-Expected: PASS.
+| Area | As-built files and responsibility |
+| --- | --- |
+| Package | `apps/toolbox/Package.swift` defines `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, `Toolbox`, `SmokeCore`, and four XCTest targets. |
+| Core | `Sources/ToolboxCore/AppMetadata.swift`, `Localization.swift`, `SafetyModels.swift`, and `EvidenceModels.swift` establish application support, language/formatting, normalized-path safety, and shared evidence types. |
+| Storage | `Sources/ToolboxStorage/**`, `Tests/ToolboxStorageTests/**`, `Tests/SmokeStorage/main.swift`, and `scripts/test_storage.sh` contain the ported storage, application, developer, cleanup, history, duplicate, photo, and storage-trend functionality. |
+| Changes | `Sources/ToolboxChanges/**`, `Tests/ToolboxChangesTests/**`, `Tests/SmokeChanges/main.swift`, and `scripts/test_changes.sh` contain the ported snapshot, FSEvents, diff, baseline, history, and Change Timeline functionality. |
+| App shell | `Sources/Toolbox/ToolboxApp.swift`, `ToolboxShellView.swift`, `HomeView.swift`, `Resources/**`, app tests, and `scripts/build_app.sh` produce one app and one window. |
+| CI/docs | `.github/workflows/ci.yml`, `README.md`, and `docs/ARCHITECTURE.md` changed the supported build/test contract to Toolbox. |
 
-- [ ] **Step 6: Commit**
+### Contracts and failure modes
 
-```bash
-git add apps/toolbox
-git commit -m "feat: establish Toolbox core package"
-```
+Dependency direction is `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, and `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`; Storage and Changes do not import one another. The stable navigation identifiers are Home, Storage, Projects, Applications, Change Timeline, and Recovery. The bundle is `com.thang.toolbox`, version `2.0.0`, macOS 13+.
 
-### Task 2: Port Diskora as the storage module
+Path safety normalizes and resolves candidates, rejects root/home/out-of-boundary targets and symlink escapes, and treats unknown targets as review/protected rather than safe. Ported scanners surface inaccessible locations as coverage errors instead of successful empty scans. Mutation remains behind review and confirmation; this foundation did not authorize automatic deletion. English and Vietnamese resources ship in the bundle; Japanese remains documentation-only.
 
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxStorage/**`
-- Create: `apps/toolbox/Tests/ToolboxStorageTests/ToolboxStorageTests.swift`
-- Create: `apps/toolbox/Tests/SmokeStorage/main.swift`
-- Modify: `apps/toolbox/Package.swift`
+### Execution record
 
-**Interfaces:**
-- Consumes: `ToolboxCore.ByteCount`, `SafetyLevel`, `PathSafetyPolicy`
-- Produces: `public enum StorageDestination { storage, projects, applications, recovery }`
-- Produces: `public struct StorageModuleView: View`
-- Produces: `public struct StorageModuleSummary: Sendable { recoverableBytes: Int64; issueCount: Int }`
+| Commit | Recorded outcome |
+| --- | --- |
+| `2160541` | Created the unified package, Core types, path-safety policy, metadata/localization primitives, Core tests, and `SmokeCore`. |
+| `1d480a6` | Ported Diskora into `ToolboxStorage` with storage, cleanup, applications, developer, duplicate, photo, history, tests, and smoke coverage. |
+| `f3a5108` | Ported Changeora into `ToolboxChanges` with snapshots, FSEvents, diffs, baselines, sessions, views, tests, and smoke coverage. |
+| `4b623b7` | Added the Toolbox executable, six-destination `NavigationSplitView`, Home, resources, app bundle script, and app-shell tests. |
+| `e780df5` | Added the Toolbox format, XCTest, smoke, release-build, bundle-resource, and structural codesign CI lane. |
+| `2c1eb1d` | Removed `apps/diskora` and `apps/changeora` after later parity and migration work completed. |
 
-- [ ] **Step 1: Copy the Diskora sources into the new module without editing legacy files**
+### Verification evidence
 
-```bash
-mkdir -p apps/toolbox/Sources/ToolboxStorage
-cp -R apps/diskora/Sources/Diskora/Core apps/toolbox/Sources/ToolboxStorage/
-cp -R apps/diskora/Sources/Diskora/Features apps/toolbox/Sources/ToolboxStorage/
-cp -R apps/diskora/Sources/Diskora/Views apps/toolbox/Sources/ToolboxStorage/
-```
+The exact release workflow `32847772209` completed `success` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` and ran format lint, XCTest, all four smoke contracts, localization validation, universal build, and public release contracts. Repository-local evidence on `2026-08-25` separately records PASS for `./scripts/test_core.sh`, `./scripts/test_storage.sh`, `./scripts/test_changes.sh`, `./scripts/test_app.sh`, localization lint, and the universal/ad-hoc bundle checks. Command Line Tools alone could not run `swift test` because `XCTest` was unavailable there; the successful exact macOS Actions run is the XCTest evidence.
 
-Rename the copied `Views/ContentView.swift` declaration to `StorageModuleView`, remove its language picker and outer navigation, and expose a focused internal `StorageSectionView` switch. Do not copy `DiskoraApp.swift`, `AppMetadata.swift`, or the old localization implementation.
+### Deferred and unproven boundaries
 
-Remove the copied `ByteCount` declaration so every storage file resolves `ToolboxCore.ByteCount`; keep storage-specific `CleanupConfidence` and `TrashMoveRecord` inside `ToolboxStorage`.
-
-- [ ] **Step 2: Port the current Diskora unit assertions before changing behavior**
-
-```swift
-import XCTest
-@testable import ToolboxStorage
-
-final class ToolboxStorageTests: XCTestCase {
-  func testDefaultCleaningTargetsNeverSelectDangerousItems() {
-    XCTAssertFalse(
-      CleaningTarget.defaults.contains { $0.isSelectedByDefault && $0.confidence == .dangerous })
-  }
-
-  func testCanonicalLeftoverMatchingRejectsShortAmbiguousNames() {
-    XCTAssertFalse(ApplicationScanner.matchesLeftoverName("go", applicationName: "Go"))
-  }
-}
-```
-
-- [ ] **Step 3: Run the storage tests to expose compile and access failures**
-
-Run: `cd apps/toolbox && swift test --filter ToolboxStorageTests`
-
-Expected: FAIL on the renamed module facade and imports/access levels.
-
-- [ ] **Step 4: Make the mechanical module port compile**
+This record does not prove physical Intel execution, performance parity against v1, a clean-account launch, Developer ID signing, notarization, stapling, Homebrew distribution, beta participation, defects resolved, or adoption. The published DMG contains `arm64` and `x86_64` slices but is ad-hoc signed and not Apple-notarized. See [stable release evidence](../../release-evidence/toolbox-2.0.0.md); **Open Anyway** is the safe first-launch exception for this build.
 
-Add `import ToolboxCore` where shared types are referenced. Keep feature implementation private/internal and expose only:
-
-```swift
-public struct StorageModuleView: View {
-  private let destination: StorageDestination
-  public init(destination: StorageDestination) { self.destination = destination }
-  public var body: some View { StorageSectionView(destination: destination) }
-}
-
-public struct StorageModuleSummary: Sendable, Equatable {
-  public let recoverableBytes: Int64
-  public let issueCount: Int
-}
-```
-
-Retain existing Diskora scanner, cleanup, duplicate, similar-photo, application, schedule, and history behavior unchanged in this task.
+## Tiếng Việt
 
-- [ ] **Step 5: Run ported unit and smoke tests**
+### Objective và release identity
 
-Run: `cd apps/toolbox && swift test --filter ToolboxStorageTests && swift run SmokeStorage`
+Record này thay plan foundation đã execute. Objective là tạo một SwiftPM package và một native Toolbox executable, đồng thời giữ behavior Diskora/Changeora đủ lâu để verify port. Work được implement ngày `2026-08-25` trong `2160541`, `1d480a6`, `f3a5108`, `4b623b7`, `e780df5`; evidence/recovery phase sau đó xóa legacy package trong `2c1eb1d`. Stable tag cuối là `v2.0.0` tại `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`.
 
-Expected: PASS with the existing cleaner, storage analyzer, duplicate, and similar-photo smoke behavior.
+### Implemented file map
 
-- [ ] **Step 6: Commit**
+| Area | File/responsibility as built |
+| --- | --- |
+| Package | `apps/toolbox/Package.swift` định nghĩa `ToolboxCore`, `ToolboxStorage`, `ToolboxChanges`, `Toolbox`, `SmokeCore` và bốn XCTest target. |
+| Core | `Sources/ToolboxCore/AppMetadata.swift`, `Localization.swift`, `SafetyModels.swift`, `EvidenceModels.swift` tạo application support, language/formatting, normalized-path safety và shared evidence type. |
+| Storage | `Sources/ToolboxStorage/**`, `Tests/ToolboxStorageTests/**`, `Tests/SmokeStorage/main.swift`, `scripts/test_storage.sh` chứa storage/application/developer/cleanup/history/duplicate/photo/trend đã port. |
+| Changes | `Sources/ToolboxChanges/**`, `Tests/ToolboxChangesTests/**`, `Tests/SmokeChanges/main.swift`, `scripts/test_changes.sh` chứa snapshot, FSEvents, diff, baseline, history và Change Timeline đã port. |
+| App shell | `Sources/Toolbox/ToolboxApp.swift`, `ToolboxShellView.swift`, `HomeView.swift`, `Resources/**`, app test và `scripts/build_app.sh` tạo một app/một window. |
+| CI/docs | `.github/workflows/ci.yml`, `README.md`, `docs/ARCHITECTURE.md` chuyển supported build/test contract sang Toolbox. |
 
-```bash
-git add apps/toolbox
-git commit -m "feat: port Diskora into Toolbox storage module"
-```
+### Contract và failure mode
 
-### Task 3: Port Changeora as the changes module
+Dependency là `ToolboxStorage -> ToolboxCore`, `ToolboxChanges -> ToolboxCore`, `Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges`; Storage/Changes không import nhau. Stable navigation identifier là Home, Storage, Projects, Applications, Change Timeline, Recovery. Bundle là `com.thang.toolbox`, version `2.0.0`, macOS 13+.
 
-**Files:**
-- Create: `apps/toolbox/Sources/ToolboxChanges/**`
-- Create: `apps/toolbox/Tests/ToolboxChangesTests/ToolboxChangesTests.swift`
-- Create: `apps/toolbox/Tests/SmokeChanges/main.swift`
-- Modify: `apps/toolbox/Package.swift`
-
-**Interfaces:**
-- Consumes: `ToolboxCore.EvidenceRecord`
-- Produces: `public struct ChangeTimelineModuleView: View`
-- Produces: `public struct ChangeModuleSummary: Sendable { importantCount: Int; activeTrace: Bool }`
+Path safety normalize/resolve candidate, reject root/home/out-of-boundary target và symlink escape, coi unknown target là review/protected thay vì safe. Scanner đã port hiển thị inaccessible location thành coverage error, không phải successful empty scan. Mutation vẫn cần review/confirmation; foundation không cho phép automatic deletion. Bundle ship English/Vietnamese resource; Japanese chỉ documentation.
 
-- [ ] **Step 1: Copy Changeora domain sources without editing legacy files**
+### Execution record
 
-```bash
-mkdir -p apps/toolbox/Sources/ToolboxChanges
-cp -R apps/changeora/Sources/Changeora/Core apps/toolbox/Sources/ToolboxChanges/
-cp -R apps/changeora/Sources/Changeora/Features apps/toolbox/Sources/ToolboxChanges/
-cp -R apps/changeora/Sources/Changeora/Views apps/toolbox/Sources/ToolboxChanges/
-```
-
-Rename the copied `Views/ContentView.swift` declaration to `ChangeTimelineModuleView`, remove its independent app shell/language picker, and do not copy `ChangeoraApp.swift`, `AppMetadata.swift`, or the old localization implementation.
-
-- [ ] **Step 2: Port deterministic diff and persistence tests**
+| Commit | Kết quả ghi nhận |
+| --- | --- |
+| `2160541` | Tạo unified package, Core type, path-safety policy, metadata/localization primitive, Core test và `SmokeCore`. |
+| `1d480a6` | Port Diskora vào `ToolboxStorage` cùng test/smoke cho storage, cleanup, applications, developer, duplicate, photo và history. |
+| `f3a5108` | Port Changeora vào `ToolboxChanges` cùng snapshot, FSEvents, diff, baseline, session, view, test và smoke. |
+| `4b623b7` | Thêm Toolbox executable, `NavigationSplitView` sáu destination, Home, resource, app bundle script và app-shell test. |
+| `e780df5` | Thêm CI lane format, XCTest, smoke, release build, bundle resource và structural codesign. |
+| `2c1eb1d` | Xóa `apps/diskora`/`apps/changeora` sau parity/migration phase. |
 
-```swift
-import XCTest
-@testable import ToolboxChanges
+### Verification evidence
 
-final class ToolboxChangesTests: XCTestCase {
-  func testImportantPersistenceChangeSortsBeforeInformationalChange() {
-    let daemon = SnapshotItem(
-      id: "daemon|test", category: .launchDaemon, name: "test", path: "/tmp/test",
-      size: 1, modifiedAt: nil, bundleIdentifier: nil, version: nil,
-      teamIdentifier: nil, signatureStatus: nil, ownerHint: "test")
-    let application = SnapshotItem(
-      id: "application|test", category: .application, name: "App", path: "/tmp/App.app",
-      size: 1, modifiedAt: nil, bundleIdentifier: "example.app", version: "1",
-      teamIdentifier: nil, signatureStatus: nil, ownerHint: nil)
-    let comparison = SnapshotDiffEngine().compare(
-      before: SystemSnapshot(name: "before", items: []),
-      after: SystemSnapshot(name: "after", items: [application, daemon]))
-    XCTAssertEqual(comparison.changes.first?.risk, .important)
-  }
+Exact release workflow `32847772209` completed `success` tại `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`, chạy format lint, XCTest, bốn smoke contract, localization, universal build và public release contract. Repository-local evidence ngày `2026-08-25` ghi PASS riêng cho `./scripts/test_core.sh`, `./scripts/test_storage.sh`, `./scripts/test_changes.sh`, `./scripts/test_app.sh`, localization lint và universal/ad-hoc bundle check. Command Line Tools local không chạy được `swift test` vì thiếu `XCTest`; exact macOS Actions run là XCTest evidence.
 
-  func testEventOnlyDeepChangeIsRetained() {
-    let path = "/tmp/Vendor/deep/item.db"
-    let comparison = SnapshotDiffEngine().compare(
-      before: SystemSnapshot(name: "before", items: []),
-      after: SystemSnapshot(name: "after", items: []),
-      events: [FileSystemEvent(path: path, flags: 0)],
-      categoryForPath: { _ in .applicationSupport })
-    XCTAssertEqual(comparison.changes.count, 1)
-    XCTAssertTrue(comparison.changes[0].riskReason?.contains("FSEvents") == true)
-  }
-}
-```
+### Boundary deferred/chưa prove
 
-- [ ] **Step 3: Run focused tests to expose missing facade and fixture helpers**
+Record không prove physical Intel execution, performance parity với v1, clean-account launch, Developer ID, notarization, stapling, Homebrew, beta participation, defect resolved hay adoption. Published DMG có slice `arm64`/`x86_64` nhưng ký ad-hoc và chưa Apple-notarize. Xem [stable release evidence](../../release-evidence/toolbox-2.0.0.md); **Open Anyway** là first-launch exception an toàn cho build này.
 
-Run: `cd apps/toolbox && swift test --filter ToolboxChangesTests`
+## 日本語
 
-Expected: FAIL until the module facade and test fixtures exist.
+### Objective と release identity
 
-- [ ] **Step 4: Complete the mechanical module port**
+この record は実行済み foundation plan を置き換えます。Objective は一つの SwiftPM package/native Toolbox executable を構築し、port 検証まで Diskora/Changeora behavior を保持することでした。`2026-08-25` に `2160541`、`1d480a6`、`f3a5108`、`4b623b7`、`e780df5` で実装し、後続 evidence/recovery work の `2c1eb1d` で legacy package を削除しました。Final stable tag は `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` の `v2.0.0` です。
 
-Expose only the SwiftUI facade and summary:
+### Implemented file map
 
-```swift
-public struct ChangeTimelineModuleView: View {
-  public init() {}
-  public var body: some View { ChangeTimelineSectionView() }
-}
+| Area | As-built file/responsibility |
+| --- | --- |
+| Package | `apps/toolbox/Package.swift` は `ToolboxCore`、`ToolboxStorage`、`ToolboxChanges`、`Toolbox`、`SmokeCore`、4 XCTest target を定義します。 |
+| Core | `Sources/ToolboxCore/AppMetadata.swift`、`Localization.swift`、`SafetyModels.swift`、`EvidenceModels.swift` が application support、language/formatting、normalized-path safety、shared evidence type を実装します。 |
+| Storage | `Sources/ToolboxStorage/**`、`Tests/ToolboxStorageTests/**`、`Tests/SmokeStorage/main.swift`、`scripts/test_storage.sh` が port 済み storage/application/developer/cleanup/history/duplicate/photo/trend を実装します。 |
+| Changes | `Sources/ToolboxChanges/**`、`Tests/ToolboxChangesTests/**`、`Tests/SmokeChanges/main.swift`、`scripts/test_changes.sh` が port 済み snapshot、FSEvents、diff、baseline、history、Change Timeline を実装します。 |
+| App shell | `Sources/Toolbox/ToolboxApp.swift`、`ToolboxShellView.swift`、`HomeView.swift`、`Resources/**`、app test、`scripts/build_app.sh` が one app/one window を作ります。 |
+| CI/docs | `.github/workflows/ci.yml`、`README.md`、`docs/ARCHITECTURE.md` が supported build/test contract を Toolbox に変更しました。 |
 
-public struct ChangeModuleSummary: Sendable, Equatable {
-  public let importantCount: Int
-  public let activeTrace: Bool
-}
-```
+### Contract と failure mode
 
-Keep snapshot scanning, FSEvents, diffing, attribution, baselines, comparisons, and export behavior unchanged.
+Dependency は `ToolboxStorage -> ToolboxCore`、`ToolboxChanges -> ToolboxCore`、`Toolbox -> ToolboxCore + ToolboxStorage + ToolboxChanges` で、Storage/Changes は相互 import しません。Stable navigation identifier は Home、Storage、Projects、Applications、Change Timeline、Recovery です。Bundle は `com.thang.toolbox`、version `2.0.0`、macOS 13+ です。
 
-- [ ] **Step 5: Run unit and smoke tests**
+Path safety は candidate を normalize/resolve し、root/home/out-of-boundary target と symlink escape を reject し、unknown target を safe ではなく review/protected とします。Port 済み scanner は inaccessible location を successful empty scan ではなく coverage error にします。Mutation は review/confirmation 後だけで、automatic deletion はありません。English/Vietnamese resource を ship し、Japanese は documentation-only です。
 
-Run: `cd apps/toolbox && swift test --filter ToolboxChangesTests && swift run SmokeChanges`
+### Execution record
 
-Expected: PASS with snapshot, diff, risk, redaction, and persistence coverage.
+| Commit | 記録結果 |
+| --- | --- |
+| `2160541` | Unified package、Core type、path-safety policy、metadata/localization primitive、Core test、`SmokeCore` を作成。 |
+| `1d480a6` | Diskora を `ToolboxStorage` に port し、storage、cleanup、applications、developer、duplicate、photo、history の test/smoke を追加。 |
+| `f3a5108` | Changeora を `ToolboxChanges` に port し、snapshot、FSEvents、diff、baseline、session、view、test/smoke を追加。 |
+| `4b623b7` | Toolbox executable、6 destination の `NavigationSplitView`、Home、resource、app bundle script、app-shell test を追加。 |
+| `e780df5` | Toolbox format、XCTest、smoke、release build、bundle resource、structural codesign CI lane を追加。 |
+| `2c1eb1d` | Parity/migration phase 後に `apps/diskora`/`apps/changeora` を削除。 |
 
-- [ ] **Step 6: Commit**
+### Verification evidence
 
-```bash
-git add apps/toolbox
-git commit -m "feat: port Changeora into Toolbox changes module"
-```
+Exact release workflow `32847772209` は `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` で completed `success` となり、format lint、XCTest、4 smoke contract、localization、universal build、public release contract を実行しました。`2026-08-25` repository-local evidence は `./scripts/test_core.sh`、`./scripts/test_storage.sh`、`./scripts/test_changes.sh`、`./scripts/test_app.sh`、localization lint、universal/ad-hoc bundle check の PASS を記録します。Local Command Line Tools は `XCTest` 不在で `swift test` を実行できず、exact macOS Actions run が XCTest evidence です。
 
-### Task 4: Build the unified app shell and resources
+### Deferred/unproven boundary
 
-**Files:**
-- Create: `apps/toolbox/Sources/Toolbox/ToolboxApp.swift`
-- Create: `apps/toolbox/Sources/Toolbox/ToolboxShellView.swift`
-- Create: `apps/toolbox/Sources/Toolbox/HomeView.swift`
-- Create: `apps/toolbox/Resources/Info.plist`
-- Create: `apps/toolbox/Resources/en.lproj/Localizable.strings`
-- Create: `apps/toolbox/scripts/build_app.sh`
-- Create: `apps/toolbox/Tests/ToolboxAppTests/ToolboxAppTests.swift`
-- Modify: `apps/toolbox/Package.swift`
-
-**Interfaces:**
-- Consumes: `StorageModuleView`, `ChangeTimelineModuleView`
-- Produces: six stable `ToolboxSection` navigation identifiers
-
-- [ ] **Step 1: Add a failing navigation contract test**
-
-```swift
-func testToolboxNavigationHasExactlySixStableSections() {
-  XCTAssertEqual(
-    ToolboxSection.allCases.map(\.rawValue),
-    ["home", "storage", "projects", "applications", "changes", "recovery"])
-}
-```
-
-- [ ] **Step 2: Run the test to verify the executable shell is absent**
-
-Run: `cd apps/toolbox && swift test --filter testToolboxNavigationHasExactlySixStableSections`
-
-Expected: FAIL because `ToolboxSection` is undefined.
-
-- [ ] **Step 3: Implement the six-destination shell**
-
-```swift
-enum ToolboxSection: String, CaseIterable, Identifiable {
-  case home, storage, projects, applications, changes, recovery
-  var id: String { rawValue }
-}
-```
-
-`ToolboxShellView` owns the language setting and navigation selection. Storage, Projects, Applications, and Recovery call `StorageModuleView(destination:)`; before project-aware scanning lands, `.projects` presents the existing developer-storage workflow. Changes routes to `ChangeTimelineModuleView`; Home shows three non-mutating cards.
-
-Add a `ToolboxAppTests` target depending on the `Toolbox` executable target so the navigation contract test compiles through `@testable import Toolbox`.
-
-- [ ] **Step 4: Add bundle metadata and local app assembly**
-
-The plist must set `CFBundleDisplayName=Toolbox`, `CFBundleIdentifier=com.thang.toolbox`, `CFBundleShortVersionString=2.0.0`, `CFBundleVersion=1`, and `LSMinimumSystemVersion=13.0`. `build_app.sh` assembles `dist/Toolbox.app`, copies the executable, plist, icon, and `en.lproj`, then applies local ad-hoc signing for development verification.
-
-- [ ] **Step 5: Verify build, bundle, localization, and launch metadata**
-
-Run: `cd apps/toolbox && swift test && swift build && ./scripts/build_app.sh && plutil -lint Resources/Info.plist Resources/en.lproj/Localizable.strings && codesign --verify --deep --strict dist/Toolbox.app`
-
-Expected: PASS; `dist/Toolbox.app/Contents/MacOS/Toolbox` exists.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add apps/toolbox
-git commit -m "feat: add unified Toolbox app shell"
-```
-
-### Task 5: Add a unified CI lane without removing legacy validation
-
-**Files:**
-- Modify: `.github/workflows/ci.yml`
-- Modify: `README.md`
-- Modify: `docs/ARCHITECTURE.md`
-
-**Interfaces:**
-- Consumes: `apps/toolbox` build/test scripts
-- Produces: required Toolbox format, test, smoke, and release-build checks
-
-- [ ] **Step 1: Add a CI contract assertion script**
-
-```bash
-rg -q 'working-directory: apps/toolbox' .github/workflows/ci.yml
-rg -q 'swift test' .github/workflows/ci.yml
-rg -q './scripts/test_core.sh' .github/workflows/ci.yml
-rg -q 'swift build -c release' .github/workflows/ci.yml
-```
-
-- [ ] **Step 2: Run the assertions and verify they fail**
-
-Expected: FAIL because CI only has `diskora` and `changeora` matrix entries.
-
-- [ ] **Step 3: Add the Toolbox job and update docs to label it pre-release**
-
-Keep the legacy matrix until the evidence/migration plan removes it. Add a separate `toolbox` job using `macos-15`, Swift format lint, `swift test`, both smoke executables, release build, app assembly, plist lint, localization presence, and ad-hoc codesign verification.
-
-- [ ] **Step 4: Run the complete local foundation gate**
-
-Run: `cd apps/toolbox && swift format lint --recursive --parallel Sources Tests Package.swift && swift test && swift run SmokeStorage && swift run SmokeChanges && swift build -c release && ./scripts/build_app.sh`
-
-Expected: PASS.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add .github/workflows/ci.yml README.md docs/ARCHITECTURE.md
-git commit -m "ci: validate unified Toolbox application"
-```
-
-## Foundation completion gate
-
-Run:
-
-```bash
-git status --short
-cd apps/toolbox
-swift format lint --recursive --parallel Sources Tests Package.swift
-swift test
-swift run SmokeStorage
-swift run SmokeChanges
-swift build -c release
-./scripts/build_app.sh
-codesign --verify --deep --strict dist/Toolbox.app
-```
-
-Expected: clean worktree after commits and all checks PASS. The legacy applications still build independently at this checkpoint.
+Physical Intel execution、v1 performance parity、clean-account launch、Developer ID、notarization、stapling、Homebrew、beta participation、resolved defect、adoption は prove していません。Published DMG は `arm64`/`x86_64` slice を含みますが ad-hoc signed で Apple-notarize されていません。[Stable release evidence](../../release-evidence/toolbox-2.0.0.md) を参照し、この build の安全な first-launch exception は **Open Anyway** です。

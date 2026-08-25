@@ -1,402 +1,226 @@
-# Toolbox 2.0 Release and Launch Implementation Plan
+# Toolbox 2.0 Release and Launch As-Built Record
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+Date: 2026-08-25
+Status: completed
+Release: `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb`
 
-**Goal:** Produce a reproducible universal release pipeline, direct-download website, Homebrew installation path, launch assets, and public adoption evidence for Toolbox 2.0.
+[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
-**Architecture:** Build one universal app and DMG from `apps/toolbox`, sign and notarize only in the protected release path, deploy a static `site/` through GitHub Pages, and derive adoption counts from public GitHub release-asset metadata. Product Hunt publication occurs only after the exact public binary and landing page pass smoke checks.
+## English
 
-**Tech Stack:** SwiftPM, codesign, `xcrun notarytool`, `stapler`, `hdiutil`, GitHub Actions/Releases/Pages, static HTML/CSS/JavaScript, Homebrew Cask, shell verification scripts.
+### Objective, release identity, and evidence order
 
-**Spec:** `docs/superpowers/specs/2026-08-24-toolbox-super-app-design.md`
+This record replaces the executed release/launch plan. The objective was to build the universal app, provide explicit signing/notarization tooling, automate release and Pages publication, prepare launch assets, and record what was actually published. The final channel decision was an ad-hoc-signed, unnotarized stable exception rather than the originally planned notarized release.
 
-## Global Constraints
+Evidence remains separated by authority: source and executable tests establish behavior; workflow definitions plus exact-run results establish what automation ran; release metadata and downloaded asset identity establish publication; the authenticated Product Hunt page establishes only its observed state. The authoritative ledger is [docs/release-evidence/toolbox-2.0.0.md](../../release-evidence/toolbox-2.0.0.md).
 
-- Complete the foundation and evidence-workflow plans first.
-- Release one `Toolbox-2.0.0.dmg` and matching `.sha256` for macOS 13+.
-- The binary must contain arm64 and x86_64 slices, use bundle identifier `com.thang.toolbox`, and pass codesign, notarization stapling, and Gatekeeper assessment.
-- Developer ID certificates and notarization credentials remain user-owned protected secrets; never commit them.
-- The app has no telemetry. Website analytics, if enabled, are cookieless aggregate analytics disclosed in site privacy copy.
-- Product Hunt gets one Toolbox post only after live binary and site verification.
-- Each task ends with focused verification and a small commit.
+### Published stable identity
 
----
+| Field | Recorded evidence |
+| --- | --- |
+| Tag/source | `v2.0.0` at `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` |
+| GitHub release | Published `2026-08-25T12:33:04Z`; non-draft; non-prerelease |
+| Release workflow | `32847772209`; completed `success` at the source commit |
+| Pages workflow | `32847688077`; completed `success` at the source commit; public site returned HTTP 200 at observation time |
+| DMG | `Toolbox-2.0.0.dmg`; `6055290` bytes |
+| Checksum | `Toolbox-2.0.0.dmg.sha256`; SHA-256 `ce9bdf8cfb67089c004d66302ef33ebd2d0c603a43435e66d58e447be9943dba` |
+| Trust | Ad-hoc signature; no Developer ID Application signature, Apple notarization, or stapling |
+| Hardware | `arm64` and `x86_64` slices; no physical Intel execution evidence |
+| Product Hunt | Scheduled, not launched, at `2026-08-26 02:07 JST` / `2026-08-25 10:07 PDT` |
 
-## File map
+### Implemented file map
 
-```text
-apps/toolbox/scripts/
-├── build_universal.sh                    # Deterministic two-architecture build
-├── build_dmg.sh                          # Signed app to DMG and checksum
-├── notarize.sh                           # Protected credential boundary
-└── verify_release.sh                     # Binary/bundle/DMG/Gatekeeper checks
-.github/workflows/
-├── ci.yml                                # Source validation
-├── release.yml                           # Protected signed release
-└── pages.yml                             # Static site deployment
-scripts/render_cask.sh                    # Generates exact-version cask after release
-site/
-├── index.html
-├── styles.css
-├── privacy.html
-└── assets/                               # Icon, screenshots, demo poster
-scripts/adoption_report.sh                # Public GitHub asset counter
-docs/release-evidence/toolbox-2.0.0.md
-docs/launch/product-hunt.md
-```
+| Area | As-built files and responsibility |
+| --- | --- |
+| Universal app | `apps/toolbox/scripts/build_universal.sh`, `build_app.sh`, `verify_release.sh`, and `Tests/Distribution/release_contract.sh` build both slices, merge them, assemble the bundle, and verify structural contracts. |
+| DMG and future trust path | `build_dmg.sh`, `notarize.sh`, and `docs/OPERATIONS-RELEASE.md` create the DMG/checksum and retain credential-bound Developer ID/notarization tooling for a future policy-compliant release. |
+| Stable workflow | `.github/workflows/release.yml` validates the exact `v2.0.0` tag, runs format/XCTest/smoke/localization/universal/public contracts, builds with `verify_release.sh --allow-adhoc`, and publishes immutable DMG/checksum assets. |
+| Cask tooling | `scripts/render_cask.sh` and `tests/render_cask_test.sh` render an exact-version cask from a URL/checksum; no Homebrew cask was published for `v2.0.0`. |
+| Site | `site/index.html`, `site/styles.css`, `site/privacy.html`, product assets, `.github/workflows/pages.yml`, and `tests/site_contract.sh` implement and publish the static site. |
+| Evidence/adoption | `scripts/adoption_report.sh`, `tests/adoption_report_test.sh`, and the stable evidence ledger distinguish DMG download events from unique users; no adoption count is claimed here. |
+| Product Hunt | `docs/launch/product-hunt.md`, `site/assets/product-hunt-*.png`, `site/assets/demo-script.md`, and `tests/launch_assets.sh` contain the validated package and time-bounded scheduled-state record. |
 
-### Task 1: Build and verify a universal application locally
+### Release contracts and failure modes
 
-**Files:**
-- Create: `apps/toolbox/scripts/build_universal.sh`
-- Create: `apps/toolbox/scripts/verify_release.sh`
-- Modify: `apps/toolbox/scripts/build_app.sh`
-- Create: `apps/toolbox/Tests/Distribution/release_contract.sh`
+`build_universal.sh` produces a bundle with `arm64` and `x86_64` slices. Slice presence is packaging evidence, not physical-machine execution. `build_dmg.sh` creates a read-only compressed DMG containing `Toolbox.app`, `/Applications`, and `Open Toolbox - First Launch.html`, then writes the checksum. `verify_release.sh --allow-adhoc` verifies bundle identity/version/resources, structural signature, slices, checksum, mount layout, and the first-launch guide while explicitly not asserting stapling or Gatekeeper acceptance.
 
-**Interfaces:**
-- Produces: `apps/toolbox/dist/Toolbox.app`
-- Produces: executable with `arm64 x86_64` architectures
+The retained `notarize.sh` requires `TOOLBOX_CODESIGN_IDENTITY` and `TOOLBOX_NOTARY_PROFILE`, signs with hardened runtime/timestamp, submits and staples app/DMG, regenerates the checksum, and calls strict verification. Missing credentials stop before signing/submission and secrets are not printed. That tooling was not used for `v2.0.0`; its existence is not evidence of Developer ID or notarization.
 
-- [ ] **Step 1: Add a failing release contract**
+For the published stable exception, direct Gatekeeper rejection is expected. The safe user path is **System Settings → Privacy & Security → Open Anyway** for this build only. Disabling Gatekeeper or removing quarantine attributes is outside the contract. Homebrew is unavailable.
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-app="${1:?Toolbox.app path required}"
-test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")" = "com.thang.toolbox"
-test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" = "2.0.0"
-lipo -archs "$app/Contents/MacOS/Toolbox" | grep -q 'arm64'
-lipo -archs "$app/Contents/MacOS/Toolbox" | grep -q 'x86_64'
-test -f "$app/Contents/Resources/en.lproj/Localizable.strings"
-codesign --verify --deep --strict "$app"
-```
+The release workflow is deliberately fixed to tag/version `v2.0.0`. A later release must update the versioned contract and use the notarized path unless a separately reviewed exception changes policy. Published asset bytes are immutable; a mismatch requires a new patch release, not silent replacement under the tag.
 
-- [ ] **Step 2: Run the contract against the current single-architecture build**
+### Execution record
 
-Run: `cd apps/toolbox && ./scripts/build_app.sh && bash Tests/Distribution/release_contract.sh dist/Toolbox.app`
+| Commit | Recorded outcome |
+| --- | --- |
+| `91c7147` | Added universal build, release contract, and structural verification. |
+| `50f5118` | Added DMG, Developer ID/notarization tooling, strict verification, and release operations. |
+| `f88c934` | Added release automation, deterministic cask rendering, and tests. |
+| `da8c4cf` | Added the static product/privacy site, Pages workflow, fixtures/screenshots, and site contract. |
+| `f16edf6` | Added release evidence and a fixture-driven DMG download-event reporter. |
+| `e3f1a29` | Added Product Hunt copy, thumbnail/gallery assets, demo script, and launch contracts. |
+| `d4051da`, `b216d27` | Made Pages checks portable and corrected asynchronous update-check test timing. |
+| `cefced3` | Prepared the unsigned `v2.0.0-beta.1` historical release path. |
+| `37de5fc` | Promoted the stable `v2.0.0` ad-hoc/unnotarized exception, embedded first-launch guidance, and aligned site/release contracts. |
+| `c60367d` | Made the launch contract portable; this is the tagged stable source. |
 
-Expected: FAIL on the missing architecture.
+### Verification evidence
 
-- [ ] **Step 3: Implement deterministic universal assembly**
+Release run `32847772209` completed `success` at the exact tagged source and validated format, XCTest, Core/Storage/Changes/App smoke, localization, universal slices, bundle contract, site contract, and launch assets before publishing the DMG and checksum. Pages run `32847688077` completed `success` at the same source commit. The public site returned HTTP 200 at the recorded observation.
 
-`build_universal.sh` runs release builds for arm64 and x86_64, combines only the Toolbox executable with `lipo -create`, assembles resources once, and uses `SOURCE_DATE_EPOCH` only when supplied through a task-specific `TOOLBOX_SOURCE_DATE_EPOCH` variable. It must reject missing slices before signing.
+Repository-local evidence dated `2026-08-25` separately records passing universal bundle and ad-hoc DMG structural checks. Those local results do not prove publication or Apple trust. The published artifact identity is the tag, full source SHA, asset name, byte size, and SHA-256 together; no download count is part of identity.
 
-- [ ] **Step 4: Verify the local ad-hoc universal build**
+### Launch and adoption outcome
 
-Run: `cd apps/toolbox && ./scripts/build_universal.sh && bash Tests/Distribution/release_contract.sh dist/Toolbox.app`
+The GitHub stable release and Pages site were published. Product Hunt assets and copy were prepared, and the authenticated page was observed as scheduled for August 26, 2026 at 12:01 AM PDT with voting disabled until live. This record does not infer any later launch, vote, follower, user, or download state. The page's observed “public beta” wording was stale relative to the higher-authority stable GitHub release and remains historical copy only.
 
-Expected: PASS.
+### Deferred and unproven boundaries
 
-- [ ] **Step 5: Commit**
+No Developer ID, notarization, stapling, Homebrew publication, physical Intel launch, clean-account production launch, public demo hosting, beta cohort, severity-1/2 defect tally, download/adoption count, unique-user count, Product Hunt launch, vote, or follower result is claimed. A successful workflow and universal slices do not fill those evidence gaps.
 
-```bash
-git add apps/toolbox/scripts apps/toolbox/Tests/Distribution
-git commit -m "build: produce universal Toolbox application"
-```
+## Tiếng Việt
 
-### Task 2: Add signed DMG and notarization tooling
+### Objective, release identity và evidence order
 
-**Files:**
-- Create: `apps/toolbox/scripts/build_dmg.sh`
-- Create: `apps/toolbox/scripts/notarize.sh`
-- Modify: `apps/toolbox/scripts/verify_release.sh`
-- Create: `docs/OPERATIONS-RELEASE.md`
-
-**Interfaces:**
-- Consumes: `TOOLBOX_CODESIGN_IDENTITY`, `TOOLBOX_NOTARY_PROFILE`
-- Produces: `dist/Toolbox-2.0.0.dmg`, `.dmg.sha256`, stapled app and DMG
-
-- [ ] **Step 1: Add a failing unsigned-DMG verification path**
-
-```bash
-codesign --verify --deep --strict --verbose=2 dist/Toolbox.app
-xcrun stapler validate dist/Toolbox.app
-xcrun stapler validate dist/Toolbox-2.0.0.dmg
-spctl --assess --type execute --verbose=4 dist/Toolbox.app
-shasum -a 256 -c dist/Toolbox-2.0.0.dmg.sha256
-```
+Record này thay release/launch plan đã execute. Objective là build universal app, cung cấp signing/notarization tooling explicit, automate release/Pages, chuẩn bị launch asset và ghi đúng thứ đã publish. Final channel decision là stable exception ký ad-hoc/chưa notarize, không phải release notarized dự kiến ban đầu.
 
-- [ ] **Step 2: Verify current local artifacts cannot satisfy notarization**
+Evidence tách theo authority: source/executable test chứng minh behavior; workflow definition/exact-run result chứng minh automation; release metadata/asset identity chứng minh publication; Product Hunt page đã authenticate chỉ chứng minh observed state. Ledger authoritative là [docs/release-evidence/toolbox-2.0.0.md](../../release-evidence/toolbox-2.0.0.md).
 
-Expected: ad-hoc app passes structural codesign but stapler/notarization checks FAIL.
+### Published stable identity
 
-- [ ] **Step 3: Implement explicit credential-bound scripts**
+| Field | Evidence ghi nhận |
+| --- | --- |
+| Tag/source | `v2.0.0` tại `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` |
+| GitHub release | Publish `2026-08-25T12:33:04Z`; non-draft; non-prerelease |
+| Release workflow | `32847772209`; completed `success` tại source commit |
+| Pages workflow | `32847688077`; completed `success` tại source commit; public site trả HTTP 200 lúc observation |
+| DMG | `Toolbox-2.0.0.dmg`; `6055290` byte |
+| Checksum | `Toolbox-2.0.0.dmg.sha256`; SHA-256 `ce9bdf8cfb67089c004d66302ef33ebd2d0c603a43435e66d58e447be9943dba` |
+| Trust | Ad-hoc signature; không Developer ID Application, Apple notarization hay stapling |
+| Hardware | Slice `arm64`/`x86_64`; không physical Intel execution evidence |
+| Product Hunt | Scheduled, chưa launch tại `2026-08-26 02:07 JST` / `2026-08-25 10:07 PDT` |
 
-```bash
-: "${TOOLBOX_CODESIGN_IDENTITY:?Set Developer ID Application identity}"
-: "${TOOLBOX_NOTARY_PROFILE:?Set notarytool keychain profile}"
-codesign --force --deep --options runtime --timestamp --sign "$TOOLBOX_CODESIGN_IDENTITY" dist/Toolbox.app
-ditto -c -k --keepParent dist/Toolbox.app dist/Toolbox-2.0.0-app.zip
-xcrun notarytool submit dist/Toolbox-2.0.0-app.zip --keychain-profile "$TOOLBOX_NOTARY_PROFILE" --wait
-xcrun stapler staple dist/Toolbox.app
-./scripts/build_dmg.sh
-xcrun notarytool submit dist/Toolbox-2.0.0.dmg --keychain-profile "$TOOLBOX_NOTARY_PROFILE" --wait
-xcrun stapler staple dist/Toolbox-2.0.0.dmg
-shasum -a 256 dist/Toolbox-2.0.0.dmg > dist/Toolbox-2.0.0.dmg.sha256
-rm dist/Toolbox-2.0.0-app.zip
-```
+### Implemented file map
 
-`build_dmg.sh` creates a read-only compressed DMG with `/Applications` symlink. The local ad-hoc path writes a checksum immediately; the notarization path rewrites the checksum after stapling the final DMG. Scripts print no credential values.
+| Area | File/responsibility as built |
+| --- | --- |
+| Universal app | `build_universal.sh`, `build_app.sh`, `verify_release.sh`, `release_contract.sh` build/merge hai slice, assemble bundle và verify structural contract. |
+| DMG/future trust | `build_dmg.sh`, `notarize.sh`, `docs/OPERATIONS-RELEASE.md` tạo DMG/checksum và giữ credential-bound Developer ID/notarization tooling cho future release. |
+| Stable workflow | `.github/workflows/release.yml` validate exact `v2.0.0`, chạy format/XCTest/smoke/localization/universal/public contract, build với `--allow-adhoc` và publish DMG/checksum immutable. |
+| Cask tooling | `scripts/render_cask.sh`, `tests/render_cask_test.sh` render cask từ exact URL/checksum; `v2.0.0` không publish Homebrew cask. |
+| Site | `site/**`, `.github/workflows/pages.yml`, `tests/site_contract.sh` implement/publish static site. |
+| Evidence/adoption | `scripts/adoption_report.sh`, test và stable ledger phân biệt DMG download event với unique user; record không claim adoption count. |
+| Product Hunt | `docs/launch/product-hunt.md`, `site/assets/product-hunt-*.png`, demo script và launch test tạo validated package/observed scheduled-state record. |
 
-- [ ] **Step 4: Test non-secret failure modes locally**
-
-Run: `cd apps/toolbox && env -u TOOLBOX_CODESIGN_IDENTITY -u TOOLBOX_NOTARY_PROFILE ./scripts/notarize.sh`
-
-Expected: FAIL immediately with the missing variable name and no partial upload.
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add apps/toolbox/scripts docs/OPERATIONS-RELEASE.md
-git commit -m "build: add Toolbox signing and notarization pipeline"
-```
+### Release contract và failure mode
 
-### Task 3: Add protected release automation and reproducible Homebrew cask generation
+`build_universal.sh` tạo bundle có slice `arm64`/`x86_64`; slice không phải proof chạy máy vật lý. `build_dmg.sh` tạo read-only compressed DMG chứa `Toolbox.app`, `/Applications`, `Open Toolbox - First Launch.html` và checksum. `verify_release.sh --allow-adhoc` verify identity/version/resource, structural signature, slice, checksum, mount layout, first-launch guide, đồng thời không assert stapling/Gatekeeper acceptance.
 
-**Files:**
-- Create: `.github/workflows/release.yml`
-- Create: `scripts/render_cask.sh`
-- Create: `tests/render_cask_test.sh`
-- Modify: `README.md`
-- Modify: `docs/OPERATIONS.md`
+`notarize.sh` giữ lại yêu cầu `TOOLBOX_CODESIGN_IDENTITY`, `TOOLBOX_NOTARY_PROFILE`, ký hardened runtime/timestamp, submit/staple app/DMG, tạo lại checksum và strict verify. Thiếu credential dừng trước signing/submission; secret không được print. Tooling đó không dùng cho `v2.0.0`, nên không là evidence Developer ID/notarization.
 
-**Interfaces:**
-- Produces: GitHub Release assets from a `v2.0.0` tag
-- Produces: exact-version `Casks/toolbox.rb` after the public DMG checksum exists
+Với stable exception đã publish, Gatekeeper direct rejection là expected. Safe path là **System Settings → Privacy & Security → Open Anyway** chỉ cho build này. Tắt Gatekeeper/xóa quarantine ngoài contract. Homebrew không available.
 
-- [ ] **Step 1: Add workflow/cask contract checks**
+Workflow cố định cho tag/version `v2.0.0`. Release sau phải update versioned contract và dùng notarized path trừ khi có exception review riêng. Published asset immutable; mismatch cần patch release mới, không silent replace.
 
-```bash
-rg -q 'workflow_dispatch|push:' .github/workflows/release.yml
-rg -q 'Toolbox-2.0.0.dmg' .github/workflows/release.yml
-rg -q 'xcrun notarytool' apps/toolbox/scripts/notarize.sh
-bash tests/render_cask_test.sh
-```
+### Execution record
 
-- [ ] **Step 2: Run checks and verify release files are absent**
+| Commit | Kết quả ghi nhận |
+| --- | --- |
+| `91c7147` | Thêm universal build, release contract, structural verification. |
+| `50f5118` | Thêm DMG, Developer ID/notarization tooling, strict verification, release operations. |
+| `f88c934` | Thêm release automation, deterministic cask renderer/test. |
+| `da8c4cf` | Thêm static product/privacy site, Pages, fixture/screenshot, site contract. |
+| `f16edf6` | Thêm release evidence và fixture-driven DMG download-event reporter. |
+| `e3f1a29` | Thêm Product Hunt copy, thumbnail/gallery, demo script, launch contract. |
+| `d4051da`, `b216d27` | Làm Pages check portable và sửa timing test update check async. |
+| `cefced3` | Chuẩn bị historical unsigned `v2.0.0-beta.1`. |
+| `37de5fc` | Promote stable exception `v2.0.0`, thêm first-launch guide và align site/release contract. |
+| `c60367d` | Làm launch contract portable; đây là tagged stable source. |
 
-Expected: FAIL because workflow and cask do not exist.
+### Verification evidence
 
-- [ ] **Step 3: Implement a protected tag release job**
+Release run `32847772209` completed `success` tại exact tagged source, validate format, XCTest, Core/Storage/Changes/App smoke, localization, universal slice, bundle/site/launch contract trước khi publish DMG/checksum. Pages run `32847688077` completed `success` tại cùng source. Public site trả HTTP 200 lúc observation.
 
-The workflow checks out the exact tag, imports the Developer ID certificate from protected secrets, configures a temporary notary keychain profile, runs the full test/build/notarize/verify scripts, uploads only the DMG and checksum, and removes the temporary keychain in an `always()` step. It uses least-privilege `contents: write` only in the release job.
+Repository-local evidence ngày `2026-08-25` ghi PASS riêng cho universal bundle/ad-hoc DMG structural check; không prove publication hay Apple trust. Published identity là tag, full SHA, asset name, byte size và SHA-256; download count không thuộc identity.
 
-- [ ] **Step 4: Add deterministic cask rendering against an exact release asset**
+### Launch/adoption outcome
 
-```bash
-version="${1:?version required}"
-sha256="${2:?sha256 required}"
-[[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
-[[ "$sha256" =~ ^[0-9a-f]{64}$ ]]
-mkdir -p Casks
-{
-  printf 'cask "toolbox" do\n'
-  printf '  version "%s"\n' "$version"
-  printf '  sha256 "%s"\n' "$sha256"
-  printf '  url "https://github.com/thangldw/toolbox/releases/download/v#{version}/Toolbox-#{version}.dmg"\n'
-  printf '  name "Toolbox"\n'
-  printf '  desc "See what changed and reclaim developer storage safely"\n'
-  printf '  homepage "https://thangldw.github.io/toolbox/"\n'
-  printf '  app "Toolbox.app"\n'
-  printf 'end\n'
-} > Casks/toolbox.rb
-```
+GitHub stable release và Pages site đã publish. Product Hunt asset/copy đã prepare; authenticated page được quan sát là scheduled cho August 26, 2026 12:01 AM PDT, voting disabled đến lúc live. Không infer launch/vote/follower/user/download sau đó. “Public beta” trên page là stale copy so với stable GitHub record có authority cao hơn.
 
-`tests/render_cask_test.sh` renders version `2.0.0` with a fixed 64-character fixture checksum, asserts exact version/URL/checksum output, and rejects malformed input. After the public DMG is downloadable, run the renderer with the checksum from the verified asset and commit the generated cask.
+### Boundary deferred/chưa prove
 
-- [ ] **Step 5: Run local YAML, cask, and release-script validation**
+Không claim Developer ID, notarization, stapling, Homebrew, physical Intel launch, clean-account production launch, public demo hosting, beta cohort, severity-1/2 defect tally, download/adoption, unique user, Product Hunt launch, vote hay follower. Workflow success/universal slice không lấp evidence gap đó.
 
-Run: `bash tests/render_cask_test.sh && actionlint .github/workflows/release.yml && cd apps/toolbox && ./scripts/build_universal.sh && ./scripts/build_dmg.sh && ./scripts/verify_release.sh --allow-adhoc`
+## 日本語
 
-Expected: PASS for local structural checks; protected notarization remains a release-environment gate.
+### Objective、release identity、evidence order
 
-- [ ] **Step 6: Commit**
+この record は実行済み release/launch plan を置き換えます。Objective は universal app build、明示的 signing/notarization tooling、release/Pages automation、launch asset preparation、published state の正確な記録でした。Final channel decision は当初予定の notarized release ではなく ad-hoc signed/unnotarized stable exception でした。
 
-```bash
-git add .github/workflows/release.yml scripts/render_cask.sh tests/render_cask_test.sh README.md docs/OPERATIONS.md
-git commit -m "release: automate Toolbox distribution"
-```
+Evidence authority を分離します。Source/executable test は behavior、workflow definition/exact-run result は automation、release metadata/asset identity は publication、authenticated Product Hunt page は observed state のみを証明します。Authoritative ledger は [docs/release-evidence/toolbox-2.0.0.md](../../release-evidence/toolbox-2.0.0.md) です。
 
-### Task 4: Build the static product site
+### Published stable identity
 
-**Files:**
-- Create: `site/index.html`
-- Create: `site/styles.css`
-- Create: `site/privacy.html`
-- Create: `site/assets/**`
-- Create: `.github/workflows/pages.yml`
-- Create: `tests/site_contract.sh`
+| Field | 記録 evidence |
+| --- | --- |
+| Tag/source | `c60367d84cdf06a93fe95c65e2ebe110ab3f70bb` の `v2.0.0` |
+| GitHub release | `2026-08-25T12:33:04Z` publish; non-draft; non-prerelease |
+| Release workflow | `32847772209`; source commit で completed `success` |
+| Pages workflow | `32847688077`; source commit で completed `success`; 観測時 public site HTTP 200 |
+| DMG | `Toolbox-2.0.0.dmg`; `6055290` byte |
+| Checksum | `Toolbox-2.0.0.dmg.sha256`; SHA-256 `ce9bdf8cfb67089c004d66302ef33ebd2d0c603a43435e66d58e447be9943dba` |
+| Trust | Ad-hoc signature; Developer ID Application、Apple notarization、stapling なし |
+| Hardware | `arm64`/`x86_64` slice; physical Intel execution evidence なし |
+| Product Hunt | `2026-08-26 02:07 JST` / `2026-08-25 10:07 PDT` 時点で scheduled、未 launch |
 
-**Interfaces:**
-- Produces: direct DMG URL, Homebrew command, trust boundaries, screenshots, demo link
+### Implemented file map
 
-- [ ] **Step 1: Add failing site-content and accessibility contracts**
+| Area | As-built file/responsibility |
+| --- | --- |
+| Universal app | `build_universal.sh`、`build_app.sh`、`verify_release.sh`、`release_contract.sh` が両 slice の build/merge、bundle assembly、structural contract を実装します。 |
+| DMG/future trust | `build_dmg.sh`、`notarize.sh`、`docs/OPERATIONS-RELEASE.md` が DMG/checksum と future release 用 credential-bound Developer ID/notarization tooling を実装します。 |
+| Stable workflow | `.github/workflows/release.yml` は exact `v2.0.0` を validate し、format/XCTest/smoke/localization/universal/public contract、`--allow-adhoc` build、immutable DMG/checksum publish を行います。 |
+| Cask tooling | `scripts/render_cask.sh`、`tests/render_cask_test.sh` は exact URL/checksum から cask を render しますが、`v2.0.0` Homebrew cask は未 publish です。 |
+| Site | `site/**`、`.github/workflows/pages.yml`、`tests/site_contract.sh` が static site を implement/publish します。 |
+| Evidence/adoption | `scripts/adoption_report.sh`、test、stable ledger が DMG download event と unique user を分離し、adoption count は claim しません。 |
+| Product Hunt | `docs/launch/product-hunt.md`、`site/assets/product-hunt-*.png`、demo script、launch test が validated package/observed scheduled-state record を構成します。 |
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-rg -q 'See what changed\. Reclaim space safely\.' site/index.html
-rg -q 'Toolbox-2.0.0.dmg' site/index.html
-rg -q 'No telemetry' site/index.html
-rg -q 'Trash' site/index.html
-rg -q '<main' site/index.html
-rg -q 'aria-label|aria-labelledby' site/index.html
-test -f site/privacy.html
-test "$(find site/assets -type f | wc -l | tr -d ' ')" -ge 5
-```
+### Release contract と failure mode
 
-- [ ] **Step 2: Run the contract and verify the site is absent**
+`build_universal.sh` は `arm64`/`x86_64` slice の bundle を作ります。Slice は physical execution proof ではありません。`build_dmg.sh` は `Toolbox.app`、`/Applications`、`Open Toolbox - First Launch.html` を含む read-only compressed DMG/checksum を作ります。`verify_release.sh --allow-adhoc` は identity/version/resource、structural signature、slice、checksum、mount layout、first-launch guide を verify しますが stapling/Gatekeeper acceptance は assert しません。
 
-Run: `bash tests/site_contract.sh`
+`notarize.sh` は `TOOLBOX_CODESIGN_IDENTITY`、`TOOLBOX_NOTARY_PROFILE` を要求し、hardened runtime/timestamp signing、app/DMG submit/staple、checksum regeneration、strict verify を行います。Credential 不足は signing/submission 前に停止し secret は print しません。この tooling は `v2.0.0` で未使用であり Developer ID/notarization evidence ではありません。
 
-Expected: FAIL.
+Published stable exception では Gatekeeper direct rejection が expected です。この build の safe path は **System Settings → Privacy & Security → Open Anyway** です。Gatekeeper disable/quarantine removal は contract 外です。Homebrew は unavailable です。
 
-- [ ] **Step 3: Implement the responsive static landing page**
+Workflow は tag/version `v2.0.0` 固定です。後続 release は versioned contract を更新し、別途 review 済み exception がなければ notarized path を使います。Published asset は immutable で、mismatch は同じ tag の silent replace ではなく新しい patch release が必要です。
 
-The first viewport contains the promise, one sentence of differentiation, direct Download and Homebrew actions, macOS requirement, and a product preview. Follow with a three-step Trace → Review → Recover story, four product previews, local-first/safety proof, installation instructions, and source/security/support links. No framework or runtime dependency is required. Representative generated previews are allowed during source preparation only when marked as fixture data; replace them with exact release-candidate captures before public launch.
+### Execution record
 
-- [ ] **Step 4: Add privacy copy and Pages deployment**
+| Commit | 記録結果 |
+| --- | --- |
+| `91c7147` | Universal build、release contract、structural verification を追加。 |
+| `50f5118` | DMG、Developer ID/notarization tooling、strict verification、release operations を追加。 |
+| `f88c934` | Release automation、deterministic cask renderer/test を追加。 |
+| `da8c4cf` | Static product/privacy site、Pages、fixture/screenshot、site contract を追加。 |
+| `f16edf6` | Release evidence、fixture-driven DMG download-event reporter を追加。 |
+| `e3f1a29` | Product Hunt copy、thumbnail/gallery、demo script、launch contract を追加。 |
+| `d4051da`, `b216d27` | Pages check portable 化、async update-check test timing 修正。 |
+| `cefced3` | Historical unsigned `v2.0.0-beta.1` を準備。 |
+| `37de5fc` | Stable `v2.0.0` exception を promote し first-launch guide と site/release contract を整合。 |
+| `c60367d` | Launch contract portable 化。Tagged stable source。 |
 
-The privacy page distinguishes no in-app telemetry from optional cookieless aggregate site analytics. The Pages workflow deploys only `site/`, runs the site contract first, and uses the standard Pages OIDC permissions.
+### Verification evidence
 
-- [ ] **Step 5: Verify links, responsive layout, and static contracts**
+Release run `32847772209` は exact tagged source で completed `success` となり、format、XCTest、Core/Storage/Changes/App smoke、localization、universal slice、bundle/site/launch contract 後に DMG/checksum を publish しました。Pages run `32847688077` も同じ source で completed `success` でした。観測時 public site は HTTP 200 でした。
 
-Run: `bash tests/site_contract.sh && npx --yes html-validate 'site/*.html'`
+`2026-08-25` repository-local evidence は universal bundle/ad-hoc DMG structural check の PASS を別に記録しますが、publication/Apple trust は prove しません。Published identity は tag、full SHA、asset name、byte size、SHA-256 の組で、download count は identity ではありません。
 
-Expected: PASS. Manually inspect at 1280x800 and 390x844 before commit.
+### Launch/adoption outcome
 
-- [ ] **Step 6: Commit**
+GitHub stable release と Pages site は publish 済みです。Product Hunt asset/copy は準備され、authenticated page は August 26, 2026 12:01 AM PDT に scheduled、live 前は voting disabled と観測されました。その後の launch、vote、follower、user、download は infer しません。Page の “public beta” はより高 authority の stable GitHub record に対する stale historical copy です。
 
-```bash
-git add site .github/workflows/pages.yml tests/site_contract.sh
-git commit -m "feat: add Toolbox product site"
-```
+### Deferred/unproven boundary
 
-### Task 5: Create reproducible release evidence and adoption reporting
-
-**Files:**
-- Create: `scripts/adoption_report.sh`
-- Create: `docs/release-evidence/toolbox-2.0.0.md`
-- Create: `tests/adoption_report_test.sh`
-
-**Interfaces:**
-- Produces: monthly and cumulative DMG download counts from GitHub release JSON
-- Produces: beta/release gate record with exact commands and observed results
-
-- [ ] **Step 1: Add a fixture-driven failing counter test**
-
-```bash
-fixture='[{"published_at":"2026-09-01T00:00:00Z","assets":[{"name":"Toolbox-2.0.0.dmg","download_count":7},{"name":"Toolbox-2.0.0.dmg.sha256","download_count":2}]}]'
-actual=$(printf '%s' "$fixture" | scripts/adoption_report.sh --stdin --asset-regex '^Toolbox-.*\.dmg$')
-printf '%s\n' "$actual" | tail -1 | grep -Eq '^TOTAL[[:space:]]+7$'
-```
-
-- [ ] **Step 2: Run the test and verify the reporter is missing**
-
-Run: `bash tests/adoption_report_test.sh`
-
-Expected: FAIL.
-
-- [ ] **Step 3: Implement the public counter**
-
-Without `--stdin`, the script calls `gh api --paginate repos/thangldw/toolbox/releases`; it counts only `.dmg` assets, groups by release month, prints a total, and labels the result `download events, not unique users`.
-
-- [ ] **Step 4: Record the beta evidence template with executable gates**
-
-The evidence document records commit SHA, macOS/hardware, Swift/Xcode, format/test/smoke/build commands, migration fixture counts, five restore drills, scan fixture elapsed time/peak memory versus v1, codesign/notary/Gatekeeper outputs, Apple Silicon/Intel verification, 20-beta-user status, and unresolved severity-1/2 defects. Unknown or unavailable evidence is marked `not yet verified`, never passed.
-
-- [ ] **Step 5: Run tests and generate the current public baseline**
-
-Run: `bash tests/adoption_report_test.sh && scripts/adoption_report.sh`
-
-Expected: fixture test PASS; live report counts only existing Toolbox DMGs matching the new naming contract.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add scripts/adoption_report.sh tests/adoption_report_test.sh docs/release-evidence
-git commit -m "docs: add Toolbox release evidence and adoption reporting"
-```
-
-### Task 6: Prepare the Product Hunt launch package
-
-**Files:**
-- Create: `docs/launch/product-hunt.md`
-- Create: `site/assets/product-hunt-thumbnail.png`
-- Create: `site/assets/product-hunt-home.png`
-- Create: `site/assets/product-hunt-projects.png`
-- Create: `site/assets/product-hunt-trace.png`
-- Create: `site/assets/product-hunt-recovery.png`
-- Create: `site/assets/demo-script.md`
-- Create: `tests/launch_assets.sh`
-
-**Interfaces:**
-- Produces: one Toolbox launch draft and validated asset set
-
-- [ ] **Step 1: Add failing launch-asset contracts**
-
-```bash
-sips -g pixelWidth -g pixelHeight site/assets/product-hunt-thumbnail.png | rg -q '240|512'
-for image in home projects trace recovery; do
-  sips -g pixelWidth -g pixelHeight "site/assets/product-hunt-$image.png" | rg -q '1270|2540'
-done
-rg -q '^Tagline:' docs/launch/product-hunt.md
-rg -q '^Description:' docs/launch/product-hunt.md
-rg -q '^First comment:' docs/launch/product-hunt.md
-```
-
-- [ ] **Step 2: Run the contract and verify assets are missing**
-
-Run: `bash tests/launch_assets.sh`
-
-Expected: FAIL.
-
-- [ ] **Step 3: Create launch copy**
-
-Use these locked messages:
-
-```text
-Name: Toolbox
-Tagline: See what changed. Reclaim developer storage safely.
-Description: A local-first macOS utility that traces installer changes, explains developer storage, and moves reviewed cleanup targets to Trash with recovery evidence.
-Topics: Developer Tools, Mac, Open Source
-Pricing: Free
-```
-
-The first comment covers the developer-storage problem, why change evidence and cleanup belong together, local-first/no-telemetry boundaries, migration from Diskora/Changeora, and a direct request for workflow feedback rather than votes.
-
-- [ ] **Step 4: Capture assets from the verified release candidate**
-
-Use real app screens with representative local fixture data. Thumbnail is square; gallery images are 1270x760 or 2540x1520; copy remains readable at Product Hunt preview size. The 30–60 second demo follows Start Trace → install fixture → finish trace → Review in Storage → Trash → Recovery.
-
-- [ ] **Step 5: Run asset and copy validation**
-
-Run: `bash tests/launch_assets.sh`
-
-Expected: PASS.
-
-- [ ] **Step 6: Commit**
-
-```bash
-git add docs/launch site/assets tests/launch_assets.sh
-git commit -m "docs: prepare Toolbox Product Hunt launch"
-```
-
-## Public launch gate
-
-Do not publish the GitHub release or Product Hunt post until all of these are true:
-
-```text
-[ ] Exact source commit passes CI.
-[ ] DMG contains arm64 and x86_64.
-[ ] Developer ID signature, notarization staple, and Gatekeeper assessment pass.
-[ ] SHA-256 check passes after downloading the public asset.
-[ ] GitHub Pages points directly to that asset and returns HTTP 200.
-[ ] Homebrew installs the same asset and launches Toolbox.
-[ ] Five restore drills pass without overwrite or data loss.
-[ ] At least 20 developers completed the signed beta.
-[ ] No unresolved severity-1 or severity-2 product defect remains.
-[ ] Product Hunt gallery, demo, copy, maker, topics, and first comment are complete.
-```
-
-Publishing or credential configuration that requires the user's Apple Developer, GitHub repository-secret, YouTube, or Product Hunt account remains an explicit user-owned handoff. All source, scripts, assets, drafts, and non-secret verification continue automatically before that handoff.
+Developer ID、notarization、stapling、Homebrew、physical Intel launch、clean-account production launch、public demo hosting、beta cohort、severity-1/2 defect tally、download/adoption、unique user、Product Hunt launch、vote、follower は claim しません。Workflow success/universal slice はこれらの evidence gap を埋めません。
