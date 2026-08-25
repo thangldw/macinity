@@ -601,4 +601,4 @@ git commit -m "refactor: retire standalone Diskora and Changeora apps"
 
 ## Evidence-workflow completion gate
 
-Run the Task 6 full gate, then perform manual smoke checks for project-root selection, Install Trace start/finish/cancel, interrupted trace recovery, migration retry, cross-module Review in Storage, cleanup preview, Trash move, and conflict-safe restore. Record results in `docs/release-evidence/toolbox-2.0-beta.md` during the release plan.
+Run the Task 6 full gate, then perform manual smoke checks for project-root selection, Install Trace start/finish/cancel, interrupted trace recovery, migration retry, cross-module Review in Storage, cleanup preview, Trash move, and conflict-safe restore. Record results in `docs/release-evidence/toolbox-2.0.0.md` during the release plan.

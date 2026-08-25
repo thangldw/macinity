@@ -70,7 +70,7 @@ The rewrite covers:
 
 - Root: `README.md`, `CONTRIBUTING.md`, `PRIVACY.md`, `SECURITY.md`, `CHANGELOG.md`.
 - Canonical references: `docs/ARCHITECTURE.md`, `docs/OPERATIONS.md`, `docs/OPERATIONS-RELEASE.md`.
-- Launch and evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0-beta.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`.
+- Launch and evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0.0.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`.
 - Engineering records: the existing Toolbox 2.0 spec and three plans under `docs/superpowers/`.
 
 The beta evidence file is renamed to a stable `toolbox-2.0.0.md` record and all references are updated. No historical release note or changelog entry is deleted. Application source and website design are outside scope; site copy or tests may change only where required to preserve documentation and release contracts.
@@ -155,7 +155,7 @@ Rewrite bao phủ:
 
 - Root: `README.md`, `CONTRIBUTING.md`, `PRIVACY.md`, `SECURITY.md`, `CHANGELOG.md`.
 - Canonical reference: `docs/ARCHITECTURE.md`, `docs/OPERATIONS.md`, `docs/OPERATIONS-RELEASE.md`.
-- Launch/evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0-beta.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`.
+- Launch/evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0.0.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`.
 - Engineering record: Toolbox 2.0 spec và ba plan hiện có dưới `docs/superpowers/`.
 
 File beta evidence được đổi tên thành stable record `toolbox-2.0.0.md` và mọi reference được cập nhật. Không xóa historical release note hoặc changelog entry. Source app và thiết kế website nằm ngoài scope; site copy hoặc test chỉ thay đổi khi cần giữ documentation/release contract.
@@ -240,7 +240,7 @@ Rewrite 対象:
 
 - Root: `README.md`, `CONTRIBUTING.md`, `PRIVACY.md`, `SECURITY.md`, `CHANGELOG.md`。
 - Canonical reference: `docs/ARCHITECTURE.md`, `docs/OPERATIONS.md`, `docs/OPERATIONS-RELEASE.md`。
-- Launch/evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0-beta.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`。
+- Launch/evidence: `docs/launch/product-hunt.md`, `docs/launch/toolbox-2.0.0-beta.1.md`, `docs/launch/toolbox-2.0.0.md`, `docs/release-evidence/toolbox-2.0.0.md`, `docs/design-evidence/toolbox-site-fidelity.md`, `site/assets/demo-script.md`。
 - Engineering record: `docs/superpowers/` の既存 Toolbox 2.0 spec と三 plan。
 
 Beta evidence file は stable record `toolbox-2.0.0.md` に rename し、全 reference を更新します。Historical release note と changelog entry は削除しません。Application source と website design は scope 外です。Site copy または test は documentation/release contract 維持に必要な場合だけ変更します。

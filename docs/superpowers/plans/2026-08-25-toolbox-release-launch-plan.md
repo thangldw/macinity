@@ -41,7 +41,7 @@ site/
 ├── privacy.html
 └── assets/                               # Icon, screenshots, demo poster
 scripts/adoption_report.sh                # Public GitHub asset counter
-docs/release-evidence/toolbox-2.0-beta.md
+docs/release-evidence/toolbox-2.0.0.md
 docs/launch/product-hunt.md
 ```
 
@@ -276,7 +276,7 @@ git commit -m "feat: add Toolbox product site"
 
 **Files:**
 - Create: `scripts/adoption_report.sh`
-- Create: `docs/release-evidence/toolbox-2.0-beta.md`
+- Create: `docs/release-evidence/toolbox-2.0.0.md`
 - Create: `tests/adoption_report_test.sh`
 
 **Interfaces:**
