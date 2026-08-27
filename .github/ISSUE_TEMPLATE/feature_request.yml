@@ -1,0 +1,60 @@
+name: Feature request
+description: Propose a user problem for Toolbox to solve safely and locally.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with the user problem, not an implementation. Toolbox prioritizes local processing, explicit review, bounded scope, and recoverable actions.
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What is difficult today, for whom, and how often does it happen?
+    validations:
+      required: true
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Closest Toolbox workflow
+      options:
+        - Storage
+        - Projects
+        - Applications
+        - Install Trace
+        - Change Timeline
+        - Recovery
+        - Settings or onboarding
+        - New workflow
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence the user needs
+      description: What information would let the user make a confident decision?
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety and recovery
+      description: What must never happen, and how should the user recover from a mistake?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround
+      description: What do you use today, and where does it fail?
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: This request does not include private paths, files, credentials, or personal data.
+          required: true
+    validations:
+      required: true

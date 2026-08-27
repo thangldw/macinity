@@ -23,6 +23,8 @@ jobs:
         run: python3 --version
       - name: Validate documentation
         run: bash tests/documentation_contract.sh
+      - name: Validate GitHub community files
+        run: ruby tests/github_community_contract.rb
       - name: Validate diagrams
         run: python3 tests/check_diagrams.py docs/diagrams/*.html
 
