@@ -1,0 +1,1 @@
+Actual captures from /Applications/Toolbox.app, CFBundleShortVersionString 2.0.0, build 1, captured 2026-10-05. Vietnamese UI. Home, Install Trace (0 sessions), Projects (no root selected). No generated or reconstructed UI. Home storage total is session-specific. Captured window only; no private paths displayed.
