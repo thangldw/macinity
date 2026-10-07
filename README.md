@@ -4,6 +4,8 @@
 
 ## English
 
+Product introduction: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/). Latest published release: [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0). Main may contain later source or documentation changes; they do not replace the published artifact or its recorded verification.
+
 Toolbox is a local-first macOS GUI for understanding installer changes and reclaiming storage through reviewed, recoverable actions. It combines the former Diskora and Changeora workflows in one application. It is not a malware scanner, package manager, automatic cleaner, cloud service, or privileged system repair tool.
 
 ### Install `v2.0.0`
@@ -83,6 +85,8 @@ Tags through `v1.4.0` retain the standalone Diskora and Changeora source and bin
 
 ## Tiếng Việt
 
+Trang giới thiệu: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/). Release đã phát hành mới nhất: [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0). Main có thể chứa source hoặc tài liệu mới hơn; chúng không thay thế artifact đã phát hành hay evidence kiểm chứng của artifact.
+
 Toolbox là GUI macOS ưu tiên xử lý local để hiểu thay đổi do installer tạo ra và giải phóng dung lượng bằng thao tác được duyệt, có thể khôi phục. Ứng dụng hợp nhất workflow Diskora và Changeora trước đây. Toolbox không phải malware scanner, package manager, trình dọn tự động, cloud service hay công cụ sửa hệ thống có quyền đặc biệt.
 
 ### Cài đặt `v2.0.0`
@@ -161,6 +165,8 @@ Các tag đến `v1.4.0` giữ source và binary độc lập của Diskora/Chan
 [MIT](LICENSE)
 
 ## 日本語
+
+紹介ページ: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/)。最新の公開 release は [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0) です。Main の新しい source/documentation change は公開 artifact やその検証記録を置換しません。
 
 Toolbox は、installer による変更を理解し、review 済みで復元可能な操作によって storage を整理する local-first macOS GUI です。旧 Diskora と Changeora の workflow を一つの application に統合しています。Malware scanner、package manager、自動 cleaner、cloud service、privileged system repair tool ではありません。
 
