@@ -1,0 +1,13 @@
+{
+  "canonicalCommit": "316473efc1269fda4a40466b171166dce02d1bd5",
+  "assets": {
+    "product-shell.js": {
+      "source": "https://thangldw.github.io/js/site-shell.js",
+      "sha256": "43a0b8a1db8d5e8a8e20391a4b211efa1a6fdaf61c13d532027fb24e69dc8952"
+    },
+    "product-support.js": {
+      "source": "https://thangldw.github.io/js/support-dialog.js",
+      "sha256": "947da4743876ee680139175a422e18bf58f48f55a5dc8986cbc4e5b12df98c3f"
+    }
+  }
+}
