@@ -1,9 +1,255 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Toolbox — See what changed. Reclaim space safely.</title><meta name="description" content="Toolbox 2 for macOS: trace installer changes, inspect storage and rebuildable project artifacts, review cleanup, and recover eligible actions from Trash."><link rel="canonical" href="https://thangldw.github.io/toolbox/"><meta property="og:title" content="Toolbox — Your Mac, with evidence."><meta property="og:description" content="Local-first installer tracing, storage review, and recoverable cleanup."><meta property="og:image" content="https://thangldw.github.io/toolbox/assets/toolbox-2-actual-home-en.png"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="styles.css?v=20261005header"><link rel="stylesheet" href="https://thangldw.github.io/css/tokens.css"><link rel="stylesheet" href="https://thangldw.github.io/css/site-shell.css?v=20261005stable"><script src="https://thangldw.github.io/js/site-shell.js?v=20260727b"></script><link rel="stylesheet" href="/css/support-dialog.css?v=20261006all"><script defer src="/js/support-dialog.js?v=20261006all"></script></head><body>
-<a class="skip-link" href="#main">Skip to content</a><header class="product-header"><a class="site-brand" href="https://thangldw.github.io/" aria-label="Thang Luu home"><span class="site-brand-mark" aria-hidden="true">t:&gt;</span><span>thang<span class="site-brand-dot">.</span></span></a><nav aria-label="Product navigation"><a href="#workflows">Workflows</a><a href="#download">Get started</a><a href="https://thangldw.github.io/apps/">Apps</a><button type="button" id="themeToggle" class="site-theme-toggle" aria-label="Switch to dark theme">◐</button></nav></header>
-<main id="main"><section class="hero"><div class="hero-copy"><p class="eyebrow">TOOLBOX 2 · LOCAL-FIRST MAC UTILITY</p><h1>See what changed.<br>Reclaim space safely.</h1><p>Understand what an installation changed. Find storage you can reclaim. Review each action, with evidence and a path back.</p><div class="actions"><a class="button button-primary" href="#download">Get Toolbox for macOS</a><a class="button button-outline" href="#workflows">Explore the workflows</a></div><p class="small">macOS 13+ · Apple Silicon and Intel binaries · MIT open source</p></div><figure><img src="assets/toolbox-2-actual-home-en.png" alt="Toolbox application overview" width="2240" height="1520"><figcaption>Actual Toolbox 2.0.0 window, English interface. The displayed storage value is specific to this local session.</figcaption></figure></section>
-<section class="trust-strip" aria-label="Product principles"><span>Local processing</span><span>No account</span><span>No telemetry</span><span>Review before cleanup</span><span>Trash-backed recovery</span></section>
-<section id="workflows"><p class="eyebrow">START WITH A REAL TASK</p><h2>Your Mac, with evidence.</h2><p class="intro">Toolbox brings the former Diskora and Changeora workflows together. Inspect first, understand the result, then decide what to do.</p><div class="feature-grid"><article><span class="number">01</span><h3>Trace an installation</h3><p>Capture a before snapshot, run the normal macOS install or uninstall yourself, and compare the after evidence. Toolbox observes changes; it does not execute your installer.</p></article><article><span class="number">02</span><h3>Review storage</h3><p>Inspect folder allocation, hash-verified duplicate candidates, similar-photo candidates and developer storage. Select the targets you actually want to clean.</p></article><article><span class="number">03</span><h3>Recover an action</h3><p>Eligible reviewed files move to macOS Trash. Recovery retains original and Trash paths and refuses to overwrite an existing destination.</p></article></div></section>
-<section id="product"><p class="eyebrow">INSIDE THE APP</p><h2>From finding to reviewed action.</h2><div class="showcase"><figure><img src="assets/toolbox-2-actual-trace-en.png" loading="lazy" width="2240" height="1520" alt="Toolbox change evidence view"><figcaption>Actual Toolbox 2.0.0 Install Trace screen before selecting an installer; no saved sessions.</figcaption></figure><div><h3>Understand what changed</h3><p>Observe bounded filesystem events around a user-run workflow. Keep snapshots and evidence locally so you can revisit the result.</p><h3>Inspect applications</h3><p>Review installed apps and evidence-linked leftovers. Receipts and registration metadata provide context for your decision.</p></div></div><div class="showcase"><div><h3>Focus on rebuildable artifacts</h3><p>Choose a project root and inspect recognized outputs such as node_modules, .build, .venv, target, Pods and Gradle or Flutter output.</p><h3>Keep control of cleanup</h3><p>Every mutation requires foreground review and immediate path revalidation. Scheduled runs scan and notify only.</p></div><figure><img src="assets/toolbox-2-actual-projects-en.png" loading="lazy" width="2240" height="1520" alt="Toolbox project artifact review"><figcaption>Actual Toolbox 2.0.0 Projects screen before selecting a project root.</figcaption></figure></div></section>
-<section class="privacy-panel"><p class="eyebrow">PRIVACY BY DESIGN</p><h2>Your scan results stay on your Mac.</h2><p>Snapshots, hashes, activity and recovery manifests are stored locally. No accounts, telemetry or content uploads. Full Disk Access is optional and expands readable coverage.</p><p>The built-in network request checks GitHub for a newer release only when you choose Check for Updates; it sends no scan data or file paths.</p><a href="privacy.html">Read the privacy policy →</a></section>
-<section id="install"><span id="download"></span><p class="eyebrow">CURRENT STABLE RELEASE · v2.0.0</p><h2>Download. Verify. Open.</h2><p class="intro">macOS 13 or later. The DMG contains Apple Silicon and Intel slices; a physical Intel launch test is not claimed in the release record.</p><div class="actions"><a class="button button-primary" href="https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg">Download Toolbox-2.0.0.dmg</a><a class="button button-outline" href="https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg.sha256">SHA-256 checksum</a></div><ol><li>Download the DMG and checksum into the same folder. Verify with <code>shasum -a 256 -c Toolbox-2.0.0.dmg.sha256</code>.</li><li>Open the DMG, read “Open Toolbox - First Launch.html”, and drag Toolbox to Applications.</li><li>Try opening once. If blocked, use System Settings → Privacy &amp; Security → Open Anyway, then authenticate.</li></ol><aside class="install-note"><strong>Unnotarized release — ad-hoc signed; not Apple-notarized.</strong> Stable describes the release channel. Manual Gatekeeper approval is required. Do not disable Gatekeeper or remove quarantine attributes. Homebrew installation is unavailable for this release.</aside><p><a href="https://github.com/thangldw/toolbox/releases/tag/v2.0.0">Release notes</a> · <a href="https://github.com/thangldw/toolbox/issues">Report an issue</a></p></section></main><footer><span>Toolbox · MIT open source</span><a href="https://thangldw.github.io/apps/">Explore more apps →</a></footer><div id="supportSlot" style="padding:20px;text-align:center"></div></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbox — Make room. Keep the context.</title>
+<meta name="description" content="See what changed. Reclaim space safely. Understand storage, rebuildable project artifacts, and application evidence with reviewed, recoverable actions.">
+<link rel="canonical" href="https://thangldw.github.io/toolbox/">
+<link rel="icon" href="assets/app-icon.png">
+<link rel="stylesheet" href="toolbox-page.css">
+<link rel="stylesheet" href="https://thangldw.github.io/css/support-dialog.css">
+<link rel="stylesheet" href="https://thangldw.github.io/css/site-shell.css?v=20261011vi">
+<script src="product-shell.js">
+</script>
+<script defer src="product-support.js">
+</script>
+<script defer src="preview.js">
+</script>
+</head>
+<body class="site-page toolbox-page">
+<a data-copy="skip" class="skip-link" href="#main">Skip to content</a>
+<header class="product-header">
+<a class="site-brand" href="https://thangldw.github.io/" aria-label="Thang Luu home" data-aria="homeLabel">
+<span class="site-brand-mark" aria-hidden="true">t:&gt;</span>
+<span>thang<span class="site-brand-dot">.</span>
+</span>
+</a>
+<div class="header-actions">
+<div class="locale-switch" aria-label="Language" data-aria="languageLabel">
+<button type="button" class="ui-button" data-lang="en" aria-pressed="true">EN</button>
+<button type="button" class="ui-button" data-lang="vi" aria-pressed="false">VN</button>
+<button type="button" class="ui-button" data-lang="ja" aria-pressed="false">JP</button>
+<button type="button" class="ui-button" data-lang="zh" aria-pressed="false">CN</button>
+</div>
+<button type="button" class="ui-icon-button" id="themeToggle" aria-label="Switch to dark theme">
+<img class="icon " src="assets/icons/moon.svg" alt="" width="24" height="24">
+</button>
+</div>
+</header>
+<main id="main">
+<section class="intro">
+<div>
+<p class="eyebrow">Toolbox · v2.0.0 · OPEN SOURCE</p>
+<h1>
+<span data-copy="title" >Make room.</span>
+<br class="hero-break">
+<span data-copy="title2" >Keep the context.</span>
+</h1>
+<p data-copy="lead" class="lead">Understand what takes space, what belongs to an app, and what can be rebuilt.</p>
+<div class="actions">
+<a data-copy="download" class="ui-button ui-button-primary" href="#install">Download for macOS</a>
+<a href="https://github.com/thangldw/toolbox">
+<span data-copy="source" >View source</span>
+<img class="icon inline-icon" src="assets/icons/arrow-right.svg" alt="" width="24" height="24">
+</a>
+</div>
+<p class="meta">macOS 13+ · v2.0.0 · MIT</p>
+</div>
+<aside class="trust">
+<p data-copy="trust" class="trust-title">A local, transparent tool for everyday storage decisions.</p>
+<ul>
+<li data-copy="local" >Runs locally. No account.</li>
+<li data-copy="observe" >You run installers. Toolbox observes.</li>
+<li data-copy="review" >Human review before files move to Trash.</li>
+<li data-copy="telemetry" >No telemetry. Nothing is deleted automatically.</li>
+</ul>
+</aside>
+</section>
+<section class="capabilities" aria-label="Storage, project, and application examples" data-aria="graphLabel">
+<article>
+<h2 data-copy="storage" >Storage</h2>
+<p data-copy="storageLead" class="section-lead">See where space is used, by folder.</p>
+<div class="storage-demo demo">
+<img class="icon large-icon" src="assets/icons/folder.svg" alt="" width="24" height="24">
+<dl>
+<div>
+<dt data-copy="documents" >Documents</dt>
+<dd>
+<meter min="0" max="50" value="42.1" aria-label="Documents" data-meter="documents">42.1 GB</meter>
+<span data-size="42.1">42.1 GB</span>
+</dd>
+</div>
+<div>
+<dt data-copy="developer" >Developer</dt>
+<dd>
+<meter min="0" max="50" value="18.7" aria-label="Developer" data-meter="developer">18.7 GB</meter>
+<span data-size="18.7">18.7 GB</span>
+</dd>
+</div>
+<div>
+<dt data-copy="applications" >Applications</dt>
+<dd>
+<meter min="0" max="50" value="12.4" aria-label="Applications" data-meter="applications">12.4 GB</meter>
+<span data-size="12.4">12.4 GB</span>
+</dd>
+</div>
+</dl>
+</div>
+<p data-copy="storageBody" class="section-body">Compare folder sizes and understand what is taking space. Review hash-verified duplicate candidates and similar photos.</p>
+</article>
+<article>
+<h2 data-copy="projects" >Projects</h2>
+<p data-copy="projectsLead" class="section-lead">Find rebuildable artifacts in your projects.</p>
+<div class="project-demo demo">
+<p class="root-path">
+<img class="icon " src="assets/icons/folder.svg" alt="" width="24" height="24">
+<code>MyProject</code>
+</p>
+<ul>
+<li>
+<img class="icon " src="assets/icons/folder.svg" alt="" width="24" height="24">
+<code>.build</code>
+<span data-size="1.2" data-unit="GB">1.2 GB</span>
+</li>
+<li>
+<img class="icon " src="assets/icons/folder.svg" alt="" width="24" height="24">
+<code>node_modules</code>
+<span data-size="812" data-unit="MB">812 MB</span>
+</li>
+<li>
+<img class="icon " src="assets/icons/folder.svg" alt="" width="24" height="24">
+<code>target</code>
+<span data-size="642" data-unit="MB">642 MB</span>
+</li>
+</ul>
+</div>
+<p data-copy="projectsBody" class="section-body">Recognize common build artifacts within a selected root. These can be rebuilt when needed.</p>
+</article>
+<article>
+<h2 data-copy="applications" >Applications</h2>
+<p data-copy="applicationsLead" class="section-lead">See the files linked to an app.</p>
+<div class="app-demo demo">
+<div class="app-example">
+<img class="icon large-icon" src="assets/icons/cube.svg" alt="" width="24" height="24">
+<span>Example.app</span>
+</div>
+<ul>
+<li>
+<img class="icon " src="assets/icons/file.svg" alt="" width="24" height="24">
+<code>/Applications/Example.app</code>
+</li>
+<li>
+<img class="icon " src="assets/icons/file.svg" alt="" width="24" height="24">
+<code>~/Library/Application Support/Example</code>
+</li>
+<li>
+<img class="icon " src="assets/icons/file.svg" alt="" width="24" height="24">
+<code>~/Library/Logs/Example</code>
+</li>
+<li>
+<img class="icon " src="assets/icons/file.svg" alt="" width="24" height="24">
+<code>~/Library/Caches/Example</code>
+</li>
+<li>
+<img class="icon " src="assets/icons/file.svg" alt="" width="24" height="24">
+<span data-copy="receipt" >Package receipt (com.example.app)</span>
+</li>
+</ul>
+</div>
+<p data-copy="applicationsBody" class="section-body">Evidence linked to each app, not delete permission. Review before deciding.</p>
+</article>
+</section>
+<p data-copy="sample" class="sample-caption">Illustrative examples · synthetic sizes and paths</p>
+<section class="workflow">
+<div>
+<h2 data-copy="workflow" >A simple, accountable workflow.</h2>
+<p data-copy="workflowLead" >Understand, review, and clean with confidence.</p>
+</div>
+<ol>
+<li>
+<span class="step-icon">
+<img class="icon " src="assets/icons/search.svg" alt="" width="24" height="24">
+</span>
+<h3 data-copy="scan" >Scan selected roots</h3>
+<p data-copy="scanBody" >Analyze your folders and applications.</p>
+</li>
+<li>
+<span class="step-icon">
+<img class="icon " src="assets/icons/list-details.svg" alt="" width="24" height="24">
+</span>
+<h3 data-copy="candidates" >Review candidates</h3>
+<p data-copy="candidatesBody" >See what was found and why.</p>
+</li>
+<li>
+<span class="step-icon">
+<img class="icon " src="assets/icons/trash.svg" alt="" width="24" height="24">
+</span>
+<h3 data-copy="trash" >Move eligible files to Trash</h3>
+<p data-copy="trashBody" >You decide what moves. Nothing is deleted automatically.</p>
+</li>
+<li>
+<span class="step-icon">
+<img class="icon " src="assets/icons/restore.svg" alt="" width="24" height="24">
+</span>
+<h3 data-copy="restore" >Restore if the original path is free</h3>
+<p data-copy="restoreBody" >Bring files back when the path is available.</p>
+</li>
+</ol>
+</section>
+<section class="supporting">
+<article>
+<img class="icon supporting-icon" src="assets/icons/clock.svg" alt="" width="24" height="24">
+<div>
+<h3 data-copy="timeline" >Change Timeline</h3>
+<p data-copy="timelineBody" >Compare saved sessions. See what was added, modified, or removed, with attribution and risk evidence.</p>
+</div>
+</article>
+<article>
+<img class="icon supporting-icon" src="assets/icons/arrow-down.svg" alt="" width="24" height="24">
+<div>
+<h3 data-copy="trace" >Install Trace</h3>
+<p data-copy="traceBody" >Observe changes during a normal user-run install, update, or uninstall. Compare before and after snapshots.</p>
+</div>
+</article>
+</section>
+<section id="install" class="install">
+<div>
+<h2 data-copy="install" >Download. Verify. Open.</h2>
+<p data-copy="installBody" >Get the release and verify its integrity.</p>
+</div>
+<div class="download-links">
+<a href="https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg">Toolbox-2.0.0.dmg</a>
+<a data-copy="checksum" href="https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg.sha256">SHA-256 checksum</a>
+</div>
+<div class="command">
+<code id="checksum-command">shasum -a 256 -c Toolbox-2.0.0.dmg.sha256</code>
+<button type="button" class="ui-button" id="copy">
+<img class="icon inline-icon" src="assets/icons/copy.svg" alt="" width="24" height="24">
+<span data-copy="copy" >Copy</span>
+</button>
+<p id="copy-status" role="status" aria-live="polite">
+</p>
+</div>
+<p class="install-note">
+<strong data-copy="unsigned" >Unnotarized release</strong> — <span data-copy="unsignedBody" >Ad-hoc signed, not Apple-notarized. Manual macOS approval required. No Homebrew install.</span>
+</p>
+</section>
+<details>
+<summary data-copy="first" >First launch & permissions</summary>
+<p data-copy="firstBody" >Open the DMG, read the included first-launch guide, and drag Toolbox to Applications. Try opening once; if macOS blocks it, use System Settings → Privacy & Security → Open Anyway. Optional Full Disk Access expands readable coverage. Protected locations may remain inaccessible.</p>
+</details>
+</main>
+<footer>
+<p>© 2026 thang. · Toolbox · <span data-copy="footer" >Open source software for everyday storage.</span>
+</p>
+<nav>
+<a href="https://github.com/thangldw/toolbox">GitHub</a>
+<a data-copy="docs" href="https://github.com/thangldw/toolbox#readme">Documentation</a>
+<a data-copy="changelog" href="https://github.com/thangldw/toolbox/blob/main/CHANGELOG.md">Changelog</a>
+<a data-copy="privacy" href="privacy.html">Privacy</a>
+<a data-copy="license" href="https://github.com/thangldw/toolbox/blob/main/LICENSE">License</a>
+</nav>
+</footer>
+</body>
+</html>
