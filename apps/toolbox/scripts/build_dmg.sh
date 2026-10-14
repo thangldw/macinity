@@ -2,8 +2,8 @@
 set -euo pipefail
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
-app="$project_dir/dist/Toolbox.app"
-dmg="$project_dir/dist/Toolbox-2.0.0.dmg"
+app="$project_dir/dist/Orven.app"
+dmg="$project_dir/dist/Orven-3.0.0.dmg"
 checksum="$dmg.sha256"
 
 test -d "$app"
@@ -12,12 +12,12 @@ test -d "$app"
 staging_dir="$(mktemp -d -t toolbox-dmg)"
 trap 'rm -rf "$staging_dir"' EXIT
 
-ditto "$app" "$staging_dir/Toolbox.app"
-cp "$project_dir/Resources/Open Toolbox - First Launch.html" "$staging_dir/"
+ditto "$app" "$staging_dir/Orven.app"
+cp "$project_dir/Resources/Open Orven - First Launch.html" "$staging_dir/"
 ln -s /Applications "$staging_dir/Applications"
 rm -f "$dmg" "$checksum"
 hdiutil create \
-  -volname "Toolbox" \
+  -volname "Orven" \
   -srcfolder "$staging_dir" \
   -ov \
   -format UDZO \

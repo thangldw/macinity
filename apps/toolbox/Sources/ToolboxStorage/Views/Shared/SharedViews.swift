@@ -28,6 +28,8 @@ struct TreemapView: View {
 }
 
 struct PageHeader: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   let title: String
   let subtitle: String
   let symbol: String
@@ -36,17 +38,14 @@ struct PageHeader: View {
 
   var body: some View {
     HStack(spacing: 16) {
-      ZStack {
-        RoundedRectangle(cornerRadius: 14)
-          .fill(
-            LinearGradient(
-              colors: [.blue, .cyan], startPoint: .topLeading, endPoint: .bottomTrailing))
-        Image(systemName: symbol).font(.system(size: 28, weight: .semibold)).foregroundStyle(.white)
-      }
-      .frame(width: 60, height: 60)
+      Image(systemName: symbol).font(.system(size: 27, weight: .medium))
+        .foregroundStyle(OrvenTheme.accent)
+        .frame(width: 44, height: 44).accessibilityHidden(true)
       VStack(alignment: .leading, spacing: 4) {
-        Text(L10n.text(title)).font(.system(size: 27, weight: .bold))
-        Text(L10n.text(subtitle)).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+        Text(L10n.text(title)).font(.system(size: 30, weight: .bold)).foregroundStyle(
+          OrvenTheme.ink)
+        Text(L10n.text(subtitle)).foregroundStyle(.secondary).fixedSize(
+          horizontal: false, vertical: true)
       }
       Spacer()
       VStack(alignment: .trailing, spacing: 3) {
@@ -55,6 +54,9 @@ struct PageHeader: View {
       }
     }
     .padding(24)
+    .background(OrvenTheme.surface)
+    .environment(
+      \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale)
   }
 }
 
@@ -74,11 +76,13 @@ struct MetricCard: View {
     }
     .padding(14)
     .frame(maxWidth: .infinity)
-    .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
+    .background(OrvenTheme.surface, in: RoundedRectangle(cornerRadius: 10))
   }
 }
 
 struct EmptyStateView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   let title: String
   let symbol: String
   let detail: String
@@ -94,5 +98,7 @@ struct EmptyStateView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(30)
+    .environment(
+      \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale)
   }
 }

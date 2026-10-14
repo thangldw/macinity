@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible Toolbox problem without exposing private paths or files.
+description: Report a reproducible Orven problem without exposing private paths or files.
 title: "[Bug]: "
 labels:
   - bug
@@ -9,13 +9,13 @@ body:
       value: |
         Thanks for reporting a reproducible problem. For a security issue, use [private vulnerability reporting](https://github.com/thangldw/toolbox/security/advisories/new) instead.
 
-        Do not paste private paths, filenames, file contents, account data, credentials, signing material, or an unredacted Toolbox export.
+        Do not paste private paths, filenames, file contents, account data, credentials, signing material, or an unredacted Orven export.
   - type: input
     id: toolbox-version
     attributes:
-      label: Toolbox version
+      label: Orven version
       description: Use the version shown in Settings or the GitHub release tag.
-      placeholder: v2.0.0
+      placeholder: v3.0.0
     validations:
       required: true
   - type: input

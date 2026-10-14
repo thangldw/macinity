@@ -5,9 +5,9 @@ set -euo pipefail
 : "${TOOLBOX_NOTARY_PROFILE:?Set notarytool keychain profile}"
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
-app="$project_dir/dist/Toolbox.app"
-archive="$project_dir/dist/Toolbox-2.0.0-app.zip"
-dmg="$project_dir/dist/Toolbox-2.0.0.dmg"
+app="$project_dir/dist/Orven.app"
+archive="$project_dir/dist/Orven-3.0.0-app.zip"
+dmg="$project_dir/dist/Orven-3.0.0.dmg"
 checksum="$dmg.sha256"
 
 test -d "$app"
@@ -40,4 +40,4 @@ xcrun stapler validate "$dmg"
 (cd "$(dirname "$dmg")" && shasum -a 256 "$(basename "$dmg")" > "$(basename "$checksum")")
 
 "$project_dir/scripts/verify_release.sh"
-echo "PASS: signed and notarized Toolbox 2.0.0"
+echo "PASS: signed and notarized Orven 3.0.0"

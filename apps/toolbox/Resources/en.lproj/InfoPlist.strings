@@ -1,0 +1,3 @@
+"NSLocationUsageDescription" = "Orven uses location permission to display Wi-Fi network names and access point identities when you inspect or scan Wi-Fi.";
+"NSLocationWhenInUseUsageDescription" = "Orven uses location permission to display Wi-Fi network names and access point identities when you inspect or scan Wi-Fi.";
+"NSLocalNetworkUsageDescription" = "Orven connects to the gateway or local destination you choose when you start a network diagnostic.";

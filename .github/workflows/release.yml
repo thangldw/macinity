@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "v2.0.0"
+      - "v3.0.0"
   workflow_dispatch:
 
 concurrency:
@@ -26,7 +26,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Require the supported release tag
-        run: test "$GITHUB_REF" = "refs/tags/v2.0.0"
+        run: test "$GITHUB_REF" = "refs/tags/v3.0.0"
       - name: Format
         run: swift format lint --recursive --parallel Sources Tests Package.swift
       - name: XCTest
@@ -37,11 +37,12 @@ jobs:
           ./scripts/test_storage.sh
           ./scripts/test_changes.sh
           ./scripts/test_app.sh
+          ./scripts/test_monitoring.sh
           ./scripts/lint_localizations.swift
       - name: Universal release contract
         run: |
           ./scripts/build_universal.sh
-          ./Tests/Distribution/release_contract.sh dist/Toolbox.app
+          ./Tests/Distribution/release_contract.sh dist/Orven.app
       - name: Public release contracts
         working-directory: .
         run: |
@@ -49,7 +50,7 @@ jobs:
           bash tests/launch_assets.sh
 
   release:
-    name: Build and publish unsigned stable release
+    name: Build and publish ad-hoc Orven release
     needs: validate
     runs-on: macos-15
     timeout-minutes: 45
@@ -64,7 +65,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Build and verify exact unsigned artifacts
+      - name: Build and verify exact ad-hoc artifacts
         run: |
           ./scripts/build_universal.sh
           ./scripts/build_dmg.sh
@@ -75,10 +76,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" \
-            dist/Toolbox-2.0.0.dmg \
-            dist/Toolbox-2.0.0.dmg.sha256 \
+            dist/Orven-3.0.0.dmg \
+            dist/Orven-3.0.0.dmg.sha256 \
             --repo "$GITHUB_REPOSITORY" \
             --verify-tag \
-            --notes-file ../../docs/launch/toolbox-2.0.0.md \
+            --notes-file ../../docs/launch/orven-3.0.0.md \
             --latest \
-            --title "Toolbox 2.0.0"
+            --title "Orven 3.0.0"

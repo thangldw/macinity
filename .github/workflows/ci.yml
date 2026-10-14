@@ -31,7 +31,7 @@ jobs:
         run: python3 tests/check_diagrams.py docs/diagrams/*.html
 
   toolbox:
-    name: Toolbox 2.0
+    name: Orven macOS
     runs-on: macos-15
     timeout-minutes: 25
     defaults:
@@ -51,14 +51,15 @@ jobs:
           ./scripts/test_storage.sh
           ./scripts/test_changes.sh
           ./scripts/test_app.sh
+          ./scripts/test_monitoring.sh
           ./scripts/lint_localizations.swift
       - name: Release build
         run: swift build -c release
       - name: Assemble app bundle
         run: |
           ./scripts/build_app.sh
-          test -x dist/Toolbox.app/Contents/MacOS/Toolbox
-          test -f dist/Toolbox.app/Contents/Resources/en.lproj/Localizable.strings
-          test -f dist/Toolbox.app/Contents/Resources/vi.lproj/Localizable.strings
+          test -x dist/Orven.app/Contents/MacOS/Toolbox
+          test -f dist/Orven.app/Contents/Resources/en.lproj/Localizable.strings
+          test -f dist/Orven.app/Contents/Resources/vi.lproj/Localizable.strings
           plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings
-          codesign --verify --deep --strict dist/Toolbox.app
+          codesign --verify --deep --strict dist/Orven.app

@@ -1,4 +1,5 @@
 import AppKit
+import Darwin
 import Foundation
 import ToolboxCore
 
@@ -28,6 +29,20 @@ struct InstalledApplication: Identifiable, Sendable {
   let bundleIdentifier: String?
   let bytes: Int64
   let leftovers: [ApplicationArtifact]
+  let backgroundEvidenceAvailable: Bool
+
+  init(
+    url: URL, name: String, bundleIdentifier: String?, bytes: Int64,
+    leftovers: [ApplicationArtifact], backgroundEvidenceAvailable: Bool = false
+  ) {
+    self.url = url
+    self.name = name
+    self.bundleIdentifier = bundleIdentifier
+    self.bytes = bytes
+    self.leftovers = leftovers
+    self.backgroundEvidenceAvailable = backgroundEvidenceAvailable
+  }
+
   var id: String { url.path }
   var totalBytes: Int64 { bytes + leftovers.reduce(0) { $0 + $1.entry.bytes } }
 }
@@ -64,7 +79,8 @@ struct ApplicationScanner: Sendable {
             bytes: (try? service.size(of: url)) ?? 0,
             leftovers: findLeftovers(
               name: name, bundleID: bundleID, home: home, service: service,
-              backgroundItems: backgroundItems)
+              backgroundItems: backgroundItems ?? ""),
+            backgroundEvidenceAvailable: backgroundItems != nil
           ))
       }
     }
@@ -230,26 +246,13 @@ struct ApplicationScanner: Sendable {
       return ApplicationArtifact(
         entry: StorageEntry(url: url, bytes: size, modifiedAt: nil),
         kind: .packageReceipt, confidence: .dangerous,
-        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Toolbox không tự xóa")
+        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa")
     }
   }
 
-  private func backgroundItemsDump() -> String {
-    let executable = URL(fileURLWithPath: "/usr/bin/sfltool")
-    guard FileManager.default.isExecutableFile(atPath: executable.path) else { return "" }
-    let process = Process()
-    let pipe = Pipe()
-    process.executableURL = executable
-    process.arguments = ["dumpbtm"]
-    process.standardOutput = pipe
-    process.standardError = FileHandle.nullDevice
-    do {
-      try process.run()
-      let data = pipe.fileHandleForReading.readDataToEndOfFile()
-      process.waitUntilExit()
-      guard process.terminationStatus == 0, data.count < 8_000_000 else { return "" }
-      return String(decoding: data, as: UTF8.self)
-    } catch { return "" }
+  private func backgroundItemsDump() -> String? {
+    guard let data = try? SystemInspectionRead.backgroundItems.read() else { return nil }
+    return String(decoding: data, as: UTF8.self)
   }
 
   private func findBackgroundItemEvidence(
@@ -267,7 +270,7 @@ struct ApplicationScanner: Sendable {
           url: database, bytes: (try? service.size(of: database)) ?? 0, modifiedAt: nil),
         kind: .loginItem, confidence: .dangerous,
         evidence:
-          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Toolbox không xóa database hệ thống"
+          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Orven không xóa database hệ thống"
       )
     ]
   }
@@ -292,6 +295,7 @@ struct ApplicationScanner: Sendable {
 final class ApplicationViewModel: ObservableObject {
   @Published var applications: [InstalledApplication] = []
   @Published var isWorking = false
+  @Published private(set) var scannedAt: Date?
   @Published var status = "Quét ứng dụng để tìm dữ liệu còn sót"
   @Published var errorMessage: String?
   private let scanner = ApplicationScanner()
@@ -305,6 +309,7 @@ final class ApplicationViewModel: ObservableObject {
     let scanner = self.scanner
     Task {
       applications = await Task.detached { scanner.scan() }.value
+      scannedAt = Date()
       ScanActivityRegistry.shared.end()
       isWorking = false
       status = "Tìm thấy \(applications.count) ứng dụng"

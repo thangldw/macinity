@@ -1,246 +1,103 @@
-# Toolbox for macOS
-
-[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
+# Orven for macOS
 
 ## English
 
-Product introduction: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/). Latest published release: [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0). Main may contain later source or documentation changes; they do not replace the published artifact or its recorded verification.
+### Orven 3.0
 
-Toolbox is a local-first macOS GUI for understanding installer changes and reclaiming storage through reviewed, recoverable actions. It combines the former Diskora and Changeora workflows in one application. It is not a malware scanner, package manager, automatic cleaner, cloud service, or privileged system repair tool.
+Orven brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostics and recoverable storage management into one native macOS app. It is the renamed successor to Toolbox, with a new ring icon and interface. English, Vietnamese, Japanese and Simplified Chinese are available.
 
-### Install `v2.0.0`
+### Install and release status
 
-Requirements: macOS 13 or later. The published DMG contains `arm64` and `x86_64` slices; the release record does not claim a physical Intel launch test.
+Orven 3.0.0 is being prepared for production. Use the [release page](https://github.com/thangldw/toolbox/releases) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
 
-1. Download [`Toolbox-2.0.0.dmg`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg) and [`Toolbox-2.0.0.dmg.sha256`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg.sha256) into the same folder.
-2. Verify the download:
+Download the DMG and matching SHA-256 file, verify the checksum, open the disk image, read the first-launch guide and drag Orven.app into Applications. Retain your data when upgrading: bundle ID `com.thang.toolbox` and `~/Library/Application Support/Toolbox` intentionally remain unchanged.
 
-   ```bash
-   shasum -a 256 -c Toolbox-2.0.0.dmg.sha256
-   ```
+### What you can do
 
-3. Open the DMG, read `Open Toolbox - First Launch.html`, and drag Toolbox to Applications.
-4. Try to open Toolbox once. If macOS blocks it, open **System Settings → Privacy & Security**, find the Toolbox message, choose **Open Anyway**, and authenticate.
+- Live monitoring: process identities and trends, CPU/memory, disk/network rates, battery/thermal and optional menu-bar status.
+- Hardware: machine profile, available mapped CPU/GPU temperatures, fan RPM, battery temperature and observed system power, with freshness and missing readings.
+- Wi-Fi/LAN: interface/IP/gateway/DNS/media/carrier observations, Wi-Fi signal/channel/link rate and explicit nearby scans.
+- Network measurements: destination DNS/TCP443 checks and 20-probe ICMP latency/loss/jitter by button; cancel and retained timestamps.
+- Health: default-off bounded local history, median baselines, session sensor charts/JSON/CSV and opt-in in-app alerts.
+- Network changes: opt-in session connection/path observations; no packet capture or firewall.
+- Storage/projects: folder allocation, duplicate candidates, selected-root rebuildable artifacts, developer workspace and growth checkpoints.
+- Applications: dossiers and evidence-linked leftovers; evidence is not deletion permission. CPU priority changes require explicit review.
+- Changes/recovery: installer evidence, comparisons, reviewed eligible moves to Trash and recovery to an unoccupied original path.
 
-`v2.0.0` is the stable product release, but it is ad-hoc signed and **not notarized** by Apple. Stable identifies the release channel; it is not Apple trust approval. Gatekeeper rejection before the manual approval is expected. Do not disable Gatekeeper or remove quarantine attributes. Homebrew installation is unavailable because this release is not Developer ID-signed and notarized.
+### Privacy and limits
 
-### Core workflows
+No account, telemetry, analytics, automatic deletion or cloud sync. Explicit network probes contact the destinations you enter; update checking contacts GitHub. History is optional and bounded. Permissions expand coverage, never authorize deletion. Physical sensor mappings are model dependent; link rate is not Internet speed, snapshots do not establish exclusive bytes, and connection observations are not a firewall. See [Privacy](PRIVACY.md), [Security](SECURITY.md) and [release readiness](docs/production/RELEASE-READINESS.md) for executed checks and remaining limits.
 
-- **Install Trace:** accept a `.dmg`, `.pkg`, or `.app`, capture a before snapshot, observe bounded FSEvents while the user runs the normal macOS install, update, or uninstall flow, then compare and persist the after evidence. Toolbox does not mount or execute the dropped installer.
-- **Storage:** inspect folder allocation, duplicate candidates verified by hashing, similar-photo candidates, developer storage, and safe cleanup categories.
-- **Projects:** find only recognized rebuildable artifacts such as `.build`, `node_modules`, `.venv`, `target`, Gradle/Flutter output, and `Pods` inside a root selected by the user.
-- **Applications:** inspect installed applications and evidence-linked leftovers; package receipts and registration metadata are evidence, not permission to delete.
-- **Change Timeline:** compare saved sessions and baselines, explain attribution and risk, and export redacted Markdown or JSON reports.
-- **Recovery:** retain original and Trash paths for eligible reviewed mutations; restore fails rather than overwrite an existing destination.
+### Build, contribute and documentation
 
-### Safety and privacy boundary
+Build with Swift 6 and full Xcode. From `apps/toolbox`, run `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh` and `./scripts/build_dmg.sh`. The resulting app is `dist/Orven.app`; the internal executable/module names remain Toolbox for compatibility. Verify with `./scripts/verify_release.sh --allow-adhoc`; this checks structural integrity, not Apple notarization.
 
-Scans, snapshots, hashes, evidence, activity, migration state, and recovery manifests stay on the Mac under `~/Library/Application Support/Toolbox`. Toolbox has no account, telemetry, advertising SDK, analytics endpoint, content upload, privileged helper, automatic deletion, or malware verdict. Full Disk Access is optional and only expands readable coverage; inaccessible protected locations remain reduced coverage.
-
-Every mutation requires foreground review and immediate canonical-path revalidation. Eligible file mutations use macOS Trash. Scheduled runs scan and notify only; they never delete. The only built-in network path is a GET to `https://api.github.com/repos/thangldw/toolbox/releases/latest` after the user chooses **Check for Updates**; it sends no scan results, paths, evidence, file metadata, or device fields.
-
-See [Privacy](PRIVACY.md) and [Security](SECURITY.md) for the complete policy.
-
-### Build and validation
-
-Swift 6.0 or later is required to build from source. From `apps/toolbox`:
-
-```bash
-swift format lint --recursive --parallel Sources Tests Package.swift
-swift test
-./scripts/test_core.sh
-./scripts/test_storage.sh
-./scripts/test_changes.sh
-./scripts/test_app.sh
-./scripts/lint_localizations.swift
-swift build -c release
-./scripts/build_app.sh
-codesign --verify --deep --strict dist/Toolbox.app
-```
-
-Command Line Tools can run the smoke gates and release build. The XCTest targets require the XCTest module from full Xcode. Local build and `codesign` success prove structural integrity only; they do not prove Developer ID signing, notarization, stapling, Gatekeeper acceptance, or a published release.
-
-### Documentation and repository layout
-
-```text
-toolbox/
-├── apps/toolbox/          # ToolboxCore, ToolboxStorage, ToolboxChanges, GUI executable
-├── docs/                  # Architecture, operations, launch, and release evidence
-├── site/                  # Product landing page
-├── .github/workflows/     # CI, Pages, and release workflows
-├── PRIVACY.md
-├── SECURITY.md
-└── CONTRIBUTING.md
-```
-
-Start with [Architecture](docs/ARCHITECTURE.md), the [architecture diagram](docs/diagrams/toolbox-architecture.html), [Operations](docs/OPERATIONS.md), and [Release operations](docs/OPERATIONS-RELEASE.md). Historical release details are in [Changelog](CHANGELOG.md) and the [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md). Engineering changes follow [Contributing](CONTRIBUTING.md).
-
-### Version 1 history
-
-Tags through `v1.4.0` retain the standalone Diskora and Changeora source and binaries as historical artifacts; they are not active support branches. On first launch, Toolbox 2 can inspect supported legacy Application Support JSON and, only with user approval, copy, merge, and verify it into the Toolbox store. Original legacy files remain unchanged.
-
-### License
-
-[MIT](LICENSE)
+Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Orven](https://thangldw.github.io/toolbox/). Previous Toolbox releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
 
 ## Tiếng Việt
 
-Trang giới thiệu: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/). Release đã phát hành mới nhất: [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0). Main có thể chứa source hoặc tài liệu mới hơn; chúng không thay thế artifact đã phát hành hay evidence kiểm chứng của artifact.
+### Orven 3.0
 
-Toolbox là GUI macOS ưu tiên xử lý local để hiểu thay đổi do installer tạo ra và giải phóng dung lượng bằng thao tác được duyệt, có thể khôi phục. Ứng dụng hợp nhất workflow Diskora và Changeora trước đây. Toolbox không phải malware scanner, package manager, trình dọn tự động, cloud service hay công cụ sửa hệ thống có quyền đặc biệt.
+Orven hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-Fi/LAN và quản lý dung lượng có khôi phục trong app macOS native. Đây là tên mới của Toolbox, với ring icon và giao diện mới. Hỗ trợ Anh, Việt, Nhật và Trung giản thể.
 
-### Cài đặt `v2.0.0`
+### Cài đặt và trạng thái release
 
-Yêu cầu: macOS 13 trở lên. DMG đã phát hành chứa slice `arm64` và `x86_64`; release record không claim đã launch trực tiếp trên máy Intel vật lý.
+Orven 3.0.0 đang được chuẩn bị cho production. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
 
-1. Tải [`Toolbox-2.0.0.dmg`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg) và [`Toolbox-2.0.0.dmg.sha256`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg.sha256) vào cùng folder.
-2. Xác minh file tải về:
+Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, đọc hướng dẫn và kéo Orven.app vào Applications. Khi nâng cấp giữ dữ liệu: bundle ID `com.thang.toolbox` và `~/Library/Application Support/Toolbox` được giữ nguyên có chủ đích.
 
-   ```bash
-   shasum -a 256 -c Toolbox-2.0.0.dmg.sha256
-   ```
+### Chức năng
 
-3. Mở DMG, đọc `Open Toolbox - First Launch.html`, rồi kéo Toolbox vào Applications.
-4. Thử mở Toolbox một lần. Nếu macOS chặn, mở **System Settings → Privacy & Security**, tìm thông báo về Toolbox, chọn **Open Anyway** rồi xác thực.
+- Giám sát: identity/trend process, CPU/memory, tốc độ disk/network, battery/thermal, menu-bar tùy chọn.
+- Phần cứng: profile máy, nhiệt độ CPU/GPU mapped khả dụng, RPM quạt, nhiệt pin/công suất hệ thống quan sát; freshness/missing rõ ràng.
+- Wi-Fi/LAN: interface/IP/gateway/DNS/media/carrier, signal/channel/link rate và nearby scan theo nút.
+- Phép đo mạng: DNS/TCP443 tới đích nhập và20probe ICMP latency/loss/jitter; cancel và timestamp kết quả cũ.
+- Health: history local bounded mặc định tắt, baseline median, sensor chart phiên/JSON/CSV, in-app alert opt-in.
+- Thay đổi mạng: connection/path observations trong RAM phiên opt-in; không packet capture/firewall.
+- Storage/projects: allocation thư mục, duplicate candidates, artifact rebuildable trong root đã chọn, developer workspace/growth checkpoints.
+- Applications: dossier/leftover có evidence; evidence không phải quyền xóa. Đổi priority CPU cần review rõ ràng.
+- Changes/recovery: evidence installer/comparison, duyệt trước khi chuyển file đủ điều kiện vào Trash, restore khi path gốc trống.
 
-`v2.0.0` là stable product release nhưng được ký ad-hoc và **chưa notarize** bởi Apple. Stable chỉ kênh phát hành, không phải Apple trust approval. Gatekeeper từ chối trước bước phê duyệt thủ công là kết quả dự kiến. Không tắt Gatekeeper hoặc xóa quarantine attribute. Chưa có Homebrew vì release này chưa được ký Developer ID và notarize.
+### Privacy và giới hạn
 
-### Workflow chính
+Không account/telemetry/analytics/tự xóa/cloud sync. Probe explicit kết nối đích bạn nhập; checkupdate kết nối GitHub. History tùy chọn/bounded. Quyền mở coverage không cấp quyền xóa. Mapping sensor theo model; linkrate không Internet speed, snapshot không proofexclusivebytes, quan sát connection không firewall. [Privacy](PRIVACY.md), [Security](SECURITY.md), [release readiness](docs/production/RELEASE-READINESS.md) ghi checks đã chạy và giới hạn.
 
-- **Install Trace:** nhận `.dmg`, `.pkg` hoặc `.app`, chụp snapshot trước, quan sát FSEvents có giới hạn trong khi người dùng chạy luồng cài đặt, cập nhật hoặc uninstall bình thường của macOS, sau đó so sánh và lưu evidence sau thao tác. Toolbox không mount hoặc execute installer được thả vào.
-- **Storage:** kiểm tra dung lượng folder, candidate file trùng được xác minh bằng hash, candidate ảnh tương tự, developer storage và các nhóm cleanup an toàn.
-- **Projects:** chỉ tìm artifact có thể build lại đã được nhận diện như `.build`, `node_modules`, `.venv`, `target`, output Gradle/Flutter và `Pods` bên trong root do người dùng chọn.
-- **Applications:** kiểm tra ứng dụng đã cài và leftover gắn với evidence; package receipt và registration metadata chỉ là evidence, không phải quyền xóa.
-- **Change Timeline:** so sánh session và baseline đã lưu, giải thích attribution/risk, đồng thời export report Markdown hoặc JSON đã redaction.
-- **Recovery:** giữ vị trí gốc và vị trí Trash cho mutation đủ điều kiện đã được duyệt; restore sẽ fail thay vì ghi đè destination đang tồn tại.
+### Build, đóng góp và tài liệu
 
-### Ranh giới an toàn và quyền riêng tư
+Build bằng Swift 6 và bộ Xcode đầy đủ. Từ `apps/toolbox`, chạy `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh`, `./scripts/build_dmg.sh`. App là `dist/Orven.app`; tên executable/module Toolbox giữ để tương thích. `./scripts/verify_release.sh --allow-adhoc` kiểm tra tính toàn vẹn của bộ cài, không chứng minh notarization.
 
-Scan, snapshot, hash, evidence, activity, trạng thái migration và recovery manifest ở lại trên máy Mac trong `~/Library/Application Support/Toolbox`. Toolbox không có account, telemetry, advertising SDK, analytics endpoint, content upload, privileged helper, tự động xóa hoặc malware verdict. Full Disk Access là tùy chọn và chỉ mở rộng coverage có thể đọc; vị trí được bảo vệ không truy cập được vẫn được hiển thị là reduced coverage.
-
-Mọi mutation cần foreground review và revalidation canonical path ngay trước thao tác. File mutation đủ điều kiện dùng macOS Trash. Lịch chạy chỉ scan và notify, tuyệt đối không xóa. Network path tích hợp duy nhất là GET tới `https://api.github.com/repos/thangldw/toolbox/releases/latest` sau khi người dùng chọn **Check for Updates**; request không gửi kết quả scan, path, evidence, file metadata hoặc device field.
-
-Xem [Quyền riêng tư](PRIVACY.md) và [Bảo mật](SECURITY.md) để đọc policy đầy đủ.
-
-### Build và validation
-
-Cần Swift 6.0 trở lên để build source. Chạy từ `apps/toolbox`:
-
-```bash
-swift format lint --recursive --parallel Sources Tests Package.swift
-swift test
-./scripts/test_core.sh
-./scripts/test_storage.sh
-./scripts/test_changes.sh
-./scripts/test_app.sh
-./scripts/lint_localizations.swift
-swift build -c release
-./scripts/build_app.sh
-codesign --verify --deep --strict dist/Toolbox.app
-```
-
-Command Line Tools chạy được smoke gate và release build. XCTest target cần module XCTest từ full Xcode. Local build và `codesign` pass chỉ chứng minh structural integrity; không chứng minh Developer ID signing, notarization, stapling, Gatekeeper acceptance hoặc release đã publish.
-
-### Tài liệu và layout repository
-
-```text
-toolbox/
-├── apps/toolbox/          # ToolboxCore, ToolboxStorage, ToolboxChanges, GUI executable
-├── docs/                  # Architecture, operations, launch, and release evidence
-├── site/                  # Product landing page
-├── .github/workflows/     # CI, Pages, and release workflows
-├── PRIVACY.md
-├── SECURITY.md
-└── CONTRIBUTING.md
-```
-
-Bắt đầu với [Architecture](docs/ARCHITECTURE.md), [sơ đồ architecture](docs/diagrams/toolbox-architecture.html), [Operations](docs/OPERATIONS.md) và [Release operations](docs/OPERATIONS-RELEASE.md). Chi tiết release lịch sử nằm trong [Changelog](CHANGELOG.md) và [release note `v2.0.0`](docs/launch/toolbox-2.0.0.md). Thay đổi kỹ thuật tuân theo [Contributing](CONTRIBUTING.md).
-
-### Lịch sử Version 1
-
-Các tag đến `v1.4.0` giữ source và binary độc lập của Diskora/Changeora dưới dạng artifact lịch sử; đây không phải active support branch. Ở lần chạy đầu, Toolbox 2 có thể inspect Application Support JSON cũ được hỗ trợ và chỉ khi người dùng đồng ý mới copy, merge, verify vào Toolbox store. File legacy gốc không thay đổi.
-
-### Giấy phép
-
-[MIT](LICENSE)
+Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Orven](https://thangldw.github.io/toolbox/). Release Toolbox trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
 
 ## 日本語
 
-紹介ページ: [thangldw.github.io/toolbox/](https://thangldw.github.io/toolbox/)。最新の公開 release は [v2.0.0](https://github.com/thangldw/toolbox/releases/tag/v2.0.0) です。Main の新しい source/documentation change は公開 artifact やその検証記録を置換しません。
+### Orven 3.0
 
-Toolbox は、installer による変更を理解し、review 済みで復元可能な操作によって storage を整理する local-first macOS GUI です。旧 Diskora と Changeora の workflow を一つの application に統合しています。Malware scanner、package manager、自動 cleaner、cloud service、privileged system repair tool ではありません。
+OrvenはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、復元可能なストレージ管理を統合したnative macOS appです。Toolboxの後継で、名前・ring icon・画面を刷新。英語、ベトナム語、日本語、簡体字中国語に対応します。
 
-### `v2.0.0` のインストール
+### インストールとrelease状況
 
-要件は macOS 13 以降です。公開 DMG は `arm64` と `x86_64` slice を含みますが、release record は物理 Intel Mac での launch test を claim していません。
+Orven 3.0.0はproduction向け準備中です。[Release page](https://github.com/thangldw/toolbox/releases)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
 
-1. [`Toolbox-2.0.0.dmg`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg) と [`Toolbox-2.0.0.dmg.sha256`](https://github.com/thangldw/toolbox/releases/download/v2.0.0/Toolbox-2.0.0.dmg.sha256) を同じ folder に download します。
-2. Download を検証します。
+同versionのDMG/SHA-256をdownloadしてchecksum確認、diskimage内guideを読みOrven.appをApplicationsへ。Upgrade時のデータを保持するためbundleID `com.thang.toolbox`と`~/Library/Application Support/Toolbox`を意図的に維持します。
 
-   ```bash
-   shasum -a 256 -c Toolbox-2.0.0.dmg.sha256
-   ```
+### 機能
 
-3. DMG を開き、`Open Toolbox - First Launch.html` を読んで Toolbox を Applications に移動します。
-4. Toolbox を一度開きます。macOS に block された場合は **System Settings → Privacy & Security** を開き、Toolbox の message から **Open Anyway** を選び、認証します。
+- ライブ監視：processidentity/trend、CPU/memory、disk/networkrate、battery/thermal、optionalmenu-bar。
+- Hardware：machineprofile、利用可能なmappedCPU/GPUtemp、fanRPM、batterytemp/観測systempower、freshness/missing表示。
+- Wi-Fi/LAN：interface/IP/gateway/DNS/media/carrier、signal/channel/linkrate、明示nearby scan。
+- Network測定：入力destinationのDNS/TCP443と20ICMPprobe latency/loss/jitter、cancel/以前のtimestamp保持。
+- Health：初期offのboundedlocalhistory、medianbaseline、sessionchart/JSON/CSV、opt-inin-appalert。
+- Networkchanges：opt-insessionconnection/path観測、packet capture/firewallなし。
+- Storage/projects：folderallocation/duplicatecandidate、選択root内rebuildableartifact、developerworkspace/growthcheckpoint。
+- Applications：dossier/evidence-linkedleftover。Evidenceは削除許可ではなく、CPUpriority変更は明示reviewが必要。
+- Changes/recovery：installerevidence/comparison、review後のeligibleTrash移動、元pathが空の場合のrestore。
 
-`v2.0.0` は stable product release ですが、ad-hoc 署名で Apple により **notarize されていません**。Stable は release channel を示すだけで、Apple trust approval ではありません。手動承認前の Gatekeeper rejection は expected result です。Gatekeeper を無効化したり quarantine attribute を削除したりしないでください。この release は Developer ID 署名・notarize 済みではないため、Homebrew install は提供しません。
+### Privacyと制限
 
-### Core workflow
+Account/telemetry/analytics/自動削除/cloud syncなし。明示probeは入力先へ、updatecheckはGitHubへ接続。Historyはoptional/bounded。権限はcoverageを広げますが削除許可ではありません。Sensorはmodel依存、linkrateはInternet速度ではなくsnapshotのexclusivebytesやfirewallを証明しません。[Privacy](PRIVACY.md)、[Security](SECURITY.md)、[release readiness](docs/production/RELEASE-READINESS.md)に検証と制限を記載。
 
-- **Install Trace:** `.dmg`、`.pkg`、`.app` を受け取り、before snapshot を取得し、user が通常の macOS install/update/uninstall flow を実行している間だけ bounded FSEvents を観測して、after evidence を比較・保存します。Toolbox は drop された installer を mount または execute しません。
-- **Storage:** folder allocation、hash で検証した duplicate candidate、similar-photo candidate、developer storage、安全な cleanup category を確認します。
-- **Projects:** user が選択した root 内だけで、`.build`、`node_modules`、`.venv`、`target`、Gradle/Flutter output、`Pods` など既知の再生成可能 artifact を検出します。
-- **Applications:** install 済み application と evidence-linked leftover を確認します。Package receipt と registration metadata は evidence であり、削除許可ではありません。
-- **Change Timeline:** 保存済み session と baseline を比較し、attribution/risk を説明し、redaction 済み Markdown または JSON report を export します。
-- **Recovery:** 対象となる review 済み mutation の original path と Trash path を保持します。既存 destination を上書きせず restore を fail させます。
+### Build・貢献・資料
 
-### Safety と privacy の境界
+Swift 6 và bộ Xcode đầy đủでbuild。`apps/toolbox`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Orven.app`、internalexecutable/moduleは互換性のためToolboxを維持。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
 
-Scan、snapshot、hash、evidence、activity、migration state、recovery manifest は Mac 内の `~/Library/Application Support/Toolbox` に保持されます。Account、telemetry、advertising SDK、analytics endpoint、content upload、privileged helper、自動削除、malware verdict はありません。Full Disk Access は任意で、読み取り可能範囲を広げるだけです。Access できない protected location は reduced coverage として表示されます。
-
-すべての mutation は foreground review と action 直前の canonical-path revalidation を必要とします。対象 file mutation は macOS Trash を使います。Scheduled run は scan と notification のみで、削除しません。内蔵 network path は、user が **Check for Updates** を選択した後の `https://api.github.com/repos/thangldw/toolbox/releases/latest` への GET だけです。Scan result、path、evidence、file metadata、device field は送信しません。
-
-完全な policy は [Privacy](PRIVACY.md) と [Security](SECURITY.md) を参照してください。
-
-### Build と validation
-
-Source build には Swift 6.0 以降が必要です。`apps/toolbox` から実行します。
-
-```bash
-swift format lint --recursive --parallel Sources Tests Package.swift
-swift test
-./scripts/test_core.sh
-./scripts/test_storage.sh
-./scripts/test_changes.sh
-./scripts/test_app.sh
-./scripts/lint_localizations.swift
-swift build -c release
-./scripts/build_app.sh
-codesign --verify --deep --strict dist/Toolbox.app
-```
-
-Command Line Tools では smoke gate と release build を実行できます。XCTest target には full Xcode の XCTest module が必要です。Local build と `codesign` pass は structural integrity の evidence に限られ、Developer ID signing、notarization、stapling、Gatekeeper acceptance、公開 release の evidence ではありません。
-
-### Documentation と repository layout
-
-```text
-toolbox/
-├── apps/toolbox/          # ToolboxCore, ToolboxStorage, ToolboxChanges, GUI executable
-├── docs/                  # Architecture, operations, launch, and release evidence
-├── site/                  # Product landing page
-├── .github/workflows/     # CI, Pages, and release workflows
-├── PRIVACY.md
-├── SECURITY.md
-└── CONTRIBUTING.md
-```
-
-[Architecture](docs/ARCHITECTURE.md)、[architecture diagram](docs/diagrams/toolbox-architecture.html)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md) から参照してください。Historical release detail は [Changelog](CHANGELOG.md) と [`v2.0.0` release note](docs/launch/toolbox-2.0.0.md) にあります。Engineering change は [Contributing](CONTRIBUTING.md) に従います。
-
-### Version 1 の履歴
-
-`v1.4.0` までの tag は、standalone Diskora/Changeora の source と binary を historical artifact として保持しています。Active support branch ではありません。初回起動時、Toolbox 2 は supported legacy Application Support JSON を inspect でき、user が承認した場合だけ Toolbox store に copy、merge、verify します。元の legacy file は変更しません。
-
-### License
-
-[MIT](LICENSE)
+[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のToolboxreleaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
