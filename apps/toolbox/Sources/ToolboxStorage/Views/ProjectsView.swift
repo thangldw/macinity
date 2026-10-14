@@ -12,10 +12,13 @@ private enum ProjectSafetyFilter: String, CaseIterable, Identifiable {
 }
 
 struct ProjectsView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   @StateObject private var model = ProjectViewModel()
   @State private var ecosystem: ProjectEcosystem?
   @State private var safetyFilter = ProjectSafetyFilter.all
   @State private var searchText = ""
+  @State private var sortsBySize = true
   @State private var showsCleanupConfirmation = false
 
   private var filteredArtifacts: [ProjectArtifact] {
@@ -32,6 +35,10 @@ struct ProjectsView: View {
       let matchesSearch =
         query.isEmpty || artifact.artifactURL.path.localizedCaseInsensitiveContains(query)
       return matchesEcosystem && matchesSafety && matchesSearch
+    }.sorted { lhs, rhs in
+      if sortsBySize && lhs.bytes != rhs.bytes { return lhs.bytes > rhs.bytes }
+      return lhs.artifactURL.path.localizedStandardCompare(rhs.artifactURL.path)
+        == .orderedAscending
     }
   }
 
@@ -54,6 +61,9 @@ struct ProjectsView: View {
       Divider()
       bottomBar
     }
+    .environment(
+      \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale
+    )
     .alert("Chuyển artifact đã chọn vào Trash?", isPresented: $showsCleanupConfirmation) {
       Button("Hủy", role: .cancel) {}
       Button("Chuyển vào Trash", role: .destructive) { model.cleanSelected() }
@@ -63,7 +73,7 @@ struct ProjectsView: View {
       )
     }
     .alert(
-      "Toolbox",
+      AppMetadata.displayName,
       isPresented: Binding(
         get: { model.errorMessage != nil },
         set: { if !$0 { model.errorMessage = nil } })
@@ -79,7 +89,7 @@ struct ProjectsView: View {
       EmptyStateView(
         title: "Chưa chọn project root", symbol: "folder.badge.plus",
         detail:
-          "Toolbox chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng."
+          "Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng."
       )
       Button("Chọn project…") { chooseProjects() }
         .buttonStyle(.borderedProminent)
@@ -91,6 +101,7 @@ struct ProjectsView: View {
   private var projectContent: some View {
     VStack(spacing: 0) {
       rootsBar
+      if let report = model.report { DeveloperWorkspaceView(report: report) }
       filters
       Divider()
       if filteredArtifacts.isEmpty {
@@ -98,7 +109,7 @@ struct ProjectsView: View {
           title: model.report == nil ? "Sẵn sàng quét" : "Không có artifact phù hợp",
           symbol: model.report == nil ? "magnifyingglass" : "checkmark.shield",
           detail: model.report == nil
-            ? "Toolbox sẽ nhận diện output có thể tạo lại từ marker dự án."
+            ? "Orven sẽ nhận diện output có thể tạo lại từ marker dự án."
             : "Không có source, manifest, lockfile hoặc thư mục chưa biết nào được đề xuất.")
       } else {
         List(filteredArtifacts) { artifact in
@@ -122,7 +133,8 @@ struct ProjectsView: View {
               Image(systemName: "xmark.circle.fill")
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Bỏ project \(root.lastPathComponent)")
+            .accessibilityLabel(
+              String(format: L10n.text("Remove project %@"), root.lastPathComponent))
           }
           .font(.caption)
           .padding(.horizontal, 10)
@@ -136,24 +148,26 @@ struct ProjectsView: View {
   }
 
   private var filters: some View {
-    HStack {
-      Picker("Hệ sinh thái", selection: $ecosystem) {
-        Text("Tất cả hệ sinh thái").tag(Optional<ProjectEcosystem>.none)
-        ForEach(ProjectEcosystem.allCases) { value in
-          Text(value.rawValue).tag(Optional(value))
+    VStack(alignment: .leading, spacing: 10) {
+      HStack {
+        Picker("Hệ sinh thái", selection: $ecosystem) {
+          Text("Tất cả hệ sinh thái").tag(Optional<ProjectEcosystem>.none)
+          ForEach(ProjectEcosystem.allCases) { value in
+            Text(value.rawValue).tag(Optional(value))
+          }
         }
-      }
-      .frame(maxWidth: 190)
-      Picker("Mức an toàn", selection: $safetyFilter) {
-        ForEach(ProjectSafetyFilter.allCases) { value in
-          Text(value.rawValue).tag(value)
+        .frame(maxWidth: 190)
+        Picker("Mức an toàn", selection: $safetyFilter) {
+          ForEach(ProjectSafetyFilter.allCases) { value in
+            Text(L10n.text(value.rawValue)).tag(value)
+          }
         }
+        .frame(maxWidth: 180)
+        Toggle(L10n.text("Largest first"), isOn: $sortsBySize).toggleStyle(.checkbox)
+        Spacer()
       }
-      .frame(maxWidth: 180)
       TextField("Tìm đường dẫn", text: $searchText)
         .textFieldStyle(.roundedBorder)
-        .frame(maxWidth: 260)
-      Spacer()
     }
     .padding(.horizontal, 18)
     .padding(.bottom, 10)
@@ -178,7 +192,7 @@ struct ProjectsView: View {
 
       Image(systemName: safetySymbol(artifact.safety))
         .foregroundStyle(safetyColor(artifact.safety))
-        .accessibilityLabel(safetyFilterLabel(artifact.safety))
+        .accessibilityLabel(L10n.text(safetyFilterLabel(artifact.safety)))
       VStack(alignment: .leading, spacing: 4) {
         HStack {
           Text(artifact.artifactURL.lastPathComponent).fontWeight(.semibold)
@@ -195,7 +209,13 @@ struct ProjectsView: View {
           .truncationMode(.middle)
           .textSelection(.enabled)
         if let reason = artifact.reasons.first {
-          Text(L10n.text(reason)).font(.caption2).foregroundStyle(.secondary)
+          let description =
+            artifact.safety == .safe
+            ? String(
+              format: L10n.text("%@ was identified from %@ markers and can be regenerated."),
+              artifact.artifactURL.lastPathComponent, artifact.ecosystem.rawValue)
+            : L10n.text(reason)
+          Text(description).font(.caption2).foregroundStyle(.secondary)
         }
       }
       Spacer()
@@ -205,9 +225,18 @@ struct ProjectsView: View {
     .padding(.vertical, 6)
   }
 
+  private var statusText: String {
+    if let report = model.report, model.status.hasPrefix("Tìm thấy ") {
+      return String(
+        format: L10n.text("Found %d artifacts in %d projects."),
+        report.artifacts.count, report.scannedProjectCount)
+    }
+    return L10n.text(model.status)
+  }
+
   private var bottomBar: some View {
     HStack {
-      Text(L10n.text(model.status)).foregroundStyle(.secondary).lineLimit(1)
+      Text(statusText).foregroundStyle(.secondary).lineLimit(1)
       Spacer()
       Button("Thêm project…") { chooseProjects() }
       if model.isWorking {
@@ -227,7 +256,7 @@ struct ProjectsView: View {
 
   private func chooseProjects() {
     let panel = NSOpenPanel()
-    panel.title = "Chọn project root"
+    panel.title = L10n.text("Chọn project root")
     panel.canChooseFiles = false
     panel.canChooseDirectories = true
     panel.allowsMultipleSelection = true

@@ -31,6 +31,7 @@ struct ProjectScanner: Sendable {
     var artifactsByPath: [String: ProjectArtifact] = [:]
     var issues: [ProjectScanIssue] = []
     var scannedProjects = Set<String>()
+    var inventory: [String: ProjectInventory] = [:]
     var cancelled = false
 
     for root in normalizedRoots {
@@ -44,7 +45,8 @@ struct ProjectScanner: Sendable {
       }
       scanDirectory(
         root, selectedRoot: root, depth: 0, manager: manager,
-        scannedProjects: &scannedProjects, artifactsByPath: &artifactsByPath, issues: &issues,
+        scannedProjects: &scannedProjects, inventory: &inventory, artifactsByPath: &artifactsByPath,
+        issues: &issues,
         cancelled: &cancelled)
     }
 
@@ -56,12 +58,14 @@ struct ProjectScanner: Sendable {
     }
     return ProjectScanReport(
       roots: normalizedRoots, scannedProjectCount: scannedProjects.count, artifacts: artifacts,
-      issues: issues.sorted { $0.path < $1.path }, cancelled: cancelled)
+      issues: issues.sorted { $0.path < $1.path }, cancelled: cancelled,
+      inventory: inventory.values.sorted { $0.root.path < $1.root.path })
   }
 
   private func scanDirectory(
     _ directory: URL, selectedRoot: URL, depth: Int, manager: FileManager,
-    scannedProjects: inout Set<String>, artifactsByPath: inout [String: ProjectArtifact],
+    scannedProjects: inout Set<String>, inventory: inout [String: ProjectInventory],
+    artifactsByPath: inout [String: ProjectArtifact],
     issues: inout [ProjectScanIssue], cancelled: inout Bool
   ) {
     guard !Task.isCancelled else {
@@ -80,10 +84,21 @@ struct ProjectScanner: Sendable {
       return
     }
 
-    let childNames = Set(children.map(\.lastPathComponent))
+    let childNames = Set(
+      children.compactMap { child -> String? in
+        guard
+          let values = try? child.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]),
+          values.isRegularFile == true, values.isSymbolicLink != true
+        else { return nil }
+        return child.lastPathComponent
+      })
     let matchedRules = Self.rules.filter { !$0.anyMarkers.isDisjoint(with: childNames) }
     if !matchedRules.isEmpty {
       scannedProjects.insert(directory.standardizedFileURL.path)
+      inventory[directory.standardizedFileURL.path] = ProjectInventory(
+        root: directory,
+        ecosystems: matchedRules.map(\.ecosystem),
+        markers: Set(matchedRules.flatMap(\.anyMarkers)).intersection(childNames).sorted())
       collectArtifacts(
         for: matchedRules, projectRoot: directory, selectedRoot: selectedRoot, manager: manager,
         artifactsByPath: &artifactsByPath, issues: &issues)
@@ -111,7 +126,8 @@ struct ProjectScanner: Sendable {
       else { continue }
       scanDirectory(
         child, selectedRoot: selectedRoot, depth: depth + 1, manager: manager,
-        scannedProjects: &scannedProjects, artifactsByPath: &artifactsByPath, issues: &issues,
+        scannedProjects: &scannedProjects, inventory: &inventory, artifactsByPath: &artifactsByPath,
+        issues: &issues,
         cancelled: &cancelled)
     }
   }

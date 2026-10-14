@@ -14,7 +14,7 @@ struct CoverageView: View {
     VStack(spacing: 0) {
       PageHeader(
         title: "Phạm vi & quyền riêng tư",
-        subtitle: "Minh bạch về dữ liệu Toolbox đọc, lưu và không thể quan sát.",
+        subtitle: "Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát.",
         symbol: "hand.raised",
         value: "Local",
         valueLabel: "không telemetry"
@@ -64,7 +64,7 @@ struct CoverageView: View {
         "Một số vùng được macOS bảo vệ có thể cần Full Disk Access để quan sát đầy đủ.",
         systemImage: "lock")
       Label(
-        "Toolbox đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại.",
+        "Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại.",
         systemImage: "exclamationmark.bubble")
     }
     .foregroundStyle(.secondary)

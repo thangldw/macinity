@@ -1,5 +1,5 @@
 name: Feature request
-description: Propose a user problem for Toolbox to solve safely and locally.
+description: Propose a user problem for Orven to solve safely and locally.
 title: "[Feature]: "
 labels:
   - enhancement
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Start with the user problem, not an implementation. Toolbox prioritizes local processing, explicit review, bounded scope, and recoverable actions.
+        Start with the user problem, not an implementation. Orven prioritizes local processing, explicit review, bounded scope, and recoverable actions.
   - type: textarea
     id: problem
     attributes:
@@ -18,7 +18,7 @@ body:
   - type: dropdown
     id: workflow
     attributes:
-      label: Closest Toolbox workflow
+      label: Closest Orven workflow
       options:
         - Storage
         - Projects

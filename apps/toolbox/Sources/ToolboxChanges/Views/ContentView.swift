@@ -58,7 +58,7 @@ public struct ChangeTimelineModuleView: View {
       }
     }
     .alert(
-      "Toolbox",
+      AppMetadata.displayName,
       isPresented: Binding(
         get: { model.errorMessage != nil },
         set: { if !$0 { model.errorMessage = nil } }

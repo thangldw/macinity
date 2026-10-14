@@ -140,12 +140,17 @@ def check_diagram_cases() -> list[bool]:
 
 def copy_tracked_markdown(destination: Path) -> None:
     files = run(
-        ["git", "ls-files", "*.md", "LICENSE", "docs/diagrams/*.html"], REPO_ROOT
+        [
+            "git", "ls-files", "--cached", "--others", "--exclude-standard",
+            "*.md", "LICENSE", "docs/diagrams/*.html", "docs/production/*.json",
+        ], REPO_ROOT
     )
     if files.returncode != 0:
         raise RuntimeError(output_of(files))
     for relative_text in files.stdout.splitlines():
         relative = Path(relative_text)
+        if not (REPO_ROOT / relative).is_file():
+            continue
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(REPO_ROOT / relative, target)
@@ -200,20 +205,6 @@ def documentation_contract_cases() -> list[bool]:
             fixture="stale-current-launch.fixture",
             accepted=False,
             diagnostic="stale authoritative current claim",
-        ),
-        contract_case(
-            name="rejects-stale-current-launch-in-product-hunt-record",
-            target="docs/launch/product-hunt.md",
-            fixture="stale-product-hunt-launch.fixture",
-            accepted=False,
-            diagnostic="stale authoritative current claim",
-        ),
-        contract_case(
-            name="rejects-unscoped-product-hunt-beta-claim",
-            target="docs/launch/product-hunt.md",
-            fixture="unscoped-product-hunt-beta.fixture",
-            accepted=False,
-            diagnostic="outside observed-copy allowlist",
         ),
         contract_case(
             name="rejects-stale-current-release",

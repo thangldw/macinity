@@ -34,6 +34,7 @@ public struct StorageModuleSummary: Sendable, Equatable {
 public struct StorageModuleView: View {
   private let destination: StorageDestination
   private let focusPath: String?
+  private let applicationActivity: ((URL) -> AnyView)?
   @State private var workspaceSection: StorageWorkspaceSection = .cleanup
   @StateObject private var cleaner = CleanerViewModel()
   @StateObject private var analyzer = AnalyzerViewModel()
@@ -43,9 +44,13 @@ public struct StorageModuleView: View {
   @StateObject private var applications = ApplicationViewModel()
   @StateObject private var history = HistoryViewModel()
 
-  public init(destination: StorageDestination, focusPath: String? = nil) {
+  public init(
+    destination: StorageDestination, focusPath: String? = nil,
+    applicationActivity: ((URL) -> AnyView)? = nil
+  ) {
     self.destination = destination
     self.focusPath = focusPath
+    self.applicationActivity = applicationActivity
   }
 
   public var body: some View {
@@ -95,7 +100,7 @@ public struct StorageModuleView: View {
     case .projects:
       ProjectsView()
     case .applications:
-      ApplicationsView(model: applications)
+      ApplicationsView(model: applications, applicationActivity: applicationActivity)
     case .recovery:
       HistoryView(model: history)
     }

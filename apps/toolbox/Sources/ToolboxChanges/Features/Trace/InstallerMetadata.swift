@@ -34,7 +34,7 @@ enum InstallTraceError: LocalizedError, Equatable {
   var errorDescription: String? {
     switch self {
     case .unsupportedType(let path):
-      "Toolbox chỉ nhận .dmg, .pkg hoặc .app: \(path)"
+      "Orven chỉ nhận .dmg, .pkg hoặc .app: \(path)"
     case .traceAlreadyActive:
       "Một Install Trace đang hoạt động."
     case .noActiveTrace:

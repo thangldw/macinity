@@ -173,3 +173,6 @@ NamiQuant-Claude-Design.html
 
 # Local isolated worktrees
 /.worktrees/
+
+# Private machine verification is local evidence, never a release asset.
+docs/monitoring/evidence/

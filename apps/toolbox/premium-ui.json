@@ -1,0 +1,14 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["Sources/Toolbox"],
+  "locale": "en",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": ["Table Selection", "Select/Listbox", "Form", "Scrollbar"],
+  "ownership": {"Select/Listbox": "native"},
+  "requiredCommands": ["unit", "build", "lint"],
+  "commands": {
+    "unit": "swift test",
+    "build": "swift build -c release",
+    "lint": "swift format lint --recursive --parallel Sources Tests Package.swift"
+  }
+}

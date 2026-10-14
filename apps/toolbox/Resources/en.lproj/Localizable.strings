@@ -1,4 +1,4 @@
-"About Toolbox" = "About Toolbox";
+"About Orven" = "About Orven";
 "Home" = "Home";
 "Storage" = "Storage";
 "Projects" = "Projects";
@@ -7,7 +7,7 @@
 "Recovery" = "Recovery";
 "Language" = "Language";
 "Your Mac, explained." = "Your Mac, explained.";
-"See what changed. Reclaim space safely." = "See what changed. Reclaim space safely.";
+"Understand your Mac. Act with context." = "Understand your Mac. Act with context.";
 "Recover space safely" = "Recover space safely";
 "See reclaimable files before anything moves to Trash." = "See reclaimable files before anything moves to Trash.";
 "Scan storage" = "Scan storage";
@@ -18,12 +18,12 @@
 "Review recoverable actions and restore without overwriting files." = "Review recoverable actions and restore without overwriting files.";
 "Open Recovery" = "Open Recovery";
 "Runs locally. No telemetry. Nothing is deleted automatically." = "Runs locally. No telemetry. Nothing is deleted automatically.";
-"Welcome to Toolbox" = "Welcome to Toolbox";
+"Welcome to Orven" = "Welcome to Orven";
 "Local evidence for safer cleanup and app changes." = "Local evidence for safer cleanup and app changes.";
 "Private by default" = "Private by default";
-"Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically." = "Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically.";
+"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically.";
 "First-launch approval" = "First-launch approval";
-"If macOS blocks Toolbox, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "If macOS blocks Toolbox, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper.";
+"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper.";
 "Open installation guide" = "Open installation guide";
 "Scan coverage" = "Scan coverage";
 "Sentinel folders are readable." = "Sentinel folders are readable.";
@@ -38,7 +38,7 @@
 "Retry import" = "Retry import";
 "No legacy data found." = "No legacy data found.";
 "You can change these choices later in Settings." = "You can change these choices later in Settings.";
-"Continue to Toolbox" = "Continue to Toolbox";
+"Continue to Orven" = "Continue to Orven";
 "Migration error" = "Migration error";
 "Close" = "Close";
 "Recoverable" = "Recoverable";
@@ -58,19 +58,19 @@
 "12 hours" = "12 hours";
 "24 hours" = "24 hours";
 "7 days" = "7 days";
-"Replace with Toolbox schedule…" = "Replace with Toolbox schedule…";
+"Replace with Orven schedule…" = "Replace with Orven schedule…";
 "No Diskora schedule needs migration." = "No Diskora schedule needs migration.";
 "The old agent remains untouched unless the new scan-only agent bootstraps successfully." = "The old agent remains untouched unless the new scan-only agent bootstraps successfully.";
 "Updates" = "Updates";
-"Only when you click the button, Toolbox requests public release metadata from GitHub. No scan or device data is sent." = "Only when you click the button, Toolbox requests public release metadata from GitHub. No scan or device data is sent.";
+"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent.";
 "Check for Updates" = "Check for Updates";
 "Replace the Diskora scheduled scan?" = "Replace the Diskora scheduled scan?";
 "Replace after verification" = "Replace after verification";
 "Cancel" = "Cancel";
-"Toolbox first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Toolbox first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds.";
+"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds.";
 "Settings error" = "Settings error";
-"Legacy schedule replaced after Toolbox bootstrap succeeded." = "Legacy schedule replaced after Toolbox bootstrap succeeded.";
-"Toolbox %@ is available." = "Toolbox %@ is available.";
+"Legacy schedule replaced after Orven bootstrap succeeded." = "Legacy schedule replaced after Orven bootstrap succeeded.";
+"Orven %@ is available." = "Orven %@ is available.";
 "You are using the latest public release." = "You are using the latest public release.";
 "Finish the active scan before checking for updates." = "Finish the active scan before checking for updates.";
 "Cleanup" = "Cleanup";
@@ -83,3 +83,620 @@
 "Succeeded" = "Succeeded";
 "Failed" = "Failed";
 "Cancelled" = "Cancelled";
+
+"Live monitoring" = "Live monitoring";
+
+"CPU • all cores" = "CPU • all cores";
+
+"Memory • includes caches" = "Memory • includes caches";
+
+"Read-only. Samples stay in memory for up to 60 seconds." = "Read-only. Samples stay in memory for up to 60 seconds.";
+
+"Warming up" = "Warming up";
+
+"Available" = "Available";
+
+"Stale" = "Stale";
+
+"Unsupported" = "Unsupported";
+
+"Permission required" = "Permission required";
+
+"Temporarily unavailable" = "Temporarily unavailable";
+
+"Read failed" = "Read failed";
+
+"Processes" = "Processes";
+
+"Search processes or PID" = "Search processes or PID";
+
+"Clear search" = "Clear search";
+
+"Sort by" = "Sort by";
+
+"CPU" = "CPU";
+
+"Memory" = "Memory";
+
+"Name" = "Name";
+
+"%d processes shown" = "%d processes shown";
+
+"CPU • one core" = "CPU • one core";
+
+"Resident memory" = "Resident memory";
+
+"No process data available." = "No process data available.";
+
+"No matching processes." = "No matching processes.";
+
+"Select a process to inspect its verified identity and recent activity." = "Select a process to inspect its verified identity and recent activity.";
+
+"100% process CPU is one logical core. Restricted processes remain visible. No termination actions." = "100% process CPU is one logical core. Restricted processes remain visible. No termination actions.";
+
+"Review in Applications" = "Review in Applications";
+
+"Observed parent PID: %d" = "Observed parent PID: %d";
+
+"Process exited or identity changed." = "Process exited or identity changed.";
+
+"Threads: %d" = "Threads: %d";
+
+"Revalidating process identity…" = "Revalidating process identity…";
+
+"Disk reads • observed drivers" = "Disk reads • observed drivers";
+
+"Disk writes • observed drivers" = "Disk writes • observed drivers";
+
+"Network received • physical" = "Network received • physical";
+
+"Network sent • physical" = "Network sent • physical";
+
+"Startup volume available" = "Startup volume available";
+
+"Battery" = "Battery";
+
+"Charging" = "Charging";
+
+"On battery" = "On battery";
+
+"External power" = "External power";
+
+"Nominal" = "Nominal";
+
+"Fair" = "Fair";
+
+"Serious" = "Serious";
+
+"Critical" = "Critical";
+
+"Unknown" = "Unknown";
+
+"Network" = "Network";
+
+"Monitoring" = "Monitoring";
+
+"Menu bar quick diagnostics" = "Menu bar quick diagnostics";
+
+"Menu bar indicator" = "Menu bar indicator";
+
+"Disabled by default. When enabled, menu bar and windows share one sampler. Background sampling runs every 5 seconds; Quit stops it." = "Disabled by default. When enabled, menu bar and windows share one sampler. Background sampling runs every 5 seconds; Quit stops it.";
+
+"Last sample" = "Last sample";
+
+"Top CPU consumers • one core" = "Top CPU consumers • one core";
+
+"Thermal state" = "Thermal state";
+
+"Automatic alerts are not available." = "Automatic alerts are not available.";
+
+"Overview" = "Overview";
+
+"Disable menu bar" = "Disable menu bar";
+
+"Quit Orven" = "Quit Orven";
+
+"Seconds before latest sample" = "Seconds before latest sample";
+
+"Previous sample" = "Previous sample";
+
+"Next sample" = "Next sample";
+
+"Unavailable" = "Unavailable";
+
+"No samples yet." = "No samples yet.";
+
+"%d valid samples. Minimum %.1f, maximum %.1f %@. Missing samples are gaps." = "%d valid samples. Minimum %.1f, maximum %.1f %@. Missing samples are gaps.";
+
+"System CPU • all cores" = "System CPU • all cores";
+
+"Occupied memory • includes caches" = "Occupied memory • includes caches";
+
+"Physical memory" = "Physical memory";
+
+"Wired memory" = "Wired memory";
+
+"Compressor storage" = "Compressor storage";
+
+"Swap used" = "Swap used";
+
+"Memory pressure • last OS event" = "Memory pressure • last OS event";
+
+"Occupied memory is physical memory minus free pages and includes caches. It does not measure reclaimable RAM. Pressure is an OS event, not an inferred score." = "Occupied memory is physical memory minus free pages and includes caches. It does not measure reclaimable RAM. Pressure is an OS event, not an inferred score.";
+
+"GPU utilization and memory: Unsupported" = "GPU utilization and memory: Unsupported";
+
+"Normal" = "Normal";
+
+"Warning" = "Warning";
+
+"Review Storage" = "Review Storage";
+
+"Review Projects" = "Review Projects";
+
+"APFS volumes share container capacity. Capacity is shown for the startup volume once; I/O is per observed storage driver, including virtual devices when exposed." = "APFS volumes share container capacity. Capacity is shown for the startup volume once; I/O is per observed storage driver, including virtual devices when exposed.";
+
+"Disk I/O by device" = "Disk I/O by device";
+
+"Read" = "Read";
+
+"Write" = "Write";
+
+"Show loopback, tunnels and other interfaces" = "Show loopback, tunnels and other interfaces";
+
+"Physical summary includes active en* interfaces. Tunnel and loopback counters are shown separately and are never added to that summary." = "Physical summary includes active en* interfaces. Tunnel and loopback counters are shown separately and are never added to that summary.";
+
+"Received" = "Received";
+
+"Sent" = "Sent";
+
+"Thermal state is macOS's coarse system condition, not a temperature in °C. Macs without an internal battery report Unsupported." = "Thermal state is macOS's coarse system condition, not a temperature in °C. Macs without an internal battery report Unsupported.";
+
+"Temperature, fan sensors and per-process energy: Unsupported" = "Temperature, fan sensors and per-process energy: Unsupported";
+
+"CPU & Memory" = "CPU & Memory";
+
+"Disk & Network" = "Disk & Network";
+
+"Battery & Thermal" = "Battery & Thermal";
+
+"Management" = "Management";
+
+"History" = "History";
+
+"Recent CPU activity" = "Recent CPU activity";
+
+"Process CPU • one core" = "Process CPU • one core";
+
+"Read-only. Recent trends stay on this Mac and are not saved." = "Read-only. Recent trends stay on this Mac and are not saved.";
+
+"Sampling paused" = "Sampling paused";
+
+"Sampling paused while the main window is inactive." = "Sampling paused while the main window is inactive.";
+"Your Mac, at a glance" = "Your Mac, at a glance";
+"Read-only" = "Read-only";
+"Using the most CPU" = "Using the most CPU";
+"Show all processes" = "Show all processes";
+"Process" = "Process";
+"Inspect process" = "Inspect process";
+"Thermal state is not a temperature in °C." = "Thermal state is not a temperature in °C.";
+"Used storage" = "Used storage";
+"Open storage" = "Open storage";
+"Inspect what's running on your Mac. Monitoring is read-only." = "Inspect what's running on your Mac. Monitoring is read-only.";
+"Close details" = "Close details";
+"Settings" = "Settings";
+"About Orven" = "About Orven";
+"Appearance" = "Appearance";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"%d of %d processes have CPU samples." = "%d of %d processes have CPU samples.";
+
+"Sleep Inspector" = "Sleep Inspector";
+"Refresh sleep requests" = "Refresh sleep requests";
+"A snapshot of active macOS power requests. Requests can be legitimate; they do not explain every sleep or wake event." = "A snapshot of active macOS power requests. Requests can be legitimate; they do not explain every sleep or wake event.";
+"Reading sleep requests" = "Reading sleep requests";
+"Observed at" = "Observed at";
+"No active requests in this snapshot" = "No active requests in this snapshot";
+"Process identity unavailable; ownership is unverified" = "Process identity unavailable; ownership is unverified";
+"Some requests could not be displayed" = "Some requests could not be displayed";
+"Refresh to inspect current requests. No background polling." = "Refresh to inspect current requests. No background polling.";
+"No readable requests in this snapshot" = "No readable requests in this snapshot";
+
+/* Application inspection and management improvements. */
+"Search apps or Bundle ID" = "Search apps or Bundle ID";
+"Sort by name" = "Sort by name";
+"No matching applications" = "No matching applications";
+"App Dossier" = "App Dossier";
+"Bundle ID" = "Bundle ID";
+"Application path" = "Application path";
+"Version" = "Version";
+"Minimum macOS" = "Minimum macOS";
+"Application bundle size" = "Application bundle size";
+"Related data observed" = "Related data observed";
+"Last application scan" = "Last application scan";
+"Sizes are from the last scan. Related data is attributed by scan evidence, not proof of exclusive ownership. Unreadable locations may be missing." = "Sizes are from the last scan. Related data is attributed by scan evidence, not proof of exclusive ownership. Unreadable locations may be missing.";
+"No related data found within scan coverage." = "No related data found within scan coverage.";
+"Largest first" = "Largest first";
+"Application Support" = "Application Support";
+"Cache" = "Cache";
+"Preference" = "Preference";
+"Log" = "Log";
+"Container" = "Container";
+"LaunchAgent" = "LaunchAgent";
+"Login Item / Background Task" = "Login Item / Background Task";
+"Package receipt" = "Package receipt";
+"Clear filters or change the search query." = "Clear filters or change the search query.";
+"Background-item evidence unavailable. The macOS helper did not complete; scan coverage is partial." = "Background-item evidence unavailable. The macOS helper did not complete; scan coverage is partial.";
+"Remove project %@" = "Remove project %@";
+"%@ was identified from %@ markers and can be regenerated." = "%@ was identified from %@ markers and can be regenerated.";
+"Found %d artifacts in %d projects." = "Found %d artifacts in %d projects.";
+
+"Explain My Mac" = "Explain My Mac";
+"Export diagnostics…" = "Export diagnostics…";
+"Evidence from recent samples. These observations do not establish causality and do not change your Mac." = "Evidence from recent samples. These observations do not establish causality and do not change your Mac.";
+"No matching findings in fresh, available samples. Missing data is not a health check." = "No matching findings in fresh, available samples. Missing data is not a health check.";
+"Sampling is paused. Resume active monitoring to evaluate current evidence." = "Sampling is paused. Resume active monitoring to evaluate current evidence.";
+"Review evidence" = "Review evidence";
+"Memory pressure needs attention" = "Memory pressure needs attention";
+"macOS reports memory pressure. Occupied memory alone does not establish a problem." = "macOS reports memory pressure. Occupied memory alone does not establish a problem.";
+"Sustained CPU activity" = "Sustained CPU activity";
+"System CPU stayed at or above 85% for at least 30 seconds. Review the measured processes before attributing a cause." = "System CPU stayed at or above 85% for at least 30 seconds. Review the measured processes before attributing a cause.";
+"Startup volume is nearly full" = "Startup volume is nearly full";
+"Available space is below 10% of reported capacity. APFS volumes share container space; inspect coverage and snapshots before cleanup." = "Available space is below 10% of reported capacity. APFS volumes share container space; inspect coverage and snapshots before cleanup.";
+"Elevated thermal state" = "Elevated thermal state";
+"macOS reports thermal pressure. This is an OS state, not a temperature measurement or proof of a particular app's impact." = "macOS reports thermal pressure. This is an OS state, not a temperature measurement or proof of a particular app's impact.";
+"Local Diagnostics Export" = "Local Diagnostics Export";
+"Preview the exact JSON before saving. Paths, username, hostname and network endpoints are excluded. Nothing is uploaded." = "Preview the exact JSON before saving. Paths, username, hostname and network endpoints are excluded. Nothing is uploaded.";
+"Include process names" = "Include process names";
+"Refresh preview" = "Refresh preview";
+"Save JSON…" = "Save JSON…";
+"Diagnostics saved." = "Diagnostics saved.";
+"Could not save diagnostics. Choose a writable location and try again." = "Could not save diagnostics. Choose a writable location and try again.";
+"Could not generate diagnostics from the current sample. Refresh and try again." = "Could not generate diagnostics from the current sample. Refresh and try again.";
+"Network Inspector" = "Network Inspector";
+"Refresh connections" = "Refresh connections";
+"Explicit TCP/UDP socket snapshot from lsof. Restricted processes and short-lived connections may be missing. No traffic history, domain attribution, byte totals or firewall control." = "Explicit TCP/UDP socket snapshot from lsof. Restricted processes and short-lived connections may be missing. No traffic history, domain attribution, byte totals or firewall control.";
+"Search process, PID or endpoint" = "Search process, PID or endpoint";
+"Connection inspection failed. Refresh to try again; coverage remains unknown." = "Connection inspection failed. Refresh to try again; coverage remains unknown.";
+"%d observed sockets; %d omitted by the display cap." = "%d observed sockets; %d omitted by the display cap.";
+"Protocol" = "Protocol";
+"Endpoint" = "Endpoint";
+"State" = "State";
+"Details" = "Details";
+"Only a revalidated PID/start identity can be inspected." = "Only a revalidated PID/start identity can be inspected.";
+"No matching sockets within observable coverage. This does not prove the Mac has no connections." = "No matching sockets within observable coverage. This does not prove the Mac has no connections.";
+"Refresh to inspect current connections." = "Refresh to inspect current connections.";
+"Hidden Space & Snapshots" = "Hidden Space & Snapshots";
+"Inspect APFS space" = "Inspect APFS space";
+"Startup Data volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements." = "Startup Data volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements.";
+"APFS inspection failed or is unsupported. Refresh to try again." = "APFS inspection failed or is unsupported. Refresh to try again.";
+"APFS container capacity" = "APFS container capacity";
+"APFS container free" = "APFS container free";
+"Data volume used" = "Data volume used";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause.";
+"APFS snapshots" = "APFS snapshots";
+"No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "No APFS snapshots reported for the Data volume. Other volumes may have snapshots.";
+"OS marks this snapshot purgeable." = "OS marks this snapshot purgeable.";
+"OS does not mark this snapshot purgeable." = "OS does not mark this snapshot purgeable.";
+"Snapshot purgeability unavailable." = "Snapshot purgeability unavailable.";
+"%d snapshot entries omitted." = "%d snapshot entries omitted.";
+"Exclusive snapshot bytes are unavailable from this inspection. Snapshot count does not measure reclaimable space. No snapshots are created, mounted, thinned or deleted." = "Exclusive snapshot bytes are unavailable from this inspection. Snapshot count does not measure reclaimable space. No snapshots are created, mounted, thinned or deleted.";
+"Inspect to read container space and Data volume snapshots." = "Inspect to read container space and Data volume snapshots.";
+"CPU scheduling" = "CPU scheduling";
+"Lower priority raises nice to at least 10 for this same-user process. It is not a CPU percentage cap. Raising priority back may require privileges; relaunch the app to reset. Child processes are not individually controlled." = "Lower priority raises nice to at least 10 for this same-user process. It is not a CPU percentage cap. Raising priority back may require privileges; relaunch the app to reset. Child processes are not individually controlled.";
+"Lower process priority…" = "Lower process priority…";
+"Lower process priority?" = "Lower process priority?";
+"Lower priority" = "Lower priority";
+"Process priority lowered and rechecked. This does not guarantee lower CPU usage." = "Process priority lowered and rechecked. This does not guarantee lower CPU usage.";
+"Priority change could not be verified. The process may have exited, changed identity or denied access. No retry is automatic." = "Priority change could not be verified. The process may have exited, changed identity or denied access. No retry is automatic.";
+"This changes scheduling for the selected process. Restoring the previous priority is not guaranteed without relaunching it." = "This changes scheduling for the selected process. Restoring the previous priority is not guaranteed without relaunching it.";
+"Storage Growth Detective" = "Storage Growth Detective";
+"Baseline saved. Scan the same location again to compare growth." = "Baseline saved. Scan the same location again to compare growth.";
+"Scans are not comparable: scope, identity, coverage or checkpoint format differs. A new baseline was saved." = "Scans are not comparable: scope, identity, coverage or checkpoint format differs. A new baseline was saved.";
+"Comparable observed folder changes. Decreases do not prove APFS space was freed; changes do not identify their cause." = "Comparable observed folder changes. Decreases do not prove APFS space was freed; changes do not identify their cause.";
+"No comparable folder deltas to display." = "No comparable folder deltas to display.";
+"Developer Workspace" = "Developer Workspace";
+"Recognized projects within selected roots. Manifest names are evidence of an ecosystem, not proof that its runtime is installed. Source size and runtime versions are not measured." = "Recognized projects within selected roots. Manifest names are evidence of an ecosystem, not proof that its runtime is installed. Source size and runtime versions are not measured.";
+"%d scan issues; results may be partial." = "%d scan issues; results may be partial.";
+"%d recognized artifacts; size is observed artifact data only." = "%d recognized artifacts; size is observed artifact data only.";
+"No recognized project manifests within scan coverage." = "No recognized project manifests within scan coverage.";
+"Only the first 100 projects are displayed. Artifact filters remain available below." = "Only the first 100 projects are displayed. Artifact filters remain available below.";
+"App Activity Timeline" = "App Activity Timeline";
+"Recent in-memory CPU trends for running processes mapped by bundle path and launch identity. Helper processes, older activity and unverified ownership may be missing. Related-data sizes remain scan-time observations." = "Recent in-memory CPU trends for running processes mapped by bundle path and launch identity. Helper processes, older activity and unverified ownership may be missing. Related-data sizes remain scan-time observations.";
+"No running process could be mapped within current coverage." = "No running process could be mapped within current coverage.";
+"Inspect app sleep requests" = "Inspect app sleep requests";
+"No sleep requests attributed to mapped processes within this snapshot's coverage." = "No sleep requests attributed to mapped processes within this snapshot's coverage.";
+"Some assertion entries were omitted; coverage is partial." = "Some assertion entries were omitted; coverage is partial.";
+"warning" = "warning";
+"critical" = "critical";
+"serious" = "serious";
+
+"%@, PID %d, %@, %@, %@" = "%@, PID %d, %@, %@, %@";
+"Measure workspace" = "Measure workspace";
+"Observed workspace size" = "Observed workspace size";
+"Other observed project data" = "Other observed project data";
+
+"Startup volume" = "Startup volume";
+"Data volume" = "Data volume";
+"System volume" = "System volume";
+"Selected volume used" = "Selected volume used";
+"Selected startup volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements." = "Selected startup volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements.";
+"No APFS snapshots reported for the selected volume. Other volumes may have snapshots." = "No APFS snapshots reported for the selected volume. Other volumes may have snapshots.";
+"Inspect to read container space and selected-volume snapshots." = "Inspect to read container space and selected-volume snapshots.";
+
+"Stop" = "Stop";
+
+"Inspect selected process" = "Inspect selected process";
+
+"Volumes sharing this container" = "Volumes sharing this container";
+"Unattributed container allocation" = "Unattributed container allocation";
+"Container remainder uses OS-reported capacity minus free space and listed volume usage. It is not hidden-file size or exclusive snapshot space. Incomplete or inconsistent accounting stays unknown." = "Container remainder uses OS-reported capacity minus free space and listed volume usage. It is not hidden-file size or exclusive snapshot space. Incomplete or inconsistent accounting stays unknown.";
+"%d volume entries omitted." = "%d volume entries omitted.";
+
+"Preview the exact JSON before saving. No dedicated path, username, hostname or network endpoint fields are included. Opt-in process names may contain identifying text. Nothing is uploaded." = "Preview the exact JSON before saving. No dedicated path, username, hostname or network endpoint fields are included. Opt-in process names may contain identifying text. Nothing is uploaded.";
+
+"Hardware Inspector" = "Hardware Inspector";
+"Hardware profile" = "Hardware profile";
+"Hardware report" = "Hardware report";
+"Refresh hardware" = "Refresh hardware";
+"Export hardware report…" = "Export hardware report…";
+"Reading hardware profile…" = "Reading hardware profile…";
+"Model identifier" = "Model identifier";
+"Operating system" = "Operating system";
+"Processor" = "Processor";
+"Physical cores" = "Physical cores";
+"Logical processors" = "Logical processors";
+"Reported nominal frequency" = "Reported nominal frequency";
+"Page size" = "Page size";
+"Cache line size" = "Cache line size";
+"L1 instruction cache" = "L1 instruction cache";
+"L1 data cache" = "L1 data cache";
+"L2 cache" = "L2 cache";
+"L3 cache" = "L3 cache";
+"Performance level" = "Performance level";
+"CPU level %d" = "CPU level %d";
+"Cores sharing L2" = "Cores sharing L2";
+"Metal device" = "Metal device";
+"Unified memory" = "Unified memory";
+"Recommended GPU working set" = "Recommended GPU working set";
+"Performance" = "Performance";
+"Efficiency" = "Efficiency";
+"Yes" = "Yes";
+"No" = "No";
+"Recent sensor range" = "Recent sensor range";
+"Reset range" = "Reset range";
+"Sensor" = "Sensor";
+"Current" = "Current";
+"Minimum" = "Minimum";
+"Maximum" = "Maximum";
+"Samples" = "Samples";
+"Disk read" = "Disk read";
+"Disk write" = "Disk write";
+"Network receive" = "Network receive";
+"Network send" = "Network send";
+"Cache sizes are OS-reported values, not summed totals. Nominal frequency is not a live core clock. The GPU working set is a recommendation, not VRAM capacity or current usage." = "Cache sizes are OS-reported values, not summed totals. Nominal frequency is not a live core clock. The GPU working set is a recommendation, not VRAM capacity or current usage.";
+"Min/max covers available observations in the latest sampling generation, up to 60 seconds. Missing readings are gaps. Reset affects this range only; it does not clear monitoring history." = "Min/max covers available observations in the latest sampling generation, up to 60 seconds. Missing readings are gaps. Reset affects this range only; it does not clear monitoring history.";
+"Sensor coverage: temperatures in °C, fan RPM, voltage, package power, live core clocks, SPD timings and SMART health are not collected. Thermal state is the macOS condition, not a temperature. No fan control, overclocking or stress test is performed." = "Sensor coverage: temperatures in °C, fan RPM, voltage, package power, live core clocks, SPD timings and SMART health are not collected. Thermal state is the macOS condition, not a temperature. No fan control, overclocking or stress test is performed.";
+
+"Preview the hardware profile and recent range before saving. No serial, hostname, paths, process names or network endpoints are included. Nothing is uploaded." = "Preview the hardware profile and recent range before saving. No serial, hostname, paths, process names or network endpoints are included. Nothing is uploaded.";
+
+"Hardware architecture" = "Hardware architecture";
+
+"System information" = "System information";
+
+"Temperature & Fans" = "Temperature & Fans";
+"CPU sensors" = "CPU sensors";
+"GPU sensors" = "GPU sensors";
+"Fans" = "Fans";
+"Battery sensors" = "Battery sensors";
+"System power" = "System power";
+"CPU • hottest mapped sensor" = "CPU • hottest mapped sensor";
+"GPU • hottest mapped sensor" = "GPU • hottest mapped sensor";
+"SMC reports no fans. This is not a fan-speed measurement." = "SMC reports no fans. This is not a fan-speed measurement.";
+"Fan count unavailable; no fan speeds inferred." = "Fan count unavailable; no fan speeds inferred.";
+"Fan coverage is capped at 8 reported fans." = "Fan coverage is capped at 8 reported fans.";
+"Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero.";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected.";
+"SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided.";
+
+"Review temperatures and fans" = "Review temperatures and fans";
+"Per-process energy: Unsupported" = "Per-process energy: Unsupported";
+
+/* Health history, alerts, recording and connection changes. */
+"Health History & Baseline" = "Health History & Baseline";
+"Record health history locally" = "Record health history locally";
+"One observed sample per minute, up to seven days. No process names, paths or network endpoints. Paused, sleep and missing samples are gaps; enabling history does not enable background monitoring." = "One observed sample per minute, up to seven days. No process names, paths or network endpoints. Paused, sleep and missing samples are gaps; enabling history does not enable background monitoring.";
+"History retention" = "History retention";
+"%d recorded observations" = "%d recorded observations";
+"Time range" = "Time range";
+"1 hour" = "1 hour";
+"Export history JSON…" = "Export history JSON…";
+"Baseline comparison" = "Baseline comparison";
+"Capture baseline" = "Capture baseline";
+"Capture the latest 30–60 recorded samples as a reference. Compare medians with at least ten newer samples per metric. Workload differences can explain changes; this is not causal diagnosis." = "Capture the latest 30–60 recorded samples as a reference. Compare medians with at least ten newer samples per metric. Workload differences can explain changes; this is not causal diagnosis.";
+"Not enough baseline or newer observations yet. Keep recording during comparable workloads." = "Not enough baseline or newer observations yet. Keep recording during comparable workloads.";
+"Baseline median" = "Baseline median";
+"Recent median" = "Recent median";
+"Chart metric" = "Chart metric";
+"Occupied memory" = "Occupied memory";
+"Temperature labels use community mappings; missing readings are gaps. Fan RPM and system power are observations, not fan control or CPU package power." = "Temperature labels use community mappings; missing readings are gaps. Fan RPM and system power are observations, not fan control or CPU package power.";
+"Sensor Charts & Recording" = "Sensor Charts & Recording";
+"Record existing samples every ten seconds for 15, 30 or 60 minutes. Sleep extends the wall-clock duration. The session stays in memory until Quit. Sampling pauses when the app is inactive unless menu bar monitoring is enabled; no readings are backfilled." = "Record existing samples every ten seconds for 15, 30 or 60 minutes. Sleep extends the wall-clock duration. The session stays in memory until Quit. Sampling pauses when the app is inactive unless menu bar monitoring is enabled; no readings are backfilled.";
+"Recording duration" = "Recording duration";
+"15 minutes" = "15 minutes";
+"30 minutes" = "30 minutes";
+"60 minutes" = "60 minutes";
+"Start recording" = "Start recording";
+"Stop recording" = "Stop recording";
+"Recording observed samples" = "Recording observed samples";
+"Recording stopped" = "Recording stopped";
+"Recording paused until monitoring resumes" = "Recording paused until monitoring resumes";
+"Export session JSON…" = "Export session JSON…";
+"Export session CSV…" = "Export session CSV…";
+"Smart Alerts" = "Smart Alerts";
+"Enable health alerts" = "Enable health alerts";
+"Off by default. Fresh active evidence only: sustained CPU, memory pressure, low startup space and elevated thermal state. A recovered condition must stay clear for 30 seconds; repeat alerts wait at least 15 minutes. Nothing is changed automatically." = "Off by default. Fresh active evidence only: sustained CPU, memory pressure, low startup space and elevated thermal state. A recovered condition must stay clear for 30 seconds; repeat alerts wait at least 15 minutes. Nothing is changed automatically.";
+"Allow macOS notifications…" = "Allow macOS notifications…";
+"Snooze for one hour" = "Snooze for one hour";
+"No alert events in this app session." = "No alert events in this app session.";
+"Recent pressure and thermal observations" = "Recent pressure and thermal observations";
+"History could not be read. The existing file is preserved; recording to disk is blocked." = "History could not be read. The existing file is preserved; recording to disk is blocked.";
+"History could not be saved. Existing data is preserved; check the local storage location." = "History could not be saved. Existing data is preserved; check the local storage location.";
+"Baseline needs at least 30 recorded samples and writable local storage." = "Baseline needs at least 30 recorded samples and writable local storage.";
+"History retention could not be saved. Existing data is preserved." = "History retention could not be saved. Existing data is preserved.";
+"Notifications require the Orven app bundle." = "Notifications require the Orven app bundle.";
+"Notification permission granted." = "Notification permission granted.";
+"Notifications are not allowed. In-app alerts remain available." = "Notifications are not allowed. In-app alerts remain available.";
+"Notification permission could not be requested. In-app alerts remain available." = "Notification permission could not be requested. In-app alerts remain available.";
+"Alerts snoozed for one hour." = "Alerts snoozed for one hour.";
+"Notification delivery failed. Review the in-app alert evidence." = "Notification delivery failed. Review the in-app alert evidence.";
+"Network Connection Changes" = "Network Connection Changes";
+"Track observed connection changes this session" = "Track observed connection changes this session";
+"Explicit Refresh compares observable sockets with verified PID/start identities. New or no-longer-observed does not mean opened or closed at this time. Short connections and restricted processes may be missed. Process names and numeric endpoints stay in memory, capped at 200 events; nothing is uploaded or saved to disk." = "Explicit Refresh compares observable sockets with verified PID/start identities. New or no-longer-observed does not mean opened or closed at this time. Short connections and restricted processes may be missed. Process names and numeric endpoints stay in memory, capped at 200 events; nothing is uploaded or saved to disk.";
+"Connection baseline established" = "Connection baseline established";
+"Refresh to establish a connection baseline" = "Refresh to establish a connection baseline";
+"%d unverified sockets excluded; %d older events omitted." = "%d unverified sockets excluded; %d older events omitted.";
+"Clear connection history" = "Clear connection history";
+"No connection changes observed yet." = "No connection changes observed yet.";
+"Showing the latest 50 change events." = "Showing the latest 50 change events.";
+"Newly observed" = "Newly observed";
+"No longer observed" = "No longer observed";
+"State changed" = "State changed";
+"Local report export" = "Local report export";
+"Preview the exact local report before saving. Nothing is uploaded." = "Preview the exact local report before saving. Nothing is uploaded.";
+"Save report…" = "Save report…";
+"normal" = "normal";
+"nominal" = "nominal";
+"fair" = "fair";
+"unknown" = "unknown";
+
+"Change" = "Change";
+"Memory pressure" = "Memory pressure";
+"System CPU" = "System CPU";
+
+"%d older observations omitted by the file-size budget." = "%d older observations omitted by the file-size budget.";
+
+"Health History" = "Health History";
+
+"Could not prepare the local report. Stop recording and try again." = "Could not prepare the local report. Stop recording and try again.";
+"Waiting for macOS notification permission. Respond to the system prompt if it appears." = "Waiting for macOS notification permission. Respond to the system prompt if it appears.";
+
+"This report is frozen when opened. Close and reopen for newer observations. Preview the exact content before saving; nothing is uploaded." = "This report is frozen when opened. Close and reopen for newer observations. Preview the exact content before saving; nothing is uploaded.";
+"Report saved." = "Report saved.";
+"Could not save the report. Choose a writable location and try again." = "Could not save the report. Choose a writable location and try again.";
+
+/* Wi-Fi and LAN tools */
+"Wi-Fi & LAN" = "Wi-Fi & LAN";
+"Network Overview" = "Network Overview";
+"Wi-Fi Inspector" = "Wi-Fi Inspector";
+"Ethernet Inspector" = "Ethernet Inspector";
+"Connection Diagnostics" = "Connection Diagnostics";
+"Latency & Stability" = "Latency & Stability";
+"Nearby Wi-Fi" = "Nearby Wi-Fi";
+"Network Change Timeline" = "Network Change Timeline";
+"Network tool" = "Network tool";
+"Refresh network status" = "Refresh network status";
+"Last network observation" = "Last network observation";
+"Path interfaces" = "Path interfaces";
+"Low Data Mode" = "Low Data Mode";
+"Expensive path" = "Expensive path";
+"An available path does not prove that an Internet destination is reachable." = "An available path does not prove that an Internet destination is reachable.";
+"Primary interface" = "Primary interface";
+"IPv4 gateway" = "IPv4 gateway";
+"IPv6 gateway" = "IPv6 gateway";
+"DNS servers" = "DNS servers";
+"No matching network adapter was observed." = "No matching network adapter was observed.";
+"IP addresses" = "IP addresses";
+"MTU" = "MTU";
+"Negotiated media" = "Negotiated media";
+"Received / sent bytes" = "Received / sent bytes";
+"Input / output packets" = "Input / output packets";
+"Input / output errors" = "Input / output errors";
+"Input queue drops" = "Input queue drops";
+"Adapter counters are cumulative observations, not session traffic or Internet speed. Packet/error counters may wrap. Live rates reuse the existing sampler." = "Adapter counters are cumulative observations, not session traffic or Internet speed. Packet/error counters may wrap. Live rates reuse the existing sampler.";
+"%d adapters omitted by the display limit." = "%d adapters omitted by the display limit.";
+"Refresh to inspect Wi-Fi and LAN." = "Refresh to inspect Wi-Fi and LAN.";
+"SSID and BSSID can be hidden by macOS location permissions. Missing identity does not mean Wi-Fi is disconnected." = "SSID and BSSID can be hidden by macOS location permissions. Missing identity does not mean Wi-Fi is disconnected.";
+"Request Wi-Fi identity permission" = "Request Wi-Fi identity permission";
+"No Wi-Fi interface was observed." = "No Wi-Fi interface was observed.";
+"Unavailable or permission restricted" = "Unavailable or permission restricted";
+"SSID" = "SSID";
+"BSSID" = "BSSID";
+"RSSI" = "RSSI";
+"Noise" = "Noise";
+"SNR" = "SNR";
+"Channel" = "Channel";
+"Band" = "Band";
+"Channel width" = "Channel width";
+"Transmit link rate" = "Transmit link rate";
+"CoreWLAN reports local radio observations. Link rate is not measured Internet throughput; SNR is RSSI minus noise from this observation." = "CoreWLAN reports local radio observations. Link rate is not measured Internet throughput; SNR is RSSI minus noise from this observation.";
+"Destination hostname or IP address" = "Destination hostname or IP address";
+"Example: example.com or 192.168.1.1" = "Example: example.com or 192.168.1.1";
+"Measurements send traffic to the displayed destination. Connection diagnostics also tests the recently observed gateway, resolves the destination and opens TCP port 443. No payload or speed-test download is sent." = "Measurements send traffic to the displayed destination. Connection diagnostics also tests the recently observed gateway, resolves the destination and opens TCP port 443. No payload or speed-test download is sent.";
+"Check connection" = "Check connection";
+"Measure 20 ICMP probes" = "Measure 20 ICMP probes";
+"Refresh network status first to include a gateway observed within 60 seconds. Each stage is bounded; total connection check is at most 30 seconds." = "Refresh network status first to include a gateway observed within 60 seconds. Each stage is bounded; total connection check is at most 30 seconds.";
+"Destination" = "Destination";
+"Elapsed" = "Elapsed";
+"ICMP may be blocked while Internet access works. DNS results may be cached. A successful TCP connection does not verify HTTP, TLS, captive portals or every application." = "ICMP may be blocked while Internet access works. DNS results may be cached. A successful TCP connection does not verify HTTP, TLS, captive portals or every application.";
+"20 probes, one second apart, at most 28 seconds. Loss uses the ICMP summary; jitter is the mean absolute difference between adjacent successful replies. Timeouts break the chart." = "20 probes, one second apart, at most 28 seconds. Loss uses the ICMP summary; jitter is the mean absolute difference between adjacent successful replies. Timeouts break the chart.";
+"Mean latency" = "Mean latency";
+"Jitter" = "Jitter";
+"Packet loss" = "Packet loss";
+"ICMP did not complete successfully; missing results are unknown or blocked." = "ICMP did not complete successfully; missing results are unknown or blocked.";
+"ICMP round-trip latency" = "ICMP round-trip latency";
+"Scan nearby Wi-Fi" = "Scan nearby Wi-Fi";
+"Scan is explicit and controlled by macOS. Stop suppresses results after the OS scan returns; it cannot interrupt CoreWLAN. Identity may require location permission. Results stay in this window only." = "Scan is explicit and controlled by macOS. Stop suppresses results after the OS scan returns; it cannot interrupt CoreWLAN. Identity may require location permission. Results stay in this window only.";
+"Filter SSID, BSSID or channel" = "Filter SSID, BSSID or channel";
+"%d visible networks; %d omitted." = "%d visible networks; %d omitted.";
+"No matching Wi-Fi network was observed." = "No matching Wi-Fi network was observed.";
+"Hidden or permission restricted" = "Hidden or permission restricted";
+"Channel / band" = "Channel / band";
+"RSSI / noise" = "RSSI / noise";
+"Observed networks on this channel" = "Observed networks on this channel";
+"Channel counts describe this scan, not airtime utilization or interference. Different bands can reuse channel numbers; wider channels can overlap. Signal bars are a relative RSSI display." = "Channel counts describe this scan, not airtime utilization or interference. Different bands can reuse channel numbers; wider channels can overlap. Signal bars are a relative RSSI display.";
+"Track network changes in this window" = "Track network changes in this window";
+"Clear network changes" = "Clear network changes";
+"Path events are observed while this page is open. IP, gateway, DNS and Wi-Fi identity changes compare explicit successful refreshes within ten minutes. Missing identities and adapter disappearance are not inferred as changes. First refresh establishes a baseline. No history is written to disk." = "Path events are observed while this page is open. IP, gateway, DNS and Wi-Fi identity changes compare explicit successful refreshes within ten minutes. Missing identities and adapter disappearance are not inferred as changes. First refresh establishes a baseline. No history is written to disk.";
+"%d status changes and %d path events; %d older events omitted." = "%d status changes and %d path events; %d older events omitted.";
+"No network changes observed in this session." = "No network changes observed in this session.";
+"Before" = "Before";
+"After" = "After";
+"Reading network status" = "Reading network status";
+"Scanning Wi-Fi" = "Scanning Wi-Fi";
+"Measuring latency" = "Measuring latency";
+"Checking connection" = "Checking connection";
+"Stopping after the macOS Wi-Fi scan returns." = "Stopping after the macOS Wi-Fi scan returns.";
+"Stopping measurement." = "Stopping measurement.";
+"Enter a hostname or IP address without a URL, port or spaces." = "Enter a hostname or IP address without a URL, port or spaces.";
+"Observation completed." = "Observation completed.";
+"Cancelled. Previous results remain timestamped." = "Cancelled. Previous results remain timestamped.";
+"Network observation failed or timed out. Check permissions and retry." = "Network observation failed or timed out. Check permissions and retry.";
+"Not requested" = "Not requested";
+"Authorized" = "Authorized";
+"Denied" = "Denied";
+"Restricted" = "Restricted";
+"Available path" = "Available path";
+"Connection required" = "Connection required";
+"No available path" = "No available path";
+"Gateway ICMP" = "Gateway ICMP";
+"DNS resolution" = "DNS resolution";
+"TCP connection" = "TCP connection";
+"Failed or blocked" = "Failed or blocked";
+"Timed out or unavailable" = "Timed out or unavailable";
+"Link state" = "Link state";
+"Ethernet" = "Ethernet";
+"Other" = "Other";
+"Global DNS configuration is shown; scoped VPN and per-domain resolvers may differ." = "Global DNS configuration is shown; scoped VPN and per-domain resolvers may differ.";
+"Observed networks by channel" = "Observed networks by channel";
+"Wi-Fi" = "Wi-Fi";
+"Not applicable to a numeric IP" = "Not applicable to a numeric IP";
+"Active" = "Active";
+"Inactive" = "Inactive";
+"Carrier state" = "Carrier state";
+"Link detected" = "Link detected";
+"No link detected" = "No link detected";
+"Up / running" = "Up / running";
+"Down / not running" = "Down / not running";
+"Interface flags" = "Interface flags";

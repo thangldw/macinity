@@ -1,4 +1,4 @@
-"About Toolbox" = "Giới thiệu Toolbox";
+"About Orven" = "Giới thiệu Orven";
 "Home" = "Trang chủ";
 "Storage" = "Dung lượng";
 "Projects" = "Dự án";
@@ -7,7 +7,7 @@
 "Recovery" = "Khôi phục";
 "Language" = "Ngôn ngữ";
 "Your Mac, explained." = "Hiểu rõ máy Mac của bạn.";
-"See what changed. Reclaim space safely." = "Biết điều gì đã thay đổi. Giải phóng dung lượng an toàn.";
+"Understand your Mac. Act with context." = "Hiểu rõ Mac. Quyết định có cơ sở.";
 "Recover space safely" = "Giải phóng dung lượng an toàn";
 "See reclaimable files before anything moves to Trash." = "Xem tệp có thể dọn trước khi chuyển bất kỳ thứ gì vào Trash.";
 "Scan storage" = "Quét dung lượng";
@@ -18,12 +18,12 @@
 "Review recoverable actions and restore without overwriting files." = "Xem thao tác có thể hoàn tác và khôi phục mà không ghi đè tệp.";
 "Open Recovery" = "Mở Khôi phục";
 "Runs locally. No telemetry. Nothing is deleted automatically." = "Chạy cục bộ. Không telemetry. Không tự động xóa dữ liệu.";
-"Welcome to Toolbox" = "Chào mừng đến với Toolbox";
+"Welcome to Orven" = "Chào mừng đến với Orven";
 "Local evidence for safer cleanup and app changes." = "Bằng chứng cục bộ để dọn dẹp và theo dõi thay đổi an toàn hơn.";
 "Private by default" = "Riêng tư ngay từ đầu";
-"Scans, snapshots, and activity stay on this Mac. Toolbox has no telemetry and never cleans automatically." = "Kết quả quét, snapshot và hoạt động chỉ lưu trên máy Mac này. Toolbox không telemetry và không tự động dọn dẹp.";
+"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "Kết quả quét, snapshot và hoạt động chỉ lưu trên máy Mac này. Orven không telemetry và không tự động dọn dẹp.";
 "First-launch approval" = "Phê duyệt lần mở đầu";
-"If macOS blocks Toolbox, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "Nếu macOS chặn Toolbox, hãy thử mở ứng dụng một lần, sau đó vào System Settings → Privacy & Security → Open Anyway. Không bao giờ tắt Gatekeeper.";
+"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "Nếu macOS chặn Orven, hãy thử mở ứng dụng một lần, sau đó vào System Settings → Privacy & Security → Open Anyway. Không bao giờ tắt Gatekeeper.";
 "Open installation guide" = "Mở hướng dẫn cài đặt";
 "Scan coverage" = "Phạm vi quét";
 "Sentinel folders are readable." = "Các thư mục kiểm tra có thể đọc được.";
@@ -38,7 +38,7 @@
 "Retry import" = "Thử nhập lại";
 "No legacy data found." = "Không tìm thấy dữ liệu cũ.";
 "You can change these choices later in Settings." = "Bạn có thể thay đổi các lựa chọn này trong Settings.";
-"Continue to Toolbox" = "Tiếp tục vào Toolbox";
+"Continue to Orven" = "Tiếp tục vào Orven";
 "Migration error" = "Lỗi migration";
 "Close" = "Đóng";
 "Recoverable" = "Có thể khôi phục";
@@ -58,19 +58,19 @@
 "12 hours" = "12 giờ";
 "24 hours" = "24 giờ";
 "7 days" = "7 ngày";
-"Replace with Toolbox schedule…" = "Thay bằng lịch Toolbox…";
+"Replace with Orven schedule…" = "Thay bằng lịch Orven…";
 "No Diskora schedule needs migration." = "Không có lịch Diskora cần migrate.";
 "The old agent remains untouched unless the new scan-only agent bootstraps successfully." = "Agent cũ được giữ nguyên nếu agent chỉ-quét mới chưa bootstrap thành công.";
 "Updates" = "Cập nhật";
-"Only when you click the button, Toolbox requests public release metadata from GitHub. No scan or device data is sent." = "Chỉ khi bạn bấm nút, Toolbox mới lấy metadata bản phát hành công khai từ GitHub. Không gửi dữ liệu quét hoặc thiết bị.";
+"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "Chỉ khi bạn bấm nút, Orven mới lấy metadata bản phát hành công khai từ GitHub. Không gửi dữ liệu quét hoặc thiết bị.";
 "Check for Updates" = "Kiểm tra cập nhật";
 "Replace the Diskora scheduled scan?" = "Thay lịch quét Diskora?";
 "Replace after verification" = "Thay sau khi xác minh";
 "Cancel" = "Hủy";
-"Toolbox first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Toolbox cài và bootstrap agent chỉ-quét trước. Plist Diskora chỉ bị gỡ sau khi bước đó thành công.";
+"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orven cài và bootstrap agent chỉ-quét trước. Plist Diskora chỉ bị gỡ sau khi bước đó thành công.";
 "Settings error" = "Lỗi Settings";
-"Legacy schedule replaced after Toolbox bootstrap succeeded." = "Đã thay lịch cũ sau khi Toolbox bootstrap thành công.";
-"Toolbox %@ is available." = "Toolbox %@ đã có bản phát hành.";
+"Legacy schedule replaced after Orven bootstrap succeeded." = "Đã thay lịch cũ sau khi Orven bootstrap thành công.";
+"Orven %@ is available." = "Orven %@ đã có bản phát hành.";
 "You are using the latest public release." = "Bạn đang dùng bản phát hành công khai mới nhất.";
 "Finish the active scan before checking for updates." = "Hãy hoàn tất lượt quét đang chạy trước khi kiểm tra cập nhật.";
 "Cleanup" = "Dọn dẹp";
@@ -83,3 +83,638 @@
 "Succeeded" = "Thành công";
 "Failed" = "Thất bại";
 "Cancelled" = "Đã hủy";
+
+"Live monitoring" = "Giám sát trực tiếp";
+
+"CPU • all cores" = "CPU • toàn bộ lõi";
+
+"Memory • includes caches" = "Bộ nhớ • gồm cache";
+
+"Read-only. Samples stay in memory for up to 60 seconds." = "Chỉ đọc. Mẫu được giữ trong bộ nhớ tối đa 60 giây.";
+
+"Warming up" = "Đang lấy mẫu ban đầu";
+
+"Available" = "Có dữ liệu";
+
+"Stale" = "Dữ liệu cũ";
+
+"Unsupported" = "Không hỗ trợ";
+
+"Permission required" = "Cần quyền truy cập";
+
+"Temporarily unavailable" = "Tạm thời không có dữ liệu";
+
+"Read failed" = "Đọc thất bại";
+
+"Processes" = "Tiến trình";
+
+"Search processes or PID" = "Tìm tiến trình hoặc PID";
+
+"Clear search" = "Xóa tìm kiếm";
+
+"Sort by" = "Sắp xếp theo";
+
+"CPU" = "CPU";
+
+"Memory" = "Bộ nhớ";
+
+"Name" = "Tên";
+
+"%d processes shown" = "Đang hiển thị %d tiến trình";
+
+"CPU • one core" = "CPU • một lõi";
+
+"Resident memory" = "Bộ nhớ resident";
+
+"No process data available." = "Chưa có dữ liệu tiến trình.";
+
+"No matching processes." = "Không có tiến trình khớp.";
+
+"Select a process to inspect its verified identity and recent activity." = "Chọn tiến trình để kiểm tra identity đã xác minh và hoạt động gần đây.";
+
+"100% process CPU is one logical core. Restricted processes remain visible. No termination actions." = "CPU tiến trình 100% tương ứng một lõi logic. Tiến trình hạn chế quyền vẫn hiển thị. Không có thao tác kết thúc tiến trình.";
+
+"Review in Applications" = "Xem trong Ứng dụng";
+
+"Observed parent PID: %d" = "PID cha quan sát được: %d";
+
+"Process exited or identity changed." = "Tiến trình đã thoát hoặc identity đã thay đổi.";
+
+"Threads: %d" = "Thread: %d";
+
+"Revalidating process identity…" = "Đang xác minh lại identity tiến trình…";
+
+"Disk reads • observed drivers" = "Đọc đĩa • driver quan sát được";
+
+"Disk writes • observed drivers" = "Ghi đĩa • driver quan sát được";
+
+"Network received • physical" = "Mạng nhận • interface vật lý";
+
+"Network sent • physical" = "Mạng gửi • interface vật lý";
+
+"Startup volume available" = "Dung lượng trống volume khởi động";
+
+"Battery" = "Pin";
+
+"Charging" = "Đang sạc";
+
+"On battery" = "Dùng pin";
+
+"External power" = "Nguồn điện ngoài";
+
+"Nominal" = "Bình thường";
+
+"Fair" = "Hơi nóng";
+
+"Serious" = "Nóng đáng kể";
+
+"Critical" = "Nghiêm trọng";
+
+"Unknown" = "Chưa xác định";
+
+"Network" = "Mạng";
+
+"Monitoring" = "Giám sát";
+
+"Menu bar quick diagnostics" = "Diagnostics nhanh trên menu bar";
+
+"Menu bar indicator" = "Chỉ báo menu bar";
+
+"Disabled by default. When enabled, menu bar and windows share one sampler. Background sampling runs every 5 seconds; Quit stops it." = "Mặc định tắt. Khi bật, menu bar và cửa sổ dùng chung một sampler. Lấy mẫu nền mỗi 5 giây; Thoát sẽ dừng lấy mẫu.";
+
+"Last sample" = "Mẫu gần nhất";
+
+"Top CPU consumers • one core" = "Tiến trình dùng CPU nhiều nhất • một lõi";
+
+"Thermal state" = "Trạng thái nhiệt";
+
+"Automatic alerts are not available." = "Chưa có cảnh báo tự động.";
+
+"Overview" = "Tổng quan";
+
+"Disable menu bar" = "Tắt menu bar";
+
+"Quit Orven" = "Thoát Orven";
+
+"Seconds before latest sample" = "Giây trước mẫu gần nhất";
+
+"Previous sample" = "Mẫu trước";
+
+"Next sample" = "Mẫu tiếp";
+
+"Unavailable" = "Không có dữ liệu";
+
+"No samples yet." = "Chưa có mẫu.";
+
+"%d valid samples. Minimum %.1f, maximum %.1f %@. Missing samples are gaps." = "%d mẫu hợp lệ. Nhỏ nhất %.1f, lớn nhất %.1f %@. Mẫu thiếu là khoảng trống.";
+
+"System CPU • all cores" = "CPU hệ thống • toàn bộ lõi";
+
+"Occupied memory • includes caches" = "Bộ nhớ chiếm dụng • gồm cache";
+
+"Physical memory" = "Bộ nhớ vật lý";
+
+"Wired memory" = "Bộ nhớ wired";
+
+"Compressor storage" = "Dung lượng bộ nén";
+
+"Swap used" = "Swap đã dùng";
+
+"Memory pressure • last OS event" = "Áp lực bộ nhớ • sự kiện OS gần nhất";
+
+"Occupied memory is physical memory minus free pages and includes caches. It does not measure reclaimable RAM. Pressure is an OS event, not an inferred score." = "Bộ nhớ chiếm dụng là bộ nhớ vật lý trừ trang trống và bao gồm cache; không đo RAM có thể giải phóng. Pressure là sự kiện OS, không phải điểm suy luận.";
+
+"GPU utilization and memory: Unsupported" = "Mức sử dụng và bộ nhớ GPU: Không hỗ trợ";
+
+"Normal" = "Bình thường";
+
+"Warning" = "Cảnh báo";
+
+"Review Storage" = "Xem Dung lượng";
+
+"Review Projects" = "Xem Dự án";
+
+"APFS volumes share container capacity. Capacity is shown for the startup volume once; I/O is per observed storage driver, including virtual devices when exposed." = "Volume APFS chia sẻ dung lượng container. Chỉ hiển thị capacity volume khởi động một lần; I/O theo driver quan sát được, gồm device ảo nếu có.";
+
+"Disk I/O by device" = "I/O đĩa theo device";
+
+"Read" = "Đọc";
+
+"Write" = "Ghi";
+
+"Show loopback, tunnels and other interfaces" = "Hiển thị loopback, tunnel và interface khác";
+
+"Physical summary includes active en* interfaces. Tunnel and loopback counters are shown separately and are never added to that summary." = "Tổng hợp vật lý gồm interface en* đang active. Counter tunnel/loopback được hiển thị riêng và không cộng vào tổng hợp này.";
+
+"Received" = "Nhận";
+
+"Sent" = "Gửi";
+
+"Thermal state is macOS's coarse system condition, not a temperature in °C. Macs without an internal battery report Unsupported." = "Thermal state là trạng thái coarse của macOS, không phải nhiệt độ °C. Mac không có pin nội bộ hiển thị Không hỗ trợ.";
+
+"Temperature, fan sensors and per-process energy: Unsupported" = "Nhiệt độ, cảm biến quạt và năng lượng từng tiến trình: Không hỗ trợ";
+
+"CPU & Memory" = "CPU & Bộ nhớ";
+
+"Disk & Network" = "Đĩa & Mạng";
+
+"Battery & Thermal" = "Pin & Nhiệt";
+
+"Management" = "Quản lý";
+
+"History" = "Lịch sử";
+
+"Recent CPU activity" = "Hoạt động CPU gần đây";
+
+"Process CPU • one core" = "CPU tiến trình • một lõi";
+
+"Read-only. Recent trends stay on this Mac and are not saved." = "Chỉ đọc. Trend gần đây giữ trên Mac này và không được lưu.";
+
+"Sampling paused" = "Tạm dừng lấy mẫu";
+
+"Sampling paused while the main window is inactive." = "Tạm dừng lấy mẫu khi cửa sổ chính không active.";
+"Your Mac, at a glance" = "Nhìn rõ tình trạng máy Mac";
+"Read-only" = "Chỉ đọc dữ liệu";
+"Using the most CPU" = "Tiến trình dùng nhiều CPU";
+"Show all processes" = "Xem mọi tiến trình";
+"Process" = "Tiến trình";
+"Inspect process" = "Xem tiến trình";
+"Thermal state is not a temperature in °C." = "Trạng thái nhiệt không phải nhiệt độ theo °C.";
+"Used storage" = "Dung lượng đã dùng";
+"Open storage" = "Xem dung lượng";
+"Inspect what's running on your Mac. Monitoring is read-only." = "Xem tiến trình đang chạy trên máy Mac. Giám sát chỉ đọc dữ liệu.";
+"Close details" = "Đóng chi tiết";
+"Settings" = "Cài đặt";
+"About Orven" = "Giới thiệu Orven";
+"Appearance" = "Giao diện";
+"System" = "Theo hệ thống";
+"Light" = "Sáng";
+"Dark" = "Tối";
+"%d of %d processes have CPU samples." = "%d trên %d tiến trình có mẫu CPU.";
+
+"Giới thiệu Diskora" = "Giới thiệu Orven";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa";
+"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
+"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
+"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu.";
+"Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu.";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa";
+"Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
+"Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
+"Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng.";
+"Orven sẽ nhận diện output có thể tạo lại từ marker dự án." = "Orven sẽ nhận diện output có thể tạo lại từ marker dự án.";
+"Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu.";
+"Coverage giảm vì Orven không chạy trong một phần của phiên." = "Coverage giảm vì Orven không chạy trong một phần của phiên.";
+"Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper." = "Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper.";
+"Orven chỉ nhận .dmg, .pkg hoặc .app" = "Orven chỉ nhận .dmg, .pkg hoặc .app";
+"Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát." = "Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát.";
+"Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại.";
+
+"Sleep Inspector" = "Kiểm tra yêu cầu giữ thức";
+"Refresh sleep requests" = "Làm mới yêu cầu giữ thức";
+"A snapshot of active macOS power requests. Requests can be legitimate; they do not explain every sleep or wake event." = "Ảnh chụp các yêu cầu nguồn đang hoạt động trên macOS. Yêu cầu có thể hợp lệ; chúng không giải thích mọi lần máy ngủ hoặc thức.";
+"Reading sleep requests" = "Đang đọc yêu cầu giữ thức";
+"Observed at" = "Quan sát lúc";
+"No active requests in this snapshot" = "Không có yêu cầu đang hoạt động trong ảnh chụp này";
+"Process identity unavailable; ownership is unverified" = "Không đọc được identity tiến trình; chưa xác minh owner";
+"Some requests could not be displayed" = "Một số yêu cầu không thể hiển thị";
+"Refresh to inspect current requests. No background polling." = "Làm mới để xem yêu cầu hiện tại. Không tự đọc trong nền.";
+"No readable requests in this snapshot" = "Không đọc được yêu cầu nào trong ảnh chụp này";
+
+/* Application inspection and management improvements. */
+"Search apps or Bundle ID" = "Tìm ứng dụng hoặc Bundle ID";
+"Sort by name" = "Sắp xếp theo tên";
+"No matching applications" = "Không có ứng dụng phù hợp";
+"App Dossier" = "Hồ sơ ứng dụng";
+"Bundle ID" = "Bundle ID";
+"Application path" = "Đường dẫn ứng dụng";
+"Version" = "Phiên bản";
+"Minimum macOS" = "macOS tối thiểu";
+"Application bundle size" = "Dung lượng bundle ứng dụng";
+"Related data observed" = "Dữ liệu liên quan đã quan sát";
+"Last application scan" = "Lần quét ứng dụng gần nhất";
+"Sizes are from the last scan. Related data is attributed by scan evidence, not proof of exclusive ownership. Unreadable locations may be missing." = "Dung lượng lấy từ lần quét gần nhất. Dữ liệu liên quan được quy theo bằng chứng quét, không chứng minh sở hữu riêng. Vị trí không đọc được có thể bị thiếu.";
+"No related data found within scan coverage." = "Không tìm thấy dữ liệu liên quan trong phạm vi quét.";
+"Largest first" = "Lớn nhất trước";
+"Application Support" = "Dữ liệu hỗ trợ ứng dụng";
+"Cache" = "Bộ nhớ đệm";
+"Preference" = "Tùy chọn";
+"Log" = "Nhật ký";
+"Container" = "Container";
+"LaunchAgent" = "LaunchAgent";
+"Login Item / Background Task" = "Mục đăng nhập / Tác vụ nền";
+"Package receipt" = "Receipt gói cài đặt";
+"Clear filters or change the search query." = "Thử bỏ bộ lọc hoặc thay đổi từ khóa tìm kiếm.";
+"Background-item evidence unavailable. The macOS helper did not complete; scan coverage is partial." = "Không lấy được bằng chứng mục chạy nền. Helper macOS không hoàn tất; phạm vi quét chưa đầy đủ.";
+"Remove project %@" = "Bỏ project %@";
+"%@ was identified from %@ markers and can be regenerated." = "%@ được nhận diện từ marker %@ và có thể tạo lại.";
+"Found %d artifacts in %d projects." = "Tìm thấy %d artifact trong %d project.";
+
+"Explain My Mac" = "Giải thích tình trạng Mac";
+"Export diagnostics…" = "Xuất chẩn đoán…";
+"Evidence from recent samples. These observations do not establish causality and do not change your Mac." = "Bằng chứng từ các mẫu gần đây. Quan sát này không xác định quan hệ nhân quả và không thay đổi máy.";
+"No matching findings in fresh, available samples. Missing data is not a health check." = "Chưa có nhận định phù hợp trong các mẫu còn mới và khả dụng. Thiếu dữ liệu không có nghĩa máy hoạt động tốt.";
+"Sampling is paused. Resume active monitoring to evaluate current evidence." = "Đang tạm dừng lấy mẫu. Tiếp tục giám sát để đánh giá bằng chứng hiện tại.";
+"Review evidence" = "Xem bằng chứng";
+"Memory pressure needs attention" = "Cần chú ý memory pressure";
+"macOS reports memory pressure. Occupied memory alone does not establish a problem." = "macOS báo memory pressure. Chỉ riêng dung lượng RAM đã dùng không chứng minh có vấn đề.";
+"Sustained CPU activity" = "CPU hoạt động cao kéo dài";
+"System CPU stayed at or above 85% for at least 30 seconds. Review the measured processes before attributing a cause." = "CPU hệ thống ở mức 85% trở lên ít nhất 30 giây. Xem các process đã đo trước khi xác định nguyên nhân.";
+"Startup volume is nearly full" = "Ổ khởi động gần đầy";
+"Available space is below 10% of reported capacity. APFS volumes share container space; inspect coverage and snapshots before cleanup." = "Dung lượng khả dụng dưới 10% capacity được báo. Các volume APFS dùng chung container; kiểm tra coverage và snapshots trước khi dọn.";
+"Elevated thermal state" = "Thermal state tăng cao";
+"macOS reports thermal pressure. This is an OS state, not a temperature measurement or proof of a particular app's impact." = "macOS báo thermal pressure. Đây là trạng thái OS, không phải nhiệt độ đo được hay bằng chứng tác động của một app cụ thể.";
+"Local Diagnostics Export" = "Xuất chẩn đoán cục bộ";
+"Preview the exact JSON before saving. Paths, username, hostname and network endpoints are excluded. Nothing is uploaded." = "Xem chính xác JSON trước khi lưu. Không chứa path, username, hostname và endpoint mạng. Không upload dữ liệu.";
+"Include process names" = "Kèm tên process";
+"Refresh preview" = "Làm mới bản xem trước";
+"Save JSON…" = "Lưu JSON…";
+"Diagnostics saved." = "Đã lưu chẩn đoán.";
+"Could not save diagnostics. Choose a writable location and try again." = "Không thể lưu chẩn đoán. Chọn vị trí có quyền ghi rồi thử lại.";
+"Could not generate diagnostics from the current sample. Refresh and try again." = "Không thể tạo chẩn đoán từ mẫu hiện tại. Làm mới rồi thử lại.";
+"Network Inspector" = "Kiểm tra kết nối mạng";
+"Refresh connections" = "Làm mới kết nối";
+"Explicit TCP/UDP socket snapshot from lsof. Restricted processes and short-lived connections may be missing. No traffic history, domain attribution, byte totals or firewall control." = "Snapshot socket TCP/UDP theo yêu cầu từ lsof. Có thể thiếu process bị giới hạn quyền và kết nối tồn tại ngắn. Không có lịch sử traffic, quy domain, tổng byte hay điều khiển firewall.";
+"Search process, PID or endpoint" = "Tìm process, PID hoặc endpoint";
+"Connection inspection failed. Refresh to try again; coverage remains unknown." = "Không thể kiểm tra kết nối. Làm mới để thử lại; coverage chưa xác định.";
+"%d observed sockets; %d omitted by the display cap." = "Quan sát %d socket; bỏ qua %d mục do giới hạn hiển thị.";
+"Protocol" = "Giao thức";
+"Endpoint" = "Endpoint";
+"State" = "Trạng thái";
+"Details" = "Chi tiết";
+"Only a revalidated PID/start identity can be inspected." = "Chỉ xem chi tiết khi đã kiểm tra lại identity PID/thời điểm bắt đầu.";
+"No matching sockets within observable coverage. This does not prove the Mac has no connections." = "Không có socket phù hợp trong phạm vi quan sát. Điều này không chứng minh Mac không có kết nối.";
+"Refresh to inspect current connections." = "Làm mới để kiểm tra kết nối hiện tại.";
+"Hidden Space & Snapshots" = "Dung lượng ẩn và snapshots";
+"Inspect APFS space" = "Kiểm tra dung lượng APFS";
+"Startup Data volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements." = "Chỉ volume Data của ổ khởi động. Các volume dùng chung capacity APFS container; quét thư mục, dung lượng khả dụng và size snapshot là các phép đo khác nhau.";
+"APFS inspection failed or is unsupported. Refresh to try again." = "Kiểm tra APFS thất bại hoặc không được hỗ trợ. Làm mới để thử lại.";
+"APFS container capacity" = "Capacity APFS container";
+"APFS container free" = "Dung lượng trống APFS container";
+"Data volume used" = "Dung lượng Data volume đã dùng";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "Chưa đo được phần dung lượng chưa giải thích. Có thể gồm tệp không đọc được, volume khác, metadata filesystem, clones hoặc snapshots; Orven không quy phần còn lại cho một nguyên nhân.";
+"APFS snapshots" = "APFS snapshots";
+"No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "OS không báo APFS snapshot trên volume Data. Các volume khác có thể có snapshots.";
+"OS marks this snapshot purgeable." = "OS đánh dấu snapshot có thể purge.";
+"OS does not mark this snapshot purgeable." = "OS không đánh dấu snapshot có thể purge.";
+"Snapshot purgeability unavailable." = "Chưa xác định snapshot có thể purge.";
+"%d snapshot entries omitted." = "Đã bỏ qua %d mục snapshot.";
+"Exclusive snapshot bytes are unavailable from this inspection. Snapshot count does not measure reclaimable space. No snapshots are created, mounted, thinned or deleted." = "Kiểm tra này không cung cấp số byte riêng của snapshot. Số snapshot không đo dung lượng có thể thu hồi. Không tạo, mount, thin hay xóa snapshot.";
+"Inspect to read container space and Data volume snapshots." = "Kiểm tra để đọc dung lượng container và snapshots của volume Data.";
+"CPU scheduling" = "Scheduling CPU";
+"Lower priority raises nice to at least 10 for this same-user process. It is not a CPU percentage cap. Raising priority back may require privileges; relaunch the app to reset. Child processes are not individually controlled." = "Hạ priority sẽ tăng nice lên ít nhất 10 cho process cùng user. Đây không phải CPU cap theo phần trăm. Tăng priority trở lại có thể cần quyền; khởi động lại app để reset. Không điều khiển riêng process con.";
+"Lower process priority…" = "Hạ priority process…";
+"Lower process priority?" = "Hạ priority process?";
+"Lower priority" = "Hạ priority";
+"Process priority lowered and rechecked. This does not guarantee lower CPU usage." = "Đã hạ và kiểm tra lại priority process. Không bảo đảm CPU usage sẽ giảm.";
+"Priority change could not be verified. The process may have exited, changed identity or denied access. No retry is automatic." = "Chưa xác minh được thay đổi priority. Process có thể đã thoát, đổi identity hoặc từ chối quyền. Không tự động thử lại.";
+"This changes scheduling for the selected process. Restoring the previous priority is not guaranteed without relaunching it." = "Thao tác thay đổi scheduling của process đã chọn. Không bảo đảm khôi phục priority cũ nếu chưa khởi động lại process.";
+"Storage Growth Detective" = "Theo dõi tăng trưởng dung lượng";
+"Baseline saved. Scan the same location again to compare growth." = "Đã lưu baseline. Quét lại cùng vị trí để so sánh thay đổi.";
+"Scans are not comparable: scope, identity, coverage or checkpoint format differs. A new baseline was saved." = "Không thể so sánh các lần quét: scope, identity, coverage hoặc format checkpoint khác nhau. Đã lưu baseline mới.";
+"Comparable observed folder changes. Decreases do not prove APFS space was freed; changes do not identify their cause." = "Thay đổi thư mục quan sát được từ hai lần quét tương thích. Giảm size không chứng minh APFS đã giải phóng space; thay đổi không xác định nguyên nhân.";
+"No comparable folder deltas to display." = "Không có delta thư mục tương thích để hiển thị.";
+"Developer Workspace" = "Workspace lập trình";
+"Recognized projects within selected roots. Manifest names are evidence of an ecosystem, not proof that its runtime is installed. Source size and runtime versions are not measured." = "Dự án nhận diện trong các root đã chọn. Tên manifest là evidence hệ sinh thái, không chứng minh đã cài runtime. Chưa đo size source và version runtime.";
+"%d scan issues; results may be partial." = "Có %d vấn đề khi quét; kết quả có thể chưa đầy đủ.";
+"%d recognized artifacts; size is observed artifact data only." = "Có %d artifact nhận diện; size chỉ là dữ liệu artifact đã quan sát.";
+"No recognized project manifests within scan coverage." = "Không có manifest dự án nhận diện trong phạm vi quét.";
+"Only the first 100 projects are displayed. Artifact filters remain available below." = "Chỉ hiển thị 100 dự án đầu. Các bộ lọc artifact vẫn ở phía dưới.";
+"App Activity Timeline" = "Lịch sử hoạt động app";
+"Recent in-memory CPU trends for running processes mapped by bundle path and launch identity. Helper processes, older activity and unverified ownership may be missing. Related-data sizes remain scan-time observations." = "CPU trend gần đây trong RAM cho process đang chạy được map bằng bundle path và launch identity. Có thể thiếu helper, hoạt động cũ và ownership chưa xác minh. Size data liên quan vẫn là quan sát lúc quét.";
+"No running process could be mapped within current coverage." = "Không map được process đang chạy trong coverage hiện tại.";
+"Inspect app sleep requests" = "Kiểm tra sleep requests của app";
+"No sleep requests attributed to mapped processes within this snapshot's coverage." = "Không có sleep request được quy cho process đã map trong coverage của snapshot này.";
+"Some assertion entries were omitted; coverage is partial." = "Một số assertion bị bỏ qua; coverage chưa đầy đủ.";
+"warning" = "Cảnh báo";
+"critical" = "Nghiêm trọng";
+"serious" = "Cao";
+
+"%@, PID %d, %@, %@, %@" = "%@, PID %d, %@, %@, %@";
+"Measure workspace" = "Đo workspace";
+"Observed workspace size" = "Dung lượng workspace đã quan sát";
+"Other observed project data" = "Dữ liệu dự án khác đã quan sát";
+
+"Startup volume" = "Volume khởi động";
+"Data volume" = "Volume Data";
+"System volume" = "Volume System";
+"Selected volume used" = "Dung lượng volume đã chọn đã dùng";
+"Selected startup volume only. APFS container capacity is shared by volumes; folder scans, available space and snapshot sizes are different measurements." = "Chỉ volume khởi động đã chọn. Các volume dùng chung capacity APFS container; quét thư mục, dung lượng khả dụng và size snapshot là các phép đo khác nhau.";
+"No APFS snapshots reported for the selected volume. Other volumes may have snapshots." = "OS không báo APFS snapshot trên volume đã chọn. Các volume khác có thể có snapshots.";
+"Inspect to read container space and selected-volume snapshots." = "Kiểm tra để đọc dung lượng container và snapshots của volume đã chọn.";
+
+"Stop" = "Dừng";
+
+"Inspect selected process" = "Xem process đã chọn";
+
+"Volumes sharing this container" = "Các volume dùng chung container";
+"Unattributed container allocation" = "Allocation container chưa quy cho volume";
+"Container remainder uses OS-reported capacity minus free space and listed volume usage. It is not hidden-file size or exclusive snapshot space. Incomplete or inconsistent accounting stays unknown." = "Phần allocation còn lại được tính từ capacity OS báo trừ free space và usage các volume liệt kê. Đây không phải size file ẩn hay exclusive snapshot space. Accounting thiếu hoặc không nhất quán giữ unknown.";
+"%d volume entries omitted." = "Đã bỏ qua %d mục volume.";
+
+"Preview the exact JSON before saving. No dedicated path, username, hostname or network endpoint fields are included. Opt-in process names may contain identifying text. Nothing is uploaded." = "Xem chính xác JSON trước khi lưu. Không kèm field riêng cho path, username, hostname hay endpoint mạng. Tên process khi bật tùy chọn có thể chứa thông tin nhận diện. Không upload dữ liệu.";
+
+"Hardware Inspector" = "Kiểm tra phần cứng";
+"Hardware profile" = "Hồ sơ phần cứng";
+"Hardware report" = "Báo cáo phần cứng";
+"Refresh hardware" = "Đọc lại phần cứng";
+"Export hardware report…" = "Xuất báo cáo phần cứng…";
+"Reading hardware profile…" = "Đang đọc hồ sơ phần cứng…";
+"Model identifier" = "Mã model";
+"Operating system" = "Hệ điều hành";
+"Processor" = "Bộ xử lý";
+"Physical cores" = "Core vật lý";
+"Logical processors" = "Bộ xử lý logic";
+"Reported nominal frequency" = "Tần số danh định do OS báo";
+"Page size" = "Kích thước page";
+"Cache line size" = "Kích thước cache line";
+"L1 instruction cache" = "Cache lệnh L1";
+"L1 data cache" = "Cache dữ liệu L1";
+"L2 cache" = "Cache L2";
+"L3 cache" = "Cache L3";
+"Performance level" = "Nhóm hiệu năng";
+"CPU level %d" = "Nhóm CPU %d";
+"Cores sharing L2" = "Core dùng chung L2";
+"Metal device" = "Thiết bị Metal";
+"Unified memory" = "Bộ nhớ hợp nhất";
+"Recommended GPU working set" = "Working set GPU khuyến nghị";
+"Performance" = "Hiệu năng";
+"Efficiency" = "Tiết kiệm điện";
+"Yes" = "Có";
+"No" = "Không";
+"Recent sensor range" = "Khoảng giá trị cảm biến gần đây";
+"Reset range" = "Đặt lại khoảng đo";
+"Sensor" = "Chỉ số";
+"Current" = "Hiện tại";
+"Minimum" = "Thấp nhất";
+"Maximum" = "Cao nhất";
+"Samples" = "Mẫu";
+"Disk read" = "Đọc ổ đĩa";
+"Disk write" = "Ghi ổ đĩa";
+"Network receive" = "Nhận qua mạng";
+"Network send" = "Gửi qua mạng";
+"Cache sizes are OS-reported values, not summed totals. Nominal frequency is not a live core clock. The GPU working set is a recommendation, not VRAM capacity or current usage." = "Kích thước cache là giá trị OS báo, không phải tổng đã cộng. Tần số danh định không phải xung core đang chạy. Working set GPU là khuyến nghị, không phải dung lượng VRAM hay mức sử dụng hiện tại.";
+"Min/max covers available observations in the latest sampling generation, up to 60 seconds. Missing readings are gaps. Reset affects this range only; it does not clear monitoring history." = "Min/max dùng các mẫu có dữ liệu trong sampling generation mới nhất, tối đa 60 giây. Mẫu thiếu là khoảng trống. Đặt lại chỉ tác động khoảng đo này, không xóa lịch sử theo dõi.";
+"Sensor coverage: temperatures in °C, fan RPM, voltage, package power, live core clocks, SPD timings and SMART health are not collected. Thermal state is the macOS condition, not a temperature. No fan control, overclocking or stress test is performed." = "Phạm vi cảm biến: chưa thu thập nhiệt độ °C, RPM quạt, điện áp, công suất package, xung core trực tiếp, timing SPD và sức khỏe SMART. Thermal state là trạng thái macOS, không phải nhiệt độ. Không điều khiển quạt, ép xung hay stress test.";
+
+"Preview the hardware profile and recent range before saving. No serial, hostname, paths, process names or network endpoints are included. Nothing is uploaded." = "Xem hồ sơ phần cứng và khoảng đo gần đây trước khi lưu. Không có serial, hostname, path, tên process hay endpoint mạng. Không upload dữ liệu.";
+
+"Hardware architecture" = "Kiến trúc phần cứng";
+
+"System information" = "Thông tin hệ thống";
+
+"Temperature & Fans" = "Nhiệt độ & Quạt";
+"CPU sensors" = "Cảm biến CPU";
+"GPU sensors" = "Cảm biến GPU";
+"Fans" = "Quạt";
+"Battery sensors" = "Cảm biến pin";
+"System power" = "Công suất hệ thống";
+"CPU • hottest mapped sensor" = "CPU • sensor đã map nóng nhất";
+"GPU • hottest mapped sensor" = "GPU • sensor đã map nóng nhất";
+"SMC reports no fans. This is not a fan-speed measurement." = "SMC báo không có quạt. Đây không phải phép đo tốc độ quạt.";
+"Fan count unavailable; no fan speeds inferred." = "Không đọc được số quạt; không suy ra tốc độ quạt.";
+"Fan coverage is capped at 8 reported fans." = "Phạm vi quạt giới hạn ở8 quạt do SMC báo.";
+"Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "Cảm biến SMC chỉ đọc, cập nhật mỗi10 giây khi monitoring chạy. Phạm vi giới hạn và tùy model. Label CPU/GPU dùng mapping cộng đồng, không phải ID core vật lý đã xác minh. Mẫu thiếu không được coi là0.";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Nhiệt độ là từng mẫu sensor đã map, không phải trung bình package CPU/GPU hay chẩn đoán an toàn. Quạt chỉ hiển thị RPM quan sát; Orven không đổi mode/target quạt. Chưa thu điện áp, xung trực tiếp, SPD và SMART.";
+"SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "Phạm vi nhiệt độ, quạt và công suất SMC hiển thị phía trên. Thermal state vẫn là trạng thái macOS riêng. Chưa cung cấp điện áp, xung core trực tiếp, timing SPD, SMART, điều khiển quạt, ép xung hay stress test.";
+
+"Review temperatures and fans" = "Xem nhiệt độ và quạt";
+"Per-process energy: Unsupported" = "Năng lượng theo process: Chưa hỗ trợ";
+
+/* Health history, alerts, recording and connection changes. */
+"Health History & Baseline" = "Lịch sử sức khỏe & Mốc tham chiếu";
+"Record health history locally" = "Lưu lịch sử sức khỏe trên máy";
+"One observed sample per minute, up to seven days. No process names, paths or network endpoints. Paused, sleep and missing samples are gaps; enabling history does not enable background monitoring." = "Lưu một mẫu quan sát mỗi phút, tối đa bảy ngày. Không lưu tên tiến trình, đường dẫn hay địa chỉ mạng. Tạm dừng, ngủ và mẫu thiếu tạo khoảng trống; bật lịch sử không tự bật giám sát nền.";
+"History retention" = "Thời gian giữ lịch sử";
+"%d recorded observations" = "%d mẫu quan sát đã lưu";
+"Time range" = "Khoảng thời gian";
+"1 hour" = "1 giờ";
+"Export history JSON…" = "Xuất lịch sử JSON…";
+"Baseline comparison" = "So sánh với mốc tham chiếu";
+"Capture baseline" = "Lưu mốc tham chiếu";
+"Capture the latest 30–60 recorded samples as a reference. Compare medians with at least ten newer samples per metric. Workload differences can explain changes; this is not causal diagnosis." = "Dùng 30–60 mẫu đã lưu gần nhất làm mốc tham chiếu. So sánh trung vị khi mỗi chỉ số có ít nhất mười mẫu mới hơn. Khối lượng công việc khác nhau có thể tạo chênh lệch; đây không phải chẩn đoán nguyên nhân.";
+"Not enough baseline or newer observations yet. Keep recording during comparable workloads." = "Chưa đủ mẫu tham chiếu hoặc mẫu mới. Tiếp tục ghi trong các khối lượng công việc tương đương.";
+"Baseline median" = "Trung vị tham chiếu";
+"Recent median" = "Trung vị gần đây";
+"Chart metric" = "Chỉ số trên biểu đồ";
+"Occupied memory" = "Bộ nhớ chiếm dụng";
+"Temperature labels use community mappings; missing readings are gaps. Fan RPM and system power are observations, not fan control or CPU package power." = "Nhãn nhiệt độ dùng mapping cộng đồng; mẫu thiếu tạo khoảng trống. RPM quạt và công suất hệ thống là số liệu quan sát, không phải điều khiển quạt hay công suất package CPU.";
+"Sensor Charts & Recording" = "Biểu đồ & Phiên ghi cảm biến";
+"Record existing samples every ten seconds for 15, 30 or 60 minutes. Sleep extends the wall-clock duration. The session stays in memory until Quit. Sampling pauses when the app is inactive unless menu bar monitoring is enabled; no readings are backfilled." = "Ghi mẫu hiện có mỗi mười giây trong 15, 30 hoặc 60 phút. Thời gian ngủ kéo dài thời lượng thực tế. Phiên chỉ giữ trong bộ nhớ đến khi thoát. Lấy mẫu tạm dừng khi app không hoạt động, trừ khi bật giám sát menu bar; không điền bù mẫu thiếu.";
+"Recording duration" = "Thời lượng phiên ghi";
+"15 minutes" = "15 phút";
+"30 minutes" = "30 phút";
+"60 minutes" = "60 phút";
+"Start recording" = "Bắt đầu ghi";
+"Stop recording" = "Dừng ghi";
+"Recording observed samples" = "Đang ghi mẫu quan sát";
+"Recording stopped" = "Đã dừng ghi";
+"Recording paused until monitoring resumes" = "Phiên ghi tạm dừng đến khi giám sát tiếp tục";
+"Export session JSON…" = "Xuất phiên ghi JSON…";
+"Export session CSV…" = "Xuất phiên ghi CSV…";
+"Smart Alerts" = "Cảnh báo thông minh";
+"Enable health alerts" = "Bật cảnh báo sức khỏe";
+"Off by default. Fresh active evidence only: sustained CPU, memory pressure, low startup space and elevated thermal state. A recovered condition must stay clear for 30 seconds; repeat alerts wait at least 15 minutes. Nothing is changed automatically." = "Mặc định tắt. Chỉ dùng bằng chứng mới khi giám sát hoạt động: CPU cao kéo dài, áp lực bộ nhớ, ổ khởi động ít trống và trạng thái nhiệt cao. Trạng thái phục hồi phải duy trì 30 giây; cảnh báo lặp cách ít nhất 15 phút. Không tự thay đổi máy.";
+"Allow macOS notifications…" = "Cho phép thông báo macOS…";
+"Snooze for one hour" = "Tạm hoãn một giờ";
+"No alert events in this app session." = "Chưa có cảnh báo trong phiên app này.";
+"Recent pressure and thermal observations" = "Quan sát áp lực bộ nhớ và nhiệt gần đây";
+"History could not be read. The existing file is preserved; recording to disk is blocked." = "Không đọc được lịch sử. Giữ nguyên file hiện có; đã chặn ghi xuống đĩa.";
+"History could not be saved. Existing data is preserved; check the local storage location." = "Không lưu được lịch sử. Giữ nguyên dữ liệu hiện có; kiểm tra vị trí lưu trên máy.";
+"Baseline needs at least 30 recorded samples and writable local storage." = "Mốc tham chiếu cần ít nhất 30 mẫu đã lưu và vị trí lưu có quyền ghi.";
+"History retention could not be saved. Existing data is preserved." = "Không lưu được thời gian giữ lịch sử. Dữ liệu hiện có được giữ nguyên.";
+"Notifications require the Orven app bundle." = "Thông báo cần chạy từ bundle app Orven.";
+"Notification permission granted." = "Đã được cho phép thông báo.";
+"Notifications are not allowed. In-app alerts remain available." = "Thông báo chưa được cho phép. Vẫn xem được cảnh báo trong app.";
+"Notification permission could not be requested. In-app alerts remain available." = "Không yêu cầu được quyền thông báo. Vẫn xem được cảnh báo trong app.";
+"Alerts snoozed for one hour." = "Đã tạm hoãn cảnh báo một giờ.";
+"Notification delivery failed. Review the in-app alert evidence." = "Không gửi được thông báo. Xem bằng chứng cảnh báo trong app.";
+"Network Connection Changes" = "Thay đổi kết nối mạng";
+"Track observed connection changes this session" = "Theo dõi thay đổi kết nối trong phiên này";
+"Explicit Refresh compares observable sockets with verified PID/start identities. New or no-longer-observed does not mean opened or closed at this time. Short connections and restricted processes may be missed. Process names and numeric endpoints stay in memory, capped at 200 events; nothing is uploaded or saved to disk." = "Bấm Làm mới để so sánh socket quan sát được với PID/start đã xác minh. Mới thấy hoặc không còn thấy không chứng minh thời điểm mở/đóng. Có thể bỏ lỡ kết nối ngắn và tiến trình bị hạn chế. Tên tiến trình và địa chỉ số chỉ giữ trong bộ nhớ, tối đa 200 sự kiện; không upload hay lưu đĩa.";
+"Connection baseline established" = "Đã có mốc tham chiếu kết nối";
+"Refresh to establish a connection baseline" = "Làm mới để tạo mốc tham chiếu kết nối";
+"%d unverified sockets excluded; %d older events omitted." = "Loại %d socket chưa xác minh; bỏ %d sự kiện cũ.";
+"Clear connection history" = "Xóa lịch sử kết nối";
+"No connection changes observed yet." = "Chưa quan sát thấy thay đổi kết nối.";
+"Showing the latest 50 change events." = "Hiển thị 50 thay đổi gần nhất.";
+"Newly observed" = "Mới quan sát thấy";
+"No longer observed" = "Không còn quan sát thấy";
+"State changed" = "Trạng thái thay đổi";
+"Local report export" = "Xuất báo cáo trên máy";
+"Preview the exact local report before saving. Nothing is uploaded." = "Xem chính xác báo cáo trước khi lưu. Không upload dữ liệu.";
+"Save report…" = "Lưu báo cáo…";
+"normal" = "Bình thường";
+"nominal" = "Bình thường";
+"fair" = "Hơi cao";
+"unknown" = "Chưa rõ";
+
+"Change" = "Thay đổi";
+"Memory pressure" = "Áp lực bộ nhớ";
+"System CPU" = "CPU hệ thống";
+
+"%d older observations omitted by the file-size budget." = "Bỏ %d mẫu cũ do giới hạn dung lượng file.";
+
+"Health History" = "Lịch sử sức khỏe";
+
+"Could not prepare the local report. Stop recording and try again." = "Không chuẩn bị được báo cáo. Dừng phiên ghi rồi thử lại.";
+"Waiting for macOS notification permission. Respond to the system prompt if it appears." = "Đang chờ quyền thông báo macOS. Phản hồi hộp thoại hệ thống nếu xuất hiện.";
+
+"This report is frozen when opened. Close and reopen for newer observations. Preview the exact content before saving; nothing is uploaded." = "Báo cáo được chốt khi mở. Đóng rồi mở lại để lấy mẫu mới hơn. Xem chính xác nội dung trước khi lưu; không upload dữ liệu.";
+"Report saved." = "Đã lưu báo cáo.";
+"Could not save the report. Choose a writable location and try again." = "Không lưu được báo cáo. Chọn vị trí có quyền ghi rồi thử lại.";
+
+/* Wi-Fi and LAN tools */
+"Wi-Fi & LAN" = "Wi‑Fi & LAN";
+"Network Overview" = "Tổng quan mạng";
+"Wi-Fi Inspector" = "Kiểm tra Wi‑Fi";
+"Ethernet Inspector" = "Kiểm tra Ethernet";
+"Connection Diagnostics" = "Chẩn đoán kết nối";
+"Latency & Stability" = "Độ trễ & ổn định";
+"Nearby Wi-Fi" = "Wi‑Fi xung quanh";
+"Network Change Timeline" = "Thay đổi mạng";
+"Network tool" = "Công cụ mạng";
+"Refresh network status" = "Làm mới trạng thái mạng";
+"Last network observation" = "Lần quan sát mạng gần nhất";
+"Path interfaces" = "Interface của đường mạng";
+"Low Data Mode" = "Chế độ dữ liệu thấp";
+"Expensive path" = "Đường mạng có chi phí cao";
+"An available path does not prove that an Internet destination is reachable." = "Đường mạng khả dụng chưa chứng minh có thể truy cập một đích Internet.";
+"Primary interface" = "Interface chính";
+"IPv4 gateway" = "Gateway IPv4";
+"IPv6 gateway" = "Gateway IPv6";
+"DNS servers" = "Máy chủ DNS";
+"No matching network adapter was observed." = "Không quan sát được adapter mạng phù hợp.";
+"IP addresses" = "Địa chỉ IP";
+"MTU" = "MTU";
+"Negotiated media" = "Liên kết được thương lượng";
+"Received / sent bytes" = "Byte nhận / gửi";
+"Input / output packets" = "Packet nhận / gửi";
+"Input / output errors" = "Lỗi nhận / gửi";
+"Input queue drops" = "Packet bị loại ở hàng đợi nhận";
+"Adapter counters are cumulative observations, not session traffic or Internet speed. Packet/error counters may wrap. Live rates reuse the existing sampler." = "Bộ đếm adapter là số tích lũy, không phải lưu lượng phiên hoặc tốc độ Internet. Bộ đếm packet/lỗi có thể quay vòng. Tốc độ hiện tại dùng sampler hiện có.";
+"%d adapters omitted by the display limit." = "%d adapter không hiển thị do giới hạn.";
+"Refresh to inspect Wi-Fi and LAN." = "Làm mới để kiểm tra Wi‑Fi và LAN.";
+"SSID and BSSID can be hidden by macOS location permissions. Missing identity does not mean Wi-Fi is disconnected." = "macOS có thể ẩn SSID/BSSID theo quyền vị trí. Thiếu định danh không có nghĩa Wi‑Fi bị ngắt.";
+"Request Wi-Fi identity permission" = "Xin quyền xem định danh Wi‑Fi";
+"No Wi-Fi interface was observed." = "Không quan sát được interface Wi‑Fi.";
+"Unavailable or permission restricted" = "Không có dữ liệu hoặc bị hạn chế quyền";
+"SSID" = "SSID";
+"BSSID" = "BSSID";
+"RSSI" = "RSSI";
+"Noise" = "Nhiễu";
+"SNR" = "SNR";
+"Channel" = "Kênh";
+"Band" = "Băng tần";
+"Channel width" = "Độ rộng kênh";
+"Transmit link rate" = "Tốc độ liên kết gửi";
+"CoreWLAN reports local radio observations. Link rate is not measured Internet throughput; SNR is RSSI minus noise from this observation." = "CoreWLAN cung cấp thông số vô tuyến cục bộ. Tốc độ liên kết không phải tốc độ Internet được đo; SNR là RSSI trừ noise của lần quan sát này.";
+"Destination hostname or IP address" = "Hostname hoặc IP đích";
+"Example: example.com or 192.168.1.1" = "Ví dụ: example.com hoặc 192.168.1.1";
+"Measurements send traffic to the displayed destination. Connection diagnostics also tests the recently observed gateway, resolves the destination and opens TCP port 443. No payload or speed-test download is sent." = "Phép đo gửi lưu lượng tới đích đang hiển thị. Chẩn đoán cũng thử gateway mới quan sát, phân giải đích và mở kết nối TCP cổng 443. Không gửi payload hoặc tải dữ liệu đo tốc độ.";
+"Check connection" = "Kiểm tra kết nối";
+"Measure 20 ICMP probes" = "Đo 20 probe ICMP";
+"Refresh network status first to include a gateway observed within 60 seconds. Each stage is bounded; total connection check is at most 30 seconds." = "Làm mới trạng thái trước để đo gateway được quan sát trong 60 giây. Từng bước có giới hạn; tổng thời gian kiểm tra tối đa 30 giây.";
+"Destination" = "Đích";
+"Elapsed" = "Thời gian";
+"ICMP may be blocked while Internet access works. DNS results may be cached. A successful TCP connection does not verify HTTP, TLS, captive portals or every application." = "ICMP có thể bị chặn dù Internet vẫn hoạt động. DNS có thể dùng cache. Kết nối TCP thành công chưa xác minh HTTP, TLS, captive portal hoặc mọi ứng dụng.";
+"20 probes, one second apart, at most 28 seconds. Loss uses the ICMP summary; jitter is the mean absolute difference between adjacent successful replies. Timeouts break the chart." = "20 probe cách nhau một giây, tối đa 28 giây. Mất packet dùng tổng kết ICMP; jitter là trung bình chênh lệch tuyệt đối giữa hai phản hồi thành công liền kề. Timeout tạo khoảng trống trên biểu đồ.";
+"Mean latency" = "Độ trễ trung bình";
+"Jitter" = "Jitter";
+"Packet loss" = "Mất packet";
+"ICMP did not complete successfully; missing results are unknown or blocked." = "ICMP không hoàn tất thành công; kết quả thiếu chưa rõ hoặc bị chặn.";
+"ICMP round-trip latency" = "Độ trễ khứ hồi ICMP";
+"Scan nearby Wi-Fi" = "Quét Wi‑Fi xung quanh";
+"Scan is explicit and controlled by macOS. Stop suppresses results after the OS scan returns; it cannot interrupt CoreWLAN. Identity may require location permission. Results stay in this window only." = "Quét theo yêu cầu và do macOS điều khiển. Dừng sẽ bỏ kết quả sau khi OS trả về, không ngắt được CoreWLAN. Định danh có thể cần quyền vị trí. Kết quả chỉ giữ trong cửa sổ này.";
+"Filter SSID, BSSID or channel" = "Lọc SSID, BSSID hoặc kênh";
+"%d visible networks; %d omitted." = "%d mạng đang hiển thị; %d mạng bị giới hạn.";
+"No matching Wi-Fi network was observed." = "Không quan sát được mạng Wi‑Fi phù hợp.";
+"Hidden or permission restricted" = "Bị ẩn hoặc hạn chế quyền";
+"Channel / band" = "Kênh / băng tần";
+"RSSI / noise" = "RSSI / nhiễu";
+"Observed networks on this channel" = "Mạng quan sát trên kênh này";
+"Channel counts describe this scan, not airtime utilization or interference. Different bands can reuse channel numbers; wider channels can overlap. Signal bars are a relative RSSI display." = "Số mạng trên kênh chỉ mô tả lần quét, không phải mức sử dụng airtime hay nhiễu. Các băng tần có thể trùng số kênh; kênh rộng có thể chồng lấn. Thanh tín hiệu biểu diễn RSSI tương đối.";
+"Track network changes in this window" = "Theo dõi thay đổi mạng trong cửa sổ";
+"Clear network changes" = "Xóa thay đổi mạng";
+"Path events are observed while this page is open. IP, gateway, DNS and Wi-Fi identity changes compare explicit successful refreshes within ten minutes. Missing identities and adapter disappearance are not inferred as changes. First refresh establishes a baseline. No history is written to disk." = "Quan sát sự kiện đường mạng khi trang mở. IP, gateway, DNS và định danh Wi‑Fi được so sánh giữa các lần làm mới thành công trong mười phút. Không suy diễn thay đổi khi thiếu định danh hoặc adapter biến mất. Lần đầu tạo baseline. Không ghi lịch sử xuống đĩa.";
+"%d status changes and %d path events; %d older events omitted." = "%d thay đổi trạng thái và %d sự kiện đường mạng; %d sự kiện cũ bị giới hạn.";
+"No network changes observed in this session." = "Chưa quan sát thay đổi mạng trong phiên.";
+"Before" = "Trước";
+"After" = "Sau";
+"Reading network status" = "Đang đọc trạng thái mạng";
+"Scanning Wi-Fi" = "Đang quét Wi‑Fi";
+"Measuring latency" = "Đang đo độ trễ";
+"Checking connection" = "Đang kiểm tra kết nối";
+"Stopping after the macOS Wi-Fi scan returns." = "Đang dừng sau khi macOS trả kết quả quét Wi‑Fi.";
+"Stopping measurement." = "Đang dừng phép đo.";
+"Enter a hostname or IP address without a URL, port or spaces." = "Nhập hostname hoặc IP, không nhập URL, cổng hoặc khoảng trắng.";
+"Observation completed." = "Đã hoàn tất quan sát.";
+"Cancelled. Previous results remain timestamped." = "Đã hủy. Kết quả trước vẫn giữ timestamp.";
+"Network observation failed or timed out. Check permissions and retry." = "Quan sát mạng thất bại hoặc timeout. Kiểm tra quyền và thử lại.";
+"Not requested" = "Chưa yêu cầu";
+"Authorized" = "Đã cấp quyền";
+"Denied" = "Bị từ chối";
+"Restricted" = "Bị hạn chế";
+"Available path" = "Đường mạng khả dụng";
+"Connection required" = "Cần thiết lập kết nối";
+"No available path" = "Không có đường mạng khả dụng";
+"Gateway ICMP" = "ICMP tới gateway";
+"DNS resolution" = "Phân giải DNS";
+"TCP connection" = "Kết nối TCP";
+"Failed or blocked" = "Thất bại hoặc bị chặn";
+"Timed out or unavailable" = "Timeout hoặc không có dữ liệu";
+"Link state" = "Trạng thái link";
+"Ethernet" = "Ethernet";
+"Other" = "Khác";
+"Global DNS configuration is shown; scoped VPN and per-domain resolvers may differ." = "Hiển thị cấu hình DNS toàn cục; DNS riêng cho VPN hoặc từng miền có thể khác.";
+"Observed networks by channel" = "Mạng quan sát theo kênh";
+"Wi-Fi" = "Wi-Fi";
+"Not applicable to a numeric IP" = "Không áp dụng cho địa chỉ IP";
+"Active" = "Hoạt động";
+"Inactive" = "Không hoạt động";
+"Carrier state" = "Trạng thái carrier";
+"Link detected" = "Phát hiện link";
+"No link detected" = "Không phát hiện link";
+"Up / running" = "Up / running";
+"Down / not running" = "Down / không running";
+"Interface flags" = "Cờ interface";

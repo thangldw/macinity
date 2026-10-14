@@ -38,6 +38,7 @@ struct ProjectScanReport: Codable, Hashable, Sendable {
   let artifacts: [ProjectArtifact]
   let issues: [ProjectScanIssue]
   let cancelled: Bool
+  var inventory: [ProjectInventory]? = nil
 
   var reclaimableBytes: Int64 {
     artifacts.filter { $0.safety == .safe }.reduce(0) { $0 + $1.bytes }
@@ -48,4 +49,11 @@ struct ProjectRule: Sendable {
   let ecosystem: ProjectEcosystem
   let anyMarkers: Set<String>
   let artifactPaths: Set<String>
+}
+
+struct ProjectInventory: Codable, Hashable, Identifiable, Sendable {
+  let root: URL
+  let ecosystems: [ProjectEcosystem]
+  let markers: [String]
+  var id: String { root.path }
 }

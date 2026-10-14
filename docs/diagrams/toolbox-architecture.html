@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolbox architecture and safety boundaries</title>
+  <title>Orven architecture and safety boundaries</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -61,11 +61,11 @@
 <body>
   <main>
     <p class="eyebrow">Architecture · Secure paved road · Engineer</p>
-    <h1>Toolbox architecture and safety boundaries</h1>
+    <h1>Orven architecture and safety boundaries</h1>
     <div class="diagram">
       <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="toolbox-architecture-title toolbox-architecture-desc">
-        <title id="toolbox-architecture-title">Toolbox architecture and safety boundaries</title>
-        <desc id="toolbox-architecture-desc">Architecture showing the app shell coordinating ToolboxCore, ToolboxStorage, and ToolboxChanges, the feature modules depending on Core, local audit and macOS service paths, the manual GitHub Releases check, two blocked paths, and the review and revalidation gate.</desc>
+        <title id="toolbox-architecture-title">Orven architecture and safety boundaries</title>
+        <desc id="toolbox-architecture-desc">Architecture showing the app shell coordinating ToolboxCore, ToolboxMonitoring, ToolboxStorage, and ToolboxChanges, the feature modules depending on Core, local audit and macOS service paths, the manual GitHub Releases check, two blocked paths, and the review and revalidation gate.</desc>
         <defs>
           <marker id="toolbox-architecture-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#505750"/></marker>
           <marker id="toolbox-architecture-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a83a00"/></marker>
@@ -135,8 +135,14 @@
         <!-- Privileged gate at the local trust boundary -->
         <polygon points="804,468 816,480 804,492 792,480" fill="#fbfaf6" stroke="#505750" stroke-width="1.2"/>
         <rect x="744" y="428" width="120" height="32" rx="4" fill="#fbfcfe" stroke="rgba(29,33,30,0.20)" stroke-width="0.8"/>
-        <text x="804" y="440" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">PRIVILEGE GATE</text>
+        <text x="804" y="440" fill="#505750" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle" letter-spacing="0.04em">ACTION REVIEW</text>
         <text x="804" y="456" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">REVALIDATE</text>
+
+        <path d="M 420 208 V 230 H 780 V 270" fill="none" stroke="#2464df" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
+        <rect x="700" y="270" width="160" height="64" rx="6" fill="#eef4ff" stroke="#2464df" stroke-width="1.2"/>
+        <text x="780" y="294" fill="#17263c" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, sans-serif" text-anchor="middle">ToolboxMonitoring</text>
+        <text x="780" y="314" fill="#586d8a" font-size="8" font-family="ui-monospace, monospace" text-anchor="middle">CPU · sensors · Wi-Fi/LAN</text>
+        <path d="M 860 302 H 900 V 360" fill="none" stroke="#2464df" stroke-width="1.2" marker-end="url(#toolbox-architecture-arrow)"/>
 
         <!-- Components -->
         <rect x="40" y="280" width="160" height="64" rx="6" fill="rgba(80,87,80,0.10)" stroke="#697169" stroke-width="1"/>
@@ -145,7 +151,7 @@
 
         <rect x="280" y="144" width="160" height="64" rx="6" fill="#ffffff" stroke="#1d211e" stroke-width="1"/>
         <text x="360" y="172" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">App shell</text>
-        <text x="360" y="192" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">coordinates 3 modules</text>
+        <text x="360" y="192" fill="#697169" font-size="8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" text-anchor="middle">coordinates 4 modules</text>
 
         <rect x="520" y="144" width="160" height="64" rx="6" fill="#fff2e8" stroke="#a83a00" stroke-width="1.2"/>
         <text x="600" y="172" fill="#1d211e" font-size="12" font-weight="600" font-family="Inter, Hiragino Sans, Noto Sans JP, sans-serif" text-anchor="middle">ToolboxCore</text>
@@ -193,7 +199,7 @@
         <h2>English</h2>
         <dl>
           <dt>Content</dt>
-          <dd>The supported route starts with foreground GUI input. The app shell coordinates ToolboxCore, ToolboxStorage, and ToolboxChanges; Storage and Changes depend on Core. Core writes local audit records, and the feature modules call macOS services. GitHub Releases is contacted only by the explicit update check.</dd>
+          <dd>The supported route starts with foreground GUI input. The app shell coordinates ToolboxCore, ToolboxMonitoring, ToolboxStorage, and ToolboxChanges; Storage and Changes depend on Core. Core writes local audit records, and the feature modules call macOS services. GitHub Releases is contacted by the explicit update check; bounded Wi-Fi/LAN probes contact user-selected destinations. Monitoring shares one lifecycle-aware coordinator and bounded optional history.</dd>
           <dt>Exclusions</dt>
           <dd>The figure does not imply a privileged helper, automatic upload, automatic update installation, cloud storage, or a complete historical audit from FSEvents.</dd>
           <dt>Safety boundary</dt>
@@ -204,7 +210,7 @@
         <h2>Tiếng Việt</h2>
         <dl>
           <dt>Nội dung</dt>
-          <dd>Luồng được hỗ trợ bắt đầu từ input GUI ở foreground. App shell điều phối ToolboxCore, ToolboxStorage và ToolboxChanges; Storage cùng Changes phụ thuộc Core. Core ghi audit record local, còn các feature module gọi service của macOS. GitHub Releases chỉ được truy cập khi người dùng chủ động kiểm tra update.</dd>
+          <dd>Luồng được hỗ trợ bắt đầu từ input GUI ở foreground. App shell điều phối ToolboxCore, ToolboxMonitoring, ToolboxStorage và ToolboxChanges; Storage cùng Changes phụ thuộc Core. Core ghi audit record local, còn các feature module gọi service của macOS. GitHub Releases dùng check update explicit; Wi-Fi/LAN probes bounded kết nối đích người dùng chọn. Monitoring dùng một coordinator theo lifecycle và history bounded tùy chọn.</dd>
           <dt>Không bao gồm</dt>
           <dd>Sơ đồ không ngụ ý privileged helper, upload tự động, tự cài update, cloud storage hoặc historical audit đầy đủ từ FSEvents.</dd>
           <dt>Ranh giới an toàn</dt>
@@ -215,7 +221,7 @@
         <h2>日本語</h2>
         <dl>
           <dt>内容</dt>
-          <dd>サポート対象の経路は foreground GUI input から始まります。App shell が ToolboxCore、ToolboxStorage、ToolboxChanges を調整し、Storage と Changes は Core に依存します。Core は local audit record を保存し、feature module は macOS service を呼び出します。GitHub Releases への接続は user が明示的に update check を行った場合だけです。</dd>
+          <dd>サポート対象の経路は foreground GUI input から始まります。App shell が ToolboxCore、ToolboxMonitoring、ToolboxStorage、ToolboxChanges を調整し、Storage と Changes は Core に依存します。Core は local audit record を保存し、feature module は macOS service を呼び出します。GitHub Releasesは明示update check、bounded Wi-Fi/LAN probeは選択destinationへ接続。Monitoringは単一lifecycle coordinatorと任意boundedhistory。</dd>
           <dt>対象外</dt>
           <dd>この図は privileged helper、自動 upload、自動 update install、cloud storage、または FSEvents による完全な historical audit を示しません。</dd>
           <dt>Safety boundary</dt>

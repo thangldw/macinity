@@ -7,7 +7,7 @@
 "Gỡ ứng dụng" = "Applications";
 "Lịch quét" = "Scheduled Scan";
 "Lịch sử" = "History";
-"Giới thiệu Diskora" = "About Diskora";
+"Giới thiệu Diskora" = "About Orven";
 "Tác giả" = "Author";
 "Công cụ phân tích và quản lý dung lượng dành cho macOS." = "Storage analysis and management for macOS.";
 "Phân tích dung lượng • Tệp trùng lặp • Dọn dẹp Developer" = "Storage analysis • Duplicate files • Developer cleanup";
@@ -152,7 +152,7 @@
 "Ứng dụng và dữ liệu còn sót" = "Applications and Leftover Data";
 "ứng dụng" = "applications";
 "Chưa quét ứng dụng" = "Applications Not Scanned";
-"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "Diskora finds bundles in Applications and matches their Bundle IDs against Library data.";
+"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "Orven finds bundles in Applications and matches their Bundle IDs against Library data.";
 "Không có Bundle ID" = "No Bundle ID";
 "Gỡ…" = "Remove…";
 "Gỡ %@?" = "Remove %@?";
@@ -164,7 +164,7 @@
 "Tên thành phần khớp; cần xem lại" = "Component name match; review required";
 "Launch item tham chiếu Bundle ID" = "Launch item references the Bundle ID";
 "Launch item tham chiếu tên ứng dụng" = "Launch item references the application name";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "The system receipt is evidence only; Diskora never deletes it automatically";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "The system receipt is evidence only; Orven never deletes it automatically";
 "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Diskora không xóa database hệ thống" = "sfltool detected a login/background item; evidence is shown without deleting system databases";
 
 /* Developer */
@@ -175,12 +175,12 @@
 "Dọn bằng công cụ chính thức" = "Cleanup with Official Tools";
 "Chưa nhận diện dữ liệu Developer" = "No Developer Data Identified";
 "Quét thư mục người dùng ở mục Phân tích dung lượng để thống kê môi trường dev." = "Scan the home folder in Storage Analyzer to inventory development environments.";
-"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Diskora cleans only after confirmation and prefers each tool's official command.";
+"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven cleans only after confirmation and prefers each tool's official command.";
 "Gỡ phiên bản runtime?" = "Remove Runtime Version?";
 "Chạy công cụ dọn dẹp?" = "Run Cleanup Tool?";
 "Developer Cleanup thất bại" = "Developer Cleanup Failed";
 "App chưa tìm thấy file cấu hình dự án tham chiếu phiên bản này. Việc quét không thể đảm bảo bao phủ mọi dự án, hãy kiểm tra trước khi tiếp tục." = "No project configuration referencing this version was found. Scanning cannot cover every project, so review before continuing.";
-"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Diskora will run exactly the displayed allowlisted command. It does not use Trash and cannot be undone.";
+"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven will run exactly the displayed allowlisted command. It does not use Trash and cannot be undone.";
 "Xóa simulator runtime không còn được Xcode hỗ trợ bằng simctl." = "Delete unsupported simulator runtimes with simctl.";
 "Dọn build cache, network và container đã dừng; không xóa volume." = "Clean build cache, networks, and stopped containers without deleting volumes.";
 "Dùng Homebrew để xóa download cũ và phiên bản package không còn cần thiết." = "Use Homebrew to remove old downloads and unneeded package versions.";
@@ -203,12 +203,12 @@
 "Tắt lịch" = "Disable Schedule";
 "Lần chạy gần nhất" = "Last Run";
 "Không thể cập nhật lịch quét" = "Unable to Update Schedule";
-"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Scheduled scans only notify; Diskora never deletes data automatically.";
-"Lịch quét chỉ thông báo; Toolbox không tự xóa dữ liệu." = "Scheduled scans only notify; Toolbox never deletes data automatically.";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Toolbox không tự xóa" = "The system receipt is evidence only; Toolbox never deletes it automatically";
-"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Toolbox không xóa database hệ thống" = "sfltool detected a login/background item; evidence is shown without deleting system databases";
-"Toolbox chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Toolbox cleans only after confirmation and prefers each tool's official command.";
-"Toolbox sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Toolbox will run exactly the displayed allowlisted command. It does not use Trash and cannot be undone.";
+"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Scheduled scans only notify; Orven never deletes data automatically.";
+"Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu." = "Scheduled scans only notify; Orven never deletes data automatically.";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa" = "The system receipt is evidence only; Orven never deletes it automatically";
+"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Orven không xóa database hệ thống" = "sfltool detected a login/background item; evidence is shown without deleting system databases";
+"Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven cleans only after confirmation and prefers each tool's official command.";
+"Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven will run exactly the displayed allowlisted command. It does not use Trash and cannot be undone.";
 "Lịch sử, vị trí Trash và khôi phục có kiểm tra xung đột" = "History, Trash locations, and conflict-safe restoration";
 "thao tác" = "operations";
 "Chưa có lịch sử" = "No History Yet";
@@ -242,7 +242,7 @@
 "Cần xem lại" = "Review";
 "Được bảo vệ" = "Protected";
 "Chưa chọn project root" = "No Project Root Selected";
-"Toolbox chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Toolbox scans only folders you select and offers artifacts only when ecosystem markers are present.";
+"Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Orven scans only folders you select and offers artifacts only when ecosystem markers are present.";
 "Chọn project…" = "Choose Projects…";
 "Tất cả hệ sinh thái" = "All Ecosystems";
 "Hệ sinh thái" = "Ecosystem";
@@ -250,7 +250,7 @@
 "Tìm đường dẫn" = "Search Paths";
 "Sẵn sàng quét" = "Ready to Scan";
 "Không có artifact phù hợp" = "No Matching Artifacts";
-"Toolbox sẽ nhận diện output có thể tạo lại từ marker dự án." = "Toolbox identifies regenerable output from project markers.";
+"Orven sẽ nhận diện output có thể tạo lại từ marker dự án." = "Orven identifies regenerable output from project markers.";
 "Không có source, manifest, lockfile hoặc thư mục chưa biết nào được đề xuất." = "No source, manifest, lockfile, or unknown folder is offered.";
 "Thêm project…" = "Add Projects…";
 "Chuyển vào Trash…" = "Move to Trash…";

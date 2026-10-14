@@ -1,5 +1,6 @@
 import SwiftUI
 import ToolboxCore
+import ToolboxMonitoring
 import ToolboxStorage
 
 @MainActor
@@ -37,7 +38,7 @@ final class ToolboxSettingsViewModel: ObservableObject {
     Task {
       do {
         try await scheduledScan.replaceLegacyLaunchAgent(intervalHours: hours)
-        statusMessage = L10n.text("Legacy schedule replaced after Toolbox bootstrap succeeded.")
+        statusMessage = L10n.text("Legacy schedule replaced after Orven bootstrap succeeded.")
       } catch {
         errorMessage = error.localizedDescription
       }
@@ -61,7 +62,7 @@ final class ToolboxSettingsViewModel: ObservableObject {
         statusMessage =
           if let latestVersion, let current, current < latestVersion {
             String(
-              format: L10n.text("Toolbox %@ is available."), latestVersion.description)
+              format: L10n.text("Orven %@ is available."), latestVersion.description)
           } else {
             L10n.text("You are using the latest public release.")
           }
@@ -74,12 +75,33 @@ final class ToolboxSettingsViewModel: ObservableObject {
 }
 
 struct SettingsView: View {
+  @AppStorage(AppAppearance.storageKey) private var appearanceCode = AppAppearance.system.rawValue
   @StateObject private var model = ToolboxSettingsViewModel()
+  @ObservedObject private var monitoring = ToolboxRuntime.shared.monitoring
   @State private var confirmsScheduleReplacement = false
   @State private var showsError = false
 
   var body: some View {
     Form {
+      Section(L10n.text("Appearance")) {
+        Picker(L10n.text("Appearance"), selection: $appearanceCode) {
+          ForEach(AppAppearance.allCases) { Text($0.title).tag($0.rawValue) }
+        }
+      }
+      Section(L10n.text("Monitoring")) {
+        Toggle(L10n.text("Menu bar quick diagnostics"), isOn: $monitoring.menuBarEnabled)
+        Picker(L10n.text("Menu bar indicator"), selection: $monitoring.menuBarIndicator) {
+          Text(L10n.text("CPU")).tag(MenuBarIndicator.cpu)
+          Text(L10n.text("Memory")).tag(MenuBarIndicator.memory)
+          Text(L10n.text("Network")).tag(MenuBarIndicator.network)
+        }.disabled(!monitoring.menuBarEnabled)
+        Text(
+          L10n.text(
+            "Disabled by default. When enabled, menu bar and windows share one sampler. Background sampling runs every 5 seconds; Quit stops it."
+          )
+        )
+        .font(.caption).foregroundStyle(.secondary)
+      }
       Section(L10n.text("Privacy and coverage")) {
         switch model.coverage {
         case .full:
@@ -110,7 +132,7 @@ struct SettingsView: View {
             Text(L10n.text("7 days")).tag(168)
           }
           .pickerStyle(.segmented)
-          Button(L10n.text("Replace with Toolbox schedule…")) {
+          Button(L10n.text("Replace with Orven schedule…")) {
             confirmsScheduleReplacement = true
           }
           .disabled(model.isReplacingSchedule)
@@ -130,7 +152,7 @@ struct SettingsView: View {
       Section(L10n.text("Updates")) {
         Text(
           L10n.text(
-            "Only when you click the button, Toolbox requests public release metadata from GitHub. No scan or device data is sent."
+            "Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent."
           )
         )
         .foregroundStyle(.secondary)
@@ -154,7 +176,10 @@ struct SettingsView: View {
       }
     }
     .formStyle(.grouped)
-    .frame(width: 620, height: 560)
+    .scrollContentBackground(.hidden)
+    .background(OrvenTheme.canvas)
+    .tint(OrvenTheme.action)
+    .frame(width: 660, height: 620)
     .onAppear { model.refresh() }
     .onChange(of: model.errorMessage) { showsError = $0 != nil }
     .confirmationDialog(
@@ -166,7 +191,7 @@ struct SettingsView: View {
     } message: {
       Text(
         L10n.text(
-          "Toolbox first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds."
+          "Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds."
         ))
     }
     .alert(L10n.text("Settings error"), isPresented: $showsError) {

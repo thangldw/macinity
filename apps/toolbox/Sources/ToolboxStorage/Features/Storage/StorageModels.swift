@@ -59,4 +59,13 @@ struct StorageSnapshot: Sendable {
   let categories: [CategoryUsage]
   let developerData: [DeveloperUsage]
   let completedAt: Date
+  var comparisonFolders: [String: Int64]? = nil
+  var rootIdentity: String? = nil
+}
+
+func storageRootIdentity(_ root: URL) -> String? {
+  let attributes = try? FileManager.default.attributesOfItem(atPath: root.path)
+  let device = (attributes?[.systemNumber] as? NSNumber)?.stringValue
+  let inode = (attributes?[.systemFileNumber] as? NSNumber)?.stringValue
+  return device.flatMap { device in inode.map { device + ":" + $0 } }
 }

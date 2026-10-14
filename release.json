@@ -1,0 +1,23 @@
+{
+  "product": "Orven",
+  "version": "3.0.0",
+  "tag": "v3.0.0",
+  "channel": "stable",
+  "status": "preparing",
+  "minimumMacOS": "13.0",
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "app": "Orven.app",
+  "dmg": "Orven-3.0.0.dmg",
+  "notarized": false,
+  "signing": "ad-hoc",
+  "repository": "thangldw/toolbox",
+  "knownLimitations": [
+    "Current native foreground resource profile remains unverified; prior candidates exceeded the 2% CPU target.",
+    "Physical Intel/macOS13 and active Ethernet hardware are unverified.",
+    "Full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified.",
+    "Mapped AppleSMC sensor availability varies by model; missing readings stay unavailable."
+  ]
+}

@@ -1,8 +1,10 @@
 import Foundation
 import ToolboxCore
+import ToolboxMonitoring
 
 enum ToolboxRoute: Equatable {
   case section(ToolboxSection)
+  case inspectProcess(ProcessIdentity)
   case reviewStorage(path: String)
 
   var storagePath: String? {
@@ -15,6 +17,7 @@ enum ToolboxRoute: Equatable {
 final class ToolboxCoordinator: ObservableObject {
   @Published var selectedSection: ToolboxSection
   @Published private(set) var storageFocusPath: String?
+  @Published private(set) var processFocus: ProcessIdentity?
   @Published private(set) var recoverableBytes: Int64 = 0
   @Published private(set) var attentionCount = 0
   @Published private(set) var reducedCoverage = false
@@ -39,12 +42,17 @@ final class ToolboxCoordinator: ObservableObject {
   func open(_ route: ToolboxRoute) {
     switch route {
     case .section(let section):
-      selectedSection = section
+      if selectedSection != section { selectedSection = section }
+    case .inspectProcess(let identity):
+      if processFocus != identity { processFocus = identity }
+      if selectedSection != .processes { selectedSection = .processes }
     case .reviewStorage:
-      storageFocusPath = route.storagePath
-      selectedSection = .storage
+      if storageFocusPath != route.storagePath { storageFocusPath = route.storagePath }
+      if selectedSection != .storage { selectedSection = .storage }
     }
-    defaults.set(selectedSection.rawValue, forKey: "toolbox.selectedSection")
+    if defaults.string(forKey: "toolbox.selectedSection") != selectedSection.rawValue {
+      defaults.set(selectedSection.rawValue, forKey: "toolbox.selectedSection")
+    }
   }
 
   func refreshSummaries() {

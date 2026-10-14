@@ -1,0 +1,3 @@
+"NSLocationUsageDescription" = "Orven dùng quyền vị trí để hiển thị tên mạng Wi-Fi và định danh điểm truy cập khi bạn kiểm tra hoặc quét Wi-Fi.";
+"NSLocationWhenInUseUsageDescription" = "Orven dùng quyền vị trí để hiển thị tên mạng Wi-Fi và định danh điểm truy cập khi bạn kiểm tra hoặc quét Wi-Fi.";
+"NSLocalNetworkUsageDescription" = "Orven kết nối tới gateway hoặc đích cục bộ bạn chọn khi bắt đầu chẩn đoán mạng.";
