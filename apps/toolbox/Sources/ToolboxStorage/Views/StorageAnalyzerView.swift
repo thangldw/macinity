@@ -2,6 +2,8 @@ import SwiftUI
 import ToolboxCore
 
 struct StorageAnalyzerView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   @ObservedObject var model: AnalyzerViewModel
   @State private var showsError = false
 
@@ -21,7 +23,7 @@ struct StorageAnalyzerView: View {
             summary(snapshot)
             TreemapView(entries: snapshot.topFolders)
               .frame(height: 210)
-            if !model.folderDeltas.isEmpty {
+            if model.comparison != nil {
               deltaSection
             }
             categorySection(snapshot)
@@ -62,12 +64,24 @@ struct StorageAnalyzerView: View {
 
   private var deltaSection: some View {
     VStack(alignment: .leading, spacing: 10) {
-      Text("Thay đổi từ lần quét trước").font(.title2).fontWeight(.semibold)
+      Text(L10n.text("Storage Growth Detective")).font(.title2).fontWeight(.semibold)
+      if let comparison = model.comparison {
+        Text(L10n.text(comparison.status)).font(.callout).foregroundStyle(.secondary)
+        if let date = comparison.previousDate {
+          Text(
+            date.formatted(
+              .dateTime.year().month().day().hour().minute().locale(
+                AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale))
+          )
+          .font(.caption)
+        }
+        if comparison.deltas.isEmpty { Text(L10n.text("No comparable folder deltas to display.")) }
+      }
       ForEach(model.folderDeltas.prefix(10)) { delta in
         HStack {
           Image(systemName: delta.bytes > 0 ? "arrow.up.right" : "arrow.down.right")
             .foregroundStyle(delta.bytes > 0 ? .orange : .green)
-          Text(URL(fileURLWithPath: delta.path).lastPathComponent)
+          Text(delta.path).lineLimit(1).help(delta.path)
           Spacer()
           Text((delta.bytes > 0 ? "+" : "−") + ByteCount.string(abs(delta.bytes))).monospacedDigit()
         }

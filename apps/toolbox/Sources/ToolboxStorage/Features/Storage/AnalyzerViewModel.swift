@@ -9,7 +9,8 @@ final class AnalyzerViewModel: ObservableObject {
   @Published var isScanning = false
   @Published var status = "Chọn Quét dung lượng để bắt đầu"
   @Published var errorMessage: String?
-  @Published var folderDeltas: [StorageDelta] = []
+  @Published var comparison: StorageComparison?
+  var folderDeltas: [StorageDelta] { comparison?.deltas ?? [] }
 
   private var scanTask: Task<Void, Never>?
   private let analyzer = StorageAnalyzer()
@@ -25,11 +26,13 @@ final class AnalyzerViewModel: ObservableObject {
     if panel.runModal() == .OK, let url = panel.url {
       rootURL = url
       snapshot = nil
+      comparison = nil
       status = "Sẵn sàng quét \(url.path)"
     }
   }
 
   func scan() {
+    guard !isScanning else { return }
     scanTask?.cancel()
     isScanning = true
     errorMessage = nil
@@ -39,11 +42,17 @@ final class AnalyzerViewModel: ObservableObject {
     let root = rootURL
     scanTask = Task {
       do {
-        let result = try await Task.detached(priority: .userInitiated) {
+        let worker = Task.detached(priority: .userInitiated) {
           try analyzer.scan(rootURL: root)
-        }.value
+        }
+        let result = try await withTaskCancellationHandler {
+          try await worker.value
+        } onCancel: {
+          worker.cancel()
+        }
+        try Task.checkCancellation()
         snapshot = result
-        folderDeltas = trendStore.compareAndSave(result)
+        comparison = try trendStore.compareAndSave(result)
         status =
           "Đã quét \(result.fileCount.formatted()) tệp • \(ByteCount.string(result.scannedBytes))"
       } catch is CancellationError {

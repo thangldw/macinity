@@ -1,111 +1,79 @@
-# Toolbox Privacy
-
-[English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
+# Orven Privacy
 
 ## English
 
-### Local processing
+### Local processing and stored data
 
-Toolbox has no account, telemetry, advertising SDK, analytics endpoint, or built-in cloud synchronization. Scans, snapshots, hashes, photo analysis, evidence, activity, migration, and recovery data are processed on the Mac. Toolbox does not upload file contents and does not declare software malicious.
+Orven has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Orven.
 
-### Data read
+State remains under `~/Library/Application Support/Toolbox` for upgrade compatibility: cleanup/recovery history, change sessions/snapshots/evidence, storage checkpoints and migration state. Opt-in `health-history-v1.json` holds system CPU/memory/pressure/thermal and available mapped sensors, with availability/source/unit/timestamps; it excludes process names, paths and network endpoints. Retention is24h/7d, at most10080 records/36fields/24MiB. File budget can omit older observations sooner. Expired observations are removed on a successful later write; an app that does not run does not actively erase them. Corrupt/unknown/oversized files are preserved and block writes.
 
-The exact read scope depends on the workflow, roots selected by the user, and macOS permissions. Toolbox may read filesystem paths and metadata, allocated sizes, partial and full file hashes, image features and metadata, project markers, application bundle metadata, code-signing identifiers, package receipts, Launch Services and background-item registration, shell/PATH configuration, configuration profiles, browser-extension metadata, and FSEvents observed during an active trace. Package and registration records are used as evidence, not as deletion authorization.
+Sensor sessions contain at most360 points in memory until Quit. Alerts contain at most100 in-app events. Socket-change and network-path timelines are opt-in bounded session data, not disk identity history. Stop preserves a recording session; starting a new session replaces it. Existing management history stays until explicitly managed.
 
-Install Trace accepts `.dmg`, `.pkg`, and `.app` paths for identification and evidence capture. It does not mount or execute the dropped installer; the user performs installation, update, or uninstall through the normal macOS flow.
+### Network activity
 
-### Data stored
+Check for Updates explicitly requests `https://api.github.com/repos/thangldw/toolbox/releases/latest`; no scan report is attached. Wi-Fi/LAN tools run only explicit refresh/scan/probe operations. DNS resolution queries the system resolver; ICMP latency uses up to20 probes, and connection checks use optional gateway ICMP3 and TCP443 without application payload. Destinations/resolvers can observe ordinary connection metadata, source IP and queried hostnames. Numeric-IP diagnostics skip DNS. Nearby Wi-Fi uses CoreWLAN, with identities possibly redacted by macOS. No background bandwidth test, packet capture, firewall, network configuration change or automatic upload is provided.
 
-Local application state is stored under `~/Library/Application Support/Toolbox`. It can include cleanup and recovery history in `history.json`, Change Timeline sessions and snapshots in `sessions.json`, `active-snapshot.json`, `active-trace-metadata.json`, and `trusted-baseline.json`, evidence in `evidence-v1.json`, activity in `activity-v1.json`, storage checkpoints, migration state in `migration-v1.json`, and locally generated reports. `active-trace-metadata.json` may contain the selected installer source URL/path, display name, installer kind, and observation timestamp until finish or cancel clears active state; only an unexpected interruption may retain it for reduced-coverage recovery. Recovery entries can contain original and Trash paths. Preferences such as language and scheduled-scan status use macOS preferences, and an enabled schedule creates `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
+### Permissions and exports
 
-### Permissions and mutations
+Optional Full Disk Access expands filesystem coverage. Location permission is requested by a dedicated button for Wi-Fi identity coverage; Local Network permission may be requested by macOS during probes. Notifications require explicit permission. None of these grants authorizes file deletion. Orven does not read Wi-Fi passwords or bypass protected locations.
 
-Full Disk Access is optional. Without it, protected paths may be unreadable and Toolbox reports reduced coverage. Notification permission is requested only when enabling scheduled scan notifications. Toolbox has no privileged helper and does not ask for broad permission to bypass macOS controls.
+JSON/CSV/Markdown export shows a frozen preview and saves to the destination you choose. Health reports retain raw measurement units, missing values and timestamps. Diagnostic reports may contain process/application names, paths and numeric endpoints; replacing the home prefix is not full anonymization. Review the exact report before sharing. Orven does not transmit it automatically.
 
-Mutations happen only after foreground review and immediate target revalidation. Eligible file operations use macOS Trash and record recovery paths. Scheduled runs only scan and notify; they never delete. Project scan roots and export destinations are selected by the user.
+### Controls and release trust
 
-### Exports
+History, alerts, menu-bar monitoring and connection tracking default off. Turning history on does not enable background sampling; inactivity/sleep/missing observations create gaps. Cleanup requires foreground review and immediate path revalidation; eligible file moves use Trash. Recovery refuses to overwrite an occupied path. Scheduled management scans never delete automatically.
 
-Change Timeline exports are generated locally as Markdown or JSON. Paths under the current home directory are redacted by replacing that prefix with `~`; names, attribution, reasons, timestamps, and paths outside the home directory can remain. The user chooses the destination and controls any later sharing. Review every report before transmitting it.
-
-### Network behavior
-
-Toolbox makes no automatic update request. Only after the user chooses **Check for Updates**, and only when no scan is active, it sends a GET request to `https://api.github.com/repos/thangldw/toolbox/releases/latest`. The request uses GitHub's JSON `Accept` header and a `User-Agent` containing the Toolbox version. Toolbox adds no scan results, paths, evidence, file metadata, or device fields to the request. There are no other built-in application network paths.
-
-### Legacy migration
-
-On first launch, Toolbox may inspect supported JSON under `~/Library/Application Support/Diskora`, `~/Library/Application Support/MacCleaner`, and `~/Library/Application Support/Changeora`. Import is opt-in: Toolbox decodes the source, merges supported records, writes them to its own directory, reads them back for verification, and records completion. Original legacy files are not modified or deleted, including after a migration failure.
-
-Replacing a legacy Diskora schedule is a separate, confirmed Settings action. Toolbox first installs and bootstraps its scan-only LaunchAgent; it removes the legacy plist only after that succeeds.
+Orven3.0.0 uses an explicitly authorized ad-hoc-signed, unnotarized release channel. This is not Apple trust approval. The [Security policy](SECURITY.md) and [user guide](docs/USER-GUIDE.md) explain installation and known limits. Website links and external support destinations have their own privacy policies.
 
 ## Tiếng Việt
 
-### Xử lý local
+### Xử lý local và dữ liệu lưu
 
-Toolbox không có account, telemetry, advertising SDK, analytics endpoint hoặc cloud synchronization tích hợp. Scan, snapshot, hash, phân tích ảnh, evidence, activity, migration và recovery data được xử lý trên máy Mac. Toolbox không upload nội dung file và không kết luận software là malware.
+Orven không có account/telemetry/advertising/analytics/cloudsync. Đọc metadata/hashfilesystem, imagefeatures, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute.
 
-### Dữ liệu được đọc
+Dữ liệu giữ trong `~/Library/Application Support/Toolbox` để tương thích nâng cấp: cleanup/recovery, change sessions/snapshots/evidence, storagecheckpoint/migration. `health-history-v1.json` opt-in lưu systemCPU/memory/pressure/thermal/sensor khả dụng, availability/source/unit/timestamp; không tênprocess/path/endpoint. Retention24h/7d, tối đa10080record/36field/24MiB; budget có thể bỏ record sớm. Expired bị loại trong write thành công sau đó; app không chạy không tự xóa. File corrupt/unknown/oversized giữ nguyên và chặn write.
 
-Read scope chính xác phụ thuộc workflow, root người dùng chọn và permission của macOS. Toolbox có thể đọc filesystem path/metadata, allocated size, partial/full file hash, image feature/metadata, project marker, application bundle metadata, code-signing identifier, package receipt, đăng ký Launch Services/background item, cấu hình shell/PATH, configuration profile, browser-extension metadata và FSEvents quan sát trong active trace. Package/registration record chỉ được dùng làm evidence, không phải authorization để xóa.
+Sensor session tối đa360point RAM tới Quit, alert tối đa100event. Socket-change/networkpath opt-in bounded/RAM, không identityhistorydisk. Stop giữ session; Start thay session cũ. History quản lý vẫn giữ tới khi được quản lý rõ ràng.
 
-Install Trace nhận path `.dmg`, `.pkg`, `.app` để nhận diện và capture evidence. Toolbox không mount hoặc execute installer được thả vào; người dùng thực hiện install, update hoặc uninstall qua luồng macOS bình thường.
+### Hoạt động mạng
 
-### Dữ liệu được lưu
+Check for Updates theo nút GET `https://api.github.com/repos/thangldw/toolbox/releases/latest`, không đính kèm scanreport. Wi-Fi/LAN chỉ refresh/scan/probe explicit. DNS dùng systemresolver; latency tối đa20ICMP; connectioncheck gatewayICMP3 tùy chọn/TCP443 không applicationpayload. Đích/resolver có thể thấy metadata kết nối, sourceIP/hostnamequery. NumericIP bỏ DNS. Nearby dùngCoreWLAN, identity có thể bị OSẩn. Không backgroundspeedtest/packetcapture/firewall/đổicấuhình/tựupload.
 
-Application state local được lưu dưới `~/Library/Application Support/Toolbox`. Dữ liệu có thể gồm cleanup/recovery history trong `history.json`; session/snapshot Change Timeline trong `sessions.json`, `active-snapshot.json`, `active-trace-metadata.json`, `trusted-baseline.json`; evidence trong `evidence-v1.json`; activity trong `activity-v1.json`; storage checkpoint; migration state trong `migration-v1.json`; và report tạo local. `active-trace-metadata.json` có thể chứa source URL/path của installer đã chọn, display name, installer kind và observation timestamp cho đến khi finish hoặc cancel xóa active state; chỉ unexpected interruption mới có thể giữ file này để recovery với reduced coverage. Recovery entry có thể chứa vị trí gốc và Trash. Preference như language và scheduled-scan status dùng macOS preferences; khi bật lịch, app tạo `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist`.
+### Quyền và export
 
-### Permission và mutation
+FullDiskAccess tùy chọn mở filesystemcoverage. Location qua nút riêng để đọc Wi-Fiidentity; macOS có thể xin LocalNetwork khi probe. Notification cần quyền riêng. Không quyền nào cấp quyền xóa file. Không đọc mật khẩu Wi-Fi/vượt protectedlocations.
 
-Full Disk Access là tùy chọn. Khi không có quyền này, protected path có thể không đọc được và Toolbox báo reduced coverage. Notification permission chỉ được yêu cầu khi bật thông báo scheduled scan. Toolbox không có privileged helper và không yêu cầu quyền rộng để bypass cơ chế macOS.
+Export JSON/CSV/Markdown preview chốt trước và lưu vào đích chọn. Health giữunit/missing/timestamp. Diagnostics có thể chứaprocess/appname/path/numericendpoint; thayhomeprefix không anonymize đầy đủ. Reviewreport trước chia sẻ; app không tự truyền.
 
-Mutation chỉ xảy ra sau foreground review và revalidation target ngay trước thao tác. File operation đủ điều kiện dùng macOS Trash và ghi recovery path. Lịch chạy chỉ scan/notify, tuyệt đối không xóa. Project scan root và export destination do người dùng chọn.
+### Điều khiển và trustrelease
 
-### Export
+History/alerts/menu-bar/connectiontracking mặc định off. Bật history không bật sampler nền; inactive/sleep/missing tạo gap. Cleanup cần foregroundreview/pathrevalidation; eligiblefile dùngTrash. Recovery không overwritepathoccupied. Scheduledscan không tự delete.
 
-Change Timeline export được tạo local dưới dạng Markdown hoặc JSON. Path trong home directory hiện tại được redaction bằng cách thay prefix đó bằng `~`; tên, attribution, reason, timestamp và path ngoài home có thể vẫn còn. Người dùng chọn destination và kiểm soát mọi chia sẻ sau đó. Phải review từng report trước khi truyền đi.
-
-### Network behavior
-
-Toolbox không tự gửi update request. Chỉ sau khi người dùng chọn **Check for Updates**, và chỉ khi không có scan active, app gửi GET tới `https://api.github.com/repos/thangldw/toolbox/releases/latest`. Request dùng JSON `Accept` header của GitHub và `User-Agent` chứa version Toolbox. Toolbox không thêm kết quả scan, path, evidence, file metadata hoặc device field vào request. Ứng dụng không có built-in network path nào khác.
-
-### Legacy migration
-
-Ở lần chạy đầu, Toolbox có thể inspect JSON được hỗ trợ dưới `~/Library/Application Support/Diskora`, `~/Library/Application Support/MacCleaner` và `~/Library/Application Support/Changeora`. Import là opt-in: Toolbox decode source, merge record được hỗ trợ, ghi vào directory riêng, đọc lại để verify và ghi completion. File legacy gốc không bị sửa hoặc xóa, kể cả khi migration fail.
-
-Thay lịch Diskora cũ là action riêng trong Settings, có confirmation. Toolbox cài và bootstrap scan-only LaunchAgent trước; app chỉ xóa legacy plist sau khi bước đó thành công.
+Orven3.0.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không Appletrustapproval. Xem [Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md). Linkwebsite/external support có policy riêng.
 
 ## 日本語
 
-### Local processing
+### Local処理と保存データ
 
-Toolbox には account、telemetry、advertising SDK、analytics endpoint、内蔵 cloud synchronization がありません。Scan、snapshot、hash、photo analysis、evidence、activity、migration、recovery data は Mac 上で処理されます。File content を upload せず、software を malware と判定しません。
+Account/telemetry/広告/analytics/cloudsyncなし。OS権限とworkflowcoverage内でfilesystemmetadata/hash、imagefeatures、installerFSEvents、receipt/registration、process/hardware/networkを読みます。Droppedinstallerをidentifyしますがmount/executeしません。
 
-### 読み取る data
+Upgrade互換のため`~/Library/Application Support/Toolbox`にcleanup/recovery、changesession/snapshot/evidence、storagecheckpoint/migrationを保存。Opt-in`health-history-v1.json`はsystemCPU/memory/pressure/thermal/availablesensorとavailability/source/unit/timestampのみ、processname/path/endpointなし。Retention24h/7d、最大10080record/36field/24MiB。Budgetで早期省略可能、期限切れは後の成功writeで削除、非実行appは能動削除しません。Corrupt/unknown/oversizedfile保持・write停止。
 
-正確な read scope は workflow、user が選択した root、macOS permission に依存します。Toolbox は filesystem path/metadata、allocated size、partial/full file hash、image feature/metadata、project marker、application bundle metadata、code-signing identifier、package receipt、Launch Services/background-item registration、shell/PATH configuration、configuration profile、browser-extension metadata、active trace 中に観測した FSEvents を読み取る場合があります。Package/registration record は evidence であり、削除 authorization ではありません。
+Sensor session最大360pointはQuitまでRAM、alert最大100event。Socket-change/networkpathはopt-inbounded/sessionRAMでdiskidentityhistoryなし。Stopは保持、Startは以前sessionを置換。Managementhistoryは明示管理まで保持。
 
-Install Trace は識別と evidence capture のため `.dmg`、`.pkg`、`.app` path を受け取ります。Drop された installer を mount または execute しません。User が通常の macOS flow で install、update、uninstall を実行します。
+### Network動作
 
-### 保存する data
+明示Check for Updatesは`https://api.github.com/repos/thangldw/toolbox/releases/latest`へGET、scanreport添付なし。Wi-Fi/LANは明示refresh/scan/probeのみ。DNSはsystemresolver、latency最大20ICMP、connectioncheckはoptionalgatewayICMP3/TCP443・applicationpayloadなし。Destination/resolverに通常connectionmetadata/sourceIP/hostnamequeryが見える場合があります。NumericIPはDNS省略。NearbyはCoreWLAN、identityはOSredaction可能。Backgroundspeedtest/packetcapture/firewall/設定変更/自動uploadなし。
 
-Local application state は `~/Library/Application Support/Toolbox` に保存されます。Cleanup/recovery history の `history.json`、Change Timeline session/snapshot の `sessions.json`、`active-snapshot.json`、`active-trace-metadata.json`、`trusted-baseline.json`、evidence の `evidence-v1.json`、activity の `activity-v1.json`、storage checkpoint、migration state の `migration-v1.json`、local 生成 report を含む場合があります。`active-trace-metadata.json` は、finish または cancel が active state を消去するまで、選択した installer の source URL/path、display name、installer kind、observation timestamp を含む場合があります。Reduced-coverage recovery のために保持されるのは unexpected interruption の場合だけです。Recovery entry は original/Trash path を含む場合があります。Language と scheduled-scan status などの preference は macOS preferences を使い、schedule を有効にすると `~/Library/LaunchAgents/com.thang.toolbox.scheduled-scan.plist` を作成します。
+### 権限とexport
 
-### Permission と mutation
+OptionalFullDiskAccessはfilesystemcoverage拡大。Locationは専用buttonでWi-Fiidentity用、probe中にOSがLocalNetwork権限を要求する場合があります。Notificationは明示権限。権限は削除許可ではなくWi-Fipassword/protectedlocation回避なし。
 
-Full Disk Access は任意です。許可しない場合、protected path を読めず reduced coverage と表示することがあります。Notification permission は scheduled scan notification を有効にする場合だけ要求します。Toolbox には privileged helper がなく、macOS control を bypass する広範な permission を要求しません。
+JSON/CSV/Markdownは凍結preview後、選択先へ保存。Healthはunit/missing/timestamp保持。Diagnosticsはprocess/appname/path/numericendpointを含む場合がありhomeprefix置換は完全匿名化ではありません。共有前にreportをreview、自動送信なし。
 
-Mutation は foreground review と action 直前の target revalidation 後だけ実行します。対象 file operation は macOS Trash を使い recovery path を記録します。Scheduled run は scan/notification のみで削除しません。Project scan root と export destination は user が選択します。
+### Controlとrelease trust
 
-### Export
+History/alerts/menu-bar/connectiontracking初期off。Historyを有効にしても背景samplingは開始せずinactive/sleep/missingはgap。Cleanupはforegroundreview/pathrevalidation、eligiblefileをTrashへ。Recoveryはoccupiedpathをoverwriteしません。Scheduledscanは自動deleteなし。
 
-Change Timeline export は local で Markdown または JSON として生成します。現在の home directory 配下の path は prefix を `~` に置換して redaction します。Name、attribution、reason、timestamp、home 外の path は残る場合があります。Destination とその後の共有は user が管理します。送信前に各 report を review してください。
-
-### Network behavior
-
-Toolbox は自動 update request を行いません。User が **Check for Updates** を選択し、scan が active でない場合だけ、`https://api.github.com/repos/thangldw/toolbox/releases/latest` に GET を送信します。Request は GitHub JSON `Accept` header と Toolbox version を含む `User-Agent` を使います。Scan result、path、evidence、file metadata、device field を request に追加しません。その他の built-in application network path はありません。
-
-### Legacy migration
-
-初回起動時、Toolbox は `~/Library/Application Support/Diskora`、`~/Library/Application Support/MacCleaner`、`~/Library/Application Support/Changeora` の supported JSON を inspect できます。Import は opt-in です。Source を decode し、supported record を merge して Toolbox directory に書き、再度読み取って verify し、completion を記録します。Migration failure の場合も含め、元の legacy file を変更・削除しません。
-
-Legacy Diskora schedule の置換は Settings の別 action で、confirmation が必要です。Toolbox は先に scan-only LaunchAgent を install/bootstrap し、成功した場合だけ legacy plist を削除します。
+Orven3.0.0は明示承認されたad-hoc署名/unnotarizedでAppletrustapprovalではありません。[Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md)参照。外部support/linkには別privacy policyがあります。

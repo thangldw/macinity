@@ -91,7 +91,7 @@ public struct ScheduledScanService: Sendable {
     guard appURL.pathExtension == "app" else {
       throw NSError(
         domain: Self.label, code: 1,
-        userInfo: [NSLocalizedDescriptionKey: "Chỉ có thể lập lịch từ bản Toolbox.app đã đóng gói."]
+        userInfo: [NSLocalizedDescriptionKey: "Chỉ có thể lập lịch từ bản Orven.app đã đóng gói."]
       )
     }
     let granted = try await notifications.requestAuthorization()
@@ -145,11 +145,11 @@ public struct ScheduledScanService: Sendable {
     let bytes = results.reduce(Int64(0)) { $0 + $1.bytes }
     let issues = results.compactMap(\.issue).count
     let content = UNMutableNotificationContent()
-    content.title = "Toolbox đã quét xong"
+    content.title = "Orven đã quét xong"
     content.body =
       issues == 0
-      ? "Có \(ByteCount.string(bytes)) dữ liệu an toàn để bạn xem xét. Toolbox chưa xóa gì."
-      : "Có \(ByteCount.string(bytes)) để xem xét và \(issues) vị trí không thể đọc. Toolbox chưa xóa gì."
+      ? "Có \(ByteCount.string(bytes)) dữ liệu an toàn để bạn xem xét. Orven chưa xóa gì."
+      : "Có \(ByteCount.string(bytes)) để xem xét và \(issues) vị trí không thể đọc. Orven chưa xóa gì."
     content.sound = .default
     try? await UNUserNotificationCenter.current().add(
       UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil))
@@ -172,7 +172,7 @@ final class ScheduledScanViewModel: ObservableObject {
   @Published var intervalHours = UserDefaults.standard.integer(
     forKey: "toolbox.scheduledScanIntervalHours")
   @Published var isWorking = false
-  @Published var status = "Lịch quét chỉ thông báo; Toolbox không tự xóa dữ liệu."
+  @Published var status = "Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu."
   @Published var errorMessage: String?
   private let service = ScheduledScanService()
 

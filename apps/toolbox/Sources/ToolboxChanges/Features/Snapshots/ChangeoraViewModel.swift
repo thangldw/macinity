@@ -176,7 +176,7 @@ final class ChangeoraViewModel: ObservableObject {
   func markdownReport(for session: WatchSession) -> String {
     let comparison = session.comparison
     var lines = [
-      "# Toolbox Change Timeline report",
+      "# Orven Change Timeline report",
       "",
       "- Phiên: \(session.title)",
       "- Bắt đầu: \(session.startedAt.formatted(date: .numeric, time: .standard))",
@@ -195,7 +195,7 @@ final class ChangeoraViewModel: ObservableObject {
         "| \(change.risk.title) | \(change.kind.rawValue) | \(item.category.rawValue) | \(escape(item.name)) | `\(escape(redact(item.path)))` | \(escape(change.attributedApplication ?? item.ownerHint ?? "—")) | \(escape(change.riskReason ?? "—")) |"
     }
     lines.append("")
-    lines.append("Generated locally by Toolbox \(AppMetadata.version).")
+    lines.append("Generated locally by Orven \(AppMetadata.version).")
     return lines.joined(separator: "\n")
   }
 

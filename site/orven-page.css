@@ -1,0 +1,20 @@
+/* Portfolio tokens and shared controls remain owned by site-shell.css. */
+.orven-page *{box-sizing:border-box}
+.orven-page{font-size:var(--text-body,16px);line-height:1.65;scrollbar-width:auto;scrollbar-color:var(--color-text-body,#6b7280) var(--color-surface,#f6f5f1)}
+.orven-page :is(header,main,footer){max-width:1440px;margin-inline:auto;padding-inline:clamp(20px,4vw,64px)}
+.product-header{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:80px;border-bottom:1px solid var(--color-border,#d9dce3)}
+.header-actions,.locale-switch,.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.actions{gap:24px;margin-top:24px}.site-brand{display:flex;gap:12px;align-items:center;text-decoration:none}.site-brand img{border-radius:9px}.header-actions{gap:16px}
+.intro{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:64px;padding-block:64px}.eyebrow,.meta{font-size:.85rem;color:var(--color-text-body,#525b6c)}.eyebrow{color:var(--color-accent,#2563eb);font-weight:600}
+h1{font-size:clamp(42px,5.5vw,80px);line-height:1.1;letter-spacing:-.035em;margin:16px 0 24px}h2{font-size:1.45rem;line-height:1.35;margin:0 0 16px}h3{font-size:1.1rem;line-height:1.4}.lead{font-size:1.2rem;max-width:760px}.trust{padding-top:8px}.hero-icon{display:block;margin-bottom:24px;border-radius:26px}.trust ul{padding-left:20px}.trust li{margin-bottom:8px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--color-border,#d9dce3)}.feature-grid article{padding:32px 24px 24px 0;min-width:0;border-bottom:1px solid var(--color-border,#d9dce3)}.feature-grid .icon{margin-bottom:20px}.icon{display:block;flex:none}.feature-grid p,.information p,.install p{color:var(--color-text-body,#525b6c)}
+.information{padding-block:40px;max-width:1000px}.install{display:grid;grid-template-columns:1fr 1fr;gap:64px;padding-block:40px;border-block:1px solid var(--color-border,#d9dce3)}details{margin-top:24px}summary{cursor:pointer;font-weight:600}a{color:var(--color-accent,#2563eb);text-underline-offset:4px}a:hover{color:var(--color-text-strong,#172033)}button,a,summary{touch-action:manipulation}button{cursor:pointer}:is(a,button,summary):focus-visible{outline:3px solid var(--color-accent,#2563eb);outline-offset:4px}button:disabled{cursor:default}footer{padding-block:32px 120px}footer nav{display:flex;gap:24px;flex-wrap:wrap}
+:root[data-theme=dark] .icon{filter:invert(1)}:lang(ja){font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.85;line-break:strict}:lang(zh){font-family:"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.85}
+.orven-page ::-webkit-scrollbar{width:12px;height:12px}.orven-page ::-webkit-scrollbar-track{background:var(--color-surface,#f6f5f1)}.orven-page ::-webkit-scrollbar-thumb{background:var(--color-text-body,#6b7280);border:3px solid var(--color-surface,#f6f5f1);border-radius:8px}.orven-page ::-webkit-scrollbar-thumb:hover{background:var(--color-text-strong,#172033)}
+@media(max-width:800px){.intro,.install{grid-template-columns:1fr;gap:32px}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{padding-block:40px}.product-header{padding-block:16px;flex-wrap:wrap}.trust{max-width:620px}}
+@media(max-width:520px){.feature-grid{grid-template-columns:1fr}h1{font-size:42px}.locale-switch .ui-button{padding-inline:10px}.feature-grid article{padding-right:0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media(forced-colors:active){.orven-page{scrollbar-color:auto}.orven-page ::-webkit-scrollbar-thumb{background:ButtonText;border-color:Canvas}a,button,summary{forced-color-adjust:auto}}
+
+.orven-page .ui-button-primary{background:var(--color-accent);color:var(--color-on-accent);border-color:var(--color-accent)}
+.orven-page .ui-button-primary:hover{background:var(--color-accent);filter:brightness(.94)}
+html{scroll-padding-block-end:100px}

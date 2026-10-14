@@ -2,6 +2,8 @@ import SwiftUI
 import ToolboxCore
 
 struct PageHeader: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   let title: String
   let subtitle: String
   let symbol: String
@@ -29,6 +31,8 @@ struct PageHeader: View {
       }
     }
     .padding(24)
+    .environment(
+      \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale)
   }
 }
 
@@ -75,6 +79,8 @@ struct RiskBadge: View {
 }
 
 struct EmptyStateView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   let title: String
   let symbol: String
   let detail: String
@@ -90,6 +96,8 @@ struct EmptyStateView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .padding(30)
+    .environment(
+      \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale)
   }
 }
 

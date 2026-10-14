@@ -1,0 +1,26 @@
+{
+  "product": "Orven",
+  "version": "3.0.0",
+  "observedUTC": "2026-10-14T17:11:45.338017+00:00",
+  "scope": "Local release candidate; CI and published assets are verified separately.",
+  "checksPassed": [
+    "96 XCTest",
+    "strict Swift formatting",
+    "all five smoke contracts",
+    "four-locale localization lint",
+    "universal arm64/x86_64 build",
+    "ad-hoc bundle signature and distribution contract",
+    "DMG checksum, mount and first-launch guidance",
+    "documentation, diagram and GitHub community contracts",
+    "site contract",
+    "adoption-report regression"
+  ],
+  "localDMGSHA256": "9f95c18c7d81b9b439a15afe86b6ea5a3389d01f5bb9208cde8f1f16b27e5d7b",
+  "localBinarySHA256": "354cee65e3f1d27d6dd944e0b3a2badee482440d0edda4b79e06402bc9dedaef",
+  "nativeForegroundResourceProfile": "unverified",
+  "notarized": false,
+  "signing": "ad-hoc",
+  "websiteBrowserCoverage": "390px EN/VI/JA/ZH without horizontal overflow; theme/locale persisted on reload; Enter disclosure and sibling guide/privacy navigation; Support Escape restored focus. Desktop 1280px checked.",
+  "staticAudit": "Native strict audit passed. Website external event bindings are false positives; reviewed against preview.js and product-shell.js plus real browser actions.",
+  "nativeReleaseSmoke": "Launched current dist/Orven.app; Orven About and Wi-Fi/LAN route verified. Actual PID executable path matched release bundle. No resource benchmark claimed."
+}

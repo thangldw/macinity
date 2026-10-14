@@ -1,4 +1,4 @@
-# Contributing to Toolbox
+# Contributing to Orven
 
 [English](#english) · [Tiếng Việt](#tiếng-việt) · [日本語](#日本語)
 
@@ -8,7 +8,7 @@
 
 Open an issue for behavior or policy changes whose scope is not already agreed. Work on a focused branch, keep each commit reviewable, and use short imperative messages such as `feat: add conflict-safe restore`. Add a failing regression before implementation when practical, make the smallest source change, and update affected documentation in the same pull request.
 
-Preserve Toolbox's local-first safety contract. Mutations require explicit foreground review, exact canonical targets, immediate revalidation, and Trash-backed recovery whenever macOS permits. Never broaden deletion with globs, unresolved variables, name-only matching, symlink escape, or inferred project artifacts. New process execution must use exact executable and argument allowlists. New network behavior requires an explicit privacy design and must not transmit scan or device data.
+Preserve Orven's local-first safety contract. Mutations require explicit foreground review, exact canonical targets, immediate revalidation, and Trash-backed recovery whenever macOS permits. Never broaden deletion with globs, unresolved variables, name-only matching, symlink escape, or inferred project artifacts. New process execution must use exact executable and argument allowlists. New network behavior requires an explicit privacy design and must not transmit scan or device data.
 
 Do not commit build output, personal reports, credentials, signing identities, notarization material, or private sample data. Do not silently change release assets or convert historical records into current product claims.
 
@@ -23,6 +23,7 @@ swift test
 ./scripts/test_storage.sh
 ./scripts/test_changes.sh
 ./scripts/test_app.sh
+./scripts/test_monitoring.sh
 ./scripts/lint_localizations.swift
 swift build -c release
 ./scripts/build_app.sh
@@ -32,9 +33,9 @@ Command Line Tools can run the smoke gates and release build; `swift test` requi
 
 ### Localization
 
-Tracked Toolbox Markdown must contain complete `## English`, `## Tiếng Việt`, and `## 日本語` sections in that order. English is canonical for commands, identifiers, paths, endpoints, tags, SHAs, and checksums; Vietnamese and Japanese must retain the same requirements and limitations rather than summarize them.
+Tracked Orven Markdown must contain complete `## English`, `## Tiếng Việt`, and `## 日本語` sections in that order. English is canonical for commands, identifiers, paths, endpoints, tags, SHAs, and checksums; Vietnamese and Japanese must retain the same requirements and limitations rather than summarize them.
 
-The shipped GUI supports English and Vietnamese. Add every new user-facing string to both localization resources, preserve exact UI labels where documentation refers to them, and run `./scripts/lint_localizations.swift`. Do not translate source identifiers, commands, filenames, URLs, bundle identifiers, or evidence values.
+The shipped GUI supports English, Vietnamese, Japanese and Simplified Chinese. Add every new user-facing string to all four localization resources, preserve exact UI labels where documentation refers to them, and run `./scripts/lint_localizations.swift`. Do not translate source identifiers, commands, filenames, URLs, bundle identifiers, or evidence values.
 
 ### Accessibility
 
@@ -50,7 +51,7 @@ Reviewers check behavior against source and executable tests first, then workflo
 
 Mở issue cho thay đổi behavior hoặc policy chưa được thống nhất scope. Làm việc trên branch tập trung, giữ từng commit có thể review và dùng message mệnh lệnh ngắn như `feat: add conflict-safe restore`. Thêm regression đang fail trước implementation khi phù hợp, thực hiện thay đổi source nhỏ nhất và cập nhật tài liệu bị ảnh hưởng trong cùng pull request.
 
-Giữ contract an toàn local-first của Toolbox. Mutation cần foreground review rõ ràng, canonical target chính xác, revalidation ngay trước thao tác và recovery qua Trash khi macOS cho phép. Không mở rộng phạm vi xóa bằng glob, biến chưa resolve, name-only matching, symlink escape hoặc artifact project suy luận. Process execution mới phải dùng executable/argument allowlist chính xác. Network behavior mới cần privacy design rõ ràng và không được truyền scan hoặc device data.
+Giữ contract an toàn local-first của Orven. Mutation cần foreground review rõ ràng, canonical target chính xác, revalidation ngay trước thao tác và recovery qua Trash khi macOS cho phép. Không mở rộng phạm vi xóa bằng glob, biến chưa resolve, name-only matching, symlink escape hoặc artifact project suy luận. Process execution mới phải dùng executable/argument allowlist chính xác. Network behavior mới cần privacy design rõ ràng và không được truyền scan hoặc device data.
 
 Không commit build output, report cá nhân, credential, signing identity, notarization material hoặc sample data riêng tư. Không âm thầm thay release asset hoặc biến historical record thành current product claim.
 
@@ -65,6 +66,7 @@ swift test
 ./scripts/test_storage.sh
 ./scripts/test_changes.sh
 ./scripts/test_app.sh
+./scripts/test_monitoring.sh
 ./scripts/lint_localizations.swift
 swift build -c release
 ./scripts/build_app.sh
@@ -74,9 +76,9 @@ Command Line Tools chạy được smoke gate và release build; `swift test` tr
 
 ### Localization
 
-Markdown được track của Toolbox phải có đầy đủ section `## English`, `## Tiếng Việt`, `## 日本語` theo thứ tự đó. English là canonical cho command, identifier, path, endpoint, tag, SHA và checksum; bản Vietnamese/Japanese phải giữ cùng requirement/limitation thay vì tóm tắt.
+Markdown được track của Orven phải có đầy đủ section `## English`, `## Tiếng Việt`, `## 日本語` theo thứ tự đó. English là canonical cho command, identifier, path, endpoint, tag, SHA và checksum; bản Vietnamese/Japanese phải giữ cùng requirement/limitation thay vì tóm tắt.
 
-GUI được ship hỗ trợ English và Vietnamese. Thêm mọi user-facing string mới vào cả hai localization resource, giữ UI label chính xác khi tài liệu tham chiếu và chạy `./scripts/lint_localizations.swift`. Không dịch source identifier, command, filename, URL, bundle identifier hoặc evidence value.
+GUI hỗ trợ English, Vietnamese, Japanese và Simplified Chinese. Thêm mọi user-facing string mới vào cả bốn localization resource, giữ UI label chính xác khi tài liệu tham chiếu và chạy `./scripts/lint_localizations.swift`. Không dịch source identifier, command, filename, URL, bundle identifier hoặc evidence value.
 
 ### Accessibility
 
@@ -92,7 +94,7 @@ Reviewer đối chiếu behavior với source và executable test trước, sau 
 
 Scope が未合意の behavior または policy change は issue を作成します。Focused branch で作業し、各 commit を review 可能に保ち、`feat: add conflict-safe restore` のような短い imperative message を使います。可能な場合は implementation 前に failing regression を追加し、最小の source change を行い、影響する documentation を同じ pull request で更新します。
 
-Toolbox の local-first safety contract を保持します。Mutation には明示的 foreground review、exact canonical target、action 直前の revalidation、macOS が許す場合の Trash-backed recovery が必要です。Glob、未解決変数、name-only matching、symlink escape、推測した project artifact で削除範囲を広げません。新しい process execution は exact executable/argument allowlist を使います。新しい network behavior は明示的 privacy design を必要とし、scan/device data を送信してはいけません。
+Orven の local-first safety contract を保持します。Mutation には明示的 foreground review、exact canonical target、action 直前の revalidation、macOS が許す場合の Trash-backed recovery が必要です。Glob、未解決変数、name-only matching、symlink escape、推測した project artifact で削除範囲を広げません。新しい process execution は exact executable/argument allowlist を使います。新しい network behavior は明示的 privacy design を必要とし、scan/device data を送信してはいけません。
 
 Build output、personal report、credential、signing identity、notarization material、private sample data を commit しません。Release asset を黙って置換したり、historical record を current product claim に変えたりしません。
 
@@ -107,6 +109,7 @@ swift test
 ./scripts/test_storage.sh
 ./scripts/test_changes.sh
 ./scripts/test_app.sh
+./scripts/test_monitoring.sh
 ./scripts/lint_localizations.swift
 swift build -c release
 ./scripts/build_app.sh
@@ -116,9 +119,9 @@ Command Line Tools では smoke gate と release build を実行できます。�
 
 ### Localization
 
-追跡済み Toolbox Markdown は `## English`、`## Tiếng Việt`、`## 日本語` の完全な section をこの順序で持ちます。Command、identifier、path、endpoint、tag、SHA、checksum は English を canonical とし、Vietnamese/Japanese は summary ではなく同じ requirement と limitation を保持します。
+追跡済み Orven Markdown は `## English`、`## Tiếng Việt`、`## 日本語` の完全な section をこの順序で持ちます。Command、identifier、path、endpoint、tag、SHA、checksum は English を canonical とし、Vietnamese/Japanese は summary ではなく同じ requirement と limitation を保持します。
 
-公開 GUI は English と Vietnamese をサポートします。新しい user-facing string は両方の localization resource に追加し、documentation が参照する exact UI label を保持して `./scripts/lint_localizations.swift` を実行します。Source identifier、command、filename、URL、bundle identifier、evidence value は翻訳しません。
+公開 GUI は英語・ベトナム語・日本語・簡体字中国語をサポートします。新しい user-facing string は4言語の localization resource に追加し、documentation が参照する exact UI label を保持して `./scripts/lint_localizations.swift` を実行します。Source identifier、command、filename、URL、bundle identifier、evidence value は翻訳しません。
 
 ### Accessibility
 

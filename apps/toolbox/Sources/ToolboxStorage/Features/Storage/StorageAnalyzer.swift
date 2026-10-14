@@ -71,6 +71,7 @@ struct StorageAnalyzer: Sendable {
   {
     let manager = FileManager()
     let root = rootURL.resolvingSymlinksInPath().standardizedFileURL
+    let initialIdentity = storageRootIdentity(root)
     let keys: Set<URLResourceKey> = [
       .isRegularFileKey, .isSymbolicLinkKey, .fileAllocatedSizeKey,
       .totalFileAllocatedSizeKey, .fileSizeKey, .contentModificationDateKey,
@@ -103,10 +104,15 @@ struct StorageAnalyzer: Sendable {
 
     for case let fileURL as URL in enumerator {
       if Task.isCancelled { throw CancellationError() }
-      guard let values = try? fileURL.resourceValues(forKeys: keys),
-        values.isRegularFile == true,
-        values.isSymbolicLink != true
-      else { continue }
+      guard let values = try? fileURL.resourceValues(forKeys: keys) else {
+        inaccessibleCount += 1
+        continue
+      }
+      if values.isSymbolicLink == true {
+        enumerator.skipDescendants()
+        continue
+      }
+      guard values.isRegularFile == true else { continue }
       let normalizedFileURL =
         fileURL.path.hasPrefix(rootPath)
         ? fileURL.standardizedFileURL
@@ -168,7 +174,13 @@ struct StorageAnalyzer: Sendable {
       largeFiles: Array(largeFiles.sorted { $0.bytes > $1.bytes }.prefix(200)),
       categories: categories,
       developerData: developerData,
-      completedAt: Date()
+      completedAt: Date(),
+      comparisonFolders: folderSizes.count <= 5000
+        ? Dictionary(
+          uniqueKeysWithValues: folderSizes.map {
+            (root.appendingPathComponent($0.key).path, $0.value)
+          }) : nil,
+      rootIdentity: initialIdentity == storageRootIdentity(root) ? initialIdentity : nil
     )
   }
 

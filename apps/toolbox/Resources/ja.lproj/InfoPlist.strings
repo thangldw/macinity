@@ -1,0 +1,3 @@
+"NSLocationUsageDescription" = "Wi-Fi の確認やスキャン時にネットワーク名とアクセスポイントの識別情報を表示するため、位置情報へのアクセスを使用します。";
+"NSLocationWhenInUseUsageDescription" = "Wi-Fi の確認やスキャン時にネットワーク名とアクセスポイントの識別情報を表示するため、位置情報へのアクセスを使用します。";
+"NSLocalNetworkUsageDescription" = "ネットワーク診断を開始すると、選択したゲートウェイまたはローカルの接続先に接続します。";
