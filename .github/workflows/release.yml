@@ -65,7 +65,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Build and verify exact unsigned artifacts
+      - name: Build and verify exact ad-hoc artifacts
         run: |
           ./scripts/build_universal.sh
           ./scripts/build_dmg.sh

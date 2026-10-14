@@ -36,7 +36,9 @@
     "scripts/render_cask.sh",
     "tests/render_cask_test.sh",
     "apps/toolbox/Resources/ToolboxLogo.png",
-    "prototypes/ (source copied and byte-verified; generated dependencies excluded)"
+    "prototypes/ (source copied and byte-verified; generated dependencies excluded)",
+    "tests/fixtures/documentation_contract/unscoped-product-hunt-beta.fixture",
+    "tests/fixtures/documentation_contract/stale-product-hunt-launch.fixture"
   ],
   "preserved": "Source modules, application data namespace, raw local verification evidence, GitHub release/tag history",
   "retiredTestContract": "render_cask_test.sh guarded only the removed unsupported Homebrew generator; no production caller remains"

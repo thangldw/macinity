@@ -1,7 +1,7 @@
 {
   "product": "Orven",
   "version": "3.0.0",
-  "observedUTC": "2026-10-14T17:11:45.338017+00:00",
+  "observedUTC": "2026-10-14T17:33:20.046390+00:00",
   "scope": "Local release candidate; CI and published assets are verified separately.",
   "checksPassed": [
     "96 XCTest",
@@ -15,13 +15,15 @@
     "site contract",
     "adoption-report regression"
   ],
-  "localDMGSHA256": "9f95c18c7d81b9b439a15afe86b6ea5a3389d01f5bb9208cde8f1f16b27e5d7b",
-  "localBinarySHA256": "354cee65e3f1d27d6dd944e0b3a2badee482440d0edda4b79e06402bc9dedaef",
+  "localDMGSHA256": "f617ab836e5d4bf8739ef0d7e1d6fe1f60826a659217f3cbeb6b80ee044fd7db",
+  "localBinarySHA256": "620aa045da4e282ef9ada584da954b2bec354260f47eea0ac549a0c230719abc",
   "nativeForegroundResourceProfile": "unverified",
   "notarized": false,
   "signing": "ad-hoc",
   "websiteBrowserCoverage": "390px EN/VI/JA/ZH without horizontal overflow; theme/locale persisted on reload; Enter disclosure and sibling guide/privacy navigation; Support Escape restored focus. Desktop 1280px checked.",
   "staticAudit": "Native strict audit passed. Website external event bindings are false positives; reviewed against preview.js and product-shell.js plus real browser actions.",
-  "nativeReleaseSmoke": "Launched current dist/Orven.app; Orven About and Wi-Fi/LAN route verified. Actual PID executable path matched release bundle. No resource benchmark claimed.",
-  "ciCompatibilityFix": "Initial GitHub CI exposed a Swift sending-capture error in memory-pressure callback. Capture now promotes weak actor reference to an immutable local before creating Task; 96 local XCTest passed again. Updated CI and package validation pending."
+  "nativeReleaseSmoke": "Final callback-compatible local bundle launched; Health History and existing baseline rows rendered in Vietnamese with history disabled. Earlier branding smoke covered About and Wi-Fi/LAN. No current foreground resource benchmark claimed.",
+  "ciCompatibilityFix": "Immutable pressure actor capture, callback-only notification object access with sendable Bool/Void results, and bounded baseline view expressions. 96 local XCTest passed after final source repair. GitHub CI passed on bd9924629a2a9582f2448fef5559a149e77132b6.",
+  "localArtifactSourceCommit": "bd9924629a2a9582f2448fef5559a149e77132b6",
+  "ciRun": "https://github.com/thangldw/toolbox/actions/runs/38606954316"
 }

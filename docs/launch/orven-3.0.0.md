@@ -12,7 +12,7 @@ Bundle ID, executable/module identifiers and Application Support/Toolbox remain 
 
 ### Validation and known limits
 
-Tests, source/locale checks, universal packaging and exact release artifact verification are recorded in [readiness](../production/RELEASE-READINESS.md). Current foreground profiling, physical Intel/macOS 13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. Earlier resource deviations are not a current-package pass. Prior Toolbox releases remain in [GitHub release history](https://github.com/thangldw/toolbox/releases).
+Tests, source/locale checks, universal packaging and exact release artifact verification are recorded in [readiness](https://github.com/thangldw/toolbox/blob/v3.0.0/docs/production/RELEASE-READINESS.md). Current foreground profiling, physical Intel/macOS 13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. Earlier resource deviations are not a current-package pass. Prior Toolbox releases remain in [GitHub release history](https://github.com/thangldw/toolbox/releases).
 
 ## Tiếng Việt
 
@@ -26,7 +26,7 @@ Bundle ID/executable/module/Application Support/Toolbox giữ tương thích. Đ
 
 ### Validation và giới hạn
 
-[Readiness](../production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS 13Ethernet vật lý/full VoiceOver/Japanese copy/OS notification chưa proof. Resource deviations cũ không proofpackage mới. Release Toolbox cũ giữ trong [GitHubhistory](https://github.com/thangldw/toolbox/releases).
+[Readiness](https://github.com/thangldw/toolbox/blob/v3.0.0/docs/production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS 13Ethernet vật lý/full VoiceOver/Japanese copy/OS notification chưa proof. Resource deviations cũ không proofpackage mới. Release Toolbox cũ giữ trong [GitHubhistory](https://github.com/thangldw/toolbox/releases).
 
 ## 日本語
 
@@ -40,4 +40,4 @@ Bundle ID/executable/module/ApplicationSupportToolboxを互換維持。英語・
 
 ### Validationと制限
 
-[Readiness](../production/RELEASE-READINESS.md)にtests/source/locale/universal/artifactcheckを記録。Currentforeground/physicalIntelmacOS 13Ethernet/full VoiceOver/Japanese copy/OS notification未検証、以前resourceはnewpackagepassではありません。旧Toolboxreleaseは[GitHubhistory](https://github.com/thangldw/toolbox/releases)に保持。
+[Readiness](https://github.com/thangldw/toolbox/blob/v3.0.0/docs/production/RELEASE-READINESS.md)にtests/source/locale/universal/artifactcheckを記録。Currentforeground/physicalIntelmacOS 13Ethernet/full VoiceOver/Japanese copy/OS notification未検証、以前resourceはnewpackagepassではありません。旧Toolboxreleaseは[GitHubhistory](https://github.com/thangldw/toolbox/releases)に保持。
