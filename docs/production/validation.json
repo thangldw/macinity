@@ -22,5 +22,6 @@
   "signing": "ad-hoc",
   "websiteBrowserCoverage": "390px EN/VI/JA/ZH without horizontal overflow; theme/locale persisted on reload; Enter disclosure and sibling guide/privacy navigation; Support Escape restored focus. Desktop 1280px checked.",
   "staticAudit": "Native strict audit passed. Website external event bindings are false positives; reviewed against preview.js and product-shell.js plus real browser actions.",
-  "nativeReleaseSmoke": "Launched current dist/Orven.app; Orven About and Wi-Fi/LAN route verified. Actual PID executable path matched release bundle. No resource benchmark claimed."
+  "nativeReleaseSmoke": "Launched current dist/Orven.app; Orven About and Wi-Fi/LAN route verified. Actual PID executable path matched release bundle. No resource benchmark claimed.",
+  "ciCompatibilityFix": "Initial GitHub CI exposed a Swift sending-capture error in memory-pressure callback. Capture now promotes weak actor reference to an immutable local before creating Task; 96 local XCTest passed again. Updated CI and package validation pending."
 }

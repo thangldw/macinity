@@ -12,7 +12,7 @@ Bundle ID, executable/module identifiers and Application Support/Toolbox remain 
 
 ### Validation and known limits
 
-Tests, source/locale checks, universal packaging and exact release artifact verification are recorded in [readiness](../production/RELEASE-READINESS.md). Current foreground profiling, physical Intel/macOS13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. Earlier resource deviations are not a current-package pass. Prior Toolbox releases remain in [GitHub release history](https://github.com/thangldw/toolbox/releases).
+Tests, source/locale checks, universal packaging and exact release artifact verification are recorded in [readiness](../production/RELEASE-READINESS.md). Current foreground profiling, physical Intel/macOS 13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. Earlier resource deviations are not a current-package pass. Prior Toolbox releases remain in [GitHub release history](https://github.com/thangldw/toolbox/releases).
 
 ## Tiếng Việt
 
@@ -26,18 +26,18 @@ Bundle ID/executable/module/Application Support/Toolbox giữ tương thích. Đ
 
 ### Validation và giới hạn
 
-[Readiness](../production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS13Ethernet vật lý/fullVO/JAcopy/OSnotification chưa proof. Resource deviations cũ không proofpackage mới. Release Toolbox cũ giữ trong [GitHubhistory](https://github.com/thangldw/toolbox/releases).
+[Readiness](../production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS 13Ethernet vật lý/full VoiceOver/Japanese copy/OS notification chưa proof. Resource deviations cũ không proofpackage mới. Release Toolbox cũ giữ trong [GitHubhistory](https://github.com/thangldw/toolbox/releases).
 
 ## 日本語
 
 ### Orven 3.0.0
 
-OrvenはToolboxの新しい名前とringidentityです。NativeUIにlive monitoring、hardware profile/available mapped sensor、Sleep Inspector、Wi-Fi/LANと明示diagnostics、optional healthhistory/baseline、sensorrecord/export、smartalert、sessionconnectionchange、appdossier/growth/workspace/localreportを追加。Installer evidence、reviewed storage action/recoveryを維持。
+OrvenはToolboxの新しい名前とring identityです。Native UIにlive monitoring、hardware profile/available mapped sensor、Sleep Inspector、Wi-Fi/LANと明示diagnostics、optional health history/baseline、sensor record/export、smart alert、session connection change、appdossier/growth/workspace/local reportを追加。Installer evidence、reviewed storage action/recoveryを維持。
 
 ### Compatibilityとtrust
 
-BundleID/executable/module/ApplicationSupportToolboxを互換維持。英語・ベトナム語・日本語・簡体字中国語を同梱。配布は明示承認されたad-hoc/unnotarized。Homebrew/firewall/fancontrol/autoCPUcap-suspension/exclusivesnapshotbytes/calibratedCPU-Z/HWMonitorparityの主張なし。
+Bundle ID/executable/module/ApplicationSupportToolboxを互換維持。英語・ベトナム語・日本語・簡体字中国語を同梱。配布は明示承認されたad-hoc/unnotarized。Homebrew/firewall/fan control/autoCPU cap-suspension/exclusive snapshot bytes/calibratedCPU-Z/HWMonitorparityの主張なし。
 
 ### Validationと制限
 
-[Readiness](../production/RELEASE-READINESS.md)にtests/source/locale/universal/artifactcheckを記録。Currentforeground/physicalIntelmacOS13Ethernet/fullVO/JAcopy/OSnotification未検証、以前resourceはnewpackagepassではありません。旧Toolboxreleaseは[GitHubhistory](https://github.com/thangldw/toolbox/releases)に保持。
+[Readiness](../production/RELEASE-READINESS.md)にtests/source/locale/universal/artifactcheckを記録。Currentforeground/physicalIntelmacOS 13Ethernet/full VoiceOver/Japanese copy/OS notification未検証、以前resourceはnewpackagepassではありません。旧Toolboxreleaseは[GitHubhistory](https://github.com/thangldw/toolbox/releases)に保持。

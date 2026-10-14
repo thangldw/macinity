@@ -8,7 +8,7 @@ Orven brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostics a
 
 ### Install and release status
 
-Orven 3.0.0 is being prepared for production. Use the [release page](https://github.com/thangldw/toolbox/releases) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS13 verification remains incomplete. Homebrew installation is unavailable.
+Orven 3.0.0 is being prepared for production. Use the [release page](https://github.com/thangldw/toolbox/releases) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
 
 Download the DMG and matching SHA-256 file, verify the checksum, open the disk image, read the first-launch guide and drag Orven.app into Applications. Retain your data when upgrading: bundle ID `com.thang.toolbox` and `~/Library/Application Support/Toolbox` intentionally remain unchanged.
 
@@ -42,7 +42,7 @@ Orven hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-Fi/
 
 ### Cài đặt và trạng thái release
 
-Orven 3.0.0 đang được chuẩn bị cho production. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS13 vật lý còn thiếu. Chưa có Homebrew.
+Orven 3.0.0 đang được chuẩn bị cho production. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
 
 Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, đọc hướng dẫn và kéo Orven.app vào Applications. Khi nâng cấp giữ dữ liệu: bundle ID `com.thang.toolbox` và `~/Library/Application Support/Toolbox` được giữ nguyên có chủ đích.
 
@@ -60,7 +60,7 @@ Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, �
 
 ### Privacy và giới hạn
 
-Không account/telemetry/analytics/tự xóa/cloudsync. Probe explicit kết nối đích bạn nhập; checkupdate kết nối GitHub. History tùy chọn/bounded. Quyền mở coverage không cấp quyền xóa. Mapping sensor theo model; linkrate không Internet speed, snapshot không proofexclusivebytes, quan sát connection không firewall. [Privacy](PRIVACY.md), [Security](SECURITY.md), [release readiness](docs/production/RELEASE-READINESS.md) ghi checks đã chạy và giới hạn.
+Không account/telemetry/analytics/tự xóa/cloud sync. Probe explicit kết nối đích bạn nhập; checkupdate kết nối GitHub. History tùy chọn/bounded. Quyền mở coverage không cấp quyền xóa. Mapping sensor theo model; linkrate không Internet speed, snapshot không proofexclusivebytes, quan sát connection không firewall. [Privacy](PRIVACY.md), [Security](SECURITY.md), [release readiness](docs/production/RELEASE-READINESS.md) ghi checks đã chạy và giới hạn.
 
 ### Build, đóng góp và tài liệu
 
@@ -76,7 +76,7 @@ OrvenはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、復
 
 ### インストールとrelease状況
 
-Orven3.0.0はproduction向け準備中です。[Release page](https://github.com/thangldw/toolbox/releases)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS13検証は未完。Homebrewなし。
+Orven 3.0.0はproduction向け準備中です。[Release page](https://github.com/thangldw/toolbox/releases)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
 
 同versionのDMG/SHA-256をdownloadしてchecksum確認、diskimage内guideを読みOrven.appをApplicationsへ。Upgrade時のデータを保持するためbundleID `com.thang.toolbox`と`~/Library/Application Support/Toolbox`を意図的に維持します。
 
@@ -87,17 +87,17 @@ Orven3.0.0はproduction向け準備中です。[Release page](https://github.com
 - Wi-Fi/LAN：interface/IP/gateway/DNS/media/carrier、signal/channel/linkrate、明示nearby scan。
 - Network測定：入力destinationのDNS/TCP443と20ICMPprobe latency/loss/jitter、cancel/以前のtimestamp保持。
 - Health：初期offのboundedlocalhistory、medianbaseline、sessionchart/JSON/CSV、opt-inin-appalert。
-- Networkchanges：opt-insessionconnection/path観測、packetcapture/firewallなし。
+- Networkchanges：opt-insessionconnection/path観測、packet capture/firewallなし。
 - Storage/projects：folderallocation/duplicatecandidate、選択root内rebuildableartifact、developerworkspace/growthcheckpoint。
 - Applications：dossier/evidence-linkedleftover。Evidenceは削除許可ではなく、CPUpriority変更は明示reviewが必要。
 - Changes/recovery：installerevidence/comparison、review後のeligibleTrash移動、元pathが空の場合のrestore。
 
 ### Privacyと制限
 
-Account/telemetry/analytics/自動削除/cloudsyncなし。明示probeは入力先へ、updatecheckはGitHubへ接続。Historyはoptional/bounded。権限はcoverageを広げますが削除許可ではありません。Sensorはmodel依存、linkrateはInternet速度ではなくsnapshotのexclusivebytesやfirewallを証明しません。[Privacy](PRIVACY.md)、[Security](SECURITY.md)、[release readiness](docs/production/RELEASE-READINESS.md)に検証と制限を記載。
+Account/telemetry/analytics/自動削除/cloud syncなし。明示probeは入力先へ、updatecheckはGitHubへ接続。Historyはoptional/bounded。権限はcoverageを広げますが削除許可ではありません。Sensorはmodel依存、linkrateはInternet速度ではなくsnapshotのexclusivebytesやfirewallを証明しません。[Privacy](PRIVACY.md)、[Security](SECURITY.md)、[release readiness](docs/production/RELEASE-READINESS.md)に検証と制限を記載。
 
 ### Build・貢献・資料
 
 Swift 6 và bộ Xcode đầy đủでbuild。`apps/toolbox`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Orven.app`、internalexecutable/moduleは互換性のためToolboxを維持。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
 
-[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のToolboxreleaseはGitHubtag/releasehistoryで保持。[MIT](LICENSE)。
+[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のToolboxreleaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
