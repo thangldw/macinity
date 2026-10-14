@@ -90,7 +90,16 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
       "Waiting for macOS notification permission. Respond to the system prompt if it appears."
     defer { requestingPermission = false }
     do {
-      let allowed = try await center.requestAuthorization(options: [.alert, .sound])
+      let allowed = try await withCheckedThrowingContinuation {
+        (continuation: CheckedContinuation<Bool, Error>) in
+        center.requestAuthorization(options: [.alert, .sound]) { allowed, error in
+          if let error {
+            continuation.resume(throwing: error)
+          } else {
+            continuation.resume(returning: allowed)
+          }
+        }
+      }
       status =
         allowed
         ? "Notification permission granted."
@@ -159,7 +168,14 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
         else {
           return
         }
-        do { try await center.add(request) } catch {
+        do {
+          try await withCheckedThrowingContinuation {
+            (continuation: CheckedContinuation<Void, Error>) in
+            center.add(request) { error in
+              if let error { continuation.resume(throwing: error) } else { continuation.resume() }
+            }
+          }
+        } catch {
           status = "Notification delivery failed. Review the in-app alert evidence."
         }
       }

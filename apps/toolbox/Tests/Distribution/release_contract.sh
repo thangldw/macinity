@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-app="${1:?Toolbox.app path required}"
+app="${1:?Orven.app path required}"
 test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")" = "com.thang.toolbox"
 test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" = "3.0.0"
 architectures="$(lipo -archs "$app/Contents/MacOS/Toolbox")"
