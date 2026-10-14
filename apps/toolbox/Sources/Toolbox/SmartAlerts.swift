@@ -146,10 +146,16 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
         identifier: "orven.health." + insight.id, content: content, trigger: nil)
       Task {
         guard let center else { return }
-        let settings = await center.notificationSettings()
+        // Older SDK settings objects are not Sendable; only transfer the authorization value.
+        let authorized = await withCheckedContinuation {
+          (continuation: CheckedContinuation<Bool, Never>) in
+          center.getNotificationSettings { settings in
+            continuation.resume(returning: settings.authorizationStatus == .authorized)
+          }
+        }
         guard enabled, Date() >= gate.snoozedUntil,
           ProcessInfo.processInfo.systemUptime - snapshot.time.monotonic <= 6,
-          settings.authorizationStatus == .authorized
+          authorized
         else {
           return
         }
