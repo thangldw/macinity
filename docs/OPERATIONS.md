@@ -18,26 +18,26 @@ Report actual version, architecture, permission scope and fresh timestamps. Do n
 
 ### Build and verify
 
-FullXcode/DEVELOPER_DIRtheocommand/Swift6/macOS13. ChạyXCTest/smoke/strictformat/localelint,builduniversal/dmg/verifyallow-adhoc. ArtifactOrven.app/Orven-3.0.0.dmg;exception3.0ad-hoc/chưa notarized,khôngbypassGatekeepercommand.
+Dùng Xcode đầy đủ, `DEVELOPER_DIR` theo từng command, Swift 6 và deployment target macOS 13. Chạy XCTest, năm smoke contracts, strict format và locale lint; sau đó chạy `build_universal.sh`, `build_dmg.sh`, `verify_release.sh --allow-adhoc` trong apps/toolbox/scripts. Artifact là Orven.app và Orven-3.0.0.dmg. Orven 3.0.0 được phép ký ad-hoc và ghi rõ chưa notarized; không dùng command bỏ qua Gatekeeper.
 
 ### Local data and cleanup
 
-Giữbundle/datanamespace. Khôngresetcorrupt/seedhistorytựđộng. Giữmissing/skipped/permissioncoverage. Scheduledkhôngdelete;eligiblecleanup vàirreversibledevelopercommandflowsreviewriêng. [Trace](diagrams/install-trace-sequence.html)/[recovery](diagrams/review-recovery-state.html).
+Giữ bundle ID và namespace dữ liệu. Không tự reset store bị hỏng hoặc tự tạo history giả. Hiển thị mẫu thiếu, mục bỏ qua và giới hạn quyền. Scheduled scans không xóa dữ liệu. Cleanup đủ điều kiện và developer commands không thể khôi phục phải có luồng duyệt riêng. Xem [Install Trace](diagrams/install-trace-sequence.html) và [recovery](diagrams/review-recovery-state.html).
 
 ### Support and limitations
 
-Báoversion/architecture/quyền/timestampthật,khôngpublishreportprivate. [Guide](USER-GUIDE.md)/[readiness](production/RELEASE-READINESS.md)/[privacy](../PRIVACY.md)/[release](OPERATIONS-RELEASE.md).
+Báo version, architecture, phạm vi quyền và timestamp thực. Không công bố báo cáo chẩn đoán riêng tư chưa duyệt. Xem [guide](USER-GUIDE.md), [readiness](production/RELEASE-READINESS.md), [privacy](../PRIVACY.md), [release operations](OPERATIONS-RELEASE.md).
 
 ## 日本語
 
 ### Build and verify
 
-FullXcode/per-commandDEVELOPER_DIR/Swift6/macOS13。XCTest/smoke/format/locale後universal/dmg/verifyallow-adhoc。ArtifactOrven.app/Orven-3.0.0.dmg、3.0exceptionad-hoc/unnotarized、Gatekeeperbypasscommand禁止。
+完全なXcode、commandごとの`DEVELOPER_DIR`、Swift 6、macOS 13 deployment targetを使用します。XCTest、五つのsmoke contracts、strict format、locale lintの後、apps/toolbox/scriptsの`build_universal.sh`、`build_dmg.sh`、`verify_release.sh --allow-adhoc`を実行します。ArtifactはOrven.appとOrven-3.0.0.dmgです。Orven 3.0.0はad-hoc署名と未notarizedの明示を承認済みで、Gatekeeperを回避するcommandは使いません。
 
 ### Local data and cleanup
 
-Bundle/data維持、corruptstore自動reset/historyseedなし。Missing/skipped/permissioncoverage保持。Scheduleddeleteなし、eligiblecleanup/irreversibledevelopercommandは別review。[Trace](diagrams/install-trace-sequence.html)/[recovery](diagrams/review-recovery-state.html)。
+Bundle IDとdata namespaceを維持します。壊れたstoreの自動resetや架空historyの生成を行いません。Missing、skipped、permissionによるcoverage制限を保持します。Scheduled scansは削除しません。対象となるcleanupと不可逆なdeveloper commandsには、それぞれ明示reviewが必要です。[Install Trace](diagrams/install-trace-sequence.html)と[recovery](diagrams/review-recovery-state.html)を参照してください。
 
 ### Support and limitations
 
-実version/architecture/permission/timestamp報告、private report公開なし。[Guide](USER-GUIDE.md)/[readiness](production/RELEASE-READINESS.md)/[privacy](../PRIVACY.md)/[release](OPERATIONS-RELEASE.md)。
+実際のversion、architecture、permission scopeとtimestampを報告します。未reviewのprivate diagnostic reportsを公開しません。[Guide](USER-GUIDE.md)、[readiness](production/RELEASE-READINESS.md)、[privacy](../PRIVACY.md)、[release operations](OPERATIONS-RELEASE.md)を参照してください。

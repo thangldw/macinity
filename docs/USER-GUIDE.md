@@ -38,66 +38,66 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 
 ### Cài đặt và nâng cấp
 
-Tải Orven-3.0.0.dmg/SHA-256 từ cùng releaseGitHub đã công bố. `shasum -a 256 -c Orven-3.0.0.dmg.sha256`, mở DMG/đọc guide/kéo Orven.app vào Applications. Kýad-hoc/chưa notarized: blockedfirstlaunch dùng System Settings → Privacy & Security → Open Anyway, không tắtGatekeeper. Namespace/bundleIDcũ tương thích, không cần move dữ liệu sangfolderOrven mới.
+Tải Orven-3.0.0.dmg và SHA-256 từ cùng một release GitHub đã công bố. Chạy `shasum -a 256 -c Orven-3.0.0.dmg.sha256`, mở DMG, đọc hướng dẫn và kéo Orven.app vào Applications. App ký ad-hoc, chưa notarized. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway; không tắt Gatekeeper. Bundle ID và thư mục dữ liệu cũ được giữ tương thích, không cần chuyển sang thư mục Orven mới.
 
 ### Quan sát Mac
 
-Overview/monitoring hiển thị CPU/memory/process/disk/network/battery/thermal quan sát. Mainwindowactive mớiLive; nếu không thìpause trừmenu-baropt-in. HardwareInspector có profile/sensor mapped khả dụng. Missing/stale không phải0. SleepInspector là sleep-preventionassertions quan sát, không permissionkillprocess.
+Overview và các trang giám sát hiển thị CPU, bộ nhớ, process, tốc độ disk/network, pin và thermal. Live cần cửa sổ chính đang hoạt động; nếu không, sampling tạm dừng trừ khi đã bật giám sát menu bar. Hardware Inspector hiển thị profile và cảm biến mapped khả dụng. Mẫu thiếu hoặc timestamp cũ không có nghĩa là giá trị bằng không. Sleep Inspector hiển thị các yêu cầu giữ máy thức, không phải quyền kill process.
 
 ### Wi-Fi và LAN
 
-Chọn sidebarWi-Fi & LAN, chọntool/refresh. Overview/Ethernet cóaddress/gateway/globalDNS/media/carrier; UP/RUNNING khác physical link. Wi-Fi signal/noise/SNR/channel/band/width/linkrate khi khả dụng; identity có thể cầnLocation. Nearby scan theo nút; count/RSSI khônginterferencemeasurement.
+Chọn Wi-Fi & LAN trong sidebar, chọn công cụ rồi làm mới. Overview/Ethernet hiển thị địa chỉ, gateway, DNS toàn cục, media và carrier; UP/RUNNING khác với phát hiện kết nối vật lý. Wi-Fi hiển thị signal, noise, SNR, channel, band, width và link rate khi có dữ liệu. Tên mạng có thể cần quyền Location. Nearby scan chạy theo nút; số lượng mạng và RSSI không phải phép đo nhiễu.
 
-ConnectionDiagnostics/Latency & Stability nhập một hostname/IP rồi chạy; không URL/port/options/credentials. DNS/TCP443/gatewayoutcomeđộc lập, numericIPbỏDNS.20ICMP loss/mean/jitter/missinggap; Stop chỉcancelownedoperation, giữ kếtquảcũ. Timelineopt-inRAM/observation, khôngpackethistory/exactdisconnect.
+Trong Connection Diagnostics hoặc Latency & Stability, nhập một hostname hoặc IP, không kèm URL, port, options hay credentials. DNS, TCP 443 và gateway có kết quả độc lập; IP số bỏ qua DNS. Phiên 20 phép đo ICMP hiển thị loss, mean, jitter và khoảng trống mẫu thiếu. Stop chỉ hủy tác vụ của Orven, giữ kết quả trước đó. Timeline tùy chọn giữ quan sát trong RAM của phiên, không phải packet history hoặc thời điểm mất kết nối chính xác.
 
 ### History, baseline và recording
 
-Historylocalmặcđịnhoff, chủđộngbật khôngsamplingnền. Retain24h/7d trongbudget.30–60quan sátthật mớiCaptureBaseline; ít nhất10newvalidobservations/metric mớicomparemedian. Workloadkhác có thểgiảithíchchênhlệch.
+History cục bộ mặc định tắt. Bật tính năng này không bật sampling nền. Chọn giữ 24 giờ hoặc 7 ngày trong giới hạn dung lượng. Sau 30–60 quan sát thực, chọn Capture Baseline; so sánh trung vị cần ít nhất 10 quan sát mới hợp lệ cho mỗi metric. Workload khác nhau có thể giải thích chênh lệch.
 
-Chọn15/30/60phút rồiStart. Stopgiữsession, Startthaysession, QuitmấtRAM. Sleep/inactive tạo gap/kéo dàiwalltime. JSON/CSVpreviewđúng nội dung lưu. SmartAlertsopt-in; OSnotification cầnquyền/service thực, hiệnchưa proofdelivery.
+Chọn 15/30/60 phút rồi Start. Stop giữ phiên, Start thay phiên, Quit bỏ phiên khỏi RAM. Sleep/inactive tạo khoảng trống và có thể kéo dài thời gian thực. Preview JSON/CSV đúng nội dung sẽ lưu. Smart Alerts tùy chọn; thông báo OS cần quyền và service thực tế, việc gửi đến người dùng chưa được xác minh.
 
 ### Storage, projects và applications
 
-Chọnroottrướcscan. Reviewallocation/duplicate/growth/rebuildableartifacts. Dossierlinkobservations/leftovers; receipt/registrationkhôngquyềnxóa. Eligiblecleanup cầnreview/Trash/recovery. Commandcleanupdeveloperlàoperationriêngexplicit, có thểkhôngTrash/Undo; reviewđúngcommandtrướcconfirm. LowerCPUprioritymanualkhôngautocap.
+Chọn thư mục gốc trước khi quét. Duyệt allocation, duplicates, growth và artifacts có thể tạo lại. App Dossier liên kết quan sát và leftovers; receipt hoặc registration không cấp quyền xóa. Cleanup đủ điều kiện cần review, Trash và kiểm tra recovery. Developer cleanup commands là thao tác riêng có xác nhận; có thể không dùng Trash hoặc Undo, nên hãy đọc đúng command trước khi chạy. Giảm CPU priority thủ công không phải tự động giới hạn CPU.
 
 ### Changes, recovery và reports
 
-InstallTracegiữboundedobservations khi bạnrun install/update/uninstallbìnhthường, khôngtựchạyinstallerdropped. Compareevidence/partialcoverage/exportlocal. Restorechỉpathgốctrống. Reportcóthểchứaname/path/endpoint, reviewtrướcshare.
+Install Trace ghi quan sát có giới hạn khi bạn thực hiện install/update/uninstall bình thường; không tự chạy installer được thả vào app. So sánh snapshots/timeline, kiểm tra coverage và export cục bộ. Chỉ restore khi đích gốc đang trống. Report có thể chứa tên, path và endpoint; duyệt trước khi chia sẻ.
 
 ### Giới hạn và support
 
-Sensormodeldependent;linkratekhôngInternetthroughput. Hidden/snapshotexplanationkhôngexclusivebytes. Khôngfirewall/fancontrol/privilegedrepair. Foregroundresources/Intel/macOS13/Ethernetvật lý/fullVO/JAcopy/OSnotificationcònchưa proof. [Readiness](production/RELEASE-READINESS.md)/[Privacy](../PRIVACY.md)/[Security](../SECURITY.md)/[issues](https://github.com/thangldw/toolbox/issues).
+Tên cảm biến phụ thuộc model; link rate không phải tốc độ Internet. Giải thích dung lượng ẩn/snapshots không chứng minh exclusive snapshot bytes. App không có firewall, điều khiển quạt hoặc sửa hệ thống với đặc quyền. Foreground resources, Intel/macOS 13/Ethernet vật lý, full VoiceOver, câu chữ quan trọng tiếng Nhật và thông báo native chưa được xác minh. Xem [readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md), [issues](https://github.com/thangldw/toolbox/issues).
 
 ## 日本語
 
-### Installとupgrade
+### インストールと更新
 
-同publishedGitHubreleaseのOrven-3.0.0.dmg/SHA-256をdownload。`shasum -a 256 -c Orven-3.0.0.dmg.sha256`で確認しDMG内guideを読みOrven.appをApplicationsへ。Ad-hoc/unnotarized、firstlaunchblocked時System Settings → Privacy & Security → Open Anyway。Gatekeeper無効化なし。旧namespace/bundleID互換、Orvenfolderへの移行不要。
+同じ公開済みGitHub releaseからOrven-3.0.0.dmgとSHA-256を取得し、`shasum -a 256 -c Orven-3.0.0.dmg.sha256`で確認します。DMG内の案内を読んでOrven.appをApplicationsへ移動します。Ad-hoc署名でApple notarizationは受けていません。初回起動が拒否された場合はSystem Settings → Privacy & Security → Open Anywayを使い、Gatekeeperを無効化しないでください。旧bundle IDとdata namespaceを維持するため、新しいOrven folderへの移行は不要です。
 
-### Macの観測
+### Macを観測する
 
-Overview/monitoringはCPU/memory/process/disk/network/battery/thermal観測。MainwindowactiveでLive、それ以外はoptionalmenu-barなしでpause。HardwareInspectorはprofile/availablemappedsensor。Missing/staleは0ではありません。SleepInspectorのassertionは観測でprocesskill許可ではありません。
+Overviewと監視画面でCPU、memory、process、disk/network rate、battery/thermalを確認します。任意のmenu-bar監視を有効にしていない場合、Liveにはactive main windowが必要で、それ以外はsamplingを停止します。Hardware Inspectorはprofileと取得可能なmapped sensorsを表示します。Missingや古いtimestampはゼロを意味しません。Sleep Inspectorはsleepを防ぐassertionsの観測であり、process終了の許可ではありません。
 
 ### Wi-FiとLAN
 
-SidebarWi-Fi & LANでtool選択/明示refresh。Overview/Ethernetはaddress/gateway/globalDNS/media/carrier、UP/RUNNINGとphysical linkは別。Wi-Fiはsignal/noise/SNR/channel/band/width/linkrate、identityはLocationが必要な場合。Nearbyは明示scan、count/RSSIはinterference測定ではありません。
+SidebarのWi-Fi & LANでtoolを選んでrefreshします。Overview/Ethernetはaddresses、gateway、global DNS、media、carrierを表示します。UP/RUNNINGとphysical linkの検出は別です。Wi-Fiは取得可能なsignal/noise/SNR/channel/band/width/link rateを表示します。IdentityにはLocation permissionが必要な場合があります。Nearby scanは明示操作のみで、network countやRSSIはinterference測定ではありません。
 
-ConnectionDiagnostics/Latency & Stabilityに単一hostname/IP入力。URL/port/options/credentialsなし。DNS/TCP443/gatewayは独立結果、numericIPはDNS省略。20ICMPのloss/mean/jitter/missinggap、Stopはownedoperationcancel・以前結果保持。Opt-intimelineはsession観測でpackethistory/exactdisconnectなし。
+Connection DiagnosticsまたはLatency & Stabilityに単一のhostname/IPを入力します。URL、port、options、credentialsは含めません。DNS、TCP 443、gatewayは独立した結果で、numeric IPはDNSを省略します。20回のICMPでloss、mean、jitterとmissing gapsを確認します。StopはOrven所有のoperationのみcancelし、以前の結果を保持します。任意timelineはsession RAM内の観測で、packet historyや正確なdisconnect時刻ではありません。
 
-### History・baseline・recording
+### History、baseline、recording
 
-Localhistoryは初期off、明示有効化しても背景samplingなし。24h/7dをbudget内保持。30–60実観測後CaptureBaseline、各metric10新valid観測でmediancompare。Workload差で変化する場合があります。
+Local historyは初期状態でoffです。有効にしてもbackground samplingを開始しません。24時間または7日を容量上限内で保持します。30–60回の実観測後にCapture Baselineを実行し、median比較にはmetricごとに10個の新しいvalid observationsが必要です。Workloadの違いが差の理由となる場合があります。
 
-15/30/60分を選びStart。Stop保持、Start置換、QuitでRAM破棄。Sleep/inactiveはgap/walltime延長。JSON/CSVは保存内容preview。SmartAlertsはopt-in、OSnotificationには権限/実serviceが必要でdelivery未検証。
+15/30/60分を選んでStartします。Stopはsessionを保持、Startは置換、QuitはRAM内sessionを破棄します。Sleep/inactiveはgapを作り、実時間を延ばす場合があります。JSON/CSV previewは保存内容と同一です。Smart Alertsは任意設定です。OS通知にはpermissionと実serviceが必要で、通知到達は未検証です。
 
-### Storage・projects・applications
+### Storage、projects、applications
 
-Root選択後scan。Allocation/duplicate/growth/rebuildableartifactをreview。Dossierのreceipt/registrationは削除許可ではありません。Eligiblecleanupはreview/Trash/recovery。Developercommandcleanupは別明示operationでTrash/Undo不可の場合、実commandを確認。ManualCPUpriorityloweringはautocapではありません。
+Rootを選択してscanし、allocation、duplicates、growth、再生成可能なartifactsをreviewします。App Dossierは観測とleftoversを関連づけますが、receipt/registrationは削除許可ではありません。対象cleanupにはreview、Trashとrecovery検証が必要です。Developer cleanup commandsは別の明示操作で、Trash/Undoを使えない場合があります。実行前に正確なcommandを確認します。手動のCPU priority低下は自動CPU capではありません。
 
-### Changes・recovery・reports
+### Changes、recovery、reports
 
-InstallTraceは人がnormalinstall/update/uninstall中のbounded観測、droppedinstallerを自動実行しません。Evidence/partialcoveragecompare/exportlocal。Restoreは元pathが空の場合のみ。Reportにname/path/endpointを含む場合、共有前に確認。
+Install Traceは通常のinstall/update/uninstallを人が行う間に限定された観測を記録し、dropされたinstallerを自動実行しません。Snapshots/timelineとcoverageをreviewしてlocal exportします。Restoreは元のdestinationが空の場合のみです。Reportに名前、path、endpointを含む場合があるため、共有前に確認します。
 
-### 制限とsupport
+### 制限とサポート
 
-Sensorはmodel依存、linkrateはInternetthroughputではありません。Hidden/snapshotはexclusivebytes証明なし。Firewall/fancontrol/privilegedrepairなし。Foregroundresources/physicalIntel/macOS13/Ethernet/fullVO/JAcopy/OSnotification未検証。[Readiness](production/RELEASE-READINESS.md)/[Privacy](../PRIVACY.md)/[Security](../SECURITY.md)/[issues](https://github.com/thangldw/toolbox/issues)参照。
+Mapped sensor labelsは機種に依存し、link rateはInternet throughputではありません。Hidden space/snapshotの説明はexclusive snapshot bytesの証明ではありません。Firewall、fan control、privileged repairは含みません。Current foreground resources、実機Intel/macOS 13/Ethernet、完全なVoiceOver、重要な日本語表現review、native通知到達は未検証です。[Readiness](production/RELEASE-READINESS.md)、[Privacy](../PRIVACY.md)、[Security](../SECURITY.md)、[issues](https://github.com/thangldw/toolbox/issues)を参照してください。

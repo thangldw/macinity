@@ -18,7 +18,7 @@ class Links(HTMLParser):
    if key in a: self.urls.append(a[key])
   for key in ['data-copy','data-aria']:
    if key in a: self.copy.add(a[key])
-source=(site/'preview.js').read_text(); begin=source.index('  const copy = ')+len('  const copy = '); end=source.index(';\n  let statusKey',begin); messages=json.loads(source[begin:end]); keys=set(messages['en'])
+source=(site/'preview.js').read_text(); begin=source.index('  const copy = ')+len('  const copy = '); end=source.index(';\n  const translate',begin); messages=json.loads(source[begin:end]); keys=set(messages['en'])
 assert set(messages)=={'en','vi','ja','zh'}
 for lang,table in messages.items(): assert set(table)==keys and all(v.strip() for v in table.values()), lang
 for name in ['index.html','guide.html','privacy.html']:

@@ -297,7 +297,6 @@
     "guideFull": "完整使用指南"
   }
 };
-  let statusKey = '';
   const translate = key => copy[language][key];
   const setLanguage = next => {
     language = Object.hasOwn(copy, next) ? next : 'en';
@@ -310,7 +309,6 @@
     document.querySelectorAll('[data-meter]').forEach(node => { node.setAttribute('aria-label', translate(node.dataset.meter)); });
     const numbers = new Intl.NumberFormat({en:'en-US',vi:'vi-VN',ja:'ja-JP',zh:'zh-CN'}[language], {maximumFractionDigits: 1});
     document.querySelectorAll('[data-size]').forEach(node => { node.textContent = `${numbers.format(Number(node.dataset.size))} ${node.dataset.unit || 'GB'}`; });
-    if (statusKey) document.getElementById('copy-status').textContent = translate(statusKey);
     try { localStorage.setItem('toolbox.site.locale', language); } catch { /* Locale remains usable without storage. */ }
   };
   document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
@@ -320,11 +318,4 @@
   const syncThemeIcon = () => { document.querySelector('#themeToggle img').src = `assets/icons/${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}.svg`; };
   document.addEventListener('themechange', syncThemeIcon);
   syncThemeIcon();
-  document.getElementById('copy')?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(document.getElementById('checksum-command').textContent);
-      statusKey = 'copied';
-    } catch { statusKey = 'copyFailed'; }
-    document.getElementById('copy-status').textContent = translate(statusKey);
-  });
 })();

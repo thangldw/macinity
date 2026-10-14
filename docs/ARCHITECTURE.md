@@ -18,26 +18,26 @@ Public app is Orven.app version3.0.0, executable Toolbox, bundleIDcom.thang.tool
 
 ### Owners
 
-ExecutablevẫnToolbox. ToolboxCoremetadata/locale/theme/filesystemidentity/migration/systemAPFSread;ToolboxMonitoringcoordinator/process/rate/hardwareSMC/health/network;ToolboxStoragescan/review/Trash/recovery/projects/apps;ToolboxChangesinstaller/snapshot/evidence/timeline.
+Executable vẫn mang tên Toolbox. ToolboxCore quản lý metadata, locale/theme, định danh filesystem, migration và kiểm tra hệ thống/APFS có giới hạn. ToolboxMonitoring quản lý nhịp lấy mẫu, process, tốc độ, hardware/SMC, health records/baseline và công cụ mạng. ToolboxStorage quản lý quét, duyệt, Trash, khôi phục, dự án và ứng dụng. ToolboxChanges quản lý installer, snapshots, bằng chứng và timeline.
 
 ### Demand and data
 
-Mộtcoordinatorchoactivewindow/menu-baropt-in;sleep/inactivepause. UIthrottled;history/recordingdùngtimestampgốc. HealthHistoryStorewritesversionedboundedoff-main. Networkpage1operationcancel+pathcallbacksvisible,helperdirectargsnoshell. Khôngextrasampler/endpointdiskhistory.
+Một MonitoringCoordinator phục vụ cửa sổ chính đang hoạt động hoặc giám sát menu bar tùy chọn. Sleep hoặc inactive tạm dừng lấy mẫu. UI giới hạn nhịp cập nhật; history và recording dùng timestamp gốc. HealthHistoryStore ghi dữ liệu có phiên bản và giới hạn ngoài main actor. Trang mạng sở hữu một tác vụ có thể hủy và callback đường mạng khi trang hiện diện; probe dùng executable và arguments cố định, không qua shell. Không có sampler nền bổ sung hoặc lịch sử endpoint lưu trên disk.
 
 ### Compatibility and trust
 
-AppOrven.app3.0.0/executableToolbox/bundleID/data giữ tươngthích.4locales. Mutationrevalidatepath/processkhi chạy/reviewexplicit. Ad-hockhôngnotarization. [Diagram](diagrams/toolbox-architecture.html)/[Health](monitoring/HEALTH-WORKFLOWS.md)/[Network](monitoring/NETWORK-TOOLS.md).
+App là Orven.app 3.0.0; executable Toolbox, bundle ID `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. App có bốn ngôn ngữ. Mutation kiểm tra lại path và định danh process ngay trước khi chạy, sau khi người dùng duyệt. Chữ ký ad-hoc không phải Apple notarization. Xem [diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
 
 ## 日本語
 
 ### Owners
 
-ExecutableはToolbox。ToolboxCoreはmetadata/locale/theme/identity/migration/systemAPFSread、ToolboxMonitoringはcoordinator/process/rate/hardwareSMC/health/network、ToolboxStorageはscan/review/Trash/recovery/projects/apps、ToolboxChangesはinstaller/snapshot/evidence/timeline。
+Executable名はToolboxを保持します。ToolboxCoreはmetadata、locale/theme、filesystem identity、migration、限定されたsystem/APFS観測を担当します。ToolboxMonitoringはsampling cadence、process/rate、hardware/SMC、health records/baselinesとnetwork toolsを担当します。ToolboxStorageはscan、review、Trash、recovery、projects/applications、ToolboxChangesはinstaller、snapshots、evidence、timelineを担当します。
 
 ### Demand and data
 
-1coordinatorがactivewindow/opt-inmenu-bar demandを処理、sleep/inactiveでpause。UIthrottle、history/recordingは原timestamp。Storeはoff-mainversionedboundedwrite。Networkpageは1canceloperation/visiblepathcallback、directargs/no shell。Extra sampler/endpointdiskhistoryなし。
+一つのMonitoringCoordinatorがactive main windowまたは任意のmenu-bar監視を処理します。Sleep/inactiveではsamplingを停止します。UI更新の頻度を制限し、history/recordingは元のtimestampを保持します。HealthHistoryStoreはmain actorの外でversionedかつboundedなwriteを行います。Network pageは一つのcancel可能operationと表示中のpath callbackを所有します。Probeは固定executable/argumentsを使い、shellを経由しません。追加のbackground samplerやdisk上のendpoint historyはありません。
 
 ### Compatibility and trust
 
-AppOrven.app3.0.0/executableToolbox/bundleID/data互換維持、4locale。Mutationは実行時identity/pathrevalidateと明示review。Ad-hocはnotarizationではありません。[Diagram](diagrams/toolbox-architecture.html)/[Health](monitoring/HEALTH-WORKFLOWS.md)/[Network](monitoring/NETWORK-TOOLS.md)。
+AppはOrven.app 3.0.0です。Executable Toolbox、bundle ID `com.thang.toolbox`、`Application Support/Toolbox`を互換性のため維持し、四言語を提供します。Mutationは明示的なreview後、実行直前にpath/process identityを再確認します。Ad-hoc署名はApple notarizationではありません。[Diagram](diagrams/toolbox-architecture.html)、[Health](monitoring/HEALTH-WORKFLOWS.md)、[Network](monitoring/NETWORK-TOOLS.md)を参照してください。

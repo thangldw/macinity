@@ -18,26 +18,26 @@ Publish from an exact reviewed source commit/tag and immutable assets/checksum. 
 
 ### Current release contract
 
-CurrentstabletargetOrven3.0.0/v3.0.0,đượcphépad-hoc/chưa notarized. release.json/Info.plist/artifact/guide/web/notesphảiđồngbộ. OldToolboxtagsimmutableGitHub.
+Orven 3.0.0/v3.0.0 là stable target hiện tại. Người dùng đã chọn ký ad-hoc và ghi rõ chưa notarized. release.json, Info.plist, tên artifact, first-launch guide, website và release notes phải cùng product/version. Giữ nguyên các tag Toolbox trước đây trên GitHub.
 
 ### Validation and packaging
 
-Hoàntất sourcechecks/smoke/format/locale/docs/site/universal/ad-hoc. MountDMGreadonly verifyOrven.app/Applicationslink/guide;checksumtheobyteDMGfinal. Recordunknownnative/hardware/resource,khôngdùngoldcandidate thay. Ad-hockhông cầnidentity/credentials.
+Hoàn tất tests, smokes, format, locale, docs, site, universal build và kiểm tra chữ ký ad-hoc. Mount DMG read-only để kiểm tra Orven.app, link Applications và first-launch guide; xác minh checksum của byte DMG cuối cùng. Ghi rõ gate native/hardware/resource chưa xác minh; không thay bằng kết quả candidate cũ. Kênh ad-hoc đã chọn không yêu cầu signing identity hoặc credentials.
 
 ### Publication and update
 
-Publishexactreviewedcommit/tag+immutableasset/checksum. Workflowchỉv3.0.0/checktrướcpublish,Pagesmain. VerifylatestGitHub/site rendered sauhoàntất. Uploadunknownphảiinspecttrướcretry. [Notes](launch/orven-3.0.0.md)/[readiness](production/RELEASE-READINESS.md).
+Phát hành từ commit/tag đã review, với artifact và checksum cố định. Workflow hỗ trợ v3.0.0 và chạy kiểm tra trước khi publish; Pages phát hành site từ main. Sau khi hoàn tất, kiểm tra GitHub latest release và nội dung Pages thực tế. Nếu chưa rõ upload thành công hay không, đọc danh sách asset trước khi retry. Xem [release notes](launch/orven-3.0.0.md) và [readiness](production/RELEASE-READINESS.md).
 
 ## 日本語
 
 ### Current release contract
 
-CurrentstabletargetOrven3.0.0/v3.0.0、ad-hoc/unnotarized承認。release.json/Info.plist/artifact/guide/web/notes一致、旧ToolboxtagはGitHubimmutable。
+現在のstable targetはOrven 3.0.0/v3.0.0です。ユーザーはad-hoc署名と未notarizedの明示を選択しました。release.json、Info.plist、artifact名、first-launch guide、website、release notesのproduct/versionを一致させます。以前のToolbox tagsはGitHubで変更しません。
 
 ### Validation and packaging
 
-Sourcechecks/smoke/format/locale/docs/site/universal/ad-hoc完了。ReadonlyDMGでOrven.app/Applicationslink/guide、finalbytechecksum確認。Unknownnative/hardware/resource明示、oldcandidate代用なし。Ad-hocにidentity/credentials不要。
+Tests、smokes、format、locale、docs、site、universal buildとad-hoc検証を完了します。DMGをread-onlyでmountし、Orven.app、Applications linkとfirst-launch guideを確認して、最終DMG bytesのchecksumを検証します。未確認のnative/hardware/resource gatesを明示し、以前のcandidateの結果で代用しません。選択されたad-hoc channelにsigning identityやcredentialsは不要です。
 
 ### Publication and update
 
-Exactreviewedcommit/tagとimmutableasset/checksum公開。Workflowはv3.0.0のみ/check後publish、Pagesmain。完了後latestGitHub/renderedsite確認。Upload不明時asset確認後retry。[Notes](launch/orven-3.0.0.md)/[readiness](production/RELEASE-READINESS.md)。
+Review済みcommit/tagから変更しないartifact/checksumを公開します。Workflowはv3.0.0に対応し、publish前に検証します。Pagesはmainからsiteを公開します。完了後、GitHub latest releaseと実際に描画されたPagesを確認します。Upload結果が不明な場合は、retry前に既存assetを確認します。[Release notes](launch/orven-3.0.0.md)と[readiness](production/RELEASE-READINESS.md)を参照してください。

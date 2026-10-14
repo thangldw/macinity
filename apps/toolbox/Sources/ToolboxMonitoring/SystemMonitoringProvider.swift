@@ -54,7 +54,8 @@ public actor SystemMonitoringProvider: MonitoringProvider {
       let events = source.data
       let level: MemoryPressureLevel =
         events.contains(.critical) ? .critical : (events.contains(.warning) ? .warning : .normal)
-      Task { await self?.recordPressure(level, token: token) }
+      guard let provider = self else { return }
+      Task { await provider.recordPressure(level, token: token) }
     }
     pressureSource = source
     source.resume()
