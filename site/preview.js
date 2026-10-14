@@ -4,7 +4,7 @@
     "title": "Know your Mac.",
     "title2": "Act with context.",
     "lead": "Live monitoring, hardware observations, Wi-Fi and LAN diagnostics, and recoverable storage tools in one native macOS app.",
-    "download": "Release status",
+    "download": "Download Orven 3.0.0",
     "source": "View source",
     "trust": "A clearer view of your Mac, with actions you control.",
     "local": "Runs locally. No account.",
@@ -20,7 +20,7 @@
     "timeline": "Change Timeline",
     "timelineBody": "Compare saved sessions. See what was added, modified, or removed, with attribution and risk evidence.",
     "install": "Install Orven. Keep your data.",
-    "installBody": "Orven 3.0.0 is being prepared for release. Published files and checksums appear on GitHub Releases.",
+    "installBody": "Orven 3.0.0 is available. Download the universal DMG and matching SHA-256, then read the first-launch guide.",
     "unsigned": "Unnotarized release",
     "unsignedBody": "Ad-hoc signed and not Apple-notarized. macOS may require Open Anyway after a blocked first launch. No Homebrew distribution.",
     "first": "First launch & permissions",
@@ -72,13 +72,17 @@
     "guideHistoryBody": "Enable optional local health history. After 30–60 real observations, capture a baseline; comparisons need ten newer valid observations per metric. Choose a 15/30/60-minute sensor session and Start. Stop preserves it; Quit discards it. Preview JSON/CSV before saving.",
     "guideCleanup": "Review storage actions",
     "guideCleanupBody": "Select roots and scan Storage, Projects or Applications. Receipts and leftovers are evidence, not deletion permission. Eligible moves use Trash and recovery checks. Developer cleanup commands can be irreversible and outside Trash: review the exact command before confirming.",
-    "guideFull": "Complete user guide"
+    "guideFull": "Complete user guide",
+    "checksum": "SHA-256 checksum",
+    "releaseNotes": "Release notes",
+    "resources": "Resources",
+    "capabilities": "Orven capabilities"
   },
   "vi": {
     "title": "Hiểu rõ Mac.",
     "title2": "Quyết định có cơ sở.",
     "lead": "Giám sát hệ thống, quan sát phần cứng, chẩn đoán Wi-Fi/LAN và quản lý dung lượng có khôi phục trong một app macOS native.",
-    "download": "Trạng thái release",
+    "download": "Tải Orven 3.0.0",
     "source": "Xem mã nguồn",
     "trust": "Nhìn rõ trạng thái máy, chủ động quyết định thao tác.",
     "local": "Chạy trên máy. Không cần tài khoản.",
@@ -94,7 +98,7 @@
     "timeline": "Lịch sử thay đổi",
     "timelineBody": "So sánh phiên đã lưu. Xem file được thêm, sửa hoặc xóa, cùng bằng chứng về nguồn thay đổi và rủi ro.",
     "install": "Cài Orven. Giữ dữ liệu của bạn.",
-    "installBody": "Orven 3.0.0 đang được chuẩn bị phát hành. Artifact đã công bố và checksum nằm trên GitHub Releases.",
+    "installBody": "Orven 3.0.0 đã phát hành. Tải DMG universal và SHA-256 tương ứng, rồi đọc hướng dẫn mở lần đầu.",
     "unsigned": "Bản phát hành chưa notarize",
     "unsignedBody": "Ký ad-hoc, chưa được Apple notarize. macOS có thể yêu cầu Open Anyway sau lần mở đầu bị chặn. Chưa có Homebrew.",
     "first": "Mở lần đầu và quyền truy cập",
@@ -146,13 +150,17 @@
     "guideHistoryBody": "Bật history local nếu cần. Sau 30–60 quan sát thực, lưu đường cơ sở; so sánh cần 10 mẫu mới hợp lệ cho mỗi chỉ số. Chọn 15/30/60 phút rồi Start. Stop giữ phiên; Quit bỏ phiên khỏi RAM. Duyệt JSON/CSV trước khi lưu.",
     "guideCleanup": "Review thao tác dung lượng",
     "guideCleanupBody": "Chọn root rồi quét Storage, Projects hoặc Applications. Receipt và leftover chỉ là evidence, không phải quyền xóa. File đủ điều kiện dùng Trash và kiểm tra recovery. Developer cleanup commands có thể không Undo hoặc không dùng Trash; hãy review đúng command trước khi xác nhận.",
-    "guideFull": "Hướng dẫn đầy đủ"
+    "guideFull": "Hướng dẫn đầy đủ",
+    "checksum": "Checksum SHA-256",
+    "releaseNotes": "Thông tin phiên bản",
+    "resources": "Tài liệu",
+    "capabilities": "Các chức năng Orven"
   },
   "ja": {
     "title": "Macの今を知る。",
     "title2": "確かめて、選ぶ。",
     "lead": "システム監視、ハードウェアの観測、Wi-Fi・LANの診断、復元可能なストレージ管理を一つのmacOSアプリに。",
-    "download": "リリース状況",
+    "download": "Orven 3.0.0をダウンロード",
     "source": "ソースを見る",
     "trust": "Macの状態を確認し、必要な操作を自分で選べます。",
     "local": "ローカルで動作。アカウント不要。",
@@ -168,7 +176,7 @@
     "timeline": "変更履歴",
     "timelineBody": "保存したセッションを比較。追加・変更・削除と、関連の根拠やリスクを確認できます。",
     "install": "Orvenをインストール。データはそのまま。",
-    "installBody": "Orven 3.0.0はリリース準備中です。公開済みファイルとチェックサムはGitHub Releasesで確認できます。",
+    "installBody": "Orven 3.0.0を公開しました。Universal DMGと同じ版のSHA-256を取得し、初回起動ガイドをご確認ください。",
     "unsigned": "未公証の公開版",
     "unsignedBody": "アドホック署名で、Appleの公証は受けていません。初回起動がブロックされた場合はOpen Anywayが必要なことがあります。Homebrewでの配布はありません。",
     "first": "初回起動とアクセス権",
@@ -220,13 +228,17 @@
     "guideHistoryBody": "任意のローカル履歴を有効にし、30～60件の実観測から基準値を保存します。比較には各指標に新しい有効な観測が10件必要です。15・30・60分の記録を開始できます。停止後は保持し、終了時にセッションを破棄します。JSON・CSVは保存前にプレビューできます。",
     "guideCleanup": "ストレージの操作を確認する",
     "guideCleanupBody": "対象フォルダを選んでストレージ・プロジェクト・アプリを調べます。レシートや残存ファイルの情報は削除許可ではありません。対象ファイルはゴミ箱と復元確認を使います。開発ツールの削除コマンドは取り消せない場合があるため、実行内容を確認してください。",
-    "guideFull": "使い方の全文"
+    "guideFull": "使い方の全文",
+    "checksum": "SHA-256チェックサム",
+    "releaseNotes": "リリースノート",
+    "resources": "関連情報",
+    "capabilities": "Orvenの機能"
   },
   "zh": {
     "title": "了解你的 Mac。",
     "title2": "确认后再操作。",
     "lead": "在一个原生 macOS 应用中查看系统性能、硬件传感器、Wi-Fi/LAN 诊断和可恢复的存储管理。",
-    "download": "发布状态",
+    "download": "下载 Orven 3.0.0",
     "source": "查看源码",
     "trust": "看清系统状态，由你选择操作。",
     "local": "本地运行，无需账户。",
@@ -242,7 +254,7 @@
     "timeline": "变更时间线",
     "timelineBody": "比较已保存的会话，查看新增、更改或移除的内容及归因和风险证据。",
     "install": "安装 Orven，保留数据。",
-    "installBody": "Orven 3.0.0 正在准备发布。已发布文件和校验和可在 GitHub Releases 查看。",
+    "installBody": "Orven 3.0.0 已发布。下载通用 DMG 和对应的 SHA-256，并阅读首次启动指南。",
     "unsigned": "未经公证的发行版",
     "unsignedBody": "使用 ad-hoc 签名，未经 Apple 公证。首次启动被阻止后可能需要 Open Anyway。暂无 Homebrew 发行。",
     "first": "首次启动与权限",
@@ -294,7 +306,11 @@
     "guideHistoryBody": "启用可选本地历史，从30–60个实际观察捕获基准。每项指标需十个较新有效观察才能比较。选择15/30/60分钟记录；停止保留会话，退出清除会话。保存JSON/CSV前先预览。",
     "guideCleanup": "审查存储操作",
     "guideCleanupBody": "选择根目录并检查存储、项目或应用。收据和残留文件是证据，不是删除授权。符合条件的文件使用废纸篓和恢复检查。开发工具清理命令可能不可撤销，执行前审查具体命令。",
-    "guideFull": "完整使用指南"
+    "guideFull": "完整使用指南",
+    "checksum": "SHA-256 校验文件",
+    "releaseNotes": "发行说明",
+    "resources": "资源",
+    "capabilities": "Orven 功能"
   }
 };
   const translate = key => copy[language][key];

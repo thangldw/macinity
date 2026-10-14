@@ -20,10 +20,28 @@
   "nativeForegroundResourceProfile": "unverified",
   "notarized": false,
   "signing": "ad-hoc",
-  "websiteBrowserCoverage": "390px EN/VI/JA/ZH without horizontal overflow; theme/locale persisted on reload; Enter disclosure and sibling guide/privacy navigation; Support Escape restored focus. Desktop 1280px checked.",
+  "websiteBrowserCoverage": "390px EN/VI/JA/ZH without horizontal overflow; theme/locale persisted on reload; Enter disclosure and sibling guide/privacy navigation; Support Escape restored focus. Desktop 1280px checked. Live GitHub Pages home verified before artifact publication; privacy/guide four-locale mobile matrix and footer mouse navigation passed.",
   "staticAudit": "Native strict audit passed. Website external event bindings are false positives; reviewed against preview.js and product-shell.js plus real browser actions.",
   "nativeReleaseSmoke": "Final callback-compatible local bundle launched; Health History and existing baseline rows rendered in Vietnamese with history disabled. Earlier branding smoke covered About and Wi-Fi/LAN. No current foreground resource benchmark claimed.",
   "ciCompatibilityFix": "Immutable pressure actor capture, callback-only notification object access with sendable Bool/Void results, and bounded baseline view expressions. 96 local XCTest passed after final source repair. GitHub CI passed on bd9924629a2a9582f2448fef5559a149e77132b6.",
   "localArtifactSourceCommit": "bd9924629a2a9582f2448fef5559a149e77132b6",
-  "ciRun": "https://github.com/thangldw/toolbox/actions/runs/38606954316"
+  "ciRun": "https://github.com/thangldw/toolbox/actions/runs/38606954316",
+  "publication": {
+    "releaseURL": "https://github.com/thangldw/toolbox/releases/tag/v3.0.0",
+    "publishedAt": "2026-10-14T18:01:07Z",
+    "downloadURL": "https://github.com/thangldw/toolbox/releases/download/v3.0.0/Orven-3.0.0.dmg",
+    "publishedDMGSHA256": "c33019ff854cbd8a30c336bc690c933a74826d7bb238833c276eda38462dd541",
+    "verification": "Published assets downloaded, checksum verified, read-only DMG mounted and bundle contract verified independently.",
+    "sourceCommit": "4296a3208cb72df0ff575eef4cb99b280fa21b45",
+    "binarySHA256": "42ded83ffddcd38fa47ca6f687caf8cf16be2febb1f012893c854768c027169a",
+    "releaseWorkflow": "https://github.com/thangldw/toolbox/actions/runs/38610505073",
+    "architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "minimumMacOS": "13.0",
+    "sdk": "15.5",
+    "signature": "adhoc; TeamIdentifier not set"
+  },
+  "codeQLRun": "https://github.com/thangldw/toolbox/actions/runs/38607660841"
 }
