@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "tag": "v3.0.0",
   "channel": "stable",
-  "status": "preparing",
+  "status": "published",
   "minimumMacOS": "13.0",
   "architectures": [
     "arm64",
@@ -19,5 +19,10 @@
     "Physical Intel/macOS13 and active Ethernet hardware are unverified.",
     "Full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified.",
     "Mapped AppleSMC sensor availability varies by model; missing readings stay unavailable."
-  ]
+  ],
+  "releaseURL": "https://github.com/thangldw/toolbox/releases/tag/v3.0.0",
+  "downloadURL": "https://github.com/thangldw/toolbox/releases/download/v3.0.0/Orven-3.0.0.dmg",
+  "checksumURL": "https://github.com/thangldw/toolbox/releases/download/v3.0.0/Orven-3.0.0.dmg.sha256",
+  "publishedAt": "2026-10-14T18:01:07Z",
+  "publishedDMGSHA256": "c33019ff854cbd8a30c336bc690c933a74826d7bb238833c276eda38462dd541"
 }

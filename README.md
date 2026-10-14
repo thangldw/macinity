@@ -8,7 +8,7 @@ Orven brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostics a
 
 ### Install and release status
 
-Orven 3.0.0 is being prepared for production. Use the [release page](https://github.com/thangldw/toolbox/releases) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
+Orven 3.0.0 is published. Use the [release page](https://github.com/thangldw/toolbox/releases/tag/v3.0.0) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
 
 Download the DMG and matching SHA-256 file, verify the checksum, open the disk image, read the first-launch guide and drag Orven.app into Applications. Retain your data when upgrading: bundle ID `com.thang.toolbox` and `~/Library/Application Support/Toolbox` intentionally remain unchanged.
 
@@ -42,7 +42,7 @@ Orven hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-Fi/
 
 ### Cài đặt và trạng thái release
 
-Orven 3.0.0 đang được chuẩn bị cho production. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
+Orven 3.0.0 đã phát hành. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases/tag/v3.0.0); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
 
 Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, đọc hướng dẫn và kéo Orven.app vào Applications. Khi nâng cấp giữ dữ liệu: bundle ID `com.thang.toolbox` và `~/Library/Application Support/Toolbox` được giữ nguyên có chủ đích.
 
@@ -76,7 +76,7 @@ OrvenはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、復
 
 ### インストールとrelease状況
 
-Orven 3.0.0はproduction向け準備中です。[Release page](https://github.com/thangldw/toolbox/releases)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
+Orven 3.0.0を公開しました。[Release page](https://github.com/thangldw/toolbox/releases/tag/v3.0.0)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
 
 同versionのDMG/SHA-256をdownloadしてchecksum確認、diskimage内guideを読みOrven.appをApplicationsへ。Upgrade時のデータを保持するためbundleID `com.thang.toolbox`と`~/Library/Application Support/Toolbox`を意図的に維持します。
 
