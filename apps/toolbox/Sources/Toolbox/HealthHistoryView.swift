@@ -146,24 +146,34 @@ private struct HealthBaselineView: View, Equatable {
         .foregroundStyle(.secondary)
       }
       ForEach(comparisons) { comparison in
-        VStack(alignment: .leading, spacing: 5) {
-          Text(healthMetricTitle(comparison.title)).font(.headline)
-          Text(
-            L10n.text("Baseline median") + ": "
-              + monitoringNumber(comparison.baselineMedian, digits: 1)
-              + " " + comparison.unit + " → " + L10n.text("Recent median") + ": "
-              + monitoringNumber(comparison.currentMedian, digits: 1) + " " + comparison.unit)
-          Text(
-            L10n.text("Change") + ": "
-              + monitoringNumber(
-                comparison.currentMedian - comparison.baselineMedian, digits: 1)
-              + " " + comparison.unit + " · " + String(comparison.baselineCount) + " / "
-              + String(comparison.currentCount)
-          )
-          .font(.caption).monospacedDigit()
-        }
+        HealthComparisonRow(comparison: comparison)
       }
     }.orvenSurface()
+  }
+}
+
+private struct HealthComparisonRow: View {
+  let comparison: HealthComparison
+
+  private var medianText: String {
+    let baseline = monitoringNumber(comparison.baselineMedian, digits: 1)
+    let recent = monitoringNumber(comparison.currentMedian, digits: 1)
+    return
+      "\(L10n.text("Baseline median")): \(baseline) \(comparison.unit) → \(L10n.text("Recent median")): \(recent) \(comparison.unit)"
+  }
+
+  private var changeText: String {
+    let change = monitoringNumber(comparison.currentMedian - comparison.baselineMedian, digits: 1)
+    return
+      "\(L10n.text("Change")): \(change) \(comparison.unit) · \(comparison.baselineCount) / \(comparison.currentCount)"
+  }
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 5) {
+      Text(healthMetricTitle(comparison.title)).font(.headline)
+      Text(medianText)
+      Text(changeText).font(.caption).monospacedDigit()
+    }
   }
 }
 

@@ -4,7 +4,7 @@
 
 ### Approved scope and ownership
 
-The user authorized Health History & Baseline, Smart Alerts, Sensor Charts and Network Connection Changes on 2026-10-14. This supersedes earlier observation-only/no-persistence/no-alert restrictions for these scoped capabilities. Commit, push and publication remain prohibited. No new sampler, driver, privileged helper, network interception, automatic cleanup, priority or fan mutation is added.
+The user authorized Health History & Baseline, Smart Alerts, Sensor Charts and Network Connection Changes on 2026-10-14. This supersedes earlier observation-only/no-persistence/no-alert restrictions for these scoped capabilities. Orven 3.0 production publication is authorized through the reviewed release workflow. No new sampler, driver, privileged helper, network interception, automatic cleanup, priority or fan mutation is added.
 
 MonitoringViewModel consumes the existing coordinator stream. HealthHistoryViewModel owns recording demand and presentation; HealthHistoryStore serializes versioned local storage off the main actor. DiagnosticInsights remains the canonical evidence-rule owner. AlertGate adds re-arm/cooldown; SmartAlertsViewModel owns OS notification delivery and routing. NetworkInspection remains the explicit bounded read owner; NetworkChangeTracker compares those results. MonitoringChart remains the shared bounded Canvas owner, extended with time-window and gap limits. DiagnosticsExportView owns exact frozen preview/save for JSON and CSV. L10n, OrvenTheme and native controls remain canonical.
 
@@ -44,7 +44,7 @@ External gates remain physical Intel/macOS13, full VoiceOver, critical Japanese 
 
 ### Scope và ownership
 
-Người dùng cho phép Health History/Baseline, Smart Alerts, Sensor Charts và Network Connection Changes ngày2026-10-14, thay thế giới hạn persistence/alert cũ trong scope này. Chưa commit/push/publish. Không thêm sampler, driver, helper đặc quyền, interception, cleanup tự động, đổi priority/quạt.
+Người dùng cho phép Health History/Baseline, Smart Alerts, Sensor Charts và Network Connection Changes ngày2026-10-14, thay thế giới hạn persistence/alert cũ trong scope này. Người dùng đã cho phép phát hành Orven 3.0 qua workflow đã kiểm chứng. Không thêm sampler, driver, helper đặc quyền, interception, cleanup tự động, đổi priority/quạt.
 
 MonitoringViewModel nhận stream coordinator hiện có; HealthHistoryViewModel quản lý ghi/presentation, HealthHistoryStore tuần tự hóa storage versioned ngoài main actor. DiagnosticInsights sở hữu rule evidence; AlertGate quản lý recovery/cooldown, SmartAlertsViewModel quản lý notification/routing. NetworkInspection đọc bounded rõ ràng, NetworkChangeTracker so sánh snapshot. MonitoringChart dùng Canvas bounded/window/gap. DiagnosticsExportView preview/lưu JSON/CSV chốt chính xác; L10n/OrvenTheme/native controls giữ ownership.
 
@@ -84,7 +84,7 @@ Gate ngoài còn Intel/macOS13 vật lý, fullVoiceOver, criticalJAcopyreview v�
 
 ### Scopeとownership
 
-2026-10-14にHealth History/Baseline、Smart Alerts、Sensor Charts、Network Connection Changesを承認。このscopeは従来のpersistence/alert制限を置換。Commit/push/publish禁止。新sampler/driver/privilegedhelper/interception/自動cleanup/priority・fan変更なし。
+2026-10-14にHealth History/Baseline、Smart Alerts、Sensor Charts、Network Connection Changesを承認。このscopeは従来のpersistence/alert制限を置換。Orven 3.0の公開はreview済みrelease workflowで承認されています。新sampler/driver/privilegedhelper/interception/自動cleanup/priority・fan変更なし。
 
 MonitoringViewModelは既存coordinator stream、HealthHistoryViewModelは記録/presentation、HealthHistoryStoreはmain actor外のversioned storageを所有。DiagnosticInsightsがrule evidence、AlertGateがrecovery/cooldown、SmartAlertsViewModelがnotification/routing。NetworkInspectionは明示boundedread、NetworkChangeTrackerは比較。MonitoringChartのCanvas/window/gap、DiagnosticsExportViewの凍結JSON/CSVpreview/save、L10n/OrvenTheme/nativecontrolを継続使用。
 
