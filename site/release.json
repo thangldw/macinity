@@ -3,7 +3,7 @@
   "version": "3.1.0",
   "tag": "v3.1.0",
   "channel": "stable",
-  "status": "candidate",
+  "status": "published",
   "minimumMacOS": "13.0",
   "architectures": [
     "arm64",
@@ -22,5 +22,7 @@
   ],
   "releaseURL": "https://github.com/thangldw/toolbox/releases/tag/v3.1.0",
   "downloadURL": "https://github.com/thangldw/toolbox/releases/download/v3.1.0/Macinity-3.1.0.dmg",
-  "checksumURL": "https://github.com/thangldw/toolbox/releases/download/v3.1.0/Macinity-3.1.0.dmg.sha256"
+  "checksumURL": "https://github.com/thangldw/toolbox/releases/download/v3.1.0/Macinity-3.1.0.dmg.sha256",
+  "publishedAt": "2026-10-16T14:07:43Z",
+  "publishedDMGSHA256": "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7"
 }

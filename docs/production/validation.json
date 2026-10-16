@@ -1,7 +1,7 @@
 {
   "product": "Macinity",
   "version": "3.1.0",
-  "observedUTC": "2026-10-16T13:38:38.751468+00:00",
+  "observedUTC": "2026-10-16T13:50:54.057653+00:00",
   "scope": "Local exact release artifact. Publication and CI are recorded separately.",
   "checksPassed": [
     "129 XCTest",
@@ -16,11 +16,26 @@
     "community and diagram contracts",
     "adoption report regression"
   ],
-  "localDMGSHA256": "f87e7137b21b61e2c7086994206a0b447ca457d3c346ff8e1808a793b9d50156",
-  "localBinarySHA256": "4af50f6a321440f20475c22f5a5d6695667fbe0cbdb3f582138c452f735fb3f3",
+  "localDMGSHA256": "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7",
+  "localBinarySHA256": "ee7bb80f13683ca6c616ed7adfeba0004e97bb59a37e4b0b0277e02055690433",
   "notarized": false,
   "signing": "ad-hoc",
-  "nativeReleaseSmoke": "Exact final bundle relaunched as PID 81106. Vietnamese sidebar/About/Settings observed; appearance System, menu bar off. No foreground resource benchmark claimed.",
+  "nativeReleaseSmoke": "Pre-inference-repair 3.1.0 bundle relaunched as PID 81106; Vietnamese sidebar/About/Settings observed, System appearance/menu off. No final repaired-bundle GUI or foreground performance claim.",
   "nativeForegroundResourceProfile": "unverified",
-  "websiteBrowserCoverage": "Desktop Vietnamese hero; mobile Japanese/Chinese 390px without horizontal overflow. More checks recorded after publication."
+  "websiteBrowserCoverage": "Desktop Vietnamese hero; EN/VI/JA/ZH mobile 390px without horizontal overflow; Vietnamese guide navigation and dark theme checked. Published portfolio catalog and Macinity landing page observed.",
+  "localArtifactSourceCommit": "cf1d2ee6ff279dc961a24ce7da773149bd8e9ca6",
+  "ciCompatibilityFix": "Swift 6.1.2 failed type inference in StartupManagerView on 7602e9e. Extracted row builder and bounded status-string expressions; 129 tests and universal package reverified locally. Full CI passed on Swift 6.1.2, including tests, smokes, release build and app bundle.",
+  "ciRun": "https://github.com/thangldw/toolbox/actions/runs/38910665288",
+  "portfolioValidation": {
+    "scopedCatalog": "passed identity/version/URL and VI/JA/ZH entries; published /apps/ observed",
+    "fullHomepageTest": "pre-existing vi: missing learning failure reproduced on baseline; unrelated to Macinity change"
+  },
+  "codeQLRun": "https://github.com/thangldw/toolbox/actions/runs/38910664922",
+  "publication": {
+    "releaseURL": "https://github.com/thangldw/toolbox/releases/tag/v3.1.0",
+    "publishedAt": "2026-10-16T14:07:43Z",
+    "sourceCommit": "cf1d2ee6ff279dc961a24ce7da773149bd8e9ca6",
+    "publishedDMGSHA256": "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7",
+    "verification": "GitHub asset digest and downloaded draft bytes match local verified DMG; public download checked separately."
+  }
 }
