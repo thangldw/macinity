@@ -67,48 +67,7 @@ struct StartupManagerView: View {
             query.isEmpty || ($0.label + $0.path + $0.program).localizedStandardContains(query)
           }
         ) { entry in
-          VStack(alignment: .leading, spacing: 7) {
-            Text(entry.label).font(.headline)
-            Text(entry.path).font(.caption).textSelection(.enabled)
-            Text(entry.program).font(.caption).textSelection(.enabled)
-            Text(
-              entry.owner + " · "
-                + L10n.text(
-                  entry.registered == true
-                    ? entry.pid == nil ? "Registered, not running" : "Running"
-                    : entry.registered == false ? "Not registered" : "Unknown")
-                + (entry.pid.map { " · PID \($0)" } ?? "")
-                + (entry.lastExit.map { " · exit \($0)" } ?? "")
-            )
-            .font(.caption).foregroundStyle(.secondary)
-            LazyVGrid(
-              columns: [GridItem(.adaptive(minimum: 180), alignment: .leading)], alignment: .leading
-            ) {
-              Button(L10n.text("Show in Finder")) {
-                NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: entry.path)])
-              }
-              if !entry.program.isEmpty {
-                Button(L10n.text("Locate executable")) {
-                  NSWorkspace.shared.activateFileViewerSelecting([
-                    URL(fileURLWithPath: entry.program)
-                  ])
-                }
-              }
-              if let related = relatedApplication(entry.program) {
-                Button(
-                  L10n.text("Related application") + ": "
-                    + related.deletingPathExtension().lastPathComponent
-                ) {
-                  NSWorkspace.shared.activateFileViewerSelecting([related])
-                }
-              }
-              if entry.canChange {
-                Button(L10n.text(entry.registered == true ? "Preview stop" : "Preview start")) {
-                  pending = entry
-                }.disabled(busy)
-              }
-            }
-          }.padding(.vertical, 5)
+          entryRow(entry)
         }.scrollContentBackground(.hidden)
         if inventory.omitted > 0 {
           Text(L10n.text("Unreadable or omitted entries") + ": \(inventory.omitted)").font(.caption)
@@ -137,6 +96,55 @@ struct StartupManagerView: View {
         }.padding(24).frame(width: 480)
       }
   }
+  private func entryStatus(_ entry: StartupEntry) -> String {
+    let state: String
+    if entry.registered == true {
+      state = entry.pid == nil ? "Registered, not running" : "Running"
+    } else {
+      state = entry.registered == false ? "Not registered" : "Unknown"
+    }
+    var result = entry.owner + " · " + L10n.text(state)
+    if let pid = entry.pid { result += " · PID \(pid)" }
+    if let exit = entry.lastExit { result += " · exit \(exit)" }
+    return result
+  }
+
+  private func entryRow(_ entry: StartupEntry) -> some View {
+    VStack(alignment: .leading, spacing: 7) {
+      Text(entry.label).font(.headline)
+      Text(entry.path).font(.caption).textSelection(.enabled)
+      Text(entry.program).font(.caption).textSelection(.enabled)
+      Text(entryStatus(entry)).font(.caption).foregroundStyle(.secondary)
+      LazyVGrid(
+        columns: [GridItem(.adaptive(minimum: 180), alignment: .leading)], alignment: .leading
+      ) {
+        Button(L10n.text("Show in Finder")) {
+          NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: entry.path)])
+        }
+        if !entry.program.isEmpty {
+          Button(L10n.text("Locate executable")) {
+            NSWorkspace.shared.activateFileViewerSelecting([
+              URL(fileURLWithPath: entry.program)
+            ])
+          }
+        }
+        if let related = relatedApplication(entry.program) {
+          Button(
+            L10n.text("Related application") + ": "
+              + related.deletingPathExtension().lastPathComponent
+          ) {
+            NSWorkspace.shared.activateFileViewerSelecting([related])
+          }
+        }
+        if entry.canChange {
+          Button(L10n.text(entry.registered == true ? "Preview stop" : "Preview start")) {
+            pending = entry
+          }.disabled(busy)
+        }
+      }
+    }.padding(.vertical, 5)
+  }
+
   private func refresh() async {
     busy = true
     let worker = Task.detached(priority: .utility) { try StartupInventory.read() }
