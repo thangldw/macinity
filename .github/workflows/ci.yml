@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: toolbox-ci-${{ github.workflow }}-${{ github.ref }}
+  group: macinity-ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -30,13 +30,13 @@ jobs:
       - name: Validate diagrams
         run: python3 tests/check_diagrams.py docs/diagrams/*.html
 
-  toolbox:
+  macinity:
     name: Macinity macOS
     runs-on: macos-15
     timeout-minutes: 25
     defaults:
       run:
-        working-directory: apps/toolbox
+        working-directory: apps/macinity
     steps:
       - uses: actions/checkout@v6
       - name: Show Swift version
@@ -58,7 +58,7 @@ jobs:
       - name: Assemble app bundle
         run: |
           ./scripts/build_app.sh
-          test -x dist/Macinity.app/Contents/MacOS/Toolbox
+          test -x dist/Macinity.app/Contents/MacOS/Macinity
           test -f dist/Macinity.app/Contents/Resources/en.lproj/Localizable.strings
           test -f dist/Macinity.app/Contents/Resources/vi.lproj/Localizable.strings
           plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings

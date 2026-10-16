@@ -32,10 +32,10 @@ for name in ['index.html','guide.html','privacy.html']:
   assert destination.exists(), (name,url)
   if split.fragment:
    fragments=Links(); fragments.feed(destination.read_text()); assert split.fragment in fragments.ids,(name,url)
- assert 'Toolbox 2.0' not in text and 'Toolbox-2.0.0.dmg' not in text
+ assert 'Macinity 2.0' not in text and 'Macinity-2.0.0.dmg' not in text
 for name,asset in json.loads((site/'shared-assets.json').read_text())['assets'].items():
  assert hashlib.sha256((site/name).read_bytes()).hexdigest()==asset['sha256'], name
-assert hashlib.sha256((site/'assets/app-icon.png').read_bytes()).hexdigest()==hashlib.sha256((root/'apps/toolbox/Resources/AppIcon-1024.png').read_bytes()).hexdigest()
+assert hashlib.sha256((site/'assets/app-icon.png').read_bytes()).hexdigest()==hashlib.sha256((root/'apps/macinity/Resources/AppIcon-1024.png').read_bytes()).hexdigest()
 print('PASS: Macinity site links, four-locale parity, release identity, native icon and canonical mirrors')
 PY
 node --check "$repo_dir/site/preview.js"

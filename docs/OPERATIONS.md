@@ -18,7 +18,7 @@ Report actual version, architecture, permission scope and fresh timestamps. Do n
 
 ### Build and verify
 
-Dùng Xcode đầy đủ, `DEVELOPER_DIR` theo từng command, Swift 6 và deployment target macOS 13. Chạy XCTest, năm smoke contracts, strict format và locale lint; sau đó chạy `build_universal.sh`, `build_dmg.sh`, `verify_release.sh --allow-adhoc` trong apps/toolbox/scripts. Artifact là Macinity.app và Macinity-3.1.0.dmg. Macinity 3.1.0 được phép ký ad-hoc và ghi rõ chưa notarized; không dùng command bỏ qua Gatekeeper.
+Dùng Xcode đầy đủ, `DEVELOPER_DIR` theo từng command, Swift 6 và deployment target macOS 13. Chạy XCTest, năm smoke contracts, strict format và locale lint; sau đó chạy `build_universal.sh`, `build_dmg.sh`, `verify_release.sh --allow-adhoc` trong apps/macinity/scripts. Artifact là Macinity.app và Macinity-3.1.0.dmg. Macinity 3.1.0 được phép ký ad-hoc và ghi rõ chưa notarized; không dùng command bỏ qua Gatekeeper.
 
 ### Local data and cleanup
 
@@ -32,7 +32,7 @@ Báo version, architecture, phạm vi quyền và timestamp thực. Không công
 
 ### Build and verify
 
-完全なXcode、commandごとの`DEVELOPER_DIR`、Swift 6、macOS 13 deployment targetを使用します。XCTest、五つのsmoke contracts、strict format、locale lintの後、apps/toolbox/scriptsの`build_universal.sh`、`build_dmg.sh`、`verify_release.sh --allow-adhoc`を実行します。ArtifactはMacinity.appとMacinity-3.1.0.dmgです。Macinity 3.1.0はad-hoc署名と未notarizedの明示を承認済みで、Gatekeeperを回避するcommandは使いません。
+完全なXcode、commandごとの`DEVELOPER_DIR`、Swift 6、macOS 13 deployment targetを使用します。XCTest、五つのsmoke contracts、strict format、locale lintの後、apps/macinity/scriptsの`build_universal.sh`、`build_dmg.sh`、`verify_release.sh --allow-adhoc`を実行します。ArtifactはMacinity.appとMacinity-3.1.0.dmgです。Macinity 3.1.0はad-hoc署名と未notarizedの明示を承認済みで、Gatekeeperを回避するcommandは使いません。
 
 ### Local data and cleanup
 

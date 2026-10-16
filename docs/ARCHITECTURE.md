@@ -4,7 +4,7 @@
 
 ### Owners
 
-The native executable remains Toolbox. ToolboxCore owns app metadata, locale/theme, filesystem identity, migration and bounded system/APFS inspection. ToolboxMonitoring owns coordinator cadence, processes/rates/hardware/SMC, health records/baselines, connection observations and bounded network tools. ToolboxStorage owns scanning/review/Trash/recovery/projects/applications. ToolboxChanges owns installer/snapshot/evidence/timeline workflows.
+The native executable remains Macinity. MacinityCore owns app metadata, locale/theme, filesystem identity, migration and bounded system/APFS inspection. MacinityMonitoring owns coordinator cadence, processes/rates/hardware/SMC, health records/baselines, connection observations and bounded network tools. MacinityStorage owns scanning/review/Trash/recovery/projects/applications. MacinityChanges owns installer/snapshot/evidence/timeline workflows.
 
 ### Demand and data
 
@@ -12,13 +12,13 @@ One monitoring coordinator serves active main-window or optional menu-bar demand
 
 ### Compatibility and trust
 
-Public app is Macinity.app version3.1.0, executable Toolbox, bundleIDcom.thang.toolbox and ApplicationSupportToolbox preserved. Four locale resources share stable user-visible strings. Mutations revalidate paths/process identities at execution and require explicit review. Ad-hoc integrity is not Apple notarization. [Architecture diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
+Public app is Macinity.app version3.1.0, executable Macinity, bundleIDcom.thang.toolbox and ApplicationSupportToolbox preserved. Four locale resources share stable user-visible strings. Mutations revalidate paths/process identities at execution and require explicit review. Ad-hoc integrity is not Apple notarization. [Architecture diagram](diagrams/macinity-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
 
 ## Tiếng Việt
 
 ### Owners
 
-Executable vẫn mang tên Toolbox. ToolboxCore quản lý metadata, locale/theme, định danh filesystem, migration và kiểm tra hệ thống/APFS có giới hạn. ToolboxMonitoring quản lý nhịp lấy mẫu, process, tốc độ, hardware/SMC, health records/baseline và công cụ mạng. ToolboxStorage quản lý quét, duyệt, Trash, khôi phục, dự án và ứng dụng. ToolboxChanges quản lý installer, snapshots, bằng chứng và timeline.
+Executable vẫn mang tên Macinity. MacinityCore quản lý metadata, locale/theme, định danh filesystem, migration và kiểm tra hệ thống/APFS có giới hạn. MacinityMonitoring quản lý nhịp lấy mẫu, process, tốc độ, hardware/SMC, health records/baseline và công cụ mạng. MacinityStorage quản lý quét, duyệt, Trash, khôi phục, dự án và ứng dụng. MacinityChanges quản lý installer, snapshots, bằng chứng và timeline.
 
 ### Demand and data
 
@@ -26,13 +26,13 @@ Một MonitoringCoordinator phục vụ cửa sổ chính đang hoạt động h
 
 ### Compatibility and trust
 
-App là Macinity.app 3.1.0; executable Toolbox, bundle ID `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. App có bốn ngôn ngữ. Mutation kiểm tra lại path và định danh process ngay trước khi chạy, sau khi người dùng duyệt. Chữ ký ad-hoc không phải Apple notarization. Xem [diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
+App là Macinity.app 3.1.0; executable Macinity, bundle ID `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. App có bốn ngôn ngữ. Mutation kiểm tra lại path và định danh process ngay trước khi chạy, sau khi người dùng duyệt. Chữ ký ad-hoc không phải Apple notarization. Xem [diagram](diagrams/macinity-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
 
 ## 日本語
 
 ### Owners
 
-Executable名はToolboxを保持します。ToolboxCoreはmetadata、locale/theme、filesystem identity、migration、限定されたsystem/APFS観測を担当します。ToolboxMonitoringはsampling cadence、process/rate、hardware/SMC、health records/baselinesとnetwork toolsを担当します。ToolboxStorageはscan、review、Trash、recovery、projects/applications、ToolboxChangesはinstaller、snapshots、evidence、timelineを担当します。
+Executable名はMacinityを保持します。MacinityCoreはmetadata、locale/theme、filesystem identity、migration、限定されたsystem/APFS観測を担当します。MacinityMonitoringはsampling cadence、process/rate、hardware/SMC、health records/baselinesとnetwork toolsを担当します。MacinityStorageはscan、review、Trash、recovery、projects/applications、MacinityChangesはinstaller、snapshots、evidence、timelineを担当します。
 
 ### Demand and data
 
@@ -40,4 +40,4 @@ Executable名はToolboxを保持します。ToolboxCoreはmetadata、locale/them
 
 ### Compatibility and trust
 
-AppはMacinity.app 3.1.0です。Executable Toolbox、bundle ID `com.thang.toolbox`、`Application Support/Toolbox`を互換性のため維持し、四言語を提供します。Mutationは明示的なreview後、実行直前にpath/process identityを再確認します。Ad-hoc署名はApple notarizationではありません。[Diagram](diagrams/toolbox-architecture.html)、[Health](monitoring/HEALTH-WORKFLOWS.md)、[Network](monitoring/NETWORK-TOOLS.md)を参照してください。
+AppはMacinity.app 3.1.0です。Executable Macinity、bundle ID `com.thang.toolbox`、`Application Support/Toolbox`を互換性のため維持し、四言語を提供します。Mutationは明示的なreview後、実行直前にpath/process identityを再確認します。Ad-hoc署名はApple notarizationではありません。[Diagram](diagrams/macinity-architecture.html)、[Health](monitoring/HEALTH-WORKFLOWS.md)、[Network](monitoring/NETWORK-TOOLS.md)を参照してください。

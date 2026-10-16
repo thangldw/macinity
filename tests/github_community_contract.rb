@@ -42,7 +42,7 @@ end
 
 validate_form(
   ".github/ISSUE_TEMPLATE/bug_report.yml",
-  %w[toolbox-version macos-version architecture workflow observed expected reproduction privacy]
+  %w[macinity-version macos-version architecture workflow observed expected reproduction privacy]
 )
 validate_form(
   ".github/ISSUE_TEMPLATE/feature_request.yml",

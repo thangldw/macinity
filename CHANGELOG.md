@@ -12,7 +12,7 @@ The native interface adds live monitoring, hardware profiles and available mappe
 
 ### Compatibility and trust
 
-Bundle ID, executable/module identifiers and Application Support/Toolbox remain compatible. English, Vietnamese, Japanese and Simplified Chinese are packaged. The explicitly authorized distribution is ad-hoc signed and not notarized. No Homebrew, firewall, fan control, automatic CPU cap/suspension, exclusive snapshot-byte accounting or calibrated CPU-Z/HWMonitor parity is claimed.
+Bundle ID, executable/module identifiers and the existing support-data directory remain compatible. English, Vietnamese, Japanese and Simplified Chinese are packaged. The explicitly authorized distribution is ad-hoc signed and not notarized. No Homebrew, firewall, fan control, automatic CPU cap/suspension, exclusive snapshot-byte accounting or calibrated CPU-Z/HWMonitor parity is claimed.
 
 ### Validation and known limits
 
@@ -30,7 +30,7 @@ Native UI bổ sung live monitoring, hardware profile/sensor mapped khả dụng
 
 ### Compatibility và trust
 
-Bundle ID/executable/module/Application Support/Toolbox giữ tương thích. Đóng gói Anh/Việt/Nhật/Trung giản thể. Distribution đã được chọn ký ad-hoc/chưa notarized. Không Homebrew/firewall/fan control/automatic CPU cap-suspension/exclusive snapshot bytes/calibrated CPU-Z/HWMonitor parity.
+Bundle ID/executable/module/thư mục dữ liệu hiện có giữ tương thích. Đóng gói Anh/Việt/Nhật/Trung giản thể. Distribution đã được chọn ký ad-hoc/chưa notarized. Không Homebrew/firewall/fan control/automatic CPU cap-suspension/exclusive snapshot bytes/calibrated CPU-Z/HWMonitor parity.
 
 ### Validation và giới hạn
 
@@ -48,7 +48,7 @@ Native UIにlive monitoring、hardware profile/available mapped sensor、Sleep I
 
 ### Compatibilityとtrust
 
-Bundle ID/executable/module/ApplicationSupportToolboxを互換維持。英語・ベトナム語・日本語・簡体字中国語を同梱。配布は明示承認されたad-hoc/unnotarized。Homebrew/firewall/fan control/autoCPU cap-suspension/exclusive snapshot bytes/calibratedCPU-Z/HWMonitorparityの主張なし。
+Bundle ID/executable/module/既存データ保存先を互換維持。英語・ベトナム語・日本語・簡体字中国語を同梱。配布は明示承認されたad-hoc/unnotarized。Homebrew/firewall/fan control/autoCPU cap-suspension/exclusive snapshot bytes/calibratedCPU-Z/HWMonitorparityの主張なし。
 
 ### Validationと制限
 

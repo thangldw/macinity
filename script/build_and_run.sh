@@ -2,11 +2,11 @@
 set -euo pipefail
 
 MODE="${1:-run}"
-APP_NAME="Toolbox"
+APP_NAME="Macinity"
 BUNDLE_NAME="Macinity"
 BUNDLE_ID="com.thang.toolbox"
 ROOT_DIR="${0:A:h:h}"
-APP_PROJECT="$ROOT_DIR/apps/toolbox"
+APP_PROJECT="$ROOT_DIR/apps/macinity"
 APP_BUNDLE="$APP_PROJECT/dist/$BUNDLE_NAME.app"
 APP_BINARY="$APP_BUNDLE/Contents/MacOS/$APP_NAME"
 

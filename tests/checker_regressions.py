@@ -66,7 +66,7 @@ def check_docs_cases() -> list[bool]:
     ]
     outcomes: list[bool] = []
     for name, accepted, diagnostic in cases:
-        with tempfile.TemporaryDirectory(prefix=f"toolbox-check-docs-{name}-") as temporary:
+        with tempfile.TemporaryDirectory(prefix=f"macinity-check-docs-{name}-") as temporary:
             root = Path(temporary)
             materialize_fixture(FIXTURE_ROOT / "check_docs" / name, root)
             result = run([sys.executable, str(CHECK_DOCS), "document.md"], root)
@@ -125,7 +125,7 @@ def check_diagram_cases() -> list[bool]:
     outcomes: list[bool] = []
     for name, mutation, accepted, diagnostic in mutations:
         source = base if mutation is None else replace_once(base, *mutation)
-        with tempfile.TemporaryDirectory(prefix=f"toolbox-check-diagram-{name}-") as temporary:
+        with tempfile.TemporaryDirectory(prefix=f"macinity-check-diagram-{name}-") as temporary:
             root = Path(temporary)
             diagram = root / "diagram.html"
             diagram.write_text(source, encoding="utf-8")
@@ -179,7 +179,7 @@ def contract_case(
     accepted: bool,
     diagnostic: str | None = None,
 ) -> bool:
-    with tempfile.TemporaryDirectory(prefix=f"toolbox-doc-contract-{name}-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"macinity-doc-contract-{name}-") as temporary:
         root = Path(temporary)
         copy_tracked_markdown(root)
         if target is not None and fixture is not None:
@@ -231,7 +231,7 @@ def documentation_contract_cases() -> list[bool]:
 
 
 def repository_hygiene_case(name: str, tracked_path: str) -> bool:
-    with tempfile.TemporaryDirectory(prefix=f"toolbox-repository-hygiene-{name}-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"macinity-repository-hygiene-{name}-") as temporary:
         root = Path(temporary)
         target = root / tracked_path
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -256,8 +256,8 @@ def repository_hygiene_cases() -> list[bool]:
         repository_hygiene_case("internal-plan", "docs/superpowers/plan.md"),
         repository_hygiene_case("design-draft", "docs/design-concepts/draft.png"),
         repository_hygiene_case("design-evidence", "docs/design-evidence/audit.png"),
-        repository_hygiene_case("beta-record", "docs/launch/toolbox-beta.md"),
-        repository_hygiene_case("release-archive", "dist/Toolbox.zip"),
+        repository_hygiene_case("beta-record", "docs/launch/macinity-beta.md"),
+        repository_hygiene_case("release-archive", "dist/Macinity.zip"),
         repository_hygiene_case("root-ds-store", ".DS_Store"),
         repository_hygiene_case("root-swift-build", ".build/workspace-state.json"),
         repository_hygiene_case("root-derived-data", "DerivedData/cache.db"),

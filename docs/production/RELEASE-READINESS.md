@@ -18,7 +18,7 @@ Current native foreground resource profiling remains unverified. Earlier active 
 
 ### Scope and compatibility
 
-The product name, icon, website and artifacts are Macinity. Module/executable names, `com.thang.toolbox` and `Application Support/Toolbox` remain compatibility identifiers. Hard CPU caps, automatic suspension, a NetworkExtension firewall, fan writes, privileged repair and exclusive APFS snapshot-byte calculation are outside this release. Raw machine QA evidence remains local and is excluded from public artifacts.
+The product name, icon, website and artifacts are Macinity. Module/executable names, the existing bundle identifier and the existing support-data directory remain compatibility identifiers. Hard CPU caps, automatic suspension, a NetworkExtension firewall, fan writes, privileged repair and exclusive APFS snapshot-byte calculation are outside this release. Raw machine QA evidence remains local and is excluded from public artifacts.
 
 ## Tiếng Việt
 
@@ -38,7 +38,7 @@ Hiệu năng foreground của bản hiện tại chưa được xác minh. Các 
 
 ### Scope and compatibility
 
-Tên, icon, website và bộ cài dùng Macinity. Tên module/executable, `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. Release không có hard CPU caps, tự động suspend, firewall NetworkExtension, ghi điều khiển quạt, sửa hệ thống với đặc quyền hoặc tính dung lượng riêng của APFS snapshots. Dữ liệu kiểm chứng máy thật được giữ cục bộ, không đưa vào artifact công khai.
+Tên, icon, website và bộ cài dùng Macinity. Tên module/executable, bundle identifier hiện có và thư mục dữ liệu hiện có được giữ để tương thích. Release không có hard CPU caps, tự động suspend, firewall NetworkExtension, ghi điều khiển quạt, sửa hệ thống với đặc quyền hoặc tính dung lượng riêng của APFS snapshots. Dữ liệu kiểm chứng máy thật được giữ cục bộ, không đưa vào artifact công khai.
 
 ## 日本語
 
@@ -58,4 +58,4 @@ Tên, icon, website và bộ cài dùng Macinity. Tên module/executable, `com.t
 
 ### Scope and compatibility
 
-製品名・icon・website・artifactはMacinityです。Module/executable名、`com.thang.toolbox`、`Application Support/Toolbox`は互換性のため保持します。Hard CPU caps、自動suspend、NetworkExtension firewall、fan制御、特権repair、APFS snapshot専有bytesの計算は含みません。実機QAのraw evidenceはローカルに保持し、公開artifactには含めません。
+製品名・icon・website・artifactはMacinityです。Module/executable名、既存bundle identifier、既存データ保存先は互換性のため保持します。Hard CPU caps、自動suspend、NetworkExtension firewall、fan制御、特権repair、APFS snapshot専有bytesの計算は含みません。実機QAのraw evidenceはローカルに保持し、公開artifactには含めません。

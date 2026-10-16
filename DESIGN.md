@@ -4,7 +4,7 @@ omitted:
   - section: colors
     reason: Canonical palette is owned by native MacinityTheme.swift and adapted by scripts/sync_brand_tokens.py.
   - section: typography
-    reason: Portfolio site-shell.css owns shared type; Japanese and Chinese route stacks are explicit in orven-page.css.
+    reason: Portfolio site-shell.css owns shared type; Japanese and Chinese route stacks are explicit in macinity-page.css.
   - section: spacing
     reason: Shared portfolio controls retain their tokens; route composition owns responsive spacing.
   - section: rounded
@@ -22,7 +22,7 @@ Global macOS users and developers, with EN/VI/JA/ZH localization. Japanese local
 
 ### Visual and component ownership
 
-Native MacinityTheme.swift owns the brand palette. scripts/sync_brand_tokens.py generates site/orven-brand.css using the existing light/dark selector contract; no second hand-maintained brand palette. site-shell.css owns shared typography and controls; product-shell.js/product-support.js remain reviewed shared mirrors recorded in shared-assets.json. orven-page.css owns the hero, nine capability cells, help/privacy composition, global scrollbar and responsive layout. The app icon is copied from the current native1024px asset.
+Native MacinityTheme.swift owns the brand palette. scripts/sync_brand_tokens.py generates site/macinity-brand.css using the existing light/dark selector contract; no second hand-maintained brand palette. site-shell.css owns shared typography and controls; product-shell.js/product-support.js remain reviewed shared mirrors recorded in shared-assets.json. macinity-page.css owns the hero, nine capability cells, help/privacy composition, global scrollbar and responsive layout. The app icon is copied from the current native1024px asset.
 
 ### Content and behavior
 
@@ -40,11 +40,11 @@ Mac users/developers toàn cầu, EN/VI/JA/ZH. Locale Nhật không tạo regula
 
 ### Visual và component ownership
 
-MacinityTheme.swift sởhữubrandpalette; scripts/sync_brand_tokens.py sinhsite/orven-brand.css/lightdarkselector,khônghandmaintainedpalette thứhai. site-shell.css typography/control; product-shell/supportJSmirror trongshared-assets.json. orven-page.css composition/scrollbar/responsive. Iconcopycurrentnative1024px.
+MacinityTheme.swift sởhữubrandpalette; scripts/sync_brand_tokens.py sinhsite/macinity-brand.css/lightdarkselector,khônghandmaintainedpalette thứhai. site-shell.css typography/control; product-shell/supportJSmirror trongshared-assets.json. macinity-page.css composition/scrollbar/responsive. Iconcopycurrentnative1024px.
 
 ### Nội dung và hành vi
 
-Heromôtảapp,cellsworkflowthật. Release/firstlaunchdisclosead-hoc/chưa notarized;preparingCTAstatuskhôngdownloadkhôngtồn tại. preview.js4locale/metadata,giữprefscompat. Guide/privacy sibling. Toolboxnamespace đểtươngthíchkhôngpublicbrand.
+Heromôtảapp,cellsworkflowthật. Release/firstlaunchdisclosead-hoc/chưa notarized;preparingCTAstatuskhôngdownloadkhôngtồn tại. preview.js4locale/metadata,giữprefscompat. Guide/privacy sibling. Macinitynamespace đểtươngthíchkhôngpublicbrand.
 
 ### Kiểm chứng
 
@@ -58,11 +58,11 @@ GlobalMacusers/developers、EN/VI/JA/ZH。日本語localeはJapan-specificregula
 
 ### Visualとcomponent ownership
 
-MacinityTheme.swiftがbrandpalette、scripts/sync_brand_tokens.pyがsite/orven-brand.css/lightdarkselectorを生成、二重handmaintainedpaletteなし。Site-shell.cssはtype/control、product-shell/supportJSmirrorはshared-assets.json。Macinity-page.cssはcomposition/scrollbar/responsive、iconはcurrentnative1024pxコピー。
+MacinityTheme.swiftがbrandpalette、scripts/sync_brand_tokens.pyがsite/macinity-brand.css/lightdarkselectorを生成、二重handmaintainedpaletteなし。Site-shell.cssはtype/control、product-shell/supportJSmirrorはshared-assets.json。Macinity-page.cssはcomposition/scrollbar/responsive、iconはcurrentnative1024pxコピー。
 
 ### Contentと動作
 
-Heroはapp目的、cellは実workflow。Release/firstlaunchはad-hoc/unnotarized明示、preparingCTAはstatusで未公開downloadなし。Preview.jsは4locale/metadata、既存prefs互換。Guide/privacy sibling、Toolboxnamespaceはcompatでpublicbrandではありません。
+Heroはapp目的、cellは実workflow。Release/firstlaunchはad-hoc/unnotarized明示、preparingCTAはstatusで未公開downloadなし。Preview.jsは4locale/metadata、既存prefs互換。Guide/privacy sibling、Macinitynamespaceはcompatでpublicbrandではありません。
 
 ### 検証
 

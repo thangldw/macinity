@@ -17,7 +17,7 @@ for file in "${markdown_files[@]}"; do
     echo "$file: stale authoritative current claim" >&2
     exit 1
   fi
-  if grep -nF 'docs/release-evidence/toolbox-2.0-beta.md' "$file"; then
+  if grep -nF 'docs/release-evidence/macinity-2.0-beta.md' "$file"; then
     echo "$file: removed beta evidence path" >&2
     exit 1
   fi

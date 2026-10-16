@@ -18,7 +18,7 @@ def replace_in_english(text, pattern, replacement)
 end
 
 def assert_rejected(name, code_of_conduct, expected_error)
-  Dir.mktmpdir("toolbox-community-contract-") do |fixture|
+  Dir.mktmpdir("macinity-community-contract-") do |fixture|
     FileUtils.mkdir_p(File.join(fixture, "tests"))
     FileUtils.cp(CHECKER, File.join(fixture, "tests/github_community_contract.rb"))
     FileUtils.cp_r(File.join(ROOT, ".github"), File.join(fixture, ".github"))

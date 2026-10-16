@@ -11,7 +11,7 @@ body:
 
         Do not paste private paths, filenames, file contents, account data, credentials, signing material, or an unredacted Macinity export.
   - type: input
-    id: toolbox-version
+    id: macinity-version
     attributes:
       label: Macinity version
       description: Use the version shown in Settings or the GitHub release tag.

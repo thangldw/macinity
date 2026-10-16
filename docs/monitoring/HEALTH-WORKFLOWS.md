@@ -20,7 +20,7 @@ Capture Baseline freezes the latest30–60 records. Comparisons use the median o
 
 Alerts default off and only evaluate fresh foreground-active evidence. The existing rules are sustained system CPU >=85% for30 seconds with continuous same-generation samples, non-normal memory pressure, startup capacity below10% available, and serious/critical thermal state. Paused/stale/missing data does not establish a finding. Re-arm requires30 seconds of continuously observed recovery: CPU below70%, normal pressure, available capacity >=15%, or nominal/fair thermal. Missing evidence and gaps over15 seconds reset recovery timing. Repeat delivery is at least15 minutes apart; Snooze suppresses new events for one hour. Disabling clears the gate. No action mutates the Mac.
 
-In-app events are capped at100, in memory. OS notification permission is requested only by the explicit button. Notification services initialize only within the Macinity bundle, avoiding unsupported command-line/XCTest hosts. If permission is denied or delivery fails, evidence remains in-app. Clicking a delivered notification navigates through ToolboxCoordinator to its evidence section. Delivery requires a functioning OS notification service and user permission; rule tests are not OS delivery proof.
+In-app events are capped at100, in memory. OS notification permission is requested only by the explicit button. Notification services initialize only within the Macinity bundle, avoiding unsupported command-line/XCTest hosts. If permission is denied or delivery fails, evidence remains in-app. Clicking a delivered notification navigates through MacinityCoordinator to its evidence section. Delivery requires a functioning OS notification service and user permission; rule tests are not OS delivery proof.
 
 ### Sensor Charts and Recording
 
@@ -60,7 +60,7 @@ Capture Baseline chốt30–60record mới nhất. Median cùng key/unit, finite
 
 Mặc định off, chỉ xét evidence foreground-active mới. Rule CPU>=85% liên tục30giây cùng generation, pressure không normal, startup available<10%, thermal serious/critical. Paused/stale/missing không tạo finding. Re-arm cần recovery quan sát liên tục30giây:CPU<70%, pressure normal, available>=15%, thermal nominal/fair. Missing/gap>15giây reset recovery; lặp ít nhất15phút, Snooze1giờ, disable xóa gate. Không đổi máy.
 
-Event tối đa100 trong RAM. Quyền notification chỉ qua nút; service chỉ khởi tạo trong bundle, tránh CLI/XCTest host không hỗ trợ. Denied/deliveryfail giữ evidence trong app. Click notification đã giao đi qua ToolboxCoordinator tới evidence. Rule tests không proof OS delivery; cần quyền và service thực.
+Event tối đa100 trong RAM. Quyền notification chỉ qua nút; service chỉ khởi tạo trong bundle, tránh CLI/XCTest host không hỗ trợ. Denied/deliveryfail giữ evidence trong app. Click notification đã giao đi qua MacinityCoordinator tới evidence. Rule tests không proof OS delivery; cần quyền và service thực.
 
 ### Sensor Charts và Recording
 
@@ -100,7 +100,7 @@ Baselineは最新30–60recordを凍結。同key/unitのavailable有限値をfie
 
 初期off、freshforeground-active evidenceのみ。CPU>=85%同generation連続30秒、非normalpressure、startupavailable<10%、serious/criticalthermal。Paused/stale/missingはfindingを作りません。Re-armは30秒連続recovery：CPU<70%、normalpressure、available>=15%、nominal/fairthermal。Missing/gap>15秒はrecoveryreset、repeatは最低15分、Snooze1時間、disableでgate消去。Mac変更なし。
 
-RAM内event最大100。Notification権限は明示button、serviceはMacinitybundle内のみ初期化し非対応CLI/XCTesthostを回避。Denied/deliveryfailでもapp内evidence保持。配信notification clickはToolboxCoordinatorでevidenceへ。Rule testsはOSdelivery証明ではなく実serviceと権限が必要。
+RAM内event最大100。Notification権限は明示button、serviceはMacinitybundle内のみ初期化し非対応CLI/XCTesthostを回避。Denied/deliveryfailでもapp内evidence保持。配信notification clickはMacinityCoordinatorでevidenceへ。Rule testsはOSdelivery証明ではなく実serviceと権限が必要。
 
 ### Sensor ChartsとRecording
 

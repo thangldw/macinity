@@ -14,7 +14,7 @@ Do not commit build output, personal reports, credentials, signing identities, n
 
 ### Required review evidence
 
-Run from `apps/toolbox`:
+Run from `apps/macinity`:
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
@@ -57,7 +57,7 @@ Không commit build output, report cá nhân, credential, signing identity, nota
 
 ### Evidence bắt buộc khi review
 
-Chạy từ `apps/toolbox`:
+Chạy từ `apps/macinity`:
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift
@@ -100,7 +100,7 @@ Build output、personal report、credential、signing identity、notarization ma
 
 ### Review に必要な evidence
 
-`apps/toolbox` から実行します。
+`apps/macinity` から実行します。
 
 ```bash
 swift format lint --recursive --parallel Sources Tests Package.swift

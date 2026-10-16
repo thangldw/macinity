@@ -24,7 +24,7 @@
     "unsigned": "Unnotarized release",
     "unsignedBody": "Ad-hoc signed and not Apple-notarized. macOS may require Open Anyway after a blocked first launch. No Homebrew distribution.",
     "first": "First launch & permissions",
-    "firstBody": "Verify the SHA-256, open the DMG and drag Macinity.app into Applications. If the first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Data remains in Application Support/Toolbox for compatibility. Optional filesystem, Wi-Fi and notification permissions expand the chosen workflow coverage.",
+    "firstBody": "Verify the SHA-256, open the DMG and drag Macinity.app into Applications. If the first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Data remains in the existing local app-data directory for compatibility. Optional filesystem, Wi-Fi and notification permissions expand the chosen workflow coverage.",
     "privacy": "Privacy",
     "changelog": "Changelog",
     "license": "License",
@@ -51,7 +51,7 @@
     "privacyHeading": "Your data stays under your control.",
     "privacyLead": "Macinity has no telemetry, account or automatic upload. Explicit network diagnostics do contact the destinations you choose.",
     "privacyLocal": "Local state and optional history",
-    "privacyLocalBody": "Management data remains in Application Support/Toolbox for compatibility. Optional health history stores system measurements only, with 24-hour or seven-day retention and a 24 MiB limit. Sensor recordings, alerts and connection timelines are bounded session data. Expired on-disk records are removed during a later successful write, not while the app is stopped.",
+    "privacyLocalBody": "Management data remains in the existing local app-data directory for compatibility. Optional health history stores system measurements only, with 24-hour or seven-day retention and a 24 MiB limit. Sensor recordings, alerts and connection timelines are bounded session data. Expired on-disk records are removed during a later successful write, not while the app is stopped.",
     "privacyNetwork": "Network and permissions",
     "privacyNetworkBody": "DNS, ICMP and TCP probes expose ordinary connection metadata to the chosen destination or resolver. Nearby Wi-Fi scans are explicit OS operations; identities may be redacted. Optional Location, Local Network, filesystem and notification permissions expand coverage, never authorize deletion. Update checks contact GitHub.",
     "privacyExport": "Review before sharing",
@@ -108,7 +108,7 @@
     "unsigned": "Bản phát hành chưa notarize",
     "unsignedBody": "Ký ad-hoc, chưa được Apple notarize. macOS có thể yêu cầu Open Anyway sau lần mở đầu bị chặn. Chưa có Homebrew.",
     "first": "Mở lần đầu và quyền truy cập",
-    "firstBody": "Xác minh SHA-256, mở DMG và kéo Macinity.app vào Applications. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway. Dữ liệu vẫn ở Application Support/Toolbox để tương thích nâng cấp. Các quyền filesystem, Wi-Fi và notification mở coverage cho workflow đã chọn.",
+    "firstBody": "Xác minh SHA-256, mở DMG và kéo Macinity.app vào Applications. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway. Dữ liệu vẫn ở thư mục dữ liệu local hiện có để tương thích nâng cấp. Các quyền filesystem, Wi-Fi và notification mở coverage cho workflow đã chọn.",
     "privacy": "Quyền riêng tư",
     "changelog": "Lịch sử phiên bản",
     "license": "Giấy phép",
@@ -135,7 +135,7 @@
     "privacyHeading": "Bạn kiểm soát dữ liệu của mình.",
     "privacyLead": "Không telemetry, tài khoản hoặc tự tải dữ liệu lên mạng. Chẩn đoán mạng chủ động kết nối tới đích bạn chọn.",
     "privacyLocal": "Dữ liệu local và history tùy chọn",
-    "privacyLocalBody": "Dữ liệu quản lý giữ ở Application Support/Toolbox để tương thích. Lịch sử sức khỏe tùy chọn chỉ lưu chỉ số hệ thống, giữ 24 giờ hoặc 7 ngày với giới hạn 24 MiB. Ghi cảm biến, cảnh báo và lịch sử kết nối có giới hạn trong phiên. Dữ liệu hết hạn trên disk được loại khi ghi thành công lần tiếp theo; không tự xóa khi app dừng.",
+    "privacyLocalBody": "Dữ liệu quản lý giữ ở thư mục dữ liệu local hiện có để tương thích. Lịch sử sức khỏe tùy chọn chỉ lưu chỉ số hệ thống, giữ 24 giờ hoặc 7 ngày với giới hạn 24 MiB. Ghi cảm biến, cảnh báo và lịch sử kết nối có giới hạn trong phiên. Dữ liệu hết hạn trên disk được loại khi ghi thành công lần tiếp theo; không tự xóa khi app dừng.",
     "privacyNetwork": "Mạng và quyền",
     "privacyNetworkBody": "Phép đo DNS/ICMP/TCP gửi metadata kết nối tới đích hoặc resolver đã chọn. Quét Wi-Fi gần đây chạy theo nút qua hệ điều hành; tên mạng có thể bị ẩn. Quyền vị trí, mạng cục bộ, filesystem và thông báo mở rộng phạm vi quan sát, không cấp quyền xóa. Kiểm tra cập nhật kết nối GitHub.",
     "privacyExport": "Review trước khi chia sẻ",
@@ -192,7 +192,7 @@
     "unsigned": "未公証の公開版",
     "unsignedBody": "アドホック署名で、Appleの公証は受けていません。初回起動がブロックされた場合はOpen Anywayが必要なことがあります。Homebrewでの配布はありません。",
     "first": "初回起動とアクセス権",
-    "firstBody": "SHA-256を確認し、DMGからMacinity.appをApplicationsへ移動します。初回起動がブロックされた場合はSystem Settings → Privacy & Security → Open Anywayを使用します。互換性のためデータ保存先はApplication Support/Toolboxを維持します。必要に応じたファイル・Wi-Fi・通知の権限は、それぞれの機能の取得範囲を広げます。",
+    "firstBody": "SHA-256を確認し、DMGからMacinity.appをApplicationsへ移動します。初回起動がブロックされた場合はSystem Settings → Privacy & Security → Open Anywayを使用します。互換性のためデータ保存先は既存のローカルデータ保存先を維持します。必要に応じたファイル・Wi-Fi・通知の権限は、それぞれの機能の取得範囲を広げます。",
     "privacy": "プライバシー",
     "changelog": "変更履歴",
     "license": "ライセンス",
@@ -219,7 +219,7 @@
     "privacyHeading": "データの扱いは、自分で選べます。",
     "privacyLead": "テレメトリー、アカウント、自動アップロードはありません。明示的なネットワーク診断は、選択した接続先へ通信します。",
     "privacyLocal": "ローカルデータと任意の履歴",
-    "privacyLocalBody": "互換性のため管理データはApplication Support/Toolboxを維持します。任意の状態履歴はシステム測定値のみで、保存期間は24時間または7日、容量上限は24MiBです。センサー記録、アラート、接続履歴は上限付きのセッションデータです。期限切れのディスク上の記録は、後の保存成功時に削除されます。停止中には自動削除しません。",
+    "privacyLocalBody": "互換性のため管理データは既存のローカルデータ保存先を維持します。任意の状態履歴はシステム測定値のみで、保存期間は24時間または7日、容量上限は24MiBです。センサー記録、アラート、接続履歴は上限付きのセッションデータです。期限切れのディスク上の記録は、後の保存成功時に削除されます。停止中には自動削除しません。",
     "privacyNetwork": "通信と権限",
     "privacyNetworkBody": "DNS・ICMP・TCP測定では通常の接続メタデータが選択先やリゾルバーに伝わります。近隣Wi-Fi検索は明示的なOS操作で、識別情報が非表示の場合があります。位置情報、ローカルネットワーク、ファイル、通知の権限は取得範囲を広げるもので、削除許可ではありません。更新確認はGitHubへ接続します。",
     "privacyExport": "共有前に確認する",
@@ -276,7 +276,7 @@
     "unsigned": "未经公证的发行版",
     "unsignedBody": "使用 ad-hoc 签名，未经 Apple 公证。首次启动被阻止后可能需要 Open Anyway。暂无 Homebrew 发行。",
     "first": "首次启动与权限",
-    "firstBody": "验证 SHA-256，打开 DMG 并将 Macinity.app 拖到 Applications。首次启动被阻止时使用 System Settings → Privacy & Security → Open Anyway。为兼容升级，数据仍保存在 Application Support/Toolbox。文件、Wi-Fi 和通知权限只扩展所选功能的覆盖范围。",
+    "firstBody": "验证 SHA-256，打开 DMG 并将 Macinity.app 拖到 Applications。首次启动被阻止时使用 System Settings → Privacy & Security → Open Anyway。为兼容升级，数据仍保存在 现有的本地应用数据目录。文件、Wi-Fi 和通知权限只扩展所选功能的覆盖范围。",
     "privacy": "隐私",
     "changelog": "更新记录",
     "license": "许可证",
@@ -303,7 +303,7 @@
     "privacyHeading": "你控制自己的数据。",
     "privacyLead": "无遥测、账号或自动上传。主动网络诊断会连接你选择的目标。",
     "privacyLocal": "本地数据和可选历史",
-    "privacyLocalBody": "为兼容升级，管理数据保留在 Application Support/Toolbox。可选健康历史只保存系统测量，保留24小时或7天，上限24MiB。传感器记录、提醒和连接历史是有界会话数据。磁盘过期记录在后续成功写入时移除，应用停止时不会自动清除。",
+    "privacyLocalBody": "为兼容升级，管理数据保留在 现有的本地应用数据目录。可选健康历史只保存系统测量，保留24小时或7天，上限24MiB。传感器记录、提醒和连接历史是有界会话数据。磁盘过期记录在后续成功写入时移除，应用停止时不会自动清除。",
     "privacyNetwork": "网络和权限",
     "privacyNetworkBody": "DNS/ICMP/TCP 测量会向目标或解析器暴露普通连接元数据。附近 Wi-Fi 扫描通过明确的系统操作执行，身份可能被隐藏。位置、本地网络、文件和通知权限只扩展覆盖范围，不授权删除。更新检查连接 GitHub。",
     "privacyExport": "分享前检查",
@@ -349,11 +349,11 @@
     document.querySelectorAll('[data-meter]').forEach(node => { node.setAttribute('aria-label', translate(node.dataset.meter)); });
     const numbers = new Intl.NumberFormat({en:'en-US',vi:'vi-VN',ja:'ja-JP',zh:'zh-CN'}[language], {maximumFractionDigits: 1});
     document.querySelectorAll('[data-size]').forEach(node => { node.textContent = `${numbers.format(Number(node.dataset.size))} ${node.dataset.unit || 'GB'}`; });
-    try { localStorage.setItem('toolbox.site.locale', language); } catch { /* Locale remains usable without storage. */ }
+    try { localStorage.setItem('macinity.site.locale', language); } catch { /* Locale remains usable without storage. */ }
   };
   document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
   let saved = 'en';
-  try { saved = localStorage.getItem('toolbox.site.locale') || 'en'; } catch { /* Use the default language. */ }
+  try { saved = localStorage.getItem('macinity.site.locale') || 'en'; } catch { /* Use the default language. */ }
   setLanguage(saved);
   const syncThemeIcon = () => { document.querySelector('#themeToggle img').src = `assets/icons/${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}.svg`; };
   document.addEventListener('themechange', syncThemeIcon);
