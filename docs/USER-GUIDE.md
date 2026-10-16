@@ -51,7 +51,7 @@ Install Trace records bounded observations while you run the normal installation
 
 ### Limits and support
 
-Mapped temperature labels vary by model; link rate is not Internet throughput. Hidden-space/snapshot explanations do not establish exclusive snapshot bytes. No firewall, fan control or privileged repair is included. Current foreground resources, physical Intel/macOS13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. See [release readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md) and [GitHub issues](https://github.com/thangldw/toolbox/issues).
+Mapped temperature labels vary by model; link rate is not Internet throughput. Hidden-space/snapshot explanations do not establish exclusive snapshot bytes. No firewall, fan control or privileged repair is included. Current foreground resources, physical Intel/macOS13/Ethernet, full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified. See [release readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md) and [GitHub issues](https://github.com/thangldw/macinity/issues).
 
 ## Tiếng Việt
 
@@ -104,7 +104,7 @@ Install Trace ghi quan sát có giới hạn khi bạn thực hiện install/upd
 
 ### Giới hạn và support
 
-Tên cảm biến phụ thuộc model; link rate không phải tốc độ Internet. Giải thích dung lượng ẩn/snapshots không chứng minh exclusive snapshot bytes. App không có firewall, điều khiển quạt hoặc sửa hệ thống với đặc quyền. Foreground resources, Intel/macOS 13/Ethernet vật lý, full VoiceOver, câu chữ quan trọng tiếng Nhật và thông báo native chưa được xác minh. Xem [readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md), [issues](https://github.com/thangldw/toolbox/issues).
+Tên cảm biến phụ thuộc model; link rate không phải tốc độ Internet. Giải thích dung lượng ẩn/snapshots không chứng minh exclusive snapshot bytes. App không có firewall, điều khiển quạt hoặc sửa hệ thống với đặc quyền. Foreground resources, Intel/macOS 13/Ethernet vật lý, full VoiceOver, câu chữ quan trọng tiếng Nhật và thông báo native chưa được xác minh. Xem [readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md), [issues](https://github.com/thangldw/macinity/issues).
 
 ## 日本語
 
@@ -157,4 +157,4 @@ Install Traceは通常のinstall/update/uninstallを人が行う間に限定さ�
 
 ### 制限とサポート
 
-Mapped sensor labelsは機種に依存し、link rateはInternet throughputではありません。Hidden space/snapshotの説明はexclusive snapshot bytesの証明ではありません。Firewall、fan control、privileged repairは含みません。Current foreground resources、実機Intel/macOS 13/Ethernet、完全なVoiceOver、重要な日本語表現review、native通知到達は未検証です。[Readiness](production/RELEASE-READINESS.md)、[Privacy](../PRIVACY.md)、[Security](../SECURITY.md)、[issues](https://github.com/thangldw/toolbox/issues)を参照してください。
+Mapped sensor labelsは機種に依存し、link rateはInternet throughputではありません。Hidden space/snapshotの説明はexclusive snapshot bytesの証明ではありません。Firewall、fan control、privileged repairは含みません。Current foreground resources、実機Intel/macOS 13/Ethernet、完全なVoiceOver、重要な日本語表現review、native通知到達は未検証です。[Readiness](production/RELEASE-READINESS.md)、[Privacy](../PRIVACY.md)、[Security](../SECURITY.md)、[issues](https://github.com/thangldw/macinity/issues)を参照してください。

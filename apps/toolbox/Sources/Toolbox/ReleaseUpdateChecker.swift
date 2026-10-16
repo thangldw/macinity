@@ -54,7 +54,7 @@ enum ReleaseUpdateError: LocalizedError {
 struct ReleaseUpdateChecker: Sendable {
   private struct Release: Decodable { let tagName: String }
   private static let endpoint = URL(
-    string: "https://api.github.com/repos/thangldw/toolbox/releases/latest")!
+    string: "https://api.github.com/repos/thangldw/macinity/releases/latest")!
   private let session: any URLSessionProtocol
 
   init(session: any URLSessionProtocol = URLSession.shared) {

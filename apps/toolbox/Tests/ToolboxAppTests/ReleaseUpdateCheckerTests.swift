@@ -15,7 +15,7 @@ final class ReleaseUpdateCheckerTests: XCTestCase {
     XCTAssertEqual(version, SemanticVersion(major: 2, minor: 1, patch: 3))
     XCTAssertEqual(
       request?.url?.absoluteString,
-      "https://api.github.com/repos/thangldw/toolbox/releases/latest")
+      "https://api.github.com/repos/thangldw/macinity/releases/latest")
     XCTAssertNil(request?.httpBody)
   }
 
