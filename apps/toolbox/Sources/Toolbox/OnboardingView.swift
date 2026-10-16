@@ -146,7 +146,7 @@ struct OnboardingView: View {
         .foregroundStyle(.secondary)
         Link(
           L10n.text("Open installation guide"),
-          destination: URL(string: "https://thangldw.github.io/toolbox/#install")!)
+          destination: URL(string: "https://thangldw.github.io/macinity/#install")!)
       }
     }
   }

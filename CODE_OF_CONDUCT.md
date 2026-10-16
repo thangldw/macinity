@@ -40,7 +40,7 @@ This Code of Conduct applies within all Macinity community spaces. It also appli
 
 ### Enforcement
 
-Report abusive, harassing, or otherwise unacceptable behavior through [Macinity's private reporting form](https://github.com/thangldw/toolbox/security/advisories/new). Begin the report title with `Code of Conduct:` so it is handled as a conduct matter. Do not open a public issue or include private information in a public thread.
+Report abusive, harassing, or otherwise unacceptable behavior through [Macinity's private reporting form](https://github.com/thangldw/macinity/security/advisories/new). Begin the report title with `Code of Conduct:` so it is handled as a conduct matter. Do not open a public issue or include private information in a public thread.
 
 All complaints will be reviewed promptly and fairly. The maintainer will minimize disclosure and protect the privacy and security of reporters and affected people. Macinity is currently a single-maintainer project; if a complaint concerns that maintainer, no independent project moderator is available, so reporters may also use GitHub's platform reporting and blocking tools.
 
@@ -118,7 +118,7 @@ Bộ quy tắc này áp dụng trong mọi không gian cộng đồng của Maci
 
 ### Thực thi
 
-Báo cáo hành vi lạm dụng, quấy rối hoặc không được chấp nhận qua [biểu mẫu báo cáo riêng tư của Macinity](https://github.com/thangldw/toolbox/security/advisories/new). Bắt đầu tiêu đề bằng `Code of Conduct:` để báo cáo được xử lý như vấn đề hành vi. Không mở public issue hoặc đưa thông tin riêng tư vào public thread.
+Báo cáo hành vi lạm dụng, quấy rối hoặc không được chấp nhận qua [biểu mẫu báo cáo riêng tư của Macinity](https://github.com/thangldw/macinity/security/advisories/new). Bắt đầu tiêu đề bằng `Code of Conduct:` để báo cáo được xử lý như vấn đề hành vi. Không mở public issue hoặc đưa thông tin riêng tư vào public thread.
 
 Mọi khiếu nại sẽ được xem xét nhanh chóng và công bằng. Maintainer sẽ hạn chế tối đa việc tiết lộ thông tin và bảo vệ quyền riêng tư, an toàn của người báo cáo cùng những người bị ảnh hưởng. Macinity hiện là dự án có một maintainer; nếu khiếu nại liên quan tới maintainer đó, dự án không có moderator độc lập, vì vậy người báo cáo cũng có thể dùng công cụ báo cáo và chặn của GitHub.
 
@@ -196,7 +196,7 @@ Hướng dẫn về tác động cộng đồng được lấy cảm hứng từ
 
 ### 執行
 
-虐待、ハラスメント、その他の許容されない行動は、[Macinity の非公開報告フォーム](https://github.com/thangldw/toolbox/security/advisories/new)から報告してください。行動規範に関する案件として処理できるよう、報告タイトルを `Code of Conduct:` で始めてください。公開 Issue を作成したり、公開スレッドに個人情報を記載したりしないでください。
+虐待、ハラスメント、その他の許容されない行動は、[Macinity の非公開報告フォーム](https://github.com/thangldw/macinity/security/advisories/new)から報告してください。行動規範に関する案件として処理できるよう、報告タイトルを `Code of Conduct:` で始めてください。公開 Issue を作成したり、公開スレッドに個人情報を記載したりしないでください。
 
 すべての申立ては、迅速かつ公正に審査されます。メンテナーは情報開示を最小限に抑え、報告者と影響を受けた人のプライバシーおよび安全を保護します。Macinity は現在単独メンテナーのプロジェクトです。申立てがそのメンテナーに関する場合、独立したプロジェクトモデレーターはいないため、報告者は GitHub のプラットフォーム報告・ブロック機能も利用できます。
 

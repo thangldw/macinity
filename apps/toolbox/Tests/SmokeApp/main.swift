@@ -25,7 +25,7 @@ struct SmokeApp {
     let request = await session.request
     guard
       request?.url?.absoluteString
-        == "https://api.github.com/repos/thangldw/toolbox/releases/latest",
+        == "https://api.github.com/repos/thangldw/macinity/releases/latest",
       request?.httpBody == nil
     else {
       fatalError("Update request leaked fields or used the wrong endpoint")

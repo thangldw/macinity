@@ -53,7 +53,7 @@ config = load_yaml(".github/ISSUE_TEMPLATE/config.yml")
 fail_contract("blank issues must stay disabled") unless config["blank_issues_enabled"] == false
 
 security_link = Array(config["contact_links"]).find do |link|
-  link["url"] == "https://github.com/thangldw/toolbox/security/advisories/new"
+  link["url"] == "https://github.com/thangldw/macinity/security/advisories/new"
 end
 fail_contract("missing private security reporting link") unless security_link
 
@@ -71,7 +71,7 @@ language_matches = languages.map do |language|
   matches.first
 end
 
-private_reporting_url = "https://github.com/thangldw/toolbox/security/advisories/new"
+private_reporting_url = "https://github.com/thangldw/macinity/security/advisories/new"
 private_reporting_link = /\[[^\]]+\]\(#{Regexp.escape(private_reporting_url)}\)/
 attribution_url = "https://www.contributor-covenant.org/version/2/0/code_of_conduct.html"
 

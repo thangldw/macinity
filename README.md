@@ -15,7 +15,7 @@ Macinity brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostic
 
 ### Install and release status
 
-Macinity 3.1.0 is published. Use the [release page](https://github.com/thangldw/toolbox/releases/tag/v3.1.0) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
+Macinity 3.1.0 is published. Use the [release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
 
 Download the DMG and matching SHA-256 file, verify the checksum, open the disk image, read the first-launch guide and drag Macinity.app into Applications. Retain your data when upgrading: bundle ID `com.thang.toolbox` and `~/Library/Application Support/Toolbox` intentionally remain unchanged.
 
@@ -39,7 +39,7 @@ No account, telemetry, analytics, automatic deletion or cloud sync. Explicit net
 
 Build with Swift 6 and full Xcode. From `apps/toolbox`, run `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh` and `./scripts/build_dmg.sh`. The resulting app is `dist/Macinity.app`; the internal executable/module names remain `Toolbox` for compatibility. Verify with `./scripts/verify_release.sh --allow-adhoc`; this checks structural integrity, not Apple notarization.
 
-Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/toolbox/). Previous Macinity releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
+Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/macinity/). Previous Macinity releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
 
 ## Tiếng Việt
 
@@ -56,7 +56,7 @@ Macinity hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-
 
 ### Cài đặt và trạng thái release
 
-Macinity 3.1.0 đã phát hành. Tải artifact đã công bố từ [release page](https://github.com/thangldw/toolbox/releases/tag/v3.1.0); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
+Macinity 3.1.0 đã phát hành. Tải artifact đã công bố từ [release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
 
 Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, đọc hướng dẫn và kéo Macinity.app vào Applications. Khi nâng cấp giữ dữ liệu: bundle ID `com.thang.toolbox` và `~/Library/Application Support/Toolbox` được giữ nguyên có chủ đích.
 
@@ -80,7 +80,7 @@ Không account/telemetry/analytics/tự xóa/cloud sync. Probe explicit kết n�
 
 Build bằng Swift 6 và bộ Xcode đầy đủ. Từ `apps/toolbox`, chạy `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh`, `./scripts/build_dmg.sh`. App là `dist/Macinity.app`; tên executable/module `Toolbox` giữ để tương thích. `./scripts/verify_release.sh --allow-adhoc` kiểm tra tính toàn vẹn của bộ cài, không chứng minh notarization.
 
-Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/toolbox/). Release Macinity trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
+Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/macinity/). Release Macinity trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
 
 ## 日本語
 
@@ -97,7 +97,7 @@ MacinityはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、
 
 ### インストールとrelease状況
 
-Macinity 3.1.0を公開しました。[Release page](https://github.com/thangldw/toolbox/releases/tag/v3.1.0)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
+Macinity 3.1.0を公開しました。[Release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
 
 同versionのDMG/SHA-256をdownloadしてchecksum確認、diskimage内guideを読みMacinity.appをApplicationsへ。Upgrade時のデータを保持するためbundleID `com.thang.toolbox`と`~/Library/Application Support/Toolbox`を意図的に維持します。
 
@@ -121,4 +121,4 @@ Account/telemetry/analytics/自動削除/cloud syncなし。明示probeは入力
 
 Swift 6 và bộ Xcode đầy đủでbuild。`apps/toolbox`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Macinity.app`、internalexecutable/moduleは互換性のため`Toolbox`を維持。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
 
-[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のMacinity releaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
+[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/macinity/)を参照。以前のMacinity releaseはGitHubtag/release historyで保持。[MIT](LICENSE)。

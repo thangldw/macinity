@@ -4,7 +4,7 @@
 
 ### Supported scope and reporting
 
-Report vulnerabilities privately through [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Include affected version, reproduction and impact; omit credentials and private filesystem/network reports. Macinity 3.1 is the current development/release line. Older Macinity binaries remain historical downloads.
+Report vulnerabilities privately through [GitHub private reporting](https://github.com/thangldw/macinity/security/advisories/new). Include affected version, reproduction and impact; omit credentials and private filesystem/network reports. Macinity 3.1 is the current development/release line. Older Macinity binaries remain historical downloads.
 
 ### Release trust
 
@@ -24,7 +24,7 @@ Mapped hardware sensors are community mappings and model dependent. No firewall,
 
 ### Scope hỗ trợ và báo cáo
 
-Báo vulnerability riêng qua [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Gửiversion/reproduction/impact, khôngcredentials/reportfilesystem/networkriêng. Macinity 3.1 là dòng hiện tại; binary phiên bản cũ là downloadhistorical.
+Báo vulnerability riêng qua [GitHub private reporting](https://github.com/thangldw/macinity/security/advisories/new). Gửiversion/reproduction/impact, khôngcredentials/reportfilesystem/networkriêng. Macinity 3.1 là dòng hiện tại; binary phiên bản cũ là downloadhistorical.
 
 ### Trustrelease
 
@@ -44,7 +44,7 @@ Sensorcommunity/modeldependent; khôngfirewall/fullpackethistory/fan control/cal
 
 ### Support範囲と報告
 
-Vulnerabilityは[GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new)へ非公開報告。Version/reproduction/impactを含めcredentials/privatefilesystem/networkreportは除外。Macinity 3.1が現在line、旧バージョンのbinaryはhistoricaldownload。
+Vulnerabilityは[GitHub private reporting](https://github.com/thangldw/macinity/security/advisories/new)へ非公開報告。Version/reproduction/impactを含めcredentials/privatefilesystem/networkreportは除外。Macinity 3.1が現在line、旧バージョンのbinaryはhistoricaldownload。
 
 ### Release trust
 

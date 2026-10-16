@@ -44,7 +44,7 @@ assert_rejected(
   "an English section without the private reporting route",
   replace_in_english(
     CODE_OF_CONDUCT,
-    "https://github.com/thangldw/toolbox/security/advisories/new",
+    "https://github.com/thangldw/macinity/security/advisories/new",
     "https://example.invalid/conduct"
   ),
   "English section must use the private reporting channel"
@@ -62,7 +62,7 @@ assert_rejected(
 
 assert_rejected(
   "an unresolved contact placeholder",
-  replace_in_english(CODE_OF_CONDUCT, "Toolbox's private reporting form", "[EMAIL]"),
+  replace_in_english(CODE_OF_CONDUCT, "Macinity's private reporting form", "[EMAIL]"),
   "Code of Conduct contains an unresolved contact placeholder"
 )
 

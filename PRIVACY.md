@@ -12,7 +12,7 @@ Sensor sessions contain at most360 points in memory until Quit. Alerts contain a
 
 ### Network activity
 
-Check for Updates explicitly requests `https://api.github.com/repos/thangldw/toolbox/releases/latest`; no scan report is attached. Wi-Fi/LAN tools run only explicit refresh/scan/probe operations. DNS resolution queries the system resolver; ICMP latency uses up to20 probes, and connection checks use optional gateway ICMP3 and TCP443 without application payload. Destinations/resolvers can observe ordinary connection metadata, source IP and queried hostnames. Numeric-IP diagnostics skip DNS. Nearby Wi-Fi uses CoreWLAN, with identities possibly redacted by macOS. No background bandwidth test, packet capture, firewall, network configuration change or automatic upload is provided.
+Check for Updates explicitly requests `https://api.github.com/repos/thangldw/macinity/releases/latest`; no scan report is attached. Wi-Fi/LAN tools run only explicit refresh/scan/probe operations. DNS resolution queries the system resolver; ICMP latency uses up to20 probes, and connection checks use optional gateway ICMP3 and TCP443 without application payload. Destinations/resolvers can observe ordinary connection metadata, source IP and queried hostnames. Numeric-IP diagnostics skip DNS. Nearby Wi-Fi uses CoreWLAN, with identities possibly redacted by macOS. No background bandwidth test, packet capture, firewall, network configuration change or automatic upload is provided.
 
 ### Permissions and exports
 
@@ -38,7 +38,7 @@ Sensor session tối đa360point RAM tới Quit, alert tối đa100event. Socket
 
 ### Hoạt động mạng
 
-Check for Updates theo nút GET `https://api.github.com/repos/thangldw/toolbox/releases/latest`, không đính kèm scan report. Wi-Fi/LAN chỉ refresh/scan/probe explicit. DNS dùng system resolver; latency tối đa20ICMP; connectioncheck gatewayICMP3 tùy chọn/TCP443 không application payload. Đích/resolver có thể thấy metadata kết nối, source IP/hostname query. NumericIP bỏ DNS. Nearby dùngCoreWLAN, identity có thể bị OSẩn. Không backgroundspeedtest/packet capture/firewall/đổicấuhình/tựupload.
+Check for Updates theo nút GET `https://api.github.com/repos/thangldw/macinity/releases/latest`, không đính kèm scan report. Wi-Fi/LAN chỉ refresh/scan/probe explicit. DNS dùng system resolver; latency tối đa20ICMP; connectioncheck gatewayICMP3 tùy chọn/TCP443 không application payload. Đích/resolver có thể thấy metadata kết nối, source IP/hostname query. NumericIP bỏ DNS. Nearby dùngCoreWLAN, identity có thể bị OSẩn. Không backgroundspeedtest/packet capture/firewall/đổicấuhình/tựupload.
 
 ### Quyền và export
 
@@ -64,7 +64,7 @@ Sensor session最大360pointはQuitまでRAM、alert最大100event。Socket-chan
 
 ### Network動作
 
-明示Check for Updatesは`https://api.github.com/repos/thangldw/toolbox/releases/latest`へGET、scan report添付なし。Wi-Fi/LANは明示refresh/scan/probeのみ。DNSはsystem resolver、latency最大20ICMP、connectioncheckはoptionalgatewayICMP3/TCP443・application payloadなし。Destination/resolverに通常connectionmetadata/source IP/hostname queryが見える場合があります。NumericIPはDNS省略。NearbyはCoreWLAN、identityはOSredaction可能。Backgroundspeedtest/packet capture/firewall/設定変更/自動uploadなし。
+明示Check for Updatesは`https://api.github.com/repos/thangldw/macinity/releases/latest`へGET、scan report添付なし。Wi-Fi/LANは明示refresh/scan/probeのみ。DNSはsystem resolver、latency最大20ICMP、connectioncheckはoptionalgatewayICMP3/TCP443・application payloadなし。Destination/resolverに通常connectionmetadata/source IP/hostname queryが見える場合があります。NumericIPはDNS省略。NearbyはCoreWLAN、identityはOSredaction可能。Backgroundspeedtest/packet capture/firewall/設定変更/自動uploadなし。
 
 ### 権限とexport
 
