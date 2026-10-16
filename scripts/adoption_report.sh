@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-repo="thangldw/toolbox"
-asset_regex='^(Toolbox|Orven|Macinity)-[0-9]+\.[0-9]+\.[0-9]+\.dmg$'
+repo="thangldw/macinity"
+asset_regex='^Macinity-[0-9]+\.[0-9]+\.[0-9]+\.dmg$'
 read_stdin=0
 
 while [[ $# -gt 0 ]]; do

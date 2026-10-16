@@ -1,31 +1,25 @@
-# Macinity repository and website migration
+# Macinity repository and naming policy
 
 ## English
 
-The canonical repository is https://github.com/thangldw/macinity and the website is https://thangldw.github.io/macinity/. The repository was renamed in place: repository ID, Git history, tags, issues and releases were retained. Local origin now points to the new URL. GitHub redirects the old repository, release downloads and update API. Do not create another repository named `toolbox`: that would replace GitHub's old-name redirects.
+The canonical repository is https://github.com/thangldw/macinity and the website is https://thangldw.github.io/macinity/. The repository was renamed in place, preserving repository ID 1307313498, Git history, tags, issues and releases. GitHub manages the old repository redirect; do not reuse the previous repository name.
 
-The account website repository owns the `/toolbox/` compatibility directory. Its index, guide and privacy pages redirect to `/macinity/`, retaining the path, query and fragment through JavaScript; a no-JavaScript fallback links to the corresponding page. Static asset and release-metadata URLs remain served there. The root 404 handler redirects other `/toolbox/` paths to the equivalent new route. A nonexistent destination remains nonexistent. Keep these compatibility files when updating the portfolio.
+The obsolete website compatibility directory and redirect handler have been removed at the owner's request. Use the canonical website. The superseded 2.0.0 and 3.0.0 DMGs, their checksums and the old documentation ZIP have been removed from GitHub after a verified private backup. Historical release pages point to the current release and guide. The published Macinity 3.1.0 DMG remains unchanged.
 
-This is an address migration, not a user-data migration. Bundle ID `com.thang.toolbox`, executable, preference keys, permissions and `Application Support/Toolbox` are unchanged. No user files were moved or deleted. The published 3.1.0 DMG is unchanged; its existing update endpoint still works through GitHub's redirect. Source URLs are updated for future builds.
-
-Verified: repository ID 1307313498 retained, all six releases and asset IDs/sizes/digests preserved, old repository HTTP 301, old update endpoint HTTP 200, old DMG download SHA-256 `57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7`. A real browser retained `guide.html?lang=vi#install` across the website redirect. 129 local tests and GitHub CI passed for the URL changes; both websites deployed successfully.
+Current source uses `apps/macinity`, Macinity modules, types and executable. Existing preferences, the bundle identifier and the support-data directory retain their exact persisted values to preserve installed permissions and user data. A legacy executable alias supports existing scheduled scans. These compatibility identifiers are not product branding; no user files or settings are deleted or moved. The renamed executable applies to subsequent builds, not the immutable published 3.1.0 artifact.
 
 ## Tiếng Việt
 
-Repo chính là https://github.com/thangldw/macinity và website là https://thangldw.github.io/macinity/. Repo được đổi tên tại chỗ, giữ ID, lịch sử Git, tag, issue và release. Remote local trỏ tới URL mới. GitHub chuyển hướng repo, download và API cập nhật cũ. Không tạo repo khác tên `toolbox`, vì sẽ thay thế các chuyển hướng tên cũ của GitHub.
+Repo chính là https://github.com/thangldw/macinity và website là https://thangldw.github.io/macinity/. Repo đổi tên tại chỗ, giữ ID 1307313498, lịch sử Git, tag, issue và release. GitHub quản lý chuyển hướng repo cũ; không tái sử dụng tên repo trước đây.
 
-Repo website cá nhân sở hữu thư mục tương thích `/toolbox/`. Trang chủ, hướng dẫn và quyền riêng tư chuyển tới `/macinity/`, giữ path, query và fragment qua JavaScript; khi không có JavaScript có liên kết tới trang tương ứng. URL asset và metadata release cũ vẫn được phục vụ. Handler 404 của site chuyển các path `/toolbox/` khác sang route mới tương ứng; đích không tồn tại vẫn không tồn tại. Giữ các file tương thích này khi cập nhật portfolio.
+Đã bỏ thư mục website tương thích và handler chuyển hướng theo yêu cầu chủ sở hữu. Dùng website chính. Đã gỡ DMG 2.0.0 và 3.0.0, checksum và ZIP tài liệu cũ khỏi GitHub sau khi sao lưu riêng và xác minh. Trang release lịch sử dẫn tới bản hiện tại và hướng dẫn mới. DMG Macinity 3.1.0 đã phát hành giữ nguyên.
 
-Đây là chuyển địa chỉ, không chuyển dữ liệu người dùng. Bundle ID `com.thang.toolbox`, executable, khóa cấu hình, quyền và `Application Support/Toolbox` không đổi. Không di chuyển hoặc xóa file người dùng. DMG 3.1.0 đã phát hành giữ nguyên; API cập nhật cũ vẫn hoạt động qua redirect GitHub. URL trong source đã cập nhật cho các build sau.
-
-Đã xác minh: giữ repo ID 1307313498, cả sáu release cùng ID/kích thước/digest asset, repo cũ trả HTTP 301, API cũ HTTP 200, download DMG cũ có SHA-256 `57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7`. Trình duyệt thật giữ `guide.html?lang=vi#install` sau chuyển hướng. 129 tests local và CI GitHub qua cho thay đổi URL; hai website đã triển khai thành công.
+Source hiện dùng `apps/macinity`, module, type và executable Macinity. Các khóa cấu hình, bundle identifier và thư mục dữ liệu giữ giá trị đã lưu để bảo toàn quyền và dữ liệu người dùng. Alias executable cũ hỗ trợ lịch quét đã cài. Đây là định danh tương thích, không phải thương hiệu; không xóa hoặc di chuyển file hay cấu hình người dùng. Executable đổi tên áp dụng cho build tiếp theo, không thay đổi artifact 3.1.0 đã phát hành.
 
 ## 日本語
 
-正規repositoryは https://github.com/thangldw/macinity、websiteは https://thangldw.github.io/macinity/ です。既存repositoryの名称変更により、ID、Git履歴、tag、issue、releaseを維持しました。local originは新URLです。旧repository、download、更新APIはGitHubが転送します。`toolbox`という別repositoryを作成すると旧名の転送が失われるため、再利用しないでください。
+正規repositoryは https://github.com/thangldw/macinity、websiteは https://thangldw.github.io/macinity/ です。名称変更は既存repositoryで行い、ID 1307313498、Git履歴、tag、issue、releaseを保持しました。旧repositoryへの転送はGitHubが管理します。旧名を別repositoryに再利用しないでください。
 
-アカウントwebsiteのrepositoryで `/toolbox/` 互換ディレクトリを維持します。トップ、guide、privacyを `/macinity/` へ転送し、JavaScriptでpath、query、fragmentを保持します。JavaScript無効時も対応ページへのリンクがあります。旧assetとrelease metadataも提供します。root 404 handlerは他の `/toolbox/` pathを対応する新routeへ転送しますが、存在しないページは新規作成しません。portfolio更新時も互換ファイルを維持してください。
+所有者の依頼により、旧websiteの互換ディレクトリと転送handlerを削除しました。正規websiteをご利用ください。2.0.0と3.0.0の旧DMG、checksum、旧資料ZIPは、検証済み非公開バックアップを保存してからGitHubより削除しました。過去のreleaseページは現行releaseとguideを案内します。公開済みMacinity 3.1.0 DMGは変更していません。
 
-これはアドレス移行であり、利用者データの移行ではありません。bundle ID `com.thang.toolbox`、実行ファイル、設定キー、権限、`Application Support/Toolbox`を維持します。利用者ファイルの移動・削除は行いません。公開済み3.1.0 DMGも同一で、旧更新APIはGitHub転送で動作します。次回build向けsource URLを更新しました。
-
-確認済み：repository ID 1307313498、六つのreleaseとasset ID・size・digestを維持。旧repositoryはHTTP 301、旧APIはHTTP 200、旧DMGのSHA-256は `57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7`。実ブラウザで `guide.html?lang=vi#install` の保持を確認しました。URL変更の129 local testsとGitHub CIに成功し、両websiteを公開しました。
+現在のsourceは`apps/macinity`、Macinity module、type、実行ファイルを使用します。既存設定キー、bundle identifier、データ保存先は権限と利用者データの保持のため同一値を維持します。旧実行ファイルaliasにより既存の定期スキャンを維持します。これらは互換識別子でありブランド名ではありません。利用者ファイルや設定を移動・削除しません。実行ファイル名の変更は次回buildに適用され、公開済み3.1.0 artifactは変更しません。

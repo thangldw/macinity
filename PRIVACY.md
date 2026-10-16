@@ -6,7 +6,7 @@
 
 Macinity has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Macinity.
 
-State remains under `~/Library/Application Support/Toolbox` for upgrade compatibility: cleanup/recovery history, change sessions/snapshots/evidence, storage checkpoints and migration state. Opt-in `health-history-v1.json` holds system CPU/memory/pressure/thermal and available mapped sensors, with availability/source/unit/timestamps; it excludes process names, paths and network endpoints. Retention is24h/7d, at most10080 records/36fields/24MiB. File budget can omit older observations sooner. Expired observations are removed on a successful later write; an app that does not run does not actively erase them. Corrupt/unknown/oversized files are preserved and block writes.
+State remains under the existing Application Support directory for upgrade compatibility: cleanup/recovery history, change sessions/snapshots/evidence, storage checkpoints and migration state. Opt-in `health-history-v1.json` holds system CPU/memory/pressure/thermal and available mapped sensors, with availability/source/unit/timestamps; it excludes process names, paths and network endpoints. Retention is24h/7d, at most10080 records/36fields/24MiB. File budget can omit older observations sooner. Expired observations are removed on a successful later write; an app that does not run does not actively erase them. Corrupt/unknown/oversized files are preserved and block writes.
 
 Sensor sessions contain at most360 points in memory until Quit. Alerts contain at most100 in-app events. Socket-change and network-path timelines are opt-in bounded session data, not disk identity history. Stop preserves a recording session; starting a new session replaces it. Existing management history stays until explicitly managed.
 
@@ -32,7 +32,7 @@ Macinity 3.1.0 uses an explicitly authorized ad-hoc-signed, unnotarized release 
 
 Macinity không có account/telemetry/advertising/analytics/cloud sync. Đọc metadata/hash filesystem, image features, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute.
 
-Dữ liệu giữ trong `~/Library/Application Support/Toolbox` để tương thích nâng cấp: cleanup/recovery, change sessions/snapshots/evidence, storagecheckpoint/migration. `health-history-v1.json` opt-in lưu systemCPU/memory/pressure/thermal/sensor khả dụng, availability/source/unit/timestamp; không tênprocess/path/endpoint. Retention24h/7d, tối đa10080record/36field/24MiB; budget có thể bỏ record sớm. Expired bị loại trong write thành công sau đó; app không chạy không tự xóa. File corrupt/unknown/oversized giữ nguyên và chặn write.
+Dữ liệu giữ trong thư mục Application Support hiện có để tương thích nâng cấp: cleanup/recovery, change sessions/snapshots/evidence, storagecheckpoint/migration. `health-history-v1.json` opt-in lưu systemCPU/memory/pressure/thermal/sensor khả dụng, availability/source/unit/timestamp; không tênprocess/path/endpoint. Retention24h/7d, tối đa10080record/36field/24MiB; budget có thể bỏ record sớm. Expired bị loại trong write thành công sau đó; app không chạy không tự xóa. File corrupt/unknown/oversized giữ nguyên và chặn write.
 
 Sensor session tối đa360point RAM tới Quit, alert tối đa100event. Socket-change/networkpath opt-in bounded/RAM, không identityhistorydisk. Stop giữ session; Start thay session cũ. History quản lý vẫn giữ tới khi được quản lý rõ ràng.
 
@@ -58,7 +58,7 @@ Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không App
 
 Account/telemetry/広告/analytics/cloud syncなし。OS権限とworkflowcoverage内でfilesystem metadata/hash、image features、installer FSEvents、receipt/registration、process/hardware/networkを読みます。Droppedinstallerをidentifyしますがmount/executeしません。
 
-Upgrade互換のため`~/Library/Application Support/Toolbox`にcleanup/recovery、changesession/snapshot/evidence、storagecheckpoint/migrationを保存。Opt-in`health-history-v1.json`はsystemCPU/memory/pressure/thermal/availablesensorとavailability/source/unit/timestampのみ、process name/path/endpointなし。Retention24h/7d、最大10080record/36field/24MiB。Budgetで早期省略可能、期限切れは後の成功writeで削除、非実行appは能動削除しません。Corrupt/unknown/oversizedfile保持・write停止。
+Upgrade互換のため既存Application Supportディレクトリにcleanup/recovery、changesession/snapshot/evidence、storagecheckpoint/migrationを保存。Opt-in`health-history-v1.json`はsystemCPU/memory/pressure/thermal/availablesensorとavailability/source/unit/timestampのみ、process name/path/endpointなし。Retention24h/7d、最大10080record/36field/24MiB。Budgetで早期省略可能、期限切れは後の成功writeで削除、非実行appは能動削除しません。Corrupt/unknown/oversizedfile保持・write停止。
 
 Sensor session最大360pointはQuitまでRAM、alert最大100event。Socket-change/networkpathはopt-inbounded/sessionRAMでdiskidentityhistoryなし。Stopは保持、Startは以前sessionを置換。Managementhistoryは明示管理まで保持。
 

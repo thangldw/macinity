@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate self-contained accessible Toolbox documentation diagrams."""
+"""Validate self-contained accessible Macinity documentation diagrams."""
 
 import argparse
 from html.parser import HTMLParser

@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: toolbox-codeql-${{ github.workflow }}-${{ github.ref }}
+  group: macinity-codeql-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
           languages: swift
           build-mode: manual
       - name: Build Swift package
-        run: swift build --package-path apps/toolbox
+        run: swift build --package-path apps/macinity
       - name: Analyze
         uses: github/codeql-action/analyze@v4
         with:
