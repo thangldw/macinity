@@ -96,19 +96,19 @@
 /* Install Trace */
 "Thả installer, chụp trước/sau và xem bằng chứng thay đổi" = "Drop an installer, capture before and after, and review change evidence";
 "Thả .dmg, .pkg hoặc .app vào đây" = "Drop a .dmg, .pkg, or .app here";
-"Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Orven reads only the file type and path; the installer opens only after the baseline is saved.";
+"Macinity chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Macinity reads only the file type and path; the installer opens only after the baseline is saved.";
 "Chọn installer…" = "Choose Installer…";
 "Bỏ chọn" = "Clear";
 "Lưu baseline và mở installer" = "Save Baseline and Open Installer";
 "Đang theo dõi installer" = "Watching Installer";
-"Coverage giảm vì Orven không chạy trong một phần của phiên." = "Coverage is reduced because Orven was not running for part of the session.";
+"Coverage giảm vì Macinity không chạy trong một phần của phiên." = "Coverage is reduced because Macinity was not running for part of the session.";
 "Install Trace bị gián đoạn" = "Install Trace Was Interrupted";
 "Baseline vẫn còn nguyên. Có thể tiếp tục với coverage giảm hoặc bỏ phiên này." = "The baseline is intact. Continue with reduced coverage or discard this trace.";
 "Tiếp tục với coverage giảm" = "Continue with Reduced Coverage";
 "Bỏ phiên" = "Discard Trace";
-"Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper." = "Snapshots and FSEvents store local metadata only. Orven does not mount, execute, or bypass Gatekeeper.";
+"Snapshot và FSEvents chỉ lưu metadata cục bộ. Macinity không mount, execute hoặc bypass Gatekeeper." = "Snapshots and FSEvents store local metadata only. Macinity does not mount, execute, or bypass Gatekeeper.";
 "Chọn DMG, PKG hoặc ứng dụng" = "Choose a DMG, PKG, or Application";
-"Orven chỉ nhận .dmg, .pkg hoặc .app" = "Orven accepts only .dmg, .pkg, or .app";
+"Macinity chỉ nhận .dmg, .pkg hoặc .app" = "Macinity accepts only .dmg, .pkg, or .app";
 "Install Trace đã lưu" = "Install Trace saved";
 "Một Install Trace đang hoạt động." = "An Install Trace is already active.";
 "Không có Install Trace đang hoạt động." = "No Install Trace is active.";
@@ -117,8 +117,8 @@
 "Đã tiếp tục theo dõi; thời gian app không chạy có coverage giảm." = "Tracing resumed; coverage is reduced while the app was not running.";
 "Đang chụp trạng thái sau thay đổi…" = "Capturing the state after changes…";
 "Đã hủy Install Trace." = "Install Trace cancelled.";
-"Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát." = "A transparent view of what Orven reads, stores, and cannot observe.";
-"Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Orven presents technical evidence; it does not declare an application malicious.";
+"Minh bạch về dữ liệu Macinity đọc, lưu và không thể quan sát." = "A transparent view of what Macinity reads, stores, and cannot observe.";
+"Macinity đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Macinity presents technical evidence; it does not declare an application malicious.";
 
 /* Dynamic-message fragments; longest matches are applied first. */
 "Không thể" = "Unable to";

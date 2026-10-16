@@ -20,7 +20,7 @@ struct APFSSpaceInspectorView: View {
       Picker(L10n.text("Startup volume"), selection: $volume) {
         Text(L10n.text("Data volume")).tag(APFSStartupVolume.data)
         Text(L10n.text("System volume")).tag(APFSStartupVolume.system)
-      }.pickerStyle(.menu).disabled(isReading)
+      }.pickerStyle(.radioGroup).disabled(isReading)
         .onChange(of: volume) { _ in
           reading = nil
           failed = false
@@ -64,7 +64,7 @@ struct APFSSpaceInspectorView: View {
         }
         Text(
           L10n.text(
-            "Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause."
+            "Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause."
           ))
         Text(L10n.text("APFS snapshots")).font(.headline)
         if reading.snapshots.isEmpty {

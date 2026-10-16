@@ -133,7 +133,12 @@ extension SystemMonitoringProvider {
       state == kIOPSBatteryPowerValue || state == kIOPSACPowerValue,
       let battery = BatteryInfo(
         current: current.doubleValue, maximum: maximum.doubleValue,
-        charging: charging, onBattery: state == kIOPSBatteryPowerValue)
+        charging: charging, onBattery: state == kIOPSBatteryPowerValue,
+        details: BatteryDetails.read(), health: description[kIOPSBatteryHealthKey] as? String,
+        minutesRemaining: (charging
+          ? description[kIOPSTimeToFullChargeKey] as? NSNumber
+          : state == kIOPSBatteryPowerValue ? description[kIOPSTimeToEmptyKey] as? NSNumber : nil)?
+          .intValue)
     else {
       return MetricSample(
         availability: .temporarilyUnavailable, unit: .percent, time: time, source: "IOPowerSources",

@@ -1,8 +1,8 @@
-# Orven Wi-Fi and LAN contract
+# Macinity Wi-Fi and LAN contract
 
 ## English
 
-Authorized scope: Network Overview, Wi-Fi Inspector, Ethernet Inspector, Connection Diagnostics, Latency & Stability, Nearby Wi-Fi and Network Change Timeline. Native SwiftUI, existing OrvenTheme/L10n/MonitoringChart and existing live-rate sampler remain owners. A dedicated page owns explicit OS reads and bounded probes; it does not change network configuration, join networks, read passwords, control routers or install extensions.
+Authorized scope: Network Overview, Wi-Fi Inspector, Ethernet Inspector, Connection Diagnostics, Latency & Stability, Nearby Wi-Fi and Network Change Timeline. Native SwiftUI, existing MacinityTheme/L10n/MonitoringChart and existing live-rate sampler remain owners. A dedicated page owns explicit OS reads and bounded probes; it does not change network configuration, join networks, read passwords, control routers or install extensions.
 
 - Overview: getifaddrs, SystemConfiguration dynamic-store global IPv4/IPv6/DNS, CoreWLAN and fixed read-only ifconfig media output. Up to32 adapters/32 DNS addresses; omission and unknown fields are explicit. Byte counters reuse NET_RT_IFLIST2/if_data64. Packet/error/drop counters are cumulative if_data observations and may wrap. Adapter UP/RUNNING is an OS flag observation, not verified physical cable integrity. Ethernet media includes negotiated speed/duplex when exposed by the driver. No claim of USB-adapter or physical Ethernet verification without hardware.
 - Wi-Fi: current SSID/BSSID where authorized, RSSI/noise/SNR, channel/band/width/transmit link rate. Zero/unavailable radio values are missing. Link rate is not Internet throughput. SSID/BSSID may be redacted; Location permission is requested only by the explicit button. Local Network permission may be required for probes. Permission explanations are packaged in EN/VI/JA/ZH. Location access is not silently granted.
@@ -11,13 +11,13 @@ Authorized scope: Network Overview, Wi-Fi Inspector, Ethernet Inspector, Connect
 - Nearby scan: explicit CoreWLAN scan, sorted RSSI, max128 networks, search/clear, same-channel counts separated by band. Relative RSSI bars are observations; counts are not interference, airtime use or exhaustive spectrum coverage. macOS owns scan duration; cancellation waits for its return and suppresses results. The scan may not provide identities without permission. No shell airport dependency. Scans never run automatically or overlap another page operation.
 - Timeline: opt-in session memory; max200 status events plus200 path events with omitted count. NWPathMonitor owns visible-page path callbacks, not polling. IP/gateway/global-DNS/known Wi-Fi identities compare explicit successful refreshes within10min. Initial/truncated/failed/long-gap reads reset the baseline; missing identities/new or disappearing adapters do not establish change events. Route leave cancels probes/path monitor and resets comparison coverage. Timestamps are observation times, not exact disconnection times. No endpoint/identity history is persisted.
 
-- Native controls: Picker/Button/TextField/Toggle; one pending operation per page, visible error/cancellation, natural page scrolling, immediate locale updates. New networking scope supersedes earlier blanket no-probe wording only for these explicit user-triggered measurements. Previous health/sensor evidence does not validate this candidate. Full VoiceOver, professional Japanese copy review and physical Intel/macOS 13/Ethernet remain unverified. Orven 3.0.0 deliberately uses the authorized ad-hoc, unnotarized channel.
+- Native controls: Picker/Button/TextField/Toggle; one pending operation per page, visible error/cancellation, natural page scrolling, immediate locale updates. New networking scope supersedes earlier blanket no-probe wording only for these explicit user-triggered measurements. Previous health/sensor evidence does not validate this candidate. Full VoiceOver, professional Japanese copy review and physical Intel/macOS 13/Ethernet remain unverified. Macinity 3.1.0 deliberately uses the authorized ad-hoc, unnotarized channel.
 
 [User guide](../USER-GUIDE.md) · [Release readiness](../production/RELEASE-READINESS.md)
 
 ## Tiếng Việt
 
-Scope được phép gồm Network Overview, Wi-Fi Inspector, Ethernet Inspector, Connection Diagnostics, Latency & Stability, Nearby Wi-Fi và Network Change Timeline. Dùng SwiftUI/OrvenTheme/L10n/MonitoringChart/sampler tốc độ hiện có. Page sở hữu OS read/probe bounded rõ ràng; không đổi cấu hình, join Wi-Fi, đọc mật khẩu, điều khiển router hay cài extension.
+Scope được phép gồm Network Overview, Wi-Fi Inspector, Ethernet Inspector, Connection Diagnostics, Latency & Stability, Nearby Wi-Fi và Network Change Timeline. Dùng SwiftUI/MacinityTheme/L10n/MonitoringChart/sampler tốc độ hiện có. Page sở hữu OS read/probe bounded rõ ràng; không đổi cấu hình, join Wi-Fi, đọc mật khẩu, điều khiển router hay cài extension.
 
 - Overview: getifaddrs/globalSystemConfiguration IPv4/IPv6/DNS/CoreWLAN/ifconfigmedia chỉ đọc. Tối đa32adapter/DNS, báo omission/unknown. Byte counter64bit NET_RT_IFLIST2; packet/error/drop tích lũy có thể wrap. UP/RUNNING không proofcáp. Speed/duplex theo driver, không proofUSB/physicalEthernet khi chưa có hardware.
 - Wi-Fi: SSID/BSSID khi có quyền, RSSI/noise/SNR/channel/band/width/transmitlinkrate. Zero/unavailable là missing; linkrate không Internetthroughput. Identity có thể redacted, Location chỉ xin qua nút; probe có thể cần LocalNetwork. Copyquyền EN/VI/JA/ZH, không tự grant.
@@ -25,13 +25,13 @@ Scope được phép gồm Network Overview, Wi-Fi Inspector, Ethernet Inspector
 - Stability:20ICMP cách1giây/deadline28giây. Loss từ summary, mean chỉreply, jitter trung bình absoluteadjacentsuccessdifference. Missingsequence tạo gap, duplicatereply không tăngcount. Trục sequence/timeapprox không packetcapture. Helperfailure hiển thị. Cancel chỉ process sở hữu/suppresspublish; resultcũ giữtimestamp.
 - Nearby: CoreWLANscan theo nút, RSSIsort/max128/searchclear/channelcounttheoband. RelativeRSSI/count không proofinterference/airtime/exhaustivespectrum. macOSquảnlýduration; Cancel chờreturn rồisuppress. Identitycó thể thiếu, không airportshell/tựscan/overlap.
 - Timeline: opt-in RAM phiên,200statusevent+200pathevent/omissioncount. NWPathMonitor callback khi pagevisible, khôngpolling. IP/gateway/globalDNS/knownidentity so sánh successfulrefresh<=10phút. First/truncated/failed/gapresetbaseline; missingidentity/new/disappearingadapter không suychange. Routeleave cancelprobe/path/resetcoverage. Timestampquan sát không exactdisconnect, khôngdiskidentityhistory.
-- Nativecontrols: Picker/Button/TextField/Toggle, một operation/page, error/cancel/scroll/locale rõ ràng. Scope này cho phép probe theo nút; evidencehealth/sensorcũ không proofcandidate. Full VoiceOver, review tiếng Nhật và Intel/macOS 13/Ethernet vật lý chưa xác minh. Orven 3.0.0 phát hành ad-hoc, chưa notarized theo lựa chọn của người dùng.
+- Nativecontrols: Picker/Button/TextField/Toggle, một operation/page, error/cancel/scroll/locale rõ ràng. Scope này cho phép probe theo nút; evidencehealth/sensorcũ không proofcandidate. Full VoiceOver, review tiếng Nhật và Intel/macOS 13/Ethernet vật lý chưa xác minh. Macinity 3.1.0 phát hành ad-hoc, chưa notarized theo lựa chọn của người dùng.
 
 [User guide](../USER-GUIDE.md) · [Release readiness](../production/RELEASE-READINESS.md)
 
 ## 日本語
 
-承認scopeはNetwork Overview、Wi-Fi Inspector、Ethernet Inspector、Connection Diagnostics、Latency & Stability、Nearby Wi-Fi、Network Change Timeline。既存SwiftUI/OrvenTheme/L10n/MonitoringChart/ratesamplerを使用。Pageが明示OSread/boundedprobeを所有し、設定変更/join/password/router/extensionなし。
+承認scopeはNetwork Overview、Wi-Fi Inspector、Ethernet Inspector、Connection Diagnostics、Latency & Stability、Nearby Wi-Fi、Network Change Timeline。既存SwiftUI/MacinityTheme/L10n/MonitoringChart/ratesamplerを使用。Pageが明示OSread/boundedprobeを所有し、設定変更/join/password/router/extensionなし。
 
 - Overview:getifaddrs/globalSystemConfiguration IPv4/IPv6/DNS/CoreWLAN/read-onlyifconfigmedia。最大32adapter/DNS、omission/unknown明示。BytecounterはNET_RT_IFLIST2/64bit、packet/error/dropは累積でwrap可能。UP/RUNNINGはcableproofではなくspeed/duplexはdriver依存、hardwareなしでUSB/physicalEthernet証明なし。
 - Wi-Fi:権限内SSID/BSSID、RSSI/noise/SNR/channel/band/width/transmitlinkrate。Zero/unavailableはmissing、linkrateはInternetthroughputではありません。Identityredaction可、Locationは明示button、probeはLocalNetwork権限が必要な場合。EN/VI/JA/ZHpermissioncopy、自動grantなし。
@@ -39,6 +39,6 @@ Scope được phép gồm Network Overview, Wi-Fi Inspector, Ethernet Inspector
 - Stability:20ICMP/1秒/deadline28秒。Lossはsummary、meanはreplyのみ、jitterは隣接成功差absolute平均。Missingsequencegap、duplicateは追加countなし。Sequence/timeapproxはpacketcaptureではありません。Helperfailure表示、Cancelはownedprocessのみ/suppresspublication、以前のtimestamp保持。
 - Nearby:明示CoreWLANscan、RSSIsort/max128/searchclear/channelcount別band。RelativeRSSI/countはinterference/airtime/exhaustivespectrum証明なし。OSがduration管理、Cancelはreturn後suppress。Identitymissing可、airportshell/自動scan/overlapなし。
 - Timeline:opt-in/sessionRAM、最大200status+200path/omissioncount。VisiblepageのNWPathMonitorcallback、pollingなし。IP/gateway/globalDNS/knownidentityをsuccessfulrefresh10分以内で比較。First/truncated/failed/gapreset、missingidentity/new/disappearingadapterからchange推定なし。Routeleaveでprobe/pathcancel・coverage reset。観測timestampでexactdisconnectなし、diskidentityhistoryなし。
-- Nativecontrol:Picker/Button/TextField/Toggle、1operation/page、error/cancel/scroll/locale明示。明示probeを承認するscopeですが以前のhealth/sensorはcandidate証明ではありません。完全なVoiceOver、日本語の専門review、実機Intel/macOS 13/Ethernetは未確認です。Orven 3.0.0は承認されたad-hoc署名・未notarized channelで公開します。
+- Nativecontrol:Picker/Button/TextField/Toggle、1operation/page、error/cancel/scroll/locale明示。明示probeを承認するscopeですが以前のhealth/sensorはcandidate証明ではありません。完全なVoiceOver、日本語の専門review、実機Intel/macOS 13/Ethernetは未確認です。Macinity 3.1.0は承認されたad-hoc署名・未notarized channelで公開します。
 
 [User guide](../USER-GUIDE.md) · [Release readiness](../production/RELEASE-READINESS.md)

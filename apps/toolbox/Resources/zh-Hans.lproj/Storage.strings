@@ -1,4 +1,4 @@
-/* Orven zh-Hans localization. */
+/* Macinity zh-Hans localization. */
 "%lld bản giống nhau • %@/tệp" = "%lld 个相同副本・每个文件 %@";
 "%lld tệp (%@) sẽ được chuyển vào Trash. Một bản mới nhất trong mỗi nhóm luôn được giữ lại." = "%lld 个文件（%@）将移到废纸篓。每组均保留最新副本。";
 "%lld ảnh • tương đồng %lld%%" = "%lld 张照片・相似度 %lld%%";
@@ -10,7 +10,7 @@
 "An toàn" = "安全";
 "App chưa tìm thấy file cấu hình dự án tham chiếu phiên bản này. Việc quét không thể đảm bảo bao phủ mọi dự án, hãy kiểm tra trước khi tiếp tục." = "未找到引用此版本的项目配置。扫描无法覆盖所有项目，请在继续前检查。";
 "App chỉ hash các tệp từ 1 MB và bỏ qua package ứng dụng, Trash cùng cache hệ thống." = "仅对至少 1 MB 的文件计算哈希；排除应用包、废纸篓和系统缓存。";
-"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "Orven 查找 Applications 中的应用包，并将其 Bundle ID 与 Library 数据匹配。";
+"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "Macinity 查找 Applications 中的应用包，并将其 Bundle ID 与 Library 数据匹配。";
 "Archive có thể cần để symbolicate crash hoặc phát hành lại ứng dụng." = "归档可能用于解析崩溃符号或重新发布应用。";
 "Artifact có thể tạo lại, chỉ trong project root bạn chọn" = "仅限所选项目根目录内可重新生成的产物";
 "Artifact vượt khỏi project root đã chọn nên bị chặn." = "产物超出所选项目根目录，操作已被阻止。";
@@ -71,8 +71,8 @@
 "Cập nhật lịch" = "更新计划";
 "Dependency và distribution có thể tải lại" = "依赖项和发行包可重新下载";
 "Developer Cleanup thất bại" = "开发数据清理失败";
-"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven 仅在确认后清理，并优先使用各工具的官方命令。";
-"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven 将原样执行显示的允许列表命令。该操作不使用废纸篓且无法撤销。";
+"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinity 仅在确认后清理，并优先使用各工具的官方命令。";
+"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinity 将原样执行显示的允许列表命令。该操作不使用废纸篓且无法撤销。";
 "Dung lượng" = "大小";
 "Dùng Homebrew để xóa download cũ và phiên bản package không còn cần thiết." = "使用 Homebrew 删除旧下载和不再需要的软件包版本。";
 "Dùng npm để dọn cache có thể tải lại." = "使用 npm 清理可重新获取的缓存。";
@@ -92,7 +92,7 @@
 "Dự án" = "项目";
 "GIỮ" = "保留";
 "GIỮ LẠI" = "保留";
-"Giới thiệu Diskora" = "关于 Orven";
+"Giới thiệu Diskora" = "关于 Macinity";
 "Gỡ %@?" = "移除 %@？";
 "Gỡ phiên bản runtime?" = "移除运行时版本？";
 "Gỡ ứng dụng" = "应用";
@@ -132,8 +132,8 @@
 "Làm mới" = "刷新";
 "Lần chạy gần nhất" = "最近运行";
 "Lịch quét" = "定时扫描";
-"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "定时扫描仅发送通知；Orven 不会自动删除数据。";
-"Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu." = "定时扫描仅发送通知；Orven 不会自动删除数据。";
+"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "定时扫描仅发送通知；Macinity 不会自动删除数据。";
+"Lịch quét chỉ thông báo; Macinity không tự xóa dữ liệu." = "定时扫描仅发送通知；Macinity 不会自动删除数据。";
 "Lịch sử" = "历史记录";
 "Lịch sử này không có thông tin vị trí trong Trash." = "此历史记录没有废纸篓位置信息。";
 "Lịch sử, vị trí Trash và khôi phục có kiểm tra xung đột" = "历史记录、废纸篓位置及避免冲突的恢复";
@@ -169,8 +169,8 @@
 "Quét ảnh" = "扫描照片";
 "Quét ứng dụng" = "扫描应用";
 "Quét ứng dụng để tìm dữ liệu còn sót" = "扫描应用以检查残留数据";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "系统收据仅作为证据；Orven 不会自动删除";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa" = "系统收据仅作为证据；Orven 不会自动删除";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "系统收据仅作为证据；Macinity 不会自动删除";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa" = "系统收据仅作为证据；Macinity 不会自动删除";
 "SDK, runtime, simulator và môi trường lập trình" = "SDK、运行时、模拟器和开发环境";
 "Sản phẩm build và chỉ mục có thể tạo lại" = "可重新生成的构建产物和索引";
 "Sẵn sàng quét" = "已准备好扫描";
@@ -181,10 +181,10 @@
 "Thùng rác" = "废纸篓";
 "Thư mục lớn nhất" = "最大的文件夹";
 "Thời gian" = "时间";
-"Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven 仅在确认后清理，并优先使用各工具的官方命令。";
-"Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Orven 仅扫描所选文件夹，仅在存在生态系统标记时建议清理产物。";
-"Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven 将原样执行显示的允许列表命令。该操作不使用废纸篓且无法撤销。";
-"Orven sẽ nhận diện output có thể tạo lại từ marker dự án." = "Orven 根据项目标记识别可重新生成的输出。";
+"Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinity 仅在确认后清理，并优先使用各工具的官方命令。";
+"Macinity chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Macinity 仅扫描所选文件夹，仅在存在生态系统标记时建议清理产物。";
+"Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinity 将原样执行显示的允许列表命令。该操作不使用废纸篓且无法撤销。";
+"Macinity sẽ nhận diện output có thể tạo lại từ marker dự án." = "Macinity 根据项目标记识别可重新生成的输出。";
 "TÊN KHÁC • NỘI DUNG GIỐNG HỆT" = "名称不同・内容完全相同";
 "Tài liệu" = "文稿";
 "Tác giả" = "作者";
@@ -221,7 +221,7 @@
 "nhóm" = "组";
 "nội dung đã thay đổi, thao tác bị hủy" = "内容已更改，操作已取消";
 "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Diskora không xóa database hệ thống" = "sfltool 检测到登录/后台项目；仅显示证据，不删除系统数据库";
-"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Orven không xóa database hệ thống" = "sfltool 检测到登录/后台项目；仅显示证据，不删除系统数据库";
+"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Macinity không xóa database hệ thống" = "sfltool 检测到登录/后台项目；仅显示证据，不删除系统数据库";
 "thao tác" = "次操作";
 "thất bại" = "失败";
 "tệp" = "个文件";

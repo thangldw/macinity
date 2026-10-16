@@ -10,7 +10,7 @@ struct ScheduledScanView: View {
     VStack(spacing: 0) {
       PageHeader(
         title: "Lịch quét", subtitle: "Quét nền và thông báo, không tự động xóa",
-        symbol: "calendar.badge.clock", value: model.isEnabled ? "Bật" : "Tắt",
+        symbol: "calendar.badge.clock", value: L10n.text(model.isEnabled ? "Bật" : "Tắt"),
         valueLabel: model.isEnabled ? "mỗi \(model.intervalHours) giờ" : "không có lịch")
       Divider()
       Form {

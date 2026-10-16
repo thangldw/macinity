@@ -1,9 +1,12 @@
 import Darwin
 import Foundation
 
-/// Only bounded network reads/probes. Arguments are passed directly, never through a shell.
+/// Only bounded system reads and network probes. Arguments are passed directly, never through a shell.
 enum NetworkToolsProcess {
   enum Operation {
+    case package(PackageCommand)
+    case utility(UtilityCommand)
+    case batteryHealth
     case media(String)
     case dns(String)
     case ping(String, Int)
@@ -18,6 +21,20 @@ enum NetworkToolsProcess {
     let pipe = Pipe()
     let duration: Double
     switch operation {
+    case .package(let command):
+      let spec = try command.specification
+      process.executableURL = URL(fileURLWithPath: spec.path)
+      process.arguments = spec.arguments
+      duration = spec.timeout
+    case .utility(let command):
+      let spec = try command.specification
+      process.executableURL = URL(fileURLWithPath: spec.path)
+      process.arguments = spec.arguments
+      duration = spec.timeout
+    case .batteryHealth:
+      process.executableURL = URL(fileURLWithPath: "/usr/sbin/system_profiler")
+      process.arguments = ["SPPowerDataType", "-json"]
+      duration = 15
     case .media(let name):
       guard name.utf8.count <= 32, name.allSatisfy({ $0.isASCII && ($0.isLetter || $0.isNumber) })
       else { throw CocoaError(.validationMissingMandatoryProperty) }
@@ -55,6 +72,14 @@ enum NetworkToolsProcess {
       duration = 8
     }
     process.environment = ["LC_ALL": "C", "LANG": "C", "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"]
+    if case .package(let command) = operation {
+      process.environment?["PATH"] =
+        URL(fileURLWithPath: command.executable).deletingLastPathComponent().path
+        + ":/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      process.environment?["HOME"] = FileManager.default.homeDirectoryForCurrentUser.path
+      process.environment?["HOMEBREW_NO_AUTO_UPDATE"] = "1"
+      process.environment?["HOMEBREW_NO_ANALYTICS"] = "1"
+    }
     process.standardOutput = pipe
     process.standardError = pipe
     defer {
@@ -78,6 +103,13 @@ enum NetworkToolsProcess {
       throw CocoaError(.fileReadUnknown)
     }
     let deadline = ProcessInfo.processInfo.systemUptime + duration
+    // Installed-package metadata can exceed the diagnostic command limit.
+    let outputLimit: Int
+    if case .package(let command) = operation, command.action == .inventory {
+      outputLimit = 8 * 1024 * 1024
+    } else {
+      outputLimit = 512 * 1024
+    }
     var bytes = Data()
     var buffer = [UInt8](repeating: 0, count: 16384)
     var ended = false
@@ -87,7 +119,7 @@ enum NetworkToolsProcess {
         Darwin.read(descriptor, $0.baseAddress, $0.count)
       }
       if count > 0 {
-        guard bytes.count + count <= 512 * 1024 else { throw CocoaError(.fileReadTooLarge) }
+        guard bytes.count + count <= outputLimit else { throw CocoaError(.fileReadTooLarge) }
         bytes.append(contentsOf: buffer.prefix(count))
       } else if count == 0 {
         ended = true

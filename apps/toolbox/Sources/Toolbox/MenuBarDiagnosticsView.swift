@@ -67,7 +67,7 @@ struct MenuBarDiagnosticsView: View {
         HStack {
           Button(L10n.text("Disable menu bar")) { model.menuBarEnabled = false }
           Spacer()
-          Button(L10n.text("Quit Orven")) { NSApp.terminate(nil) }
+          Button(L10n.text("Quit Macinity")) { NSApp.terminate(nil) }
         }
       }.padding(16).frame(width: 360)
     }

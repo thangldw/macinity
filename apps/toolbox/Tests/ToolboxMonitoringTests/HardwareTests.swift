@@ -10,6 +10,31 @@ final class HardwareTests: XCTestCase {
       time: SampleTime(wall: Date(), monotonic: time), source: "fixture")
   }
 
+  func testBatteryDetailsRejectSentinelsAndSeparateAdapterFromBatteryCapacity() {
+    let missing = BatteryDetails(properties: [:])
+    XCTAssertNil(missing.capacityRatio)
+    let details = BatteryDetails(properties: [
+      "CycleCount": 0, "Voltage": 12500, "ExternalConnected": true,
+      "AdapterDetails": ["Watts": 65],
+      "BatteryData": ["DesignCapacity": 6000, "NominalChargeCapacity": 5100],
+    ])
+    XCTAssertEqual(details.cycles, 0)
+    XCTAssertEqual(details.capacityRatio, 85)
+    XCTAssertEqual(details.voltage, 12.5)
+    XCTAssertEqual(details.adapterWatts, 65)
+    XCTAssertNil(
+      BatteryDetails(properties: ["ExternalConnected": false, "AdapterDetails": ["Watts": 65]])
+        .adapterWatts)
+    XCTAssertNil(
+      BatteryDetails(properties: [
+        "BatteryData": ["DesignCapacity": 0, "NominalChargeCapacity": 5000]
+      ]).capacityRatio)
+    XCTAssertNil(
+      BatteryInfo(
+        current: 50, maximum: 100, charging: false, onBattery: true, minutesRemaining: 65535)?
+        .minutesRemaining)
+  }
+
   func testDeviceRatesWarmUpAndRetireMissingResetOrRecreatedInterfaces() {
     var tracker = CounterRateTracker()
     func counter(_ id: String, _ bytes: UInt64) -> IOCounter {

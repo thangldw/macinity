@@ -70,8 +70,8 @@ struct ChangesView: View {
         ForEach(ChangeRisk.allCases, id: \.rawValue) { risk in
           Text(L10n.text(risk.title)).tag(Optional(risk))
         }
-      }
-      .frame(width: 150)
+      }.pickerStyle(.radioGroup)
+        .frame(width: 150)
     }
     .padding(14)
   }

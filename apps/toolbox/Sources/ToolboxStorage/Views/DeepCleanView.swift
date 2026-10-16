@@ -13,7 +13,7 @@ struct DeepCleanView: View {
       Divider()
       List {
         ForEach(CleanupConfidence.allCases, id: \.rawValue) { confidence in
-          Section(confidence.title) {
+          Section(L10n.text(confidence.title)) {
             ForEach(
               $model.rows.filter { $0.wrappedValue.definition.confidence == confidence }
             ) { $row in

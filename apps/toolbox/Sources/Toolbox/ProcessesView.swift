@@ -53,7 +53,7 @@ struct ProcessesView: View {
             Text(L10n.text("Memory")).tag(ProcessOrdering.memory)
             Text(L10n.text("Name")).tag(ProcessOrdering.name)
             Text("PID").tag(ProcessOrdering.pid)
-          }.frame(width: 180)
+          }.pickerStyle(.segmented).frame(width: 260)
         }
         HStack {
           Text(String(format: L10n.text("%d processes shown"), rows.count))

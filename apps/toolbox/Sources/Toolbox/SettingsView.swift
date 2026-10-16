@@ -38,7 +38,7 @@ final class ToolboxSettingsViewModel: ObservableObject {
     Task {
       do {
         try await scheduledScan.replaceLegacyLaunchAgent(intervalHours: hours)
-        statusMessage = L10n.text("Legacy schedule replaced after Orven bootstrap succeeded.")
+        statusMessage = L10n.text("Legacy schedule replaced after Macinity bootstrap succeeded.")
       } catch {
         errorMessage = error.localizedDescription
       }
@@ -62,7 +62,7 @@ final class ToolboxSettingsViewModel: ObservableObject {
         statusMessage =
           if let latestVersion, let current, current < latestVersion {
             String(
-              format: L10n.text("Orven %@ is available."), latestVersion.description)
+              format: L10n.text("Macinity %@ is available."), latestVersion.description)
           } else {
             L10n.text("You are using the latest public release.")
           }
@@ -75,6 +75,8 @@ final class ToolboxSettingsViewModel: ObservableObject {
 }
 
 struct SettingsView: View {
+  @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
+    .rawValue
   @AppStorage(AppAppearance.storageKey) private var appearanceCode = AppAppearance.system.rawValue
   @StateObject private var model = ToolboxSettingsViewModel()
   @ObservedObject private var monitoring = ToolboxRuntime.shared.monitoring
@@ -86,7 +88,12 @@ struct SettingsView: View {
       Section(L10n.text("Appearance")) {
         Picker(L10n.text("Appearance"), selection: $appearanceCode) {
           ForEach(AppAppearance.allCases) { Text($0.title).tag($0.rawValue) }
-        }
+        }.pickerStyle(.radioGroup)
+      }
+      Section(L10n.text("Language")) {
+        OrvenChoicePicker(
+          L10n.text("Language"), selection: $languageCode,
+          options: AppLanguage.allCases.map { ($0.rawValue, $0.displayName) }, minimumWidth: 120)
       }
       Section(L10n.text("Monitoring")) {
         Toggle(L10n.text("Menu bar quick diagnostics"), isOn: $monitoring.menuBarEnabled)
@@ -94,13 +101,14 @@ struct SettingsView: View {
           Text(L10n.text("CPU")).tag(MenuBarIndicator.cpu)
           Text(L10n.text("Memory")).tag(MenuBarIndicator.memory)
           Text(L10n.text("Network")).tag(MenuBarIndicator.network)
-        }.disabled(!monitoring.menuBarEnabled)
+        }.pickerStyle(.radioGroup).disabled(!monitoring.menuBarEnabled)
         Text(
           L10n.text(
             "Disabled by default. When enabled, menu bar and windows share one sampler. Background sampling runs every 5 seconds; Quit stops it."
           )
         )
         .font(.caption).foregroundStyle(.secondary)
+        .fixedSize(horizontal: false, vertical: true)
       }
       Section(L10n.text("Privacy and coverage")) {
         switch model.coverage {
@@ -116,6 +124,7 @@ struct SettingsView: View {
           Text(paths.joined(separator: "\n"))
             .font(.caption.monospaced())
             .textSelection(.enabled)
+            .fixedSize(horizontal: false, vertical: true)
         }
         Button(L10n.text("Check again")) { model.refresh() }
       }
@@ -132,7 +141,7 @@ struct SettingsView: View {
             Text(L10n.text("7 days")).tag(168)
           }
           .pickerStyle(.segmented)
-          Button(L10n.text("Replace with Orven schedule…")) {
+          Button(L10n.text("Replace with Macinity schedule…")) {
             confirmsScheduleReplacement = true
           }
           .disabled(model.isReplacingSchedule)
@@ -147,15 +156,17 @@ struct SettingsView: View {
         )
         .font(.caption)
         .foregroundStyle(.secondary)
+        .fixedSize(horizontal: false, vertical: true)
       }
 
       Section(L10n.text("Updates")) {
         Text(
           L10n.text(
-            "Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent."
+            "Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent."
           )
         )
         .foregroundStyle(.secondary)
+        .fixedSize(horizontal: false, vertical: true)
         Button {
           model.checkForUpdates()
         } label: {
@@ -178,6 +189,10 @@ struct SettingsView: View {
     .formStyle(.grouped)
     .scrollContentBackground(.hidden)
     .background(OrvenTheme.canvas)
+    .environment(
+      \.locale,
+      AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale
+    )
     .tint(OrvenTheme.action)
     .frame(width: 660, height: 620)
     .onAppear { model.refresh() }
@@ -191,7 +206,7 @@ struct SettingsView: View {
     } message: {
       Text(
         L10n.text(
-          "Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds."
+          "Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds."
         ))
     }
     .alert(L10n.text("Settings error"), isPresented: $showsError) {

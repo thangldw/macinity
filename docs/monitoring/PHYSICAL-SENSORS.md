@@ -1,4 +1,4 @@
-# Orven physical sensor contract
+# Macinity physical sensor contract
 
 ## English
 

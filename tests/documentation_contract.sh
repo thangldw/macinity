@@ -26,4 +26,4 @@ done
 if [[ "$repo_dir" == "$default_repo_dir" ]]; then
   python3 "$script_dir/checker_regressions.py"
 fi
-echo "PASS: Orven documentation contract"
+echo "PASS: Macinity documentation contract"

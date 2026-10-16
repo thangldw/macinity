@@ -4,17 +4,17 @@ public enum AppMetadata {
   // Legacy storage namespace remains stable across display-name changes.
   public static let name = "Toolbox"
   public static var displayName: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Orven"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Macinity"
   }
-  public static let tagline = "Understand your Mac. Act with context."
+  public static let tagline = "Your Mac. Everything connected."
   public static let bundleIdentifier = "com.thang.toolbox"
 
   public static var version: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "3.0.0"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "3.1.0"
   }
 
   public static var build: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "300"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "310"
   }
 
   public static func applicationSupportDirectory(base: URL? = nil) -> URL {

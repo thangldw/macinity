@@ -55,6 +55,14 @@ public struct HealthRecord: Codable, Sendable, Equatable, Identifiable {
         snapshot.memory, id: "memory", title: "Occupied memory", unit: "%", age: 6,
         value: snapshot.memory.value?.occupiedPercent),
     ]
+    let battery = snapshot.hardware.reading.battery
+    for (id, title, unit, value) in [
+      ("battery.level", "Battery level", "%", battery.value?.percent),
+      ("battery.charging", "Charging", "", battery.value.map { $0.charging ? 1.0 : 0.0 }),
+      ("battery.onBattery", "Discharging", "", battery.value.map { $0.onBattery ? 1.0 : 0.0 }),
+    ] {
+      fields.append(field(battery, id: id, title: title, unit: unit, age: 30, value: value))
+    }
     let sensors = snapshot.hardware.reading.physicalSensors
     if let readings = sensors.value?.readings {
       for sensor in readings.prefix(34) {
@@ -240,7 +248,7 @@ public actor HealthHistoryStore {
   }
   private static func valid(_ record: HealthRecord) -> Bool {
     record.observedAt.timeIntervalSince1970.isFinite && record.uptime.isFinite
-      && record.uptime >= 0 && record.values.count <= 36
+      && record.uptime >= 0 && record.values.count <= 39
       && Set(record.values.map(\.id)).count == record.values.count
       && (record.pressure == nil || ["normal", "warning", "critical"].contains(record.pressure!))
       && (record.thermal == nil

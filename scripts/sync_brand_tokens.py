@@ -17,5 +17,5 @@ for index, selector in [(0, ':root[data-theme="light"]'), (1, ':root[data-theme=
     lines.extend(f'  --{role}: #{colors[owner][index]};' for role, owner in roles.items())
     lines.append('  --color-on-accent: ' + ('#FFFFFF;' if index == 0 else '#' + colors['canvas'][1] + ';'))
     lines.append('}')
-lines.append('body.orven-page{background:var(--color-canvas);color:var(--color-text-strong)}')
-(root / 'site/orven-brand.css').write_text('\n'.join(lines) + '\n')
+lines.append('body.macinity-page{background:var(--color-canvas);color:var(--color-text-strong)}')
+(root / 'site/macinity-brand.css').write_text('\n'.join(lines) + '\n')

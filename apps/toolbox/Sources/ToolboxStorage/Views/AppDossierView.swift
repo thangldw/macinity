@@ -7,6 +7,7 @@ struct AppDossierView: View {
   let app: InstalledApplication
   let observedAt: Date?
   var activity: AnyView? = nil
+  var embedded = false
   @Environment(\.dismiss) private var dismiss
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
@@ -19,7 +20,9 @@ struct AppDossierView: View {
       HStack {
         Text(L10n.text("App Dossier")).font(.title2.bold())
         Spacer()
-        Button(L10n.text("Close")) { dismiss() }.keyboardShortcut(.cancelAction)
+        if !embedded {
+          Button(L10n.text("Close")) { dismiss() }.keyboardShortcut(.cancelAction)
+        }
       }
       ScrollView {
         VStack(alignment: .leading, spacing: 18) {
@@ -77,8 +80,10 @@ struct AppDossierView: View {
       Button(L10n.text("Show in Finder")) {
         NSWorkspace.shared.activateFileViewerSelecting([app.url])
       }
-    }.padding(24).frame(width: 600, height: 560).background(OrvenTheme.surface)
-      .environment(\.locale, locale)
+    }.padding(24).frame(width: embedded ? nil : 600, height: embedded ? nil : 560).background(
+      OrvenTheme.surface
+    )
+    .environment(\.locale, locale)
   }
 
   private func field(_ title: String, _ value: String) -> some View {

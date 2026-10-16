@@ -91,7 +91,7 @@ struct OnboardingView: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 22) {
       VStack(alignment: .leading, spacing: 6) {
-        Text(L10n.text("Welcome to Orven"))
+        Text(L10n.text("Welcome to Macinity"))
           .font(.system(size: 28, weight: .bold))
         Text(L10n.text("Local evidence for safer cleanup and app changes."))
           .font(.title3)
@@ -107,7 +107,7 @@ struct OnboardingView: View {
           .font(.caption)
           .foregroundStyle(.secondary)
         Spacer()
-        Button(L10n.text("Continue to Orven"), action: onComplete)
+        Button(L10n.text("Continue to Macinity"), action: onComplete)
           .buttonStyle(.borderedProminent)
           .keyboardShortcut(.defaultAction)
       }
@@ -131,7 +131,7 @@ struct OnboardingView: View {
       VStack(alignment: .leading, spacing: 8) {
         Text(
           L10n.text(
-            "Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically."
+            "Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically."
           )
         )
         .foregroundStyle(.secondary)
@@ -140,7 +140,7 @@ struct OnboardingView: View {
           .font(.subheadline.weight(.semibold))
         Text(
           L10n.text(
-            "If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper."
+            "If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper."
           )
         )
         .foregroundStyle(.secondary)

@@ -1,14 +1,14 @@
-# Orven Security
+# Macinity Security
 
 ## English
 
 ### Supported scope and reporting
 
-Report vulnerabilities privately through [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Include affected version, reproduction and impact; omit credentials and private filesystem/network reports. Orven 3.0 is the current development/release line. Older Toolbox binaries remain historical downloads.
+Report vulnerabilities privately through [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Include affected version, reproduction and impact; omit credentials and private filesystem/network reports. Macinity 3.1 is the current development/release line. Older Toolbox binaries remain historical downloads.
 
 ### Release trust
 
-Orven 3.0.0 is an explicitly authorized ad-hoc-signed, unnotarized release. Verify the SHA-256 from the same published release before installing. Structural codesign verification does not establish Developer ID trust or notarization. macOS may require Open Anyway after the blocked first launch; do not disable Gatekeeper or strip quarantine. No Homebrew distribution is claimed.
+Macinity 3.1.0 is an explicitly authorized ad-hoc-signed, unnotarized release. Verify the SHA-256 from the same published release before installing. Structural codesign verification does not establish Developer ID trust or notarization. macOS may require Open Anyway after the blocked first launch; do not disable Gatekeeper or strip quarantine. No Homebrew distribution is claimed.
 
 ### Data and actions
 
@@ -24,11 +24,11 @@ Mapped hardware sensors are community mappings and model dependent. No firewall,
 
 ### Scope hỗ trợ và báo cáo
 
-Báo vulnerability riêng qua [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Gửiversion/reproduction/impact, khôngcredentials/reportfilesystem/networkriêng. Orven 3.0 là dòng hiện tại; binaryToolbox cũ là downloadhistorical.
+Báo vulnerability riêng qua [GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new). Gửiversion/reproduction/impact, khôngcredentials/reportfilesystem/networkriêng. Macinity 3.1 là dòng hiện tại; binaryToolbox cũ là downloadhistorical.
 
 ### Trustrelease
 
-Orven 3.0.0 kýad-hoc/chưa notarized theo lựa chọn được phép. VerifySHA-256 của cùngrelease trước cài. Codesignstructural không proofDeveloperID/notarization. macOS có thể cầnOpenAnyway saufirst launch blocked; không tắtGatekeeper/xóaquarantine. Không claimHomebrew.
+Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn được phép. VerifySHA-256 của cùngrelease trước cài. Codesignstructural không proofDeveloperID/notarization. macOS có thể cầnOpenAnyway saufirst launch blocked; không tắtGatekeeper/xóaquarantine. Không claimHomebrew.
 
 ### Dữ liệu và actions
 
@@ -44,11 +44,11 @@ Sensorcommunity/modeldependent; khôngfirewall/fullpackethistory/fan control/cal
 
 ### Support範囲と報告
 
-Vulnerabilityは[GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new)へ非公開報告。Version/reproduction/impactを含めcredentials/privatefilesystem/networkreportは除外。Orven 3.0が現在line、旧Toolboxbinaryはhistoricaldownload。
+Vulnerabilityは[GitHub private reporting](https://github.com/thangldw/toolbox/security/advisories/new)へ非公開報告。Version/reproduction/impactを含めcredentials/privatefilesystem/networkreportは除外。Macinity 3.1が現在line、旧Toolboxbinaryはhistoricaldownload。
 
 ### Release trust
 
-Orven 3.0.0は承認されたad-hoc署名/unnotarized。同publishedreleaseのSHA-256を確認。StructuralcodesignはDeveloperID/notarization証明ではありません。Firstlaunchblocked後OpenAnywayが必要な場合、Gatekeeper無効化/quarantine除去なし。Homebrewの主張なし。
+Macinity 3.1.0は承認されたad-hoc署名/unnotarized。同publishedreleaseのSHA-256を確認。StructuralcodesignはDeveloperID/notarization証明ではありません。Firstlaunchblocked後OpenAnywayが必要な場合、Gatekeeper無効化/quarantine除去なし。Homebrewの主張なし。
 
 ### Dataとaction
 

@@ -19,14 +19,14 @@ struct HistoryView: View {
       } else {
         List {
           if !model.entries.isEmpty {
-            Section("Có thể khôi phục từ Trash") {
+            Section(L10n.text("Có thể khôi phục từ Trash")) {
               ForEach(model.entries) { entry in
                 historyRow(entry)
               }
             }
           }
           if !model.activityEntries.isEmpty {
-            Section("Toàn bộ hoạt động") {
+            Section(L10n.text("Toàn bộ hoạt động")) {
               ForEach(model.activityEntries.prefix(100)) { activity in
                 activityRow(activity)
               }

@@ -257,16 +257,7 @@ struct DuplicateScanner: Sendable {
   }
 
   private func sha256(of url: URL) throws -> String {
-    let handle = try FileHandle(forReadingFrom: url)
-    defer { try? handle.close() }
-    var hasher = SHA256()
-    while true {
-      let data = try handle.read(upToCount: 1_024 * 1_024) ?? Data()
-      if data.isEmpty { break }
-      hasher.update(data: data)
-      if Task.isCancelled { throw CancellationError() }
-    }
-    return hasher.finalize().map { String(format: "%02x", $0) }.joined()
+    try FileChecksum.sha256(url)
   }
 
   private func partialSHA256(of url: URL, bytes: Int64) throws -> String {

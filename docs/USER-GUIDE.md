@@ -1,10 +1,17 @@
-# Orven user guide
+# Macinity user guide
 
 ## English
 
+Macinity 3.1.0 introduces the Cobalt Link identity and expands Orven into a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
+
+- Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
+- Utilities cover startup/background inventory, Keep Awake, external drives/file locks, ports, batch rename with preview/undo, SHA-256, folder comparison, package/runtime inspection and device/workspace management.
+- Battery details and charge/discharge history, clearer sensor groups, independent Disk and Network screens, automatic application inventory and Wi-Fi access tools extend monitoring.
+- English, Vietnamese, Japanese and Simplified Chinese; language and appearance live in Settings.
+
 ### Install and upgrade
 
-Download Orven-3.0.0.dmg and its SHA-256 file from the same published GitHub release. Run `shasum -a 256 -c Orven-3.0.0.dmg.sha256`, open the DMG, read the included guide and drag Orven.app into Applications. Ad-hoc signed, not notarized: if first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Do not disable Gatekeeper. The old data namespace and bundle ID remain compatible; no data migration to a new Orven folder is required.
+Download Macinity-3.1.0.dmg and its SHA-256 file from the same published GitHub release. Run `shasum -a 256 -c Macinity-3.1.0.dmg.sha256`, open the DMG, read the included guide and drag Macinity.app into Applications. Ad-hoc signed, not notarized: if first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Do not disable Gatekeeper. The old data namespace and bundle ID remain compatible; no data migration to a new Macinity folder is required.
 
 ### Observe your Mac
 
@@ -36,9 +43,16 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 
 ## Tiếng Việt
 
+Macinity 3.1.0 giới thiệu nhận diện Cobalt Link và mở rộng Orven thành không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
+
+- Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
+- Tiện ích gồm startup/background, Keep Awake, ổ ngoài/file đang mở, cổng, đổi tên hàng loạt có preview/hoàn tác, SHA-256, so sánh thư mục, package/runtime và quản lý thiết bị/workspace.
+- Bổ sung thông tin pin/lịch sử sạc xả, nhóm cảm biến dễ đọc, tách Disk/Network, tự quét ứng dụng và tiện ích Wi-Fi.
+- Hỗ trợ Anh, Việt, Nhật và Trung giản thể; ngôn ngữ/giao diện nằm trong Settings.
+
 ### Cài đặt và nâng cấp
 
-Tải Orven-3.0.0.dmg và SHA-256 từ cùng một release GitHub đã công bố. Chạy `shasum -a 256 -c Orven-3.0.0.dmg.sha256`, mở DMG, đọc hướng dẫn và kéo Orven.app vào Applications. App ký ad-hoc, chưa notarized. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway; không tắt Gatekeeper. Bundle ID và thư mục dữ liệu cũ được giữ tương thích, không cần chuyển sang thư mục Orven mới.
+Tải Macinity-3.1.0.dmg và SHA-256 từ cùng một release GitHub đã công bố. Chạy `shasum -a 256 -c Macinity-3.1.0.dmg.sha256`, mở DMG, đọc hướng dẫn và kéo Macinity.app vào Applications. App ký ad-hoc, chưa notarized. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway; không tắt Gatekeeper. Bundle ID và thư mục dữ liệu cũ được giữ tương thích, không cần chuyển sang thư mục Macinity mới.
 
 ### Quan sát Mac
 
@@ -48,7 +62,7 @@ Overview và các trang giám sát hiển thị CPU, bộ nhớ, process, tốc 
 
 Chọn Wi-Fi & LAN trong sidebar, chọn công cụ rồi làm mới. Overview/Ethernet hiển thị địa chỉ, gateway, DNS toàn cục, media và carrier; UP/RUNNING khác với phát hiện kết nối vật lý. Wi-Fi hiển thị signal, noise, SNR, channel, band, width và link rate khi có dữ liệu. Tên mạng có thể cần quyền Location. Nearby scan chạy theo nút; số lượng mạng và RSSI không phải phép đo nhiễu.
 
-Trong Connection Diagnostics hoặc Latency & Stability, nhập một hostname hoặc IP, không kèm URL, port, options hay credentials. DNS, TCP 443 và gateway có kết quả độc lập; IP số bỏ qua DNS. Phiên 20 phép đo ICMP hiển thị loss, mean, jitter và khoảng trống mẫu thiếu. Stop chỉ hủy tác vụ của Orven, giữ kết quả trước đó. Timeline tùy chọn giữ quan sát trong RAM của phiên, không phải packet history hoặc thời điểm mất kết nối chính xác.
+Trong Connection Diagnostics hoặc Latency & Stability, nhập một hostname hoặc IP, không kèm URL, port, options hay credentials. DNS, TCP 443 và gateway có kết quả độc lập; IP số bỏ qua DNS. Phiên 20 phép đo ICMP hiển thị loss, mean, jitter và khoảng trống mẫu thiếu. Stop chỉ hủy tác vụ của Macinity, giữ kết quả trước đó. Timeline tùy chọn giữ quan sát trong RAM của phiên, không phải packet history hoặc thời điểm mất kết nối chính xác.
 
 ### History, baseline và recording
 
@@ -70,9 +84,16 @@ Tên cảm biến phụ thuộc model; link rate không phải tốc độ Inter
 
 ## 日本語
 
+Macinity 3.1.0はCobalt Linkのブランドを導入し、OrvenをMac管理用のnative workspaceへ拡張します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
+
+- Action Centerはお気に入りと最近の操作、Smart DiagnosticsはCPU・メモリ・容量・ネットワークの観測結果を表示します。Work Profilesはworkspace・音声・Keep Awake操作を事前確認します。
+- 起動項目、Keep Awake、外部ドライブとファイルロック、ポート、一括名称変更と取り消し、SHA-256、フォルダ比較、package/runtime、デバイスとworkspace管理を追加しました。
+- バッテリー詳細と充放電履歴、整理したセンサー、独立したDisk/Network画面、アプリの自動一覧、Wi-Fiツールを提供します。
+- 英語・ベトナム語・日本語・簡体字に対応し、言語と外観はSettingsで変更できます。
+
 ### インストールと更新
 
-同じ公開済みGitHub releaseからOrven-3.0.0.dmgとSHA-256を取得し、`shasum -a 256 -c Orven-3.0.0.dmg.sha256`で確認します。DMG内の案内を読んでOrven.appをApplicationsへ移動します。Ad-hoc署名でApple notarizationは受けていません。初回起動が拒否された場合はSystem Settings → Privacy & Security → Open Anywayを使い、Gatekeeperを無効化しないでください。旧bundle IDとdata namespaceを維持するため、新しいOrven folderへの移行は不要です。
+同じ公開済みGitHub releaseからMacinity-3.1.0.dmgとSHA-256を取得し、`shasum -a 256 -c Macinity-3.1.0.dmg.sha256`で確認します。DMG内の案内を読んでMacinity.appをApplicationsへ移動します。Ad-hoc署名でApple notarizationは受けていません。初回起動が拒否された場合はSystem Settings → Privacy & Security → Open Anywayを使い、Gatekeeperを無効化しないでください。旧bundle IDとdata namespaceを維持するため、新しいMacinity folderへの移行は不要です。
 
 ### Macを観測する
 
@@ -82,7 +103,7 @@ Overviewと監視画面でCPU、memory、process、disk/network rate、battery/t
 
 SidebarのWi-Fi & LANでtoolを選んでrefreshします。Overview/Ethernetはaddresses、gateway、global DNS、media、carrierを表示します。UP/RUNNINGとphysical linkの検出は別です。Wi-Fiは取得可能なsignal/noise/SNR/channel/band/width/link rateを表示します。IdentityにはLocation permissionが必要な場合があります。Nearby scanは明示操作のみで、network countやRSSIはinterference測定ではありません。
 
-Connection DiagnosticsまたはLatency & Stabilityに単一のhostname/IPを入力します。URL、port、options、credentialsは含めません。DNS、TCP 443、gatewayは独立した結果で、numeric IPはDNSを省略します。20回のICMPでloss、mean、jitterとmissing gapsを確認します。StopはOrven所有のoperationのみcancelし、以前の結果を保持します。任意timelineはsession RAM内の観測で、packet historyや正確なdisconnect時刻ではありません。
+Connection DiagnosticsまたはLatency & Stabilityに単一のhostname/IPを入力します。URL、port、options、credentialsは含めません。DNS、TCP 443、gatewayは独立した結果で、numeric IPはDNSを省略します。20回のICMPでloss、mean、jitterとmissing gapsを確認します。StopはMacinity所有のoperationのみcancelし、以前の結果を保持します。任意timelineはsession RAM内の観測で、packet historyや正確なdisconnect時刻ではありません。
 
 ### History、baseline、recording
 

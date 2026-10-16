@@ -99,7 +99,7 @@ struct DeveloperStorageView: View {
       }
       Divider()
       HStack {
-        Text("Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.")
+        Text("Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.")
           .font(.callout).foregroundStyle(.secondary)
         Spacer()
         Button("Quét thư mục người dùng") {
@@ -137,7 +137,7 @@ struct DeveloperStorageView: View {
       }
     } message: {
       Text(
-        "Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo."
+        "Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo."
       )
     }
     .alert("Developer Cleanup thất bại", isPresented: $showsCleanupError) {

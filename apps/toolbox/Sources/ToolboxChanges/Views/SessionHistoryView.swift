@@ -23,14 +23,20 @@ struct SessionHistoryView: View {
           .disabled(model.baselineSnapshot == nil || model.isScanning)
         if model.sessions.count > 1 {
           Divider().frame(height: 20)
-          Picker("Phiên trước", selection: $olderID) {
-            Text("Chọn phiên").tag(UUID?.none)
-            ForEach(model.sessions) { Text($0.title).tag(Optional($0.id)) }
-          }.frame(maxWidth: 190)
-          Picker("Phiên sau", selection: $newerID) {
-            Text("Chọn phiên").tag(UUID?.none)
-            ForEach(model.sessions) { Text($0.title).tag(Optional($0.id)) }
-          }.frame(maxWidth: 190)
+          OrvenChoicePicker(
+            L10n.text("Phiên trước"), selection: $olderID,
+            options: [(UUID?.none, L10n.text("Chọn phiên"))]
+              + model.sessions.map { (Optional($0.id), $0.title) },
+            searchable: true
+          )
+          .frame(maxWidth: 230)
+          OrvenChoicePicker(
+            L10n.text("Phiên sau"), selection: $newerID,
+            options: [(UUID?.none, L10n.text("Chọn phiên"))]
+              + model.sessions.map { (Optional($0.id), $0.title) },
+            searchable: true
+          )
+          .frame(maxWidth: 230)
           Button("So sánh hai phiên") {
             if let olderID, let newerID {
               model.compareSessions(olderID: olderID, newerID: newerID)
@@ -135,7 +141,7 @@ private struct SessionDetailView: View {
     let panel = NSSavePanel()
     panel.allowedContentTypes = format == "json" ? [.json] : [.plainText]
     panel.nameFieldStringValue =
-      "Orven-Change-Timeline-\(session.finishedAt.formatted(.iso8601.year().month().day())).\(format)"
+      "Macinity-Change-Timeline-\(session.finishedAt.formatted(.iso8601.year().month().day())).\(format)"
     guard panel.runModal() == .OK, let url = panel.url else { return }
     do {
       let report =

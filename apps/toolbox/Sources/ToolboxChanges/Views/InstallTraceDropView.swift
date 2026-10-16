@@ -79,7 +79,7 @@ struct InstallTraceDropView: View {
         .foregroundStyle(isDropTargeted ? Color.accentColor : Color.secondary)
       Text("Thả .dmg, .pkg hoặc .app vào đây")
         .font(.title2.weight(.semibold))
-      Text("Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu.")
+      Text("Macinity chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu.")
         .foregroundStyle(.secondary)
         .multilineTextAlignment(.center)
       Button("Chọn installer…") { chooseInstaller() }
@@ -163,7 +163,7 @@ struct InstallTraceDropView: View {
       }
       if coordinator.reducedCoverage {
         Label(
-          "Coverage giảm vì Orven không chạy trong một phần của phiên.",
+          "Coverage giảm vì Macinity không chạy trong một phần của phiên.",
           systemImage: "exclamationmark.triangle"
         )
         .foregroundStyle(.orange)
@@ -230,7 +230,7 @@ struct InstallTraceDropView: View {
 
   private var privacyCard: some View {
     Label(
-      "Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper.",
+      "Snapshot và FSEvents chỉ lưu metadata cục bộ. Macinity không mount, execute hoặc bypass Gatekeeper.",
       systemImage: "lock.shield"
     )
     .foregroundStyle(.secondary)

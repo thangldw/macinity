@@ -1,4 +1,4 @@
-/* Orven zh-Hans localization. */
+/* Macinity zh-Hans localization. */
 "%d of %d processes have CPU samples." = "%d 个进程具有 CPU 样本，共 %d 个进程。";
 "%d processes shown" = "显示 %d 个进程";
 "%d valid samples. Minimum %.1f, maximum %.1f %@. Missing samples are gaps." = "%d 个有效样本。最小 %.1f，最大 %.1f %@。缺失样本显示为空段。";
@@ -11,8 +11,8 @@
 "A Diskora scheduled scan is installed." = "已安装 Diskora 定时扫描。";
 "A snapshot of active macOS power requests. Requests can be legitimate; they do not explain every sleep or wake event." = "这是 macOS 活动电源请求的快照。请求可能是正常的，不能解释所有睡眠或唤醒事件。";
 "APFS volumes share container capacity. Capacity is shown for the startup volume once; I/O is per observed storage driver, including virtual devices when exposed." = "APFS 卷共享容器容量。容量仅针对启动卷显示一次；I/O 按观察到的存储驱动显示，包括可获取的虚拟设备。";
-"About Orven" = "关于 Orven";
-"About Orven" = "关于 Orven";
+"About Macinity" = "关于 Macinity";
+"About Macinity" = "关于 Macinity";
 "Appearance" = "外观";
 "Applications" = "应用";
 "Automatic alerts are not available." = "不支持自动警报。";
@@ -35,7 +35,7 @@
 "Close details" = "关闭详情";
 "Compare local snapshots around an install, update, or removal." = "比较安装、更新或卸载前后的本地快照。";
 "Compressor storage" = "压缩器存储";
-"Continue to Orven" = "进入 Orven";
+"Continue to Macinity" = "进入 Macinity";
 "Coverage" = "覆盖范围";
 "Coverage is reduced until protected folders are readable." = "在可读取受保护文件夹之前，覆盖范围有所缩小。";
 "Critical" = "危急";
@@ -59,7 +59,7 @@
 "GPU utilization and memory: Unsupported" = "GPU 使用率和内存：不支持";
 "History" = "历史记录";
 "Home" = "首页";
-"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "如果 macOS 阻止 Orven，请先打开一次，再前往“系统设置 → 隐私与安全性 → 仍要打开”。不要关闭 Gatekeeper。";
+"If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "如果 macOS 阻止 Macinity，请先打开一次，再前往“系统设置 → 隐私与安全性 → 仍要打开”。不要关闭 Gatekeeper。";
 "Import and verify" = "导入并验证";
 "Inspect process" = "检查进程";
 "Inspect what's running on your Mac. Monitoring is read-only." = "检查 Mac 上正在运行的进程。监测为只读。";
@@ -68,7 +68,7 @@
 "Language" = "语言";
 "Last sample" = "最新样本";
 "Legacy data was copied and verified." = "已复制并验证旧版数据。";
-"Legacy schedule replaced after Orven bootstrap succeeded." = "Orven 代理启动成功后，已替换旧版计划。";
+"Legacy schedule replaced after Macinity bootstrap succeeded." = "Macinity 代理启动成功后，已替换旧版计划。";
 "Legacy scheduled scan" = "旧版定时扫描";
 "Light" = "浅色";
 "Live monitoring" = "实时监测";
@@ -103,7 +103,7 @@
 "Occupied memory is physical memory minus free pages and includes caches. It does not measure reclaimable RAM. Pressure is an OS event, not an inferred score." = "已占用内存为物理内存减去空闲页面，包含缓存，不代表可回收 RAM。压力来自系统事件，不是推算评分。";
 "Occupied memory • includes caches" = "已占用内存・包含缓存";
 "On battery" = "使用电池";
-"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "仅在点击按钮时，Orven 才会向 GitHub 请求公开发布信息。不会发送扫描或设备数据。";
+"Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent." = "仅在点击按钮时，Macinity 才会向 GitHub 请求公开发布信息。不会发送扫描或设备数据。";
 "Open Full Disk Access" = "打开完全磁盘访问权限";
 "Open Recovery" = "打开恢复";
 "Open installation guide" = "打开安装指南";
@@ -121,7 +121,7 @@
 "Process identity unavailable; ownership is unverified" = "无法获取进程身份；归属未经验证";
 "Processes" = "进程";
 "Projects" = "项目";
-"Quit Orven" = "退出 Orven";
+"Quit Macinity" = "退出 Macinity";
 "Read" = "读取";
 "Read failed" = "读取失败";
 "Read-only" = "只读";
@@ -138,7 +138,7 @@
 "Refresh to inspect current requests. No background polling." = "刷新以查看当前请求。不会在后台轮询。";
 "Replace after verification" = "验证后替换";
 "Replace the Diskora scheduled scan?" = "替换 Diskora 定时扫描？";
-"Replace with Orven schedule…" = "替换为 Orven 计划…";
+"Replace with Macinity schedule…" = "替换为 Macinity 计划…";
 "Resident memory" = "驻留内存";
 "Restore" = "恢复";
 "Retry import" = "重试导入";
@@ -154,7 +154,7 @@
 "Sampling paused while the main window is inactive." = "主窗口不活动时暂停采样。";
 "Scan coverage" = "扫描覆盖范围";
 "Scan storage" = "扫描存储空间";
-"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "扫描、快照及操作记录保留在此 Mac 上。Orven 无遥测，也不会自动清理。";
+"Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically." = "扫描、快照及操作记录保留在此 Mac 上。Macinity 无遥测，也不会自动清理。";
 "Search processes or PID" = "搜索进程或 PID";
 "Seconds before latest sample" = "距最新样本的秒数";
 "See reclaimable files before anything moves to Trash." = "在移入废纸篓前，先查看可释放空间的文件。";
@@ -187,8 +187,8 @@
 "Thermal state is macOS's coarse system condition, not a temperature in °C. Macs without an internal battery report Unsupported." = "热状态是 macOS 提供的粗略系统状态，不是摄氏温度。没有内置电池的 Mac 显示“不支持”。";
 "Thermal state is not a temperature in °C." = "热状态不是摄氏温度。";
 "Threads: %d" = "线程数：%d";
-"Orven %@ is available." = "Orven %@ 可用。";
-"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orven 会先安装并启动仅扫描代理，成功后才会移除 Diskora 的 plist。";
+"Macinity %@ is available." = "Macinity %@ 可用。";
+"Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Macinity 会先安装并启动仅扫描代理，成功后才会移除 Diskora 的 plist。";
 "Top CPU consumers • one core" = "高 CPU 占用进程・单核心基准";
 "Unavailable" = "不可用";
 "Understand app changes" = "了解应用更改";
@@ -200,7 +200,7 @@
 "Using the most CPU" = "CPU 占用最高的进程";
 "Warming up" = "正在获取初始样本";
 "Warning" = "警告";
-"Welcome to Orven" = "欢迎使用 Orven";
+"Welcome to Macinity" = "欢迎使用 Macinity";
 "Wired memory" = "联动内存";
 "Write" = "写入";
 "You are using the latest public release." = "你正在使用最新公开版本。";
@@ -279,7 +279,7 @@
 "APFS container capacity" = "APFS 容器容量";
 "APFS container free" = "APFS 容器空闲空间";
 "Data volume used" = "Data 卷已用空间";
-"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "此处未测量未解释空间。它可能包含不可读文件、其他卷、文件系统元数据、克隆或快照；Orven 不会将剩余空间归因于单一原因。";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause." = "此处未测量未解释空间。它可能包含不可读文件、其他卷、文件系统元数据、克隆或快照；Macinity 不会将剩余空间归因于单一原因。";
 "APFS snapshots" = "APFS 快照";
 "No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "Data 卷未报告 APFS 快照。其他卷可能存在快照。";
 "OS marks this snapshot purgeable." = "系统将此快照标记为可清除。";
@@ -402,7 +402,7 @@
 "Fan count unavailable; no fan speeds inferred." = "风扇数量不可用；不推断风扇转速。";
 "Fan coverage is capped at 8 reported fans." = "风扇覆盖范围最多包含SMC报告的8个风扇。";
 "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "监测运行时每10秒只读刷新SMC传感器。覆盖范围有限且取决于机型。CPU/GPU分类基于社区映射，不是已验证的物理核心ID。缺失读数不按0处理。";
-"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "温度为已映射传感器的独立读数，不是CPU/GPU封装平均温度或安全诊断。风扇仅显示观测转速，Orven不更改模式或目标转速。不采集电压、实时频率、SPD或SMART。";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "温度为已映射传感器的独立读数，不是CPU/GPU封装平均温度或安全诊断。风扇仅显示观测转速，Macinity不更改模式或目标转速。不采集电压、实时频率、SPD或SMART。";
 "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "SMC温度、风扇和功耗的覆盖范围如上所示。热状态仍是独立的macOS状态。不提供电压、实时核心频率、SPD时序、SMART健康信息、风扇控制、超频或压力测试。";
 
 "Review temperatures and fans" = "查看温度与风扇";
@@ -450,7 +450,7 @@
 "History could not be saved. Existing data is preserved; check the local storage location." = "无法保存历史。现有数据已保留，请检查本机存储位置。";
 "Baseline needs at least 30 recorded samples and writable local storage." = "基准需要至少 30 个已记录样本和可写的本机存储。";
 "History retention could not be saved. Existing data is preserved." = "无法保存历史保留设置。现有数据已保留。";
-"Notifications require the Orven app bundle." = "通知需要从 Orven 应用包运行。";
+"Notifications require the Macinity app bundle." = "通知需要从 Macinity 应用包运行。";
 "Notification permission granted." = "已获得通知权限。";
 "Notifications are not allowed. In-app alerts remain available." = "尚未允许通知。应用内提醒仍可使用。";
 "Notification permission could not be requested. In-app alerts remain available." = "无法请求通知权限。应用内提醒仍可使用。";
@@ -605,3 +605,606 @@
 "Up / running" = "已启用／运行中";
 "Down / not running" = "已关闭／未运行";
 "Interface flags" = "接口标志";
+
+"My Mac" = "我的 Mac";
+
+"Thermals" = "温度";
+
+"Software" = "软件";
+
+"Files" = "文件";
+
+"Search Macinity" = "搜索 Macinity";
+
+"Workspace page" = "工作区页面";
+
+"Temperatures & Fans" = "温度与风扇";
+
+"Find a tool or page" = "查找工具或页面";
+
+"Find tools and pages. File and application contents are not searched." = "搜索工具和页面，不搜索文件或应用的内容。";
+
+"No matching tools" = "未找到匹配工具";
+
+"Try another name or clear the search." = "请尝试其他名称或清除搜索。";
+
+"Your Mac, in focus" = "一览 Mac 状态";
+
+"Inspect this Mac" = "查看此 Mac 配置";
+
+"Installed memory" = "已安装内存";
+
+"Recent sensor readings" = "最近的传感器读数";
+
+"Observed sensor samples only. Missing readings remain gaps; the chart does not diagnose thermal safety." = "仅显示观测到的样本。缺失读数保留为空白；图表不判断温度是否安全。";
+
+"No sensor samples available." = "暂无传感器样本。";
+
+"Active monitoring" = "实时监测";
+
+"Developer Tools" = "开发工具";
+
+"Discover runtimes and command-line tools in common installation folders." = "在常见安装目录中查找运行时和命令行工具。";
+
+"Presence only: shims and system stubs may need setup. Versions, packages and the active shell environment are not inspected. No tools are executed." = "仅检查是否存在：shim 和系统占位程序可能需要配置。不检查版本、软件包或当前 shell 环境，也不执行任何工具。";
+
+"Filter by name or path" = "按名称或路径筛选";
+
+"No tools found in this view. Custom installation folders are not scanned." = "未找到匹配的工具。未扫描自定义安装目录。";
+
+"Last checked" = "上次检查";
+
+"Refresh" = "刷新";
+
+"Filter choices" = "筛选选项";
+
+"No matching choices" = "没有匹配的选项";
+"Có thể khôi phục từ Trash" = "可从废纸篓恢复";
+"Toàn bộ hoạt động" = "所有活动";
+"mục có thể khôi phục" = "可恢复项目";
+"Loại tệp trùng lặp" = "重复文件清理";
+"Chọn Quét dung lượng để bắt đầu" = "选择扫描存储空间以开始";
+"đã chọn vào Trash" = "已选择移至废纸篓";
+
+"Developed by thangldw and Codex" = "由 thangldw 和 Codex 开发";
+
+"After allowing Location access, refresh or scan again to read Wi-Fi names." = "允许位置访问后，请刷新或重新扫描以读取 Wi-Fi 名称。";
+
+"Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization." = "请在系统设置 → 隐私与安全性 → 定位服务中检查 Macinity。限制可能由你的组织管理。";
+
+"Select a sensor below to view its chart." = "选择下方的传感器以查看对应图表。";
+
+"No applications found" = "未找到应用";
+
+"No readable application bundles were found in /Applications or ~/Applications." = "在 /Applications 或 ~/Applications 中未找到可读取的应用包。";
+
+"Disk Activity" = "磁盘活动";
+
+"Network Activity" = "网络活动";
+
+"Battery details" = "电池详情";
+
+"Power source" = "电源";
+
+"AC Power" = "外接电源";
+
+"Low Power Mode" = "低电量模式";
+
+"Battery health" = "电池状况";
+
+"Estimated time to full" = "预计充满时间";
+
+"Estimated time remaining" = "预计剩余时间";
+
+"Charge cycles" = "循环次数";
+
+"Design capacity" = "设计容量";
+
+"Full charge capacity" = "满充容量";
+
+"Capacity vs. design" = "相对设计容量";
+
+"Battery voltage" = "电池电压";
+
+"Reported adapter power" = "适配器报告功率";
+
+"Capacity ratio is calculated from reported full and design capacity; it may differ from macOS Battery Health. Adapter watts describe the adapter, not live charging power. Missing values are unavailable, not zero." = "容量比率根据报告的满充容量与设计容量计算，可能与 macOS 电池健康不同。功率表示适配器信息，不是实时充电功率。缺失值表示不可用，不代表零。";
+
+"Battery health: Good" = "良好";
+
+"Battery health: Fair" = "容量受限";
+
+"Battery health: Poor" = "较差";
+
+"Battery level & charging history" = "电池电量与充放电历史";
+
+"Save local health history" = "在本机保存健康历史";
+
+"Battery level" = "电池电量";
+
+"Discharging" = "正在放电";
+
+"External power (not charging)" = "外接电源（未充电）";
+
+"One sample per minute while monitoring is active. Uses Health History retention. Sleep, pauses and missing samples remain gaps; earlier macOS history is not imported." = "监控运行时每分钟记录一次，使用健康历史的保留期限。睡眠、暂停和缺失样本保留为空白；不导入已有的 macOS 历史。";
+
+"No battery history yet. Enable recording and keep monitoring active." = "尚无电池历史。请启用记录并保持监控运行。";
+
+"Latest 20 observed intervals. Times mark recorded samples, not exact plug/unplug events." = "显示最近 20 个观测区间。时间代表样本记录时间，并非精确的电源插拔时间。";
+
+"macOS Battery Health" = "macOS 电池健康";
+
+"Battery condition" = "电池状态";
+
+"Maximum Capacity" = "最大容量";
+
+"Service Recommended" = "建议维修";
+
+"Reported by macOS System Information, separately from the raw capacity ratio. Availability and rounding depend on macOS and hardware. Refresh to update." = "由 macOS 系统信息报告，与原始容量比率分开显示。可用性和舍入方式取决于 macOS 与硬件。点击刷新更新。";
+
+"Add folders" = "添加文件夹";
+
+"Add prefix" = "添加前缀";
+
+"Application changed or missing" = "应用已更改或不存在";
+
+"Applications opened; layout requires Accessibility access" = "已打开应用；布局需要辅助功能权限";
+
+"Apply" = "应用";
+
+"Apply reviewed rename" = "应用已预览的重命名";
+
+"Apply the displayed rename plan? Existing files will never be overwritten." = "应用显示的重命名计划？不会覆盖现有文件。";
+
+"Calculate checksum" = "计算校验和";
+
+"Capacity" = "容量";
+
+"Change failed or state changed; refresh before retrying" = "更改失败或状态已改变；请刷新后重试";
+
+"Checksum differs" = "校验和不匹配";
+
+"Checksum matches" = "校验和匹配";
+
+"Choose Python environment" = "选择 Python 环境";
+
+"Choose files" = "选择文件";
+
+"Choose first folder" = "选择第一个文件夹";
+
+"Choose second folder" = "选择第二个文件夹";
+
+"Clear" = "清空";
+
+"Clear folders" = "清除文件夹选择";
+
+"Clear report" = "清空报告";
+
+"Command arguments may contain secrets. Displayed locally only; clear after review." = "命令参数可能包含机密信息。仅在本机显示；查看后请清空。";
+
+"Compare contents" = "比较内容";
+
+"Device Inspector" = "设备检查器";
+
+"Device category" = "设备类别";
+
+"Device details changed" = "设备详情已更改";
+
+"Device inspection failed or access is restricted" = "设备检查失败或访问受限";
+
+"Different content" = "内容不同";
+
+"Drive inspection failed; results may be incomplete" = "磁盘检查失败；结果可能不完整";
+
+"Eject" = "推出";
+
+"Eject external drive?" = "推出外部磁盘？";
+
+"Eject failed or device changed. Inspect open files; no force eject was attempted." = "推出失败或设备已改变。请检查打开的文件；未尝试强制推出。";
+
+"Eject request completed" = "推出请求已完成";
+
+"Enter credentials for a network you own or may share. The QR contains the password. It stays in memory and is cleared when you leave this page; no upload or automatic copy." = "请输入您拥有或获准分享的网络凭据。二维码包含密码，仅保存在内存中，离开页面即清除；不会上传或自动复制。";
+
+"Expected SHA-256 (optional, one file)" = "预期 SHA-256（可选，单个文件）";
+
+"External Drives" = "外部磁盘";
+
+"External Drives & File Locks" = "外部磁盘与文件占用";
+
+"External disks and their partitions, including unmounted entries. Eject uses macOS without force. Open-file inspection may omit restricted processes; it does not prove a file is locked." = "显示外部磁盘及分区，包括未挂载项。通过 macOS 正常推出。打开文件检查可能遗漏受限进程，并不证明文件被锁定。";
+
+"File Utilities" = "文件工具";
+
+"File utility" = "文件工具";
+
+"Filter packages" = "筛选软件包";
+
+"Find in filename" = "查找文件名";
+
+"Finish file operations first. macOS may eject related volumes on the same device. Busy devices will not be forcibly unmounted." = "请先完成文件操作。macOS 可能同时推出同一设备的相关卷。不会强制卸载正在使用的设备。";
+
+"Free" = "可用";
+
+"Generate QR" = "生成二维码";
+
+"Hidden network" = "隐藏网络";
+
+"Inspect" = "检查";
+
+"Inspect open files" = "检查打开的文件";
+
+"Inspect tool" = "检查工具";
+
+"Inspection failed or access is restricted" = "检查失败或访问受限";
+
+"Invalid names, changed files or destination conflicts" = "名称无效、文件已更改或目标冲突";
+
+"Keep Awake" = "保持唤醒";
+
+"Last rename recovery preview" = "最近重命名的恢复预览";
+
+"Latest observed device changes" = "最近观测到的设备变化";
+
+"Launch plists and current user registrations. System daemon status is unknown. Modern login items are managed in macOS Settings. Runtime changes affect this session; original plists stay intact." = "显示启动 plist 和当前用户注册项。系统守护进程状态未知。现代登录项在 macOS 设置中管理。运行时更改仅影响当前会话，不修改原始 plist。";
+
+"Local socket ownership only. Wildcard binding is not proof of Internet exposure; firewalls and routers still apply. Restricted and short-lived processes may be missing." = "仅显示本地套接字归属。通配绑定并不证明可从互联网访问，仍受防火墙和路由器影响。受限或短暂进程可能缺失。";
+
+"Locate executable" = "定位可执行文件";
+
+"Login items report unavailable; use macOS Settings" = "登录项报告不可用；请使用 macOS 设置";
+
+"No external disks in this observation" = "本次观测未发现外部磁盘";
+
+"No matching observable sockets" = "未发现匹配的可观测套接字";
+
+"No readable devices in this category" = "此类别中没有可读取的设备";
+
+"No readable open files; restricted processes may be missing" = "未发现可读取的打开文件；受限进程可能缺失";
+
+"Not mounted" = "未挂载";
+
+"Observed open files" = "观测到的打开文件";
+
+"Only in first" = "仅在第一个文件夹中";
+
+"Only in second" = "仅在第二个文件夹中";
+
+"Only profiles exposed by macOS are listed. Missing profiles or names may be restricted; this is not a complete connection history. Passwords are never read by Macinity." = "仅列出 macOS 允许访问的配置。名称或配置可能受限；这不是完整连接历史。Macinity 不读取密码。";
+
+"Open Accessibility Settings" = "打开辅助功能设置";
+
+"Open Login Items Settings" = "打开登录项设置";
+
+"Open Passwords" = "打开密码";
+
+"Open network (no password)" = "开放网络（无密码）";
+
+"Operation failed or timed out; inspect current state before retrying" = "操作失败或超时；重试前请检查当前状态";
+
+"Operation stopped or failed; no complete result is available" = "操作已停止或失败；没有完整结果";
+
+"Original names restored" = "已恢复原始名称";
+
+"Partial inventory: display limit reached" = "清单不完整：已达到显示上限";
+
+"Port" = "端口";
+
+"Port & Service Inspector" = "端口与服务检查器";
+
+"Potentially overlapping 2.4 GHz networks" = "可能重叠的 2.4 GHz 网络";
+
+"Preset name" = "预设名称";
+
+"Prevents idle system sleep only. Display sleep, screen locking and manual sleep remain unchanged. Process sessions stop on exit or after 24 hours; quitting Macinity releases the request." = "仅阻止系统空闲睡眠，不改变显示器睡眠、锁屏或手动睡眠。进程会话在进程退出或 24 小时后结束；退出 Macinity 会释放请求。";
+
+"Preview rename" = "预览重命名";
+
+"Process is unavailable; refresh before retrying" = "进程不可用；请刷新后重试";
+
+"Read macOS login items report" = "读取 macOS 登录项报告";
+
+"Read packages / environment" = "读取软件包与环境";
+
+"Read version" = "读取版本";
+
+"Refresh saved networks" = "刷新已保存网络";
+
+"Remove preset" = "移除预设";
+
+"Rename completed. Recovery journal retained." = "重命名完成。已保留恢复日志。";
+
+"Replace with" = "替换为";
+
+"Restore original names from the latest journal? Changed files and conflicts will be left untouched." = "从最近日志恢复原始名称？不会修改已变更或存在冲突的文件。";
+
+"Restore workspace?" = "恢复工作区？";
+
+"Review eject" = "确认推出";
+
+"Review package operation" = "确认软件包操作";
+
+"Review restore" = "确认恢复";
+
+"Review runtime change" = "确认运行时更改";
+
+"Review undo last rename" = "确认撤销最近重命名";
+
+"Review uninstall" = "确认卸载";
+
+"Review update" = "确认更新";
+
+"Same content" = "内容相同";
+
+"Save selected running apps, chosen folders and observable window geometry. Window titles are stored locally for matching. Browser tabs, terminal sessions, documents and VPN state are not restored. Missing or ambiguous windows are skipped." = "保存选中的运行中应用、文件夹和可观测窗口布局。窗口标题仅保存在本机用于匹配。不恢复标签页、终端会话、文档或 VPN 状态。跳过缺失或匹配不唯一的窗口。";
+
+"Save workspace" = "保存工作区";
+
+"Saved Wi-Fi & Sharing" = "已保存 Wi-Fi 与共享";
+
+"Security" = "安全性";
+
+"Selected files only. Symlinks are excluded. Hashing is bounded to 16 GiB per file and two minutes per operation. Folder comparison excludes package contents and stops rather than claiming completeness when limits or read errors occur." = "仅处理选中文件，排除符号链接。每个文件最多 16 GiB，每次操作限两分钟。文件夹比较排除包内容；达到限制或读取失败时停止，不宣称结果完整。";
+
+"Share your Wi-Fi with QR" = "通过二维码共享 Wi-Fi";
+
+"Show launch command" = "显示启动命令";
+
+"Show recovery journals" = "显示恢复日志";
+
+"Startup & Background" = "启动与后台";
+
+"Startup inspection failed" = "启动项检查失败";
+
+"System Information snapshot. Accessory battery is shown only when macOS supplies it. Bluetooth entries may include paired, disconnected devices. Change history compares explicit refreshes, not exact physical plug/unplug times." = "系统信息快照。仅在 macOS 提供时显示配件电量。蓝牙项可能包含已配对但未连接设备。历史比较手动刷新结果，并非精确插拔时间。";
+
+"This changes installed software and may run package code. Dependencies can change. A timeout or error may leave partial changes; inspect the package manager before retrying." = "此操作会更改已安装软件，并可能运行软件包代码。依赖项可能改变。超时或错误可能留下部分更改；重试前请检查包管理器。";
+
+"This opens the listed apps and folders and moves matching windows. Existing windows and documents are not closed." = "打开列出的应用和文件夹，并移动匹配窗口。不会关闭现有窗口或文档。";
+
+"Tools run only after a button press, without shell startup files. Package mutations can download and execute package code, affect dependencies and are not automatically reversible. No sudo. Python writes require a virtual environment; npm writes skip lifecycle scripts." = "仅点击按钮后运行工具，不加载 shell 启动文件。软件包更改可下载和执行代码、影响依赖，且不会自动回滚。不使用 sudo。Python 写入仅限虚拟环境；npm 跳过生命周期脚本。";
+
+"Track device changes during this visit" = "在本次访问中记录设备变化";
+
+"Undo rename" = "撤销重命名";
+
+"Unreadable or omitted entries" = "无法读取或被省略的项目";
+
+"Until process exits" = "直到进程退出";
+
+"Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA." = "网络未加密或安全性较弱。请将路由器配置为 WPA3 或 WPA2-AES，避免 WEP 和旧版 WPA。";
+
+"Weak signal: move closer to the access point before retrying authentication or connection tests." = "信号较弱：请靠近接入点后再尝试认证或连接测试。";
+
+"Wi-Fi password" = "Wi-Fi 密码";
+
+"Wi-Fi sharing QR" = "Wi-Fi 共享二维码";
+
+"Window does not support layout changes" = "窗口不支持布局更改";
+
+"Window missing or ambiguous" = "窗口缺失或匹配不唯一";
+
+"Workspace Presets" = "工作区预设";
+
+"Workspace partially restored" = "工作区已部分恢复";
+
+"Workspace restored" = "工作区已恢复";
+
+"folders" = "文件夹";
+
+"macOS login item registrations; this report does not prove a service is running. Output is limited to 24,000 characters." = "macOS 登录项注册信息，不证明服务正在运行。输出限 24,000 字符。";
+
+"saved windows" = "已保存窗口";
+
+"selected files" = "已选文件";
+
+"No active Keep Awake session" = "没有保持唤醒会话";
+
+"Process is unavailable; no session started" = "进程不可用；未启动会话";
+
+"Keep Awake could not start" = "无法开始保持唤醒";
+
+"Keep Awake is active" = "保持唤醒中";
+
+"Registered, not running" = "已注册，未运行";
+
+"Running" = "运行中";
+
+"Not registered" = "未注册";
+
+"Preview stop" = "预览停止";
+
+"Preview start" = "预览启动";
+
+"Stop and unregister this user agent now. Its process may terminate. Start it again from the same unchanged plist to restore registration." = "停止并注销此用户代理，其进程可能结束。可从同一未更改的 plist 重新启动以恢复注册。";
+
+"Register this user agent now. Its configured executable may run. Stop it again to undo registration." = "注册此用户代理。其配置的程序可能运行。再次停止可撤销注册。";
+
+"No readable saved networks" = "没有可读取的已保存网络";
+
+"Saved network access is unavailable" = "无法访问已保存网络";
+
+"Enter a valid SSID and password" = "请输入有效的 SSID 和密码";
+
+"Loopback only" = "仅回环地址";
+
+"All local interfaces" = "所有本地接口";
+
+"Specific interface address" = "指定接口地址";
+
+"Batch Rename" = "批量重命名";
+
+"Compare Folders" = "比较文件夹";
+
+"Duplicate Files" = "重复文件";
+
+"Displays" = "显示器";
+
+"Audio" = "音频";
+
+"Open" = "开放（未加密）";
+
+"Workspace file could not be read; existing data is preserved" = "无法读取工作区文件；现有数据已保留";
+
+"Choose a name; at most 20 presets are retained" = "请设置名称；最多保留 20 个预设";
+
+"Select applications or folders first" = "请先选择应用或文件夹";
+
+"Workspace saved" = "工作区已保存";
+
+"Apps and folders saved; window layout requires Accessibility access" = "已保存应用和文件夹；窗口布局需要辅助功能权限";
+
+"Workspace could not be saved" = "无法保存工作区";
+
+"Preset removed; recovery copy retained" = "预设已移除；已保留恢复副本";
+
+"Accessibility access available" = "辅助功能权限可用";
+
+"Accessibility access required for window layouts" = "窗口布局需要辅助功能权限";
+
+"Discovery checks paths only. Select a tool to explicitly read its version or packages. Multiple installations are kept separate; the active shell environment is not inferred." = "发现阶段仅检查路径。选择工具后读取版本或软件包。不同安装单独显示，不推断当前 shell 环境。";
+
+"Filter saved networks" = "筛选已保存的网络";
+
+"Previous" = "上一页";
+
+"Next" = "下一页";
+
+"Window missing, ambiguous or layout not applied" = "窗口不存在、匹配不唯一或布局未应用";
+
+"Connection" = "连接";
+
+"Not connected" = "未连接";
+
+"Connected" = "已连接";
+
+"Battery Percent" = "电池电量";
+
+"Resolution" = "分辨率";
+
+"Online" = "在线";
+
+"Manufacturer" = "制造商";
+
+"Transport" = "传输方式";
+
+"Speed" = "速度";
+
+"Power" = "电源";
+
+"Channels" = "通道数";
+
+"Sample Rate" = "采样率";
+
+"Related application" = "关联应用";
+
+/* Action Center, Smart Diagnostics and Work Profiles */
+"Action Center" = "操作中心";
+"Smart Diagnostics" = "智能诊断";
+"Work Profiles" = "工作配置";
+"Quick actions" = "快捷操作";
+"Edit favorites" = "编辑收藏";
+"Choose up to eight favorites." = "最多选择八个收藏项。";
+"Applying work profile" = "正在应用工作配置";
+"steps succeeded" = "个步骤成功";
+"Latest diagnostic" = "最近的分析";
+"A saved observation, not current health status." = "这是已保存的观测结果，并非当前状态。";
+"Analyze a problem" = "分析问题";
+"Recent activity" = "最近的操作";
+"Recent alerts" = "最近的提醒";
+"Activity summary unavailable" = "无法获取操作摘要";
+"No recorded activity." = "暂无操作记录。";
+"Hints use available samples from the last 15 seconds. Missing or paused checks cannot establish normal operation." = "提示使用过去15秒内可用的样本。数据缺失或采样暂停不能证明运行正常。";
+"Mac feels slow" = "Mac运行缓慢";
+"Mac feels hot" = "Mac发热";
+"Battery drains quickly" = "电池耗电快";
+"Network feels slow" = "网络缓慢";
+"Running out of storage" = "存储空间不足";
+"CPU (%)" = "CPU (%)";
+"Memory pressure (0 normal, 1 warning, 2 critical)" = "内存压力（0正常、1警告、2严重）";
+"Thermal state (0 nominal, 1 fair, 2 serious, 3 critical)" = "温度状态（0正常、1偏高、2严重、3危急）";
+"Battery (%)" = "电池电量 (%)";
+"On battery (1 yes, 0 no)" = "电池供电（1是、0否）";
+"Available storage (%)" = "可用空间 (%)";
+"Wi-Fi signal (dBm)" = "Wi-Fi信号 (dBm)";
+"Default gateway configured (1 yes, 0 no)" = "已配置默认网关（1是、0否）";
+"Global DNS servers configured" = "已配置的全局DNS服务器数";
+"Fresh evidence unavailable" = "没有可用的新数据";
+"Paused, missing or older than 15 seconds. This check cannot establish normal operation." = "采样暂停、数据缺失或超过15秒。此检查无法确认运行正常。";
+"CPU is elevated in this observation" = "本次观测的CPU使用率较高";
+"CPU observation available" = "有CPU观测数据";
+"Review the largest CPU consumers. The 80% threshold is a triage hint, not proof of a persistent fault or its cause." = "查看CPU占用最高的进程。80%阈值仅用于排查提示，不能证明持续故障或其原因。";
+"No pressure warning in this observation" = "本次观测无内存压力警告";
+"Use memory pressure rather than occupied RAM alone. Review applications before closing anything." = "应根据内存压力而非仅已用RAM判断。关闭应用前请先检查。";
+"macOS reports thermal pressure" = "macOS报告温度压力";
+"Thermal observation available" = "有温度状态数据";
+"Serious or critical is the macOS thermal classification. Inspect sensor coverage and recent load; no fan or CPU policy is changed." = "严重或危急由macOS判定。请检查传感器覆盖范围和近期负载；不会更改风扇或CPU策略。";
+"Battery level is low" = "电量偏低";
+"Battery observation available" = "有电池观测数据";
+"20% is a low-charge hint. One reading cannot establish drain rate or battery wear; review Battery History." = "20%是低电量提示阈值。单次读数无法判断耗电速度或电池老化，请查看电池历史。";
+"Running on battery" = "正在使用电池";
+"External power observed" = "检测到外接电源";
+"Review Keep Awake and power-consuming applications. A process CPU reading is not a per-app energy measurement." = "请检查保持唤醒和高负载应用。进程CPU读数不是应用级能耗测量。";
+"Available storage is low" = "可用空间偏低";
+"Storage observation available" = "有存储空间数据";
+"10% available is a triage threshold for the sampled volume. Review storage accounting and cleanup previews; no files are deleted here." = "10%可用空间是所测卷的排查阈值。请查看空间分析和清理预览；此处不会删除文件。";
+"Wi-Fi signal is weak" = "Wi-Fi信号弱";
+"Wi-Fi signal observed" = "已观测Wi-Fi信号";
+"At or below -75 dBm suggests weak reception. Signal alone does not measure Internet speed or prove channel interference." = "-75 dBm或更低提示接收较弱。仅凭信号无法测量网速或证明信道干扰。";
+"No default gateway observed" = "未发现默认网关";
+"Default gateway configured" = "已配置默认网关";
+"Configuration does not prove reachability. Use explicit gateway and latency checks in Wi-Fi & LAN." = "配置存在不代表可访问。请在Wi-Fi与LAN中手动检查网关和延迟。";
+"No global DNS servers observed" = "未发现全局DNS服务器";
+"Global DNS configuration observed" = "已观测全局DNS配置";
+"Scoped VPN and per-domain resolvers may differ. Run an explicit DNS check; this cannot diagnose an incorrect Wi-Fi password." = "VPN或域名专用解析器可能不同。请手动运行DNS检查；此结果无法诊断Wi-Fi密码错误。";
+"Read-only triage from timestamped observations. Findings are hints, not a diagnosis of root cause. Reports stay in this app session." = "基于带时间的观测进行只读排查。结果仅为提示，不是根因诊断。报告仅保留在本次应用会话中。";
+"What needs attention?" = "需要检查什么？";
+"Analyze latest evidence" = "分析最新数据";
+"Saved observation, not a live status. Analyze again after taking action. Unavailable evidence is never treated as healthy." = "这是已保存的观测，不是实时状态。操作后请重新分析。缺失数据不会被视为正常。";
+"Open related tools" = "打开相关工具";
+"Largest observed CPU consumers" = "观测到的CPU占用最高进程";
+"Process CPU may exceed 100% across cores. Identity is checked again by the process inspector." = "多核下进程CPU可能超过100%。进程检查器会再次验证身份。";
+"Compared with previous analysis" = "与上次分析比较";
+"No newer comparable measurements" = "暂无可比较的新测量值";
+"Differences describe observations; they do not prove an action caused the change." = "差异仅描述观测结果，不能证明变化由某项操作导致。";
+"Choose a symptom and analyze. Network analysis reads configuration only; it sends no probe traffic." = "选择症状并分析。网络分析仅读取配置，不发送探测流量。";
+"Group apps, folders, window layout, audio devices and timed Keep Awake. Apply only after reviewing every step. No automatic triggers or automatic rollback." = "组合应用、文件夹、窗口布局、音频设备和定时保持唤醒。确认各步骤后再应用。不自动触发或回滚。";
+"Create work profile" = "创建工作配置";
+"Saving workspace" = "正在保存工作区";
+"Travel" = "出行";
+"Select running applications" = "选择正在运行的应用";
+"Capture and restore window layout" = "保存和恢复窗口布局";
+"Keep Awake duration" = "保持唤醒时长";
+"Leave unchanged" = "保持不变";
+"A selected duration replaces any active Macinity Keep Awake session. Lock Screen remains unchanged." = "所选时长将替换当前Macinity保持唤醒会话。锁屏设置不变。";
+"Audio output" = "音频输出";
+"Microphone" = "麦克风";
+"Refresh audio devices" = "刷新音频设备";
+"Audio devices unavailable" = "无法获取音频设备";
+"Changes the system default device only. Apps with their own audio routing may ignore it. No audio is recorded." = "仅更改系统默认设备。使用独立音频路由的应用可能不受影响。不录音。";
+"Saved work profiles" = "已保存的工作配置";
+"No saved work profiles" = "暂无已保存的工作配置";
+"Step results" = "各步骤结果";
+"Stop after current step" = "当前步骤后停止";
+"Successful steps remain applied if another step fails or you stop. Results are kept for this app session; profiles stay on this Mac." = "某一步失败或停止时，已完成的更改仍然有效。结果保留在本次会话中，配置保存在此Mac上。";
+"This opens listed apps and folders, applies selected window/audio settings and may replace Keep Awake. Steps are checked at execution. Existing apps are not closed; failures do not undo completed steps." = "打开所列应用和文件夹，应用所选窗口及音频设置，并可能替换保持唤醒会话。执行时再次检查。不关闭已有应用；失败不会撤销已完成步骤。";
+"Window layout enabled" = "应用窗口布局";
+"Window layout unchanged" = "窗口布局保持不变";
+"Invalid work profile options" = "工作配置选项无效";
+"Work profile stopped; completed steps remain applied" = "工作配置已停止；已完成的更改仍然有效";
+"Application open request completed" = "应用打开请求已完成";
+"Folder open request accepted" = "已接受文件夹打开请求";
+"Folder open request failed" = "文件夹打开请求失败";
+"Window layout" = "窗口布局";
+"Window unavailable" = "窗口不可用";
+"Window geometry verified" = "已验证窗口位置和尺寸";
+"Default microphone verified" = "已验证默认麦克风";
+"Default output verified" = "已验证默认输出";
+"No applicable steps" = "没有可应用的步骤";
+"skipped" = "已跳过";
+"Recent profile runs" = "最近的配置运行记录";
+"Command" = "命令";
+"Trace" = "跟踪";
+"Done" = "完成";
+
+"Your Mac. Everything connected." = "你的 Mac，一切相连。";

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
-app="$project_dir/dist/Orven.app"
+app="$project_dir/dist/Macinity.app"
 allow_adhoc=0
 
 if [[ "${1:-}" == "--allow-adhoc" ]]; then
@@ -14,7 +14,7 @@ fi
 
 "$project_dir/Tests/Distribution/release_contract.sh" "$app"
 
-dmg="$project_dir/dist/Orven-3.0.0.dmg"
+dmg="$project_dir/dist/Macinity-3.1.0.dmg"
 checksum="$dmg.sha256"
 if [[ -f "$dmg" || -f "$checksum" ]]; then
   test -f "$dmg"
@@ -33,7 +33,7 @@ if [[ -f "$dmg" || -f "$checksum" ]]; then
   trap cleanup_mount EXIT
   hdiutil attach "$dmg" -nobrowse -readonly -mountpoint "$mount_dir" -quiet
   mounted=1
-  "$project_dir/Tests/Distribution/release_contract.sh" "$mount_dir/Orven.app"
+  "$project_dir/Tests/Distribution/release_contract.sh" "$mount_dir/Macinity.app"
   test -L "$mount_dir/Applications"
   test "$(readlink "$mount_dir/Applications")" = "/Applications"
   hdiutil detach "$mount_dir" -quiet
@@ -52,4 +52,4 @@ test -f "$dmg"
 xcrun stapler validate "$dmg"
 spctl --assess --type execute --verbose=4 "$app"
 
-echo "PASS: notarized Orven release"
+echo "PASS: notarized Macinity release"

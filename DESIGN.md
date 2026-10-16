@@ -2,27 +2,27 @@
 version: production-candidate
 omitted:
   - section: colors
-    reason: Canonical palette is owned by native OrvenTheme.swift and adapted by scripts/sync_brand_tokens.py.
+    reason: Canonical palette is owned by native MacinityTheme.swift and adapted by scripts/sync_brand_tokens.py.
   - section: typography
     reason: Portfolio site-shell.css owns shared type; Japanese and Chinese route stacks are explicit in orven-page.css.
   - section: spacing
     reason: Shared portfolio controls retain their tokens; route composition owns responsive spacing.
   - section: rounded
-    reason: Native ring icon and shared controls remain canonical.
+    reason: Native Cobalt Link icon and shared controls remain canonical.
   - section: components
     reason: Theme and support remain canonical shared portfolio mirrors.
 ---
-# Orven website design
+# Macinity website design
 
 ## English
 
 ### Audience and intent
 
-Global macOS users and developers, with EN/VI/JA/ZH localization. Japanese locale does not introduce Japan-specific regulated business flows. This is a marketing/help site for Orven3.0; native app owns the approved ring identity. No mock dashboard or synthetic measurement is shown as live evidence. Critical Japanese privacy/acquisition copy has not received independent native review.
+Global macOS users and developers, with EN/VI/JA/ZH localization. Japanese locale does not introduce Japan-specific regulated business flows. This is a marketing/help site for Macinity3.0; native app owns the approved ring identity. No mock dashboard or synthetic measurement is shown as live evidence. Critical Japanese privacy/acquisition copy has not received independent native review.
 
 ### Visual and component ownership
 
-Native OrvenTheme.swift owns the brand palette. scripts/sync_brand_tokens.py generates site/orven-brand.css using the existing light/dark selector contract; no second hand-maintained brand palette. site-shell.css owns shared typography and controls; product-shell.js/product-support.js remain reviewed shared mirrors recorded in shared-assets.json. orven-page.css owns the hero, nine capability cells, help/privacy composition, global scrollbar and responsive layout. The app icon is copied from the current native1024px asset.
+Native MacinityTheme.swift owns the brand palette. scripts/sync_brand_tokens.py generates site/orven-brand.css using the existing light/dark selector contract; no second hand-maintained brand palette. site-shell.css owns shared typography and controls; product-shell.js/product-support.js remain reviewed shared mirrors recorded in shared-assets.json. orven-page.css owns the hero, nine capability cells, help/privacy composition, global scrollbar and responsive layout. The app icon is copied from the current native1024px asset.
 
 ### Content and behavior
 
@@ -36,11 +36,11 @@ Verify real browser wide/narrow, all locales, theme and reload, first-launch dis
 
 ### Audience và mục tiêu
 
-Mac users/developers toàn cầu, EN/VI/JA/ZH. Locale Nhật không tạo regulatedflow Nhật riêng. Marketing/help choOrven3.0, nativeapp sởhữuringidentityđãduyệt. Khôngmock/syntheticmeasurement giảlàm liveevidence. CriticalJAprivacy/acquisition chưaindependentreview.
+Mac users/developers toàn cầu, EN/VI/JA/ZH. Locale Nhật không tạo regulatedflow Nhật riêng. Marketing/help choMacinity3.0, nativeapp sởhữuringidentityđãduyệt. Khôngmock/syntheticmeasurement giảlàm liveevidence. CriticalJAprivacy/acquisition chưaindependentreview.
 
 ### Visual và component ownership
 
-OrvenTheme.swift sởhữubrandpalette; scripts/sync_brand_tokens.py sinhsite/orven-brand.css/lightdarkselector,khônghandmaintainedpalette thứhai. site-shell.css typography/control; product-shell/supportJSmirror trongshared-assets.json. orven-page.css composition/scrollbar/responsive. Iconcopycurrentnative1024px.
+MacinityTheme.swift sởhữubrandpalette; scripts/sync_brand_tokens.py sinhsite/orven-brand.css/lightdarkselector,khônghandmaintainedpalette thứhai. site-shell.css typography/control; product-shell/supportJSmirror trongshared-assets.json. orven-page.css composition/scrollbar/responsive. Iconcopycurrentnative1024px.
 
 ### Nội dung và hành vi
 
@@ -54,11 +54,11 @@ Browserwide/narrow/4locale/theme/reload/disclosure/keyboard/support/siblings. Lo
 
 ### Audienceと目的
 
-GlobalMacusers/developers、EN/VI/JA/ZH。日本語localeはJapan-specificregulatedflowを導入しません。Orven3.0marketing/help、nativeappの承認ringidentity。Mock/syntheticmeasurementをliveevidenceとして表示しません。CriticalJAprivacy/acquisitionはindependentreview未完。
+GlobalMacusers/developers、EN/VI/JA/ZH。日本語localeはJapan-specificregulatedflowを導入しません。Macinity3.0marketing/help、nativeappの承認ringidentity。Mock/syntheticmeasurementをliveevidenceとして表示しません。CriticalJAprivacy/acquisitionはindependentreview未完。
 
 ### Visualとcomponent ownership
 
-OrvenTheme.swiftがbrandpalette、scripts/sync_brand_tokens.pyがsite/orven-brand.css/lightdarkselectorを生成、二重handmaintainedpaletteなし。Site-shell.cssはtype/control、product-shell/supportJSmirrorはshared-assets.json。Orven-page.cssはcomposition/scrollbar/responsive、iconはcurrentnative1024pxコピー。
+MacinityTheme.swiftがbrandpalette、scripts/sync_brand_tokens.pyがsite/orven-brand.css/lightdarkselectorを生成、二重handmaintainedpaletteなし。Site-shell.cssはtype/control、product-shell/supportJSmirrorはshared-assets.json。Macinity-page.cssはcomposition/scrollbar/responsive、iconはcurrentnative1024pxコピー。
 
 ### Contentと動作
 

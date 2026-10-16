@@ -89,13 +89,22 @@ public struct BatteryInfo: Sendable, Equatable {
   public let percent: Double
   public let charging: Bool
   public let onBattery: Bool
-  public init?(current: Double, maximum: Double, charging: Bool, onBattery: Bool) {
+  public let details: BatteryDetails?
+  public let health: String?
+  public let minutesRemaining: Int?
+  public init?(
+    current: Double, maximum: Double, charging: Bool, onBattery: Bool,
+    details: BatteryDetails? = nil, health: String? = nil, minutesRemaining: Int? = nil
+  ) {
     guard current.isFinite, maximum.isFinite, maximum > 0, current >= 0, current <= maximum else {
       return nil
     }
     percent = current / maximum * 100
     self.charging = charging
     self.onBattery = onBattery
+    self.details = details
+    self.health = health
+    self.minutesRemaining = minutesRemaining.flatMap { (1..<65535).contains($0) ? $0 : nil }
   }
 }
 

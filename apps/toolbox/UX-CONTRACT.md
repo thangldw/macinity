@@ -1,32 +1,43 @@
-# Orven native interaction contract
+# Macinity native interaction contract
 
 ## English
 
+Direct-choice policy: application selectors do not use dropdowns. Short choices use native radio groups, segments or visible adaptive buttons. Long sensor/metric/session choices use a searchable 144-point scrolling grid. Selection uses the existing binding and disabled state; no sampling, scanning or mutation is added. Native macOS menu bars and system file dialogs remain platform-owned.
+
+The split-view detail column has a 600-point minimum width before SwiftUI measures wrapped copy. Without this boundary, a 96-point fitting proposal made the Developer Tools column demand more than 2,300 points of height and pushed the shell outside its 900-point window. The root minimum remains 960×640. The hosting-view regression test must fit within that minimum; lists remain scrollable. No clipping modifier or fixed window height hides overflow.
+
+### Unified navigation
+
+MacinityArea groups every persisted ToolboxSection exactly once. ToolboxCoordinator remains the route owner and remembers the last page per area in session memory. Cross-feature routes select the corresponding area without changing mutation selections or process identity validation. Six native sidebar rows replace the previous flat route inventory. MacinityChoicePicker keeps peer page choices visible in an adaptive button grid; long labels wrap and narrow windows never switch to a menu. Each destination keeps its own ScrollView/Table and operation lifecycle. The localized window title remains the selected page title.
+
+MacinityToolSearch owns a bounded, local route catalog. Command-K and the sidebar button open a native sheet. A labeled native TextField filters by localized page/area words; no query persistence, filesystem scan, remote search or default Enter execution is introduced. Clear restores input focus, Escape/Close dismiss, native buttons open results. Files/app-content search is explicitly excluded in the UI. Four locales use the same key set. Native AX/keyboard, narrow geometry, themes and locale checks are recorded separately from build/static checks.
+
+
 ### Wi-Fi and LAN
 
-Wi-Fi/LAN uses the existing Orven theme, native controls, locale provider, MonitoringChart and rate sampler. A page-owned explicit read/probe service has one operation, cancellation and timestamped results; NWPathMonitor is a visible-page event observer. No configuration changes or persisted identities. See [network contract](../../docs/monitoring/NETWORK-TOOLS.md).
+Wi-Fi/LAN uses the existing Macinity theme, native controls, locale provider, MonitoringChart and rate sampler. A page-owned explicit read/probe service has one operation, cancellation and timestamped results; NWPathMonitor is a visible-page event observer. No configuration changes or persisted identities. See [network contract](../../docs/monitoring/NETWORK-TOOLS.md).
 
 
 ### Health workflows
 
-The user authorized local Health History/Baseline, opt-in Smart Alerts, Sensor Charts/Recording and session-only Network Connection Changes. This scoped change supersedes earlier no-persistence/no-alert wording below. Existing sampler, MonitoringChart, OrvenTheme, L10n, native controls and DiagnosticsExportView remain owners. Persistence is bounded/default-off; notification permission is explicit; endpoints stay in session memory. See [health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md).
+The user authorized local Health History/Baseline, opt-in Smart Alerts, Sensor Charts/Recording and session-only Network Connection Changes. This scoped change supersedes earlier no-persistence/no-alert wording below. Existing sampler, MonitoringChart, MacinityTheme, L10n, native controls and DiagnosticsExportView remain owners. Persistence is bounded/default-off; notification permission is explicit; endpoints stay in session memory. See [health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md).
 
 
 ### Physical sensors
 
-Physical Sensor Panel reuses the existing hardware cadence, Orven surface, native disclosure/Grid and shared export. Mapped identity, stale current, missing values and limited coverage are explicit; no fan mutation. See [physical sensor scope](../../docs/monitoring/PHYSICAL-SENSORS.md).
+Physical Sensor Panel reuses the existing hardware cadence, Macinity surface, native disclosure/Grid and shared export. Mapped identity, stale current, missing values and limited coverage are explicit; no fan mutation. See [physical sensor scope](../../docs/monitoring/PHYSICAL-SENSORS.md).
 
 ### Hardware Inspector
 
-Hardware Inspector reuses Orven surfaces, native Grid, explicit refresh and the shared diagnostics preview/save sheet. Range reset preserves engine history; missing/current-stale fields remain explicit. See [hardware scope](../../docs/monitoring/HARDWARE-TOOLS.md).
+Hardware Inspector reuses Macinity surfaces, native Grid, explicit refresh and the shared diagnostics preview/save sheet. Range reset preserves engine history; missing/current-stale fields remain explicit. See [hardware scope](../../docs/monitoring/HARDWARE-TOOLS.md).
 
 Coverage and privacy explanations in bounded sheets must wrap vertically, remain readable in full, and allow scrolling to related actions. App Activity Timeline explicitly fixes vertical text sizing; a clipped or ellipsized warning is not a completed narrow-window gate. Native screenshots and AX evidence remain separate from static audits.
 
 ### Feature expansion
 
-New diagnostics reuse OrvenTheme, native controls and existing sampling. Explicit helper refresh owns loading/error/cancellation states. The approved CPU priority action has its own native confirmation and same-user PID/start guard; monitoring does not change process scheduling automatically. Scope and prerequisites are defined in [feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md).
+New diagnostics reuse MacinityTheme, native controls and existing sampling. Explicit helper refresh owns loading/error/cancellation states. The approved CPU priority action has its own native confirmation and same-user PID/start guard; monitoring does not change process scheduling automatically. Scope and prerequisites are defined in [feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md).
 
-Native redesign approved: shared OrvenTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
+Native redesign approved: shared MacinityTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
 
 ### Sources and ownership
 
@@ -55,6 +66,15 @@ Existing foreground confirmation, canonical validation, Trash/recovery and legac
 
 ## Tiếng Việt
 
+Quy tắc chọn trực tiếp: bộ chọn trong ứng dụng không dùng dropdown. Nhóm ngắn dùng radio, segmented hoặc nút luôn hiện và tự xuống hàng. Danh sách sensor/chỉ số/phiên dài dùng lưới cuộn cao 144 điểm có tìm kiếm. Giữ binding và trạng thái disabled cũ; không thêm sampling, scan hay mutation. Menu bar macOS và hộp thoại tệp hệ thống vẫn do nền tảng quản lý.
+
+Cột nội dung split view có chiều rộng tối thiểu 600 điểm trước khi SwiftUI đo văn bản xuống dòng. Khi thiếu giới hạn này, phép đo ở 96 điểm khiến trang Công cụ lập trình đòi hơn 2.300 điểm chiều cao và đẩy khung giao diện khỏi cửa sổ cao 900 điểm. Kích thước tối thiểu toàn cửa sổ vẫn là 960×640. Regression test của hosting view phải nằm trong giới hạn đó; danh sách vẫn cuộn được. Không dùng clipping hoặc chiều cao cửa sổ cố định để che lỗi tràn.
+
+### Điều hướng thống nhất
+
+MacinityArea gom mỗi ToolboxSection đúng một lần. Coordinator giữ route, nhớ trang cuối trong từng khu vực ở RAM và giữ nguyên kiểm tra định danh/selection mutation. Sáu hàng sidebar native; nút chọn trang xuống hàng khi hẹp/nhãn dài, không dùng dropdown. Mỗi trang giữ ScrollView/Table và lifecycle riêng; title theo trang và locale. Search qua nút hoặc Command-K, sheet native lọc catalog công cụ/trang theo từ đã dịch; không lưu query/quét tệp/request mạng/Enter tự chạy. Clear trả focus, Escape/Close đóng, button native mở kết quả. UI ghi rõ không tìm nội dung tệp/app. Bốn locale cùng key; runtime QA riêng với build/static.
+
+
 ### Wi-Fi and LAN
 
 Wi-Fi/LAN dùng theme/control/locale/chart/sampler cũ; owner riêng cho read/probe theo yêu cầu, một operation/cancel/timestamp. NWPathMonitor quan sát event khi trang mở. Không đổi cấu hình hoặc lưu identity. Xem [network contract](../../docs/monitoring/NETWORK-TOOLS.md).
@@ -62,23 +82,23 @@ Wi-Fi/LAN dùng theme/control/locale/chart/sampler cũ; owner riêng cho read/pr
 
 ### Health workflows
 
-Người dùng cho phép Health History/Baseline trên máy, Smart Alerts opt-in, Sensor Charts/Recording và Network Connection Changes chỉ trong phiên. Scope này thay thế các hạn chế persistence/alert cũ bên dưới. Sampler, MonitoringChart, OrvenTheme, L10n, native controls và DiagnosticsExportView hiện có tiếp tục sở hữu chức năng. Persistence có giới hạn và mặc định tắt; quyền notification qua nút riêng; endpoint chỉ giữ trong RAM phiên. Xem [health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md).
+Người dùng cho phép Health History/Baseline trên máy, Smart Alerts opt-in, Sensor Charts/Recording và Network Connection Changes chỉ trong phiên. Scope này thay thế các hạn chế persistence/alert cũ bên dưới. Sampler, MonitoringChart, MacinityTheme, L10n, native controls và DiagnosticsExportView hiện có tiếp tục sở hữu chức năng. Persistence có giới hạn và mặc định tắt; quyền notification qua nút riêng; endpoint chỉ giữ trong RAM phiên. Xem [health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md).
 
 ### Physical sensors
 
-Physical Sensor Panel dùng cadence phần cứng cũ, surface Orven, disclosure/Grid native và export chung. Ghi rõ mapped identity, current stale, missing/limited coverage; không đổi quạt. Xem [scope sensor](../../docs/monitoring/PHYSICAL-SENSORS.md).
+Physical Sensor Panel dùng cadence phần cứng cũ, surface Macinity, disclosure/Grid native và export chung. Ghi rõ mapped identity, current stale, missing/limited coverage; không đổi quạt. Xem [scope sensor](../../docs/monitoring/PHYSICAL-SENSORS.md).
 
 ### Hardware Inspector
 
-Hardware Inspector dùng lại surface Orven, Grid native, refresh theo yêu cầu và sheet preview/save diagnostics chung. Reset range giữ history engine; field thiếu/current-stale được ghi rõ. Xem [scope phần cứng](../../docs/monitoring/HARDWARE-TOOLS.md).
+Hardware Inspector dùng lại surface Macinity, Grid native, refresh theo yêu cầu và sheet preview/save diagnostics chung. Reset range giữ history engine; field thiếu/current-stale được ghi rõ. Xem [scope phần cứng](../../docs/monitoring/HARDWARE-TOOLS.md).
 
 Giải thích coverage/privacy trong sheet có kích thước giới hạn phải wrap theo chiều dọc, đọc được đầy đủ và cuộn tới action liên quan. App Activity Timeline cố định vertical text sizing; cảnh báo bị cắt hoặc rút gọn không đạt gate cửa sổ nhỏ. Screenshot/AX native được ghi riêng với static audit.
 
 ### Feature expansion
 
-Diagnostics mới dùng lại OrvenTheme, control native và sampling cũ. Refresh helper theo yêu cầu có loading/error/cancellation. CPU priority đã được cho phép có xác nhận native riêng và guard cùng user/PID/start; monitoring không tự đổi scheduling. Scope/prerequisite ở [feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md).
+Diagnostics mới dùng lại MacinityTheme, control native và sampling cũ. Refresh helper theo yêu cầu có loading/error/cancellation. CPU priority đã được cho phép có xác nhận native riêng và guard cùng user/PID/start; monitoring không tự đổi scheduling. Scope/prerequisite ở [feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md).
 
-Native redesign approved: shared OrvenTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
+Native redesign approved: shared MacinityTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
 
 ### Nguồn và ownership
 
@@ -107,6 +127,15 @@ Foreground confirmation/canonical validation/Trash-recovery/legacy import giữ 
 
 ## 日本語
 
+直接選択方針：アプリ内selectorにdropdownを使いません。少数の選択肢はnative radio、segment、常時表示のadaptive buttonを使用。長いsensor/metric/session一覧は検索可能な高さ144ポイントのscroll gridを使用。既存bindingとdisabled状態を維持し、sampling、scan、mutationは追加しません。macOS menu barとsystem file dialogはOS管理のままです。
+
+split viewの詳細列は、SwiftUIが折り返しテキストを測定する前に最小幅600ポイントを持ちます。この境界がない場合、幅96ポイントでの測定により開発ツールが2,300ポイント以上の高さを要求し、高さ900ポイントのウィンドウ外へシェルがはみ出しました。ルートの最小サイズは960×640のままです。hosting viewの回帰テストはその範囲内に収まり、一覧はスクロール可能でなければなりません。clippingや固定ウィンドウ高さで問題を隠しません。
+
+### 統合ナビゲーション
+
+MacinityAreaは各ToolboxSectionを一度だけ分類。Coordinatorはrouteとエリア別の直近ページを管理し、mutation selectionとidentity検証を維持。六つのnative sidebar項目、常時表示の選択ボタンを使い、幅不足時は折り返します。各ページのscroll ownerとlifecycle、ローカライズ済みtitleを保持。Command-K/ボタンでnative検索sheetを開き、ツール/ページの翻訳名を検索。Query保存、file scan、network request、Enterによる自動実行なし。Clearでfocusを戻しEscape/Closeで閉じ、native buttonで移動。四言語で同じkey。Runtime QAとbuild/static evidenceを区別。
+
+
 ### Wi-Fi and LAN
 
 Wi-Fi/LANは既存theme/control/locale/chart/samplerを再利用。Page-owned明示read/probeはsingleoperation/cancel/timestamp、NWPathMonitorは表示pageのeventobserver。設定変更/identity保存なし。[Network contract](../../docs/monitoring/NETWORK-TOOLS.md)参照。
@@ -114,23 +143,23 @@ Wi-Fi/LANは既存theme/control/locale/chart/samplerを再利用。Page-owned明
 
 ### Health workflows
 
-ユーザーはlocal Health History/Baseline、opt-in Smart Alerts、Sensor Charts/Recording、session-only Network Connection Changesを承認しました。このscopeでは下記の従来persistence/alert制限を置き換えます。既存sampler、MonitoringChart、OrvenTheme、L10n、native controls、DiagnosticsExportViewを引き続き使用します。Persistenceは上限付きで初期off、notification権限は明示button、endpointはsession memoryのみ。[Health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md)を参照。
+ユーザーはlocal Health History/Baseline、opt-in Smart Alerts、Sensor Charts/Recording、session-only Network Connection Changesを承認しました。このscopeでは下記の従来persistence/alert制限を置き換えます。既存sampler、MonitoringChart、MacinityTheme、L10n、native controls、DiagnosticsExportViewを引き続き使用します。Persistenceは上限付きで初期off、notification権限は明示button、endpointはsession memoryのみ。[Health workflow contract](../../docs/monitoring/HEALTH-WORKFLOWS.md)を参照。
 
 ### Physical sensors
 
-Physical Sensor Panelは既存hardware cadence、Orven surface、native disclosure/Grid、共通exportを再利用。Mapped identity/stale current/missing/limited coverageを明示し、fanを変更しません。[Scope](../../docs/monitoring/PHYSICAL-SENSORS.md)参照。
+Physical Sensor Panelは既存hardware cadence、Macinity surface、native disclosure/Grid、共通exportを再利用。Mapped identity/stale current/missing/limited coverageを明示し、fanを変更しません。[Scope](../../docs/monitoring/PHYSICAL-SENSORS.md)参照。
 
 ### Hardware Inspector
 
-Hardware InspectorはOrven surface、native Grid、明示refresh、共通diagnostics preview/save sheetを再利用。Range resetはengine historyを保持し、欠測/current-staleを明示します。[Hardware scope](../../docs/monitoring/HARDWARE-TOOLS.md)参照。
+Hardware InspectorはMacinity surface、native Grid、明示refresh、共通diagnostics preview/save sheetを再利用。Range resetはengine historyを保持し、欠測/current-staleを明示します。[Hardware scope](../../docs/monitoring/HARDWARE-TOOLS.md)参照。
 
 サイズ制限付きsheetのcoverage/privacy説明は縦方向に折り返し、全文を読めて関連actionへscrollできること。App Activity Timelineはvertical text sizingを明示固定。警告の切れ/省略表示はnarrow-window gate未完了です。Native screenshot/AX evidenceとstatic auditを区別します。
 
 ### Feature expansion
 
-新diagnosticsはOrvenTheme/native control/既存samplingを再利用。明示helper refreshはloading/error/cancellationを所有。承認済みCPU priority actionはnative確認とsame-user PID/start guardを持ちmonitoringは自動変更しません。Scope/prerequisiteは[feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md)。
+新diagnosticsはMacinityTheme/native control/既存samplingを再利用。明示helper refreshはloading/error/cancellationを所有。承認済みCPU priority actionはnative確認とsame-user PID/start guardを持ちmonitoringは自動変更しません。Scope/prerequisiteは[feature expansion](../../docs/monitoring/FEATURE-EXPANSION.md)。
 
-Native redesign approved: shared OrvenTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
+Native redesign approved: shared MacinityTheme and surfaces replace the old material/gradient headers. Overview reads the existing monitoring snapshot and routes Inspect process with a full PID/start identity; no storage selection is made. Process details use a persistent inspector at wide sizes and an OS-owned modal sheet at smaller sizes. System/light/dark is app-local with toolbox.appearance defaulting to system. Table, picker, focus and scroll ownership stay native. No runtime schema or data directory changes.
 
 ### Source と ownership
 

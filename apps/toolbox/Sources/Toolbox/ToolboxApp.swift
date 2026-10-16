@@ -35,7 +35,7 @@ struct ToolboxApp: App {
     .defaultSize(width: 1_320, height: 900)
     .commands {
       CommandGroup(replacing: .appInfo) {
-        Button(L10n.text("About Orven")) { showAboutPanel() }
+        Button(L10n.text("About Macinity")) { showAboutPanel() }
       }
       CommandGroup(replacing: .newItem) {}
     }
@@ -45,7 +45,10 @@ struct ToolboxApp: App {
     MenuBarExtra(isInserted: menuBarInsertion) {
       MenuBarDiagnosticsView(model: monitoring).preferredColorScheme(preferredScheme)
     } label: {
-      Text(monitoring.menuBarTitle).monospacedDigit()
+      HStack(spacing: 4) {
+        Image(nsImage: AppBrand.menuIcon).accessibilityLabel(AppMetadata.displayName)
+        Text(monitoring.menuBarTitle).monospacedDigit()
+      }
     }
     .menuBarExtraStyle(.window)
   }

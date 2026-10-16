@@ -1,0 +1,22 @@
+/* Generated from OrvenTheme.swift by scripts/sync_brand_tokens.py. */
+:root[data-theme="light"]{
+  --color-canvas: #F5F7FB;
+  --color-background: #F5F7FB;
+  --color-surface: #FFFFFF;
+  --color-accent: #4169F5;
+  --color-text-strong: #17263C;
+  --color-text-body: #586D8A;
+  --color-border: #E2E8F1;
+  --color-on-accent: #FFFFFF;
+}
+:root[data-theme="dark"]{
+  --color-canvas: #151A23;
+  --color-background: #151A23;
+  --color-surface: #172335;
+  --color-accent: #8FB1FF;
+  --color-text-strong: #EAF0FA;
+  --color-text-body: #ABBBD1;
+  --color-border: #2B3C54;
+  --color-on-accent: #151A23;
+}
+body.macinity-page{background:var(--color-canvas);color:var(--color-text-strong)}
