@@ -38,7 +38,7 @@ Developer expansion: Software now includes the bounded, read-only Developer Tool
 
 Brand update on October 16: Macinity replaces the display identity; the clean linked-M logo, native icon family and compatibility boundaries are documented in [Macinity integration](../../docs/brand/macinity/INTEGRATION.md). Internal MacinityTheme/MacinityNavigation names remain stable.
 
-The current Macinity Cobalt Link identity uses graphite canvas #151A23, surface #172335, sidebar #131F30, ink #EAF0FA, secondary #ABBBD1 and border #2B3C54. Light/System remain first-class modes; existing preferences are not reset. Appearance and language choices live in Settings, not the sidebar, and remain directly selectable. The sidebar exposes all 22 stable page routes under six group headings. The sidebar search box and duplicate workspace page grid are removed. The route list scrolls at small heights while Settings and About stay anchored below. Brand, route and footer rows share consistent insets and fixed icon columns; navigation uses no dropdowns. Storage tools and network tools use the available width; refresh actions have their own row. Choice search appears only for more than eight options or an active query, with a clear button. Disk Activity belongs to Files and owns APFS capacity, snapshots and disk I/O. Network Activity belongs to Network and owns connections, connection changes and interface throughput. The legacy diskNetwork route restores Network Activity. Hardware profile and sensor panels are separate destinations. The thermal page leads with CPU/GPU hottest mapped readings, then five direct group buttons. Only the selected group renders a four-column sensor table and its selected sensor chart. Raw keys remain traceable; unrelated CPU/memory/I/O ranges are excluded. Charts reuse existing observations; gap/generation semantics remain owned by MonitoringChart. Applications automatically starts its read-only scan on first appearance for each screen model, retains completed results during that model lifetime, and keeps manual rescan. Concurrent scans are rejected; loading and empty results have distinct states. Applications uses its existing AppDossierView as a 340-point inspector above 900 points of available width, with the existing sheet at narrower sizes. The Overview uses real OS/memory/processor facts; no mock metrics or health score. Existing module detail/confirmation owners remain in place. Utility extensions now add startup inspection, temporary Keep Awake, external drives, file operations, package adapters, device snapshots and workspace presets; exact capability and verification boundaries are tracked in docs/product/SUPER-APP-EXPANSION.md.
+The current Macinity identity uses graphite canvas #151A23, surface #172335, sidebar #131F30, ink #EAF0FA, secondary #ABBBD1 and border #2B3C54. Light/System remain first-class modes; existing preferences are not reset. Appearance and language choices live in Settings, not the sidebar, and remain directly selectable. The sidebar exposes all 22 stable page routes under six group headings. The sidebar search box and duplicate workspace page grid are removed. The route list scrolls at small heights while Settings and About stay anchored below. Brand, route and footer rows share consistent insets and fixed icon columns; navigation uses no dropdowns. Storage tools and network tools use the available width; refresh actions have their own row. Choice search appears only for more than eight options or an active query, with a clear button. Disk Activity belongs to Files and owns APFS capacity, snapshots and disk I/O. Network Activity belongs to Network and owns connections, connection changes and interface throughput. The legacy diskNetwork route restores Network Activity. Hardware profile and sensor panels are separate destinations. The thermal page leads with CPU/GPU hottest mapped readings, then five direct group buttons. Only the selected group renders a four-column sensor table and its selected sensor chart. Raw keys remain traceable; unrelated CPU/memory/I/O ranges are excluded. Charts reuse existing observations; gap/generation semantics remain owned by MonitoringChart. Applications automatically starts its read-only scan on first appearance for each screen model, retains completed results during that model lifetime, and keeps manual rescan. Concurrent scans are rejected; loading and empty results have distinct states. Applications uses its existing AppDossierView as a 340-point inspector above 900 points of available width, with the existing sheet at narrower sizes. The Overview uses real OS/memory/processor facts; no mock metrics or health score. Existing module detail/confirmation owners remain in place. Utility extensions now add startup inspection, temporary Keep Awake, external drives, file operations, package adapters, device snapshots and workspace presets; exact capability and verification boundaries are tracked in docs/product/SUPER-APP-EXPANSION.md.
 
 | Previous rule | Decision | Runtime owner |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ Sleep Inspector extends Battery & Thermal using the existing surface, native ref
 
 ## Overview
 
-The user approved the Macinity observation-ring identity and the light diagnostics workspace, then authorized native implementation. The October 15 redesign combines the approved dark sensor concept, spacious Overview and list/detail software composition. The bundled Cobalt Link icon remains canonical. This is native SwiftUI with real monitoring snapshots, not a browser shell or synthetic data. GUI locales are English, Vietnamese, Japanese and Simplified Chinese, as explicitly requested. L10n owns language selection; dates and numbers follow the selected locale while source timestamps and paths retain their meaning.
+The user approved the Macinity observation-ring identity and the light diagnostics workspace, then authorized native implementation. The October 15 redesign combines the approved dark sensor concept, spacious Overview and list/detail software composition. The bundled Macinity icon remains canonical. This is native SwiftUI with real monitoring snapshots, not a browser shell or synthetic data. GUI locales are English, Vietnamese, Japanese and Simplified Chinese, as explicitly requested. L10n owns language selection; dates and numbers follow the selected locale while source timestamps and paths retain their meaning.
 
 ### Colors
 
@@ -98,7 +98,7 @@ Grouped flat adaptive surfaces with1-point borders. No ornamental shadows/gradie
 
 ### Shapes
 
-Surface radius16, compact control radius9; native controls retain OS geometry. The observation-Cobalt Link icon comes from AppIcon.icns, the supplied MacinityLogo.png is bundled and displayed on a white contrast plate in Help. Existing file/driver identities are not inferred from branding.
+Surface radius16, compact control radius9; native controls retain OS geometry. The observation-Macinity icon comes from AppIcon.icns, the supplied MacinityLogo.png is bundled and displayed on a white contrast plate in Help. Existing file/driver identities are not inferred from branding.
 
 ### Components
 
@@ -106,7 +106,7 @@ MacinityTheme/orvenSurface are shared across app/Core/Storage. MacinityPageHeade
 
 ### Do's and Don'ts
 
-Display live timestamps, CPU normalization, occupied-memory cache semantics, capacity versus rates, unsupported and stale states. Only processes with measured CPU values are ranked in Overview; explicit sample coverage leads to the complete process view, where restricted processes remain visible. Never interpret app correlation as deletion permission. Native cleanup/recovery confirmations and exact target checks remain unchanged. Keep com.thang.toolbox, the Toolbox data directory, executable/module names and existing preference keys stable.
+Display live timestamps, CPU normalization, occupied-memory cache semantics, capacity versus rates, unsupported and stale states. Only processes with measured CPU values are ranked in Overview; explicit sample coverage leads to the complete process view, where restricted processes remain visible. Never interpret app correlation as deletion permission. Native cleanup/recovery confirmations and exact target checks remain unchanged. Keep com.thang.toolbox, the Macinity data directory, executable/module names and existing preference keys stable.
 
 ## Tiếng Việt
 
@@ -157,7 +157,7 @@ Sleep Inspector mở rộng Battery & Thermal bằng surface, nút refresh nativ
 
 ## Overview
 
-Người dùng chốt identity Macinity vòng quan sát và workspace diagnostics sáng, rồi cho phép triển khai native. The October 15 redesign combines the approved dark sensor concept, spacious Overview and list/detail software composition. The bundled Cobalt Link icon remains canonical. SwiftUI dùng snapshot thật; không browser shell hoặc dữ liệu mẫu. GUI English/Tiếng Việt/日本語/简体中文 theo yêu cầu rõ ràng. L10n sở hữu language; date/number theo locale, timestamp nguồn/path giữ nguyên ý nghĩa.
+Người dùng chốt identity Macinity vòng quan sát và workspace diagnostics sáng, rồi cho phép triển khai native. The October 15 redesign combines the approved dark sensor concept, spacious Overview and list/detail software composition. The bundled Macinity icon remains canonical. SwiftUI dùng snapshot thật; không browser shell hoặc dữ liệu mẫu. GUI English/Tiếng Việt/日本語/简体中文 theo yêu cầu rõ ràng. L10n sở hữu language; date/number theo locale, timestamp nguồn/path giữ nguyên ý nghĩa.
 
 ### Colors
 
@@ -185,7 +185,7 @@ MacinityTheme/orvenSurface dùng chung app/Core/Storage. Header/status/MetricRea
 
 ### Do's and Don'ts
 
-Ghi timestamp, CPU normalization, memory gồm cache, capacity khác rate, unsupported/stale. Overview chỉ xếp hạng CPU đã đo và hiển thị coverage; màn hình đầy đủ vẫn giữ process bị hạn chế quyền. App correlation không phải quyền xóa. Giữ confirmation/target checks cleanup-recovery, com.thang.toolbox, thư mục dữ liệu Toolbox, executable/module và preference keys cũ.
+Ghi timestamp, CPU normalization, memory gồm cache, capacity khác rate, unsupported/stale. Overview chỉ xếp hạng CPU đã đo và hiển thị coverage; màn hình đầy đủ vẫn giữ process bị hạn chế quyền. App correlation không phải quyền xóa. Giữ confirmation/target checks cleanup-recovery, com.thang.toolbox, thư mục dữ liệu Macinity, executable/module và preference keys cũ.
 
 ## 日本語
 
@@ -264,6 +264,6 @@ MacinityTheme/orvenSurfaceはapp/Core/Storage共有。Header/status/readout/char
 
 ### Do's and Don'ts
 
-Timestamp/CPU normalization/cache/capacity-rate/unsupported-staleを明記。Overviewは実CPU sampleのみrankしcoverageを表示、完全viewはrestricted processを保持。Correlationは削除許可ではありません。Confirmation/target checksとcom.thang.toolbox/Toolbox data directory/executable/module/preference keyを保持。
+Timestamp/CPU normalization/cache/capacity-rate/unsupported-staleを明記。Overviewは実CPU sampleのみrankしcoverageを表示、完全viewはrestricted processを保持。Correlationは削除許可ではありません。Confirmation/target checksとcom.thang.toolbox/Macinity data directory/executable/module/preference keyを保持。
 
 Action Center now owns the home presentation, with bounded favorites and summaries from existing state owners. Smart Diagnostics adds a read-only route. Work Profiles extends the existing workspace preset schema with optional audio and Keep Awake settings. Capability and verification boundaries: `docs/product/ACTION-WORKFLOWS.md`.

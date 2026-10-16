@@ -8,7 +8,7 @@ omitted:
   - section: spacing
     reason: Shared portfolio controls retain their tokens; route composition owns responsive spacing.
   - section: rounded
-    reason: Native Cobalt Link icon and shared controls remain canonical.
+    reason: Native Macinity icon and shared controls remain canonical.
   - section: components
     reason: Theme and support remain canonical shared portfolio mirrors.
 ---
@@ -26,7 +26,7 @@ Native MacinityTheme.swift owns the brand palette. scripts/sync_brand_tokens.py 
 
 ### Content and behavior
 
-Hero states what the app does; capability cells name actual implemented workflows. Release/first-launch guidance explicitly discloses ad-hoc signing and no notarization. While preparing, CTA links to release status rather than a nonexistent new download. preview.js is the shared four-locale copy/metadata owner; existing locale/theme preferences remain compatible. Help and privacy are sibling routes. Source identifiers/data namespace remain Toolbox for compatibility, not user-facing branding.
+Hero states what the app does; capability cells name actual implemented workflows. Release/first-launch guidance explicitly discloses ad-hoc signing and no notarization. While preparing, CTA links to release status rather than a nonexistent new download. preview.js is the shared four-locale copy/metadata owner; existing locale/theme preferences remain compatible. Help and privacy are sibling routes. Source identifiers/data namespace remain Macinity for compatibility, not user-facing branding.
 
 ### Verification
 

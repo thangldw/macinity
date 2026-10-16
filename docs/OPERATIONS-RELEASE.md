@@ -4,7 +4,7 @@
 
 ### Current release contract
 
-Macinity3.1.0/v3.1.0 is the current stable target. The user explicitly authorized ad-hoc signing and not-notarized disclosure. release.json and Info.plist must agree; ZIP/DMG names, first-launch guide, website and release notes must identify the same product/version. Historical Toolbox tags remain immutable on GitHub.
+Macinity3.1.0/v3.1.0 is the current stable target. The user explicitly authorized ad-hoc signing and not-notarized disclosure. release.json and Info.plist must agree; ZIP/DMG names, first-launch guide, website and release notes must identify the same product/version. Historical Macinity tags remain immutable on GitHub.
 
 ### Validation and packaging
 
@@ -18,7 +18,7 @@ Publish from an exact reviewed source commit/tag and immutable assets/checksum. 
 
 ### Current release contract
 
-Macinity 3.1.0/v3.1.0 là stable target hiện tại. Người dùng đã chọn ký ad-hoc và ghi rõ chưa notarized. release.json, Info.plist, tên artifact, first-launch guide, website và release notes phải cùng product/version. Giữ nguyên các tag Toolbox trước đây trên GitHub.
+Macinity 3.1.0/v3.1.0 là stable target hiện tại. Người dùng đã chọn ký ad-hoc và ghi rõ chưa notarized. release.json, Info.plist, tên artifact, first-launch guide, website và release notes phải cùng product/version. Giữ nguyên các tag Macinity trước đây trên GitHub.
 
 ### Validation and packaging
 
@@ -32,7 +32,7 @@ Phát hành từ commit/tag đã review, với artifact và checksum cố địn
 
 ### Current release contract
 
-現在のstable targetはMacinity 3.1.0/v3.1.0です。ユーザーはad-hoc署名と未notarizedの明示を選択しました。release.json、Info.plist、artifact名、first-launch guide、website、release notesのproduct/versionを一致させます。以前のToolbox tagsはGitHubで変更しません。
+現在のstable targetはMacinity 3.1.0/v3.1.0です。ユーザーはad-hoc署名と未notarizedの明示を選択しました。release.json、Info.plist、artifact名、first-launch guide、website、release notesのproduct/versionを一致させます。以前のMacinity tagsはGitHubで変更しません。
 
 ### Validation and packaging
 
