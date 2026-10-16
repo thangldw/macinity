@@ -14,7 +14,7 @@
 See [utility limits](product/SUPER-APP-EXPANSION.md) and [Action Center, diagnostics and profiles](product/ACTION-WORKFLOWS.md) for permission and recovery details.
 
 
-Macinity 3.1.0 introduces the Cobalt Link identity and expands Orven into a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.1.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
 - Utilities cover startup/background inventory, Keep Awake, external drives/file locks, ports, batch rename with preview/undo, SHA-256, folder comparison, package/runtime inspection and device/workspace management.
@@ -67,7 +67,7 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 Xem [giới hạn tiện ích](product/SUPER-APP-EXPANSION.md) và [trung tâm thao tác, chẩn đoán, hồ sơ](product/ACTION-WORKFLOWS.md) để biết quyền và cách phục hồi.
 
 
-Macinity 3.1.0 giới thiệu nhận diện Cobalt Link và mở rộng Orven thành không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.1.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
 - Tiện ích gồm startup/background, Keep Awake, ổ ngoài/file đang mở, cổng, đổi tên hàng loạt có preview/hoàn tác, SHA-256, so sánh thư mục, package/runtime và quản lý thiết bị/workspace.
@@ -120,7 +120,7 @@ Tên cảm biến phụ thuộc model; link rate không phải tốc độ Inter
 権限と復元の詳細は[ツールの制限](product/SUPER-APP-EXPANSION.md)と[操作・診断・profile](product/ACTION-WORKFLOWS.md)を参照してください。
 
 
-Macinity 3.1.0はCobalt Linkのブランドを導入し、OrvenをMac管理用のnative workspaceへ拡張します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
+Macinity 3.1.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
 
 - Action Centerはお気に入りと最近の操作、Smart DiagnosticsはCPU・メモリ・容量・ネットワークの観測結果を表示します。Work Profilesはworkspace・音声・Keep Awake操作を事前確認します。
 - 起動項目、Keep Awake、外部ドライブとファイルロック、ポート、一括名称変更と取り消し、SHA-256、フォルダ比較、package/runtime、デバイスとworkspace管理を追加しました。

@@ -2,7 +2,7 @@
 
 ## English
 
-Macinity 3.1.0 introduces the Cobalt Link identity and expands Orven into a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.1.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
 - Utilities cover startup/background inventory, Keep Awake, external drives/file locks, ports, batch rename with preview/undo, SHA-256, folder comparison, package/runtime inspection and device/workspace management.
@@ -11,7 +11,7 @@ Macinity 3.1.0 introduces the Cobalt Link identity and expands Orven into a nati
 
 ### Macinity 3.1
 
-Macinity brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostics and recoverable storage management into one native macOS app. It is the renamed successor to Toolbox, with a Cobalt Link identity and interface. English, Vietnamese, Japanese and Simplified Chinese are available.
+Macinity brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostics and recoverable storage management into one native macOS app. It brings a unified identity and interface to daily Mac workflows. English, Vietnamese, Japanese and Simplified Chinese are available.
 
 ### Install and release status
 
@@ -37,13 +37,13 @@ No account, telemetry, analytics, automatic deletion or cloud sync. Explicit net
 
 ### Build, contribute and documentation
 
-Build with Swift 6 and full Xcode. From `apps/toolbox`, run `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh` and `./scripts/build_dmg.sh`. The resulting app is `dist/Macinity.app`; the internal executable/module names remain Toolbox for compatibility. Verify with `./scripts/verify_release.sh --allow-adhoc`; this checks structural integrity, not Apple notarization.
+Build with Swift 6 and full Xcode. From `apps/toolbox`, run `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh` and `./scripts/build_dmg.sh`. The resulting app is `dist/Macinity.app`; the internal executable/module names remain `Toolbox` for compatibility. Verify with `./scripts/verify_release.sh --allow-adhoc`; this checks structural integrity, not Apple notarization.
 
-Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/toolbox/). Previous Toolbox releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
+Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/toolbox/). Previous Macinity releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
 
 ## Tiếng Việt
 
-Macinity 3.1.0 giới thiệu nhận diện Cobalt Link và mở rộng Orven thành không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.1.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
 - Tiện ích gồm startup/background, Keep Awake, ổ ngoài/file đang mở, cổng, đổi tên hàng loạt có preview/hoàn tác, SHA-256, so sánh thư mục, package/runtime và quản lý thiết bị/workspace.
@@ -52,7 +52,7 @@ Macinity 3.1.0 giới thiệu nhận diện Cobalt Link và mở rộng Orven th
 
 ### Macinity 3.1
 
-Macinity hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-Fi/LAN và quản lý dung lượng có khôi phục trong app macOS native. Đây là tên mới của Toolbox, với Cobalt Link icon và giao diện mới. Hỗ trợ Anh, Việt, Nhật và Trung giản thể.
+Macinity hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-Fi/LAN và quản lý dung lượng có khôi phục trong app macOS native. Ứng dụng có nhận diện và giao diện thống nhất cho công việc hằng ngày trên Mac. Hỗ trợ Anh, Việt, Nhật và Trung giản thể.
 
 ### Cài đặt và trạng thái release
 
@@ -78,13 +78,13 @@ Không account/telemetry/analytics/tự xóa/cloud sync. Probe explicit kết n�
 
 ### Build, đóng góp và tài liệu
 
-Build bằng Swift 6 và bộ Xcode đầy đủ. Từ `apps/toolbox`, chạy `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh`, `./scripts/build_dmg.sh`. App là `dist/Macinity.app`; tên executable/module Toolbox giữ để tương thích. `./scripts/verify_release.sh --allow-adhoc` kiểm tra tính toàn vẹn của bộ cài, không chứng minh notarization.
+Build bằng Swift 6 và bộ Xcode đầy đủ. Từ `apps/toolbox`, chạy `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh`, `./scripts/build_dmg.sh`. App là `dist/Macinity.app`; tên executable/module `Toolbox` giữ để tương thích. `./scripts/verify_release.sh --allow-adhoc` kiểm tra tính toàn vẹn của bộ cài, không chứng minh notarization.
 
-Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/toolbox/). Release Toolbox trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
+Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/toolbox/). Release Macinity trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
 
 ## 日本語
 
-Macinity 3.1.0はCobalt Linkのブランドを導入し、OrvenをMac管理用のnative workspaceへ拡張します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
+Macinity 3.1.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
 
 - Action Centerはお気に入りと最近の操作、Smart DiagnosticsはCPU・メモリ・容量・ネットワークの観測結果を表示します。Work Profilesはworkspace・音声・Keep Awake操作を事前確認します。
 - 起動項目、Keep Awake、外部ドライブとファイルロック、ポート、一括名称変更と取り消し、SHA-256、フォルダ比較、package/runtime、デバイスとworkspace管理を追加しました。
@@ -93,7 +93,7 @@ Macinity 3.1.0はCobalt Linkのブランドを導入し、OrvenをMac管理用�
 
 ### Macinity 3.1
 
-MacinityはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、復元可能なストレージ管理を統合したnative macOS appです。Toolboxの後継で、名前・Cobalt Link icon・画面を刷新。英語、ベトナム語、日本語、簡体字中国語に対応します。
+MacinityはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、復元可能なストレージ管理を統合したnative macOS appです。アイコンと画面を統一しました。英語、ベトナム語、日本語、簡体字中国語に対応します。
 
 ### インストールとrelease状況
 
@@ -119,6 +119,6 @@ Account/telemetry/analytics/自動削除/cloud syncなし。明示probeは入力
 
 ### Build・貢献・資料
 
-Swift 6 và bộ Xcode đầy đủでbuild。`apps/toolbox`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Macinity.app`、internalexecutable/moduleは互換性のためToolboxを維持。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
+Swift 6 và bộ Xcode đầy đủでbuild。`apps/toolbox`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Macinity.app`、internalexecutable/moduleは互換性のため`Toolbox`を維持。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
 
-[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のToolboxreleaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
+[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/toolbox/)を参照。以前のMacinity releaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
