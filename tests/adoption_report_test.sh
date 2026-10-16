@@ -16,7 +16,7 @@ fixture='[
   ]}
 ]'
 
-actual="$(printf '%s' "$fixture" | "$repo_dir/scripts/adoption_report.sh" --stdin --asset-regex '^Macinity-.*\.dmg$')"
+actual="$(printf '%s' "$fixture" | "$repo_dir/scripts/adoption_report.sh" --stdin --asset-regex '^Macinity-2[.].*\.dmg$')"
 printf '%s\n' "$actual" | grep -Eq '^2026-09[[:space:]]+12$'
 printf '%s\n' "$actual" | grep -Eq '^TOTAL[[:space:]]+12$'
 printf '%s\n' "$actual" | grep -Fq 'download events, not unique users'
