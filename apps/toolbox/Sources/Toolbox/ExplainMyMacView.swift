@@ -54,7 +54,7 @@ struct ExplainMyMacView: View {
 struct DiagnosticsExportView: View {
   @ObservedObject var model: MonitoringViewModel
   var preparedReport: String? = nil
-  var reportName = "Orven-health.json"
+  var reportName = "Macinity-health.json"
   var hardwareProfile: HardwareProfile? = nil
   var rangeSince: Double? = nil
   @Environment(\.dismiss) private var dismiss
@@ -98,7 +98,7 @@ struct DiagnosticsExportView: View {
           panel.nameFieldStringValue =
             preparedReport != nil
             ? reportName
-            : (hardwareProfile == nil ? "Orven-diagnostics.json" : "Orven-hardware.json")
+            : (hardwareProfile == nil ? "Macinity-diagnostics.json" : "Macinity-hardware.json")
           guard panel.runModal() == .OK, let url = panel.url else { return }
           do {
             try Data(preview.utf8).write(to: url, options: .atomic)

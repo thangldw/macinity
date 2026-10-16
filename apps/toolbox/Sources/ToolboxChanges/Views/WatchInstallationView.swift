@@ -51,7 +51,7 @@ struct WatchInstallationView: View {
       Label("Bắt đầu một phiên thay đổi", systemImage: "camera.metering.matrix")
         .font(.title2).fontWeight(.semibold)
       Text(
-        "Orven sẽ lưu snapshot và bật FSEvents. Sau đó bạn cài, cập nhật hoặc gỡ ứng dụng như bình thường rồi quay lại để so sánh."
+        "Macinity sẽ lưu snapshot và bật FSEvents. Sau đó bạn cài, cập nhật hoặc gỡ ứng dụng như bình thường rồi quay lại để so sánh."
       )
       .foregroundStyle(.secondary)
       TextField("Tên phiên", text: $sessionTitle)
@@ -129,7 +129,7 @@ struct WatchInstallationView: View {
   private var privacyNote: some View {
     Label {
       Text(
-        "Orven chỉ đọc metadata cục bộ, không đọc nội dung tài liệu, không telemetry và không tự động xóa hoặc hoàn tác thay đổi."
+        "Macinity chỉ đọc metadata cục bộ, không đọc nội dung tài liệu, không telemetry và không tự động xóa hoặc hoàn tác thay đổi."
       )
     } icon: {
       Image(systemName: "hand.raised.fill")

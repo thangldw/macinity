@@ -1,4 +1,4 @@
-# Orven architecture
+# Macinity architecture
 
 ## English
 
@@ -12,7 +12,7 @@ One monitoring coordinator serves active main-window or optional menu-bar demand
 
 ### Compatibility and trust
 
-Public app is Orven.app version3.0.0, executable Toolbox, bundleIDcom.thang.toolbox and ApplicationSupportToolbox preserved. Four locale resources share stable user-visible strings. Mutations revalidate paths/process identities at execution and require explicit review. Ad-hoc integrity is not Apple notarization. [Architecture diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
+Public app is Macinity.app version3.1.0, executable Toolbox, bundleIDcom.thang.toolbox and ApplicationSupportToolbox preserved. Four locale resources share stable user-visible strings. Mutations revalidate paths/process identities at execution and require explicit review. Ad-hoc integrity is not Apple notarization. [Architecture diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
 
 ## Tiếng Việt
 
@@ -26,7 +26,7 @@ Một MonitoringCoordinator phục vụ cửa sổ chính đang hoạt động h
 
 ### Compatibility and trust
 
-App là Orven.app 3.0.0; executable Toolbox, bundle ID `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. App có bốn ngôn ngữ. Mutation kiểm tra lại path và định danh process ngay trước khi chạy, sau khi người dùng duyệt. Chữ ký ad-hoc không phải Apple notarization. Xem [diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
+App là Macinity.app 3.1.0; executable Toolbox, bundle ID `com.thang.toolbox` và `Application Support/Toolbox` được giữ để tương thích. App có bốn ngôn ngữ. Mutation kiểm tra lại path và định danh process ngay trước khi chạy, sau khi người dùng duyệt. Chữ ký ad-hoc không phải Apple notarization. Xem [diagram](diagrams/toolbox-architecture.html), [Health](monitoring/HEALTH-WORKFLOWS.md), [Network](monitoring/NETWORK-TOOLS.md).
 
 ## 日本語
 
@@ -40,4 +40,4 @@ Executable名はToolboxを保持します。ToolboxCoreはmetadata、locale/them
 
 ### Compatibility and trust
 
-AppはOrven.app 3.0.0です。Executable Toolbox、bundle ID `com.thang.toolbox`、`Application Support/Toolbox`を互換性のため維持し、四言語を提供します。Mutationは明示的なreview後、実行直前にpath/process identityを再確認します。Ad-hoc署名はApple notarizationではありません。[Diagram](diagrams/toolbox-architecture.html)、[Health](monitoring/HEALTH-WORKFLOWS.md)、[Network](monitoring/NETWORK-TOOLS.md)を参照してください。
+AppはMacinity.app 3.1.0です。Executable Toolbox、bundle ID `com.thang.toolbox`、`Application Support/Toolbox`を互換性のため維持し、四言語を提供します。Mutationは明示的なreview後、実行直前にpath/process identityを再確認します。Ad-hoc署名はApple notarizationではありません。[Diagram](diagrams/toolbox-architecture.html)、[Health](monitoring/HEALTH-WORKFLOWS.md)、[Network](monitoring/NETWORK-TOOLS.md)を参照してください。

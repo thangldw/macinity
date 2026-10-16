@@ -3,7 +3,9 @@ import ToolboxCore
 import ToolboxMonitoring
 
 struct HardwareInspectorView: View {
+  enum Mode { case profile, sensors }
   let model: MonitoringViewModel
+  var mode: Mode = .profile
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
   @State private var profile: HardwareProfile?
@@ -15,56 +17,64 @@ struct HardwareInspectorView: View {
   var body: some View {
     ScrollView {
       LazyVStack(alignment: .leading, spacing: 20) {
-        OrvenPageHeader(title: L10n.text("Hardware Inspector"))
+        OrvenPageHeader(
+          title: mode == .profile
+            ? L10n.text("Hardware Inspector") : L10n.text("Temperatures & Fans"))
         OrvenSamplingStatus(model: model)
-        PhysicalSensorPanel(model: model, since: resetTime)
-        HStack {
-          Text(L10n.text("Hardware profile")).font(.title2.bold())
-          Spacer()
-          Button(L10n.text("Refresh hardware")) { refreshToken += 1 }.disabled(loading)
-          Button(L10n.text("Export hardware report…")) { showsExport = true }.disabled(
-            profile == nil)
+        if mode == .sensors {
+          PhysicalSensorPanel(model: model, since: resetTime)
         }
-        if loading { Text(L10n.text("Reading hardware profile…")).foregroundStyle(.secondary) }
-        if let profile {
-          HardwareProfileDetails(profile: profile, languageCode: languageCode).equatable()
-        }
-        Text(
-          L10n.text(
-            "Cache sizes are OS-reported values, not summed totals. Nominal frequency is not a live core clock. The GPU working set is a recommendation, not VRAM capacity or current usage."
-          )
-        )
-        .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-        HStack {
-          Text(L10n.text("Recent sensor range")).font(.title2.bold())
-          Spacer()
-          Button {
-            resetTime = model.snapshot?.time.monotonic ?? ProcessInfo.processInfo.systemUptime
-          } label: {
-            Text(L10n.text("Reset range"))
+        if mode == .profile {
+          HStack {
+            Text(L10n.text("Hardware profile")).font(.title2.bold())
+            Spacer()
+            Button(L10n.text("Refresh hardware")) { refreshToken += 1 }.disabled(loading)
+            Button(L10n.text("Export hardware report…")) { showsExport = true }.disabled(
+              profile == nil)
           }
-          .buttonStyle(.bordered)
-          .accessibilityLabel(Text(L10n.text("Reset range")))
-          .accessibilityIdentifier("hardware-reset-range")
-          .help(L10n.text("Reset range"))
+          if loading { Text(L10n.text("Reading hardware profile…")).foregroundStyle(.secondary) }
+          if let profile {
+            HardwareProfileDetails(profile: profile, languageCode: languageCode).equatable()
+          }
+          Text(
+            L10n.text(
+              "Cache sizes are OS-reported values, not summed totals. Nominal frequency is not a live core clock. The GPU working set is a recommendation, not VRAM capacity or current usage."
+            )
+          )
+          .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
         }
-        Text(
-          L10n.text(
-            "Min/max covers available observations in the latest sampling generation, up to 60 seconds. Missing readings are gaps. Reset affects this range only; it does not clear monitoring history."
+        if mode == .sensors {
+          HStack {
+            Text(L10n.text("Recent sensor range")).font(.title2.bold())
+            Spacer()
+            Button {
+              resetTime = model.snapshot?.time.monotonic ?? ProcessInfo.processInfo.systemUptime
+            } label: {
+              Text(L10n.text("Reset range"))
+            }
+            .buttonStyle(.bordered)
+            .accessibilityLabel(Text(L10n.text("Reset range")))
+            .accessibilityIdentifier("hardware-reset-range")
+            .help(L10n.text("Reset range"))
+          }
+          Text(
+            L10n.text(
+              "Min/max covers available observations in the latest sampling generation, up to 60 seconds. Missing readings are gaps. Reset affects this range only; it does not clear monitoring history."
+            )
           )
-        )
-        .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-        HardwareLiveRange(model: model, since: resetTime, languageCode: languageCode)
-        Text(
-          L10n.text(
-            "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided."
+          .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+          Text(
+            L10n.text(
+              "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided."
+            )
           )
-        )
-        .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+          .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+        }
       }.padding(28)
     }
     .environment(\.locale, locale)
     .task(id: refreshToken) {
+      guard mode == .profile else { return }
       loading = true
       let result = await Task.detached(priority: .utility) { HardwareProfile.read() }.value
       guard !Task.isCancelled else { return }
@@ -147,73 +157,5 @@ private struct HardwareProfileDetails: View, Equatable {
     case .text:
       return ["Yes", "No", "Performance", "Efficiency"].contains(value) ? L10n.text(value) : value
     }
-  }
-}
-
-private struct HardwareLiveRange: View {
-  @ObservedObject var model: MonitoringViewModel
-  let since: Double?
-  let languageCode: String
-
-  var body: some View {
-    VStack(alignment: .leading, spacing: 20) {
-      Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 12) {
-        GridRow {
-          Text(L10n.text("Sensor"))
-          Text(L10n.text("Current"))
-          Text(L10n.text("Minimum"))
-          Text(L10n.text("Maximum"))
-          Text(L10n.text("Samples"))
-        }.font(.caption.bold()).foregroundStyle(.secondary)
-        ForEach(SensorWindow.extrema(model.snapshot?.history ?? [], since: since)) { range in
-          GridRow {
-            Text(L10n.text(range.sensor.title)).frame(maxWidth: .infinity, alignment: .leading)
-            Text(current(range.sensor)).fixedSize(horizontal: false, vertical: true)
-            Text(sensorValue(range.minimum, range.sensor))
-            Text(sensorValue(range.maximum, range.sensor))
-            Text(range.validSamples.formatted(.number.locale(locale)))
-          }.font(.callout).monospacedDigit()
-        }
-      }.orvenSurface()
-      if let reading = model.snapshot?.hardware.reading {
-        HStack(alignment: .top) {
-          MetricReadout(
-            title: L10n.text("Battery"), sample: reading.battery,
-            format: { monitoringNumber($0.percent, digits: 0) + "% • " + batteryState($0) },
-            maximumAge: 30)
-          MetricReadout(
-            title: L10n.text("Thermal state"), sample: reading.thermal, format: thermalLabel,
-            maximumAge: 6)
-        }.orvenSurface()
-      }
-    }
-  }
-
-  private var locale: Locale {
-    AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale
-  }
-  private func sensorValue(_ value: Double?, _ sensor: WindowSensor) -> String {
-    guard let value else { return "—" }
-    return sensor.isPercent ? monitoringNumber(value, digits: 1) + "%" : rateText(value)
-  }
-  private func current(_ sensor: WindowSensor) -> String {
-    guard let snapshot = model.snapshot else { return L10n.text("Warming up") }
-    let sample: MetricSample<Double>
-    switch sensor {
-    case .cpu: sample = snapshot.cpu
-    case .memory:
-      sample = MetricSample(
-        value: snapshot.memory.value?.occupiedPercent, availability: snapshot.memory.availability,
-        unit: .percent, time: snapshot.memory.time, source: snapshot.memory.source)
-    case .diskRead, .diskWrite, .networkReceive, .networkSend:
-      sample = snapshot.hardware.aggregate(
-        network: sensor == .networkReceive || sensor == .networkSend,
-        output: sensor == .diskWrite || sensor == .networkSend)
-    }
-    let state = sample.freshness(at: ProcessInfo.processInfo.systemUptime, maximumAge: 6)
-    guard state == .available, model.samplingMode != .paused else {
-      return availabilityLabel(state == .available ? .stale : state)
-    }
-    return sensorValue(sample.value, sensor)
   }
 }

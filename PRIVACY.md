@@ -1,10 +1,10 @@
-# Orven Privacy
+# Macinity Privacy
 
 ## English
 
 ### Local processing and stored data
 
-Orven has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Orven.
+Macinity has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Macinity.
 
 State remains under `~/Library/Application Support/Toolbox` for upgrade compatibility: cleanup/recovery history, change sessions/snapshots/evidence, storage checkpoints and migration state. Opt-in `health-history-v1.json` holds system CPU/memory/pressure/thermal and available mapped sensors, with availability/source/unit/timestamps; it excludes process names, paths and network endpoints. Retention is24h/7d, at most10080 records/36fields/24MiB. File budget can omit older observations sooner. Expired observations are removed on a successful later write; an app that does not run does not actively erase them. Corrupt/unknown/oversized files are preserved and block writes.
 
@@ -16,21 +16,21 @@ Check for Updates explicitly requests `https://api.github.com/repos/thangldw/too
 
 ### Permissions and exports
 
-Optional Full Disk Access expands filesystem coverage. Location permission is requested by a dedicated button for Wi-Fi identity coverage; Local Network permission may be requested by macOS during probes. Notifications require explicit permission. None of these grants authorizes file deletion. Orven does not read Wi-Fi passwords or bypass protected locations.
+Optional Full Disk Access expands filesystem coverage. Location permission is requested by a dedicated button for Wi-Fi identity coverage; Local Network permission may be requested by macOS during probes. Notifications require explicit permission. None of these grants authorizes file deletion. Macinity does not read Wi-Fi passwords or bypass protected locations.
 
-JSON/CSV/Markdown export shows a frozen preview and saves to the destination you choose. Health reports retain raw measurement units, missing values and timestamps. Diagnostic reports may contain process/application names, paths and numeric endpoints; replacing the home prefix is not full anonymization. Review the exact report before sharing. Orven does not transmit it automatically.
+JSON/CSV/Markdown export shows a frozen preview and saves to the destination you choose. Health reports retain raw measurement units, missing values and timestamps. Diagnostic reports may contain process/application names, paths and numeric endpoints; replacing the home prefix is not full anonymization. Review the exact report before sharing. Macinity does not transmit it automatically.
 
 ### Controls and release trust
 
 History, alerts, menu-bar monitoring and connection tracking default off. Turning history on does not enable background sampling; inactivity/sleep/missing observations create gaps. Cleanup requires foreground review and immediate path revalidation; eligible file moves use Trash. Recovery refuses to overwrite an occupied path. Scheduled management scans never delete automatically.
 
-Orven 3.0.0 uses an explicitly authorized ad-hoc-signed, unnotarized release channel. This is not Apple trust approval. The [Security policy](SECURITY.md) and [user guide](docs/USER-GUIDE.md) explain installation and known limits. Website links and external support destinations have their own privacy policies.
+Macinity 3.1.0 uses an explicitly authorized ad-hoc-signed, unnotarized release channel. This is not Apple trust approval. The [Security policy](SECURITY.md) and [user guide](docs/USER-GUIDE.md) explain installation and known limits. Website links and external support destinations have their own privacy policies.
 
 ## Tiếng Việt
 
 ### Xử lý local và dữ liệu lưu
 
-Orven không có account/telemetry/advertising/analytics/cloud sync. Đọc metadata/hash filesystem, image features, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute.
+Macinity không có account/telemetry/advertising/analytics/cloud sync. Đọc metadata/hash filesystem, image features, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute.
 
 Dữ liệu giữ trong `~/Library/Application Support/Toolbox` để tương thích nâng cấp: cleanup/recovery, change sessions/snapshots/evidence, storagecheckpoint/migration. `health-history-v1.json` opt-in lưu systemCPU/memory/pressure/thermal/sensor khả dụng, availability/source/unit/timestamp; không tênprocess/path/endpoint. Retention24h/7d, tối đa10080record/36field/24MiB; budget có thể bỏ record sớm. Expired bị loại trong write thành công sau đó; app không chạy không tự xóa. File corrupt/unknown/oversized giữ nguyên và chặn write.
 
@@ -50,7 +50,7 @@ Export JSON/CSV/Markdown preview chốt trước và lưu vào đích chọn. He
 
 History/alerts/menu-bar/connectiontracking mặc định off. Bật history không bật sampler nền; inactive/sleep/missing tạo gap. Cleanup cần foreground review/path revalidation; eligiblefile dùngTrash. Recovery không overwritepathoccupied. Scheduledscan không tự delete.
 
-Orven 3.0.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không Appletrustapproval. Xem [Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md). Linkwebsite/external support có policy riêng.
+Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không Appletrustapproval. Xem [Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md). Linkwebsite/external support có policy riêng.
 
 ## 日本語
 
@@ -76,4 +76,12 @@ JSON/CSV/Markdownは凍結preview後、選択先へ保存。Healthはunit/missin
 
 History/alerts/menu-bar/connectiontracking初期off。Historyを有効にしても背景samplingは開始せずinactive/sleep/missingはgap。Cleanupはforeground review/path revalidation、eligiblefileをTrashへ。Recoveryはoccupiedpathをoverwriteしません。Scheduledscanは自動deleteなし。
 
-Orven 3.0.0は明示承認されたad-hoc署名/unnotarizedでAppletrustapprovalではありません。[Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md)参照。外部support/linkには別privacy policyがあります。
+Macinity 3.1.0は明示承認されたad-hoc署名/unnotarizedでAppletrustapprovalではありません。[Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md)参照。外部support/linkには別privacy policyがあります。
+
+## Local development increment: action workflows
+
+**English:** The unreleased Action Center / Smart Diagnostics / Work Profiles increment stores up to eight favorites in local preferences. Work Profiles extend the existing local preset file with selected audio device UIDs/names and optional Keep Awake duration. Audio enumeration does not record sound. Diagnostic reports (including selected process identities/names) and the latest 20 profile-run results stay in memory until Quit. Network diagnostics retain numeric configuration/signal observations, not SSIDs, addresses or DNS identities. Audio and window changes require an explicit reviewed profile run. See [scope and verification](docs/product/ACTION-WORKFLOWS.md).
+
+**Tiếng Việt:** Đợt phát triển chưa phát hành lưu tối đa tám mục yêu thích trong tùy chọn cục bộ. Hồ sơ làm việc bổ sung UID/tên thiết bị âm thanh và thời gian giữ máy thức vào file preset hiện có. Liệt kê âm thanh không ghi âm. Báo cáo chẩn đoán (gồm tên/định danh tiến trình được chọn) và 20 kết quả chạy gần nhất chỉ giữ trong bộ nhớ đến khi thoát. Chẩn đoán mạng giữ số liệu cấu hình/tín hiệu, không giữ SSID, địa chỉ hay định danh DNS. Đổi âm thanh/bố cục chỉ xảy ra khi người dùng xác nhận chạy hồ sơ đã xem trước.
+
+**日本語:** 未公開の開発更新では最大8件のお気に入りをローカル設定に保存します。既存presetに選択した音声機器のUID・名前とスリープ防止時間を追加します。音声一覧の取得は録音を伴いません。診断レポート（選択したプロセス名・識別情報を含む）と直近20件の実行結果は終了までメモリ内のみ保持します。ネットワーク診断は数値化した設定・信号のみ保持し、SSID・アドレス・DNS識別情報を保持しません。音声・配置変更は内容確認後の明示実行時のみ行います。

@@ -31,7 +31,7 @@ struct HealthHistoryView: View {
           Picker(L10n.text("History retention"), selection: $model.retentionHours) {
             Text(L10n.text("24 hours")).tag(24)
             Text(L10n.text("7 days")).tag(168)
-          }.frame(maxWidth: 280)
+          }.pickerStyle(.radioGroup).frame(maxWidth: 280)
           Text(String(format: L10n.text("%d recorded observations"), model.archive.records.count))
           Text(
             String(
@@ -72,7 +72,7 @@ struct HealthHistoryView: View {
       encoder.dateEncodingStrategy = .iso8601
       report = LocalReportPreview(
         text: String(decoding: try encoder.encode(records), as: UTF8.self),
-        filename: "Orven-health.json")
+        filename: "Macinity-health.json")
       exportError = false
     } catch {
       report = nil
@@ -194,12 +194,11 @@ struct HealthMetricChart: View {
   var body: some View {
     let availableMetrics = metrics
     return VStack(alignment: .leading, spacing: 12) {
-      Picker(L10n.text("Chart metric"), selection: $selectedKey) {
-        Text(L10n.text("System CPU")).tag("cpu")
-        ForEach(availableMetrics.filter { $0.id != "cpu" }) { metric in
-          Text(healthMetricTitle(metric.title)).tag(metric.id)
-        }
-      }.frame(maxWidth: 400)
+      OrvenChoicePicker(
+        L10n.text("Chart metric"), selection: $selectedKey,
+        options: [("cpu", L10n.text("System CPU"))]
+          + availableMetrics.filter { $0.id != "cpu" }.map { ($0.id, healthMetricTitle($0.title)) },
+        searchable: true, minimumWidth: 160)
       let metric = availableMetrics.first { $0.id == selectedKey }
       HealthChartPlot(
         title: healthMetricTitle(metric?.title ?? "System CPU"), unit: metric?.unit ?? "%",
@@ -272,7 +271,7 @@ struct SensorRecordingView: View {
           Text(L10n.text("15 minutes")).tag(15)
           Text(L10n.text("30 minutes")).tag(30)
           Text(L10n.text("60 minutes")).tag(60)
-        }.frame(maxWidth: 220).disabled(model.recording)
+        }.pickerStyle(.radioGroup).frame(maxWidth: 220).disabled(model.recording)
         Button(L10n.text(model.recording ? "Stop recording" : "Start recording")) {
           if model.recording {
             model.stopRecording()
@@ -314,14 +313,14 @@ struct SensorRecordingView: View {
     do {
       if csv {
         report = LocalReportPreview(
-          text: HealthSessionExport.csv(model.session), filename: "Orven-sensors.csv")
+          text: HealthSessionExport.csv(model.session), filename: "Macinity-sensors.csv")
       } else {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         report = LocalReportPreview(
           text: String(decoding: try encoder.encode(model.session), as: UTF8.self),
-          filename: "Orven-sensors.json")
+          filename: "Macinity-sensors.json")
       }
       exportError = false
     } catch {

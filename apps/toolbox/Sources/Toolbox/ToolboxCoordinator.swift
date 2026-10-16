@@ -18,10 +18,13 @@ final class ToolboxCoordinator: ObservableObject {
   @Published var selectedSection: ToolboxSection
   @Published private(set) var storageFocusPath: String?
   @Published private(set) var processFocus: ProcessIdentity?
+  @Published private(set) var recentActivities: [ActivityEntry] = []
   @Published private(set) var recoverableBytes: Int64 = 0
   @Published private(set) var attentionCount = 0
   @Published private(set) var reducedCoverage = false
   @Published private(set) var summaryError: String?
+
+  private var recentSections: [OrvenArea: ToolboxSection] = [:]
 
   private let activityLedger: ActivityLedger
   private let evidenceStore: EvidenceStore
@@ -39,7 +42,13 @@ final class ToolboxCoordinator: ObservableObject {
       ToolboxSection(rawValue: defaults.string(forKey: "toolbox.selectedSection") ?? "") ?? .home
   }
 
+  func openArea(_ area: OrvenArea) {
+    guard selectedSection.area != area else { return }
+    open(.section(recentSections[area] ?? area.sections[0]))
+  }
+
   func open(_ route: ToolboxRoute) {
+    recentSections[selectedSection.area] = selectedSection
     switch route {
     case .section(let section):
       if selectedSection != section { selectedSection = section }
@@ -58,6 +67,7 @@ final class ToolboxCoordinator: ObservableObject {
   func refreshSummaries() {
     do {
       let activities = try activityLedger.load()
+      recentActivities = Array(activities.sorted { $0.occurredAt > $1.occurredAt }.prefix(5))
       recoverableBytes = activities.filter {
         $0.kind == .cleanup && $0.status == .succeeded && $0.recoverable
       }.reduce(0) { $0 + $1.affectedBytes }

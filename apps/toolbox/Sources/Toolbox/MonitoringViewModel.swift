@@ -186,4 +186,7 @@ final class ToolboxRuntime {
   let navigation = ToolboxCoordinator()
   let monitoring = MonitoringViewModel()
   let networkChanges = NetworkChangesViewModel()
+  let workspaces = WorkspacePresets()
+  let diagnostics = DiagnosticsModel()
+  let favorites = ActionFavorites()
 }

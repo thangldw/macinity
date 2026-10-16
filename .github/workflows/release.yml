@@ -1,9 +1,6 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v3.0.0"
   workflow_dispatch:
 
 concurrency:
@@ -26,7 +23,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Require the supported release tag
-        run: test "$GITHUB_REF" = "refs/tags/v3.0.0"
+        run: test "$GITHUB_REF" = "refs/tags/v3.1.0"
       - name: Format
         run: swift format lint --recursive --parallel Sources Tests Package.swift
       - name: XCTest
@@ -42,7 +39,7 @@ jobs:
       - name: Universal release contract
         run: |
           ./scripts/build_universal.sh
-          ./Tests/Distribution/release_contract.sh dist/Orven.app
+          ./Tests/Distribution/release_contract.sh dist/Macinity.app
       - name: Public release contracts
         working-directory: .
         run: |
@@ -50,7 +47,7 @@ jobs:
           bash tests/launch_assets.sh
 
   release:
-    name: Build and publish ad-hoc Orven release
+    name: Build and publish ad-hoc Macinity release
     needs: validate
     runs-on: macos-15
     timeout-minutes: 45
@@ -75,11 +72,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Require consistent public identity before publication.
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleDisplayName' dist/Macinity.app/Contents/Info.plist)" = "$(python3 -c 'import json; print(json.load(open("../../release.json"))["product"])')"
           gh release create "$GITHUB_REF_NAME" \
-            dist/Orven-3.0.0.dmg \
-            dist/Orven-3.0.0.dmg.sha256 \
+            dist/Macinity-3.1.0.dmg \
+            dist/Macinity-3.1.0.dmg.sha256 \
             --repo "$GITHUB_REPOSITORY" \
             --verify-tag \
-            --notes-file ../../docs/launch/orven-3.0.0.md \
+            --notes-file ../../docs/launch/macinity-3.1.0.md \
             --latest \
-            --title "Orven 3.0.0"
+            --title "Macinity 3.1.0"

@@ -176,3 +176,6 @@ NamiQuant-Claude-Design.html
 
 # Private machine verification is local evidence, never a release asset.
 docs/monitoring/evidence/
+
+# Local machine screenshots and verification evidence
+docs/brand/**/evidence/

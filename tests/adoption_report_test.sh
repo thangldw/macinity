@@ -12,7 +12,7 @@ fixture='[
   ]},
   {"published_at":"2026-10-02T00:00:00Z","assets":[
     {"name":"legacy.zip","download_count":99},
-    {"name":"Orven-3.0.0.dmg","download_count":3}
+    {"name":"Macinity-3.1.0.dmg","download_count":3}
   ]}
 ]'
 

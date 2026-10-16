@@ -83,12 +83,10 @@ public struct StorageModuleView: View {
           .padding(.vertical, 10)
           .background(Color.orange.opacity(0.08))
         }
-        Picker(L10n.text("Công cụ lưu trữ"), selection: $workspaceSection) {
-          ForEach(StorageWorkspaceSection.allCases) { section in
-            Text(section.title).tag(section)
-          }
-        }
-        .pickerStyle(.segmented)
+        OrvenChoicePicker(
+          L10n.text("Công cụ lưu trữ"), selection: $workspaceSection,
+          options: StorageWorkspaceSection.allCases.map { ($0, $0.title) }, minimumWidth: 140
+        )
         .padding()
 
         Divider()

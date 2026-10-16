@@ -92,8 +92,10 @@ struct EmptyStateView: View {
       Spacer()
       Image(systemName: symbol).font(.system(size: 42)).foregroundStyle(.secondary)
       Text(L10n.text(title)).font(.title2).fontWeight(.semibold)
-      Text(L10n.text(detail)).foregroundStyle(.secondary).multilineTextAlignment(.center).frame(
-        maxWidth: 430)
+        .fixedSize(horizontal: false, vertical: true)
+      Text(L10n.text(detail)).foregroundStyle(.secondary).multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true).frame(
+          maxWidth: 430)
       Spacer()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)

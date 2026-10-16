@@ -1,10 +1,10 @@
-# Orven operations
+# Macinity operations
 
 ## English
 
 ### Build and verify
 
-Use full Xcode with a per-command DEVELOPER_DIR, Swift6 and macOS13deployment. Run all XCTest and smoke contracts, strict formatting and locale lint, then build_universal.sh/build_dmg.sh/verify_release.sh --allow-adhoc. Artifacts are Orven.app and Orven-3.0.0.dmg. The explicit exception for Orven3.0.0 is ad-hoc/unnotarized; no Gatekeeper bypass command is permitted.
+Use full Xcode with a per-command DEVELOPER_DIR, Swift6 and macOS13deployment. Run all XCTest and smoke contracts, strict formatting and locale lint, then build_universal.sh/build_dmg.sh/verify_release.sh --allow-adhoc. Artifacts are Macinity.app and Macinity-3.1.0.dmg. The explicit exception for Macinity3.1.0 is ad-hoc/unnotarized; no Gatekeeper bypass command is permitted.
 
 ### Local data and cleanup
 
@@ -18,7 +18,7 @@ Report actual version, architecture, permission scope and fresh timestamps. Do n
 
 ### Build and verify
 
-Dùng Xcode đầy đủ, `DEVELOPER_DIR` theo từng command, Swift 6 và deployment target macOS 13. Chạy XCTest, năm smoke contracts, strict format và locale lint; sau đó chạy `build_universal.sh`, `build_dmg.sh`, `verify_release.sh --allow-adhoc` trong apps/toolbox/scripts. Artifact là Orven.app và Orven-3.0.0.dmg. Orven 3.0.0 được phép ký ad-hoc và ghi rõ chưa notarized; không dùng command bỏ qua Gatekeeper.
+Dùng Xcode đầy đủ, `DEVELOPER_DIR` theo từng command, Swift 6 và deployment target macOS 13. Chạy XCTest, năm smoke contracts, strict format và locale lint; sau đó chạy `build_universal.sh`, `build_dmg.sh`, `verify_release.sh --allow-adhoc` trong apps/toolbox/scripts. Artifact là Macinity.app và Macinity-3.1.0.dmg. Macinity 3.1.0 được phép ký ad-hoc và ghi rõ chưa notarized; không dùng command bỏ qua Gatekeeper.
 
 ### Local data and cleanup
 
@@ -32,7 +32,7 @@ Báo version, architecture, phạm vi quyền và timestamp thực. Không công
 
 ### Build and verify
 
-完全なXcode、commandごとの`DEVELOPER_DIR`、Swift 6、macOS 13 deployment targetを使用します。XCTest、五つのsmoke contracts、strict format、locale lintの後、apps/toolbox/scriptsの`build_universal.sh`、`build_dmg.sh`、`verify_release.sh --allow-adhoc`を実行します。ArtifactはOrven.appとOrven-3.0.0.dmgです。Orven 3.0.0はad-hoc署名と未notarizedの明示を承認済みで、Gatekeeperを回避するcommandは使いません。
+完全なXcode、commandごとの`DEVELOPER_DIR`、Swift 6、macOS 13 deployment targetを使用します。XCTest、五つのsmoke contracts、strict format、locale lintの後、apps/toolbox/scriptsの`build_universal.sh`、`build_dmg.sh`、`verify_release.sh --allow-adhoc`を実行します。ArtifactはMacinity.appとMacinity-3.1.0.dmgです。Macinity 3.1.0はad-hoc署名と未notarizedの明示を承認済みで、Gatekeeperを回避するcommandは使いません。
 
 ### Local data and cleanup
 

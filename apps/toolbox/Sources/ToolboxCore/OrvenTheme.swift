@@ -3,14 +3,14 @@ import SwiftUI
 
 /// Shared native appearance for monitoring and legacy management workspaces.
 public enum OrvenTheme {
-  public static let canvas: Color = adaptive(light: 0xF5F7FA, dark: 0x14283B)
-  public static let surface: Color = adaptive(light: 0xFFFFFF, dark: 0x1C3247)
-  public static let sidebar: Color = adaptive(light: 0xF0F4F9, dark: 0x172C40)
-  public static let accent: Color = adaptive(light: 0x2464DF, dark: 0x73A8FF)
-  public static var action: Color { Color(red: 36.0 / 255, green: 100.0 / 255, blue: 223.0 / 255) }
-  public static let ink: Color = adaptive(light: 0x17263C, dark: 0xE5EDF7)
-  public static let secondary: Color = adaptive(light: 0x586D8A, dark: 0xB0C0D6)
-  public static let border: Color = adaptive(light: 0xE2E8F1, dark: 0x375069)
+  public static let canvas: Color = adaptive(light: 0xF5F7FB, dark: 0x151A23)
+  public static let surface: Color = adaptive(light: 0xFFFFFF, dark: 0x172335)
+  public static let sidebar: Color = adaptive(light: 0xF0F4F9, dark: 0x131F30)
+  public static let accent: Color = adaptive(light: 0x4169F5, dark: 0x8FB1FF)
+  public static var action: Color { Color(red: 49.0 / 255, green: 86.0 / 255, blue: 207.0 / 255) }
+  public static let ink: Color = adaptive(light: 0x17263C, dark: 0xEAF0FA)
+  public static let secondary: Color = adaptive(light: 0x586D8A, dark: 0xABBBD1)
+  public static let border: Color = adaptive(light: 0xE2E8F1, dark: 0x2B3C54)
 
   private static func adaptive(light: UInt32, dark: UInt32) -> Color {
     Color(

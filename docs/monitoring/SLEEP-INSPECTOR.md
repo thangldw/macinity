@@ -1,4 +1,4 @@
-# Orven Sleep Inspector contract
+# Macinity Sleep Inspector contract
 
 ## English
 

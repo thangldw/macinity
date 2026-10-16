@@ -82,7 +82,7 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
   func requestPermission() async {
     guard !requestingPermission else { return }
     guard let center else {
-      status = "Notifications require the Orven app bundle."
+      status = "Notifications require the Macinity app bundle."
       return
     }
     requestingPermission = true

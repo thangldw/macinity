@@ -6,7 +6,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 import json,re,sys,urllib.parse,hashlib
 root=Path(sys.argv[1]); site=root/'site'; release=json.loads((root/'release.json').read_text())
-assert release['product']=='Orven' and release['version']=='3.0.0'
+assert release['product']=='Macinity' and release['version']=='3.1.0'
 assert release['signing']=='ad-hoc' and release['notarized'] is False
 assert json.loads((site/'release.json').read_text())==release, 'site release metadata drift'
 class Links(HTMLParser):
@@ -23,7 +23,7 @@ assert set(messages)=={'en','vi','ja','zh'}
 for lang,table in messages.items(): assert set(table)==keys and all(v.strip() for v in table.values()), lang
 for name in ['index.html','guide.html','privacy.html']:
  text=(site/name).read_text(); parser=Links(); parser.feed(text)
- assert '<meta name="viewport"' in text and '<main' in text and '<title>Orven' in text
+ assert '<meta name="viewport"' in text and '<main' in text and '<title>Macinity' in text
  assert parser.copy<=keys, name
  for url in parser.urls:
   split=urllib.parse.urlsplit(url)
@@ -36,7 +36,7 @@ for name in ['index.html','guide.html','privacy.html']:
 for name,asset in json.loads((site/'shared-assets.json').read_text())['assets'].items():
  assert hashlib.sha256((site/name).read_bytes()).hexdigest()==asset['sha256'], name
 assert hashlib.sha256((site/'assets/app-icon.png').read_bytes()).hexdigest()==hashlib.sha256((root/'apps/toolbox/Resources/AppIcon-1024.png').read_bytes()).hexdigest()
-print('PASS: Orven site links, four-locale parity, release identity, native icon and canonical mirrors')
+print('PASS: Macinity site links, four-locale parity, release identity, native icon and canonical mirrors')
 PY
 node --check "$repo_dir/site/preview.js"
 bash "$repo_dir/tests/unsigned_stable_release_test.sh"

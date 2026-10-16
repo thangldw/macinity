@@ -31,7 +31,7 @@ jobs:
         run: python3 tests/check_diagrams.py docs/diagrams/*.html
 
   toolbox:
-    name: Orven macOS
+    name: Macinity macOS
     runs-on: macos-15
     timeout-minutes: 25
     defaults:
@@ -58,8 +58,8 @@ jobs:
       - name: Assemble app bundle
         run: |
           ./scripts/build_app.sh
-          test -x dist/Orven.app/Contents/MacOS/Toolbox
-          test -f dist/Orven.app/Contents/Resources/en.lproj/Localizable.strings
-          test -f dist/Orven.app/Contents/Resources/vi.lproj/Localizable.strings
+          test -x dist/Macinity.app/Contents/MacOS/Toolbox
+          test -f dist/Macinity.app/Contents/Resources/en.lproj/Localizable.strings
+          test -f dist/Macinity.app/Contents/Resources/vi.lproj/Localizable.strings
           plutil -lint Resources/Info.plist Resources/en.lproj/*.strings Resources/vi.lproj/*.strings
-          codesign --verify --deep --strict dist/Orven.app
+          codesign --verify --deep --strict dist/Macinity.app

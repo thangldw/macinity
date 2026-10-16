@@ -65,7 +65,7 @@ struct ReleaseUpdateChecker: Sendable {
     var request = URLRequest(url: Self.endpoint)
     request.httpMethod = "GET"
     request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
-    request.setValue("Orven/\(AppMetadata.version)", forHTTPHeaderField: "User-Agent")
+    request.setValue("Macinity/\(AppMetadata.version)", forHTTPHeaderField: "User-Agent")
     let (data, response) = try await session.data(for: request)
     let status = (response as? HTTPURLResponse)?.statusCode ?? 0
     guard (200..<300).contains(status) else { throw ReleaseUpdateError.invalidResponse(status) }

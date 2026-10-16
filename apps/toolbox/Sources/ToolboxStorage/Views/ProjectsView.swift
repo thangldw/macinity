@@ -89,7 +89,7 @@ struct ProjectsView: View {
       EmptyStateView(
         title: "Chưa chọn project root", symbol: "folder.badge.plus",
         detail:
-          "Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng."
+          "Macinity chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng."
       )
       Button("Chọn project…") { chooseProjects() }
         .buttonStyle(.borderedProminent)
@@ -109,7 +109,7 @@ struct ProjectsView: View {
           title: model.report == nil ? "Sẵn sàng quét" : "Không có artifact phù hợp",
           symbol: model.report == nil ? "magnifyingglass" : "checkmark.shield",
           detail: model.report == nil
-            ? "Orven sẽ nhận diện output có thể tạo lại từ marker dự án."
+            ? "Macinity sẽ nhận diện output có thể tạo lại từ marker dự án."
             : "Không có source, manifest, lockfile hoặc thư mục chưa biết nào được đề xuất.")
       } else {
         List(filteredArtifacts) { artifact in
@@ -149,25 +149,21 @@ struct ProjectsView: View {
 
   private var filters: some View {
     VStack(alignment: .leading, spacing: 10) {
-      HStack {
-        Picker("Hệ sinh thái", selection: $ecosystem) {
-          Text("Tất cả hệ sinh thái").tag(Optional<ProjectEcosystem>.none)
-          ForEach(ProjectEcosystem.allCases) { value in
-            Text(value.rawValue).tag(Optional(value))
-          }
-        }
-        .frame(maxWidth: 190)
-        Picker("Mức an toàn", selection: $safetyFilter) {
-          ForEach(ProjectSafetyFilter.allCases) { value in
-            Text(L10n.text(value.rawValue)).tag(value)
-          }
-        }
-        .frame(maxWidth: 180)
-        Toggle(L10n.text("Largest first"), isOn: $sortsBySize).toggleStyle(.checkbox)
-        Spacer()
+      VStack(alignment: .leading, spacing: 10) {
+        OrvenChoicePicker(
+          L10n.text("Hệ sinh thái"), selection: $ecosystem,
+          options: [(Optional<ProjectEcosystem>.none, L10n.text("Tất cả hệ sinh thái"))]
+            + ProjectEcosystem.allCases.map { (Optional($0), $0.rawValue) }, minimumWidth: 100)
+        OrvenChoicePicker(
+          L10n.text("Mức an toàn"), selection: $safetyFilter,
+          options: ProjectSafetyFilter.allCases.map { ($0, L10n.text($0.rawValue)) },
+          minimumWidth: 100)
       }
-      TextField("Tìm đường dẫn", text: $searchText)
-        .textFieldStyle(.roundedBorder)
+      HStack {
+        TextField("Tìm đường dẫn", text: $searchText)
+          .textFieldStyle(.roundedBorder)
+        Toggle(L10n.text("Largest first"), isOn: $sortsBySize).toggleStyle(.checkbox)
+      }
     }
     .padding(.horizontal, 18)
     .padding(.bottom, 10)

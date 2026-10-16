@@ -1,4 +1,4 @@
-"About Orven" = "About Orven";
+"About Macinity" = "About Macinity";
 "Home" = "Home";
 "Storage" = "Storage";
 "Projects" = "Projects";
@@ -18,12 +18,12 @@
 "Review recoverable actions and restore without overwriting files." = "Review recoverable actions and restore without overwriting files.";
 "Open Recovery" = "Open Recovery";
 "Runs locally. No telemetry. Nothing is deleted automatically." = "Runs locally. No telemetry. Nothing is deleted automatically.";
-"Welcome to Orven" = "Welcome to Orven";
+"Welcome to Macinity" = "Welcome to Macinity";
 "Local evidence for safer cleanup and app changes." = "Local evidence for safer cleanup and app changes.";
 "Private by default" = "Private by default";
-"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically.";
+"Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically." = "Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically.";
 "First-launch approval" = "First-launch approval";
-"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper.";
+"If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper.";
 "Open installation guide" = "Open installation guide";
 "Scan coverage" = "Scan coverage";
 "Sentinel folders are readable." = "Sentinel folders are readable.";
@@ -38,7 +38,7 @@
 "Retry import" = "Retry import";
 "No legacy data found." = "No legacy data found.";
 "You can change these choices later in Settings." = "You can change these choices later in Settings.";
-"Continue to Orven" = "Continue to Orven";
+"Continue to Macinity" = "Continue to Macinity";
 "Migration error" = "Migration error";
 "Close" = "Close";
 "Recoverable" = "Recoverable";
@@ -58,19 +58,19 @@
 "12 hours" = "12 hours";
 "24 hours" = "24 hours";
 "7 days" = "7 days";
-"Replace with Orven schedule…" = "Replace with Orven schedule…";
+"Replace with Macinity schedule…" = "Replace with Macinity schedule…";
 "No Diskora schedule needs migration." = "No Diskora schedule needs migration.";
 "The old agent remains untouched unless the new scan-only agent bootstraps successfully." = "The old agent remains untouched unless the new scan-only agent bootstraps successfully.";
 "Updates" = "Updates";
-"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent.";
+"Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent." = "Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent.";
 "Check for Updates" = "Check for Updates";
 "Replace the Diskora scheduled scan?" = "Replace the Diskora scheduled scan?";
 "Replace after verification" = "Replace after verification";
 "Cancel" = "Cancel";
-"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds.";
+"Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds.";
 "Settings error" = "Settings error";
-"Legacy schedule replaced after Orven bootstrap succeeded." = "Legacy schedule replaced after Orven bootstrap succeeded.";
-"Orven %@ is available." = "Orven %@ is available.";
+"Legacy schedule replaced after Macinity bootstrap succeeded." = "Legacy schedule replaced after Macinity bootstrap succeeded.";
+"Macinity %@ is available." = "Macinity %@ is available.";
 "You are using the latest public release." = "You are using the latest public release.";
 "Finish the active scan before checking for updates." = "Finish the active scan before checking for updates.";
 "Cleanup" = "Cleanup";
@@ -194,7 +194,7 @@
 
 "Disable menu bar" = "Disable menu bar";
 
-"Quit Orven" = "Quit Orven";
+"Quit Macinity" = "Quit Macinity";
 
 "Seconds before latest sample" = "Seconds before latest sample";
 
@@ -285,7 +285,7 @@
 "Inspect what's running on your Mac. Monitoring is read-only." = "Inspect what's running on your Mac. Monitoring is read-only.";
 "Close details" = "Close details";
 "Settings" = "Settings";
-"About Orven" = "About Orven";
+"About Macinity" = "About Macinity";
 "Appearance" = "Appearance";
 "System" = "System";
 "Light" = "Light";
@@ -374,7 +374,7 @@
 "APFS container capacity" = "APFS container capacity";
 "APFS container free" = "APFS container free";
 "Data volume used" = "Data volume used";
-"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause.";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause." = "Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause.";
 "APFS snapshots" = "APFS snapshots";
 "No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "No APFS snapshots reported for the Data volume. Other volumes may have snapshots.";
 "OS marks this snapshot purgeable." = "OS marks this snapshot purgeable.";
@@ -497,7 +497,7 @@
 "Fan count unavailable; no fan speeds inferred." = "Fan count unavailable; no fan speeds inferred.";
 "Fan coverage is capped at 8 reported fans." = "Fan coverage is capped at 8 reported fans.";
 "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero.";
-"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected.";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected.";
 "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided.";
 
 "Review temperatures and fans" = "Review temperatures and fans";
@@ -545,7 +545,7 @@
 "History could not be saved. Existing data is preserved; check the local storage location." = "History could not be saved. Existing data is preserved; check the local storage location.";
 "Baseline needs at least 30 recorded samples and writable local storage." = "Baseline needs at least 30 recorded samples and writable local storage.";
 "History retention could not be saved. Existing data is preserved." = "History retention could not be saved. Existing data is preserved.";
-"Notifications require the Orven app bundle." = "Notifications require the Orven app bundle.";
+"Notifications require the Macinity app bundle." = "Notifications require the Macinity app bundle.";
 "Notification permission granted." = "Notification permission granted.";
 "Notifications are not allowed. In-app alerts remain available." = "Notifications are not allowed. In-app alerts remain available.";
 "Notification permission could not be requested. In-app alerts remain available." = "Notification permission could not be requested. In-app alerts remain available.";
@@ -700,3 +700,606 @@
 "Up / running" = "Up / running";
 "Down / not running" = "Down / not running";
 "Interface flags" = "Interface flags";
+
+"My Mac" = "My Mac";
+
+"Thermals" = "Thermals";
+
+"Software" = "Software";
+
+"Files" = "Files";
+
+"Search Macinity" = "Search Macinity";
+
+"Workspace page" = "Workspace page";
+
+"Temperatures & Fans" = "Temperatures & Fans";
+
+"Find a tool or page" = "Find a tool or page";
+
+"Find tools and pages. File and application contents are not searched." = "Find tools and pages. File and application contents are not searched.";
+
+"No matching tools" = "No matching tools";
+
+"Try another name or clear the search." = "Try another name or clear the search.";
+
+"Your Mac, in focus" = "Your Mac, in focus";
+
+"Inspect this Mac" = "Inspect this Mac";
+
+"Installed memory" = "Installed memory";
+
+"Recent sensor readings" = "Recent sensor readings";
+
+"Observed sensor samples only. Missing readings remain gaps; the chart does not diagnose thermal safety." = "Observed sensor samples only. Missing readings remain gaps; the chart does not diagnose thermal safety.";
+
+"No sensor samples available." = "No sensor samples available.";
+
+"Active monitoring" = "Active monitoring";
+
+"Developer Tools" = "Developer Tools";
+
+"Discover runtimes and command-line tools in common installation folders." = "Discover runtimes and command-line tools in common installation folders.";
+
+"Presence only: shims and system stubs may need setup. Versions, packages and the active shell environment are not inspected. No tools are executed." = "Presence only: shims and system stubs may need setup. Versions, packages and the active shell environment are not inspected. No tools are executed.";
+
+"Filter by name or path" = "Filter by name or path";
+
+"No tools found in this view. Custom installation folders are not scanned." = "No tools found in this view. Custom installation folders are not scanned.";
+
+"Last checked" = "Last checked";
+
+"Refresh" = "Refresh";
+
+"Filter choices" = "Filter choices";
+
+"No matching choices" = "No matching choices";
+"Có thể khôi phục từ Trash" = "Recoverable from Trash";
+"Toàn bộ hoạt động" = "All activity";
+"mục có thể khôi phục" = "recoverable items";
+"Loại tệp trùng lặp" = "Duplicate file cleanup";
+"Chọn Quét dung lượng để bắt đầu" = "Select Scan Storage to begin";
+"đã chọn vào Trash" = "selected for Trash";
+
+"Developed by thangldw and Codex" = "Developed by thangldw and Codex";
+
+"After allowing Location access, refresh or scan again to read Wi-Fi names." = "After allowing Location access, refresh or scan again to read Wi-Fi names.";
+
+"Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization." = "Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization.";
+
+"Select a sensor below to view its chart." = "Select a sensor below to view its chart.";
+
+"No applications found" = "No applications found";
+
+"No readable application bundles were found in /Applications or ~/Applications." = "No readable application bundles were found in /Applications or ~/Applications.";
+
+"Disk Activity" = "Disk Activity";
+
+"Network Activity" = "Network Activity";
+
+"Battery details" = "Battery details";
+
+"Power source" = "Power source";
+
+"AC Power" = "AC Power";
+
+"Low Power Mode" = "Low Power Mode";
+
+"Battery health" = "Battery health";
+
+"Estimated time to full" = "Estimated time to full";
+
+"Estimated time remaining" = "Estimated time remaining";
+
+"Charge cycles" = "Charge cycles";
+
+"Design capacity" = "Design capacity";
+
+"Full charge capacity" = "Full charge capacity";
+
+"Capacity vs. design" = "Capacity vs. design";
+
+"Battery voltage" = "Battery voltage";
+
+"Reported adapter power" = "Reported adapter power";
+
+"Capacity ratio is calculated from reported full and design capacity; it may differ from macOS Battery Health. Adapter watts describe the adapter, not live charging power. Missing values are unavailable, not zero." = "Capacity ratio is calculated from reported full and design capacity; it may differ from macOS Battery Health. Adapter watts describe the adapter, not live charging power. Missing values are unavailable, not zero.";
+
+"Battery health: Good" = "Good";
+
+"Battery health: Fair" = "Fair";
+
+"Battery health: Poor" = "Poor";
+
+"Battery level & charging history" = "Battery level & charging history";
+
+"Save local health history" = "Save local health history";
+
+"Battery level" = "Battery level";
+
+"Discharging" = "Discharging";
+
+"External power (not charging)" = "External power (not charging)";
+
+"One sample per minute while monitoring is active. Uses Health History retention. Sleep, pauses and missing samples remain gaps; earlier macOS history is not imported." = "One sample per minute while monitoring is active. Uses Health History retention. Sleep, pauses and missing samples remain gaps; earlier macOS history is not imported.";
+
+"No battery history yet. Enable recording and keep monitoring active." = "No battery history yet. Enable recording and keep monitoring active.";
+
+"Latest 20 observed intervals. Times mark recorded samples, not exact plug/unplug events." = "Latest 20 observed intervals. Times mark recorded samples, not exact plug/unplug events.";
+
+"macOS Battery Health" = "macOS Battery Health";
+
+"Battery condition" = "Battery condition";
+
+"Maximum Capacity" = "Maximum Capacity";
+
+"Service Recommended" = "Service Recommended";
+
+"Reported by macOS System Information, separately from the raw capacity ratio. Availability and rounding depend on macOS and hardware. Refresh to update." = "Reported by macOS System Information, separately from the raw capacity ratio. Availability and rounding depend on macOS and hardware. Refresh to update.";
+
+"Add folders" = "Add folders";
+
+"Add prefix" = "Add prefix";
+
+"Application changed or missing" = "Application changed or missing";
+
+"Applications opened; layout requires Accessibility access" = "Applications opened; layout requires Accessibility access";
+
+"Apply" = "Apply";
+
+"Apply reviewed rename" = "Apply reviewed rename";
+
+"Apply the displayed rename plan? Existing files will never be overwritten." = "Apply the displayed rename plan? Existing files will never be overwritten.";
+
+"Calculate checksum" = "Calculate checksum";
+
+"Capacity" = "Capacity";
+
+"Change failed or state changed; refresh before retrying" = "Change failed or state changed; refresh before retrying";
+
+"Checksum differs" = "Checksum differs";
+
+"Checksum matches" = "Checksum matches";
+
+"Choose Python environment" = "Choose Python environment";
+
+"Choose files" = "Choose files";
+
+"Choose first folder" = "Choose first folder";
+
+"Choose second folder" = "Choose second folder";
+
+"Clear" = "Clear";
+
+"Clear folders" = "Clear folders";
+
+"Clear report" = "Clear report";
+
+"Command arguments may contain secrets. Displayed locally only; clear after review." = "Command arguments may contain secrets. Displayed locally only; clear after review.";
+
+"Compare contents" = "Compare contents";
+
+"Device Inspector" = "Device Inspector";
+
+"Device category" = "Device category";
+
+"Device details changed" = "Device details changed";
+
+"Device inspection failed or access is restricted" = "Device inspection failed or access is restricted";
+
+"Different content" = "Different content";
+
+"Drive inspection failed; results may be incomplete" = "Drive inspection failed; results may be incomplete";
+
+"Eject" = "Eject";
+
+"Eject external drive?" = "Eject external drive?";
+
+"Eject failed or device changed. Inspect open files; no force eject was attempted." = "Eject failed or device changed. Inspect open files; no force eject was attempted.";
+
+"Eject request completed" = "Eject request completed";
+
+"Enter credentials for a network you own or may share. The QR contains the password. It stays in memory and is cleared when you leave this page; no upload or automatic copy." = "Enter credentials for a network you own or may share. The QR contains the password. It stays in memory and is cleared when you leave this page; no upload or automatic copy.";
+
+"Expected SHA-256 (optional, one file)" = "Expected SHA-256 (optional, one file)";
+
+"External Drives" = "External Drives";
+
+"External Drives & File Locks" = "External Drives & File Locks";
+
+"External disks and their partitions, including unmounted entries. Eject uses macOS without force. Open-file inspection may omit restricted processes; it does not prove a file is locked." = "External disks and their partitions, including unmounted entries. Eject uses macOS without force. Open-file inspection may omit restricted processes; it does not prove a file is locked.";
+
+"File Utilities" = "File Utilities";
+
+"File utility" = "File utility";
+
+"Filter packages" = "Filter packages";
+
+"Find in filename" = "Find in filename";
+
+"Finish file operations first. macOS may eject related volumes on the same device. Busy devices will not be forcibly unmounted." = "Finish file operations first. macOS may eject related volumes on the same device. Busy devices will not be forcibly unmounted.";
+
+"Free" = "Free";
+
+"Generate QR" = "Generate QR";
+
+"Hidden network" = "Hidden network";
+
+"Inspect" = "Inspect";
+
+"Inspect open files" = "Inspect open files";
+
+"Inspect tool" = "Inspect tool";
+
+"Inspection failed or access is restricted" = "Inspection failed or access is restricted";
+
+"Invalid names, changed files or destination conflicts" = "Invalid names, changed files or destination conflicts";
+
+"Keep Awake" = "Keep Awake";
+
+"Last rename recovery preview" = "Last rename recovery preview";
+
+"Latest observed device changes" = "Latest observed device changes";
+
+"Launch plists and current user registrations. System daemon status is unknown. Modern login items are managed in macOS Settings. Runtime changes affect this session; original plists stay intact." = "Launch plists and current user registrations. System daemon status is unknown. Modern login items are managed in macOS Settings. Runtime changes affect this session; original plists stay intact.";
+
+"Local socket ownership only. Wildcard binding is not proof of Internet exposure; firewalls and routers still apply. Restricted and short-lived processes may be missing." = "Local socket ownership only. Wildcard binding is not proof of Internet exposure; firewalls and routers still apply. Restricted and short-lived processes may be missing.";
+
+"Locate executable" = "Locate executable";
+
+"Login items report unavailable; use macOS Settings" = "Login items report unavailable; use macOS Settings";
+
+"No external disks in this observation" = "No external disks in this observation";
+
+"No matching observable sockets" = "No matching observable sockets";
+
+"No readable devices in this category" = "No readable devices in this category";
+
+"No readable open files; restricted processes may be missing" = "No readable open files; restricted processes may be missing";
+
+"Not mounted" = "Not mounted";
+
+"Observed open files" = "Observed open files";
+
+"Only in first" = "Only in first";
+
+"Only in second" = "Only in second";
+
+"Only profiles exposed by macOS are listed. Missing profiles or names may be restricted; this is not a complete connection history. Passwords are never read by Macinity." = "Only profiles exposed by macOS are listed. Missing profiles or names may be restricted; this is not a complete connection history. Passwords are never read by Macinity.";
+
+"Open Accessibility Settings" = "Open Accessibility Settings";
+
+"Open Login Items Settings" = "Open Login Items Settings";
+
+"Open Passwords" = "Open Passwords";
+
+"Open network (no password)" = "Open network (no password)";
+
+"Operation failed or timed out; inspect current state before retrying" = "Operation failed or timed out; inspect current state before retrying";
+
+"Operation stopped or failed; no complete result is available" = "Operation stopped or failed; no complete result is available";
+
+"Original names restored" = "Original names restored";
+
+"Partial inventory: display limit reached" = "Partial inventory: display limit reached";
+
+"Port" = "Port";
+
+"Port & Service Inspector" = "Port & Service Inspector";
+
+"Potentially overlapping 2.4 GHz networks" = "Potentially overlapping 2.4 GHz networks";
+
+"Preset name" = "Preset name";
+
+"Prevents idle system sleep only. Display sleep, screen locking and manual sleep remain unchanged. Process sessions stop on exit or after 24 hours; quitting Macinity releases the request." = "Prevents idle system sleep only. Display sleep, screen locking and manual sleep remain unchanged. Process sessions stop on exit or after 24 hours; quitting Macinity releases the request.";
+
+"Preview rename" = "Preview rename";
+
+"Process is unavailable; refresh before retrying" = "Process is unavailable; refresh before retrying";
+
+"Read macOS login items report" = "Read macOS login items report";
+
+"Read packages / environment" = "Read packages / environment";
+
+"Read version" = "Read version";
+
+"Refresh saved networks" = "Refresh saved networks";
+
+"Remove preset" = "Remove preset";
+
+"Rename completed. Recovery journal retained." = "Rename completed. Recovery journal retained.";
+
+"Replace with" = "Replace with";
+
+"Restore original names from the latest journal? Changed files and conflicts will be left untouched." = "Restore original names from the latest journal? Changed files and conflicts will be left untouched.";
+
+"Restore workspace?" = "Restore workspace?";
+
+"Review eject" = "Review eject";
+
+"Review package operation" = "Review package operation";
+
+"Review restore" = "Review restore";
+
+"Review runtime change" = "Review runtime change";
+
+"Review undo last rename" = "Review undo last rename";
+
+"Review uninstall" = "Review uninstall";
+
+"Review update" = "Review update";
+
+"Same content" = "Same content";
+
+"Save selected running apps, chosen folders and observable window geometry. Window titles are stored locally for matching. Browser tabs, terminal sessions, documents and VPN state are not restored. Missing or ambiguous windows are skipped." = "Save selected running apps, chosen folders and observable window geometry. Window titles are stored locally for matching. Browser tabs, terminal sessions, documents and VPN state are not restored. Missing or ambiguous windows are skipped.";
+
+"Save workspace" = "Save workspace";
+
+"Saved Wi-Fi & Sharing" = "Saved Wi-Fi & Sharing";
+
+"Security" = "Security";
+
+"Selected files only. Symlinks are excluded. Hashing is bounded to 16 GiB per file and two minutes per operation. Folder comparison excludes package contents and stops rather than claiming completeness when limits or read errors occur." = "Selected files only. Symlinks are excluded. Hashing is bounded to 16 GiB per file and two minutes per operation. Folder comparison excludes package contents and stops rather than claiming completeness when limits or read errors occur.";
+
+"Share your Wi-Fi with QR" = "Share your Wi-Fi with QR";
+
+"Show launch command" = "Show launch command";
+
+"Show recovery journals" = "Show recovery journals";
+
+"Startup & Background" = "Startup & Background";
+
+"Startup inspection failed" = "Startup inspection failed";
+
+"System Information snapshot. Accessory battery is shown only when macOS supplies it. Bluetooth entries may include paired, disconnected devices. Change history compares explicit refreshes, not exact physical plug/unplug times." = "System Information snapshot. Accessory battery is shown only when macOS supplies it. Bluetooth entries may include paired, disconnected devices. Change history compares explicit refreshes, not exact physical plug/unplug times.";
+
+"This changes installed software and may run package code. Dependencies can change. A timeout or error may leave partial changes; inspect the package manager before retrying." = "This changes installed software and may run package code. Dependencies can change. A timeout or error may leave partial changes; inspect the package manager before retrying.";
+
+"This opens the listed apps and folders and moves matching windows. Existing windows and documents are not closed." = "This opens the listed apps and folders and moves matching windows. Existing windows and documents are not closed.";
+
+"Tools run only after a button press, without shell startup files. Package mutations can download and execute package code, affect dependencies and are not automatically reversible. No sudo. Python writes require a virtual environment; npm writes skip lifecycle scripts." = "Tools run only after a button press, without shell startup files. Package mutations can download and execute package code, affect dependencies and are not automatically reversible. No sudo. Python writes require a virtual environment; npm writes skip lifecycle scripts.";
+
+"Track device changes during this visit" = "Track device changes during this visit";
+
+"Undo rename" = "Undo rename";
+
+"Unreadable or omitted entries" = "Unreadable or omitted entries";
+
+"Until process exits" = "Until process exits";
+
+"Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA." = "Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA.";
+
+"Weak signal: move closer to the access point before retrying authentication or connection tests." = "Weak signal: move closer to the access point before retrying authentication or connection tests.";
+
+"Wi-Fi password" = "Wi-Fi password";
+
+"Wi-Fi sharing QR" = "Wi-Fi sharing QR";
+
+"Window does not support layout changes" = "Window does not support layout changes";
+
+"Window missing or ambiguous" = "Window missing or ambiguous";
+
+"Workspace Presets" = "Workspace Presets";
+
+"Workspace partially restored" = "Workspace partially restored";
+
+"Workspace restored" = "Workspace restored";
+
+"folders" = "folders";
+
+"macOS login item registrations; this report does not prove a service is running. Output is limited to 24,000 characters." = "macOS login item registrations; this report does not prove a service is running. Output is limited to 24,000 characters.";
+
+"saved windows" = "saved windows";
+
+"selected files" = "selected files";
+
+"No active Keep Awake session" = "No active Keep Awake session";
+
+"Process is unavailable; no session started" = "Process is unavailable; no session started";
+
+"Keep Awake could not start" = "Keep Awake could not start";
+
+"Keep Awake is active" = "Keep Awake is active";
+
+"Registered, not running" = "Registered, not running";
+
+"Running" = "Running";
+
+"Not registered" = "Not registered";
+
+"Preview stop" = "Preview stop";
+
+"Preview start" = "Preview start";
+
+"Stop and unregister this user agent now. Its process may terminate. Start it again from the same unchanged plist to restore registration." = "Stop and unregister this user agent now. Its process may terminate. Start it again from the same unchanged plist to restore registration.";
+
+"Register this user agent now. Its configured executable may run. Stop it again to undo registration." = "Register this user agent now. Its configured executable may run. Stop it again to undo registration.";
+
+"No readable saved networks" = "No readable saved networks";
+
+"Saved network access is unavailable" = "Saved network access is unavailable";
+
+"Enter a valid SSID and password" = "Enter a valid SSID and password";
+
+"Loopback only" = "Loopback only";
+
+"All local interfaces" = "All local interfaces";
+
+"Specific interface address" = "Specific interface address";
+
+"Batch Rename" = "Batch Rename";
+
+"Compare Folders" = "Compare Folders";
+
+"Duplicate Files" = "Duplicate Files";
+
+"Displays" = "Displays";
+
+"Audio" = "Audio";
+
+"Open" = "Open";
+
+"Workspace file could not be read; existing data is preserved" = "Workspace file could not be read; existing data is preserved";
+
+"Choose a name; at most 20 presets are retained" = "Choose a name; at most 20 presets are retained";
+
+"Select applications or folders first" = "Select applications or folders first";
+
+"Workspace saved" = "Workspace saved";
+
+"Apps and folders saved; window layout requires Accessibility access" = "Apps and folders saved; window layout requires Accessibility access";
+
+"Workspace could not be saved" = "Workspace could not be saved";
+
+"Preset removed; recovery copy retained" = "Preset removed; recovery copy retained";
+
+"Accessibility access available" = "Accessibility access available";
+
+"Accessibility access required for window layouts" = "Accessibility access required for window layouts";
+
+"Discovery checks paths only. Select a tool to explicitly read its version or packages. Multiple installations are kept separate; the active shell environment is not inferred." = "Discovery checks paths only. Select a tool to explicitly read its version or packages. Multiple installations are kept separate; the active shell environment is not inferred.";
+
+"Filter saved networks" = "Filter saved networks";
+
+"Previous" = "Previous";
+
+"Next" = "Next";
+
+"Window missing, ambiguous or layout not applied" = "Window missing, ambiguous or layout not applied";
+
+"Connection" = "Connection";
+
+"Not connected" = "Not connected";
+
+"Connected" = "Connected";
+
+"Battery Percent" = "Battery Percent";
+
+"Resolution" = "Resolution";
+
+"Online" = "Online";
+
+"Manufacturer" = "Manufacturer";
+
+"Transport" = "Transport";
+
+"Speed" = "Speed";
+
+"Power" = "Power";
+
+"Channels" = "Channels";
+
+"Sample Rate" = "Sample Rate";
+
+"Related application" = "Related application";
+
+/* Action Center, Smart Diagnostics and Work Profiles */
+"Action Center" = "Action Center";
+"Smart Diagnostics" = "Smart Diagnostics";
+"Work Profiles" = "Work Profiles";
+"Quick actions" = "Quick actions";
+"Edit favorites" = "Edit favorites";
+"Choose up to eight favorites." = "Choose up to eight favorites.";
+"Applying work profile" = "Applying work profile";
+"steps succeeded" = "steps succeeded";
+"Latest diagnostic" = "Latest diagnostic";
+"A saved observation, not current health status." = "A saved observation, not current health status.";
+"Analyze a problem" = "Analyze a problem";
+"Recent activity" = "Recent activity";
+"Recent alerts" = "Recent alerts";
+"Activity summary unavailable" = "Activity summary unavailable";
+"No recorded activity." = "No recorded activity.";
+"Hints use available samples from the last 15 seconds. Missing or paused checks cannot establish normal operation." = "Hints use available samples from the last 15 seconds. Missing or paused checks cannot establish normal operation.";
+"Mac feels slow" = "Mac feels slow";
+"Mac feels hot" = "Mac feels hot";
+"Battery drains quickly" = "Battery drains quickly";
+"Network feels slow" = "Network feels slow";
+"Running out of storage" = "Running out of storage";
+"CPU (%)" = "CPU (%)";
+"Memory pressure (0 normal, 1 warning, 2 critical)" = "Memory pressure (0 normal, 1 warning, 2 critical)";
+"Thermal state (0 nominal, 1 fair, 2 serious, 3 critical)" = "Thermal state (0 nominal, 1 fair, 2 serious, 3 critical)";
+"Battery (%)" = "Battery (%)";
+"On battery (1 yes, 0 no)" = "On battery (1 yes, 0 no)";
+"Available storage (%)" = "Available storage (%)";
+"Wi-Fi signal (dBm)" = "Wi-Fi signal (dBm)";
+"Default gateway configured (1 yes, 0 no)" = "Default gateway configured (1 yes, 0 no)";
+"Global DNS servers configured" = "Global DNS servers configured";
+"Fresh evidence unavailable" = "Fresh evidence unavailable";
+"Paused, missing or older than 15 seconds. This check cannot establish normal operation." = "Paused, missing or older than 15 seconds. This check cannot establish normal operation.";
+"CPU is elevated in this observation" = "CPU is elevated in this observation";
+"CPU observation available" = "CPU observation available";
+"Review the largest CPU consumers. The 80% threshold is a triage hint, not proof of a persistent fault or its cause." = "Review the largest CPU consumers. The 80% threshold is a triage hint, not proof of a persistent fault or its cause.";
+"No pressure warning in this observation" = "No pressure warning in this observation";
+"Use memory pressure rather than occupied RAM alone. Review applications before closing anything." = "Use memory pressure rather than occupied RAM alone. Review applications before closing anything.";
+"macOS reports thermal pressure" = "macOS reports thermal pressure";
+"Thermal observation available" = "Thermal observation available";
+"Serious or critical is the macOS thermal classification. Inspect sensor coverage and recent load; no fan or CPU policy is changed." = "Serious or critical is the macOS thermal classification. Inspect sensor coverage and recent load; no fan or CPU policy is changed.";
+"Battery level is low" = "Battery level is low";
+"Battery observation available" = "Battery observation available";
+"20% is a low-charge hint. One reading cannot establish drain rate or battery wear; review Battery History." = "20% is a low-charge hint. One reading cannot establish drain rate or battery wear; review Battery History.";
+"Running on battery" = "Running on battery";
+"External power observed" = "External power observed";
+"Review Keep Awake and power-consuming applications. A process CPU reading is not a per-app energy measurement." = "Review Keep Awake and power-consuming applications. A process CPU reading is not a per-app energy measurement.";
+"Available storage is low" = "Available storage is low";
+"Storage observation available" = "Storage observation available";
+"10% available is a triage threshold for the sampled volume. Review storage accounting and cleanup previews; no files are deleted here." = "10% available is a triage threshold for the sampled volume. Review storage accounting and cleanup previews; no files are deleted here.";
+"Wi-Fi signal is weak" = "Wi-Fi signal is weak";
+"Wi-Fi signal observed" = "Wi-Fi signal observed";
+"At or below -75 dBm suggests weak reception. Signal alone does not measure Internet speed or prove channel interference." = "At or below -75 dBm suggests weak reception. Signal alone does not measure Internet speed or prove channel interference.";
+"No default gateway observed" = "No default gateway observed";
+"Default gateway configured" = "Default gateway configured";
+"Configuration does not prove reachability. Use explicit gateway and latency checks in Wi-Fi & LAN." = "Configuration does not prove reachability. Use explicit gateway and latency checks in Wi-Fi & LAN.";
+"No global DNS servers observed" = "No global DNS servers observed";
+"Global DNS configuration observed" = "Global DNS configuration observed";
+"Scoped VPN and per-domain resolvers may differ. Run an explicit DNS check; this cannot diagnose an incorrect Wi-Fi password." = "Scoped VPN and per-domain resolvers may differ. Run an explicit DNS check; this cannot diagnose an incorrect Wi-Fi password.";
+"Read-only triage from timestamped observations. Findings are hints, not a diagnosis of root cause. Reports stay in this app session." = "Read-only triage from timestamped observations. Findings are hints, not a diagnosis of root cause. Reports stay in this app session.";
+"What needs attention?" = "What needs attention?";
+"Analyze latest evidence" = "Analyze latest evidence";
+"Saved observation, not a live status. Analyze again after taking action. Unavailable evidence is never treated as healthy." = "Saved observation, not a live status. Analyze again after taking action. Unavailable evidence is never treated as healthy.";
+"Open related tools" = "Open related tools";
+"Largest observed CPU consumers" = "Largest observed CPU consumers";
+"Process CPU may exceed 100% across cores. Identity is checked again by the process inspector." = "Process CPU may exceed 100% across cores. Identity is checked again by the process inspector.";
+"Compared with previous analysis" = "Compared with previous analysis";
+"No newer comparable measurements" = "No newer comparable measurements";
+"Differences describe observations; they do not prove an action caused the change." = "Differences describe observations; they do not prove an action caused the change.";
+"Choose a symptom and analyze. Network analysis reads configuration only; it sends no probe traffic." = "Choose a symptom and analyze. Network analysis reads configuration only; it sends no probe traffic.";
+"Group apps, folders, window layout, audio devices and timed Keep Awake. Apply only after reviewing every step. No automatic triggers or automatic rollback." = "Group apps, folders, window layout, audio devices and timed Keep Awake. Apply only after reviewing every step. No automatic triggers or automatic rollback.";
+"Create work profile" = "Create work profile";
+"Saving workspace" = "Saving workspace";
+"Travel" = "Travel";
+"Select running applications" = "Select running applications";
+"Capture and restore window layout" = "Capture and restore window layout";
+"Keep Awake duration" = "Keep Awake duration";
+"Leave unchanged" = "Leave unchanged";
+"A selected duration replaces any active Macinity Keep Awake session. Lock Screen remains unchanged." = "A selected duration replaces any active Macinity Keep Awake session. Lock Screen remains unchanged.";
+"Audio output" = "Audio output";
+"Microphone" = "Microphone";
+"Refresh audio devices" = "Refresh audio devices";
+"Audio devices unavailable" = "Audio devices unavailable";
+"Changes the system default device only. Apps with their own audio routing may ignore it. No audio is recorded." = "Changes the system default device only. Apps with their own audio routing may ignore it. No audio is recorded.";
+"Saved work profiles" = "Saved work profiles";
+"No saved work profiles" = "No saved work profiles";
+"Step results" = "Step results";
+"Stop after current step" = "Stop after current step";
+"Successful steps remain applied if another step fails or you stop. Results are kept for this app session; profiles stay on this Mac." = "Successful steps remain applied if another step fails or you stop. Results are kept for this app session; profiles stay on this Mac.";
+"This opens listed apps and folders, applies selected window/audio settings and may replace Keep Awake. Steps are checked at execution. Existing apps are not closed; failures do not undo completed steps." = "This opens listed apps and folders, applies selected window/audio settings and may replace Keep Awake. Steps are checked at execution. Existing apps are not closed; failures do not undo completed steps.";
+"Window layout enabled" = "Window layout enabled";
+"Window layout unchanged" = "Window layout unchanged";
+"Invalid work profile options" = "Invalid work profile options";
+"Work profile stopped; completed steps remain applied" = "Work profile stopped; completed steps remain applied";
+"Application open request completed" = "Application open request completed";
+"Folder open request accepted" = "Folder open request accepted";
+"Folder open request failed" = "Folder open request failed";
+"Window layout" = "Window layout";
+"Window unavailable" = "Window unavailable";
+"Window geometry verified" = "Window geometry verified";
+"Default microphone verified" = "Default microphone verified";
+"Default output verified" = "Default output verified";
+"No applicable steps" = "No applicable steps";
+"skipped" = "skipped";
+"Recent profile runs" = "Recent profile runs";
+"Command" = "Command";
+"Trace" = "Trace";
+"Done" = "Done";
+
+"Your Mac. Everything connected." = "Your Mac. Everything connected.";

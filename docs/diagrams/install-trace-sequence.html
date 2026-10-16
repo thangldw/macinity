@@ -157,7 +157,7 @@
           <dt>Content</dt>
           <dd>The user selects a supported installer and the GUI calls coordinator.start. The coordinator captures a before snapshot and starts bounded FSEvents; after start returns, the GUI invokes NSWorkspace.shared.open(metadata.sourceURL) for normal macOS handling. Finishing captures after evidence, compares it, and persists the session and audit records.</dd>
           <dt>Exclusions</dt>
-          <dd>Orven does not mount, execute, install, uninstall, or bypass Gatekeeper for the selected item. The sequence does not claim that FSEvents is a complete historical audit.</dd>
+          <dd>Macinity does not mount, execute, install, uninstall, or bypass Gatekeeper for the selected item. The sequence does not claim that FSEvents is a complete historical audit.</dd>
           <dt>Safety boundary</dt>
           <dd>The user starts and finishes the trace in the foreground. cancel() stops the journal and clears active-snapshot.json plus active-trace-metadata.json, so cancellation is not resumable. Only unexpected interruption may retain resumable metadata; resumed observation reports the interruption interval as reduced coverage.</dd>
         </dl>
@@ -168,7 +168,7 @@
           <dt>Nội dung</dt>
           <dd>Người dùng chọn installer được hỗ trợ và GUI gọi coordinator.start. Coordinator chụp before snapshot rồi bắt đầu FSEvents có giới hạn; sau khi start return, GUI gọi NSWorkspace.shared.open(metadata.sourceURL) để macOS xử lý bình thường. Khi finish, hệ thống chụp after evidence, so sánh và lưu session cùng audit record.</dd>
           <dt>Không bao gồm</dt>
-          <dd>Orven không mount, execute, install, uninstall hoặc bypass Gatekeeper cho item đã chọn. Sequence không claim FSEvents là historical audit đầy đủ.</dd>
+          <dd>Macinity không mount, execute, install, uninstall hoặc bypass Gatekeeper cho item đã chọn. Sequence không claim FSEvents là historical audit đầy đủ.</dd>
           <dt>Ranh giới an toàn</dt>
           <dd>Người dùng bắt đầu và kết thúc trace trong foreground. cancel() dừng journal và xóa active-snapshot.json cùng active-trace-metadata.json, nên cancellation không thể resume. Chỉ unexpected interruption mới có thể giữ metadata để resume; observation sau resume báo khoảng interruption là reduced coverage.</dd>
         </dl>
@@ -179,7 +179,7 @@
           <dt>内容</dt>
           <dd>User が supported installer を選択し、GUI が coordinator.start を呼びます。Coordinator は before snapshot を取得して bounded FSEvents を開始し、start が return した後、GUI が NSWorkspace.shared.open(metadata.sourceURL) を呼んで通常の macOS handling に渡します。Finish 時に after evidence を取得・比較し、session と audit record を保存します。</dd>
           <dt>対象外</dt>
-          <dd>Orven は選択 item を mount、execute、install、uninstall せず、Gatekeeper を bypass しません。この sequence は FSEvents を完全な historical audit として扱いません。</dd>
+          <dd>Macinity は選択 item を mount、execute、install、uninstall せず、Gatekeeper を bypass しません。この sequence は FSEvents を完全な historical audit として扱いません。</dd>
           <dt>Safety boundary</dt>
           <dd>Trace の開始と終了は user の foreground action です。cancel() は journal を停止し active-snapshot.json と active-trace-metadata.json を消去するため、cancellation は resume できません。Unexpected interruption だけが resumable metadata を保持でき、resume 後の observation は interruption 区間を reduced coverage として報告します。</dd>
         </dl>

@@ -16,18 +16,18 @@ struct NetworkToolsView: View {
   }
   private let tabs = [
     "Network Overview", "Wi-Fi Inspector", "Ethernet Inspector", "Connection Diagnostics",
-    "Latency & Stability", "Nearby Wi-Fi", "Network Change Timeline",
+    "Latency & Stability", "Nearby Wi-Fi", "Saved Wi-Fi & Sharing", "Port & Service Inspector",
+    "Network Change Timeline",
   ]
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 20) {
         OrvenPageHeader(title: L10n.text("Wi-Fi & LAN"))
         OrvenSamplingStatus(model: monitoring)
+        OrvenChoicePicker(
+          L10n.text("Network tool"), selection: $tab,
+          options: tabs.map { ($0, L10n.text($0)) }, minimumWidth: 150)
         HStack {
-          Picker(L10n.text("Network tool"), selection: $tab) {
-            ForEach(tabs, id: \.self) { Text(L10n.text($0)).tag($0) }
-          }.frame(maxWidth: 340)
-          Spacer()
           Button(L10n.text("Refresh network status")) { model.refresh() }.disabled(
             model.busy != nil)
           if model.busy != nil {
@@ -46,6 +46,8 @@ struct NetworkToolsView: View {
         case "Wi-Fi Inspector": wifiPanel
         case "Ethernet Inspector": adapters(kind: "Ethernet")
         case "Connection Diagnostics", "Latency & Stability": measurements
+        case "Saved Wi-Fi & Sharing": WiFiAccessView()
+        case "Port & Service Inspector": PortInspectorView()
         case "Nearby Wi-Fi": nearby
         case "Network Change Timeline": timeline
         default: overviewPanel
@@ -148,8 +150,8 @@ struct NetworkToolsView: View {
       Text(L10n.text("Refresh to inspect Wi-Fi and LAN."))
     }
   }
-  private var wifiPanel: some View {
-    VStack(alignment: .leading, spacing: 16) {
+  private var wifiIdentityPermission: some View {
+    VStack(alignment: .leading, spacing: 10) {
       Text(
         L10n.text(
           "SSID and BSSID can be hidden by macOS location permissions. Missing identity does not mean Wi-Fi is disconnected."
@@ -162,6 +164,21 @@ struct NetworkToolsView: View {
         .disabled(model.locationStatus != "Not requested")
         Text(L10n.text(model.locationStatus))
       }
+      Text(L10n.text("After allowing Location access, refresh or scan again to read Wi-Fi names."))
+        .font(.caption).fixedSize(horizontal: false, vertical: true)
+      if model.locationStatus == "Denied" || model.locationStatus == "Restricted" {
+        Text(
+          L10n.text(
+            "Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization."
+          )
+        )
+        .font(.caption).fixedSize(horizontal: false, vertical: true)
+      }
+    }.orvenSurface()
+  }
+  private var wifiPanel: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      wifiIdentityPermission
       if let value = model.overview {
         if value.wifi.isEmpty { Text(L10n.text("No Wi-Fi interface was observed.")) }
         ForEach(value.wifi, id: \.interface) { wifi in
@@ -273,6 +290,7 @@ struct NetworkToolsView: View {
   }
   private var nearby: some View {
     VStack(alignment: .leading, spacing: 16) {
+      wifiIdentityPermission
       Button(L10n.text("Scan nearby Wi-Fi")) { model.scanNearby() }.disabled(model.busy != nil)
       Text(
         L10n.text(
@@ -319,6 +337,15 @@ struct NetworkToolsView: View {
         ForEach(filtered) { network in
           VStack(alignment: .leading, spacing: 6) {
             Text(network.ssid ?? L10n.text("Hidden or permission restricted")).font(.headline)
+            Text(L10n.text("Security") + ": " + L10n.text(network.security)).font(.callout)
+            if ["Open", "WEP", "WPA", "WPA/WPA2"].contains(network.security) {
+              Text(
+                L10n.text(
+                  "Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA."
+                )
+              )
+              .font(.caption).foregroundStyle(.orange)
+            }
             row("BSSID", network.bssid ?? L10n.text("Unavailable or permission restricted"))
             row(
               "Channel / band",
@@ -330,6 +357,22 @@ struct NetworkToolsView: View {
               $0.channel != nil && $0.channel == network.channel && $0.band == network.band
             }.count
             row("Observed networks on this channel", String(same))
+            if let rssi = network.rssi, rssi <= -75 {
+              Text(
+                L10n.text(
+                  "Weak signal: move closer to the access point before retrying authentication or connection tests."
+                )
+              )
+              .font(.caption).foregroundStyle(.orange)
+            }
+            if network.band == "2.4 GHz", let channel = network.channel {
+              let overlapping = scan.networks.filter {
+                $0.id != network.id && $0.band == network.band
+                  && $0.channel.map { abs($0 - channel) < 5 } == true
+              }.count
+              Text(L10n.text("Potentially overlapping 2.4 GHz networks") + ": \(overlapping)").font(
+                .caption)
+            }
             if let rssi = network.rssi {
               ProgressView(value: Double(max(0, min(100, rssi + 100))), total: 100)
                 .accessibilityLabel(L10n.text("RSSI") + " \(rssi) dBm")

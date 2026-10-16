@@ -7,18 +7,13 @@ struct PhysicalSensorPanel: View {
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
   let since: Double?
-  @State private var expandedGroups: Set<String> = []
+  @State private var selectedGroup = "CPU sensors"
+  @State private var selectedKey: String?
   private let groups = ["CPU sensors", "GPU sensors", "Fans", "Battery sensors", "System power"]
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
       Text(L10n.text("Temperature & Fans")).font(.title2.bold())
-      Text(
-        L10n.text(
-          "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero."
-        )
-      )
-      .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
       if let sample = model.snapshot?.hardware.reading.physicalSensors {
         if let snapshot = sample.value {
           HStack(alignment: .top, spacing: 20) {
@@ -41,53 +36,59 @@ struct PhysicalSensorPanel: View {
           } else if snapshot.reportedFanCount! > 8 {
             Text(L10n.text("Fan coverage is capped at 8 reported fans."))
           }
-          ForEach(groups, id: \.self) { group in
-            let rows = snapshot.readings.filter { $0.group == group }
-            if !rows.isEmpty {
-              DisclosureGroup(
-                isExpanded: Binding(
-                  get: { expandedGroups.contains(group) },
-                  set: { expanded in
-                    if expanded {
-                      expandedGroups.insert(group)
-                    } else {
-                      expandedGroups.remove(group)
-                    }
-                  })
-              ) {
-                if expandedGroups.contains(group) {
-                  Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 10) {
-                    GridRow {
-                      Text(L10n.text("Sensor"))
-                      Text(L10n.text("Current"))
-                      Text(L10n.text("Minimum"))
-                      Text(L10n.text("Maximum"))
-                      Text(L10n.text("Samples"))
-                    }.font(.caption.bold()).foregroundStyle(.secondary)
-                    ForEach(rows) { reading in
-                      let range = SensorWindow.physicalExtrema(
-                        model.snapshot?.history ?? [], sensor: reading, since: since)
-                      GridRow {
-                        Text(reading.key).font(.callout.monospaced()).help(
-                          "AppleSMC/" + reading.key + " • " + (reading.dataType ?? "?"))
-                        Text(current(reading, sample)).fixedSize(horizontal: false, vertical: true)
-                        Text(value(range.minimum, reading.unit))
-                        Text(value(range.maximum, reading.unit))
-                        Text(monitoringNumber(Double(range.validSamples), digits: 0))
-                      }.monospacedDigit()
-                    }
-                  }.padding(.top, 12)
-                }
-              } label: {
-                HStack {
-                  Text(L10n.text(group)).font(.headline)
-                  Spacer()
-                  Text("\(rows.filter { $0.availability == .available }.count)/\(rows.count)")
-                    .font(.caption.monospaced()).foregroundStyle(.secondary)
-                }
+          OrvenChoicePicker(
+            L10n.text("Sensor"), selection: $selectedGroup,
+            options: groups.map { ($0, L10n.text($0)) }, minimumWidth: 110)
+          let rows = snapshot.readings.filter { $0.group == selectedGroup }
+          let selected = rows.first { $0.key == selectedKey } ?? rows.first
+          if rows.isEmpty {
+            Text(L10n.text("No sensor samples available.")).foregroundStyle(.secondary)
+          } else {
+            HStack {
+              Text(L10n.text(selectedGroup)).font(.headline)
+              Spacer()
+              Text("\(rows.filter { $0.availability == .available }.count)/\(rows.count)")
+                .font(.caption.monospaced()).foregroundStyle(.secondary)
+            }
+            PhysicalSensorTrend(model: model, selectedKey: selected?.key)
+            Text(L10n.text("Select a sensor below to view its chart."))
+              .font(.caption).foregroundStyle(.secondary)
+            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 10) {
+              GridRow {
+                Text(L10n.text("Sensor"))
+                Text(L10n.text("Current"))
+                Text(L10n.text("Minimum"))
+                Text(L10n.text("Maximum"))
+              }.font(.caption.bold()).foregroundStyle(.secondary)
+              ForEach(rows) { reading in
+                let range = SensorWindow.physicalExtrema(
+                  model.snapshot?.history ?? [], sensor: reading, since: since)
+                GridRow {
+                  Button {
+                    selectedKey = reading.key
+                  } label: {
+                    HStack(spacing: 6) {
+                      Image(
+                        systemName: selected?.key == reading.key
+                          ? "checkmark.circle.fill" : "circle"
+                      )
+                      .foregroundStyle(
+                        selected?.key == reading.key ? OrvenTheme.action : OrvenTheme.secondary)
+                      Text(reading.key).font(.callout.monospaced())
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                  }.buttonStyle(.plain)
+                    .accessibilityAddTraits(selected?.key == reading.key ? .isSelected : [])
+                    .help("AppleSMC/" + reading.key + " • " + (reading.dataType ?? "?"))
+                  Text(current(reading, sample)).fontWeight(.semibold)
+                    .fixedSize(horizontal: false, vertical: true)
+                  Text(value(range.minimum, reading.unit)).foregroundStyle(.secondary)
+                  Text(value(range.maximum, reading.unit)).foregroundStyle(.secondary)
+                }.monospacedDigit()
+                Divider()
               }
             }
           }
+
         } else {
           Text(availabilityLabel(sample.availability)).foregroundStyle(.secondary)
         }
@@ -96,7 +97,13 @@ struct PhysicalSensorPanel: View {
       }
       Text(
         L10n.text(
-          "Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected."
+          "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero."
+        )
+      )
+      .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+      Text(
+        L10n.text(
+          "Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected."
         )
       )
       .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
@@ -131,7 +138,7 @@ struct PhysicalSensorPanel: View {
     return VStack(alignment: .leading, spacing: 6) {
       Text(L10n.text(title)).font(.headline)
       Text(hottest.map { current($0, sample) } ?? L10n.text("Unavailable"))
-        .font(.title2.monospacedDigit())
+        .font(.system(size: 30, weight: .semibold, design: .rounded).monospacedDigit())
       if let hottest { Text("AppleSMC/" + hottest.key).font(.caption).foregroundStyle(.secondary) }
     }.frame(maxWidth: .infinity, alignment: .leading)
   }

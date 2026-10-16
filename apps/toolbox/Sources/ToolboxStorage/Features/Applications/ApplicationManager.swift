@@ -246,7 +246,7 @@ struct ApplicationScanner: Sendable {
       return ApplicationArtifact(
         entry: StorageEntry(url: url, bytes: size, modifiedAt: nil),
         kind: .packageReceipt, confidence: .dangerous,
-        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa")
+        evidence: "Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa")
     }
   }
 
@@ -270,7 +270,7 @@ struct ApplicationScanner: Sendable {
           url: database, bytes: (try? service.size(of: database)) ?? 0, modifiedAt: nil),
         kind: .loginItem, confidence: .dangerous,
         evidence:
-          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Orven không xóa database hệ thống"
+          "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Macinity không xóa database hệ thống"
       )
     ]
   }
@@ -302,7 +302,13 @@ final class ApplicationViewModel: ObservableObject {
   private let history = HistoryStore()
   private let activityLedger = ActivityLedger()
 
+  func scanIfNeeded() {
+    guard scannedAt == nil else { return }
+    scan()
+  }
+
   func scan() {
+    guard !isWorking else { return }
     isWorking = true
     ScanActivityRegistry.shared.begin()
     status = "Đang phân tích ứng dụng và dữ liệu liên quan…"

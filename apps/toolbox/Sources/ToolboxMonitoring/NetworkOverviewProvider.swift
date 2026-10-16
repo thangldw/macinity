@@ -6,7 +6,7 @@ import SystemConfiguration
 public enum NetworkOverviewProvider {
   public static func read() throws -> NetworkOverview {
     try Task.checkCancellation()
-    let store = SCDynamicStoreCreate(nil, "Orven Network Observation" as CFString, nil, nil)
+    let store = SCDynamicStoreCreate(nil, "Macinity Network Observation" as CFString, nil, nil)
     func dictionary(_ key: String) -> [String: Any] {
       guard let store else { return [:] }
       return SCDynamicStoreCopyValue(store, key as CFString) as? [String: Any] ?? [:]
@@ -131,7 +131,8 @@ public enum NetworkOverviewProvider {
       observedAt: Date(),
       networks: sorted.prefix(128).enumerated().map { index, network in
         NearbyWiFi(
-          id: String(index), ssid: network.ssid, bssid: network.bssid,
+          security: WiFiUtilities.scanSecurity(network), id: String(index), ssid: network.ssid,
+          bssid: network.bssid,
           channel: network.wlanChannel.map { Int($0.channelNumber) },
           band: network.wlanChannel.map { band($0) },
           rssi: network.rssiValue < 0 ? network.rssiValue : nil,

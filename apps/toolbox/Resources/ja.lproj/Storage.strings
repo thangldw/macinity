@@ -1,4 +1,4 @@
-/* Orven ja localization. */
+/* Macinity ja localization. */
 "%lld bản giống nhau • %@/tệp" = "同一コピー%lld件・1ファイル%@";
 "%lld tệp (%@) sẽ được chuyển vào Trash. Một bản mới nhất trong mỗi nhóm luôn được giữ lại." = "%lldファイル（%@）をゴミ箱に移動します。各グループの最新コピーを必ず保持します。";
 "%lld ảnh • tương đồng %lld%%" = "%lld枚・類似度%lld%%";
@@ -10,7 +10,7 @@
 "An toàn" = "安全";
 "App chưa tìm thấy file cấu hình dự án tham chiếu phiên bản này. Việc quét không thể đảm bảo bao phủ mọi dự án, hãy kiểm tra trước khi tiếp tục." = "このバージョンを参照するプロジェクト設定は見つかりませんでした。すべてのプロジェクトを確認できるわけではないため、続行前に確認してください。";
 "App chỉ hash các tệp từ 1 MB và bỏ qua package ứng dụng, Trash cùng cache hệ thống." = "1 MB以上のファイルのみハッシュを取得します。アプリバンドル、ゴミ箱、システムキャッシュは除外します。";
-"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "OrvenはApplications内のバンドルを探し、Bundle IDとLibraryのデータを照合します。";
+"App sẽ tìm bundle trong Applications và đối chiếu Bundle ID với dữ liệu trong Library." = "MacinityはApplications内のバンドルを探し、Bundle IDとLibraryのデータを照合します。";
 "Archive có thể cần để symbolicate crash hoặc phát hành lại ứng dụng." = "アーカイブはクラッシュのシンボル解決やアプリの再公開に必要な場合があります。";
 "Artifact có thể tạo lại, chỉ trong project root bạn chọn" = "選択したプロジェクトルート内の再生成可能な成果物";
 "Artifact vượt khỏi project root đã chọn nên bị chặn." = "成果物が選択したルートフォルダの外にあるため、操作をブロックしました。";
@@ -71,8 +71,8 @@
 "Cập nhật lịch" = "スケジュールを更新";
 "Dependency và distribution có thể tải lại" = "依存関係と配布物は再ダウンロードできます";
 "Developer Cleanup thất bại" = "開発データのクリーンアップに失敗";
-"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orvenは確認後にのみクリーンアップを行い、各ツールの公式コマンドを優先します。";
-"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orvenは表示された許可リスト内のコマンドをそのまま実行します。ゴミ箱は使用せず、取り消せません。";
+"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinityは確認後にのみクリーンアップを行い、各ツールの公式コマンドを優先します。";
+"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinityは表示された許可リスト内のコマンドをそのまま実行します。ゴミ箱は使用せず、取り消せません。";
 "Dung lượng" = "サイズ";
 "Dùng Homebrew để xóa download cũ và phiên bản package không còn cần thiết." = "Homebrewで古いダウンロードや不要なパッケージバージョンを削除します。";
 "Dùng npm để dọn cache có thể tải lại." = "npmで再取得可能なキャッシュを削除します。";
@@ -92,7 +92,7 @@
 "Dự án" = "プロジェクト";
 "GIỮ" = "保持";
 "GIỮ LẠI" = "保持";
-"Giới thiệu Diskora" = "Orvenについて";
+"Giới thiệu Diskora" = "Macinityについて";
 "Gỡ %@?" = "%@を削除しますか？";
 "Gỡ phiên bản runtime?" = "ランタイムのバージョンを削除しますか？";
 "Gỡ ứng dụng" = "アプリ";
@@ -132,8 +132,8 @@
 "Làm mới" = "更新";
 "Lần chạy gần nhất" = "最終実行";
 "Lịch quét" = "定期スキャン";
-"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "定期スキャンは通知のみです。Orvenはデータを自動削除しません。";
-"Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu." = "定期スキャンは通知のみです。Orvenはデータを自動削除しません。";
+"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "定期スキャンは通知のみです。Macinityはデータを自動削除しません。";
+"Lịch quét chỉ thông báo; Macinity không tự xóa dữ liệu." = "定期スキャンは通知のみです。Macinityはデータを自動削除しません。";
 "Lịch sử" = "履歴";
 "Lịch sử này không có thông tin vị trí trong Trash." = "この履歴にはゴミ箱内の位置情報がありません。";
 "Lịch sử, vị trí Trash và khôi phục có kiểm tra xung đột" = "履歴、ゴミ箱内の位置、競合を防ぐ復元";
@@ -169,8 +169,8 @@
 "Quét ảnh" = "写真をスキャン";
 "Quét ứng dụng" = "アプリをスキャン";
 "Quét ứng dụng để tìm dữ liệu còn sót" = "アプリをスキャンして残存データを確認";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "システムの受領記録は証拠としてのみ扱い、Orvenは自動削除しません";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa" = "システムの受領記録は証拠としてのみ扱い、Orvenは自動削除しません";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "システムの受領記録は証拠としてのみ扱い、Macinityは自動削除しません";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa" = "システムの受領記録は証拠としてのみ扱い、Macinityは自動削除しません";
 "SDK, runtime, simulator và môi trường lập trình" = "SDK、ランタイム、シミュレータ、開発環境";
 "Sản phẩm build và chỉ mục có thể tạo lại" = "再生成可能なビルド成果物とインデックス";
 "Sẵn sàng quét" = "スキャンの準備完了";
@@ -181,10 +181,10 @@
 "Thùng rác" = "ゴミ箱";
 "Thư mục lớn nhất" = "大きいフォルダ";
 "Thời gian" = "時刻";
-"Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orvenは確認後にのみクリーンアップを行い、各ツールの公式コマンドを優先します。";
-"Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Orvenは選択したフォルダのみをスキャンし、エコシステムのマーカーがある成果物だけを提案します。";
-"Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orvenは表示された許可リスト内のコマンドをそのまま実行します。ゴミ箱は使用せず、取り消せません。";
-"Orven sẽ nhận diện output có thể tạo lại từ marker dự án." = "Orvenはプロジェクトのマーカーから再生成可能な出力を識別します。";
+"Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinityは確認後にのみクリーンアップを行い、各ツールの公式コマンドを優先します。";
+"Macinity chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Macinityは選択したフォルダのみをスキャンし、エコシステムのマーカーがある成果物だけを提案します。";
+"Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinityは表示された許可リスト内のコマンドをそのまま実行します。ゴミ箱は使用せず、取り消せません。";
+"Macinity sẽ nhận diện output có thể tạo lại từ marker dự án." = "Macinityはプロジェクトのマーカーから再生成可能な出力を識別します。";
 "TÊN KHÁC • NỘI DUNG GIỐNG HỆT" = "名前は異なり、内容は同一";
 "Tài liệu" = "書類";
 "Tác giả" = "作成者";
@@ -221,7 +221,7 @@
 "nhóm" = "グループ";
 "nội dung đã thay đổi, thao tác bị hủy" = "内容が変更されたため、操作をキャンセルしました";
 "sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Diskora không xóa database hệ thống" = "sfltoolがログイン／バックグラウンド項目を検出しました。システムデータベースを削除せずに証拠を表示します";
-"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Orven không xóa database hệ thống" = "sfltoolがログイン／バックグラウンド項目を検出しました。システムデータベースを削除せずに証拠を表示します";
+"sfltool phát hiện login/background item; chỉ hiển thị bằng chứng, Macinity không xóa database hệ thống" = "sfltoolがログイン／バックグラウンド項目を検出しました。システムデータベースを削除せずに証拠を表示します";
 "thao tác" = "操作";
 "thất bại" = "失敗";
 "tệp" = "ファイル";

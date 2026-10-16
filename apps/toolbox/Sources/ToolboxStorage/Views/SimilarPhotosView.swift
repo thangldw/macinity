@@ -52,20 +52,23 @@ struct SimilarPhotosView: View {
         )
       }
       Divider()
-      HStack {
-        if model.isWorking { ProgressView().controlSize(.small) }
-        Text(L10n.text(model.status))
-        Spacer()
-        Button("Chọn thư mục…") { model.chooseRoot() }.disabled(model.isWorking)
-        Button("Chọn ảnh đề xuất loại") { model.selectSuggestions() }.disabled(
-          model.snapshot == nil || model.isWorking)
-        if model.isWorking {
-          Button("Dừng") { model.cancel() }
-        } else {
-          Button("Quét ảnh") { model.scan() }
+      VStack(alignment: .leading, spacing: 8) {
+        HStack {
+          if model.isWorking { ProgressView().controlSize(.small) }
+          Text(L10n.text(model.status)).fixedSize(horizontal: false, vertical: true)
         }
-        Button("Chuyển vào Trash…") { confirmsTrash = true }.buttonStyle(.borderedProminent)
-          .disabled(model.selectedPaths.isEmpty || model.isWorking)
+        HStack {
+          Button("Chọn thư mục…") { model.chooseRoot() }.disabled(model.isWorking)
+          Button("Chọn ảnh đề xuất loại") { model.selectSuggestions() }.disabled(
+            model.snapshot == nil || model.isWorking)
+          if model.isWorking {
+            Button("Dừng") { model.cancel() }
+          } else {
+            Button("Quét ảnh") { model.scan() }
+          }
+          Button("Chuyển vào Trash…") { confirmsTrash = true }.buttonStyle(.borderedProminent)
+            .disabled(model.selectedPaths.isEmpty || model.isWorking)
+        }
       }.padding(18)
     }
     .alert("Chuyển ảnh đã chọn vào Trash?", isPresented: $confirmsTrash) {

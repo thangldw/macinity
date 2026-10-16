@@ -1,4 +1,4 @@
-/* Orven ja localization. */
+/* Macinity ja localization. */
 "%lld thay đổi" = "%lld件の変更";
 "Application Support, Cache và Container được quan sát sâu hai cấp để nhận diện thay đổi bên trong thư mục ứng dụng." = "Application Support、Cache、Containerを2階層まで確認し、内部の変更を検出します。";
 "Application bundle thay đổi; kiểm tra version, Team ID và chữ ký." = "アプリのバンドルが変更されました。バージョン、Team ID、署名を確認してください。";
@@ -22,7 +22,7 @@
 "Chọn phiên" = "セッションを選択";
 "Chụp trạng thái ban đầu" = "初期状態を記録";
 "Configuration profile có thể thay đổi policy và thiết lập quản trị của macOS." = "構成プロファイルはmacOSのポリシーや管理設定を変更する可能性があります。";
-"Coverage giảm vì Orven không chạy trong một phần của phiên." = "セッションの一部でOrvenが動作していなかったため、対象範囲が縮小されています。";
+"Coverage giảm vì Macinity không chạy trong một phần của phiên." = "セッションの一部でMacinityが動作していなかったため、対象範囲が縮小されています。";
 "Cài đặt / cập nhật / gỡ ứng dụng" = "アプリをインストール／更新／削除";
 "Các phiên so sánh hoàn tất sẽ xuất hiện tại đây." = "完了した比較セッションがここに表示されます。";
 "Dữ liệu người dùng hoặc metadata ứng dụng thay đổi trong Library." = "Library内のユーザーデータやアプリのメタデータが変更されました。";
@@ -53,7 +53,7 @@
 "Lưu baseline và mở installer" = "ベースラインを保存してインストーラを開く";
 "Lịch sử" = "履歴";
 "Minh bạch về dữ liệu Changeora đọc, lưu và không thể quan sát." = "Changeoraが読み取り、保存できる情報と、確認できない情報を説明します。";
-"Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát." = "Orvenが読み取り、保存できる情報と、確認できない情報を説明します。";
+"Minh bạch về dữ liệu Macinity đọc, lưu và không thể quan sát." = "Macinityが読み取り、保存できる情報と、確認できない情報を説明します。";
 "Mọi báo cáo được lưu cục bộ trên máy Mac này." = "すべてのレポートはこのMacに保存されます。";
 "Một Install Trace đang hoạt động." = "インストール追跡はすでに実行中です。";
 "Một số vùng được macOS bảo vệ có thể cần Full Disk Access để quan sát đầy đủ." = "macOSで保護された場所を十分に確認するには、フルディスクアクセスが必要な場合があります。";
@@ -69,7 +69,7 @@
 "Quan trọng" = "重要";
 "Shell/PATH thay đổi có thể tác động mọi terminal session và command được thực thi." = "Shell/PATHの変更はすべてのターミナルセッションと実行コマンドに影響する可能性があります。";
 "Snapshot ban đầu có %lld mục. FSEvents đang ghi thay đổi sâu; hãy hoàn tất thao tác trước khi tạo snapshot thứ hai." = "初期スナップショットには%lld項目があります。FSEventsで内部の変更を記録中です。操作を終えてから2回目のスナップショットを取得してください。";
-"Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper." = "スナップショットとFSEventsはローカルのメタデータのみを保存します。Orvenはマウント、実行、Gatekeeperの回避を行いません。";
+"Snapshot và FSEvents chỉ lưu metadata cục bộ. Macinity không mount, execute hoặc bypass Gatekeeper." = "スナップショットとFSEventsはローカルのメタデータのみを保存します。Macinityはマウント、実行、Gatekeeperの回避を行いません。";
 "Snapshot đang theo dõi" = "追跡中のスナップショット";
 "So sánh hai phiên" = "2つのセッションを比較";
 "So sánh hai phiên có" = "セッション比較の項目数";
@@ -84,9 +84,9 @@
 "Thả installer, chụp trước/sau và xem bằng chứng thay đổi" = "インストーラをドロップして前後を記録し、変更の証拠を確認";
 "Thử bỏ bộ lọc hoặc thay đổi từ khóa tìm kiếm." = "フィルタを解除するか検索語を変更してください。";
 "Tiếp tục với coverage giảm" = "範囲を縮小して続行";
-"Orven chỉ nhận .dmg, .pkg hoặc .app" = "Orvenで扱えるのは.dmg、.pkg、.appのみです";
-"Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Orvenはファイルの種類とパスのみを読み取ります。ベースラインの保存後にインストーラを開きます。";
-"Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Orvenは技術的な証拠を示しますが、アプリが悪意を持つとは断定しません。";
+"Macinity chỉ nhận .dmg, .pkg hoặc .app" = "Macinityで扱えるのは.dmg、.pkg、.appのみです";
+"Macinity chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Macinityはファイルの種類とパスのみを読み取ります。ベースラインの保存後にインストーラを開きます。";
+"Macinity đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Macinityは技術的な証拠を示しますが、アプリが悪意を持つとは断定しません。";
 "Trạng thái hiện tại" = "現在の状態";
 "Tác giả" = "作成者";
 "Tên phiên" = "セッション名";

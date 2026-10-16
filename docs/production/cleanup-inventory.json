@@ -41,5 +41,20 @@
     "tests/fixtures/documentation_contract/stale-product-hunt-launch.fixture"
   ],
   "preserved": "Source modules, application data namespace, raw local verification evidence, GitHub release/tag history",
-  "retiredTestContract": "render_cask_test.sh guarded only the removed unsupported Homebrew generator; no production caller remains"
+  "retiredTestContract": "render_cask_test.sh guarded only the removed unsupported Homebrew generator; no production caller remains",
+  "macinity310": {
+    "backup": "Macinity-release-backup-20261016 outside repository",
+    "removed": [
+      "unused OrvenLogo.png",
+      "superseded Open Orven first-launch guide",
+      "unused site/styles.css",
+      "superseded docs/launch/orven-3.0.0.md"
+    ],
+    "renamed": [
+      "orven-brand.css -> macinity-brand.css",
+      "orven-page.css -> macinity-page.css"
+    ],
+    "retained": "Historical tags/releases and previous-release.json; stable bundle/storage identifiers",
+    "privateEvidence": "Brand machine screenshots moved to external backup; future evidence ignored"
+  }
 }

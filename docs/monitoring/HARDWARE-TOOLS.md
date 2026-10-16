@@ -1,4 +1,4 @@
-# Orven hardware tools contract
+# Macinity hardware tools contract
 
 ## English
 

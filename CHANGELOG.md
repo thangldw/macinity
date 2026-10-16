@@ -1,6 +1,10 @@
-# Orven changelog
+# Macinity changelog
 
 ## English
+
+### Macinity 3.1.0 — 2026-10-16
+
+Action Center adds favorites and existing-state summaries. Smart Diagnostics adds explicit, timestamped symptom analysis and comparable-observation deltas. Work Profiles extends compatible workspace presets with reviewed audio/Keep Awake steps and per-step results. See [scope and verification](docs/product/ACTION-WORKFLOWS.md). Cobalt Link branding, the utility suite, battery history and separate Disk/Network navigation are included.
 
 ### Orven 3.0.0
 
@@ -16,6 +20,10 @@ Tests, source/locale checks, universal packaging and exact release artifact veri
 
 ## Tiếng Việt
 
+### Macinity 3.1.0 — 2026-10-16
+
+Trung tâm thao tác thêm mục yêu thích và tóm tắt trạng thái hiện có. Chẩn đoán thông minh phân tích theo triệu chứng, có thời điểm và so sánh mẫu mới. Hồ sơ làm việc giữ tương thích preset cũ, thêm âm thanh/Giữ máy thức có xem trước và kết quả từng bước. Bao gồm nhận diện Cobalt Link, nhóm tiện ích, lịch sử pin và điều hướng Disk/Network riêng.
+
 ### Orven 3.0.0
 
 Orven là tên và ring identity mới của Toolbox. Native UI bổ sung live monitoring, hardware profile/sensor mapped khả dụng, Sleep Inspector, Wi-Fi/LAN/diagnostics theo nút, health history/baseline tùy chọn, sensor recording/export, smart alerts, connection changes trong phiên, app dossiers/growth/workspace/local reports. Giữ installer evidence, storage actions có review và recovery.
@@ -29,6 +37,10 @@ Bundle ID/executable/module/Application Support/Toolbox giữ tương thích. Đ
 [Readiness](docs/production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS 13Ethernet vật lý/full VoiceOver/Japanese copy/OS notification chưa proof. Resource deviations cũ không proofpackage mới. Release Toolbox cũ giữ trong [GitHubhistory](https://github.com/thangldw/toolbox/releases).
 
 ## 日本語
+
+### Macinity 3.1.0 — 2026-10-16
+
+アクションセンターにお気に入りと既存状態の概要を追加。スマート診断は症状別の時刻付き分析と新しい観測の比較を提供します。作業プロファイルは旧preset互換を維持し、確認付きの音声・スリープ防止と各ステップの結果を追加します。Cobalt Link、各ツール、バッテリー履歴、Disk/Networkの個別画面を含みます。
 
 ### Orven 3.0.0
 

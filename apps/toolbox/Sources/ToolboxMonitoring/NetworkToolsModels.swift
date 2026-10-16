@@ -47,6 +47,7 @@ public struct NetworkOverview: Sendable {
 }
 
 public struct NearbyWiFi: Identifiable, Sendable {
+  public var security: String = "Unknown"
   public let id: String
   public let ssid: String?
   public let bssid: String?

@@ -1,4 +1,4 @@
-/* Orven ja localization. */
+/* Macinity ja localization. */
 "%d of %d processes have CPU samples." = "CPUサンプルあり%d件／全%d件。";
 "%d processes shown" = "%d件のプロセスを表示中";
 "%d valid samples. Minimum %.1f, maximum %.1f %@. Missing samples are gaps." = "有効なサンプル%d件。最小%.1f、最大%.1f %@。欠測部分は空白です。";
@@ -11,8 +11,8 @@
 "A Diskora scheduled scan is installed." = "Diskoraの定期スキャンがインストールされています。";
 "A snapshot of active macOS power requests. Requests can be legitimate; they do not explain every sleep or wake event." = "macOSの有効な電源要求のスナップショットです。要求は正常な動作による場合もあり、すべてのスリープやスリープ解除の原因を説明するものではありません。";
 "APFS volumes share container capacity. Capacity is shown for the startup volume once; I/O is per observed storage driver, including virtual devices when exposed." = "APFSボリュームはコンテナの容量を共有します。容量は起動ボリュームについて1回だけ表示します。I/Oは確認できたストレージドライバごとに表示し、取得可能な仮想デバイスも含みます。";
-"About Orven" = "Orvenについて";
-"About Orven" = "Orvenについて";
+"About Macinity" = "Macinityについて";
+"About Macinity" = "Macinityについて";
 "Appearance" = "外観";
 "Applications" = "アプリ";
 "Automatic alerts are not available." = "自動通知には対応していません。";
@@ -35,7 +35,7 @@
 "Close details" = "詳細を閉じる";
 "Compare local snapshots around an install, update, or removal." = "インストール、更新、削除の前後でローカルのスナップショットを比較します。";
 "Compressor storage" = "圧縮データ用メモリ";
-"Continue to Orven" = "Orvenを使い始める";
+"Continue to Macinity" = "Macinityを使い始める";
 "Coverage" = "対象範囲";
 "Coverage is reduced until protected folders are readable." = "保護されたフォルダを読み取れるようになるまで、対象範囲は縮小されます。";
 "Critical" = "危機的";
@@ -59,7 +59,7 @@
 "GPU utilization and memory: Unsupported" = "GPU使用率とメモリ：非対応";
 "History" = "履歴";
 "Home" = "ホーム";
-"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "macOSがOrvenをブロックした場合、一度開いてから「システム設定 → プライバシーとセキュリティ → このまま開く」を使用してください。Gatekeeperを無効にしないでください。";
+"If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "macOSがMacinityをブロックした場合、一度開いてから「システム設定 → プライバシーとセキュリティ → このまま開く」を使用してください。Gatekeeperを無効にしないでください。";
 "Import and verify" = "読み込んで検証";
 "Inspect process" = "プロセスを確認";
 "Inspect what's running on your Mac. Monitoring is read-only." = "このMacで動作中のプロセスを確認します。モニタリングは読み取り専用です。";
@@ -68,7 +68,7 @@
 "Language" = "言語";
 "Last sample" = "最新サンプル";
 "Legacy data was copied and verified." = "旧バージョンのデータをコピーして検証しました。";
-"Legacy schedule replaced after Orven bootstrap succeeded." = "Orvenのエージェント起動を確認し、旧スケジュールを置き換えました。";
+"Legacy schedule replaced after Macinity bootstrap succeeded." = "Macinityのエージェント起動を確認し、旧スケジュールを置き換えました。";
 "Legacy scheduled scan" = "旧バージョンの定期スキャン";
 "Light" = "ライト";
 "Live monitoring" = "ライブモニタリング";
@@ -103,7 +103,7 @@
 "Occupied memory is physical memory minus free pages and includes caches. It does not measure reclaimable RAM. Pressure is an OS event, not an inferred score." = "使用中のメモリは物理メモリから空きページを差し引いた値で、キャッシュを含みます。解放可能なRAMを示すものではありません。プレッシャーはOSイベントであり、推定スコアではありません。";
 "Occupied memory • includes caches" = "使用中のメモリ・キャッシュを含む";
 "On battery" = "バッテリー使用中";
-"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "ボタンを押したときのみ、OrvenはGitHubの公開リリース情報を取得します。スキャンやデバイスのデータは送信しません。";
+"Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent." = "ボタンを押したときのみ、MacinityはGitHubの公開リリース情報を取得します。スキャンやデバイスのデータは送信しません。";
 "Open Full Disk Access" = "フルディスクアクセスを開く";
 "Open Recovery" = "復元を開く";
 "Open installation guide" = "インストールガイドを開く";
@@ -121,7 +121,7 @@
 "Process identity unavailable; ownership is unverified" = "プロセスの識別情報を取得できず、所有者は未確認です";
 "Processes" = "プロセス";
 "Projects" = "プロジェクト";
-"Quit Orven" = "Orvenを終了";
+"Quit Macinity" = "Macinityを終了";
 "Read" = "読み取り";
 "Read failed" = "読み取り失敗";
 "Read-only" = "読み取り専用";
@@ -138,7 +138,7 @@
 "Refresh to inspect current requests. No background polling." = "更新して現在の要求を確認してください。バックグラウンドでは読み取りません。";
 "Replace after verification" = "検証後に置き換える";
 "Replace the Diskora scheduled scan?" = "Diskoraの定期スキャンを置き換えますか？";
-"Replace with Orven schedule…" = "Orvenのスケジュールに置き換える…";
+"Replace with Macinity schedule…" = "Macinityのスケジュールに置き換える…";
 "Resident memory" = "常駐メモリ";
 "Restore" = "復元";
 "Retry import" = "読み込みを再試行";
@@ -154,7 +154,7 @@
 "Sampling paused while the main window is inactive." = "メインウィンドウが非アクティブの間はサンプリングを一時停止します。";
 "Scan coverage" = "スキャンの対象範囲";
 "Scan storage" = "ストレージをスキャン";
-"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "スキャン、スナップショット、操作記録はこのMacに保持します。Orvenはテレメトリや自動クリーンアップを行いません。";
+"Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically." = "スキャン、スナップショット、操作記録はこのMacに保持します。Macinityはテレメトリや自動クリーンアップを行いません。";
 "Search processes or PID" = "プロセス名またはPIDで検索";
 "Seconds before latest sample" = "最新サンプルからの経過秒数";
 "See reclaimable files before anything moves to Trash." = "ゴミ箱に移動する前に、空き容量を増やせるファイルを確認できます。";
@@ -187,8 +187,8 @@
 "Thermal state is macOS's coarse system condition, not a temperature in °C. Macs without an internal battery report Unsupported." = "熱状態はmacOSが示す大まかなシステム状態であり、温度（°C）ではありません。内蔵バッテリーのないMacでは「非対応」と表示します。";
 "Thermal state is not a temperature in °C." = "熱状態は温度（°C）ではありません。";
 "Threads: %d" = "スレッド数：%d";
-"Orven %@ is available." = "Orven %@を利用できます。";
-"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orvenは先にスキャン専用エージェントをインストールして起動します。成功した場合のみDiskoraのplistを削除します。";
+"Macinity %@ is available." = "Macinity %@を利用できます。";
+"Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Macinityは先にスキャン専用エージェントをインストールして起動します。成功した場合のみDiskoraのplistを削除します。";
 "Top CPU consumers • one core" = "CPU使用率の高いプロセス・1コア基準";
 "Unavailable" = "利用不可";
 "Understand app changes" = "アプリの変更を理解する";
@@ -200,7 +200,7 @@
 "Using the most CPU" = "CPU使用率の高いプロセス";
 "Warming up" = "初期サンプルを取得中";
 "Warning" = "警告";
-"Welcome to Orven" = "Orvenへようこそ";
+"Welcome to Macinity" = "Macinityへようこそ";
 "Wired memory" = "固定メモリ";
 "Write" = "書き込み";
 "You are using the latest public release." = "最新の公開バージョンを使用しています。";
@@ -279,7 +279,7 @@
 "APFS container capacity" = "APFSコンテナ容量";
 "APFS container free" = "APFSコンテナの空き容量";
 "Data volume used" = "Dataボリュームの使用容量";
-"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "未確認の容量はここでは計測していません。読み取り不可のファイル、他のボリューム、ファイルシステム情報、クローン、スナップショットなどが含まれ得ます。残りの容量を単一の原因に帰属させません。";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause." = "未確認の容量はここでは計測していません。読み取り不可のファイル、他のボリューム、ファイルシステム情報、クローン、スナップショットなどが含まれ得ます。残りの容量を単一の原因に帰属させません。";
 "APFS snapshots" = "APFSスナップショット";
 "No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "DataボリュームにAPFSスナップショットは報告されていません。他のボリュームには存在する可能性があります。";
 "OS marks this snapshot purgeable." = "OSはこのスナップショットを削除可能と報告しています。";
@@ -402,7 +402,7 @@
 "Fan count unavailable; no fan speeds inferred." = "ファン数を取得できません。回転数は推定しません。";
 "Fan coverage is capped at 8 reported fans." = "表示対象はSMCが報告する最大8台のファンです。";
 "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "監視中はSMCセンサーを10秒ごとに読み取ります。取得範囲は限定的で、モデルによって異なります。CPU/GPUの分類はコミュニティの対応表に基づき、検証済みの物理コアIDではありません。欠測値は0として扱いません。";
-"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "温度は対応表に基づく個別センサー値で、CPU/GPUパッケージ平均や安全診断ではありません。ファンは取得した回転数のみ表示し、モードや目標値は変更しません。電圧、リアルタイムクロック、SPD、SMARTは収集しません。";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "温度は対応表に基づく個別センサー値で、CPU/GPUパッケージ平均や安全診断ではありません。ファンは取得した回転数のみ表示し、モードや目標値は変更しません。電圧、リアルタイムクロック、SPD、SMARTは収集しません。";
 "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "SMC温度・ファン・電力の取得範囲は上記のとおりです。熱状態は別のmacOS状態です。電圧、リアルタイムコアクロック、SPDタイミング、SMART健全性、ファン制御、オーバークロック、負荷テストは提供しません。";
 
 "Review temperatures and fans" = "温度とファンを確認";
@@ -450,7 +450,7 @@
 "History could not be saved. Existing data is preserved; check the local storage location." = "履歴を保存できません。既存データを保持しています。保存先を確認してください。";
 "Baseline needs at least 30 recorded samples and writable local storage." = "基準値には30件以上の記録と書き込み可能な保存先が必要です。";
 "History retention could not be saved. Existing data is preserved." = "保存期間を変更できません。既存データを保持しています。";
-"Notifications require the Orven app bundle." = "通知にはOrvenアプリからの実行が必要です。";
+"Notifications require the Macinity app bundle." = "通知にはMacinityアプリからの実行が必要です。";
 "Notification permission granted." = "通知が許可されています。";
 "Notifications are not allowed. In-app alerts remain available." = "通知は許可されていません。アプリ内の通知履歴は利用できます。";
 "Notification permission could not be requested. In-app alerts remain available." = "通知の許可を要求できません。アプリ内の通知履歴は利用できます。";
@@ -605,3 +605,606 @@
 "Up / running" = "Up／running";
 "Down / not running" = "Down／not running";
 "Interface flags" = "インターフェースのフラグ";
+
+"My Mac" = "このMac";
+
+"Thermals" = "温度";
+
+"Software" = "ソフトウェア";
+
+"Files" = "ファイル";
+
+"Search Macinity" = "Macinity内を検索";
+
+"Workspace page" = "ワークスペースのページ";
+
+"Temperatures & Fans" = "温度とファン";
+
+"Find a tool or page" = "ツールやページを検索";
+
+"Find tools and pages. File and application contents are not searched." = "ツールとページを検索します。ファイルやアプリの内容は検索しません。";
+
+"No matching tools" = "該当するツールがありません";
+
+"Try another name or clear the search." = "別の名前で検索するか、検索欄をクリアしてください。";
+
+"Your Mac, in focus" = "Macの状態を、ひと目で";
+
+"Inspect this Mac" = "このMacの構成を確認";
+
+"Installed memory" = "搭載メモリ";
+
+"Recent sensor readings" = "最近のセンサー測定値";
+
+"Observed sensor samples only. Missing readings remain gaps; the chart does not diagnose thermal safety." = "観測した測定値のみを表示します。欠測は空白で示し、温度の安全性は判定しません。";
+
+"No sensor samples available." = "センサーの測定値がありません。";
+
+"Active monitoring" = "ライブモニタリング";
+
+"Developer Tools" = "開発ツール";
+
+"Discover runtimes and command-line tools in common installation folders." = "一般的なインストール先でランタイムとコマンドラインツールを確認します。";
+
+"Presence only: shims and system stubs may need setup. Versions, packages and the active shell environment are not inspected. No tools are executed." = "存在のみを確認します。shimやシステムのスタブは設定が必要な場合があります。バージョン、パッケージ、現在のシェル環境は調査せず、ツールも実行しません。";
+
+"Filter by name or path" = "名前またはパスで絞り込む";
+
+"No tools found in this view. Custom installation folders are not scanned." = "一致するツールがありません。独自のインストール先は検索対象外です。";
+
+"Last checked" = "最終確認";
+
+"Refresh" = "更新";
+
+"Filter choices" = "選択肢を絞り込む";
+
+"No matching choices" = "一致する選択肢がありません";
+"Có thể khôi phục từ Trash" = "ゴミ箱から復元可能";
+"Toàn bộ hoạt động" = "すべての操作";
+"mục có thể khôi phục" = "復元可能な項目";
+"Loại tệp trùng lặp" = "重複ファイルの削除";
+"Chọn Quét dung lượng để bắt đầu" = "容量スキャンを選択して開始";
+"đã chọn vào Trash" = "ゴミ箱への移動対象";
+
+"Developed by thangldw and Codex" = "thangldw と Codex が開発";
+
+"After allowing Location access, refresh or scan again to read Wi-Fi names." = "位置情報へのアクセスを許可した後、更新または再スキャンしてWi-Fi名を取得してください。";
+
+"Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization." = "システム設定 → プライバシーとセキュリティ → 位置情報サービスでMacinityを確認してください。制限は組織によって管理されている場合があります。";
+
+"Select a sensor below to view its chart." = "下のセンサーを選択すると、そのグラフを表示します。";
+
+"No applications found" = "アプリケーションが見つかりません";
+
+"No readable application bundles were found in /Applications or ~/Applications." = "/Applications または ~/Applications に読み取り可能なアプリケーションが見つかりませんでした。";
+
+"Disk Activity" = "ディスクの動作状況";
+
+"Network Activity" = "ネットワークの動作状況";
+
+"Battery details" = "バッテリーの詳細";
+
+"Power source" = "電源";
+
+"AC Power" = "外部電源";
+
+"Low Power Mode" = "低電力モード";
+
+"Battery health" = "バッテリーの状態";
+
+"Estimated time to full" = "満充電までの推定時間";
+
+"Estimated time remaining" = "推定残り時間";
+
+"Charge cycles" = "充放電回数";
+
+"Design capacity" = "設計容量";
+
+"Full charge capacity" = "満充電容量";
+
+"Capacity vs. design" = "設計容量に対する比率";
+
+"Battery voltage" = "バッテリー電圧";
+
+"Reported adapter power" = "アダプタの公称電力";
+
+"Capacity ratio is calculated from reported full and design capacity; it may differ from macOS Battery Health. Adapter watts describe the adapter, not live charging power. Missing values are unavailable, not zero." = "容量比率は報告された満充電容量と設計容量から計算され、macOSのバッテリー状態と異なる場合があります。電力はアダプタの情報で、現在の充電電力ではありません。欠測値はゼロではなく取得不可です。";
+
+"Battery health: Good" = "良好";
+
+"Battery health: Fair" = "容量低下";
+
+"Battery health: Poor" = "不良";
+
+"Battery level & charging history" = "バッテリー残量と充放電履歴";
+
+"Save local health history" = "ヘルス履歴をローカルに保存";
+
+"Battery level" = "バッテリー残量";
+
+"Discharging" = "放電中";
+
+"External power (not charging)" = "外部電源（充電していません）";
+
+"One sample per minute while monitoring is active. Uses Health History retention. Sleep, pauses and missing samples remain gaps; earlier macOS history is not imported." = "監視中は毎分記録し、ヘルス履歴の保存期間を使用します。スリープ、一時停止、欠測は空白になります。過去のmacOS履歴は取り込みません。";
+
+"No battery history yet. Enable recording and keep monitoring active." = "バッテリー履歴はまだありません。記録を有効にして監視を続けてください。";
+
+"Latest 20 observed intervals. Times mark recorded samples, not exact plug/unplug events." = "直近20区間を表示。時刻はサンプルの記録時刻であり、電源の接続・切断の正確な時刻ではありません。";
+
+"macOS Battery Health" = "macOSのバッテリー状態";
+
+"Battery condition" = "バッテリーの状態";
+
+"Maximum Capacity" = "最大容量";
+
+"Service Recommended" = "修理サービス推奨";
+
+"Reported by macOS System Information, separately from the raw capacity ratio. Availability and rounding depend on macOS and hardware. Refresh to update." = "macOSのシステム情報による値で、生の容量比とは別です。取得可否と丸め方はmacOSとハードウェアに依存します。更新ボタンで再取得します。";
+
+"Add folders" = "フォルダを追加";
+
+"Add prefix" = "接頭辞を追加";
+
+"Application changed or missing" = "アプリが変更されたか見つかりません";
+
+"Applications opened; layout requires Accessibility access" = "アプリを開きました。配置にはアクセシビリティ権限が必要です";
+
+"Apply" = "適用";
+
+"Apply reviewed rename" = "確認した名前変更を適用";
+
+"Apply the displayed rename plan? Existing files will never be overwritten." = "表示中の名前変更を適用しますか？既存ファイルは上書きしません。";
+
+"Calculate checksum" = "チェックサムを計算";
+
+"Capacity" = "容量";
+
+"Change failed or state changed; refresh before retrying" = "変更に失敗したか状態が変わりました。更新してから再試行してください";
+
+"Checksum differs" = "チェックサムが一致しません";
+
+"Checksum matches" = "チェックサムが一致しました";
+
+"Choose Python environment" = "Python環境を選択";
+
+"Choose files" = "ファイルを選択";
+
+"Choose first folder" = "最初のフォルダを選択";
+
+"Choose second folder" = "2番目のフォルダを選択";
+
+"Clear" = "クリア";
+
+"Clear folders" = "フォルダ選択をクリア";
+
+"Clear report" = "レポートをクリア";
+
+"Command arguments may contain secrets. Displayed locally only; clear after review." = "コマンド引数に機密情報が含まれる場合があります。ローカル表示のみです。確認後にクリアしてください。";
+
+"Compare contents" = "内容を比較";
+
+"Device Inspector" = "デバイス情報";
+
+"Device category" = "デバイスの種類";
+
+"Device details changed" = "デバイス情報が変更されました";
+
+"Device inspection failed or access is restricted" = "デバイスの取得に失敗したかアクセスが制限されています";
+
+"Different content" = "内容が異なります";
+
+"Drive inspection failed; results may be incomplete" = "ドライブの取得に失敗しました。結果は不完全な場合があります";
+
+"Eject" = "取り出す";
+
+"Eject external drive?" = "外部ドライブを取り出しますか？";
+
+"Eject failed or device changed. Inspect open files; no force eject was attempted." = "取り出しに失敗したかデバイスが変更されました。開いているファイルを確認してください。強制取り出しは行っていません。";
+
+"Eject request completed" = "取り出し要求が完了しました";
+
+"Enter credentials for a network you own or may share. The QR contains the password. It stays in memory and is cleared when you leave this page; no upload or automatic copy." = "所有または共有を許可されたネットワークの情報を入力してください。QRにはパスワードが含まれます。メモリ内のみで保持し、ページを離れると消去します。アップロードや自動コピーは行いません。";
+
+"Expected SHA-256 (optional, one file)" = "照合するSHA-256（任意、1ファイル）";
+
+"External Drives" = "外部ドライブ";
+
+"External Drives & File Locks" = "外部ドライブと使用中のファイル";
+
+"External disks and their partitions, including unmounted entries. Eject uses macOS without force. Open-file inspection may omit restricted processes; it does not prove a file is locked." = "未マウントを含む外部ディスクとパーティションです。macOSで強制せずに取り出します。開いているファイルの検査は制限されたプロセスを含まない場合があり、ロックを証明するものではありません。";
+
+"File Utilities" = "ファイルツール";
+
+"File utility" = "ファイルツール";
+
+"Filter packages" = "パッケージを絞り込む";
+
+"Find in filename" = "ファイル名内を検索";
+
+"Finish file operations first. macOS may eject related volumes on the same device. Busy devices will not be forcibly unmounted." = "ファイル操作を先に完了してください。同じデバイスの関連ボリュームも取り出される場合があります。使用中のデバイスは強制解除しません。";
+
+"Free" = "空き容量";
+
+"Generate QR" = "QRを生成";
+
+"Hidden network" = "非公開ネットワーク";
+
+"Inspect" = "調べる";
+
+"Inspect open files" = "開いているファイルを確認";
+
+"Inspect tool" = "ツールを調べる";
+
+"Inspection failed or access is restricted" = "取得に失敗したかアクセスが制限されています";
+
+"Invalid names, changed files or destination conflicts" = "無効な名前、変更されたファイル、または移動先の競合";
+
+"Keep Awake" = "スリープを防止";
+
+"Last rename recovery preview" = "直近の名前変更の復元プレビュー";
+
+"Latest observed device changes" = "最近観測したデバイスの変更";
+
+"Launch plists and current user registrations. System daemon status is unknown. Modern login items are managed in macOS Settings. Runtime changes affect this session; original plists stay intact." = "起動plistと現在のユーザーの登録です。システムdaemonの状態は不明です。新しいログイン項目はmacOS設定で管理します。実行時の変更はこのセッションに適用し、plistは変更しません。";
+
+"Local socket ownership only. Wildcard binding is not proof of Internet exposure; firewalls and routers still apply. Restricted and short-lived processes may be missing." = "ローカルソケットの所有者のみです。全インターフェースへのバインドはインターネット公開を意味しません。ファイアウォールやルーターも影響します。制限された短命なプロセスは欠落する場合があります。";
+
+"Locate executable" = "実行ファイルを表示";
+
+"Login items report unavailable; use macOS Settings" = "ログイン項目を取得できません。macOS設定を使用してください";
+
+"No external disks in this observation" = "今回の観測では外部ディスクはありません";
+
+"No matching observable sockets" = "一致する観測可能なソケットはありません";
+
+"No readable devices in this category" = "この種類で取得可能なデバイスはありません";
+
+"No readable open files; restricted processes may be missing" = "取得可能な開いているファイルはありません。制限されたプロセスは欠落する場合があります";
+
+"Not mounted" = "未マウント";
+
+"Observed open files" = "観測した開いているファイル";
+
+"Only in first" = "最初のフォルダのみ";
+
+"Only in second" = "2番目のフォルダのみ";
+
+"Only profiles exposed by macOS are listed. Missing profiles or names may be restricted; this is not a complete connection history. Passwords are never read by Macinity." = "macOSが公開するプロファイルのみ表示します。名前やプロファイルが制限される場合があり、完全な接続履歴ではありません。Macinityはパスワードを読み取りません。";
+
+"Open Accessibility Settings" = "アクセシビリティ設定を開く";
+
+"Open Login Items Settings" = "ログイン項目の設定を開く";
+
+"Open Passwords" = "パスワードを開く";
+
+"Open network (no password)" = "オープンネットワーク（パスワードなし）";
+
+"Operation failed or timed out; inspect current state before retrying" = "処理に失敗またはタイムアウトしました。現在の状態を確認してから再試行してください";
+
+"Operation stopped or failed; no complete result is available" = "処理が停止または失敗しました。完全な結果はありません";
+
+"Original names restored" = "元の名前に戻しました";
+
+"Partial inventory: display limit reached" = "表示上限に達したため一覧は不完全です";
+
+"Port" = "ポート";
+
+"Port & Service Inspector" = "ポートとサービス";
+
+"Potentially overlapping 2.4 GHz networks" = "重複する可能性のある2.4 GHzネットワーク";
+
+"Preset name" = "プリセット名";
+
+"Prevents idle system sleep only. Display sleep, screen locking and manual sleep remain unchanged. Process sessions stop on exit or after 24 hours; quitting Macinity releases the request." = "アイドル時のシステムスリープのみ防止します。画面スリープ、ロック、手動スリープは変更しません。プロセス終了または24時間後に停止し、Macinity終了時に要求を解除します。";
+
+"Preview rename" = "名前変更をプレビュー";
+
+"Process is unavailable; refresh before retrying" = "プロセスを取得できません。更新して再試行してください";
+
+"Read macOS login items report" = "macOSログイン項目レポートを取得";
+
+"Read packages / environment" = "パッケージ・環境を取得";
+
+"Read version" = "バージョンを取得";
+
+"Refresh saved networks" = "保存済みネットワークを更新";
+
+"Remove preset" = "プリセットを削除";
+
+"Rename completed. Recovery journal retained." = "名前を変更しました。復元ログを保持しています。";
+
+"Replace with" = "置換後の文字列";
+
+"Restore original names from the latest journal? Changed files and conflicts will be left untouched." = "直近のログから元の名前に戻しますか？変更されたファイルや競合は変更しません。";
+
+"Restore workspace?" = "ワークスペースを復元しますか？";
+
+"Review eject" = "取り出しを確認";
+
+"Review package operation" = "パッケージ操作を確認";
+
+"Review restore" = "復元を確認";
+
+"Review runtime change" = "実行時の変更を確認";
+
+"Review undo last rename" = "直近の名前変更の取り消しを確認";
+
+"Review uninstall" = "削除を確認";
+
+"Review update" = "更新を確認";
+
+"Same content" = "内容が一致";
+
+"Save selected running apps, chosen folders and observable window geometry. Window titles are stored locally for matching. Browser tabs, terminal sessions, documents and VPN state are not restored. Missing or ambiguous windows are skipped." = "選択した実行中アプリ、フォルダ、取得可能なウィンドウ配置を保存します。照合用タイトルはローカル保存します。タブ、ターミナル、文書、VPNは復元しません。不明確なウィンドウはスキップします。";
+
+"Save workspace" = "ワークスペースを保存";
+
+"Saved Wi-Fi & Sharing" = "保存済みWi-Fiと共有";
+
+"Security" = "セキュリティ";
+
+"Selected files only. Symlinks are excluded. Hashing is bounded to 16 GiB per file and two minutes per operation. Folder comparison excludes package contents and stops rather than claiming completeness when limits or read errors occur." = "選択したファイルのみ処理し、シンボリックリンクは除外します。ハッシュは1ファイル16 GiB、1処理2分までです。フォルダ比較はパッケージ内容を除外し、制限や読み取りエラーでは停止します。";
+
+"Share your Wi-Fi with QR" = "Wi-FiをQRで共有";
+
+"Show launch command" = "起動コマンドを表示";
+
+"Show recovery journals" = "復元ログを表示";
+
+"Startup & Background" = "起動とバックグラウンド";
+
+"Startup inspection failed" = "起動情報を取得できません";
+
+"System Information snapshot. Accessory battery is shown only when macOS supplies it. Bluetooth entries may include paired, disconnected devices. Change history compares explicit refreshes, not exact physical plug/unplug times." = "システム情報のスナップショットです。周辺機器の電池はmacOSが提供する場合のみ表示します。Bluetoothには未接続のペアリング済み機器も含まれます。履歴は更新間の比較で、正確な接続・切断時刻ではありません。";
+
+"This changes installed software and may run package code. Dependencies can change. A timeout or error may leave partial changes; inspect the package manager before retrying." = "インストール済みソフトウェアを変更し、パッケージのコードを実行する場合があります。依存関係も変更されます。エラーや時間切れで部分的な変更が残る場合があるため、再試行前に確認してください。";
+
+"This opens the listed apps and folders and moves matching windows. Existing windows and documents are not closed." = "一覧のアプリとフォルダを開き、一致するウィンドウを移動します。既存のウィンドウや文書は閉じません。";
+
+"Tools run only after a button press, without shell startup files. Package mutations can download and execute package code, affect dependencies and are not automatically reversible. No sudo. Python writes require a virtual environment; npm writes skip lifecycle scripts." = "ボタン操作時のみツールを実行し、shell設定は読み込みません。パッケージ変更はコードの取得・実行や依存関係の変更を伴い、自動では戻せません。sudoは使いません。Pythonは仮想環境のみ、npmはlifecycle scriptを省略します。";
+
+"Track device changes during this visit" = "この画面でデバイス変更を記録";
+
+"Undo rename" = "名前変更を取り消す";
+
+"Unreadable or omitted entries" = "取得不可または省略された項目";
+
+"Until process exits" = "プロセス終了まで";
+
+"Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA." = "暗号化なし、または弱い方式です。ルーターをWPA3かWPA2-AESに設定し、WEPや旧WPAは避けてください。";
+
+"Weak signal: move closer to the access point before retrying authentication or connection tests." = "電波が弱いため、アクセスポイントに近づいてから認証や接続を再確認してください。";
+
+"Wi-Fi password" = "Wi-Fiパスワード";
+
+"Wi-Fi sharing QR" = "Wi-Fi共有QR";
+
+"Window does not support layout changes" = "配置変更に対応していないウィンドウ";
+
+"Window missing or ambiguous" = "ウィンドウが見つからないか一致が不明確です";
+
+"Workspace Presets" = "ワークスペース設定";
+
+"Workspace partially restored" = "ワークスペースを一部復元しました";
+
+"Workspace restored" = "ワークスペースを復元しました";
+
+"folders" = "フォルダ";
+
+"macOS login item registrations; this report does not prove a service is running. Output is limited to 24,000 characters." = "macOSのログイン項目登録です。実行中であることを示すものではありません。表示は24,000文字までです。";
+
+"saved windows" = "保存したウィンドウ";
+
+"selected files" = "選択ファイル";
+
+"No active Keep Awake session" = "スリープ防止セッションなし";
+
+"Process is unavailable; no session started" = "プロセスを取得できないため開始しませんでした";
+
+"Keep Awake could not start" = "スリープ防止を開始できません";
+
+"Keep Awake is active" = "スリープ防止中";
+
+"Registered, not running" = "登録済み、未実行";
+
+"Running" = "実行中";
+
+"Not registered" = "未登録";
+
+"Preview stop" = "停止を確認";
+
+"Preview start" = "開始を確認";
+
+"Stop and unregister this user agent now. Its process may terminate. Start it again from the same unchanged plist to restore registration." = "このユーザーagentを停止し登録解除します。プロセスが終了する場合があります。同じ未変更のplistから再起動すると登録を復元できます。";
+
+"Register this user agent now. Its configured executable may run. Stop it again to undo registration." = "このユーザーagentを登録します。設定された実行ファイルが動作する場合があります。停止すれば登録を取り消せます。";
+
+"No readable saved networks" = "取得可能な保存済みネットワークはありません";
+
+"Saved network access is unavailable" = "保存済みネットワークにアクセスできません";
+
+"Enter a valid SSID and password" = "有効なSSIDとパスワードを入力してください";
+
+"Loopback only" = "ループバックのみ";
+
+"All local interfaces" = "すべてのローカルインターフェース";
+
+"Specific interface address" = "特定インターフェースのアドレス";
+
+"Batch Rename" = "一括名前変更";
+
+"Compare Folders" = "フォルダ比較";
+
+"Duplicate Files" = "重複ファイル";
+
+"Displays" = "ディスプレイ";
+
+"Audio" = "オーディオ";
+
+"Open" = "オープン（暗号化なし）";
+
+"Workspace file could not be read; existing data is preserved" = "設定ファイルを読めません。既存データは保持しています";
+
+"Choose a name; at most 20 presets are retained" = "名前を指定してください。最大20件まで保存できます";
+
+"Select applications or folders first" = "先にアプリまたはフォルダを選択してください";
+
+"Workspace saved" = "ワークスペースを保存しました";
+
+"Apps and folders saved; window layout requires Accessibility access" = "アプリとフォルダを保存しました。配置にはアクセシビリティ権限が必要です";
+
+"Workspace could not be saved" = "ワークスペースを保存できません";
+
+"Preset removed; recovery copy retained" = "プリセットを削除し、復元用コピーを保持しました";
+
+"Accessibility access available" = "アクセシビリティ権限あり";
+
+"Accessibility access required for window layouts" = "ウィンドウ配置にはアクセシビリティ権限が必要です";
+
+"Discovery checks paths only. Select a tool to explicitly read its version or packages. Multiple installations are kept separate; the active shell environment is not inferred." = "検出時はパスのみ確認します。ツールを選んでバージョンやパッケージを取得してください。複数のインストールは別扱いとし、使用中のshell環境は推測しません。";
+
+"Filter saved networks" = "保存済みネットワークを絞り込む";
+
+"Previous" = "前へ";
+
+"Next" = "次へ";
+
+"Window missing, ambiguous or layout not applied" = "ウィンドウを特定できないか、配置を適用できません";
+
+"Connection" = "接続";
+
+"Not connected" = "未接続";
+
+"Connected" = "接続済み";
+
+"Battery Percent" = "バッテリー残量";
+
+"Resolution" = "解像度";
+
+"Online" = "オンライン";
+
+"Manufacturer" = "メーカー";
+
+"Transport" = "接続方式";
+
+"Speed" = "速度";
+
+"Power" = "電源";
+
+"Channels" = "チャンネル数";
+
+"Sample Rate" = "サンプルレート";
+
+"Related application" = "関連アプリ";
+
+/* Action Center, Smart Diagnostics and Work Profiles */
+"Action Center" = "アクションセンター";
+"Smart Diagnostics" = "スマート診断";
+"Work Profiles" = "作業プロファイル";
+"Quick actions" = "クイック操作";
+"Edit favorites" = "お気に入りを編集";
+"Choose up to eight favorites." = "お気に入りは8件まで選択できます。";
+"Applying work profile" = "プロファイルを適用中";
+"steps succeeded" = "ステップ成功";
+"Latest diagnostic" = "最新の分析";
+"A saved observation, not current health status." = "保存済みの観測結果であり、現在の状態ではありません。";
+"Analyze a problem" = "問題を分析";
+"Recent activity" = "最近の操作";
+"Recent alerts" = "最近の通知";
+"Activity summary unavailable" = "操作概要を取得できません";
+"No recorded activity." = "記録された操作はありません。";
+"Hints use available samples from the last 15 seconds. Missing or paused checks cannot establish normal operation." = "過去15秒以内の取得可能なサンプルを使用します。欠測・停止中の項目から正常とは判断できません。";
+"Mac feels slow" = "Macの動作が遅い";
+"Mac feels hot" = "Macが熱い";
+"Battery drains quickly" = "バッテリーの減りが早い";
+"Network feels slow" = "ネットワークが遅い";
+"Running out of storage" = "空き容量が少ない";
+"CPU (%)" = "CPU (%)";
+"Memory pressure (0 normal, 1 warning, 2 critical)" = "メモリプレッシャー（0 通常、1 警告、2 危険）";
+"Thermal state (0 nominal, 1 fair, 2 serious, 3 critical)" = "温度状態（0 通常、1 やや高い、2 深刻、3 危険）";
+"Battery (%)" = "バッテリー残量 (%)";
+"On battery (1 yes, 0 no)" = "バッテリー駆動（1 はい、0 いいえ）";
+"Available storage (%)" = "利用可能な容量 (%)";
+"Wi-Fi signal (dBm)" = "Wi-Fi信号 (dBm)";
+"Default gateway configured (1 yes, 0 no)" = "デフォルトゲートウェイ設定済み（1 はい、0 いいえ）";
+"Global DNS servers configured" = "設定済みグローバルDNSサーバー数";
+"Fresh evidence unavailable" = "新しいデータを取得できません";
+"Paused, missing or older than 15 seconds. This check cannot establish normal operation." = "停止中・欠測・15秒より古いデータです。正常動作とは判断できません。";
+"CPU is elevated in this observation" = "この観測ではCPU使用率が高い";
+"CPU observation available" = "CPUの観測データあり";
+"Review the largest CPU consumers. The 80% threshold is a triage hint, not proof of a persistent fault or its cause." = "CPU使用率の高いプロセスを確認してください。80%は調査の目安であり、継続的な障害や原因の証明ではありません。";
+"No pressure warning in this observation" = "この観測ではメモリ警告なし";
+"Use memory pressure rather than occupied RAM alone. Review applications before closing anything." = "使用済みRAM量だけでなくメモリプレッシャーを確認してください。終了前にアプリを確認してください。";
+"macOS reports thermal pressure" = "macOSが温度上昇を報告";
+"Thermal observation available" = "温度状態の観測データあり";
+"Serious or critical is the macOS thermal classification. Inspect sensor coverage and recent load; no fan or CPU policy is changed." = "深刻・危険はmacOSによる分類です。センサーの取得範囲と最近の負荷を確認してください。ファンやCPU設定は変更しません。";
+"Battery level is low" = "バッテリー残量が少ない";
+"Battery observation available" = "バッテリーの観測データあり";
+"20% is a low-charge hint. One reading cannot establish drain rate or battery wear; review Battery History." = "20%は残量低下の目安です。1回の測定では消費速度や劣化を判断できません。バッテリー履歴を確認してください。";
+"Running on battery" = "バッテリーで駆動中";
+"External power observed" = "外部電源を観測";
+"Review Keep Awake and power-consuming applications. A process CPU reading is not a per-app energy measurement." = "スリープ防止と負荷の高いアプリを確認してください。CPU使用率はアプリ別消費電力ではありません。";
+"Available storage is low" = "利用可能な容量が少ない";
+"Storage observation available" = "容量の観測データあり";
+"10% available is a triage threshold for the sampled volume. Review storage accounting and cleanup previews; no files are deleted here." = "対象ボリュームの空き10%を目安にします。容量内訳と削除プレビューを確認してください。ここではファイルを削除しません。";
+"Wi-Fi signal is weak" = "Wi-Fi信号が弱い";
+"Wi-Fi signal observed" = "Wi-Fi信号を観測";
+"At or below -75 dBm suggests weak reception. Signal alone does not measure Internet speed or prove channel interference." = "-75 dBm以下は受信が弱い目安です。信号強度だけでは通信速度やチャネル干渉を判断できません。";
+"No default gateway observed" = "デフォルトゲートウェイ未確認";
+"Default gateway configured" = "デフォルトゲートウェイ設定済み";
+"Configuration does not prove reachability. Use explicit gateway and latency checks in Wi-Fi & LAN." = "設定だけでは到達性を確認できません。Wi-FiとLANでゲートウェイ・遅延テストを実行してください。";
+"No global DNS servers observed" = "グローバルDNSサーバー未確認";
+"Global DNS configuration observed" = "グローバルDNS設定を観測";
+"Scoped VPN and per-domain resolvers may differ. Run an explicit DNS check; this cannot diagnose an incorrect Wi-Fi password." = "VPNやドメイン別のDNSは異なる場合があります。DNSテストを実行してください。Wi-Fiパスワード誤りは判定できません。";
+"Read-only triage from timestamped observations. Findings are hints, not a diagnosis of root cause. Reports stay in this app session." = "時刻付き観測による読み取り専用の分析です。結果は手掛かりであり、根本原因の診断ではありません。レポートはこのセッションのみ保持します。";
+"What needs attention?" = "何を確認しますか？";
+"Analyze latest evidence" = "最新データを分析";
+"Saved observation, not a live status. Analyze again after taking action. Unavailable evidence is never treated as healthy." = "保存済みの観測結果です。操作後は再分析してください。欠測を正常とは扱いません。";
+"Open related tools" = "関連ツールを開く";
+"Largest observed CPU consumers" = "観測されたCPU使用率上位";
+"Process CPU may exceed 100% across cores. Identity is checked again by the process inspector." = "複数コアではCPUが100%を超える場合があります。プロセス画面で識別情報を再確認します。";
+"Compared with previous analysis" = "前回の分析との比較";
+"No newer comparable measurements" = "比較可能な新しい測定値なし";
+"Differences describe observations; they do not prove an action caused the change." = "差分は観測結果であり、操作による変化の証明ではありません。";
+"Choose a symptom and analyze. Network analysis reads configuration only; it sends no probe traffic." = "症状を選んで分析してください。ネットワーク分析は設定の読み取りのみで、試験通信を送りません。";
+"Group apps, folders, window layout, audio devices and timed Keep Awake. Apply only after reviewing every step. No automatic triggers or automatic rollback." = "アプリ・フォルダ・ウインドウ配置・音声機器・スリープ防止をまとめます。各手順を確認後に適用します。自動実行・自動復元はありません。";
+"Create work profile" = "作業プロファイルを作成";
+"Saving workspace" = "ワークスペースを保存中";
+"Travel" = "移動";
+"Select running applications" = "実行中のアプリを選択";
+"Capture and restore window layout" = "ウインドウ配置を保存・復元";
+"Keep Awake duration" = "スリープ防止の時間";
+"Leave unchanged" = "変更しない";
+"A selected duration replaces any active Macinity Keep Awake session. Lock Screen remains unchanged." = "選んだ時間で現在のMacinityスリープ防止を置き換えます。画面ロックは変更しません。";
+"Audio output" = "音声出力";
+"Microphone" = "マイク";
+"Refresh audio devices" = "音声機器を再取得";
+"Audio devices unavailable" = "音声機器を取得できません";
+"Changes the system default device only. Apps with their own audio routing may ignore it. No audio is recorded." = "システムの既定機器のみ変更します。独自設定のアプリには反映されない場合があります。録音しません。";
+"Saved work profiles" = "保存済みプロファイル";
+"No saved work profiles" = "保存済みプロファイルなし";
+"Step results" = "各ステップの結果";
+"Stop after current step" = "現在のステップ後に停止";
+"Successful steps remain applied if another step fails or you stop. Results are kept for this app session; profiles stay on this Mac." = "失敗・停止時も完了済みの変更は残ります。結果はセッション内、プロファイルはこのMacに保存します。";
+"This opens listed apps and folders, applies selected window/audio settings and may replace Keep Awake. Steps are checked at execution. Existing apps are not closed; failures do not undo completed steps." = "一覧のアプリ・フォルダを開き、選んだ配置・音声設定を適用し、スリープ防止を置き換える場合があります。実行時に再確認します。既存アプリは閉じず、失敗時も完了済みの操作は戻しません。";
+"Window layout enabled" = "ウインドウ配置を適用";
+"Window layout unchanged" = "ウインドウ配置は変更しない";
+"Invalid work profile options" = "プロファイル設定が無効です";
+"Work profile stopped; completed steps remain applied" = "停止しました。完了済みの変更は残ります";
+"Application open request completed" = "アプリを開く要求が完了";
+"Folder open request accepted" = "フォルダを開く要求を受理";
+"Folder open request failed" = "フォルダを開く要求が失敗";
+"Window layout" = "ウインドウ配置";
+"Window unavailable" = "ウインドウを取得できません";
+"Window geometry verified" = "位置とサイズを確認済み";
+"Default microphone verified" = "既定のマイクを確認済み";
+"Default output verified" = "既定の出力を確認済み";
+"No applicable steps" = "適用できるステップなし";
+"skipped" = "スキップ";
+"Recent profile runs" = "最近のプロファイル実行";
+"Command" = "コマンド";
+"Trace" = "追跡";
+"Done" = "完了";
+
+"Your Mac. Everything connected." = "あなたのMac。すべてがつながる。";

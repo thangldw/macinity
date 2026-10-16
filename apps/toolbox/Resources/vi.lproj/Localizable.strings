@@ -1,4 +1,4 @@
-"About Orven" = "Giới thiệu Orven";
+"About Macinity" = "Giới thiệu Macinity";
 "Home" = "Trang chủ";
 "Storage" = "Dung lượng";
 "Projects" = "Dự án";
@@ -18,12 +18,12 @@
 "Review recoverable actions and restore without overwriting files." = "Xem thao tác có thể hoàn tác và khôi phục mà không ghi đè tệp.";
 "Open Recovery" = "Mở Khôi phục";
 "Runs locally. No telemetry. Nothing is deleted automatically." = "Chạy cục bộ. Không telemetry. Không tự động xóa dữ liệu.";
-"Welcome to Orven" = "Chào mừng đến với Orven";
+"Welcome to Macinity" = "Chào mừng đến với Macinity";
 "Local evidence for safer cleanup and app changes." = "Bằng chứng cục bộ để dọn dẹp và theo dõi thay đổi an toàn hơn.";
 "Private by default" = "Riêng tư ngay từ đầu";
-"Scans, snapshots, and activity stay on this Mac. Orven has no telemetry and never cleans automatically." = "Kết quả quét, snapshot và hoạt động chỉ lưu trên máy Mac này. Orven không telemetry và không tự động dọn dẹp.";
+"Scans, snapshots, and activity stay on this Mac. Macinity has no telemetry and never cleans automatically." = "Kết quả quét, snapshot và hoạt động chỉ lưu trên máy Mac này. Macinity không telemetry và không tự động dọn dẹp.";
 "First-launch approval" = "Phê duyệt lần mở đầu";
-"If macOS blocks Orven, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "Nếu macOS chặn Orven, hãy thử mở ứng dụng một lần, sau đó vào System Settings → Privacy & Security → Open Anyway. Không bao giờ tắt Gatekeeper.";
+"If macOS blocks Macinity, open it once, then use System Settings → Privacy & Security → Open Anyway. Never disable Gatekeeper." = "Nếu macOS chặn Macinity, hãy thử mở ứng dụng một lần, sau đó vào System Settings → Privacy & Security → Open Anyway. Không bao giờ tắt Gatekeeper.";
 "Open installation guide" = "Mở hướng dẫn cài đặt";
 "Scan coverage" = "Phạm vi quét";
 "Sentinel folders are readable." = "Các thư mục kiểm tra có thể đọc được.";
@@ -38,7 +38,7 @@
 "Retry import" = "Thử nhập lại";
 "No legacy data found." = "Không tìm thấy dữ liệu cũ.";
 "You can change these choices later in Settings." = "Bạn có thể thay đổi các lựa chọn này trong Settings.";
-"Continue to Orven" = "Tiếp tục vào Orven";
+"Continue to Macinity" = "Tiếp tục vào Macinity";
 "Migration error" = "Lỗi migration";
 "Close" = "Đóng";
 "Recoverable" = "Có thể khôi phục";
@@ -58,19 +58,19 @@
 "12 hours" = "12 giờ";
 "24 hours" = "24 giờ";
 "7 days" = "7 ngày";
-"Replace with Orven schedule…" = "Thay bằng lịch Orven…";
+"Replace with Macinity schedule…" = "Thay bằng lịch Macinity…";
 "No Diskora schedule needs migration." = "Không có lịch Diskora cần migrate.";
 "The old agent remains untouched unless the new scan-only agent bootstraps successfully." = "Agent cũ được giữ nguyên nếu agent chỉ-quét mới chưa bootstrap thành công.";
 "Updates" = "Cập nhật";
-"Only when you click the button, Orven requests public release metadata from GitHub. No scan or device data is sent." = "Chỉ khi bạn bấm nút, Orven mới lấy metadata bản phát hành công khai từ GitHub. Không gửi dữ liệu quét hoặc thiết bị.";
+"Only when you click the button, Macinity requests public release metadata from GitHub. No scan or device data is sent." = "Chỉ khi bạn bấm nút, Macinity mới lấy metadata bản phát hành công khai từ GitHub. Không gửi dữ liệu quét hoặc thiết bị.";
 "Check for Updates" = "Kiểm tra cập nhật";
 "Replace the Diskora scheduled scan?" = "Thay lịch quét Diskora?";
 "Replace after verification" = "Thay sau khi xác minh";
 "Cancel" = "Hủy";
-"Orven first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Orven cài và bootstrap agent chỉ-quét trước. Plist Diskora chỉ bị gỡ sau khi bước đó thành công.";
+"Macinity first installs and bootstraps its scan-only agent. The Diskora plist is removed only after that succeeds." = "Macinity cài và bootstrap agent chỉ-quét trước. Plist Diskora chỉ bị gỡ sau khi bước đó thành công.";
 "Settings error" = "Lỗi Settings";
-"Legacy schedule replaced after Orven bootstrap succeeded." = "Đã thay lịch cũ sau khi Orven bootstrap thành công.";
-"Orven %@ is available." = "Orven %@ đã có bản phát hành.";
+"Legacy schedule replaced after Macinity bootstrap succeeded." = "Đã thay lịch cũ sau khi Macinity bootstrap thành công.";
+"Macinity %@ is available." = "Macinity %@ đã có bản phát hành.";
 "You are using the latest public release." = "Bạn đang dùng bản phát hành công khai mới nhất.";
 "Finish the active scan before checking for updates." = "Hãy hoàn tất lượt quét đang chạy trước khi kiểm tra cập nhật.";
 "Cleanup" = "Dọn dẹp";
@@ -194,7 +194,7 @@
 
 "Disable menu bar" = "Tắt menu bar";
 
-"Quit Orven" = "Thoát Orven";
+"Quit Macinity" = "Thoát Macinity";
 
 "Seconds before latest sample" = "Giây trước mẫu gần nhất";
 
@@ -285,30 +285,30 @@
 "Inspect what's running on your Mac. Monitoring is read-only." = "Xem tiến trình đang chạy trên máy Mac. Giám sát chỉ đọc dữ liệu.";
 "Close details" = "Đóng chi tiết";
 "Settings" = "Cài đặt";
-"About Orven" = "Giới thiệu Orven";
+"About Macinity" = "Giới thiệu Macinity";
 "Appearance" = "Giao diện";
 "System" = "Theo hệ thống";
 "Light" = "Sáng";
 "Dark" = "Tối";
 "%d of %d processes have CPU samples." = "%d trên %d tiến trình có mẫu CPU.";
 
-"Giới thiệu Diskora" = "Giới thiệu Orven";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa";
-"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
-"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
-"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu.";
-"Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Orven không tự xóa dữ liệu.";
-"Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Orven không tự xóa";
-"Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Orven chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
-"Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Orven sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
-"Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Orven chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng.";
-"Orven sẽ nhận diện output có thể tạo lại từ marker dự án." = "Orven sẽ nhận diện output có thể tạo lại từ marker dự án.";
-"Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Orven chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu.";
-"Coverage giảm vì Orven không chạy trong một phần của phiên." = "Coverage giảm vì Orven không chạy trong một phần của phiên.";
-"Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper." = "Snapshot và FSEvents chỉ lưu metadata cục bộ. Orven không mount, execute hoặc bypass Gatekeeper.";
-"Orven chỉ nhận .dmg, .pkg hoặc .app" = "Orven chỉ nhận .dmg, .pkg hoặc .app";
-"Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát." = "Minh bạch về dữ liệu Orven đọc, lưu và không thể quan sát.";
-"Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Orven đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại.";
+"Giới thiệu Diskora" = "Giới thiệu Macinity";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Diskora không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa";
+"Diskora chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
+"Diskora sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
+"Lịch quét chỉ thông báo; Diskora không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Macinity không tự xóa dữ liệu.";
+"Lịch quét chỉ thông báo; Macinity không tự xóa dữ liệu." = "Lịch quét chỉ thông báo; Macinity không tự xóa dữ liệu.";
+"Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa" = "Receipt hệ thống chỉ dùng làm bằng chứng; Macinity không tự xóa";
+"Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ." = "Macinity chỉ dọn sau khi xác nhận và ưu tiên command chính thức của từng công cụ.";
+"Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo." = "Macinity sẽ chạy đúng command được hiển thị từ allowlist. Command này không chuyển dữ liệu vào Trash và không thể Undo.";
+"Macinity chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng." = "Macinity chỉ quét thư mục bạn chọn và chỉ đề xuất artifact có marker hệ sinh thái rõ ràng.";
+"Macinity sẽ nhận diện output có thể tạo lại từ marker dự án." = "Macinity sẽ nhận diện output có thể tạo lại từ marker dự án.";
+"Macinity chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu." = "Macinity chỉ đọc loại file và đường dẫn; installer chỉ mở sau khi baseline đã lưu.";
+"Coverage giảm vì Macinity không chạy trong một phần của phiên." = "Coverage giảm vì Macinity không chạy trong một phần của phiên.";
+"Snapshot và FSEvents chỉ lưu metadata cục bộ. Macinity không mount, execute hoặc bypass Gatekeeper." = "Snapshot và FSEvents chỉ lưu metadata cục bộ. Macinity không mount, execute hoặc bypass Gatekeeper.";
+"Macinity chỉ nhận .dmg, .pkg hoặc .app" = "Macinity chỉ nhận .dmg, .pkg hoặc .app";
+"Minh bạch về dữ liệu Macinity đọc, lưu và không thể quan sát." = "Minh bạch về dữ liệu Macinity đọc, lưu và không thể quan sát.";
+"Macinity đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại." = "Macinity đưa ra bằng chứng kỹ thuật, không kết luận một ứng dụng là độc hại.";
 
 "Sleep Inspector" = "Kiểm tra yêu cầu giữ thức";
 "Refresh sleep requests" = "Làm mới yêu cầu giữ thức";
@@ -392,7 +392,7 @@
 "APFS container capacity" = "Capacity APFS container";
 "APFS container free" = "Dung lượng trống APFS container";
 "Data volume used" = "Dung lượng Data volume đã dùng";
-"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Orven does not attribute the remainder to one cause." = "Chưa đo được phần dung lượng chưa giải thích. Có thể gồm tệp không đọc được, volume khác, metadata filesystem, clones hoặc snapshots; Orven không quy phần còn lại cho một nguyên nhân.";
+"Unaccounted space is not measured here. It may include unreadable files, other volumes, filesystem metadata, clones or snapshots; Macinity does not attribute the remainder to one cause." = "Chưa đo được phần dung lượng chưa giải thích. Có thể gồm tệp không đọc được, volume khác, metadata filesystem, clones hoặc snapshots; Macinity không quy phần còn lại cho một nguyên nhân.";
 "APFS snapshots" = "APFS snapshots";
 "No APFS snapshots reported for the Data volume. Other volumes may have snapshots." = "OS không báo APFS snapshot trên volume Data. Các volume khác có thể có snapshots.";
 "OS marks this snapshot purgeable." = "OS đánh dấu snapshot có thể purge.";
@@ -515,7 +515,7 @@
 "Fan count unavailable; no fan speeds inferred." = "Không đọc được số quạt; không suy ra tốc độ quạt.";
 "Fan coverage is capped at 8 reported fans." = "Phạm vi quạt giới hạn ở8 quạt do SMC báo.";
 "Read-only SMC sensors refresh every 10 seconds while monitoring runs. Coverage is limited and model-dependent. CPU/GPU labels use community mappings, not verified physical core IDs. Missing readings are never zero." = "Cảm biến SMC chỉ đọc, cập nhật mỗi10 giây khi monitoring chạy. Phạm vi giới hạn và tùy model. Label CPU/GPU dùng mapping cộng đồng, không phải ID core vật lý đã xác minh. Mẫu thiếu không được coi là0.";
-"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Orven does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Nhiệt độ là từng mẫu sensor đã map, không phải trung bình package CPU/GPU hay chẩn đoán an toàn. Quạt chỉ hiển thị RPM quan sát; Orven không đổi mode/target quạt. Chưa thu điện áp, xung trực tiếp, SPD và SMART.";
+"Temperatures are individual mapped readings, not CPU/GPU package averages or a safety diagnosis. Fan speeds are observed RPM only; Macinity does not change fan modes or targets. Voltage, live clocks, SPD and SMART are not collected." = "Nhiệt độ là từng mẫu sensor đã map, không phải trung bình package CPU/GPU hay chẩn đoán an toàn. Quạt chỉ hiển thị RPM quan sát; Macinity không đổi mode/target quạt. Chưa thu điện áp, xung trực tiếp, SPD và SMART.";
 "SMC temperature, fan and power coverage is shown above. Thermal state remains a separate macOS condition. Voltage, live core clocks, SPD timings, SMART health, fan control, overclocking and stress tests are not provided." = "Phạm vi nhiệt độ, quạt và công suất SMC hiển thị phía trên. Thermal state vẫn là trạng thái macOS riêng. Chưa cung cấp điện áp, xung core trực tiếp, timing SPD, SMART, điều khiển quạt, ép xung hay stress test.";
 
 "Review temperatures and fans" = "Xem nhiệt độ và quạt";
@@ -563,7 +563,7 @@
 "History could not be saved. Existing data is preserved; check the local storage location." = "Không lưu được lịch sử. Giữ nguyên dữ liệu hiện có; kiểm tra vị trí lưu trên máy.";
 "Baseline needs at least 30 recorded samples and writable local storage." = "Mốc tham chiếu cần ít nhất 30 mẫu đã lưu và vị trí lưu có quyền ghi.";
 "History retention could not be saved. Existing data is preserved." = "Không lưu được thời gian giữ lịch sử. Dữ liệu hiện có được giữ nguyên.";
-"Notifications require the Orven app bundle." = "Thông báo cần chạy từ bundle app Orven.";
+"Notifications require the Macinity app bundle." = "Thông báo cần chạy từ bundle app Macinity.";
 "Notification permission granted." = "Đã được cho phép thông báo.";
 "Notifications are not allowed. In-app alerts remain available." = "Thông báo chưa được cho phép. Vẫn xem được cảnh báo trong app.";
 "Notification permission could not be requested. In-app alerts remain available." = "Không yêu cầu được quyền thông báo. Vẫn xem được cảnh báo trong app.";
@@ -718,3 +718,606 @@
 "Up / running" = "Up / running";
 "Down / not running" = "Down / không running";
 "Interface flags" = "Cờ interface";
+
+"My Mac" = "Máy Mac";
+
+"Thermals" = "Nhiệt độ";
+
+"Software" = "Phần mềm";
+
+"Files" = "Tệp";
+
+"Search Macinity" = "Tìm trong Macinity";
+
+"Workspace page" = "Trang trong khu vực";
+
+"Temperatures & Fans" = "Nhiệt độ & Quạt";
+
+"Find a tool or page" = "Tìm công cụ hoặc trang";
+
+"Find tools and pages. File and application contents are not searched." = "Tìm công cụ và trang. Không tìm trong nội dung tệp hay ứng dụng.";
+
+"No matching tools" = "Không tìm thấy công cụ";
+
+"Try another name or clear the search." = "Thử tên khác hoặc xóa nội dung tìm kiếm.";
+
+"Your Mac, in focus" = "Hiểu rõ máy Mac của bạn";
+
+"Inspect this Mac" = "Xem cấu hình máy";
+
+"Installed memory" = "Bộ nhớ đã lắp";
+
+"Recent sensor readings" = "Mẫu cảm biến gần đây";
+
+"Observed sensor samples only. Missing readings remain gaps; the chart does not diagnose thermal safety." = "Chỉ hiển thị mẫu đã quan sát. Mẫu thiếu tạo khoảng trống; biểu đồ không kết luận mức nhiệt có an toàn hay không.";
+
+"No sensor samples available." = "Chưa có mẫu cảm biến.";
+
+"Active monitoring" = "Giám sát trực tiếp";
+
+"Developer Tools" = "Công cụ lập trình";
+
+"Discover runtimes and command-line tools in common installation folders." = "Tìm runtime và công cụ dòng lệnh trong các thư mục cài đặt phổ biến.";
+
+"Presence only: shims and system stubs may need setup. Versions, packages and the active shell environment are not inspected. No tools are executed." = "Chỉ kiểm tra sự hiện diện: shim và công cụ có sẵn của hệ thống có thể cần thiết lập thêm. Không kiểm tra phiên bản, package hay môi trường shell hiện tại. Không chạy công cụ.";
+
+"Filter by name or path" = "Lọc theo tên hoặc đường dẫn";
+
+"No tools found in this view. Custom installation folders are not scanned." = "Không tìm thấy công cụ phù hợp. Các thư mục cài đặt tùy chỉnh chưa được quét.";
+
+"Last checked" = "Kiểm tra lần cuối";
+
+"Refresh" = "Làm mới";
+
+"Filter choices" = "Lọc lựa chọn";
+
+"No matching choices" = "Không có lựa chọn phù hợp";
+"Có thể khôi phục từ Trash" = "Có thể khôi phục từ Trash";
+"Toàn bộ hoạt động" = "Toàn bộ hoạt động";
+"mục có thể khôi phục" = "mục có thể khôi phục";
+"Loại tệp trùng lặp" = "Loại tệp trùng lặp";
+"Chọn Quét dung lượng để bắt đầu" = "Chọn Quét dung lượng để bắt đầu";
+"đã chọn vào Trash" = "đã chọn vào Trash";
+
+"Developed by thangldw and Codex" = "Được phát triển bởi thangldw và Codex";
+
+"After allowing Location access, refresh or scan again to read Wi-Fi names." = "Sau khi cho phép truy cập Vị trí, hãy làm mới hoặc quét lại để đọc tên Wi-Fi.";
+
+"Review Macinity in System Settings → Privacy & Security → Location Services. Restrictions may be managed by your organization." = "Kiểm tra Macinity trong Cài đặt hệ thống → Quyền riêng tư & Bảo mật → Dịch vụ định vị. Các hạn chế có thể do tổ chức của bạn quản lý.";
+
+"Select a sensor below to view its chart." = "Chọn cảm biến bên dưới để xem biểu đồ tương ứng.";
+
+"No applications found" = "Không tìm thấy ứng dụng";
+
+"No readable application bundles were found in /Applications or ~/Applications." = "Không tìm thấy gói ứng dụng có thể đọc trong /Applications hoặc ~/Applications.";
+
+"Disk Activity" = "Hoạt động ổ đĩa";
+
+"Network Activity" = "Hoạt động mạng";
+
+"Battery details" = "Chi tiết pin";
+
+"Power source" = "Nguồn điện";
+
+"AC Power" = "Nguồn ngoài";
+
+"Low Power Mode" = "Chế độ nguồn điện thấp";
+
+"Battery health" = "Tình trạng pin";
+
+"Estimated time to full" = "Ước tính sạc đầy";
+
+"Estimated time remaining" = "Thời gian còn lại ước tính";
+
+"Charge cycles" = "Chu kỳ sạc";
+
+"Design capacity" = "Dung lượng thiết kế";
+
+"Full charge capacity" = "Dung lượng khi sạc đầy";
+
+"Capacity vs. design" = "Dung lượng so với thiết kế";
+
+"Battery voltage" = "Điện áp pin";
+
+"Reported adapter power" = "Công suất bộ sạc báo cáo";
+
+"Capacity ratio is calculated from reported full and design capacity; it may differ from macOS Battery Health. Adapter watts describe the adapter, not live charging power. Missing values are unavailable, not zero." = "Tỷ lệ được tính từ dung lượng sạc đầy và thiết kế do máy báo cáo, có thể khác Sức khỏe pin của macOS. Công suất là thông tin bộ sạc, không phải công suất sạc tức thời. Dữ liệu thiếu không được coi là số không.";
+
+"Battery health: Good" = "Tốt";
+
+"Battery health: Fair" = "Dung lượng hạn chế";
+
+"Battery health: Poor" = "Kém";
+
+"Battery level & charging history" = "Mức pin và lịch sử sạc/xả";
+
+"Save local health history" = "Lưu lịch sử sức khỏe trên máy";
+
+"Battery level" = "Mức pin";
+
+"Discharging" = "Đang dùng pin";
+
+"External power (not charging)" = "Cắm nguồn (không sạc)";
+
+"One sample per minute while monitoring is active. Uses Health History retention. Sleep, pauses and missing samples remain gaps; earlier macOS history is not imported." = "Ghi mỗi phút khi giám sát hoạt động, theo thời hạn lưu của Health History. Máy ngủ, tạm dừng và mẫu thiếu tạo khoảng trống; không nhập lịch sử cũ từ macOS.";
+
+"No battery history yet. Enable recording and keep monitoring active." = "Chưa có lịch sử pin. Bật lưu lịch sử và duy trì giám sát.";
+
+"Latest 20 observed intervals. Times mark recorded samples, not exact plug/unplug events." = "20 khoảng quan sát gần nhất. Thời gian là lúc ghi mẫu, không phải thời điểm cắm/rút sạc chính xác.";
+
+"macOS Battery Health" = "Sức khỏe pin từ macOS";
+
+"Battery condition" = "Tình trạng pin";
+
+"Maximum Capacity" = "Dung lượng tối đa";
+
+"Service Recommended" = "Khuyến nghị bảo dưỡng";
+
+"Reported by macOS System Information, separately from the raw capacity ratio. Availability and rounding depend on macOS and hardware. Refresh to update." = "Do Thông tin hệ thống macOS báo cáo, tách biệt với tỷ lệ dung lượng thô. Khả năng đọc và cách làm tròn tùy macOS và phần cứng. Bấm Làm mới để cập nhật.";
+
+"Add folders" = "Thêm thư mục";
+
+"Add prefix" = "Thêm tiền tố";
+
+"Application changed or missing" = "Ứng dụng đã thay đổi hoặc không còn";
+
+"Applications opened; layout requires Accessibility access" = "Đã mở ứng dụng; bố cục cần quyền Trợ năng";
+
+"Apply" = "Áp dụng";
+
+"Apply reviewed rename" = "Áp dụng đổi tên đã xem trước";
+
+"Apply the displayed rename plan? Existing files will never be overwritten." = "Áp dụng danh sách đổi tên đang hiển thị? Không ghi đè file hiện có.";
+
+"Calculate checksum" = "Tính mã kiểm tra";
+
+"Capacity" = "Dung lượng";
+
+"Change failed or state changed; refresh before retrying" = "Thay đổi thất bại hoặc trạng thái đã đổi; làm mới trước khi thử lại";
+
+"Checksum differs" = "Mã kiểm tra không khớp";
+
+"Checksum matches" = "Mã kiểm tra khớp";
+
+"Choose Python environment" = "Chọn môi trường Python";
+
+"Choose files" = "Chọn file";
+
+"Choose first folder" = "Chọn thư mục thứ nhất";
+
+"Choose second folder" = "Chọn thư mục thứ hai";
+
+"Clear" = "Xóa nội dung";
+
+"Clear folders" = "Bỏ các thư mục";
+
+"Clear report" = "Xóa báo cáo";
+
+"Command arguments may contain secrets. Displayed locally only; clear after review." = "Tham số lệnh có thể chứa thông tin bí mật. Chỉ hiển thị trên máy; xóa sau khi xem.";
+
+"Compare contents" = "So sánh nội dung";
+
+"Device Inspector" = "Thiết bị kết nối";
+
+"Device category" = "Nhóm thiết bị";
+
+"Device details changed" = "Thông tin thiết bị thay đổi";
+
+"Device inspection failed or access is restricted" = "Không đọc được thiết bị hoặc bị giới hạn quyền";
+
+"Different content" = "Nội dung khác nhau";
+
+"Drive inspection failed; results may be incomplete" = "Không đọc được ổ đĩa; kết quả có thể thiếu";
+
+"Eject" = "Tháo ổ";
+
+"Eject external drive?" = "Tháo ổ ngoài?";
+
+"Eject failed or device changed. Inspect open files; no force eject was attempted." = "Tháo ổ thất bại hoặc thiết bị đã thay đổi. Hãy kiểm tra file đang mở; chưa cưỡng chế tháo ổ.";
+
+"Eject request completed" = "Đã hoàn tất yêu cầu tháo ổ";
+
+"Enter credentials for a network you own or may share. The QR contains the password. It stays in memory and is cleared when you leave this page; no upload or automatic copy." = "Nhập thông tin mạng bạn sở hữu hoặc được phép chia sẻ. QR chứa mật khẩu, chỉ giữ trong bộ nhớ và xóa khi rời trang; không tải lên hay tự sao chép.";
+
+"Expected SHA-256 (optional, one file)" = "SHA-256 cần đối chiếu (tùy chọn, một file)";
+
+"External Drives" = "Ổ đĩa ngoài";
+
+"External Drives & File Locks" = "Ổ ngoài và file đang mở";
+
+"External disks and their partitions, including unmounted entries. Eject uses macOS without force. Open-file inspection may omit restricted processes; it does not prove a file is locked." = "Ổ ngoài và phân vùng, gồm cả mục chưa mount. Tháo ổ qua macOS, không cưỡng chế. Kiểm tra file mở có thể thiếu tiến trình bị giới hạn; không khẳng định file bị khóa.";
+
+"File Utilities" = "Tiện ích file";
+
+"File utility" = "Công cụ file";
+
+"Filter packages" = "Lọc package";
+
+"Find in filename" = "Tìm trong tên file";
+
+"Finish file operations first. macOS may eject related volumes on the same device. Busy devices will not be forcibly unmounted." = "Hoàn tất thao tác file trước. macOS có thể tháo các volume cùng thiết bị. Không cưỡng chế tháo thiết bị đang bận.";
+
+"Free" = "Còn trống";
+
+"Generate QR" = "Tạo mã QR";
+
+"Hidden network" = "Mạng ẩn";
+
+"Inspect" = "Kiểm tra";
+
+"Inspect open files" = "Kiểm tra file đang mở";
+
+"Inspect tool" = "Kiểm tra công cụ";
+
+"Inspection failed or access is restricted" = "Kiểm tra thất bại hoặc bị giới hạn quyền";
+
+"Invalid names, changed files or destination conflicts" = "Tên không hợp lệ, file đã đổi hoặc trùng tên đích";
+
+"Keep Awake" = "Giữ máy thức";
+
+"Last rename recovery preview" = "Xem trước phục hồi đổi tên gần nhất";
+
+"Latest observed device changes" = "Thay đổi thiết bị quan sát gần nhất";
+
+"Launch plists and current user registrations. System daemon status is unknown. Modern login items are managed in macOS Settings. Runtime changes affect this session; original plists stay intact." = "Plist khởi chạy và đăng ký của người dùng hiện tại. Trạng thái daemon hệ thống chưa xác minh. Login Items hiện đại quản lý trong Settings. Thay đổi runtime áp dụng phiên này, giữ nguyên plist.";
+
+"Local socket ownership only. Wildcard binding is not proof of Internet exposure; firewalls and routers still apply. Restricted and short-lived processes may be missing." = "Chỉ kiểm tra socket cục bộ. Bind mọi interface không chứng minh truy cập được từ Internet; còn phụ thuộc firewall/router. Có thể thiếu tiến trình bị giới hạn hoặc tồn tại ngắn.";
+
+"Locate executable" = "Tìm file thực thi";
+
+"Login items report unavailable; use macOS Settings" = "Không đọc được báo cáo Login Items; dùng Settings";
+
+"No external disks in this observation" = "Không thấy ổ ngoài trong lần đọc này";
+
+"No matching observable sockets" = "Không thấy socket phù hợp";
+
+"No readable devices in this category" = "Không đọc được thiết bị trong nhóm này";
+
+"No readable open files; restricted processes may be missing" = "Không thấy file mở đọc được; có thể thiếu tiến trình bị giới hạn";
+
+"Not mounted" = "Chưa mount";
+
+"Observed open files" = "File đang mở quan sát được";
+
+"Only in first" = "Chỉ có ở thư mục thứ nhất";
+
+"Only in second" = "Chỉ có ở thư mục thứ hai";
+
+"Only profiles exposed by macOS are listed. Missing profiles or names may be restricted; this is not a complete connection history. Passwords are never read by Macinity." = "Chỉ liệt kê hồ sơ macOS cho phép đọc. Tên hoặc hồ sơ có thể bị giới hạn; đây không phải toàn bộ lịch sử kết nối. Macinity không đọc mật khẩu.";
+
+"Open Accessibility Settings" = "Mở cài đặt Trợ năng";
+
+"Open Login Items Settings" = "Mở cài đặt Login Items";
+
+"Open Passwords" = "Mở Passwords";
+
+"Open network (no password)" = "Mạng mở (không mật khẩu)";
+
+"Operation failed or timed out; inspect current state before retrying" = "Thao tác thất bại hoặc hết thời gian; kiểm tra trạng thái trước khi thử lại";
+
+"Operation stopped or failed; no complete result is available" = "Thao tác dừng hoặc thất bại; chưa có kết quả đầy đủ";
+
+"Original names restored" = "Đã khôi phục tên ban đầu";
+
+"Partial inventory: display limit reached" = "Danh sách chưa đầy đủ: đạt giới hạn hiển thị";
+
+"Port" = "Cổng";
+
+"Port & Service Inspector" = "Cổng và dịch vụ";
+
+"Potentially overlapping 2.4 GHz networks" = "Mạng 2.4 GHz có thể chồng lấn";
+
+"Preset name" = "Tên cấu hình";
+
+"Prevents idle system sleep only. Display sleep, screen locking and manual sleep remain unchanged. Process sessions stop on exit or after 24 hours; quitting Macinity releases the request." = "Chỉ ngăn ngủ do máy nhàn rỗi, không đổi tắt màn hình, khóa máy hay ngủ thủ công. Phiên theo tiến trình dừng khi tiến trình thoát hoặc sau 24 giờ; thoát Macinity sẽ giải phóng yêu cầu.";
+
+"Preview rename" = "Xem trước đổi tên";
+
+"Process is unavailable; refresh before retrying" = "Tiến trình không còn; làm mới trước khi thử lại";
+
+"Read macOS login items report" = "Đọc báo cáo Login Items macOS";
+
+"Read packages / environment" = "Đọc package / môi trường";
+
+"Read version" = "Đọc phiên bản";
+
+"Refresh saved networks" = "Làm mới mạng đã lưu";
+
+"Remove preset" = "Bỏ cấu hình";
+
+"Rename completed. Recovery journal retained." = "Đã đổi tên. Nhật ký phục hồi được giữ lại.";
+
+"Replace with" = "Thay bằng";
+
+"Restore original names from the latest journal? Changed files and conflicts will be left untouched." = "Khôi phục tên từ nhật ký gần nhất? File đã thay đổi và tên xung đột sẽ không bị sửa.";
+
+"Restore workspace?" = "Khôi phục không gian làm việc?";
+
+"Review eject" = "Xem trước tháo ổ";
+
+"Review package operation" = "Xem trước thao tác package";
+
+"Review restore" = "Xem trước khôi phục";
+
+"Review runtime change" = "Xem trước thay đổi runtime";
+
+"Review undo last rename" = "Xem trước hoàn tác đổi tên";
+
+"Review uninstall" = "Xem trước gỡ";
+
+"Review update" = "Xem trước cập nhật";
+
+"Same content" = "Nội dung giống nhau";
+
+"Save selected running apps, chosen folders and observable window geometry. Window titles are stored locally for matching. Browser tabs, terminal sessions, documents and VPN state are not restored. Missing or ambiguous windows are skipped." = "Lưu ứng dụng đang chạy được chọn, thư mục và bố cục cửa sổ đọc được. Tiêu đề cửa sổ lưu trên máy để đối chiếu. Không khôi phục tab, phiên terminal, tài liệu hay VPN. Bỏ qua cửa sổ thiếu hoặc không khớp duy nhất.";
+
+"Save workspace" = "Lưu không gian làm việc";
+
+"Saved Wi-Fi & Sharing" = "Wi-Fi đã lưu và chia sẻ";
+
+"Security" = "Bảo mật";
+
+"Selected files only. Symlinks are excluded. Hashing is bounded to 16 GiB per file and two minutes per operation. Folder comparison excludes package contents and stops rather than claiming completeness when limits or read errors occur." = "Chỉ xử lý file được chọn, bỏ symlink. Hash tối đa 16 GiB mỗi file và hai phút mỗi lần. So sánh thư mục bỏ nội dung package; dừng và báo lỗi khi vượt giới hạn hoặc không đọc được.";
+
+"Share your Wi-Fi with QR" = "Chia sẻ Wi-Fi bằng QR";
+
+"Show launch command" = "Xem lệnh khởi chạy";
+
+"Show recovery journals" = "Mở nhật ký phục hồi";
+
+"Startup & Background" = "Khởi động và chạy nền";
+
+"Startup inspection failed" = "Không đọc được thông tin khởi động";
+
+"System Information snapshot. Accessory battery is shown only when macOS supplies it. Bluetooth entries may include paired, disconnected devices. Change history compares explicit refreshes, not exact physical plug/unplug times." = "Ảnh chụp Thông tin hệ thống. Chỉ hiện pin phụ kiện khi macOS cung cấp. Bluetooth có thể gồm thiết bị đã ghép nhưng ngắt kết nối. Lịch sử so sánh các lần làm mới, không phải thời điểm cắm/rút chính xác.";
+
+"This changes installed software and may run package code. Dependencies can change. A timeout or error may leave partial changes; inspect the package manager before retrying." = "Thao tác thay đổi phần mềm và có thể chạy mã package. Dependencies có thể đổi. Lỗi/hết thời gian có thể để lại thay đổi một phần; kiểm tra package manager trước khi thử lại.";
+
+"This opens the listed apps and folders and moves matching windows. Existing windows and documents are not closed." = "Mở ứng dụng/thư mục đã liệt kê và di chuyển cửa sổ khớp. Không đóng cửa sổ hay tài liệu hiện có.";
+
+"Tools run only after a button press, without shell startup files. Package mutations can download and execute package code, affect dependencies and are not automatically reversible. No sudo. Python writes require a virtual environment; npm writes skip lifecycle scripts." = "Chỉ chạy công cụ khi bấm nút, không nạp cấu hình shell. Thay đổi package có thể tải/chạy mã, tác động dependencies và không tự hoàn tác. Không dùng sudo. Python chỉ ghi trong virtual environment; npm bỏ lifecycle scripts.";
+
+"Track device changes during this visit" = "Theo dõi thay đổi thiết bị trong lần mở này";
+
+"Undo rename" = "Hoàn tác đổi tên";
+
+"Unreadable or omitted entries" = "Mục không đọc được hoặc bị lược bỏ";
+
+"Until process exits" = "Đến khi tiến trình thoát";
+
+"Weak or unencrypted network. Configure your router for WPA3 or WPA2-AES; avoid WEP and legacy WPA." = "Mạng yếu về bảo mật hoặc không mã hóa. Nên cấu hình router dùng WPA3 hoặc WPA2-AES, tránh WEP/WPA cũ.";
+
+"Weak signal: move closer to the access point before retrying authentication or connection tests." = "Tín hiệu yếu: đến gần điểm phát trước khi thử xác thực hoặc kiểm tra kết nối lại.";
+
+"Wi-Fi password" = "Mật khẩu Wi-Fi";
+
+"Wi-Fi sharing QR" = "QR chia sẻ Wi-Fi";
+
+"Window does not support layout changes" = "Cửa sổ không hỗ trợ thay đổi bố cục";
+
+"Window missing or ambiguous" = "Thiếu cửa sổ hoặc không khớp duy nhất";
+
+"Workspace Presets" = "Không gian làm việc";
+
+"Workspace partially restored" = "Đã khôi phục một phần không gian làm việc";
+
+"Workspace restored" = "Đã khôi phục không gian làm việc";
+
+"folders" = "thư mục";
+
+"macOS login item registrations; this report does not prove a service is running. Output is limited to 24,000 characters." = "Đăng ký Login Items của macOS; không chứng minh dịch vụ đang chạy. Giới hạn hiển thị 24.000 ký tự.";
+
+"saved windows" = "cửa sổ đã lưu";
+
+"selected files" = "file được chọn";
+
+"No active Keep Awake session" = "Chưa có phiên giữ máy thức";
+
+"Process is unavailable; no session started" = "Tiến trình không còn; chưa bắt đầu phiên";
+
+"Keep Awake could not start" = "Không thể bắt đầu giữ máy thức";
+
+"Keep Awake is active" = "Đang giữ máy thức";
+
+"Registered, not running" = "Đã đăng ký, chưa chạy";
+
+"Running" = "Đang chạy";
+
+"Not registered" = "Chưa đăng ký";
+
+"Preview stop" = "Xem trước dừng";
+
+"Preview start" = "Xem trước khởi chạy";
+
+"Stop and unregister this user agent now. Its process may terminate. Start it again from the same unchanged plist to restore registration." = "Dừng và bỏ đăng ký user agent này. Tiến trình có thể kết thúc. Khởi chạy lại từ plist không thay đổi để phục hồi đăng ký.";
+
+"Register this user agent now. Its configured executable may run. Stop it again to undo registration." = "Đăng ký user agent này. File thực thi đã cấu hình có thể chạy. Dừng lại để hoàn tác đăng ký.";
+
+"No readable saved networks" = "Không có mạng đã lưu đọc được";
+
+"Saved network access is unavailable" = "Không đọc được mạng đã lưu";
+
+"Enter a valid SSID and password" = "Nhập SSID và mật khẩu hợp lệ";
+
+"Loopback only" = "Chỉ localhost";
+
+"All local interfaces" = "Mọi interface cục bộ";
+
+"Specific interface address" = "Địa chỉ interface cụ thể";
+
+"Batch Rename" = "Đổi tên hàng loạt";
+
+"Compare Folders" = "So sánh thư mục";
+
+"Duplicate Files" = "File trùng nội dung";
+
+"Displays" = "Màn hình";
+
+"Audio" = "Âm thanh";
+
+"Open" = "Mở, không mã hóa";
+
+"Workspace file could not be read; existing data is preserved" = "Không đọc được file cấu hình; dữ liệu hiện có được giữ nguyên";
+
+"Choose a name; at most 20 presets are retained" = "Chọn tên; lưu tối đa 20 cấu hình";
+
+"Select applications or folders first" = "Chọn ứng dụng hoặc thư mục trước";
+
+"Workspace saved" = "Đã lưu không gian làm việc";
+
+"Apps and folders saved; window layout requires Accessibility access" = "Đã lưu ứng dụng và thư mục; bố cục cửa sổ cần quyền Trợ năng";
+
+"Workspace could not be saved" = "Không lưu được không gian làm việc";
+
+"Preset removed; recovery copy retained" = "Đã bỏ cấu hình; giữ bản sao phục hồi";
+
+"Accessibility access available" = "Đã có quyền Trợ năng";
+
+"Accessibility access required for window layouts" = "Bố cục cửa sổ cần quyền Trợ năng";
+
+"Discovery checks paths only. Select a tool to explicitly read its version or packages. Multiple installations are kept separate; the active shell environment is not inferred." = "Quét ban đầu chỉ tìm đường dẫn. Chọn công cụ để đọc phiên bản hoặc package. Các bản cài tách riêng; không suy đoán môi trường shell đang dùng.";
+
+"Filter saved networks" = "Lọc mạng đã lưu";
+
+"Previous" = "Trước";
+
+"Next" = "Tiếp";
+
+"Window missing, ambiguous or layout not applied" = "Không tìm thấy cửa sổ duy nhất hoặc không áp dụng được bố cục";
+
+"Connection" = "Kết nối";
+
+"Not connected" = "Chưa kết nối";
+
+"Connected" = "Đã kết nối";
+
+"Battery Percent" = "Mức pin";
+
+"Resolution" = "Độ phân giải";
+
+"Online" = "Đang hoạt động";
+
+"Manufacturer" = "Nhà sản xuất";
+
+"Transport" = "Giao thức kết nối";
+
+"Speed" = "Tốc độ";
+
+"Power" = "Nguồn điện";
+
+"Channels" = "Số kênh";
+
+"Sample Rate" = "Tần số lấy mẫu";
+
+"Related application" = "Ứng dụng liên quan";
+
+/* Action Center, Smart Diagnostics and Work Profiles */
+"Action Center" = "Trung tâm thao tác";
+"Smart Diagnostics" = "Chẩn đoán thông minh";
+"Work Profiles" = "Hồ sơ làm việc";
+"Quick actions" = "Thao tác nhanh";
+"Edit favorites" = "Sửa mục yêu thích";
+"Choose up to eight favorites." = "Chọn tối đa tám mục yêu thích.";
+"Applying work profile" = "Đang áp dụng hồ sơ";
+"steps succeeded" = "bước thành công";
+"Latest diagnostic" = "Phân tích gần nhất";
+"A saved observation, not current health status." = "Kết quả đã lưu, không phải tình trạng hiện tại.";
+"Analyze a problem" = "Phân tích vấn đề";
+"Recent activity" = "Hoạt động gần đây";
+"Recent alerts" = "Cảnh báo gần đây";
+"Activity summary unavailable" = "Không đọc được tóm tắt hoạt động";
+"No recorded activity." = "Chưa có hoạt động được ghi lại.";
+"Hints use available samples from the last 15 seconds. Missing or paused checks cannot establish normal operation." = "Gợi ý dựa trên mẫu có sẵn trong 15 giây gần nhất. Dữ liệu thiếu hoặc tạm dừng không chứng minh máy hoạt động bình thường.";
+"Mac feels slow" = "Máy chạy chậm";
+"Mac feels hot" = "Máy nóng";
+"Battery drains quickly" = "Pin hao nhanh";
+"Network feels slow" = "Mạng chậm";
+"Running out of storage" = "Sắp hết dung lượng";
+"CPU (%)" = "CPU (%)";
+"Memory pressure (0 normal, 1 warning, 2 critical)" = "Áp lực bộ nhớ (0 bình thường, 1 cảnh báo, 2 nghiêm trọng)";
+"Thermal state (0 nominal, 1 fair, 2 serious, 3 critical)" = "Trạng thái nhiệt (0 bình thường, 1 hơi cao, 2 cao, 3 nghiêm trọng)";
+"Battery (%)" = "Mức pin (%)";
+"On battery (1 yes, 0 no)" = "Đang dùng pin (1 có, 0 không)";
+"Available storage (%)" = "Dung lượng khả dụng (%)";
+"Wi-Fi signal (dBm)" = "Tín hiệu Wi-Fi (dBm)";
+"Default gateway configured (1 yes, 0 no)" = "Đã cấu hình gateway mặc định (1 có, 0 không)";
+"Global DNS servers configured" = "Số máy chủ DNS toàn cục đã cấu hình";
+"Fresh evidence unavailable" = "Không có dữ liệu mới";
+"Paused, missing or older than 15 seconds. This check cannot establish normal operation." = "Dữ liệu tạm dừng, thiếu hoặc quá 15 giây. Chưa thể kết luận máy hoạt động bình thường.";
+"CPU is elevated in this observation" = "CPU cao trong mẫu này";
+"CPU observation available" = "Có dữ liệu CPU";
+"Review the largest CPU consumers. The 80% threshold is a triage hint, not proof of a persistent fault or its cause." = "Xem các tiến trình dùng CPU nhiều nhất. Ngưỡng 80% chỉ là gợi ý kiểm tra, không chứng minh lỗi kéo dài hay nguyên nhân.";
+"No pressure warning in this observation" = "Mẫu này không có cảnh báo áp lực bộ nhớ";
+"Use memory pressure rather than occupied RAM alone. Review applications before closing anything." = "Đánh giá áp lực bộ nhớ thay vì chỉ lượng RAM đã dùng. Kiểm tra ứng dụng trước khi đóng.";
+"macOS reports thermal pressure" = "macOS báo áp lực nhiệt";
+"Thermal observation available" = "Có dữ liệu trạng thái nhiệt";
+"Serious or critical is the macOS thermal classification. Inspect sensor coverage and recent load; no fan or CPU policy is changed." = "Mức cao hoặc nghiêm trọng do macOS phân loại. Kiểm tra độ phủ cảm biến và tải gần đây; không thay đổi chính sách quạt hay CPU.";
+"Battery level is low" = "Mức pin thấp";
+"Battery observation available" = "Có dữ liệu pin";
+"20% is a low-charge hint. One reading cannot establish drain rate or battery wear; review Battery History." = "20% là ngưỡng gợi ý pin thấp. Một mẫu không xác định được tốc độ hao pin hay độ chai; hãy xem lịch sử pin.";
+"Running on battery" = "Đang dùng pin";
+"External power observed" = "Đang dùng nguồn ngoài";
+"Review Keep Awake and power-consuming applications. A process CPU reading is not a per-app energy measurement." = "Kiểm tra Giữ máy thức và ứng dụng tiêu thụ nhiều tài nguyên. CPU của tiến trình không phải phép đo điện năng theo ứng dụng.";
+"Available storage is low" = "Dung lượng khả dụng thấp";
+"Storage observation available" = "Có dữ liệu dung lượng";
+"10% available is a triage threshold for the sampled volume. Review storage accounting and cleanup previews; no files are deleted here." = "10% khả dụng là ngưỡng gợi ý cho ổ được đo. Xem phân tích dung lượng và bản xem trước dọn dẹp; không xóa file tại đây.";
+"Wi-Fi signal is weak" = "Tín hiệu Wi-Fi yếu";
+"Wi-Fi signal observed" = "Đã đọc tín hiệu Wi-Fi";
+"At or below -75 dBm suggests weak reception. Signal alone does not measure Internet speed or prove channel interference." = "Từ -75 dBm trở xuống gợi ý sóng yếu. Tín hiệu không đo tốc độ Internet hay chứng minh nhiễu kênh.";
+"No default gateway observed" = "Chưa thấy gateway mặc định";
+"Default gateway configured" = "Đã cấu hình gateway mặc định";
+"Configuration does not prove reachability. Use explicit gateway and latency checks in Wi-Fi & LAN." = "Có cấu hình chưa chứng minh kết nối được. Dùng phép thử gateway và độ trễ trong Wi-Fi & LAN.";
+"No global DNS servers observed" = "Chưa thấy máy chủ DNS toàn cục";
+"Global DNS configuration observed" = "Đã đọc cấu hình DNS toàn cục";
+"Scoped VPN and per-domain resolvers may differ. Run an explicit DNS check; this cannot diagnose an incorrect Wi-Fi password." = "DNS theo VPN hoặc tên miền có thể khác. Chạy phép thử DNS riêng; kết quả này không xác định mật khẩu Wi-Fi sai.";
+"Read-only triage from timestamped observations. Findings are hints, not a diagnosis of root cause. Reports stay in this app session." = "Phân tích chỉ đọc từ dữ liệu có thời điểm. Kết quả là gợi ý, không kết luận nguyên nhân gốc. Báo cáo chỉ lưu trong phiên app.";
+"What needs attention?" = "Bạn muốn kiểm tra gì?";
+"Analyze latest evidence" = "Phân tích dữ liệu mới nhất";
+"Saved observation, not a live status. Analyze again after taking action. Unavailable evidence is never treated as healthy." = "Kết quả đã lưu, không phải trạng thái trực tiếp. Phân tích lại sau thao tác. Dữ liệu thiếu không được coi là bình thường.";
+"Open related tools" = "Mở công cụ liên quan";
+"Largest observed CPU consumers" = "Tiến trình dùng CPU cao nhất trong mẫu";
+"Process CPU may exceed 100% across cores. Identity is checked again by the process inspector." = "CPU của tiến trình có thể vượt 100% trên nhiều lõi. Màn hình tiến trình sẽ kiểm tra lại định danh.";
+"Compared with previous analysis" = "So với lần phân tích trước";
+"No newer comparable measurements" = "Chưa có mẫu mới để so sánh";
+"Differences describe observations; they do not prove an action caused the change." = "Chênh lệch phản ánh hai lần đo, không chứng minh thao tác gây ra thay đổi.";
+"Choose a symptom and analyze. Network analysis reads configuration only; it sends no probe traffic." = "Chọn vấn đề rồi phân tích. Phân tích mạng chỉ đọc cấu hình, không gửi lưu lượng thăm dò.";
+"Group apps, folders, window layout, audio devices and timed Keep Awake. Apply only after reviewing every step. No automatic triggers or automatic rollback." = "Gom ứng dụng, thư mục, bố cục cửa sổ, thiết bị âm thanh và thời gian giữ máy thức. Xem lại từng bước trước khi áp dụng. Không tự kích hoạt hay tự hoàn tác.";
+"Create work profile" = "Tạo hồ sơ làm việc";
+"Saving workspace" = "Đang lưu không gian làm việc";
+"Travel" = "Di chuyển";
+"Select running applications" = "Chọn ứng dụng đang chạy";
+"Capture and restore window layout" = "Lưu và khôi phục bố cục cửa sổ";
+"Keep Awake duration" = "Thời gian giữ máy thức";
+"Leave unchanged" = "Giữ nguyên";
+"A selected duration replaces any active Macinity Keep Awake session. Lock Screen remains unchanged." = "Thời gian được chọn sẽ thay phiên giữ máy thức hiện tại của Macinity. Không đổi khóa màn hình.";
+"Audio output" = "Đầu ra âm thanh";
+"Microphone" = "Micrô";
+"Refresh audio devices" = "Cập nhật thiết bị âm thanh";
+"Audio devices unavailable" = "Không đọc được thiết bị âm thanh";
+"Changes the system default device only. Apps with their own audio routing may ignore it. No audio is recorded." = "Chỉ đổi thiết bị mặc định của hệ thống. Ứng dụng có định tuyến âm thanh riêng có thể không dùng thiết lập này. Không ghi âm.";
+"Saved work profiles" = "Hồ sơ đã lưu";
+"No saved work profiles" = "Chưa có hồ sơ đã lưu";
+"Step results" = "Kết quả từng bước";
+"Stop after current step" = "Dừng sau bước hiện tại";
+"Successful steps remain applied if another step fails or you stop. Results are kept for this app session; profiles stay on this Mac." = "Các bước thành công vẫn có hiệu lực nếu bước khác lỗi hoặc bạn dừng. Kết quả lưu trong phiên app; hồ sơ lưu trên máy.";
+"This opens listed apps and folders, applies selected window/audio settings and may replace Keep Awake. Steps are checked at execution. Existing apps are not closed; failures do not undo completed steps." = "Mở ứng dụng và thư mục đã liệt kê, áp dụng bố cục/âm thanh đã chọn và có thể thay phiên giữ máy thức. Kiểm tra lại khi chạy. Không đóng app đang mở; lỗi không hoàn tác bước đã xong.";
+"Window layout enabled" = "Có áp dụng bố cục cửa sổ";
+"Window layout unchanged" = "Giữ nguyên bố cục cửa sổ";
+"Invalid work profile options" = "Tùy chọn hồ sơ không hợp lệ";
+"Work profile stopped; completed steps remain applied" = "Đã dừng hồ sơ; các bước hoàn tất vẫn có hiệu lực";
+"Application open request completed" = "Đã hoàn tất yêu cầu mở ứng dụng";
+"Folder open request accepted" = "Đã tiếp nhận yêu cầu mở thư mục";
+"Folder open request failed" = "Yêu cầu mở thư mục thất bại";
+"Window layout" = "Bố cục cửa sổ";
+"Window unavailable" = "Không tìm thấy cửa sổ";
+"Window geometry verified" = "Đã kiểm tra vị trí và kích thước";
+"Default microphone verified" = "Đã kiểm tra micrô mặc định";
+"Default output verified" = "Đã kiểm tra đầu ra mặc định";
+"No applicable steps" = "Không có bước có thể áp dụng";
+"skipped" = "đã bỏ qua";
+"Recent profile runs" = "Các lần chạy hồ sơ gần đây";
+"Command" = "Lệnh";
+"Trace" = "Theo dõi";
+"Done" = "Xong";
+
+"Your Mac. Everything connected." = "Mac của bạn. Mọi thứ kết nối.";

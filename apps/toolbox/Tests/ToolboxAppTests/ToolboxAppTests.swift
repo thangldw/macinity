@@ -1,14 +1,102 @@
+import AppKit
 import Combine
+import SwiftUI
 import ToolboxMonitoring
 import XCTest
 
 @testable import Toolbox
 
 final class ToolboxAppTests: XCTestCase {
+  @MainActor
+  func testDeveloperWorkspaceFitsMinimumWindowWithoutVerticalOverflow() {
+    let suite = "OrvenWorkspaceLayout." + UUID().uuidString
+    let defaults = UserDefaults(suiteName: suite)!
+    defer { defaults.removePersistentDomain(forName: suite) }
+    defaults.set("developerTools", forKey: "toolbox.selectedSection")
+    let coordinator = ToolboxCoordinator(defaults: defaults)
+    let view = NSHostingView(rootView: ToolboxShellView(coordinator: coordinator))
+    view.frame = NSRect(x: 0, y: 0, width: 960, height: 640)
+    view.layoutSubtreeIfNeeded()
+    XCTAssertLessThanOrEqual(view.fittingSize.height, 640)
+    XCTAssertLessThanOrEqual(view.fittingSize.width, 960)
+  }
+
+  @MainActor
+  func testAllWorkspaceRoutesFitMinimumWindow() {
+    let suite = "OrvenRouteLayout." + UUID().uuidString
+    let defaults = UserDefaults(suiteName: suite)!
+    defer { defaults.removePersistentDomain(forName: suite) }
+    for section in ToolboxSection.allCases {
+      defaults.set(section.rawValue, forKey: "toolbox.selectedSection")
+      let coordinator = ToolboxCoordinator(defaults: defaults)
+      let view = NSHostingView(rootView: ToolboxShellView(coordinator: coordinator))
+      view.frame = NSRect(x: 0, y: 0, width: 960, height: 640)
+      view.layoutSubtreeIfNeeded()
+      XCTAssertLessThanOrEqual(view.fittingSize.height, 640, section.rawValue)
+      XCTAssertLessThanOrEqual(view.fittingSize.width, 960, section.rawValue)
+    }
+  }
+
+  func testDeveloperInventoryDoesNotExecuteOrCollapseDistinctInstallations() {
+    let paths: Set<String> = [
+      "/opt/homebrew/bin/python3", "/usr/bin/python3", "/test/.cargo/bin/cargo",
+      "/test/.local/bin/node",
+    ]
+    let entries = DeveloperToolInventory.scan(
+      home: "/test", executable: { paths.contains($0) },
+      directory: { $0 == "/test/.local/bin/node" })
+    XCTAssertEqual(Set(entries.map(\.path)), paths.subtracting(["/test/.local/bin/node"]))
+    XCTAssertEqual(entries.filter { $0.name == "python3" }.count, 2)
+    XCTAssertEqual(Set(entries.map(\.id)).count, entries.count)
+  }
+
+  func testDeveloperInventoryMissingToolsAreNotReportedAsInstalled() {
+    XCTAssertTrue(DeveloperToolInventory.scan(executable: { _ in false }).isEmpty)
+  }
+
   func testLegacyNavigationRawValuesRemainRestorable() {
     for legacy in ["home", "storage", "projects", "applications", "changes", "recovery"] {
       XCTAssertNotNil(ToolboxSection(rawValue: legacy))
     }
+  }
+
+  func testEveryRestorableRouteHasExactlyOneWorkspaceDestination() {
+    let routes = OrvenArea.allCases.flatMap(\.sections)
+    XCTAssertEqual(Set(routes), Set(ToolboxSection.allCases))
+    XCTAssertEqual(routes.count, Set(routes).count)
+    for area in OrvenArea.allCases {
+      XCTAssertFalse(area.sections.isEmpty)
+      XCTAssertTrue(area.sections.allSatisfy { $0.area == area })
+    }
+  }
+
+  @MainActor
+  func testWorkspaceSwitchRestoresPageWithoutSelectingMutationTargets() {
+    let suite = "OrvenWorkspaceNavigation." + UUID().uuidString
+    let defaults = UserDefaults(suiteName: suite)!
+    defer { defaults.removePersistentDomain(forName: suite) }
+    defaults.set("recovery", forKey: "toolbox.selectedSection")
+    let coordinator = ToolboxCoordinator(defaults: defaults)
+    coordinator.openArea(.software)
+    XCTAssertEqual(coordinator.selectedSection, .applications)
+    coordinator.open(.section(.projects))
+    coordinator.openArea(.files)
+    XCTAssertEqual(coordinator.selectedSection, .recovery)
+    coordinator.openArea(.software)
+    XCTAssertEqual(coordinator.selectedSection, .projects)
+    coordinator.openArea(.software)
+    XCTAssertEqual(coordinator.selectedSection, .projects)
+    XCTAssertNil(coordinator.storageFocusPath)
+    XCTAssertNil(coordinator.processFocus)
+    XCTAssertEqual(defaults.string(forKey: "toolbox.selectedSection"), "projects")
+  }
+
+  func testToolSearchIsBoundedAndMatchesLocalizedDestinationNames() {
+    XCTAssertEqual(Set(ToolboxSection.matching(" \n ")), Set(ToolboxSection.allCases))
+    XCTAssertTrue(ToolboxSection.matching("nonexistent-tool-8429").isEmpty)
+    XCTAssertTrue(ToolboxSection.matching(ToolboxSection.sensors.title).contains(.sensors))
+    XCTAssertEqual(
+      Set(ToolboxSection.matching(OrvenArea.network.title)), Set(OrvenArea.network.sections))
   }
 
   @MainActor
