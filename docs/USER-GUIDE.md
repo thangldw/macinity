@@ -2,6 +2,18 @@
 
 ## English
 
+### Everyday workflows
+
+1. Open Action Center and pin frequent destinations. Choose Smart Diagnostics, select a symptom and run an analysis; compare only fresh observations.
+2. In Work Profiles, select apps/folders and optional audio or Keep Awake steps. Preview before Run. Stop affects pending steps; completed changes remain applied.
+3. In File Utilities, choose files or two folders. Preview rename mappings before applying; use the retained journal to undo eligible renames. SHA-256 and comparisons are read-only.
+4. In Developer Tools, inspect detected versions and packages first. Review the exact update/uninstall command and its result; package changes do not have automatic rollback.
+5. In Startup & Background, refresh inventory and distinguish registration from running state. Only supported owned user agents offer a reviewed runtime start/stop.
+6. In Wi-Fi & LAN, scan nearby networks by button. Location may be required for SSIDs. Open the system Passwords interface for saved passwords, or enter your own credentials to create a local QR.
+
+See [utility limits](product/SUPER-APP-EXPANSION.md) and [Action Center, diagnostics and profiles](product/ACTION-WORKFLOWS.md) for permission and recovery details.
+
+
 Macinity 3.1.0 introduces the Cobalt Link identity and expands Orven into a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
@@ -43,6 +55,18 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 
 ## Tiếng Việt
 
+### Thao tác thường dùng
+
+1. Mở Trung tâm thao tác và ghim màn hình hay dùng. Chọn Chẩn đoán thông minh, triệu chứng rồi phân tích; chỉ so sánh dữ liệu mới.
+2. Trong Hồ sơ làm việc, chọn app/thư mục, tùy chọn âm thanh hoặc Giữ máy thức. Xem trước rồi chạy. Stop chỉ dừng bước chưa chạy; thay đổi hoàn tất vẫn giữ.
+3. Trong Tiện ích file, chọn file hoặc hai thư mục. Xem trước tên mới rồi áp dụng; dùng nhật ký để hoàn tác mục đủ điều kiện. SHA-256 và so sánh chỉ đọc.
+4. Trong Công cụ lập trình, đọc phiên bản/package trước. Duyệt lệnh cập nhật/gỡ và kết quả; không có rollback package tự động.
+5. Trong Khởi động và chạy nền, làm mới danh sách, phân biệt đăng ký và đang chạy. Chỉ user agent thuộc sở hữu và được hỗ trợ mới có preview start/stop.
+6. Trong Wi-Fi & LAN, bấm quét mạng lân cận. SSID có thể cần Location. Mở Passwords hệ thống để xem mật khẩu đã lưu, hoặc nhập thông tin mạng của bạn để tạo QR cục bộ.
+
+Xem [giới hạn tiện ích](product/SUPER-APP-EXPANSION.md) và [trung tâm thao tác, chẩn đoán, hồ sơ](product/ACTION-WORKFLOWS.md) để biết quyền và cách phục hồi.
+
+
 Macinity 3.1.0 giới thiệu nhận diện Cobalt Link và mở rộng Orven thành không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
@@ -83,6 +107,18 @@ Install Trace ghi quan sát có giới hạn khi bạn thực hiện install/upd
 Tên cảm biến phụ thuộc model; link rate không phải tốc độ Internet. Giải thích dung lượng ẩn/snapshots không chứng minh exclusive snapshot bytes. App không có firewall, điều khiển quạt hoặc sửa hệ thống với đặc quyền. Foreground resources, Intel/macOS 13/Ethernet vật lý, full VoiceOver, câu chữ quan trọng tiếng Nhật và thông báo native chưa được xác minh. Xem [readiness](production/RELEASE-READINESS.md), [Privacy](../PRIVACY.md), [Security](../SECURITY.md), [issues](https://github.com/thangldw/toolbox/issues).
 
 ## 日本語
+
+### 日常の操作
+
+1. Action Centerでよく使う画面を固定します。Smart Diagnosticsで症状を選び分析し、新しい観測だけを比較します。
+2. Work Profilesでapp/フォルダと任意の音声・Keep Awakeを選び、プレビュー後に実行します。Stopは未実行の手順を止め、完了した変更は維持します。
+3. File Utilitiesでファイルまたは二つのフォルダを選びます。名前変更を確認して適用し、条件を満たす項目は履歴から戻せます。SHA-256と比較は読み取り専用です。
+4. Developer Toolsで版とpackageを確認してから更新・削除コマンドを確認します。自動rollbackはありません。
+5. Startup & Backgroundで一覧を更新し、登録状態と実行状態を区別します。対応する所有user agentのみ起動・停止を事前確認できます。
+6. Wi-Fi & LANの近隣スキャンはボタンで開始します。SSIDにはLocationが必要な場合があります。保存パスワードはシステムPasswordsで確認し、手入力した情報からlocal QRを生成できます。
+
+権限と復元の詳細は[ツールの制限](product/SUPER-APP-EXPANSION.md)と[操作・診断・profile](product/ACTION-WORKFLOWS.md)を参照してください。
+
 
 Macinity 3.1.0はCobalt Linkのブランドを導入し、OrvenをMac管理用のnative workspaceへ拡張します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
 
