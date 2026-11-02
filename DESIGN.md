@@ -2,9 +2,9 @@
 version: production-candidate
 omitted:
   - section: colors
-    reason: Canonical palette is owned by native MacinityTheme.swift and adapted by scripts/sync_brand_tokens.py.
+    reason: The public site uses the portfolio palette from site-shell.css, as on KakeFlow. The native app owns its own palette.
   - section: typography
-    reason: Portfolio site-shell.css owns shared type; Japanese and Chinese route stacks are explicit in macinity-page.css.
+    reason: Portfolio site-shell.css owns typography, including the script-capable font stack.
   - section: spacing
     reason: Shared portfolio controls retain their tokens; route composition owns responsive spacing.
   - section: rounded
@@ -22,7 +22,7 @@ Global macOS users and developers, with EN/VI/JA/ZH localization. Japanese local
 
 ### Visual and component ownership
 
-Native MacinityTheme.swift owns the brand palette. scripts/sync_brand_tokens.py generates site/macinity-brand.css using the existing light/dark selector contract; no second hand-maintained brand palette. site-shell.css owns shared typography and controls; product-shell.js/product-support.js remain reviewed shared mirrors recorded in shared-assets.json. macinity-page.css owns the hero, nine capability cells, help/privacy composition, global scrollbar and responsive layout. The app icon is copied from the current native1024px asset.
+The public landing, guide and privacy pages follow the KakeFlow product-page design. Load macinity-page.css first and the portfolio site-shell.css last. The shell supplies the white and dark canvases, accent, typography, controls, scrollbar and portfolio header. The route stylesheet composes the two-column hero, signal diagram, capability grid and reading sections. The app icon identifies Macinity within the diagram. MacinityTheme.swift remains the native palette owner. The generated macinity-brand.css is a legacy asset and is not loaded by these pages.
 
 ### Content and behavior
 
@@ -40,7 +40,7 @@ Mac users/developers toàn cầu, EN/VI/JA/ZH. Locale Nhật không tạo regula
 
 ### Visual và component ownership
 
-MacinityTheme.swift sởhữubrandpalette; scripts/sync_brand_tokens.py sinhsite/macinity-brand.css/lightdarkselector,khônghandmaintainedpalette thứhai. site-shell.css typography/control; product-shell/supportJSmirror trongshared-assets.json. macinity-page.css composition/scrollbar/responsive. Iconcopycurrentnative1024px.
+Trang giới thiệu, hướng dẫn và quyền riêng tư dùng thiết kế KakeFlow. CSS chung của portfolio được nạp sau cùng và quản lý nền, màu nhấn, kiểu chữ, nút và thanh đầu trang. CSS của Macinity quản lý bố cục và sơ đồ. Biểu tượng ứng dụng xuất hiện trong sơ đồ. Bảng màu của ứng dụng macOS thuộc MacinityTheme.swift.
 
 ### Nội dung và hành vi
 
@@ -58,7 +58,7 @@ GlobalMacusers/developers、EN/VI/JA/ZH。日本語localeはJapan-specificregula
 
 ### Visualとcomponent ownership
 
-MacinityTheme.swiftがbrandpalette、scripts/sync_brand_tokens.pyがsite/macinity-brand.css/lightdarkselectorを生成、二重handmaintainedpaletteなし。Site-shell.cssはtype/control、product-shell/supportJSmirrorはshared-assets.json。Macinity-page.cssはcomposition/scrollbar/responsive、iconはcurrentnative1024pxコピー。
+紹介、ガイド、プライバシーの各ページは KakeFlow と共通のデザインを使用します。ポートフォリオの site-shell.css を最後に読み込み、背景色、アクセントカラー、書体、ボタン、ヘッダーを統一します。Macinity 専用の CSS はレイアウトと構成図を担当し、構成図にはアプリのアイコンを表示します。macOS アプリの配色は MacinityTheme.swift で管理します。
 
 ### Contentと動作
 

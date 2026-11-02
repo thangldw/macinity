@@ -82,7 +82,17 @@
     "utilitiesTitle": "Everyday Mac utilities",
     "utilitiesBody": "Inspect startup items, ports, external drives, file locks and connected devices. Keep Awake for a timed session without changing Lock Screen.",
     "filesTitle": "Files, packages & workspaces",
-    "filesBody": "Preview batch renames, compare folders and SHA-256; inspect Homebrew, Python and Node packages. Save app/folder/window presets. Review commands before changes."
+    "filesBody": "Preview batch renames, compare folders and SHA-256; inspect Homebrew, Python and Node packages. Save app/folder/window presets. Review commands before changes.",
+    "homeLabel": "Thang Luu home",
+    "localTitle": "On your Mac",
+    "observeTitle": "Read-only monitoring",
+    "reviewTitle": "Review changes",
+    "signals": "System signals",
+    "processes": "Processes",
+    "sensors": "Sensors",
+    "connections": "Connections",
+    "workspace": "Macinity workspace",
+    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ad-hoc signed, not notarized."
   },
   "vi": {
     "title": "Máy Mac của bạn.",
@@ -166,7 +176,17 @@
     "utilitiesTitle": "Tiện ích Mac hằng ngày",
     "utilitiesBody": "Xem startup, cổng, ổ ngoài, file đang mở và thiết bị kết nối. Giữ máy thức có thời hạn, không đổi Lock Screen.",
     "filesTitle": "File, package & workspace",
-    "filesBody": "Xem trước đổi tên hàng loạt, so sánh thư mục và SHA-256; xem package Homebrew, Python, Node. Lưu preset app/thư mục/cửa sổ. Duyệt lệnh trước khi thay đổi."
+    "filesBody": "Xem trước đổi tên hàng loạt, so sánh thư mục và SHA-256; xem package Homebrew, Python, Node. Lưu preset app/thư mục/cửa sổ. Duyệt lệnh trước khi thay đổi.",
+    "homeLabel": "Trang chủ Thang Luu",
+    "localTitle": "Chạy trên máy",
+    "observeTitle": "Giám sát chỉ đọc",
+    "reviewTitle": "Duyệt thay đổi",
+    "signals": "Tín hiệu hệ thống",
+    "processes": "Tiến trình",
+    "sensors": "Cảm biến",
+    "connections": "Kết nối",
+    "workspace": "Không gian làm việc Macinity",
+    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ký ad-hoc, chưa được Apple công chứng."
   },
   "ja": {
     "title": "あなたのMac。",
@@ -250,7 +270,17 @@
     "utilitiesTitle": "日常のMacツール",
     "utilitiesBody": "起動項目、ポート、外部ドライブ、ファイルロック、接続デバイスを確認。Lock Screenを変更せず一定時間スリープを防止。",
     "filesTitle": "ファイル・package・workspace",
-    "filesBody": "一括名称変更のプレビュー、フォルダ・SHA-256比較、Homebrew/Python/Node package確認。app/フォルダ/ウィンドウ設定を保存し、変更前にコマンドを確認。"
+    "filesBody": "一括名称変更のプレビュー、フォルダ・SHA-256比較、Homebrew/Python/Node package確認。app/フォルダ/ウィンドウ設定を保存し、変更前にコマンドを確認。",
+    "homeLabel": "Thang Luu ホーム",
+    "localTitle": "Mac 内で完結",
+    "observeTitle": "読み取り専用の監視",
+    "reviewTitle": "変更前に確認",
+    "signals": "システムの状態",
+    "processes": "プロセス",
+    "sensors": "センサー",
+    "connections": "接続",
+    "workspace": "Macinity のワークスペース",
+    "compatibility": "macOS 13 以降 · ARM64 / x86_64 · アドホック署名済み、Apple による公証は未取得です。"
   },
   "zh": {
     "title": "你的 Mac。",
@@ -334,7 +364,17 @@
     "utilitiesTitle": "日常 Mac 工具",
     "utilitiesBody": "查看启动项、端口、外置磁盘、文件占用和连接设备。定时保持唤醒，不更改锁屏设置。",
     "filesTitle": "文件、软件包与工作空间",
-    "filesBody": "预览批量重命名，比较文件夹和 SHA-256；查看 Homebrew、Python 和 Node 软件包。保存应用、文件夹和窗口预设，更改前审核命令。"
+    "filesBody": "预览批量重命名，比较文件夹和 SHA-256；查看 Homebrew、Python 和 Node 软件包。保存应用、文件夹和窗口预设，更改前审核命令。",
+    "homeLabel": "Thang Luu 主页",
+    "localTitle": "本机运行",
+    "observeTitle": "只读监测",
+    "reviewTitle": "审核更改",
+    "signals": "系统信号",
+    "processes": "进程",
+    "sensors": "传感器",
+    "connections": "连接",
+    "workspace": "Macinity 工作区",
+    "compatibility": "macOS 13 及以上版本 · ARM64 / x86_64 · 已使用临时签名，未经 Apple 公证。"
   }
 };
   const translate = key => copy[language][key];
@@ -355,7 +395,7 @@
   let saved = 'en';
   try { saved = localStorage.getItem('macinity.site.locale') || 'en'; } catch { /* Use the default language. */ }
   setLanguage(saved);
-  const syncThemeIcon = () => { document.querySelector('#themeToggle img').src = `assets/icons/${document.documentElement.dataset.theme === 'dark' ? 'sun' : 'moon'}.svg`; };
+  const syncThemeIcon = () => { document.getElementById('themeToggle').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾'; };
   document.addEventListener('themechange', syncThemeIcon);
   syncThemeIcon();
 })();
