@@ -10,9 +10,10 @@ assert release['product']=='Macinity' and release['version']=='3.1.0'
 assert release['signing']=='ad-hoc' and release['notarized'] is False
 assert json.loads((site/'release.json').read_text())==release, 'site release metadata drift'
 class Links(HTMLParser):
- def __init__(self): super().__init__(); self.urls=[]; self.ids=set(); self.copy=set()
+ def __init__(self): super().__init__(); self.urls=[]; self.ids=set(); self.copy=set(); self.styles=[]
  def handle_starttag(self,tag,attrs):
   a=dict(attrs)
+  if tag=='link' and a.get('rel')=='stylesheet': self.styles.append(urllib.parse.urlsplit(a['href']))
   if 'id' in a: self.ids.add(a['id'])
   for key in ['href','src']:
    if key in a: self.urls.append(a[key])
@@ -23,6 +24,8 @@ assert set(messages)=={'en','vi','ja','zh'}
 for lang,table in messages.items(): assert set(table)==keys and all(v.strip() for v in table.values()), lang
 for name in ['index.html','guide.html','privacy.html']:
  text=(site/name).read_text(); parser=Links(); parser.feed(text)
+ assert parser.styles[-1].netloc=='thangldw.github.io' and parser.styles[-1].path=='/css/site-shell.css', (name,'shared shell must load last')
+ assert not any(s.path.endswith('macinity-brand.css') for s in parser.styles), (name,'native palette overrides the portfolio colors')
  assert '<meta name="viewport"' in text and '<main' in text and '<title>Macinity' in text
  assert parser.copy<=keys, name
  for url in parser.urls:
