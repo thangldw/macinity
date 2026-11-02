@@ -92,7 +92,9 @@
     "sensors": "Sensors",
     "connections": "Connections",
     "workspace": "Macinity workspace",
-    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ad-hoc signed, not notarized."
+    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ad-hoc signed, not notarized.",
+    "footerGuide": "Guide",
+    "footerSupport": "Support"
   },
   "vi": {
     "title": "Máy Mac của bạn.",
@@ -186,7 +188,9 @@
     "sensors": "Cảm biến",
     "connections": "Kết nối",
     "workspace": "Không gian làm việc Macinity",
-    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ký ad-hoc, chưa được Apple công chứng."
+    "compatibility": "macOS 13+ · ARM64 / x86_64 · Ký ad-hoc, chưa được Apple công chứng.",
+    "footerGuide": "Hướng dẫn",
+    "footerSupport": "Ủng hộ"
   },
   "ja": {
     "title": "あなたのMac。",
@@ -280,7 +284,9 @@
     "sensors": "センサー",
     "connections": "接続",
     "workspace": "Macinity のワークスペース",
-    "compatibility": "macOS 13 以降 · ARM64 / x86_64 · アドホック署名済み、Apple による公証は未取得です。"
+    "compatibility": "macOS 13 以降 · ARM64 / x86_64 · アドホック署名済み、Apple による公証は未取得です。",
+    "footerGuide": "ガイド",
+    "footerSupport": "支援する"
   },
   "zh": {
     "title": "你的 Mac。",
@@ -374,7 +380,9 @@
     "sensors": "传感器",
     "connections": "连接",
     "workspace": "Macinity 工作区",
-    "compatibility": "macOS 13 及以上版本 · ARM64 / x86_64 · 已使用临时签名，未经 Apple 公证。"
+    "compatibility": "macOS 13 及以上版本 · ARM64 / x86_64 · 已使用临时签名，未经 Apple 公证。",
+    "footerGuide": "指南",
+    "footerSupport": "支持"
   }
 };
   const translate = key => copy[language][key];

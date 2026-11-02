@@ -6,10 +6,11 @@
 <meta name="description" content="Live monitoring, hardware observations, Wi-Fi and LAN diagnostics, and recoverable storage tools in one native macOS app.">
 <link rel="canonical" href="https://thangldw.github.io/macinity/privacy.html">
 <link rel="icon" href="assets/app-icon.png">
-<link rel="stylesheet" href="macinity-page.css?v=20261103">
+<link rel="stylesheet" href="macinity-page.css?v=20261103-compact">
 <link rel="stylesheet" href="https://thangldw.github.io/css/support-dialog.css?v=20261007sharedsupport">
+<link rel="stylesheet" href="https://thangldw.github.io/css/compact-footer.css?v=20261103">
 <link rel="stylesheet" href="https://thangldw.github.io/css/site-shell.css?v=20261011vi">
-<script src="product-shell.js"></script><script defer src="product-support.js"></script><script defer src="preview.js?v=20261103"></script>
+<script src="product-shell.js"></script><script defer src="product-support.js"></script><script defer src="preview.js?v=20261103-compact"></script>
 </head>
 <body class="site-page macinity-page" data-support-shared data-page="privacy">
 <a data-copy="skip" class="skip-link" href="#main">Skip to content</a>
@@ -30,5 +31,13 @@
 <main id="main"><section class="information"><p class="eyebrow"><a href="./">Macinity</a> · <span data-copy="privacy">Privacy</span></p><h1 data-copy="privacyHeading">Your data stays under your control.</h1><p class="lead" data-copy="privacyLead">No telemetry or automatic upload. Explicit probes contact chosen destinations.</p></section>
 <section class="information"><h2 data-copy="privacyLocal">Local state and optional history</h2><p data-copy="privacyLocalBody">Management data remains in the existing local app-data directory for compatibility. Optional health history stores system measurements only, with 24-hour or seven-day retention and a 24 MiB limit. Sensor recordings, alerts and connection timelines are bounded session data. Expired on-disk records are removed during a later successful write, not while the app is stopped.</p></section>
 <section class="information"><h2 data-copy="privacyNetwork">Network and permissions</h2><p data-copy="privacyNetworkBody">DNS, ICMP and TCP probes expose ordinary connection metadata to the chosen destination or resolver. Nearby Wi-Fi scans are explicit OS operations; identities may be redacted. Optional Location, Local Network, filesystem and notification permissions expand coverage, never authorize deletion. Update checks contact GitHub.</p></section>
-<section class="information"><h2 data-copy="privacyExport">Review before sharing</h2><p data-copy="privacyExportBody">Reports are previewed and saved locally. Diagnostic reports may contain app/process names, paths and endpoints; replacing a home prefix is not complete anonymization. Review every report before sharing. There is no automatic upload.</p><a data-copy="privacyFull" href="https://github.com/thangldw/macinity/blob/main/PRIVACY.md">Read the full privacy policy</a></section></main><footer><p><a href="./">Macinity</a> · v3.1.0 · MIT</p><nav aria-label="Resources" data-aria="resources"><a href="guide.html" data-copy="guide">User guide</a><a href="privacy.html" data-copy="privacy">Privacy</a><a href="https://github.com/thangldw/macinity/blob/main/CHANGELOG.md" data-copy="changelog">Changelog</a><a href="https://github.com/thangldw/macinity/blob/main/LICENSE" data-copy="license">License</a><a href="https://thangldw.github.io/">thang.</a></nav></footer>
+<section class="information"><h2 data-copy="privacyExport">Review before sharing</h2><p data-copy="privacyExportBody">Reports are previewed and saved locally. Diagnostic reports may contain app/process names, paths and endpoints; replacing a home prefix is not complete anonymization. Review every report before sharing. There is no automatic upload.</p><a data-copy="privacyFull" href="https://github.com/thangldw/macinity/blob/main/PRIVACY.md">Read the full privacy policy</a></section></main><footer class="compact-footer" id="footer">
+  <p class="footer-id"><strong><a href="./">Macinity</a></strong> <a href="https://github.com/thangldw/macinity/blob/main/LICENSE">MIT</a></p>
+  <nav aria-label="Resources" data-aria="resources">
+    <a href="guide.html" data-copy="footerGuide">Guide</a>
+    <a href="privacy.html" data-copy="privacy" aria-current="page">Privacy</a>
+    <a href="https://github.com/thangldw/macinity">GitHub</a>
+    <span id="supportSlot"><button type="button" data-support-open data-copy="footerSupport">Support</button></span>
+  </nav>
+</footer>
 </body></html>
