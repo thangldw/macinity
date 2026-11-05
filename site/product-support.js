@@ -40,6 +40,25 @@
     trigger.setAttribute("aria-controls", "supportDialog");
     trigger.innerHTML = '<span>Fuel my next build</span>';
 
+    var supportLabels = {
+      en: 'Fuel my next build',
+      vi: 'Tiếp sức cho dự án mới',
+      ja: '次の開発を応援する',
+      zh: '支持我的下一个项目'
+    };
+    function syncSupportLanguage() {
+      var language = document.documentElement.lang.toLowerCase().split('-')[0];
+      var label = supportLabels[language] || supportLabels.en;
+      var buttons = customTriggers.length ? customTriggers : [trigger];
+      buttons.forEach(function (button) {
+        var text = button.querySelector('span');
+        if (text) text.textContent = label;
+        else button.textContent = label;
+      });
+    }
+    syncSupportLanguage();
+    new MutationObserver(syncSupportLanguage).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
     var slot = document.getElementById('supportSlot');
     document.body.insertAdjacentHTML("beforeend", dialogMarkup());
     if (customTriggers.length) {
@@ -75,7 +94,7 @@
         openSupport();
       });
     });
-    if (customTriggers.length && window.location.hash === "#support") {
+    if (window.location.hash === "#support") {
       openSupport();
     }
     closeButton.addEventListener("click", function () {
