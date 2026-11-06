@@ -1,0 +1,33 @@
+name: Documentation CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: macinity-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Show Python version
+        run: python3 --version
+      - name: Validate documentation
+        run: bash tests/documentation_contract.sh
+      - name: Validate GitHub community files
+        run: |
+          ruby tests/github_community_contract.rb
+          ruby tests/github_community_regressions.rb
+      - name: Validate diagrams
+        run: python3 tests/check_diagrams.py docs/diagrams/*.html
+      - name: Validate site contract
+        run: bash tests/site_contract.sh
