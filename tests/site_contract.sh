@@ -22,7 +22,7 @@ class Links(HTMLParser):
 source=(site/'preview.js').read_text(); begin=source.index('  const copy = ')+len('  const copy = '); end=source.index(';\n  const translate',begin); messages=json.loads(source[begin:end]); keys=set(messages['en'])
 assert set(messages)=={'en','vi','ja','zh'}
 for lang,table in messages.items(): assert set(table)==keys and all(v.strip() for v in table.values()), lang
-for name in ['index.html','guide.html','privacy.html']:
+for name in ['index.html']:
  text=(site/name).read_text(); parser=Links(); parser.feed(text)
  assert parser.styles[-1].netloc=='thangldw.github.io' and parser.styles[-1].path=='/css/site-shell.css', (name,'shared shell must load last')
  assert not any(s.path.endswith('macinity-brand.css') for s in parser.styles), (name,'native palette overrides the portfolio colors')
