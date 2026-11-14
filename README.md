@@ -39,7 +39,7 @@ No account, telemetry, analytics, automatic deletion or cloud sync. Explicit net
 
 Build with Swift 6 and full Xcode. From `apps/macinity`, run `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh` and `./scripts/build_dmg.sh`. The resulting app is `dist/Macinity.app`; the source executable and modules use `Macinity`. Verify with `./scripts/verify_release.sh --allow-adhoc`; this checks structural integrity, not Apple notarization.
 
-Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/macinity/). Previous Macinity releases remain in GitHub's immutable tag/release history. [MIT license](LICENSE).
+Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md) and [Changelog](CHANGELOG.md). Website: [Macinity](https://thangldw.github.io/macinity/). Previous Macinity releases remain in GitHub's immutable tag/release history. [Apache License 2.0](LICENSE).
 
 ## Tiếng Việt
 
@@ -80,7 +80,7 @@ Không account/telemetry/analytics/tự xóa/cloud sync. Probe explicit kết n�
 
 Build bằng Swift 6 và bộ Xcode đầy đủ. Từ `apps/macinity`, chạy `swift test`, `./scripts/test_monitoring.sh`, `./scripts/lint_localizations.swift`, `./scripts/build_universal.sh`, `./scripts/build_dmg.sh`. App là `dist/Macinity.app`; executable/module trong source dùng `Macinity`. `./scripts/verify_release.sh --allow-adhoc` kiểm tra tính toàn vẹn của bộ cài, không chứng minh notarization.
 
-Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/macinity/). Release Macinity trước đó giữ trong tag/release history trên GitHub. [MIT](LICENSE).
+Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Operations](docs/OPERATIONS.md), [Release operations](docs/OPERATIONS-RELEASE.md), [Contributing](CONTRIBUTING.md), [Changelog](CHANGELOG.md), [website Macinity](https://thangldw.github.io/macinity/). Release Macinity trước đó giữ trong tag/release history trên GitHub. [Apache-2.0](LICENSE).
 
 ## 日本語
 
@@ -121,4 +121,4 @@ Account/telemetry/analytics/自動削除/cloud syncなし。明示probeは入力
 
 Swift 6 và bộ Xcode đầy đủでbuild。`apps/macinity`から`swift test`、`./scripts/test_monitoring.sh`、`./scripts/lint_localizations.swift`、`./scripts/build_universal.sh`、`./scripts/build_dmg.sh`。Appは`dist/Macinity.app`、source実行ファイル/moduleは`Macinity`です。`./scripts/verify_release.sh --allow-adhoc`はstructuralintegrityでApple notarization証明ではありません。
 
-[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/macinity/)を参照。以前のMacinity releaseはGitHubtag/release historyで保持。[MIT](LICENSE)。
+[User guide](docs/USER-GUIDE.md)、[Architecture](docs/ARCHITECTURE.md)、[Operations](docs/OPERATIONS.md)、[Release operations](docs/OPERATIONS-RELEASE.md)、[Contributing](CONTRIBUTING.md)、[Changelog](CHANGELOG.md)、[website](https://thangldw.github.io/macinity/)を参照。以前のMacinity releaseはGitHubtag/release historyで保持。[Apache-2.0](LICENSE)。
