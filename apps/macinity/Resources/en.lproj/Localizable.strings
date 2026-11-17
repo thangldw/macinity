@@ -1303,3 +1303,21 @@
 "Done" = "Done";
 
 "Your Mac. Everything connected." = "Your Mac. Everything connected.";
+
+"Clipboard & Snippets" = "Clipboard & Snippets";
+"Record clipboard history" = "Record clipboard history";
+"Off by default. Text only; history stays in memory, keeps the latest 50 items and is cleared when you turn recording off or quit Macinity. Items marked secret by password managers are skipped." = "Off by default. Text only; history stays in memory, keeps the latest 50 items and is cleared when you turn recording off or quit Macinity. Items marked secret by password managers are skipped.";
+"Clear history" = "Clear history";
+"Search history" = "Search history";
+"No clipboard items." = "No clipboard items.";
+"Copy" = "Copy";
+"Save as snippet" = "Save as snippet";
+"Remove" = "Remove";
+"Snippets" = "Snippets";
+"Text" = "Text";
+"Add snippet" = "Add snippet";
+"No snippets saved." = "No snippets saved.";
+"Snippets are stored locally on this Mac and never uploaded." = "Snippets are stored locally on this Mac and never uploaded.";
+"Snippets file could not be read; existing data is preserved" = "Snippets file could not be read; existing data is preserved";
+"Enter a name and text; at most 100 snippets are kept" = "Enter a name and text; at most 100 snippets are kept";
+"Snippets could not be saved" = "Snippets could not be saved";

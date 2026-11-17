@@ -21,6 +21,7 @@ enum MacinitySection: String, CaseIterable, Identifiable {
   case developerTools
   case startup
   case workspaces
+  case clipboard
   case fileUtilities
   case devices
   case externalDrives
@@ -48,6 +49,7 @@ enum MacinitySection: String, CaseIterable, Identifiable {
     case .devices: L10n.text("Device Inspector")
     case .fileUtilities: L10n.text("File Utilities")
     case .workspaces: L10n.text("Work Profiles")
+    case .clipboard: L10n.text("Clipboard & Snippets")
     case .startup: L10n.text("Startup & Background")
     case .developerTools: L10n.text("Developer Tools")
     case .applications: L10n.text("Applications")
@@ -75,6 +77,7 @@ enum MacinitySection: String, CaseIterable, Identifiable {
     case .devices: "cable.connector"
     case .fileUtilities: "doc.badge.gearshape"
     case .workspaces: "rectangle.3.group"
+    case .clipboard: "doc.on.clipboard"
     case .startup: "power"
     case .developerTools: "wrench.and.screwdriver"
     case .applications: "app.dashed"
@@ -253,6 +256,8 @@ struct MacinityShellView: View {
       FileUtilitiesView()
     case .workspaces:
       WorkspacePresetsView()
+    case .clipboard:
+      ClipboardSnippetsView()
     case .startup:
       StartupManagerView()
     case .developerTools:

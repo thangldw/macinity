@@ -31,7 +31,7 @@ enum MacinityArea: String, CaseIterable, Identifiable {
   var sections: [MacinitySection] {
     switch self {
     case .overview: [.home, .diagnostics, .healthHistory, .changes]
-    case .mac: [.hardware, .devices, .cpuMemory, .workspaces]
+    case .mac: [.hardware, .devices, .cpuMemory, .workspaces, .clipboard]
     case .thermals: [.sensors, .batteryThermal]
     case .software: [.applications, .developerTools, .startup, .processes, .projects]
     case .files: [.diskActivity, .externalDrives, .fileUtilities, .storage, .recovery]
@@ -44,7 +44,7 @@ extension MacinitySection {
   var area: MacinityArea {
     switch self {
     case .home, .diagnostics, .healthHistory, .changes: .overview
-    case .hardware, .devices, .cpuMemory, .workspaces: .mac
+    case .hardware, .devices, .cpuMemory, .workspaces, .clipboard: .mac
     case .sensors, .batteryThermal: .thermals
     case .applications, .developerTools, .startup, .processes, .projects: .software
     case .diskActivity, .externalDrives, .fileUtilities, .storage, .recovery: .files

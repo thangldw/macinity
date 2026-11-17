@@ -189,4 +189,5 @@ final class MacinityRuntime {
   let workspaces = WorkspacePresets()
   let diagnostics = DiagnosticsModel()
   let favorites = ActionFavorites()
+  let clipboard = ClipboardModel()
 }
