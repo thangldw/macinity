@@ -144,11 +144,13 @@ final class NearDuplicatePhotoViewModelTests: XCTestCase {
     return model
   }
 
-  override func setUp() {
+  override func setUp() async throws {
     temporaryDirectory = FileManager.default.temporaryDirectory.appendingPathComponent(
       UUID().uuidString)
   }
-  override func tearDown() { try? FileManager.default.removeItem(at: temporaryDirectory) }
+  override func tearDown() async throws {
+    try? FileManager.default.removeItem(at: temporaryDirectory)
+  }
 
   func testTrashedPhotosLeaveResultsWithoutRescanAndGroupDisappears() async throws {
     let keep = try realPhoto("x/keep.jpg", side: 200, bytes: 500)
