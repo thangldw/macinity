@@ -11,7 +11,7 @@ public enum AppMetadata {
   public static let bundleIdentifier = "com.thang.toolbox"
 
   public static var version: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "3.1.0"
+    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "3.2.0"
   }
 
   public static var build: String {

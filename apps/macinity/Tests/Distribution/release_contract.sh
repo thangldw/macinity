@@ -3,7 +3,7 @@ set -euo pipefail
 
 app="${1:?Macinity.app path required}"
 test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")" = "com.thang.toolbox"
-test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" = "3.1.0"
+test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" = "3.2.0"
 test "$(readlink "$app/Contents/MacOS/Toolbox")" = "Macinity"
 architectures="$(lipo -archs "$app/Contents/MacOS/Macinity")"
 grep -qw arm64 <<<"$architectures"

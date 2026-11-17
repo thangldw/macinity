@@ -6,7 +6,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 import json,re,sys,urllib.parse,hashlib
 root=Path(sys.argv[1]); site=root/'site'; release=json.loads((root/'release.json').read_text())
-assert release['product']=='Macinity' and release['version']=='3.1.0'
+assert release['product']=='Macinity' and release['version']=='3.2.0'
 assert release['signing']=='ad-hoc' and release['notarized'] is False
 assert json.loads((site/'release.json').read_text())==release, 'site release metadata drift'
 class Links(HTMLParser):

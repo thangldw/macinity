@@ -8,7 +8,7 @@ Report vulnerabilities privately through [GitHub private reporting](https://gith
 
 ### Release trust
 
-Macinity 3.1.0 is an explicitly authorized ad-hoc-signed, unnotarized release. Verify the SHA-256 from the same published release before installing. Structural codesign verification does not establish Developer ID trust or notarization. macOS may require Open Anyway after the blocked first launch; do not disable Gatekeeper or strip quarantine. No Homebrew distribution is claimed.
+Macinity 3.2.0 is an explicitly authorized ad-hoc-signed, unnotarized release. Verify the SHA-256 from the same published release before installing. Structural codesign verification does not establish Developer ID trust or notarization. macOS may require Open Anyway after the blocked first launch; do not disable Gatekeeper or strip quarantine. No Homebrew distribution is claimed.
 
 ### Data and actions
 
@@ -28,7 +28,7 @@ Báo vulnerability riêng qua [GitHub private reporting](https://github.com/than
 
 ### Trustrelease
 
-Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn được phép. VerifySHA-256 của cùngrelease trước cài. Codesignstructural không proofDeveloperID/notarization. macOS có thể cầnOpenAnyway saufirst launch blocked; không tắtGatekeeper/xóaquarantine. Không claimHomebrew.
+Macinity 3.2.0 kýad-hoc/chưa notarized theo lựa chọn được phép. VerifySHA-256 của cùngrelease trước cài. Codesignstructural không proofDeveloperID/notarization. macOS có thể cầnOpenAnyway saufirst launch blocked; không tắtGatekeeper/xóaquarantine. Không claimHomebrew.
 
 ### Dữ liệu và actions
 
@@ -48,7 +48,7 @@ Vulnerabilityは[GitHub private reporting](https://github.com/thangldw/macinity/
 
 ### Release trust
 
-Macinity 3.1.0は承認されたad-hoc署名/unnotarized。同publishedreleaseのSHA-256を確認。StructuralcodesignはDeveloperID/notarization証明ではありません。Firstlaunchblocked後OpenAnywayが必要な場合、Gatekeeper無効化/quarantine除去なし。Homebrewの主張なし。
+Macinity 3.2.0は承認されたad-hoc署名/unnotarized。同publishedreleaseのSHA-256を確認。StructuralcodesignはDeveloperID/notarization証明ではありません。Firstlaunchblocked後OpenAnywayが必要な場合、Gatekeeper無効化/quarantine除去なし。Homebrewの主張なし。
 
 ### Dataとaction
 

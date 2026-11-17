@@ -2,7 +2,7 @@
 
 ## English
 
-Macinity 3.1.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.2.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
 - Utilities cover startup/background inventory, Keep Awake, external drives/file locks, ports, batch rename with preview/undo, SHA-256, folder comparison, package/runtime inspection and device/workspace management.
@@ -15,7 +15,7 @@ Macinity brings live Mac monitoring, hardware observations, Wi-Fi/LAN diagnostic
 
 ### Install and release status
 
-Macinity 3.1.0 is published. Use the [release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
+Macinity 3.2.0 is published. Use the [release page](https://github.com/thangldw/macinity/releases/tag/v3.2.0) for published assets; a local build is not a published download. The release is ad-hoc signed and **not notarized**. macOS may require **System Settings → Privacy & Security → Open Anyway** after the first blocked launch. Do not disable Gatekeeper or remove quarantine. Requirements: macOS 13+, ARM64 or x86_64; physical Intel/macOS 13 verification remains incomplete. Homebrew installation is unavailable.
 
 Download the DMG and matching SHA-256 file, verify the checksum, open the disk image, read the first-launch guide and drag Macinity.app into Applications. Retain your data when upgrading: bundle ID the existing bundle identifier and the existing Application Support directory intentionally remain unchanged.
 
@@ -43,7 +43,7 @@ Read [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Op
 
 ## Tiếng Việt
 
-Macinity 3.1.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.2.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
 - Tiện ích gồm startup/background, Keep Awake, ổ ngoài/file đang mở, cổng, đổi tên hàng loạt có preview/hoàn tác, SHA-256, so sánh thư mục, package/runtime và quản lý thiết bị/workspace.
@@ -56,7 +56,7 @@ Macinity hợp nhất giám sát Mac, quan sát phần cứng, chẩn đoán Wi-
 
 ### Cài đặt và trạng thái release
 
-Macinity 3.1.0 đã phát hành. Tải artifact đã công bố từ [release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
+Macinity 3.2.0 đã phát hành. Tải artifact đã công bố từ [release page](https://github.com/thangldw/macinity/releases/tag/v3.2.0); local build không phải download đã phát hành. Release ký ad-hoc và **chưa notarize**. Khi lần mở đầu bị chặn, macOS có thể yêu cầu **System Settings → Privacy & Security → Open Anyway**. Không tắt Gatekeeper/xóa quarantine. Yêu cầu macOS 13+, ARM64/x86_64; kiểm chứng Intel/macOS 13 vật lý còn thiếu. Chưa có Homebrew.
 
 Tải DMG và SHA-256 cùng phiên bản, xác minh checksum, mở disk image, đọc hướng dẫn và kéo Macinity.app vào Applications. Khi nâng cấp giữ dữ liệu: bundle ID bundle identifier hiện có và thư mục Application Support hiện có được giữ nguyên có chủ đích.
 
@@ -84,7 +84,7 @@ Xem [User guide](docs/USER-GUIDE.md), [Architecture](docs/ARCHITECTURE.md), [Ope
 
 ## 日本語
 
-Macinity 3.1.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
+Macinity 3.2.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
 
 - Action Centerはお気に入りと最近の操作、Smart DiagnosticsはCPU・メモリ・容量・ネットワークの観測結果を表示します。Work Profilesはworkspace・音声・Keep Awake操作を事前確認します。
 - 起動項目、Keep Awake、外部ドライブとファイルロック、ポート、一括名称変更と取り消し、SHA-256、フォルダ比較、package/runtime、デバイスとworkspace管理を追加しました。
@@ -97,7 +97,7 @@ MacinityはMacのライブ監視、ハードウェア観測、Wi-Fi/LAN診断、
 
 ### インストールとrelease状況
 
-Macinity 3.1.0を公開しました。[Release page](https://github.com/thangldw/macinity/releases/tag/v3.1.0)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
+Macinity 3.2.0を公開しました。[Release page](https://github.com/thangldw/macinity/releases/tag/v3.2.0)に公開されたartifactを使用してください。Localbuildは公開downloadではありません。Ad-hoc署名で**notarize されていません**。初回起動がblockedの場合、**System Settings → Privacy & Security → Open Anyway**が必要なことがあります。Gatekeeper無効化/quarantine削除はしません。macOS 13+/ARM64/x86_64、physicalIntel/macOS 13検証は未完。Homebrewなし。
 
 同versionのDMG/SHA-256をdownloadしてchecksum確認、diskimage内guideを読みMacinity.appをApplicationsへ。Upgrade時のデータを保持するためbundleID 既存bundle identifierと既存Application Supportディレクトリを意図的に維持します。
 

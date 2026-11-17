@@ -1,6 +1,6 @@
 {
   "product": "Macinity",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "observedUTC": "2026-10-16T13:50:54.057653+00:00",
   "scope": "Local exact release artifact. Publication and CI are recorded separately.",
   "checksPassed": [
@@ -32,7 +32,7 @@
   },
   "codeQLRun": "https://github.com/thangldw/macinity/actions/runs/38910664922",
   "publication": {
-    "releaseURL": "https://github.com/thangldw/macinity/releases/tag/v3.1.0",
+    "releaseURL": "https://github.com/thangldw/macinity/releases/tag/v3.2.0",
     "publishedAt": "2026-10-16T14:07:43Z",
     "sourceCommit": "cf1d2ee6ff279dc961a24ce7da773149bd8e9ca6",
     "publishedDMGSHA256": "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7",

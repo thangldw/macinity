@@ -14,7 +14,7 @@ fi
 
 "$project_dir/Tests/Distribution/release_contract.sh" "$app"
 
-dmg="$project_dir/dist/Macinity-3.1.0.dmg"
+dmg="$project_dir/dist/Macinity-3.2.0.dmg"
 checksum="$dmg.sha256"
 if [[ -f "$dmg" || -f "$checksum" ]]; then
   test -f "$dmg"

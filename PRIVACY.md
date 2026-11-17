@@ -24,7 +24,7 @@ JSON/CSV/Markdown export shows a frozen preview and saves to the destination you
 
 History, alerts, menu-bar monitoring and connection tracking default off. Turning history on does not enable background sampling; inactivity/sleep/missing observations create gaps. Cleanup requires foreground review and immediate path revalidation; eligible file moves use Trash. Recovery refuses to overwrite an occupied path. Scheduled management scans never delete automatically.
 
-Macinity 3.1.0 uses an explicitly authorized ad-hoc-signed, unnotarized release channel. This is not Apple trust approval. The [Security policy](SECURITY.md) and [user guide](docs/USER-GUIDE.md) explain installation and known limits. Website links and external support destinations have their own privacy policies.
+Macinity 3.2.0 uses an explicitly authorized ad-hoc-signed, unnotarized release channel. This is not Apple trust approval. The [Security policy](SECURITY.md) and [user guide](docs/USER-GUIDE.md) explain installation and known limits. Website links and external support destinations have their own privacy policies.
 
 ## Tiếng Việt
 
@@ -50,7 +50,7 @@ Export JSON/CSV/Markdown preview chốt trước và lưu vào đích chọn. He
 
 History/alerts/menu-bar/connectiontracking mặc định off. Bật history không bật sampler nền; inactive/sleep/missing tạo gap. Cleanup cần foreground review/path revalidation; eligiblefile dùngTrash. Recovery không overwritepathoccupied. Scheduledscan không tự delete.
 
-Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không Appletrustapproval. Xem [Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md). Linkwebsite/external support có policy riêng.
+Macinity 3.2.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không Appletrustapproval. Xem [Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md). Linkwebsite/external support có policy riêng.
 
 ## 日本語
 
@@ -76,7 +76,7 @@ JSON/CSV/Markdownは凍結preview後、選択先へ保存。Healthはunit/missin
 
 History/alerts/menu-bar/connectiontracking初期off。Historyを有効にしても背景samplingは開始せずinactive/sleep/missingはgap。Cleanupはforeground review/path revalidation、eligiblefileをTrashへ。Recoveryはoccupiedpathをoverwriteしません。Scheduledscanは自動deleteなし。
 
-Macinity 3.1.0は明示承認されたad-hoc署名/unnotarizedでAppletrustapprovalではありません。[Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md)参照。外部support/linkには別privacy policyがあります。
+Macinity 3.2.0は明示承認されたad-hoc署名/unnotarizedでAppletrustapprovalではありません。[Security](SECURITY.md)/[userguide](docs/USER-GUIDE.md)参照。外部support/linkには別privacy policyがあります。
 
 ## Local development increment: action workflows
 

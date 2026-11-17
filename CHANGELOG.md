@@ -2,7 +2,7 @@
 
 ## English
 
-### Unreleased
+### Macinity 3.2.0 — 2026-11-17
 
 Adds a menu-bar quick panel, `macinity://` links, opt-in clipboard history with local snippets, Open/Snooze on health notifications, a weekly Mac report, ⌘K tool search and near-duplicate photo review (similar photos are grouped with a keep/remove suggestion; removals go to the Trash only after confirmation). See the [user guide](docs/USER-GUIDE.md).
 
@@ -24,7 +24,7 @@ Tests, source/locale checks, universal packaging and exact release artifact veri
 
 ## Tiếng Việt
 
-### Chưa phát hành
+### Macinity 3.2.0 — 2026-11-17
 
 Thêm bảng nhanh trên menu bar, liên kết `macinity://`, lịch sử clipboard tùy chọn kèm snippet cục bộ, Mở/Tạm hoãn trên thông báo sức khỏe, báo cáo Mac hàng tuần, tìm công cụ bằng ⌘K và duyệt ảnh gần trùng (nhóm ảnh giống nhau, gợi ý giữ/loại; chỉ chuyển vào Trash sau khi xác nhận). Xem [hướng dẫn](docs/USER-GUIDE.md).
 
@@ -46,7 +46,7 @@ Bundle ID/executable/module/thư mục dữ liệu hiện có giữ tương thí
 
 ## 日本語
 
-### 未リリース
+### Macinity 3.2.0 — 2026-11-17
 
 メニューバーのクイックパネル、`macinity://`リンク、任意のクリップボード履歴とローカルスニペット、ヘルス通知の開く/スヌーズ、週次Macレポート、⌘Kツール検索、類似写真レビュー（似た写真をグループ化し残す/削除の候補を提示。削除は確認後にTrashへ移動）を追加。[ユーザーガイド](docs/USER-GUIDE.md)を参照。
 

@@ -1,7 +1,7 @@
 {
   "product": "Macinity",
-  "version": "3.1.0",
-  "tag": "v3.1.0",
+  "version": "3.2.0",
+  "tag": "v3.2.0",
   "channel": "stable",
   "status": "published",
   "minimumMacOS": "13.0",
@@ -10,7 +10,7 @@
     "x86_64"
   ],
   "app": "Macinity.app",
-  "dmg": "Macinity-3.1.0.dmg",
+  "dmg": "Macinity-3.2.0.dmg",
   "notarized": false,
   "signing": "ad-hoc",
   "repository": "thangldw/macinity",
@@ -20,9 +20,9 @@
     "Full VoiceOver, Japanese critical-copy review and native notification delivery remain unverified.",
     "Mapped AppleSMC sensor availability varies by model; missing readings stay unavailable."
   ],
-  "releaseURL": "https://github.com/thangldw/macinity/releases/tag/v3.1.0",
-  "downloadURL": "https://github.com/thangldw/macinity/releases/download/v3.1.0/Macinity-3.1.0.dmg",
-  "checksumURL": "https://github.com/thangldw/macinity/releases/download/v3.1.0/Macinity-3.1.0.dmg.sha256",
-  "publishedAt": "2026-10-16T14:07:43Z",
-  "publishedDMGSHA256": "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7"
+  "releaseURL": "https://github.com/thangldw/macinity/releases/tag/v3.2.0",
+  "downloadURL": "https://github.com/thangldw/macinity/releases/download/v3.2.0/Macinity-3.2.0.dmg",
+  "checksumURL": "https://github.com/thangldw/macinity/releases/download/v3.2.0/Macinity-3.2.0.dmg.sha256",
+  "publishedAt": "2026-11-17T04:59:44Z",
+  "publishedDMGSHA256": "77f691dc585ae52108ca11fad722a8c8225a418f1e65abbf9fae104b3408f819"
 }

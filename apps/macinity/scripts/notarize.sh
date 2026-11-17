@@ -6,8 +6,8 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
 app="$project_dir/dist/Macinity.app"
-archive="$project_dir/dist/Macinity-3.1.0-app.zip"
-dmg="$project_dir/dist/Macinity-3.1.0.dmg"
+archive="$project_dir/dist/Macinity-3.2.0-app.zip"
+dmg="$project_dir/dist/Macinity-3.2.0.dmg"
 checksum="$dmg.sha256"
 
 test -d "$app"
@@ -40,4 +40,4 @@ xcrun stapler validate "$dmg"
 (cd "$(dirname "$dmg")" && shasum -a 256 "$(basename "$dmg")" > "$(basename "$checksum")")
 
 "$project_dir/scripts/verify_release.sh"
-echo "PASS: signed and notarized Macinity 3.1.0"
+echo "PASS: signed and notarized Macinity 3.2.0"

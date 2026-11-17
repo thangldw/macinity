@@ -3,7 +3,7 @@ set -euo pipefail
 
 project_dir="$(cd "$(dirname "$0")/.." && pwd)"
 app="$project_dir/dist/Macinity.app"
-dmg="$project_dir/dist/Macinity-3.1.0.dmg"
+dmg="$project_dir/dist/Macinity-3.2.0.dmg"
 checksum="$dmg.sha256"
 
 test -d "$app"

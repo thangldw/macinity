@@ -3,7 +3,7 @@
 # not notarized, so Homebrew's official cask repository would reject it.
 # On each release, update `version` and `sha256` from release.json (publishedDMGSHA256).
 cask "macinity" do
-  version "3.1.0"
+  version "3.2.0"
   sha256 "57aa780a4a3b86af79661fcc78641621fd9f660424d148da0beb52b70eec73e7"
 
   url "https://github.com/thangldw/macinity/releases/download/v#{version}/Macinity-#{version}.dmg"

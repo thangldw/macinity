@@ -4,7 +4,7 @@
 
 ### Release decision
 
-The user selected an ad-hoc-signed, unnotarized Macinity 3.1.0 production release. No Developer ID or Apple notarization claim is made. `release.json` describes publication status; [validation.json](validation.json) records local checks. GitHub CI and published assets are verified separately.
+The user selected an ad-hoc-signed, unnotarized Macinity 3.2.0 production release. No Developer ID or Apple notarization claim is made. `release.json` describes publication status; [validation.json](validation.json) records local checks. GitHub CI and published assets are verified separately.
 
 ### Verification
 
@@ -24,7 +24,7 @@ The product name, icon, website and artifacts are Macinity. Module/executable na
 
 ### Release decision
 
-Người dùng chọn phát hành Macinity 3.1.0 ký ad-hoc, chưa notarized. Không công bố rằng app có Developer ID hoặc đã được Apple notarize. `release.json` mô tả trạng thái phát hành; [validation.json](validation.json) ghi kết quả kiểm tra cục bộ. CI và artifact đã công bố được kiểm tra riêng.
+Người dùng chọn phát hành Macinity 3.2.0 ký ad-hoc, chưa notarized. Không công bố rằng app có Developer ID hoặc đã được Apple notarize. `release.json` mô tả trạng thái phát hành; [validation.json](validation.json) ghi kết quả kiểm tra cục bộ. CI và artifact đã công bố được kiểm tra riêng.
 
 ### Verification
 
@@ -44,7 +44,7 @@ Tên, icon, website và bộ cài dùng Macinity. Tên module/executable, bundle
 
 ### Release decision
 
-ユーザーは、ad-hoc署名でAppleのnotarizationを受けていないMacinity 3.1.0の公開を選択しました。Developer ID署名やnotarization完了とは表示しません。公開状態は`release.json`、ローカル検証結果は[validation.json](validation.json)に記録します。GitHub CIと公開済みartifactは別途確認します。
+ユーザーは、ad-hoc署名でAppleのnotarizationを受けていないMacinity 3.2.0の公開を選択しました。Developer ID署名やnotarization完了とは表示しません。公開状態は`release.json`、ローカル検証結果は[validation.json](validation.json)に記録します。GitHub CIと公開済みartifactは別途確認します。
 
 ### Verification
 

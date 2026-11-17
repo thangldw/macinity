@@ -7,10 +7,10 @@ import plistlib,json,sys,re
 root=Path(sys.argv[1]); release=json.loads((root/'release.json').read_text()); info=plistlib.loads((root/'apps/macinity/Resources/Info.plist').read_bytes())
 assert info['CFBundleDisplayName']=='Macinity'
 assert release['product']=='Macinity'
-assert info['CFBundleShortVersionString']==release['version']=='3.1.0'
+assert info['CFBundleShortVersionString']==release['version']=='3.2.0'
 assert info['CFBundleIdentifier']=='com.thang.toolbox' and info['CFBundleExecutable']=='Macinity'
-assert release['app']=='Macinity.app' and release['dmg']=='Macinity-3.1.0.dmg'
-assert release['tag']=='v3.1.0' and release['channel']=='stable' and release['notarized'] is False
+assert release['app']=='Macinity.app' and release['dmg']=='Macinity-3.2.0.dmg'
+assert release['tag']=='v3.2.0' and release['channel']=='stable' and release['notarized'] is False
 for name in ['README.md','SECURITY.md','site/index.html','apps/macinity/Resources/Open Macinity - First Launch.html']:
  text=(root/name).read_text()
  assert 'Open Anyway' in text, name

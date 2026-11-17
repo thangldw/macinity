@@ -17,7 +17,7 @@
 See [utility limits](product/SUPER-APP-EXPANSION.md) and [Action Center, diagnostics and profiles](product/ACTION-WORKFLOWS.md) for permission and recovery details.
 
 
-Macinity 3.1.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.2.0 unifies monitoring and utilities in a native Mac workspace. Developed by [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center collects favorites and recent workflows; Smart Diagnostics explains observed CPU, memory, storage and network conditions. Work Profiles preview selected workspace, audio and Keep Awake actions.
 - Utilities cover startup/background inventory, Keep Awake, external drives/file locks, ports, batch rename with preview/undo, SHA-256, folder comparison, package/runtime inspection and device/workspace management.
@@ -26,7 +26,7 @@ Macinity 3.1.0 unifies monitoring and utilities in a native Mac workspace. Devel
 
 ### Install and upgrade
 
-Download Macinity-3.1.0.dmg and its SHA-256 file from the same published GitHub release. Run `shasum -a 256 -c Macinity-3.1.0.dmg.sha256`, open the DMG, read the included guide and drag Macinity.app into Applications. Ad-hoc signed, not notarized: if first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Do not disable Gatekeeper. The old data namespace and bundle ID remain compatible; no data migration to a new Macinity folder is required.
+Download Macinity-3.2.0.dmg and its SHA-256 file from the same published GitHub release. Run `shasum -a 256 -c Macinity-3.2.0.dmg.sha256`, open the DMG, read the included guide and drag Macinity.app into Applications. Ad-hoc signed, not notarized: if first launch is blocked, use System Settings → Privacy & Security → Open Anyway. Do not disable Gatekeeper. The old data namespace and bundle ID remain compatible; no data migration to a new Macinity folder is required.
 
 ### Observe your Mac
 
@@ -73,7 +73,7 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 Xem [giới hạn tiện ích](product/SUPER-APP-EXPANSION.md) và [trung tâm thao tác, chẩn đoán, hồ sơ](product/ACTION-WORKFLOWS.md) để biết quyền và cách phục hồi.
 
 
-Macinity 3.1.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
+Macinity 3.2.0 hợp nhất giám sát và tiện ích trong không gian quản lý Mac native. Phát triển bởi [thangldw](https://thangldw.github.io/) & Codex.
 
 - Action Center gom mục yêu thích và thao tác gần đây; Smart Diagnostics giải thích trạng thái CPU, bộ nhớ, dung lượng và mạng quan sát được. Work Profiles cho xem trước thao tác workspace, âm thanh và Keep Awake.
 - Tiện ích gồm startup/background, Keep Awake, ổ ngoài/file đang mở, cổng, đổi tên hàng loạt có preview/hoàn tác, SHA-256, so sánh thư mục, package/runtime và quản lý thiết bị/workspace.
@@ -82,7 +82,7 @@ Macinity 3.1.0 hợp nhất giám sát và tiện ích trong không gian quản 
 
 ### Cài đặt và nâng cấp
 
-Tải Macinity-3.1.0.dmg và SHA-256 từ cùng một release GitHub đã công bố. Chạy `shasum -a 256 -c Macinity-3.1.0.dmg.sha256`, mở DMG, đọc hướng dẫn và kéo Macinity.app vào Applications. App ký ad-hoc, chưa notarized. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway; không tắt Gatekeeper. Bundle ID và thư mục dữ liệu cũ được giữ tương thích, không cần chuyển sang thư mục Macinity mới.
+Tải Macinity-3.2.0.dmg và SHA-256 từ cùng một release GitHub đã công bố. Chạy `shasum -a 256 -c Macinity-3.2.0.dmg.sha256`, mở DMG, đọc hướng dẫn và kéo Macinity.app vào Applications. App ký ad-hoc, chưa notarized. Nếu lần mở đầu bị chặn, dùng System Settings → Privacy & Security → Open Anyway; không tắt Gatekeeper. Bundle ID và thư mục dữ liệu cũ được giữ tương thích, không cần chuyển sang thư mục Macinity mới.
 
 ### Quan sát Mac
 
@@ -129,7 +129,7 @@ Tên cảm biến phụ thuộc model; link rate không phải tốc độ Inter
 権限と復元の詳細は[ツールの制限](product/SUPER-APP-EXPANSION.md)と[操作・診断・profile](product/ACTION-WORKFLOWS.md)を参照してください。
 
 
-Macinity 3.1.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
+Macinity 3.2.0は監視と各ツールをMac管理用のnative workspaceに統合します。[thangldw](https://thangldw.github.io/) & Codexが開発しました。
 
 - Action Centerはお気に入りと最近の操作、Smart DiagnosticsはCPU・メモリ・容量・ネットワークの観測結果を表示します。Work Profilesはworkspace・音声・Keep Awake操作を事前確認します。
 - 起動項目、Keep Awake、外部ドライブとファイルロック、ポート、一括名称変更と取り消し、SHA-256、フォルダ比較、package/runtime、デバイスとworkspace管理を追加しました。
@@ -138,7 +138,7 @@ Macinity 3.1.0は監視と各ツールをMac管理用のnative workspaceに統�
 
 ### インストールと更新
 
-同じ公開済みGitHub releaseからMacinity-3.1.0.dmgとSHA-256を取得し、`shasum -a 256 -c Macinity-3.1.0.dmg.sha256`で確認します。DMG内の案内を読んでMacinity.appをApplicationsへ移動します。Ad-hoc署名でApple notarizationは受けていません。初回起動が拒否された場合はSystem Settings → Privacy & Security → Open Anywayを使い、Gatekeeperを無効化しないでください。旧bundle IDとdata namespaceを維持するため、新しいMacinity folderへの移行は不要です。
+同じ公開済みGitHub releaseからMacinity-3.2.0.dmgとSHA-256を取得し、`shasum -a 256 -c Macinity-3.2.0.dmg.sha256`で確認します。DMG内の案内を読んでMacinity.appをApplicationsへ移動します。Ad-hoc署名でApple notarizationは受けていません。初回起動が拒否された場合はSystem Settings → Privacy & Security → Open Anywayを使い、Gatekeeperを無効化しないでください。旧bundle IDとdata namespaceを維持するため、新しいMacinity folderへの移行は不要です。
 
 ### Macを観測する
 

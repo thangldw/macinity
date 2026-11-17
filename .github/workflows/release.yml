@@ -24,7 +24,7 @@ jobs:
           persist-credentials: false
           ref: ${{ github.ref }}
       - name: Require the supported release tag
-        run: test "$GITHUB_REF" = "refs/tags/v3.1.0"
+        run: test "$GITHUB_REF" = "refs/tags/v3.2.0"
       - name: Format
         run: swift format lint --recursive --parallel Sources Tests Package.swift
       - name: XCTest
@@ -77,10 +77,10 @@ jobs:
           # Require consistent public identity before publication.
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleDisplayName' dist/Macinity.app/Contents/Info.plist)" = "$(python3 -c 'import json; print(json.load(open("../../release.json"))["product"])')"
           gh release create "$GITHUB_REF_NAME" \
-            dist/Macinity-3.1.0.dmg \
-            dist/Macinity-3.1.0.dmg.sha256 \
+            dist/Macinity-3.2.0.dmg \
+            dist/Macinity-3.2.0.dmg.sha256 \
             --repo "$GITHUB_REPOSITORY" \
             --verify-tag \
-            --notes-file ../../docs/launch/macinity-3.1.0.md \
+            --notes-file ../../docs/launch/macinity-3.2.0.md \
             --latest \
-            --title "Macinity 3.1.0"
+            --title "Macinity 3.2.0"
