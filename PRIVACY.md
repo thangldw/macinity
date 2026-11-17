@@ -4,7 +4,7 @@
 
 ### Local processing and stored data
 
-Macinity has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Macinity.
+Macinity has no account, telemetry, advertising SDK, analytics or cloud sync. Filesystem metadata/hashes, image features, installer FSEvents, package receipts, application registrations, processes, hardware and network observations are read only within OS permissions and selected workflow coverage. Dropped installers are identified, never mounted or executed by Macinity. Clipboard history is off by default, text-only, kept in memory (latest 50 items) and cleared when turned off or on quit; saved snippets stay in a local file. Near-duplicate photo review stores per-photo fingerprints (path, size, modified time and a 64-bit hash) in a local cache file inside Application Support, capped at 200,000 entries; photos are read only from the folder you choose and nothing is uploaded.
 
 State remains under the existing Application Support directory for upgrade compatibility: cleanup/recovery history, change sessions/snapshots/evidence, storage checkpoints and migration state. Opt-in `health-history-v1.json` holds system CPU/memory/pressure/thermal and available mapped sensors, with availability/source/unit/timestamps; it excludes process names, paths and network endpoints. Retention is24h/7d, at most10080 records/36fields/24MiB. File budget can omit older observations sooner. Expired observations are removed on a successful later write; an app that does not run does not actively erase them. Corrupt/unknown/oversized files are preserved and block writes.
 
@@ -30,7 +30,7 @@ Macinity 3.1.0 uses an explicitly authorized ad-hoc-signed, unnotarized release 
 
 ### Xử lý local và dữ liệu lưu
 
-Macinity không có account/telemetry/advertising/analytics/cloud sync. Đọc metadata/hash filesystem, image features, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute.
+Macinity không có account/telemetry/advertising/analytics/cloud sync. Đọc metadata/hash filesystem, image features, FSEventsinstaller, receipt/registration, process/hardware/network trong quyền OS và coverage workflow. Installer thả vào chỉ được định danh, không mount/execute. Lịch sử clipboard mặc định tắt, chỉ văn bản, giữ trong RAM (50 mục gần nhất) và xóa khi tắt hoặc thoát; snippet đã lưu nằm trong file cục bộ. Duyệt ảnh gần trùng lưu dấu vân tay từng ảnh (đường dẫn, dung lượng, ngày sửa và hash 64-bit) trong file cache cục bộ ở Application Support, tối đa 200.000 mục; chỉ đọc ảnh trong thư mục bạn chọn và không tải gì lên.
 
 Dữ liệu giữ trong thư mục Application Support hiện có để tương thích nâng cấp: cleanup/recovery, change sessions/snapshots/evidence, storagecheckpoint/migration. `health-history-v1.json` opt-in lưu systemCPU/memory/pressure/thermal/sensor khả dụng, availability/source/unit/timestamp; không tênprocess/path/endpoint. Retention24h/7d, tối đa10080record/36field/24MiB; budget có thể bỏ record sớm. Expired bị loại trong write thành công sau đó; app không chạy không tự xóa. File corrupt/unknown/oversized giữ nguyên và chặn write.
 
@@ -56,7 +56,7 @@ Macinity 3.1.0 kýad-hoc/chưa notarized theo lựa chọn rõ ràng, không App
 
 ### Local処理と保存データ
 
-Account/telemetry/広告/analytics/cloud syncなし。OS権限とworkflowcoverage内でfilesystem metadata/hash、image features、installer FSEvents、receipt/registration、process/hardware/networkを読みます。Droppedinstallerをidentifyしますがmount/executeしません。
+Account/telemetry/広告/analytics/cloud syncなし。OS権限とworkflowcoverage内でfilesystem metadata/hash、image features、installer FSEvents、receipt/registration、process/hardware/networkを読みます。Droppedinstallerをidentifyしますがmount/executeしません。クリップボード履歴は既定でオフ、テキストのみ、メモリ内（最新50件）に保持し、オフまたは終了時に消去します。保存したスニペットはローカルファイルに残ります。類似写真レビューは写真ごとのフィンガープリント（パス、サイズ、更新日時、64ビットハッシュ）をApplication Support内のローカルキャッシュに最大20万件まで保存します。写真は選択したフォルダからのみ読み取り、何もアップロードしません。
 
 Upgrade互換のため既存Application Supportディレクトリにcleanup/recovery、changesession/snapshot/evidence、storagecheckpoint/migrationを保存。Opt-in`health-history-v1.json`はsystemCPU/memory/pressure/thermal/availablesensorとavailability/source/unit/timestampのみ、process name/path/endpointなし。Retention24h/7d、最大10080record/36field/24MiB。Budgetで早期省略可能、期限切れは後の成功writeで削除、非実行appは能動削除しません。Corrupt/unknown/oversizedfile保持・write停止。
 

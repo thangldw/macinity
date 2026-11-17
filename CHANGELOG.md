@@ -2,6 +2,10 @@
 
 ## English
 
+### Unreleased
+
+Adds a menu-bar quick panel, `macinity://` links, opt-in clipboard history with local snippets, Open/Snooze on health notifications, a weekly Mac report, ⌘K tool search and near-duplicate photo review (similar photos are grouped with a keep/remove suggestion; removals go to the Trash only after confirmation). See the [user guide](docs/USER-GUIDE.md).
+
 ### Macinity 3.1.0 — 2026-10-16
 
 Action Center adds favorites and existing-state summaries. Smart Diagnostics adds explicit, timestamped symptom analysis and comparable-observation deltas. Work Profiles extends compatible workspace presets with reviewed audio/Keep Awake steps and per-step results. See [scope and verification](docs/product/ACTION-WORKFLOWS.md). Macinity branding, the utility suite, battery history and separate Disk/Network navigation are included.
@@ -20,6 +24,10 @@ Tests, source/locale checks, universal packaging and exact release artifact veri
 
 ## Tiếng Việt
 
+### Chưa phát hành
+
+Thêm bảng nhanh trên menu bar, liên kết `macinity://`, lịch sử clipboard tùy chọn kèm snippet cục bộ, Mở/Tạm hoãn trên thông báo sức khỏe, báo cáo Mac hàng tuần, tìm công cụ bằng ⌘K và duyệt ảnh gần trùng (nhóm ảnh giống nhau, gợi ý giữ/loại; chỉ chuyển vào Trash sau khi xác nhận). Xem [hướng dẫn](docs/USER-GUIDE.md).
+
 ### Macinity 3.1.0 — 2026-10-16
 
 Trung tâm thao tác thêm mục yêu thích và tóm tắt trạng thái hiện có. Chẩn đoán thông minh phân tích theo triệu chứng, có thời điểm và so sánh mẫu mới. Hồ sơ làm việc giữ tương thích preset cũ, thêm âm thanh/Giữ máy thức có xem trước và kết quả từng bước. Bao gồm nhận diện Macinity, nhóm tiện ích, lịch sử pin và điều hướng Disk/Network riêng.
@@ -37,6 +45,10 @@ Bundle ID/executable/module/thư mục dữ liệu hiện có giữ tương thí
 [Readiness](docs/production/RELEASE-READINESS.md) ghi tests/source/locale/universal/artifact checks. Foreground profiling/IntelmacOS 13Ethernet vật lý/full VoiceOver/Japanese copy/OS notification chưa proof. Resource deviations cũ không proofpackage mới. Release Macinity cũ giữ trong [GitHubhistory](https://github.com/thangldw/macinity/releases).
 
 ## 日本語
+
+### 未リリース
+
+メニューバーのクイックパネル、`macinity://`リンク、任意のクリップボード履歴とローカルスニペット、ヘルス通知の開く/スヌーズ、週次Macレポート、⌘Kツール検索、類似写真レビュー（似た写真をグループ化し残す/削除の候補を提示。削除は確認後にTrashへ移動）を追加。[ユーザーガイド](docs/USER-GUIDE.md)を参照。
 
 ### Macinity 3.1.0 — 2026-10-16
 

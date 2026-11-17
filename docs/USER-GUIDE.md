@@ -10,6 +10,9 @@
 4. In Developer Tools, inspect detected versions and packages first. Review the exact update/uninstall command and its result; package changes do not have automatic rollback.
 5. In Startup & Background, refresh inventory and distinguish registration from running state. Only supported owned user agents offer a reviewed runtime start/stop.
 6. In Wi-Fi & LAN, scan nearby networks by button. Location may be required for SSIDs. Open the system Passwords interface for saved passwords, or enter your own credentials to create a local QR.
+7. Press ⌘K to search Macinity's tools. In Clipboard & Snippets, history is off by default; when on it keeps up to 50 text items in memory only and clears them on quit. Snippets are saved locally on this Mac.
+8. Links like `macinity://open/<section>`, `macinity://keep-awake?minutes=15|30|60` and `macinity://keep-awake/stop` open a section or control Keep Awake from Shortcuts or a script. The menu-bar panel also offers Keep Awake, a battery line and your favorites.
+9. In History, Prepare weekly report creates a local summary of the last week (median, 95th percentile, peak, gaps). Health notifications offer Open in Macinity and Snooze for 1 hour.
 
 See [utility limits](product/SUPER-APP-EXPANSION.md) and [Action Center, diagnostics and profiles](product/ACTION-WORKFLOWS.md) for permission and recovery details.
 
@@ -43,7 +46,7 @@ Select15/30/60 minutes for a sensor recording, then Start. Stop preserves the se
 
 ### Storage, projects and applications
 
-Choose roots before scanning. Review allocated sizes, duplicate candidates, growth and rebuildable project artifacts. App Dossier links observations and leftovers; receipts and registrations do not authorize deletion. Eligible file cleanup requires review and Trash/recovery checks. Developer-tool cleanup commands are a separate explicit operation and may not use Trash or support Undo; review the exact command before confirming. Manual CPU priority lowering is not an automatic CPU cap.
+Choose roots before scanning. Review allocated sizes, duplicate candidates, growth and rebuildable project artifacts. App Dossier links observations and leftovers; receipts and registrations do not authorize deletion. Eligible file cleanup requires review and Trash/recovery checks. Developer-tool cleanup commands are a separate explicit operation and may not use Trash or support Undo; review the exact command before confirming. Manual CPU priority lowering is not an automatic CPU cap. Similar Photos → Whole library finds exact and visually similar photos in a chosen folder (hidden folders and the Trash are skipped). Each group shows what to keep and what to remove, with resolution, size, date, sharpness and the measured similarity to the kept photo; a similarity slider (80–100%, default 90%) and a folder filter narrow the list. Similarity is an estimate and groups can link photos through a chain, so a removal is only pre-selected when it was compared directly with the kept photo. Nothing is removed until you confirm; selected photos move to the Trash and can be restored from Recovery. Only data read from your photos stays on this Mac, in a local fingerprint cache.
 
 ### Changes, recovery and reports
 
@@ -63,6 +66,9 @@ Mapped temperature labels vary by model; link rate is not Internet throughput. H
 4. Trong Công cụ lập trình, đọc phiên bản/package trước. Duyệt lệnh cập nhật/gỡ và kết quả; không có rollback package tự động.
 5. Trong Khởi động và chạy nền, làm mới danh sách, phân biệt đăng ký và đang chạy. Chỉ user agent thuộc sở hữu và được hỗ trợ mới có preview start/stop.
 6. Trong Wi-Fi & LAN, bấm quét mạng lân cận. SSID có thể cần Location. Mở Passwords hệ thống để xem mật khẩu đã lưu, hoặc nhập thông tin mạng của bạn để tạo QR cục bộ.
+7. Nhấn ⌘K để tìm công cụ của Macinity. Ở Clipboard & Snippets, lịch sử mặc định tắt; khi bật chỉ giữ tối đa 50 mục văn bản trong RAM và xóa khi thoát. Snippet được lưu cục bộ trên Mac này.
+8. Liên kết `macinity://open/<section>`, `macinity://keep-awake?minutes=15|30|60` và `macinity://keep-awake/stop` mở một mục hoặc điều khiển Keep Awake từ Shortcuts hay script. Bảng menu bar cũng có Keep Awake, dòng pin và mục yêu thích.
+9. Trong History, Chuẩn bị báo cáo tuần tạo bản tóm tắt cục bộ của tuần qua (trung vị, phân vị 95, đỉnh, khoảng trống). Thông báo sức khỏe có Mở trong Macinity và Tạm hoãn 1 giờ.
 
 Xem [giới hạn tiện ích](product/SUPER-APP-EXPANSION.md) và [trung tâm thao tác, chẩn đoán, hồ sơ](product/ACTION-WORKFLOWS.md) để biết quyền và cách phục hồi.
 
@@ -96,7 +102,7 @@ Chọn 15/30/60 phút rồi Start. Stop giữ phiên, Start thay phiên, Quit b�
 
 ### Storage, projects và applications
 
-Chọn thư mục gốc trước khi quét. Duyệt allocation, duplicates, growth và artifacts có thể tạo lại. App Dossier liên kết quan sát và leftovers; receipt hoặc registration không cấp quyền xóa. Cleanup đủ điều kiện cần review, Trash và kiểm tra recovery. Developer cleanup commands là thao tác riêng có xác nhận; có thể không dùng Trash hoặc Undo, nên hãy đọc đúng command trước khi chạy. Giảm CPU priority thủ công không phải tự động giới hạn CPU.
+Chọn thư mục gốc trước khi quét. Duyệt allocation, duplicates, growth và artifacts có thể tạo lại. App Dossier liên kết quan sát và leftovers; receipt hoặc registration không cấp quyền xóa. Cleanup đủ điều kiện cần review, Trash và kiểm tra recovery. Developer cleanup commands là thao tác riêng có xác nhận; có thể không dùng Trash hoặc Undo, nên hãy đọc đúng command trước khi chạy. Giảm CPU priority thủ công không phải tự động giới hạn CPU. Ảnh tương tự → Cả thư viện tìm ảnh trùng hệt và giống nhau trong thư mục đã chọn (bỏ qua thư mục ẩn và Trash). Mỗi nhóm cho thấy nên giữ và nên loại ảnh nào, kèm độ phân giải, dung lượng, ngày, độ nét và độ giống đo được so với ảnh giữ lại; thanh trượt độ giống (80–100%, mặc định 90%) và bộ lọc thư mục thu hẹp danh sách. Độ giống chỉ là ước lượng và nhóm có thể nối ảnh theo chuỗi, nên ảnh chỉ được chọn sẵn để loại khi đã so sánh trực tiếp với ảnh giữ lại. Không có gì bị xóa cho tới khi bạn xác nhận; ảnh đã chọn chuyển vào Trash và khôi phục được từ Recovery. Dữ liệu đọc từ ảnh chỉ nằm trên Mac này, trong bộ nhớ đệm dấu vân tay cục bộ.
 
 ### Changes, recovery và reports
 
@@ -116,6 +122,9 @@ Tên cảm biến phụ thuộc model; link rate không phải tốc độ Inter
 4. Developer Toolsで版とpackageを確認してから更新・削除コマンドを確認します。自動rollbackはありません。
 5. Startup & Backgroundで一覧を更新し、登録状態と実行状態を区別します。対応する所有user agentのみ起動・停止を事前確認できます。
 6. Wi-Fi & LANの近隣スキャンはボタンで開始します。SSIDにはLocationが必要な場合があります。保存パスワードはシステムPasswordsで確認し、手入力した情報からlocal QRを生成できます。
+7. ⌘KでMacinityのツールを検索します。Clipboard & Snippetsの履歴は既定でオフで、オンの間もテキスト最大50件をメモリ上だけに保持し、終了時に消去します。スニペットはこのMac内に保存されます。
+8. `macinity://open/<section>`、`macinity://keep-awake?minutes=15|30|60`、`macinity://keep-awake/stop`のリンクで、ショートカットやスクリプトからセクションを開くかKeep Awakeを操作できます。メニューバーのパネルにもKeep Awake、バッテリー行、お気に入りがあります。
+9. Historyの週次レポートを準備は、直近1週間のローカル要約（中央値、95パーセンタイル、ピーク、欠測）を作成します。ヘルス通知にはMacinityで開くと1時間スヌーズがあります。
 
 権限と復元の詳細は[ツールの制限](product/SUPER-APP-EXPANSION.md)と[操作・診断・profile](product/ACTION-WORKFLOWS.md)を参照してください。
 
@@ -149,7 +158,7 @@ Local historyは初期状態でoffです。有効にしてもbackground sampling
 
 ### Storage、projects、applications
 
-Rootを選択してscanし、allocation、duplicates、growth、再生成可能なartifactsをreviewします。App Dossierは観測とleftoversを関連づけますが、receipt/registrationは削除許可ではありません。対象cleanupにはreview、Trashとrecovery検証が必要です。Developer cleanup commandsは別の明示操作で、Trash/Undoを使えない場合があります。実行前に正確なcommandを確認します。手動のCPU priority低下は自動CPU capではありません。
+Rootを選択してscanし、allocation、duplicates、growth、再生成可能なartifactsをreviewします。App Dossierは観測とleftoversを関連づけますが、receipt/registrationは削除許可ではありません。対象cleanupにはreview、Trashとrecovery検証が必要です。Developer cleanup commandsは別の明示操作で、Trash/Undoを使えない場合があります。実行前に正確なcommandを確認します。手動のCPU priority低下は自動CPU capではありません。類似写真→ライブラリ全体は、選択フォルダ内の完全一致と見た目が近い写真を探します（隠しフォルダとTrashは対象外）。各グループに残す写真と削除候補を、解像度・サイズ・日付・シャープネス・残す写真との測定済み類似度とともに表示し、類似度スライダー（80〜100%、既定90%）とフォルダフィルターで絞り込めます。類似度は推定値で、グループは写真を連鎖でつなぐことがあるため、残す写真と直接比較された写真だけが削除候補として事前選択されます。確認するまで何も削除されず、選択した写真はTrashへ移動しRecoveryから復元できます。写真から読み取ったデータはこのMac内のローカルなフィンガープリントキャッシュにのみ保存されます。
 
 ### Changes、recovery、reports
 
