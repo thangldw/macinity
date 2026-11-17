@@ -45,54 +45,61 @@ struct PhotoHashIndex {
       }
     }
 
-    var buckets: [UInt64: [Int]] = [:]
-    for (chunk, range) in Self.chunkRanges(count: min(64, maxHamming + 1)).enumerated() {
-      let mask: UInt64 = range.count == 64 ? .max : (1 << UInt64(range.count)) - 1
-      for (index, hash) in representatives.enumerated() {
-        let value = (hash >> UInt64(range.lowerBound)) & mask
-        // Chunk number occupies the top byte so equal values in different chunks stay apart.
-        buckets[UInt64(chunk) << 56 | value, default: []].append(index)
+    // Four 16-bit chunks: two hashes within `maxHamming` bits differ by at most
+    // `maxHamming / 4` bits in at least one chunk (pigeonhole), so each hash probes the buckets
+    // within that radius of its own chunk values. Buckets stay tiny for varied photos, which
+    // keeps the work near-linear instead of quadratic.
+    let radius = maxHamming / Self.chunkCount
+    let probes = Self.probeMasks(radius: radius)
+    var tables = [[UInt16: [Int]]](repeating: [:], count: Self.chunkCount)
+    for (index, hash) in representatives.enumerated() {
+      for chunk in 0..<Self.chunkCount {
+        tables[chunk][Self.chunkValue(hash, chunk), default: []].append(index)
       }
     }
-    var checked: Set<[Int]> = []
-    var skippedBuckets = 0
-    for bucket in buckets.values where bucket.count > 1 {
-      guard bucket.count <= maxBucket else {
-        skippedBuckets += 1
-        continue
-      }
-      for position in bucket.indices {
-        for other in bucket[(position + 1)...] {
-          let low = min(bucket[position], other)
-          let high = max(bucket[position], other)
-          guard checked.insert([low, high]).inserted else { continue }
-          let distance = PhotoFingerprint.hamming(representatives[low], representatives[high])
-          guard distance <= maxHamming else { continue }
-          for first in members[low] {
-            for second in members[high] {
-              pairs.insert(
-                PhotoHashPair(
-                  first: min(first, second), second: max(first, second), hamming: distance))
+    var skippedBucketKeys: Set<UInt32> = []
+    var seen: Set<Int> = []
+    for (low, hash) in representatives.enumerated() {
+      seen.removeAll(keepingCapacity: true)
+      for chunk in 0..<Self.chunkCount {
+        let value = Self.chunkValue(hash, chunk)
+        for mask in probes {
+          let key = value ^ mask
+          guard let bucket = tables[chunk][key] else { continue }
+          guard bucket.count <= maxBucket else {
+            skippedBucketKeys.insert(UInt32(chunk) << 16 | UInt32(key))
+            continue
+          }
+          for high in bucket where high > low {
+            guard seen.insert(high).inserted else { continue }
+            let distance = PhotoFingerprint.hamming(hash, representatives[high])
+            guard distance <= maxHamming else { continue }
+            for first in members[low] {
+              for second in members[high] {
+                pairs.insert(
+                  PhotoHashPair(
+                    first: min(first, second), second: max(first, second), hamming: distance))
+              }
             }
           }
         }
       }
     }
+    let skippedBuckets = skippedBucketKeys.count
     return (
       pairs.sorted { ($0.first, $0.second) < ($1.first, $1.second) }, skippedBuckets,
       skippedPhotos
     )
   }
 
-  /// Splits 0..<64 into `count` contiguous ranges whose lengths differ by at most one.
-  private static func chunkRanges(count: Int) -> [Range<Int>] {
-    let base = 64 / count
-    let extra = 64 % count
-    var start = 0
-    return (0..<count).map { index in
-      let length = base + (index < extra ? 1 : 0)
-      defer { start += length }
-      return start..<(start + length)
-    }
+  private static let chunkCount = 4
+
+  private static func chunkValue(_ hash: UInt64, _ chunk: Int) -> UInt16 {
+    UInt16(truncatingIfNeeded: hash >> UInt64(chunk * 16))
+  }
+
+  /// Every 16-bit mask with at most `radius` set bits (always includes 0).
+  private static func probeMasks(radius: Int) -> [UInt16] {
+    (0...UInt16.max).filter { $0.nonzeroBitCount <= radius }
   }
 }

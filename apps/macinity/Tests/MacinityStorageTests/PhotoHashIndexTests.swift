@@ -74,4 +74,31 @@ final class PhotoHashIndexTests: XCTestCase {
     XCTAssertTrue(PhotoHashIndex(hashes: []).candidatePairs().pairs.isEmpty)
     XCTAssertTrue(PhotoHashIndex(hashes: [1]).candidatePairs().pairs.isEmpty)
   }
+
+  func testMatchesBruteForceOnRandomHashesWithPlantedNearCopies() {
+    var generator = SystemRandomNumberGenerator()
+    var hashes: [UInt64] = []
+    for index in 0..<1_500 {
+      if index % 5 == 0, let last = hashes.last {
+        var hash = last
+        for _ in 0..<Int.random(in: 1...10, using: &generator) {
+          hash ^= 1 << UInt64.random(in: 0..<64, using: &generator)
+        }
+        hashes.append(hash)
+      } else {
+        hashes.append(UInt64.random(in: .min ... .max, using: &generator))
+      }
+    }
+    var expected: Set<[Int]> = []
+    for first in hashes.indices {
+      for second in hashes.indices where second > first {
+        if PhotoFingerprint.hamming(hashes[first], hashes[second]) <= 10 {
+          expected.insert([first, second])
+        }
+      }
+    }
+    let found = Set(
+      PhotoHashIndex(hashes: hashes).candidatePairs().pairs.map { [$0.first, $0.second] })
+    XCTAssertEqual(found, expected)
+  }
 }
