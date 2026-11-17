@@ -46,3 +46,13 @@ final class SmartAlertsTests: XCTestCase {
     XCTAssertTrue(csv.contains("1970-01-01T00:00:00Z"))
   }
 }
+
+final class AlertNotificationActionTests: XCTestCase {
+  func testResolvesBannerTapAndActionsAndRejectsUnknown() {
+    XCTAssertEqual(
+      AlertNotificationAction.resolve("com.apple.UNNotificationDefaultActionIdentifier"), .open)
+    XCTAssertEqual(AlertNotificationAction.resolve("macinity.alert.snooze"), .snooze)
+    XCTAssertNil(AlertNotificationAction.resolve("com.apple.UNNotificationDismissActionIdentifier"))
+    XCTAssertNil(AlertNotificationAction.resolve("other"))
+  }
+}

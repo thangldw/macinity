@@ -1226,3 +1226,23 @@
 "Snippets file could not be read; existing data is preserved" = "无法读取片段文件;现有数据已保留";
 "Enter a name and text; at most 100 snippets are kept" = "请输入名称和文本;最多保留100个片段";
 "Snippets could not be saved" = "无法保存片段";
+
+"Clipboard & Snippets" = "剪贴板与片段";
+"Record clipboard history" = "记录剪贴板历史";
+"Off by default. Text only; history stays in memory, keeps the latest 50 items and is cleared when you turn recording off or quit Macinity. Items marked secret by password managers are skipped." = "默认关闭。仅限文本;历史仅保存在内存中,保留最近50项,关闭记录或退出Macinity时清除。被密码管理器标记为机密的内容会被跳过。";
+"Clear history" = "清除历史";
+"Search history" = "搜索历史";
+"No clipboard items." = "没有剪贴板项目。";
+"Copy" = "复制";
+"Save as snippet" = "保存为片段";
+"Remove" = "移除";
+"Snippets" = "片段";
+"Text" = "文本";
+"Add snippet" = "添加片段";
+"No snippets saved." = "尚未保存片段。";
+"Snippets are stored locally on this Mac and never uploaded." = "片段仅存储在这台Mac本地,不会上传。";
+"Snippets file could not be read; existing data is preserved" = "无法读取片段文件;现有数据已保留";
+"Enter a name and text; at most 100 snippets are kept" = "请输入名称和文本;最多保留100个片段";
+"Snippets could not be saved" = "无法保存片段";
+"Snooze alerts for 1 hour" = "暂停提醒1小时";
+"Open in Macinity" = "在 Macinity 中打开";

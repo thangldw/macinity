@@ -46,6 +46,29 @@ struct AlertGate {
   }
 }
 
+/// Actions offered on a health-alert notification.
+enum AlertNotificationAction: String {
+  static let categoryIdentifier = "macinity.health"
+  case open = "macinity.alert.open"
+  case snooze = "macinity.alert.snooze"
+
+  /// Banner taps arrive as the system default action and behave like Open.
+  static func resolve(_ identifier: String) -> AlertNotificationAction? {
+    identifier == UNNotificationDefaultActionIdentifier ? .open : Self(rawValue: identifier)
+  }
+
+  static func category() -> UNNotificationCategory {
+    UNNotificationCategory(
+      identifier: categoryIdentifier,
+      actions: [
+        UNNotificationAction(
+          identifier: open.rawValue, title: L10n.text("Open in Macinity"), options: [.foreground]),
+        UNNotificationAction(
+          identifier: snooze.rawValue, title: L10n.text("Snooze alerts for 1 hour"), options: []),
+      ], intentIdentifiers: [], options: [])
+  }
+}
+
 struct SmartAlertEvent: Identifiable {
   let id = UUID()
   let observedAt: Date
@@ -77,6 +100,7 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
     enabled = defaults.bool(forKey: "toolbox.smartAlerts.enabled")
     super.init()
     center?.delegate = self
+    center?.setNotificationCategories([AlertNotificationAction.category()])
   }
 
   func requestPermission() async {
@@ -151,6 +175,7 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
       content.title = L10n.text(insight.title)
       content.body = L10n.text(insight.explanation)
       content.userInfo = ["section": insight.section.rawValue]
+      content.categoryIdentifier = AlertNotificationAction.categoryIdentifier
       let request = UNNotificationRequest(
         identifier: "orven.health." + insight.id, content: content, trigger: nil)
       Task {
@@ -187,9 +212,17 @@ final class SmartAlertsViewModel: NSObject, ObservableObject, UNUserNotification
     withCompletionHandler completionHandler: @escaping () -> Void
   ) {
     let raw = response.notification.request.content.userInfo["section"] as? String
+    let action = AlertNotificationAction.resolve(response.actionIdentifier)
     Task { @MainActor in
-      if let raw, let section = MacinitySection(rawValue: raw) {
-        MacinityRuntime.shared.navigation.open(.section(section))
+      switch action {
+      case .snooze:
+        MacinityRuntime.shared.monitoring.alerts.snooze()
+      case .open:
+        if let raw, let section = MacinitySection(rawValue: raw) {
+          MacinityRuntime.shared.navigation.open(.section(section))
+        }
+      case nil:
+        break
       }
     }
     completionHandler()
