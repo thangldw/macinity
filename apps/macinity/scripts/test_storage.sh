@@ -26,6 +26,8 @@ swiftc \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Storage/StorageModels.swift" \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Storage/StorageAnalyzer.swift" \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Duplicates/DuplicateScanner.swift" \
+  "$PROJECT_DIR/Sources/MacinityStorage/Features/Photos/NearDuplicateGrouping.swift" \
+  "$PROJECT_DIR/Sources/MacinityStorage/Features/Photos/PhotoMetadata.swift" \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Photos/SimilarPhotoScanner.swift" \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Projects/ProjectModels.swift" \
   "$PROJECT_DIR/Sources/MacinityStorage/Features/Projects/ProjectScanner.swift" \
