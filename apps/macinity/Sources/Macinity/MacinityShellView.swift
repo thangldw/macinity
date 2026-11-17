@@ -95,6 +95,7 @@ struct MacinityShellView: View {
   @ObservedObject private var coordinator: MacinityCoordinator
   @State private var showsOnboarding = false
   @State private var showsHelp = false
+  @State private var showsSearch = false
 
   init(coordinator: MacinityCoordinator = MacinityRuntime.shared.navigation) {
     self.coordinator = coordinator
@@ -118,6 +119,20 @@ struct MacinityShellView: View {
           Spacer(minLength: 0)
         }
         .padding(.horizontal, 28).padding(.vertical, 16)
+        Button {
+          showsSearch = true
+        } label: {
+          HStack {
+            Image(systemName: "magnifyingglass").accessibilityHidden(true)
+            Text(L10n.text("Search Macinity"))
+            Spacer()
+            Text("⌘K").foregroundStyle(MacinityTheme.secondary)
+          }
+          .font(.system(size: 13)).padding(8)
+          .background(MacinityTheme.canvas, in: RoundedRectangle(cornerRadius: 8))
+        }
+        .buttonStyle(.plain).keyboardShortcut("k", modifiers: .command)
+        .padding(.horizontal, 20).padding(.bottom, 10)
         Divider().padding(.horizontal, 16)
         List(selection: selection) {
           ForEach(MacinityArea.allCases) { area in
@@ -202,6 +217,12 @@ struct MacinityShellView: View {
           .foregroundStyle(.secondary)
         Button(L10n.text("Close")) { showsHelp = false }.keyboardShortcut(.cancelAction)
       }.padding(28).frame(width: 430).background(MacinityTheme.surface)
+    }
+    .sheet(isPresented: $showsSearch) {
+      MacinityToolSearch { section in
+        coordinator.open(.section(section))
+        showsSearch = false
+      }
     }
     .sheet(isPresented: $showsOnboarding) {
       OnboardingView {
