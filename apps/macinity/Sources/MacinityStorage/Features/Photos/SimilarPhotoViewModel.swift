@@ -13,8 +13,6 @@ final class SimilarPhotoViewModel: ObservableObject {
   @Published var status = "Chọn thư mục ảnh để bắt đầu"
   @Published var errorMessage: String?
   private let scanner = SimilarPhotoScanner()
-  private let history = HistoryStore()
-  private let activityLedger = ActivityLedger()
   private var task: Task<Void, Never>?
 
   var selectedBytes: Int64 {
@@ -46,9 +44,7 @@ final class SimilarPhotoViewModel: ObservableObject {
     let root = rootURL
     task = Task {
       do {
-        snapshot = try await Task.detached(priority: .userInitiated) {
-          try scanner.scan(rootURL: root)
-        }.value
+        snapshot = try await CancellableWork.run { try scanner.scan(rootURL: root) }
         status = "Tìm thấy \(snapshot?.groups.count ?? 0) chuỗi ảnh tương tự"
       } catch is CancellationError { status = "Đã dừng quét" } catch {
         errorMessage = error.localizedDescription
@@ -80,49 +76,13 @@ final class SimilarPhotoViewModel: ObservableObject {
   func reveal(_ url: URL) { NSWorkspace.shared.activateFileViewerSelecting([url]) }
 
   func trashSelected() {
-    let root = rootURL.resolvingSymlinksInPath().standardizedFileURL
     let photos = snapshot?.groups.flatMap(\.photos).filter { selectedPaths.contains($0.id) } ?? []
-    let history = self.history
-    let activityLedger = self.activityLedger
+    let root = rootURL
     isWorking = true
     Task {
-      let outcome = await Task.detached {
-        var errors: [String] = []
-        var moves: [TrashMoveRecord] = []
-        for photo in photos {
-          let url: URL
-          do {
-            url = try PathSafetyPolicy.validate(candidate: photo.url, allowedRoots: [root])
-          } catch {
-            errors.append("Đường dẫn không an toàn: \(photo.url.path)")
-            continue
-          }
-          do {
-            var trashedURL: NSURL?
-            try FileManager.default.trashItem(at: url, resultingItemURL: &trashedURL)
-            if let trashedURL {
-              moves.append(
-                TrashMoveRecord(
-                  originalPath: url.path, trashPath: (trashedURL as URL).path,
-                  bytes: photo.bytes))
-            }
-          } catch {
-            errors.append("\(url.lastPathComponent): \(error.localizedDescription)")
-          }
-        }
-        return (errors, moves)
-      }.value
-      errorMessage = outcome.0.isEmpty ? nil : outcome.0.joined(separator: "\n")
-      let moved = photos.filter { photo in !FileManager.default.fileExists(atPath: photo.url.path) }
-      history.record(
-        action: "Loại ảnh tương tự", paths: moved.map { $0.url.path },
-        bytes: moved.reduce(0) { $0 + $1.bytes }, recoverable: true,
-        note: "Ảnh đã chuyển vào Trash sau khi người dùng duyệt", moves: outcome.1)
-      try? activityLedger.append(
-        ActivityEntry(
-          kind: .cleanup, status: outcome.0.isEmpty ? .succeeded : .failed,
-          paths: photos.map { $0.url.path }, affectedBytes: moved.reduce(0) { $0 + $1.bytes },
-          recoverable: !outcome.1.isEmpty, errors: outcome.0))
+      let errors = await PhotoTrashService().trash(
+        photos: photos, root: root, note: "Ảnh đã chuyển vào Trash sau khi người dùng duyệt")
+      errorMessage = errors.isEmpty ? nil : errors.joined(separator: "\n")
       isWorking = false
       scan()
     }

@@ -21,7 +21,9 @@ private enum StorageWorkspaceSection: String, CaseIterable, Identifiable {
   var title: String { L10n.text(rawValue) }
 }
 
-public struct StorageModuleSummary: Sendable, Equatable {
+enum PhotoReviewMode { case library, bursts }
+
+struct StorageModuleSummary: Sendable, Equatable {
   public let recoverableBytes: Int64
   public let issueCount: Int
 
@@ -40,6 +42,8 @@ public struct StorageModuleView: View {
   @StateObject private var analyzer = AnalyzerViewModel()
   @StateObject private var duplicates = DuplicateViewModel()
   @StateObject private var similarPhotos = SimilarPhotoViewModel()
+  @StateObject private var nearDuplicates = NearDuplicatePhotoViewModel()
+  @State private var photoMode: PhotoReviewMode = .library
   @StateObject private var deepClean = DeepCleanViewModel()
   @StateObject private var applications = ApplicationViewModel()
   @StateObject private var history = HistoryViewModel()
@@ -114,7 +118,16 @@ public struct StorageModuleView: View {
     case .duplicates:
       DuplicateFilesView(model: duplicates)
     case .similarPhotos:
-      SimilarPhotosView(model: similarPhotos)
+      VStack(spacing: 0) {
+        Picker("", selection: $photoMode) {
+          Text(L10n.text("Cả thư viện")).tag(PhotoReviewMode.library)
+          Text(L10n.text("Chụp liên tiếp")).tag(PhotoReviewMode.bursts)
+        }.pickerStyle(.segmented).labelsHidden().frame(maxWidth: 320).padding(.vertical, 8)
+        switch photoMode {
+        case .library: NearDuplicatePhotosView(model: nearDuplicates)
+        case .bursts: SimilarPhotosView(model: similarPhotos)
+        }
+      }
     case .deepClean:
       DeepCleanView(model: deepClean)
     case .schedule:
