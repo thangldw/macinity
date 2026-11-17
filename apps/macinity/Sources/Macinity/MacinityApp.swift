@@ -116,6 +116,15 @@ final class MacinityAppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
+  func application(_ application: NSApplication, open urls: [URL]) {
+    guard !isScheduledScan else { return }
+    for url in urls {
+      guard let action = MacinityURLAction.parse(url) else { continue }
+      action.perform()
+      if case .open = action { ensureMainWindow() }
+    }
+  }
+
   func applicationDidBecomeActive(_ notification: Notification) {
     guard !isScheduledScan else { return }
     MacinityRuntime.shared.monitoring.setActive(true)
