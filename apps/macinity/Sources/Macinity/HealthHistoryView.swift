@@ -50,7 +50,12 @@ struct HealthHistoryView: View {
           if exportError {
             Text(L10n.text("Could not prepare the local report. Stop recording and try again."))
           }
-          Button(L10n.text("Export history JSON…")) { export(records) }.disabled(records.isEmpty)
+          HStack {
+            Button(L10n.text("Export history JSON…")) { export(records) }
+              .disabled(records.isEmpty)
+            Button(L10n.text("Prepare weekly report…")) { prepareWeeklyReport() }
+              .disabled(model.archive.records.isEmpty)
+          }
         }.macinitySurface()
         HealthBaselineView(archive: model.archive, languageCode: languageCode) {
           Task { await model.captureBaseline() }
@@ -65,6 +70,15 @@ struct HealthHistoryView: View {
           reportName: report.filename)
       }
   }
+  private func prepareWeeklyReport() {
+    guard let summary = WeeklyReport.build(records: model.archive.records, now: Date()) else {
+      return
+    }
+    report = LocalReportPreview(
+      text: WeeklyReportText.render(summary, language: languageCode),
+      filename: "Macinity-weekly-report.md")
+  }
+
   private func export(_ records: [HealthRecord]) {
     do {
       let encoder = JSONEncoder()
