@@ -5,6 +5,8 @@ import SwiftUI
 
 struct MenuBarDiagnosticsView: View {
   @ObservedObject var model: MonitoringViewModel
+  @ObservedObject private var awake = KeepAwakeController.shared
+  @ObservedObject private var favorites = MacinityRuntime.shared.favorites
   @AppStorage(AppLanguage.storageKey) private var languageCode = AppLanguage.defaultLanguage
     .rawValue
 
@@ -56,8 +58,8 @@ struct MenuBarDiagnosticsView: View {
                 : availabilityLabel(state))
           }.font(.caption)
         }
-        Text(L10n.text("Automatic alerts are not available.")).font(.caption).foregroundStyle(
-          .secondary)
+        Divider()
+        quickActions
         Divider()
         HStack {
           Button(L10n.text("Overview")) { open(.home) }
@@ -73,6 +75,38 @@ struct MenuBarDiagnosticsView: View {
     }
     .environment(
       \.locale, AppLanguage(rawValue: languageCode)?.locale ?? AppLanguage.defaultLanguage.locale)
+  }
+
+  @ViewBuilder private var quickActions: some View {
+    Text(L10n.text("Quick actions")).font(.subheadline.weight(.semibold))
+    HStack {
+      Text(L10n.text("Keep Awake")).font(.caption)
+      Spacer()
+      if awake.remaining > 0 {
+        Text(
+          String(
+            format: "%d:%02d:%02d", awake.remaining / 3600, awake.remaining / 60 % 60,
+            awake.remaining % 60)
+        ).font(.caption.monospacedDigit())
+        Button(L10n.text("Stop")) { awake.stop() }.buttonStyle(.borderedProminent)
+      } else {
+        ForEach([15, 30, 60], id: \.self) { minutes in
+          Button("\(minutes) min") { awake.start(minutes: minutes, pid: nil) }
+        }
+      }
+    }.controlSize(.small)
+    if let battery = model.snapshot?.hardware.reading.battery.value {
+      Text(L10n.text(battery.onBattery ? "On battery" : "AC Power") + " · \(Int(battery.percent))%")
+        .font(.caption).foregroundStyle(battery.onBattery ? Color.orange : .secondary)
+    }
+    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), alignment: .leading)], spacing: 6) {
+      ForEach(favorites.sections.prefix(6)) { section in
+        Button { open(section) } label: {
+          Label(section.title, systemImage: section.symbol)
+            .lineLimit(1).frame(maxWidth: .infinity, alignment: .leading)
+        }.buttonStyle(.bordered).controlSize(.small)
+      }
+    }
   }
 
   private func open(_ section: MacinitySection) {
