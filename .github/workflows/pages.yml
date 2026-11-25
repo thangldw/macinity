@@ -1,12 +1,10 @@
 name: Pages
 
+# The macinity website has been retired. This workflow replaces the published site
+# with a single 404 page so the old URLs no longer serve any content.
 on:
   push:
     branches: [main]
-    paths:
-      - "site/**"
-      - "tests/site_contract.sh"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 concurrency:
@@ -18,30 +16,30 @@ permissions:
 
 jobs:
   build:
+    name: Build retired-site placeholder
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Write 404 page
+        run: |
+          mkdir -p pages-site
+          printf '%s\n' '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><title>Not found</title><p>This site has been retired. Source and releases: <a href="https://github.com/thangldw/macinity">github.com/thangldw/macinity</a></p></html>' > pages-site/404.html
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          persist-credentials: false
-      - name: Verify static site contract
-        run: bash tests/site_contract.sh
-      - name: Configure Pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
-        with:
-          path: site
+          path: pages-site
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    name: Deploy GitHub Pages
     needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
